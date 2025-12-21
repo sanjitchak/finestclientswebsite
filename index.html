@@ -104,7 +104,7 @@
 </head>
 <body class="bg-black text-gray-100">
 
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b border-transparent py-4 md:py-6">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b border-transparent py-6 bg-transparent">
         <div class="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center relative z-50">
             <div class="flex items-center cursor-pointer" onclick="switchView('landing')">
                 <span class="text-xl md:text-2xl font-black tracking-tighter text-white">
@@ -191,6 +191,10 @@
                             See How It Works
                         </button>
                     </div>
+                </div>
+
+                <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-30 animate-bounce" onclick="scrollToSection('proof')">
+                    <i data-lucide="chevron-down" class="text-white w-12 h-12 opacity-70 hover:opacity-100 transition-opacity"></i>
                 </div>
             </section>
 
@@ -648,14 +652,17 @@
         }
 
         // --- 4. Navbar Scroll Logic ---
+        // Updated to remove padding shrinking logic
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) {
-                navbar.classList.add('bg-black', 'border-white/10', 'py-4');
-                navbar.classList.remove('py-4', 'md:py-6', 'border-transparent');
+                // Add background and border opacity, but keep padding fixed (class py-6 is on the HTML element)
+                navbar.classList.add('bg-black', 'border-white/10');
+                navbar.classList.remove('border-transparent', 'bg-transparent');
             } else {
-                navbar.classList.remove('bg-black', 'border-white/10', 'py-4');
-                navbar.classList.add('py-4', 'md:py-6', 'border-transparent');
+                // Revert to transparent
+                navbar.classList.remove('bg-black', 'border-white/10');
+                navbar.classList.add('border-transparent', 'bg-transparent');
             }
         });
 
@@ -668,14 +675,14 @@
             if (menu.classList.contains('hidden')) {
                 menu.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
-                nav.classList.add('bg-black', 'border-white/10', 'py-4');
-                nav.classList.remove('border-transparent');
+                nav.classList.add('bg-black', 'border-white/10');
+                nav.classList.remove('border-transparent', 'bg-transparent');
             } else {
                 menu.classList.add('hidden');
                 document.body.style.overflow = 'auto';
                 if(window.scrollY <= 20) {
-                    nav.classList.remove('bg-black', 'border-white/10', 'py-4');
-                    nav.classList.add('border-transparent');
+                    nav.classList.remove('bg-black', 'border-white/10');
+                    nav.classList.add('border-transparent', 'bg-transparent');
                 }
             }
         }

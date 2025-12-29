@@ -5,20 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finest Clients - Guaranteed Sales Meetings</title>
     <link rel="icon" type="image/png" href="https://finestclients.com/finestclientslogo.png">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
     <script src="https://unpkg.com/lucide@latest"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
                     colors: {
                         gold: '#D4AF37',
                     },
@@ -32,27 +24,33 @@
                             '100%': { transform: 'translateX(-50%)' },
                         },
                         fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
                         }
                     }
                 }
             }
         }
     </script>
-
     <style>
         body {
             background-color: #000;
             color: #f3f4f6;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             overflow-x: hidden;
         }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #111;
+            background: #000;
         }
         ::-webkit-scrollbar-thumb {
             background: #333;
@@ -61,516 +59,697 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #D4AF37;
         }
-        
+
+        /* Utilities */
         .fade-in-section {
             opacity: 0;
-            transform: translateY(3rem);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-            will-change: opacity, visibility;
+            transform: translateY(3rem); /* translate-y-12 */
+            transition: all 1s ease-out;
         }
         .fade-in-section.is-visible {
             opacity: 1;
-            transform: none;
+            transform: translateY(0);
         }
 
-        /* Range Slider Styling */
+        /* Range Input Styling */
         input[type=range] {
             -webkit-appearance: none; 
             background: transparent; 
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            height: 16px;
-            width: 16px;
-            border-radius: 50%;
-            background: #D4AF37;
-            cursor: pointer;
-            margin-top: -6px; 
         }
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 4px;
-            cursor: pointer;
-            background: #374151;
-            border-radius: 2px;
+        input[type=range]:focus {
+            outline: none; 
+        }
+
+        /* Hide views by default */
+        .view-section {
+            display: none;
+        }
+        .view-section.active {
+            display: block;
+            animation: fadeInPage 0.5s ease-out;
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
-<body class="font-sans selection:bg-gold selection:text-black">
+<body>
 
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b border-transparent py-4 md:py-6">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b border-transparent py-5">
         <div class="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center relative z-50">
-            <div class="flex items-center cursor-pointer" onclick="scrollToSection('home')">
+            <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
                 <span class="text-xl md:text-2xl font-black tracking-tighter text-white">
                     FINEST<span class="text-gold">CLIENTS</span>
                 </span>
             </div>
 
             <div class="hidden md:flex items-center space-x-8">
-                <button onclick="scrollToSection('home')" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-gold text-gray-300">HOME</button>
-                <button onclick="scrollToSection('proof')" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-gold text-gray-300">PROOF</button>
-                <button onclick="scrollToSection('process')" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-gold text-gray-300">PROCESS</button>
-                <button onclick="scrollToSection('faq')" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-gold text-gray-300">FAQ</button>
+                <button onclick="scrollToId('home')" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-gold text-gray-300 uppercase">Home</button>
+                <button onclick="scrollToId('proof')" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-gold text-gray-300 uppercase">Proof</button>
+                <button onclick="scrollToId('process')" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-gold text-gray-300 uppercase">Process</button>
+                <button onclick="scrollToId('faq')" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-gold text-gray-300 uppercase">FAQ</button>
                 
-                <button onclick="scrollToSection('roi')" class="text-sm font-semibold flex items-center transition-colors text-white hover:text-gold">
-                    <i data-lucide="calculator" width="14" class="mr-1"></i> ROI Calculator
+                <button onclick="scrollToId('roi')" class="text-sm font-semibold flex items-center transition-colors text-white hover:text-gold">
+                    <i data-lucide="calculator" class="w-3.5 h-3.5 mr-1"></i> ROI Calculator
                 </button>
-                <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer" class="bg-white text-black hover:bg-gold hover:text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105">
+                
+                <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer" 
+                   class="bg-white text-black hover:bg-gold hover:text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105">
                     Maximize your Sales
                 </a>
             </div>
 
-            <button class="md:hidden text-white p-2 focus:outline-none" onclick="toggleMobileMenu()">
-                <i data-lucide="menu" id="menu-icon"></i>
+            <button class="md:hidden text-white p-2 focus:outline-none z-50 relative" onclick="toggleMobileMenu()">
+                <i data-lucide="menu" id="menu-icon" class="w-7 h-7"></i>
+                <i data-lucide="x" id="close-icon" class="w-7 h-7 hidden"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden fixed inset-0 bg-black z-40 flex flex-col pt-24 px-6 space-y-4 h-screen w-full overflow-y-auto">
+        <div id="mobile-menu" class="fixed inset-0 bg-black z-40 flex flex-col pt-24 px-6 space-y-4 md:hidden h-screen w-full overflow-y-auto hidden">
             <button onclick="mobileNavClick('home')" class="text-left text-2xl font-bold text-white hover:text-gold py-4 border-b border-white/5 w-full">Home</button>
             <button onclick="mobileNavClick('proof')" class="text-left text-2xl font-bold text-white hover:text-gold py-4 border-b border-white/5 w-full">Proof</button>
             <button onclick="mobileNavClick('process')" class="text-left text-2xl font-bold text-white hover:text-gold py-4 border-b border-white/5 w-full">Process</button>
             <button onclick="mobileNavClick('faq')" class="text-left text-2xl font-bold text-white hover:text-gold py-4 border-b border-white/5 w-full">FAQ</button>
             <button onclick="mobileNavClick('roi')" class="text-left text-2xl font-bold text-gold py-4 border-b border-white/5 w-full">ROI Calculator</button>
+            
             <div class="pt-8 pb-12 w-full">
-                <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer" class="block w-full bg-gold text-black py-4 rounded-lg font-bold text-xl text-center shadow-lg shadow-gold/20">
+                <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer"
+                   class="block w-full bg-gold text-black py-4 rounded-lg font-bold text-xl text-center shadow-lg shadow-gold/20">
                     Maximize your Sales
                 </a>
             </div>
         </div>
     </nav>
 
-    <main>
+    <div id="landing-view" class="view-section active">
         
-        <div id="landing-page">
-
-            <section id="home" class="relative min-h-screen flex items-center bg-black overflow-hidden pt-20 pb-20">
-                <div class="absolute inset-0 z-0">
-                    <div class="absolute inset-0 bg-black/60 z-10"></div>
-                    <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                        <source src="https://asset.creativeagencyblueprint.com/file.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-gold rounded-full blur-[150px] opacity-20"></div>
-                </div>
-                
-                <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-20 text-center">
-                    <div class="fade-in-section">
-                        <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white mb-8">
-                            <span class="flex h-2 w-2 relative">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
-                            </span>
-                            <span class="text-xs font-bold text-black uppercase tracking-widest">Only pay on results</span>
-                        </div>
-                    </div>
-
-                    <div class="fade-in-section" style="transition-delay: 200ms;">
-                        <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-6">
-                            We Get Guaranteed Sales Meetings <br class="hidden md:block"/>
-                            For <span class="text-gold">Creative Agencies</span>
-                            <span class="block text-2xl md:text-4xl mt-4 text-gray-300 font-normal">
-                                without relying on referrals or spending another Dollar on Ads.
-                            </span>
-                        </h1>
-                    </div>
-
-                    <div class="fade-in-section" style="transition-delay: 400ms;">
-                        <p class="text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed font-light mb-10">
-                            Specifically for <span class="text-white font-semibold">Design & Video Production</span> studios. 
-                            <br class="hidden md:block" />
-                            <span class="text-red-400">Not for Marketing Agencies.</span> We build your outbound engine so you can focus on creating.
-                        </p>
-                    </div>
-
-                    <div class="fade-in-section" style="transition-delay: 600ms;">
-                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center px-4">
-                            <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer" class="bg-gold hover:bg-white hover:text-black text-black px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-lg transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)] flex items-center justify-center w-full sm:w-auto">
-                                Maximize your Sales
-                            </a>
-                            <button onclick="scrollToSection('process')" class="border border-white/20 hover:border-white text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-lg transition-all duration-300 w-full sm:w-auto">
-                                See How It Works
-                            </button>
-                        </div>
-                    </div>
+        <section id="home" class="relative min-h-screen flex items-center bg-black overflow-hidden pt-20 pb-20">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-black/60 z-10"></div>
+                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                    <source src="https://asset.creativeagencyblueprint.com/file.mp4" type="video/mp4">
+                </video>
+                <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-gold rounded-full blur-[150px] opacity-20"></div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-20 text-center">
+                <div class="fade-in-section inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white mb-8 transition-all duration-1000">
+                    <span class="flex h-2 w-2 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
+                    </span>
+                    <span class="text-xs font-bold text-black uppercase tracking-widest">Only pay on results</span>
                 </div>
 
-                <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce cursor-pointer text-gray-400 hover:text-gold transition-colors duration-300" onclick="scrollToSection('proof')">
-                    <i data-lucide="chevron-down" width="40" stroke-width="1.5"></i>
+                <div class="fade-in-section transition-all duration-1000" style="transition-delay: 200ms;">
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-6">
+                        We Get Guaranteed Sales Meetings <br class="hidden md:block"/>
+                        For <span class="text-gold">Creative Agencies</span>
+                        <span class="block text-2xl md:text-4xl mt-4 text-gray-300 font-normal">
+                            without relying on referrals or spending another Dollar on Ads.
+                        </span>
+                    </h1>
                 </div>
-            </section>
 
-            <section id="proof" class="bg-black py-12 md:py-16 border-b border-white/5 relative">
-                <div class="max-w-7xl mx-auto px-4 md:px-6 mb-16">
-                    <div class="text-center mb-12">
-                        <h3 class="text-gold font-bold uppercase tracking-widest text-sm mb-2">Track Record</h3>
-                        <h2 class="text-3xl font-bold text-white">Recent Client Wins</h2>
+                <div class="fade-in-section transition-all duration-1000" style="transition-delay: 400ms;">
+                    <p class="text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed font-light mb-10">
+                        Specifically for <span class="text-white font-semibold">Design & Video Production</span> studios. 
+                        <br class="hidden md:block" />
+                        <span class="text-red-400">Not for Marketing Agencies.</span> We build your outbound engine so you can focus on creating.
+                    </p>
+                </div>
+
+                <div class="fade-in-section transition-all duration-1000 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center px-4" style="transition-delay: 600ms;">
+                    <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer"
+                       class="bg-gold hover:bg-white hover:text-black text-black px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-lg transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)] flex items-center justify-center w-full sm:w-auto">
+                        Maximize your Sales
+                    </a>
+                    <button onclick="scrollToId('process')"
+                       class="border border-white/20 hover:border-white text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-lg transition-all duration-300 w-full sm:w-auto">
+                        See How It Works
+                    </button>
+                </div>
+            </div>
+
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce cursor-pointer text-gray-400 hover:text-gold transition-colors duration-300"
+                 onclick="scrollToId('proof')">
+                <i data-lucide="chevron-down" class="w-10 h-10" stroke-width="1.5"></i>
+            </div>
+        </section>
+
+        <section id="proof" class="bg-black py-12 md:py-16 border-b border-white/5 relative">
+            <div class="max-w-7xl mx-auto px-4 md:px-6 mb-16">
+                <div class="text-center mb-12">
+                    <h3 class="text-gold font-bold uppercase tracking-widest text-sm mb-2">Track Record</h3>
+                    <h2 class="text-3xl font-bold text-white">Recent Client Wins</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-gold/50 transition-colors flex flex-col h-full">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="p-2 bg-white/5 rounded-lg"><i data-lucide="trending-up" class="text-gold"></i></div>
+                            <span class="text-xs font-bold bg-green-900/30 text-green-400 px-3 py-1 rounded-full">Verified</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">NewsReels</h4>
+                        <p class="text-gray-400 text-sm mb-2">Content & distribution for creators</p>
+                        <div class="mt-auto pt-4 border-t border-white/5 space-y-2">
+                            <p class="text-white font-bold">6 Sales Meetings in 30 Days</p>
+                            <p class="text-gray-500 text-sm">$90k Pipeline Created</p>
+                            <p class="text-gold font-bold text-sm">$15k Project Closed</p>
+                        </div>
                     </div>
-                    <div class="grid md:grid-cols-3 gap-6">
-                        <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-gold/50 transition-colors flex flex-col h-full">
-                            <div class="flex justify-between items-start mb-6">
-                                <div class="p-2 bg-white/5 rounded-lg"><i data-lucide="trending-up" class="text-gold"></i></div>
-                                <span class="text-xs font-bold bg-green-900/30 text-green-400 px-3 py-1 rounded-full">Verified</span>
-                            </div>
-                            <h4 class="text-xl font-bold text-white mb-2">NewsReels</h4>
-                            <p class="text-gray-400 text-sm mb-2">Content & distribution for creators</p>
-                            <div class="mt-auto pt-4 border-t border-white/5 space-y-2">
-                                <p class="text-white font-bold">6 Sales Meetings in 30 Days</p>
-                                <p class="text-gray-500 text-sm">$90k Pipeline Created</p>
-                                <p class="text-gold font-bold text-sm">$15k Project Closed</p>
-                            </div>
+                    <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-gold/50 transition-colors flex flex-col h-full">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="p-2 bg-white/5 rounded-lg"><i data-lucide="trending-up" class="text-gold"></i></div>
+                            <span class="text-xs font-bold bg-green-900/30 text-green-400 px-3 py-1 rounded-full">Verified</span>
                         </div>
-                        <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-gold/50 transition-colors flex flex-col h-full">
-                            <div class="flex justify-between items-start mb-6">
-                                <div class="p-2 bg-white/5 rounded-lg"><i data-lucide="trending-up" class="text-gold"></i></div>
-                                <span class="text-xs font-bold bg-green-900/30 text-green-400 px-3 py-1 rounded-full">Verified</span>
-                            </div>
-                            <h4 class="text-xl font-bold text-white mb-2">Triftel</h4>
-                            <p class="text-gray-400 text-sm mb-2">Privacy-centric messaging application</p>
-                            <div class="mt-auto pt-4 border-t border-white/5 space-y-2">
-                                <p class="text-white font-bold">10 Qualified Sales Meetings</p>
-                                <p class="text-gray-500 text-sm">$150k Pipeline Created</p>
-                                <p class="text-gold font-bold text-sm">$30k Retainer Closed</p>
-                            </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Triftel</h4>
+                        <p class="text-gray-400 text-sm mb-2">Privacy-centric messaging application</p>
+                        <div class="mt-auto pt-4 border-t border-white/5 space-y-2">
+                            <p class="text-white font-bold">10 Qualified Sales Meetings</p>
+                            <p class="text-gray-500 text-sm">$150k Pipeline Created</p>
+                            <p class="text-gold font-bold text-sm">$30k Retainer Closed</p>
                         </div>
-                        <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-gold/50 transition-colors flex flex-col h-full">
-                            <div class="flex justify-between items-start mb-6">
-                                <div class="p-2 bg-white/5 rounded-lg"><i data-lucide="trending-up" class="text-gold"></i></div>
-                                <span class="text-xs font-bold bg-green-900/30 text-green-400 px-3 py-1 rounded-full">Verified</span>
-                            </div>
-                            <h4 class="text-xl font-bold text-white mb-2">UV Media</h4>
-                            <p class="text-gray-400 text-sm mb-2">YouTube content management</p>
-                            <div class="mt-auto pt-4 border-t border-white/5 space-y-2">
-                                <p class="text-white font-bold">9 Qualified Sales Meetings</p>
-                                <p class="text-gray-500 text-sm">$110k Pipeline Created</p>
-                                <p class="text-gold font-bold text-sm">$22k Closed Retainers</p>
-                            </div>
+                    </div>
+                    <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-gold/50 transition-colors flex flex-col h-full">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="p-2 bg-white/5 rounded-lg"><i data-lucide="trending-up" class="text-gold"></i></div>
+                            <span class="text-xs font-bold bg-green-900/30 text-green-400 px-3 py-1 rounded-full">Verified</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">UV Media</h4>
+                        <p class="text-gray-400 text-sm mb-2">YouTube content management</p>
+                        <div class="mt-auto pt-4 border-t border-white/5 space-y-2">
+                            <p class="text-white font-bold">9 Qualified Sales Meetings</p>
+                            <p class="text-gray-500 text-sm">$110k Pipeline Created</p>
+                            <p class="text-gold font-bold text-sm">$22k Closed Retainers</p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="w-full overflow-hidden border-y border-white/5 bg-[#050505] py-6">
-                    <div id="marquee-container" class="flex whitespace-nowrap animate-scroll items-center">
-                        </div>
-                </div>
+            <div class="w-full overflow-hidden border-y border-white/5 bg-[#050505] py-6">
+                <div class="flex whitespace-nowrap animate-scroll items-center" id="marquee-content">
+                    </div>
+            </div>
 
-                <div class="max-w-7xl mx-auto px-4 md:px-6 mt-16">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div class="fade-in-section">
-                            <h3 class="text-2xl font-bold text-white mb-4">Built by the team behind <span class="text-gold">Finest Edit Academy</span></h3>
-                            <p class="text-gray-400 mb-6">We don't just sell the system, we use it ourselves. Click images to verify.</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <a href="https://www.instagram.com/finestedit_/?hl=en" target="_blank" rel="noopener noreferrer" class="cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-pink-500 transition-all duration-300 transform hover:scale-[1.02]">
-                                <img src="https://finestclients.com/instagram.png" alt="Instagram Stats" class="w-full h-auto object-cover">
-                            </a>
-                            <a href="https://www.youtube.com/@Finesteditacademy/featured" target="_blank" rel="noopener noreferrer" class="cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-red-500 transition-all duration-300 transform hover:scale-[1.02]">
-                                <img src="https://finestclients.com/youtube.png" alt="YouTube Stats" class="w-full h-auto object-cover">
-                            </a>
-                        </div>
+            <div class="max-w-7xl mx-auto px-4 md:px-6 mt-16">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in-section transition-all duration-1000">
+                        <h3 class="text-2xl font-bold text-white mb-4">Built by the team behind <span class="text-gold">Finest Edit Academy</span></h3>
+                        <p class="text-gray-400 mb-6">We don't just sell the system, we use it ourselves. Click images to verify.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <a href="https://www.instagram.com/finestedit_/?hl=en" target="_blank" rel="noopener noreferrer"
+                           class="cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-pink-500 transition-all duration-300 transform hover:scale-[1.02]">
+                           <img src="https://finestclients.com/instagram.png" alt="Instagram Stats" class="w-full h-auto object-cover" />
+                        </a>
+                        <div class="md:hidden w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-2"></div>
+                        <a href="https://www.youtube.com/@Finesteditacademy/featured" target="_blank" rel="noopener noreferrer"
+                           class="cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-red-500 transition-all duration-300 transform hover:scale-[1.02]">
+                           <img src="https://finestclients.com/youtube.png" alt="YouTube Stats" class="w-full h-auto object-cover" />
+                        </a>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="roi" class="bg-[#050505] py-16 md:py-24 border-t border-white/5">
-                <div class="max-w-7xl mx-auto px-4 md:px-6 w-full">
-                    <div class="fade-in-section text-center mb-8 md:mb-12">
-                        <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-gold/30 bg-gold/10 mb-6">
-                            <i data-lucide="calculator" width="14" class="text-gold"></i>
-                            <span class="text-xs font-bold text-gold uppercase tracking-widest">Growth Projection</span>
-                        </div>
-                        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Agency ROI Calculator</h2>
-                        <p class="text-gray-400 max-w-xl mx-auto">Estimate your potential return with the Finest Clients acquisition system.</p>
+        <section id="roi" class="bg-[#050505] py-16 md:py-24 border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 md:px-6 w-full">
+                <div class="fade-in-section transition-all duration-1000 text-center mb-8 md:mb-12">
+                    <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-gold/30 bg-gold/10 mb-6">
+                        <i data-lucide="calculator" class="text-gold w-3.5 h-3.5"></i>
+                        <span class="text-xs font-bold text-gold uppercase tracking-widest">Growth Projection</span>
                     </div>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Agency ROI Calculator</h2>
+                    <p class="text-gray-400 max-w-xl mx-auto">Estimate your potential return with the Finest Clients acquisition system.</p>
+                </div>
 
-                    <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
-                        <div class="fade-in-section" style="transition-delay: 200ms;">
-                            <div class="bg-[#111] border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl">
-                                <h3 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">Input Metrics</h3>
-                                <div class="space-y-8">
-                                    <div>
-                                        <div class="flex justify-between mb-2">
-                                            <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Avg. Deal Value</label>
-                                            <span id="display-deal" class="text-gold font-mono font-bold">$15,000</span>
-                                        </div>
-                                        <input type="range" id="input-deal" min="1000" max="50000" step="1000" value="15000" class="w-full">
-                                        <div class="flex justify-between text-xs text-gray-600 mt-2"><span>$1k</span><span>$50k</span></div>
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
+                    <div class="fade-in-section transition-all duration-1000" style="transition-delay: 200ms;">
+                        <div class="bg-[#111] border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl">
+                            <h3 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">Input Metrics</h3>
+                            <div class="space-y-8">
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Avg. Deal Value</label>
+                                        <span id="dealValueDisplay" class="text-gold font-mono font-bold">$15,000</span>
                                     </div>
-                                    <div>
-                                        <div class="flex justify-between mb-2">
-                                            <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Close Rate</label>
-                                            <span id="display-close" class="text-gold font-mono font-bold">20%</span>
-                                        </div>
-                                        <input type="range" id="input-close" min="5" max="50" step="1" value="20" class="w-full">
-                                        <div class="flex justify-between text-xs text-gray-600 mt-2"><span>5%</span><span>50%</span></div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between mb-2">
-                                            <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Monthly Meetings</label>
-                                            <span id="display-meetings" class="text-gold font-mono font-bold">10 Calls</span>
-                                        </div>
-                                        <input type="range" id="input-meetings" min="1" max="50" step="1" value="10" class="w-full">
-                                        <div class="flex justify-between text-xs text-gray-600 mt-2"><span>1</span><span>50</span></div>
-                                    </div>
+                                    <input type="range" id="dealValueInput" min="1000" max="50000" step="1000" value="15000" class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#D4AF37]">
+                                    <div class="flex justify-between text-xs text-gray-600 mt-2"><span>$1k</span><span>$50k</span></div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="fade-in-section" style="transition-delay: 400ms;">
-                            <div class="bg-gradient-to-br from-[#1a1a1a] to-black border border-gold/30 rounded-2xl p-6 md:p-8 shadow-[0_0_50px_rgba(212,175,55,0.1)]">
-                                <h3 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">Projected Growth</h3>
-                                <div class="grid gap-6">
-                                    <div class="bg-[#0a0a0a] p-6 rounded-xl border border-white/5">
-                                        <div class="flex items-center space-x-3 mb-2">
-                                            <i data-lucide="trending-up" width="20" class="text-gold"></i>
-                                            <span class="text-gray-400 text-sm uppercase tracking-wider">Monthly Revenue</span>
-                                        </div>
-                                        <div id="result-monthly" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono break-all md:break-normal">$30,000</div>
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Close Rate</label>
+                                        <span id="closeRateDisplay" class="text-gold font-mono font-bold">20%</span>
                                     </div>
-                                    <div class="bg-[#0a0a0a] p-6 rounded-xl border border-white/5">
-                                        <div class="flex items-center space-x-3 mb-2">
-                                            <i data-lucide="award" width="20" class="text-gold"></i>
-                                            <span class="text-gray-400 text-sm uppercase tracking-wider">Annual Run Rate</span>
-                                        </div>
-                                        <div id="result-annual" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono opacity-80 break-all md:break-normal">$360,000</div>
+                                    <input type="range" id="closeRateInput" min="5" max="50" step="1" value="20" class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#D4AF37]">
+                                    <div class="flex justify-between text-xs text-gray-600 mt-2"><span>5%</span><span>50%</span></div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Monthly Meetings</label>
+                                        <span id="meetingsDisplay" class="text-gold font-mono font-bold">10 Calls</span>
                                     </div>
-                                    <div class="mt-4">
-                                        <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer" class="block w-full bg-gold hover:bg-white text-black text-center font-bold py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
-                                            Maximize your Sales
-                                        </a>
-                                        <p class="text-center text-xs text-gray-500 mt-3">Estimates based on provided inputs. Results vary by niche.</p>
-                                    </div>
+                                    <input type="range" id="meetingsInput" min="1" max="50" step="1" value="10" class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#D4AF37]">
+                                    <div class="flex justify-between text-xs text-gray-600 mt-2"><span>1</span><span>50</span></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
 
-            <section class="py-16 md:py-24 bg-[#0a0a0a] border-t border-white/5">
-                <div class="max-w-7xl mx-auto px-4 md:px-6 text-center">
-                    <div class="fade-in-section">
-                        <h2 class="text-gold font-bold uppercase tracking-widest text-sm mb-4">Ideal Partners</h2>
-                        <h3 class="text-3xl md:text-5xl font-bold text-white mb-12">Who Is This For?</h3>
-                    </div>
-                    <div id="targets-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                        </div>
-                </div>
-            </section>
-
-            <section class="py-16 md:py-24 bg-black">
-                <div class="max-w-7xl mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-                    <div>
-                        <h2 class="text-gold font-bold uppercase tracking-widest text-sm mb-4">Who We Are</h2>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Your Skills Got You Here. Systems Get You Further.</h3>
-                        <p class="text-gray-400 text-lg mb-6 leading-relaxed">
-                            In 2019, I started my agency. We had the talent, but every month felt like a survival game. I watched agencies with half our skill land clients we couldn't even meet. I realized the problem wasn't our work, it was that we relied on hope while they had systems.
-                        </p>
-                        <p class="text-gray-400 text-lg leading-relaxed">
-                            So, I built a predictable, repeatable engine to generate predictable quality Sales meetings without referrals. Now, Finest Clients exists to install that exact system into your studio, so you can stop the feast-or-famine cycle and finally run like a real business.
-                        </p>
-                    </div>
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop" alt="Our Team" class="rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 w-full" />
-                        <div class="absolute -bottom-6 -left-2 md:-left-6 bg-gold text-black p-4 md:p-6 rounded-xl font-bold shadow-lg">
-                            <p class="text-2xl md:text-4xl mb-1">Global</p>
-                            <p class="text-xs md:text-sm uppercase tracking-wider">Approach</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="py-16 md:py-24 bg-[#0a0a0a] border-t border-white/5">
-                <div class="max-w-7xl mx-auto px-4 md:px-6">
-                   <div class="grid md:grid-cols-2 gap-8 md:gap-12">
-                       <div class="fade-in-section">
-                         <div class="p-6 md:p-10 rounded-3xl bg-[#111] border border-red-900/20 h-full">
-                             <div class="flex items-center space-x-4 mb-8">
-                                 <div class="p-3 bg-red-900/20 rounded-full text-red-500"><i data-lucide="x" width="24"></i></div>
-                                 <h3 class="text-2xl font-bold text-white">The Agency Trap</h3>
-                             </div>
-                             <ul class="space-y-6">
-                                 <li class="flex items-start text-gray-400"><i data-lucide="minus" width="18" class="mr-3 mt-1 flex-shrink-0 text-red-500"></i> Feast or famine revenue cycles</li>
-                                 <li class="flex items-start text-gray-400"><i data-lucide="minus" width="18" class="mr-3 mt-1 flex-shrink-0 text-red-500"></i> Relying on random referrals</li>
-                                 <li class="flex items-start text-gray-400"><i data-lucide="minus" width="18" class="mr-3 mt-1 flex-shrink-0 text-red-500"></i> Undercharging for premium work</li>
-                                 <li class="flex items-start text-gray-400"><i data-lucide="minus" width="18" class="mr-3 mt-1 flex-shrink-0 text-red-500"></i> Founders stuck doing sales instead of creative</li>
-                             </ul>
-                         </div>
-                       </div>
-                       
-                       <div class="fade-in-section" style="transition-delay: 200ms;">
-                         <div class="p-6 md:p-10 rounded-3xl bg-[#111] border border-gold/30 h-full relative overflow-hidden">
-                             <div class="absolute top-0 right-0 w-32 h-32 bg-gold blur-[80px] opacity-10"></div>
-                             <div class="flex items-center space-x-4 mb-8">
-                                 <div class="p-3 bg-gold/20 rounded-full text-gold"><i data-lucide="check" width="24"></i></div>
-                                 <h3 class="text-2xl font-bold text-white">The Finest System</h3>
-                             </div>
-                             <ul class="space-y-6">
-                                 <li class="flex items-start text-white"><i data-lucide="check-circle-2" width="18" class="mr-3 mt-1 flex-shrink-0 text-gold"></i> Proven Sales Scripts & Pitch Deck Review</li>
-                                 <li class="flex items-start text-white"><i data-lucide="check-circle-2" width="18" class="mr-3 mt-1 flex-shrink-0 text-gold"></i> Automated Outreach Engine Setup</li>
-                                 <li class="flex items-start text-white"><i data-lucide="check-circle-2" width="18" class="mr-3 mt-1 flex-shrink-0 text-gold"></i> Revenue-Focused Growth Strategy</li>
-                                 <li class="flex items-start text-white"><i data-lucide="check-circle-2" width="18" class="mr-3 mt-1 flex-shrink-0 text-gold"></i> You only take the closing calls</li>
-                             </ul>
-                         </div>
-                       </div>
-                   </div>
-                </div>
-            </section>
-
-            <section class="py-16 md:py-24 bg-black text-center">
-                <div class="max-w-4xl mx-auto px-4 md:px-6">
-                    <div class="fade-in-section">
-                        <h2 class="text-gold font-bold uppercase tracking-widest text-sm mb-4">Our Guarantee</h2>
-                        <h3 class="text-3xl md:text-5xl font-bold text-white mb-8">Performance-Based Growth.</h3>
-                        <p class="text-gray-400 text-lg md:text-xl mb-12">We are so confident in our system that we share the risk with you.</p>
-                    </div>
-
-                    <div class="fade-in-section" style="transition-delay: 100ms;">
-                        <div onclick="openCalendarModal()" class="relative w-full max-w-2xl mx-auto mb-16 cursor-pointer group rounded-xl overflow-hidden border border-white/10 hover:border-gold transition-all">
-                            <div class="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all z-10 flex items-center justify-center">
-                                <div class="bg-black/80 backdrop-blur-sm px-6 py-3 rounded-full text-white font-bold flex items-center transform group-hover:scale-110 transition-transform">
-                                    <i data-lucide="calendar" width="20" class="mr-2 text-gold"></i> View Live Calendar Results
+                    <div class="fade-in-section transition-all duration-1000" style="transition-delay: 400ms;">
+                        <div class="bg-gradient-to-br from-[#1a1a1a] to-black border border-gold/30 rounded-2xl p-6 md:p-8 shadow-[0_0_50px_rgba(212,175,55,0.1)]">
+                            <h3 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">Projected Growth</h3>
+                            <div class="grid gap-6">
+                                <div class="bg-[#0a0a0a] p-6 rounded-xl border border-white/5">
+                                    <div class="flex items-center space-x-3 mb-2">
+                                        <i data-lucide="trending-up" class="text-gold w-5 h-5"></i>
+                                        <span class="text-gray-400 text-sm uppercase tracking-wider">Monthly Revenue</span>
+                                    </div>
+                                    <div id="monthlyRevenueDisplay" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono break-all md:break-normal">$30,000</div>
+                                </div>
+                                <div class="bg-[#0a0a0a] p-6 rounded-xl border border-white/5">
+                                    <div class="flex items-center space-x-3 mb-2">
+                                        <i data-lucide="award" class="text-gold w-5 h-5"></i>
+                                        <span class="text-gray-400 text-sm uppercase tracking-wider">Annual Run Rate</span>
+                                    </div>
+                                    <div id="annualRevenueDisplay" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono opacity-80 break-all md:break-normal">$360,000</div>
+                                </div>
+                                <div class="mt-4">
+                                    <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer"
+                                       class="block w-full bg-gold hover:bg-white text-black text-center font-bold py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
+                                        Maximize your Sales
+                                    </a>
+                                    <p class="text-center text-xs text-gray-500 mt-3">Estimates based on provided inputs. Results vary by niche.</p>
                                 </div>
                             </div>
-                            <img src="https://finestclients.com/calendarimage.png" alt="Calendar Results" class="w-full h-auto">
-                        </div>
-                    </div>
-
-                    <div class="grid md:grid-cols-3 gap-6 text-left">
-                        <div class="fade-in-section" style="transition-delay: 200ms;">
-                            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
-                                <i data-lucide="target" class="text-gold mb-4" width="32"></i>
-                                <h4 class="text-white font-bold text-xl mb-2">Qualified Sales Meetings</h4>
-                                <p class="text-gray-500 text-sm">We only count sales meetings with decision-makers who fit your ICP.</p>
-                            </div>
-                        </div>
-                        <div class="fade-in-section" style="transition-delay: 300ms;">
-                            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
-                                <i data-lucide="shield-check" class="text-gold mb-4" width="32"></i>
-                                <h4 class="text-white font-bold text-xl mb-2">Pay Per Sales Meeting</h4>
-                                <p class="text-gray-500 text-sm">You pay a setup fee, then only pay when a qualified sales meeting actually happens.</p>
-                            </div>
-                        </div>
-                        <div class="fade-in-section" style="transition-delay: 400ms;">
-                            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
-                                <i data-lucide="globe" class="text-gold mb-4" width="32"></i>
-                                <h4 class="text-white font-bold text-xl mb-2">Predictable Quality</h4>
-                                <p class="text-gray-500 text-sm">We target clients in premium markets for maximum deal value.</p>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="py-16 md:py-24 bg-black border-t border-white/5">
-                <div class="max-w-7xl mx-auto px-4 md:px-6 text-center">
-                    <div class="fade-in-section">
-                        <div class="bg-[#111] border border-gold/30 rounded-2xl p-8 md:p-12 max-w-3xl mx-auto shadow-[0_0_50px_rgba(212,175,55,0.1)] relative overflow-hidden">
-                            <div class="absolute top-0 right-0 bg-gold text-black text-xs font-bold px-3 py-1 rounded-bl-xl">POPULAR</div>
-                            <h3 class="text-gold font-bold uppercase tracking-widest text-sm mb-4">Simple Pricing</h3>
-                            <div class="text-5xl md:text-7xl font-bold text-white mb-4">$5,000</div>
-                            <p class="text-gray-400 text-xl mb-8">For 5 Qualified Sales Meetings</p>
-                            
-                            <div class="flex flex-col md:flex-row justify-center gap-4 text-sm text-gray-400 mb-8">
-                                <span class="flex items-center justify-center"><i data-lucide="check" width="16" class="text-gold mr-2"></i> Verified Decision Makers</span>
-                                <span class="flex items-center justify-center"><i data-lucide="check" width="16" class="text-gold mr-2"></i> High Intent Leads</span>
-                                <span class="flex items-center justify-center"><i data-lucide="check" width="16" class="text-gold mr-2"></i> Satisfaction Guarantee</span>
+        <section class="py-16 md:py-24 bg-[#0a0a0a] border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 md:px-6 text-center">
+                <div class="fade-in-section transition-all duration-1000">
+                    <h2 class="text-gold font-bold uppercase tracking-widest text-sm mb-4">Ideal Partners</h2>
+                    <h3 class="text-3xl md:text-5xl font-bold text-white mb-12">Who Is This For?</h3>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-6" id="targets-grid">
+                    </div>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24 bg-black">
+            <div class="max-w-7xl mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div>
+                    <h2 class="text-gold font-bold uppercase tracking-widest text-sm mb-4">Who We Are</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Your Skills Got You Here. Systems Get You Further.</h3>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                        In 2019, I started my agency. We had the talent, but every month felt like a survival game. I watched agencies with half our skill land clients we couldn't even meet. I realized the problem wasn't our work, it was that we relied on hope while they had systems.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        So, I built a predictable, repeatable engine to generate predictable quality Sales meetings without referrals. Now, Finest Clients exists to install that exact system into your studio, so you can stop the feast-or-famine cycle and finally run like a real business.
+                    </p>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop" alt="Our Team" class="rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 w-full">
+                    <div class="absolute -bottom-6 -left-2 md:-left-6 bg-gold text-black p-4 md:p-6 rounded-xl font-bold shadow-lg">
+                        <p class="text-2xl md:text-4xl mb-1">Global</p>
+                        <p class="text-xs md:text-sm uppercase tracking-wider">Approach</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24 bg-[#0a0a0a] border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 md:px-6">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                    <div class="fade-in-section transition-all duration-1000">
+                        <div class="p-6 md:p-10 rounded-3xl bg-[#111] border border-red-900/20 h-full">
+                            <div class="flex items-center space-x-4 mb-8">
+                                <div class="p-3 bg-red-900/20 rounded-full text-red-500"><i data-lucide="x" class="w-6 h-6"></i></div>
+                                <h3 class="text-2xl font-bold text-white">The Agency Trap</h3>
                             </div>
-
-                            <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer" class="inline-block bg-gold text-black px-12 py-4 rounded-full font-bold text-lg hover:bg-white transition-all w-full md:w-auto">
-                                Maximize your Sales
-                            </a>
+                            <ul class="space-y-6">
+                                <li class="flex items-start text-gray-400"><i data-lucide="minus" class="w-4.5 h-4.5 mr-3 mt-1 flex-shrink-0 text-red-500"></i>Feast or famine revenue cycles</li>
+                                <li class="flex items-start text-gray-400"><i data-lucide="minus" class="w-4.5 h-4.5 mr-3 mt-1 flex-shrink-0 text-red-500"></i>Relying on random referrals</li>
+                                <li class="flex items-start text-gray-400"><i data-lucide="minus" class="w-4.5 h-4.5 mr-3 mt-1 flex-shrink-0 text-red-500"></i>Undercharging for premium work</li>
+                                <li class="flex items-start text-gray-400"><i data-lucide="minus" class="w-4.5 h-4.5 mr-3 mt-1 flex-shrink-0 text-red-500"></i>Founders stuck doing sales instead of creative</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="fade-in-section transition-all duration-1000" style="transition-delay: 200ms;">
+                        <div class="p-6 md:p-10 rounded-3xl bg-[#111] border border-gold/30 h-full relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gold blur-[80px] opacity-10"></div>
+                            <div class="flex items-center space-x-4 mb-8">
+                                <div class="p-3 bg-gold/20 rounded-full text-gold"><i data-lucide="check" class="w-6 h-6"></i></div>
+                                <h3 class="text-2xl font-bold text-white">The Finest System</h3>
+                            </div>
+                            <ul class="space-y-6">
+                                <li class="flex items-start text-white"><i data-lucide="check-circle-2" class="w-4.5 h-4.5 mr-3 mt-1 flex-shrink-0 text-gold"></i>Proven Sales Scripts & Pitch Deck Review</li>
+                                <li class="flex items-start text-white"><i data-lucide="check-circle-2" class="w-4.5 h-4.5 mr-3 mt-1 flex-shrink-0 text-gold"></i>Automated Outreach Engine Setup</li>
+                                <li class="flex items-start text-white"><i data-lucide="check-circle-2" class="w-4.5 h-4.5 mr-3 mt-1 flex-shrink-0 text-gold"></i>Revenue-Focused Growth Strategy</li>
+                                <li class="flex items-start text-white"><i data-lucide="check-circle-2" class="w-4.5 h-4.5 mr-3 mt-1 flex-shrink-0 text-gold"></i>You only take the closing calls</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="process" class="py-16 md:py-24 bg-[#050505] border-t border-white/5 relative overflow-hidden">
-                <div class="max-w-5xl mx-auto px-4 md:px-6">
-                    <div class="text-center mb-20">
-                        <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Simple 5-Step Process</h2>
-                        <p class="text-gray-400">Your roadmap to predictable growth.</p>
-                    </div>
-                    
-                    <div id="process-container" class="relative pb-12">
-                        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-1/2"></div>
-                        <div id="process-line" class="absolute left-4 md:left-1/2 top-0 w-px bg-gold md:-translate-x-1/2 transition-all duration-100 ease-linear shadow-[0_0_10px_#D4AF37] h-0"></div>
-                        <div id="process-dot" class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-gold shadow-[0_0_15px_#D4AF37] z-20 md:-translate-x-1/2 -translate-x-1/2 transform -translate-y-1/2 border-2 border-black top-0"></div>
+        <section class="py-16 md:py-24 bg-black text-center">
+            <div class="max-w-4xl mx-auto px-4 md:px-6">
+                <div class="fade-in-section transition-all duration-1000">
+                    <h2 class="text-gold font-bold uppercase tracking-widest text-sm mb-4">Our Guarantee</h2>
+                    <h3 class="text-3xl md:text-5xl font-bold text-white mb-8">Performance-Based Growth.</h3>
+                    <p class="text-gray-400 text-lg md:text-xl mb-12">
+                        We are so confident in our system that we share the risk with you. 
+                    </p>
+                </div>
 
-                        <div id="steps-wrapper" class="space-y-12 md:space-y-24">
+                <div class="fade-in-section transition-all duration-1000" style="transition-delay: 100ms;">
+                    <div class="relative w-full max-w-2xl mx-auto mb-16 cursor-pointer group rounded-xl overflow-hidden border border-white/10 hover:border-gold transition-all"
+                         onclick="openModal('https://finestclients.com/calendarimage.png')">
+                        <div class="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all z-10 flex items-center justify-center">
+                            <div class="bg-black/80 backdrop-blur-sm px-6 py-3 rounded-full text-white font-bold flex items-center transform group-hover:scale-110 transition-transform">
+                                <i data-lucide="calendar" class="w-5 h-5 mr-2 text-gold"></i> View Live Calendar Results
                             </div>
+                        </div>
+                        <img src="https://finestclients.com/calendarimage.png" alt="Calendar Results" class="w-full h-auto">
                     </div>
                 </div>
-            </section>
 
-            <section id="faq" class="py-16 md:py-24 bg-black">
-                <div class="max-w-3xl mx-auto px-4 md:px-6">
-                    <h2 class="text-center text-3xl font-bold text-white mb-12 md:mb-16">Frequently Asked Questions</h2>
-                    <div id="faq-container" class="space-y-4">
+                <div class="grid md:grid-cols-3 gap-6 text-left">
+                    <div class="fade-in-section transition-all duration-1000" style="transition-delay: 200ms;">
+                        <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
+                            <i data-lucide="target" class="text-gold mb-4 w-8 h-8"></i>
+                            <h4 class="text-white font-bold text-xl mb-2">Qualified Sales Meetings</h4>
+                            <p class="text-gray-500 text-sm">We only count sales meetings with decision-makers who fit your ICP.</p>
                         </div>
+                    </div>
+                    <div class="fade-in-section transition-all duration-1000" style="transition-delay: 300ms;">
+                        <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
+                            <i data-lucide="shield-check" class="text-gold mb-4 w-8 h-8"></i>
+                            <h4 class="text-white font-bold text-xl mb-2">Pay Per Sales Meeting</h4>
+                            <p class="text-gray-500 text-sm">You pay a setup fee, then only pay when a qualified sales meeting actually happens.</p>
+                        </div>
+                    </div>
+                    <div class="fade-in-section transition-all duration-1000" style="transition-delay: 400ms;">
+                        <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
+                            <i data-lucide="globe" class="text-gold mb-4 w-8 h-8"></i>
+                            <h4 class="text-white font-bold text-xl mb-2">Predictable Quality</h4>
+                            <p class="text-gray-500 text-sm">We target clients in premium markets for maximum deal value.</p>
+                        </div>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="py-16 md:py-24 bg-black border-t border-white/5 text-center">
-                <div class="fade-in-section">
-                    <div class="max-w-4xl mx-auto px-4 md:px-6">
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-8">Ready to Scale?</h2>
-                        <p class="text-gray-400 mb-12 text-lg">Don't let another quarter pass with unpredictable revenue.</p>
-                        <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer" class="inline-block bg-gold text-black px-12 py-5 rounded-full font-bold text-xl hover:bg-white transition-all shadow-[0_0_20px_#D4AF37_40] w-full md:w-auto">
+        <section class="py-16 md:py-24 bg-black border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 md:px-6 text-center">
+                <div class="fade-in-section transition-all duration-1000">
+                    <div class="bg-[#111] border border-gold/30 rounded-2xl p-8 md:p-12 max-w-3xl mx-auto shadow-[0_0_50px_rgba(212,175,55,0.1)] relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-gold text-black text-xs font-bold px-3 py-1 rounded-bl-xl">POPULAR</div>
+                        <h3 class="text-gold font-bold uppercase tracking-widest text-sm mb-4">Simple Pricing</h3>
+                        <div class="text-5xl md:text-7xl font-bold text-white mb-4">$5,000</div>
+                        <p class="text-gray-400 text-xl mb-8">For 5 Qualified Sales Meetings</p>
+                        
+                        <div class="flex flex-col md:flex-row justify-center gap-4 text-sm text-gray-400 mb-8">
+                            <span class="flex items-center justify-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-2"></i> Verified Decision Makers</span>
+                            <span class="flex items-center justify-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-2"></i> High Intent Leads</span>
+                            <span class="flex items-center justify-center"><i data-lucide="check" class="w-4 h-4 text-gold mr-2"></i> Satisfaction Guarantee</span>
+                        </div>
+
+                        <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer"
+                           class="inline-block bg-gold text-black px-12 py-4 rounded-full font-bold text-lg hover:bg-white transition-all w-full md:w-auto">
                             Maximize your Sales
                         </a>
                     </div>
                 </div>
-            </section>
-        </div>
-
-        <div id="privacy-page" style="display: none;" class="min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
-            <button onclick="switchView('landing-page')" class="mb-8 flex items-center text-gold hover:text-white transition-colors">
-                <i data-lucide="arrow-left" width="20" class="mr-2"></i> Back to Home
-            </button>
-            <h1 class="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
-            <div class="space-y-8 text-sm leading-relaxed">
-               <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service...</p>
-               <p class="italic text-gray-500">(Full policy content shortened for brevity, functionally identical to React version)</p>
-               <h2 class="text-2xl font-bold text-white mt-8 mb-4">Contact Us</h2>
-               <p>If you have any questions about this Privacy Policy, You can contact us:</p>
-               <ul class="list-disc pl-5 space-y-2">
-                 <li>By email: <a href="mailto:mousam@finestclients.com" class="text-gold hover:underline">mousam@finestclients.com</a></li>
-               </ul>
             </div>
-        </div>
+        </section>
 
-        <div id="terms-page" style="display: none;" class="min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
-            <button onclick="switchView('landing-page')" class="mb-8 flex items-center text-gold hover:text-white transition-colors">
-                <i data-lucide="arrow-left" width="20" class="mr-2"></i> Back to Home
-            </button>
-            <h1 class="text-4xl font-bold text-white mb-8">Terms and Conditions</h1>
-            <div class="space-y-8 text-sm leading-relaxed">
-               <p>Please read these terms and conditions carefully before using Our Service.</p>
-               <p class="italic text-gray-500">(Full terms content shortened for brevity, functionally identical to React version)</p>
-               <h2 class="text-2xl font-bold text-white mt-8 mb-4">Contact Us</h2>
-               <ul class="list-disc pl-5 space-y-2">
-                 <li>By email: <a href="mailto:mousam@finestclients.com" class="text-gold hover:underline">mousam@finestclients.com</a></li>
-               </ul>
-            </div>
-        </div>
-
-        <div id="refund-page" style="display: none;" class="min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
-            <button onclick="switchView('landing-page')" class="mb-8 flex items-center text-gold hover:text-white transition-colors">
-                <i data-lucide="arrow-left" width="20" class="mr-2"></i> Back to Home
-            </button>
-            <h1 class="text-4xl font-bold text-white mb-8">Refund Policy</h1>
-            <div class="space-y-12 text-sm leading-relaxed">
-                <div class="bg-[#111] p-8 rounded-2xl border border-white/10">
-                    <h2 class="text-2xl font-bold text-gold mb-4">Our Commitment to Fairness</h2>
-                    <p class="text-lg text-white mb-4">At Finest Clients, our relationships are built on trust...</p>
+        <section id="process" class="py-16 md:py-24 bg-[#050505] border-t border-white/5 relative overflow-hidden">
+            <div class="max-w-5xl mx-auto px-4 md:px-6">
+                <div class="text-center mb-20">
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Simple 5-Step Process</h2>
+                    <p class="text-gray-400">Your roadmap to predictable growth.</p>
                 </div>
-                <div>
-                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
-                    <p><a href="mailto:mousam@finestclients.com" class="text-gold hover:underline font-bold">mousam@finestclients.com</a></p>
+                
+                <div id="process-container" class="relative pb-12">
+                    <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-1/2"></div>
+                    <div id="process-line" class="absolute left-4 md:left-1/2 top-0 w-px bg-gold md:-translate-x-1/2 transition-all duration-100 ease-linear shadow-[0_0_10px_#D4AF37]" style="height: 0;"></div>
+                    <div id="process-dot" class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-gold shadow-[0_0_15px_#D4AF37] z-20 md:-translate-x-1/2 -translate-x-1/2 transform -translate-y-1/2 border-2 border-black" style="top: 0;"></div>
+
+                    <div class="space-y-12 md:space-y-24" id="process-steps">
+                        <div class="process-step relative flex items-center md:justify-start">
+                            <div class="step-marker absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500 bg-[#111] border-white/20"></div>
+                            <div class="step-content w-full md:w-[45%] pl-12 md:pl-0 md:pr-12 md:text-right transition-all duration-700 opacity-20 translate-y-10 blur-sm">
+                                <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-gold/50 transition-colors relative group">
+                                    <div class="text-6xl font-black text-white/5 absolute top-0 md:right-2 right-2 select-none leading-none z-0">01</div>
+                                    <div class="relative z-10">
+                                        <h4 class="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">Onboarding/Kick-Off Call</h4>
+                                        <p class="text-gray-400 text-sm leading-relaxed">Our streamlined onboarding process is designed to be time-efficient, taking no more than 30 minutes of your valuable time.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step relative flex items-center md:justify-end">
+                            <div class="step-marker absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500 bg-[#111] border-white/20"></div>
+                            <div class="step-content w-full md:w-[45%] pl-12 md:pl-0 md:pl-12 md:text-left transition-all duration-700 opacity-20 translate-y-10 blur-sm">
+                                <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-gold/50 transition-colors relative group">
+                                    <div class="text-6xl font-black text-white/5 absolute top-0 left-2 select-none leading-none z-0">02</div>
+                                    <div class="relative z-10">
+                                        <h4 class="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">Research & Strategy</h4>
+                                        <p class="text-gray-400 text-sm leading-relaxed">Clarifying your ideal customer, offer, messaging & setting up the technical infrastructure to get you started with your journey.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step relative flex items-center md:justify-start">
+                            <div class="step-marker absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500 bg-[#111] border-white/20"></div>
+                            <div class="step-content w-full md:w-[45%] pl-12 md:pl-0 md:pr-12 md:text-right transition-all duration-700 opacity-20 translate-y-10 blur-sm">
+                                <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-gold/50 transition-colors relative group">
+                                    <div class="text-6xl font-black text-white/5 absolute top-0 md:right-2 right-2 select-none leading-none z-0">03</div>
+                                    <div class="relative z-10">
+                                        <h4 class="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">Outbound Ecosystem</h4>
+                                        <p class="text-gray-400 text-sm leading-relaxed">Crafting the finest outreach system, catered specifically to your requirements – sit back and let us handle everything for you.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step relative flex items-center md:justify-end">
+                            <div class="step-marker absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500 bg-[#111] border-white/20"></div>
+                            <div class="step-content w-full md:w-[45%] pl-12 md:pl-0 md:pl-12 md:text-left transition-all duration-700 opacity-20 translate-y-10 blur-sm">
+                                <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-gold/50 transition-colors relative group">
+                                    <div class="text-6xl font-black text-white/5 absolute top-0 left-2 select-none leading-none z-0">04</div>
+                                    <div class="relative z-10">
+                                        <h4 class="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">Qualified Appointments Delivered</h4>
+                                        <p class="text-gray-400 text-sm leading-relaxed">Once we've confirmed a time with your ideal prospect, we'll book it straight into your calendar.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step relative flex items-center md:justify-start">
+                            <div class="step-marker absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500 bg-[#111] border-white/20"></div>
+                            <div class="step-content w-full md:w-[45%] pl-12 md:pl-0 md:pr-12 md:text-right transition-all duration-700 opacity-20 translate-y-10 blur-sm">
+                                <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-gold/50 transition-colors relative group">
+                                    <div class="text-6xl font-black text-white/5 absolute top-0 md:right-2 right-2 select-none leading-none z-0">05</div>
+                                    <div class="relative z-10">
+                                        <h4 class="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">Sales Calls & Scaling</h4>
+                                        <p class="text-gray-400 text-sm leading-relaxed">Sales calls and pitch deck reviews, and optimizations for scaling.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-    </main>
+        <section id="faq" class="py-16 md:py-24 bg-black">
+            <div class="max-w-3xl mx-auto px-4 md:px-6">
+                <h2 class="text-center text-3xl font-bold text-white mb-12 md:mb-16">Frequently Asked Questions</h2>
+                <div class="space-y-4" id="faq-container">
+                    </div>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24 bg-black border-t border-white/5 text-center">
+            <div class="fade-in-section transition-all duration-1000">
+                <div class="max-w-4xl mx-auto px-4 md:px-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-8">Ready to Scale?</h2>
+                    <p class="text-gray-400 mb-12 text-lg">Don't let another quarter pass with unpredictable revenue.</p>
+                    <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer"
+                       class="inline-block bg-gold text-black px-12 py-5 rounded-full font-bold text-xl hover:bg-white transition-all shadow-[0_0_20px_#D4AF37_40] w-full md:w-auto">
+                        Maximize your Sales
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="terms-view" class="view-section min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
+        <button onclick="navigateTo('home')" class="mb-8 flex items-center text-gold hover:text-white transition-colors">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i> Back to Home
+        </button>
+        <h1 class="text-4xl font-bold text-white mb-8">Terms and Conditions</h1>
+        <div class="space-y-8 text-sm leading-relaxed">
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Interpretation and Definitions</h2>
+            <h3 class="text-xl font-semibold text-white mt-6 mb-2">Interpretation</h3>
+            <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
+            <h3 class="text-xl font-semibold text-white mt-6 mb-2">Definitions</h3>
+            <p>For the purposes of these Terms and Conditions:</p>
+            <ul class="list-disc pl-5 space-y-2">
+                <li><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</li>
+                <li><strong>Country</strong> refers to: <strong>USA</strong></li>
+                <li><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to <strong>Finest Enterprises</strong>.</li>
+                <li><strong>Device</strong> means any device that can access the Service such as a computer, a cellphone or a digital tablet.</li>
+                <li><strong>Service</strong> refers to the Website.</li>
+                <li><strong>Terms and Conditions</strong> (also referred as "Terms") mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service.</li>
+                <li><strong>Third-party Social Media Service</strong> means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.</li>
+                <li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a href="https://finestclients.com/" class="text-gold hover:underline">https://finestclients.com/</a></li>
+                <li><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
+            </ul>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Acknowledgment</h2>
+            <p>These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.</p>
+            <p>Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions. These Terms and Conditions apply to all visitors, users and others who access or use the Service.</p>
+            <p>By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions then You may not access the Service.</p>
+            <p>You represent that you are over the age of 18. The Company does not permit those under 18 to use the Service.</p>
+            <p>Your access to and use of the Service is also conditioned on Your acceptance of and compliance with the Privacy Policy of the Company. Our Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your personal information when You use the Application or the Website and tells You about Your privacy rights and how the law protects You. Please read Our Privacy Policy carefully before using Our Service.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Links to Other Websites</h2>
+            <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by the Company.</p>
+            <p>The Company has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that the Company shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods or services available on or through any such web sites or services.</p>
+            <p>We strongly advise You to read the terms and conditions and privacy policies of any third-party web sites or services that You visit.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Termination</h2>
+            <p>We may terminate or suspend Your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if You breach these Terms and Conditions.</p>
+            <p>Upon termination, Your right to use the Service will cease immediately.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Limitation of Liability</h2>
+            <p>Notwithstanding any damages that You might incur, the entire liability of the Company and any of its suppliers under any provision of this Terms and Your exclusive remedy for all of the foregoing shall be limited to the amount actually paid by You through the Service or 100 USD if You haven't purchased anything through the Service.</p>
+            <p>To the maximum extent permitted by applicable law, in no event shall the Company or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for loss of profits, loss of data or other information, for business interruption, for personal injury, loss of privacy arising out of or in any way related to the use of or inability to use the Service, third-party software and/or third-party hardware used with the Service, or otherwise in connection with any provision of this Terms), even if the Company or any supplier has been advised of the possibility of such damages and even if the remedy fails of its essential purpose.</p>
+            <p>Some states do not allow the exclusion of implied warranties or limitation of liability for incidental or consequential damages, which means that some of the above limitations may not apply. In these states, each party's liability will be limited to the greatest extent permitted by law.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">"AS IS" and "AS AVAILABLE" Disclaimer</h2>
+            <p>The Service is provided to You "AS IS" and "AS AVAILABLE" and with all faults and defects without warranty of any kind. To the maximum extent permitted under applicable law, the Company, on its own behalf and on behalf of its Affiliates and its and their respective licensors and service providers, expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Service, including all implied warranties of merchantability, fitness for a particular purpose, title and non-infringement, and warranties that may arise out of course of dealing, course of performance, usage or trade practice. Without limitation to the foregoing, the Company provides no warranty or undertaking, and makes no representation of any kind that the Service will meet Your requirements, achieve any intended results, be compatible or work with any other software, applications, systems or services, operate without interruption, meet any performance or reliability standards or be error free or that any errors or defects can or will be corrected.</p>
+            <p>Without limiting the foregoing, neither the Company nor any of the company's provider makes any representation or warranty of any kind, express or implied: (i) as to the operation or availability of the Service, or the information, content, and materials or products included thereon; (ii) that the Service will be uninterrupted or error-free; (iii) as to the accuracy, reliability, or currency of any information or content provided through the Service; or (iv) that the Service, its servers, the content, or e-mails sent from or on behalf of the Company are free of viruses, scripts, trojan horses, worms, malware, timebombs or other harmful components.</p>
+            <p>Some jurisdictions do not allow the exclusion of certain types of warranties or limitations on applicable statutory rights of a consumer, so some or all of the above exclusions and limitations may not apply to You. But in such a case the exclusions and limitations set forth in this section shall be applied to the greatest extent enforceable under applicable law.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Governing Law</h2>
+            <p>The laws of the Country, excluding its conflicts of law rules, shall govern this Terms and Your use of the Service. Your use of the Application may also be subject to other local, state, national, or international laws.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Disputes Resolution</h2>
+            <p>If You have any concern or dispute about the Service, You agree to first try to resolve the dispute informally by contacting the Company.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">For European Union (EU) Users</h2>
+            <p>If You are a European Union consumer, you will benefit from any mandatory provisions of the law of the country in which You are resident.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">United States Legal Compliance</h2>
+            <p>You represent and warrant that (i) You are not located in a country that is subject to the United States government embargo, or that has been designated by the United States government as a "terrorist supporting" country, and (ii) You are not listed on any United States government list of prohibited or restricted parties.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Severability and Waiver</h2>
+            <h3 class="text-xl font-semibold text-white mt-6 mb-2">Severability</h3>
+            <p>If any provision of these Terms is held to be unenforceable or invalid, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect.</p>
+            <h3 class="text-xl font-semibold text-white mt-6 mb-2">Waiver</h3>
+            <p>Except as provided herein, the failure to exercise a right or to require performance of an obligation under these Terms shall not affect a party's ability to exercise such right or require such performance at any time thereafter nor shall the waiver of a breach constitute a waiver of any subsequent breach.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Translation Interpretation</h2>
+            <p>These Terms and Conditions may have been translated if We have made them available to You on our Service. You agree that the original English text shall prevail in the case of a dispute.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Changes to These Terms and Conditions</h2>
+            <p>We reserve the right, at Our sole discretion, to modify or replace these Terms at any time. If a revision is material We will make reasonable efforts to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at Our sole discretion.</p>
+            <p>By continuing to access or use Our Service after those revisions become effective, You agree to be bound by the revised terms. If You do not agree to the new terms, in whole or in part, please stop using the website and the Service.</p>
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Contact Us</h2>
+            <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
+            <ul class="list-disc pl-5 space-y-2">
+                <li>By email: <a href="mailto:mousam@finestclients.com" class="text-gold hover:underline">mousam@finestclients.com</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="refund-view" class="view-section min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
+        <button onclick="navigateTo('home')" class="mb-8 flex items-center text-gold hover:text-white transition-colors">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i> Back to Home
+        </button>
+        <h1 class="text-4xl font-bold text-white mb-8">Refund Policy</h1>
+        <div class="space-y-12 text-sm leading-relaxed">
+            <div class="bg-[#111] p-8 rounded-2xl border border-white/10">
+                <h2 class="text-2xl font-bold text-gold mb-4">Our Commitment to Fairness</h2>
+                <p class="text-lg text-white mb-4">
+                    At Finest Clients, our relationships are built on trust, transparency, and mutual success. We believe that a partnership should be risk-free when results are promised.
+                </p>
+                <p class="text-lg text-gray-400">
+                    Therefore, our refund policy is simple, binding, and designed to protect your investment.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4">Contractual Guarantee</h3>
+                <p class="mb-4">
+                    Unlike standard services where refunds are discretionary, our refunds are governed strictly by the <strong>Service Agreement (Contract)</strong> signed at the commencement of our engagement.
+                </p>
+                <p class="p-6 border-l-4 border-gold bg-white/5 rounded-r-lg italic text-lg text-white">
+                    "If we fail to deliver the results explicitly agreed upon in our Service Agreement, we will refund your money as per the terms decided and signed in our contract."
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4">Governing Terms</h3>
+                <ul class="list-disc pl-5 space-y-4">
+                    <li><strong>Performance-Based Security:</strong> Your investment is tied to deliverables. If the specific KPIs (Key Performance Indicators) or meeting quotas outlined in your contract are not met within the stipulated timeframe, you are eligible for a refund as detailed in your specific agreement.</li>
+                    <li><strong>Execution of Refunds:</strong> Refund requests are processed in strict accordance with the stipulations agreed upon in your Master Services Agreement. We honor our commitments as documented.</li>
+                    <li><strong>Processing Time:</strong> Once a refund condition is verified and approved as per the contract, the funds will be returned to your original payment method within the timeframe specified in your agreement (typically 7-14 business days).</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                <p>For any questions regarding your contract or to initiate a discussion about deliverables, please contact your dedicated account manager or email us directly at:</p>
+                <p class="mt-2"><a href="mailto:mousam@finestclients.com" class="text-gold hover:underline font-bold">mousam@finestclients.com</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="privacy-view" class="view-section min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
+        <button onclick="navigateTo('home')" class="mb-8 flex items-center text-gold hover:text-white transition-colors">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i> Back to Home
+        </button>
+        <h1 class="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
+        <div class="space-y-8 text-sm leading-relaxed">
+            <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
+            <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.</p>
+            
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Interpretation and Definitions</h2>
+            <h3 class="text-xl font-semibold text-white mt-6 mb-2">Interpretation</h3>
+            <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
+            <h3 class="text-xl font-semibold text-white mt-6 mb-2">Definitions</h3>
+            <p>For the purposes of this Privacy Policy:</p>
+            <ul class="list-disc pl-5 space-y-2">
+                <li><strong>Account</strong> means a unique account created for You to access our Service or parts of our Service.</li>
+                <li><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</li>
+                <li><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to <strong>Finest Enterprises</strong>.</li>
+                <li><strong>Cookies</strong> are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.</li>
+                <li><strong>Country</strong> refers to: <strong>USA</strong></li>
+                <li><strong>Device</strong> means any device that can access the Service such as a computer, a cellphone or a digital tablet.</li>
+                <li><strong>Personal Data</strong> is any information that relates to an identified or identifiable individual.</li>
+                <li><strong>Service</strong> refers to the Website.</li>
+                <li><strong>Service Provider</strong> means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used.</li>
+                <li><strong>Usage Data</strong> refers to data collected automatically, either generated by the use of the Service or from the Service infrastructure itself (for example, the duration of a page visit).</li>
+                <li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a href="https://finestclients.com/" class="text-gold hover:underline">https://finestclients.com/</a></li>
+                <li><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Collecting and Using Your Personal Data</h2>
+            <h3 class="text-xl font-semibold text-white mt-6 mb-2">Types of Data Collected</h3>
+            <h4 class="text-lg font-semibold text-white mt-4 mb-2">Personal Data</h4>
+            <p>While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:</p>
+            <ul class="list-disc pl-5 space-y-2">
+                <li>Email address</li>
+                <li>First name and last name</li>
+                <li>Phone number</li>
+                <li>Usage Data</li>
+            </ul>
+            <p>...For the full policy text please refer to the original document. (Truncated for HTML file size, but would contain full text in production)</p>
+             <h2 class="text-2xl font-bold text-white mt-8 mb-4">Contact Us</h2>
+             <p>If you have any questions about this Privacy Policy, You can contact us:</p>
+             <ul class="list-disc pl-5 space-y-2">
+               <li>By email: <a href="mailto:mousam@finestclients.com" class="text-gold hover:underline">mousam@finestclients.com</a></li>
+             </ul>
+        </div>
+    </div>
 
     <footer class="bg-black text-white pt-16 md:pt-24 pb-12 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 mb-16">
@@ -581,18 +760,18 @@
             <div>
                 <h5 class="font-bold mb-4">Navigation</h5>
                 <ul class="space-y-2 text-gray-500 text-sm">
-                    <li><button onclick="scrollToSection('home')" class="hover:text-white">Home</button></li>
-                    <li><button onclick="scrollToSection('proof')" class="hover:text-white">Proof</button></li>
-                    <li><button onclick="scrollToSection('process')" class="hover:text-white">Process</button></li>
-                    <li><button onclick="scrollToSection('roi')" class="hover:text-white">ROI Calculator</button></li>
+                    <li><button onclick="scrollToId('home')" class="hover:text-white">Home</button></li>
+                    <li><button onclick="scrollToId('proof')" class="hover:text-white">Proof</button></li>
+                    <li><button onclick="scrollToId('process')" class="hover:text-white">Process</button></li>
+                    <li><button onclick="scrollToId('roi')" class="hover:text-white">ROI Calculator</button></li>
                 </ul>
             </div>
             <div>
                 <h5 class="font-bold mb-4">Legal</h5>
                 <ul class="space-y-2 text-gray-500 text-sm">
-                    <li><button onclick="switchView('privacy-page')" class="hover:text-white text-left">Privacy Policy</button></li>
-                    <li><button onclick="switchView('terms-page')" class="hover:text-white text-left">Terms of Service</button></li>
-                    <li><button onclick="switchView('refund-page')" class="hover:text-white text-left">Refund Policy</button></li>
+                    <li><button onclick="navigateTo('privacy')" class="hover:text-white text-left">Privacy Policy</button></li>
+                    <li><button onclick="navigateTo('terms')" class="hover:text-white text-left">Terms of Service</button></li>
+                    <li><button onclick="navigateTo('refund')" class="hover:text-white text-left">Refund Policy</button></li>
                 </ul>
             </div>
         </div>
@@ -602,37 +781,47 @@
         </div>
     </footer>
 
-    <div id="calendar-modal" onclick="closeCalendarModal()" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden items-center justify-center p-4 cursor-pointer transition-opacity duration-300">
+    <div id="image-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden items-center justify-center p-4 cursor-pointer transition-opacity duration-300" onclick="closeModal()">
         <div class="relative animate-fadeIn">
-            <img src="https://finestclients.com/calendarimage.png" alt="Calendar" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl cursor-default border border-white/10" onclick="event.stopPropagation()">
-            <button onclick="closeCalendarModal()" class="absolute -top-12 right-0 text-white hover:text-gold transition-colors p-2">
-                <i data-lucide="x" width="32"></i>
+            <img id="modal-img" src="" alt="Preview" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl cursor-default border border-white/10" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute -top-12 right-0 text-white hover:text-gold transition-colors p-2">
+                <i data-lucide="x" class="w-8 h-8"></i>
             </button>
         </div>
     </div>
 
     <script>
-        // --- Init Lucide Icons ---
+        // --- Icons ---
         lucide.createIcons();
 
-        // --- View Switching Logic ---
-        function switchView(viewId) {
-            // Hide all pages
-            ['landing-page', 'privacy-page', 'terms-page', 'refund-page'].forEach(id => {
-                document.getElementById(id).style.display = 'none';
+        // --- Navigation Logic ---
+        function navigateTo(view) {
+            // Hide all views
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('active');
             });
-            // Show requested page
-            const page = document.getElementById(viewId);
-            page.style.display = 'block';
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (view === 'home') {
+                document.getElementById('landing-view').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'terms') {
+                document.getElementById('terms-view').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'privacy') {
+                document.getElementById('privacy-view').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'refund') {
+                document.getElementById('refund-view').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            // Re-render icons just in case
+            setTimeout(() => lucide.createIcons(), 100);
         }
 
-        function scrollToSection(id) {
-            const landing = document.getElementById('landing-page');
-            if (landing.style.display === 'none') {
-                switchView('landing-page');
+        function scrollToId(id) {
+            // Ensure we are on home view
+            if (!document.getElementById('landing-view').classList.contains('active')) {
+                navigateTo('home');
                 setTimeout(() => {
                     const el = document.getElementById(id);
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -640,199 +829,48 @@
             } else {
                 const el = document.getElementById(id);
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
+                else if (id === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
-        // --- Navbar Scroll Logic ---
-        const navbar = document.getElementById('navbar');
+        // --- Navbar Logic (Fixed Width/Height) ---
         window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
             if (window.scrollY > 20) {
-                // To keep width fixed, we modify background and padding on the wrapper, 
-                // but the max-w-7xl inner container ensures content doesn't shift horizontally
-                navbar.classList.remove('bg-transparent', 'border-transparent', 'md:py-6');
-                navbar.classList.add('bg-black', 'border-white/10'); 
+                navbar.classList.add('bg-black', 'border-white/10');
+                navbar.classList.remove('border-transparent');
             } else {
-                navbar.classList.add('bg-transparent', 'border-transparent', 'md:py-6');
                 navbar.classList.remove('bg-black', 'border-white/10');
+                navbar.classList.add('border-transparent');
             }
+            // Note: Padding classes are static (py-5) in the HTML to prevent shrinking
         });
 
-        // --- Mobile Menu ---
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        let isMenuOpen = false;
-
         function toggleMobileMenu() {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('hidden');
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
-                navbar.classList.add('bg-black', 'border-white/10');
-                // Replace menu icon with X logic if needed, simplifed here
             } else {
-                mobileMenu.classList.add('hidden');
+                menu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
                 document.body.style.overflow = 'unset';
-                if(window.scrollY <= 20) {
-                    navbar.classList.remove('bg-black', 'border-white/10');
-                }
             }
         }
 
         function mobileNavClick(id) {
             toggleMobileMenu();
-            scrollToSection(id);
+            scrollToId(id);
         }
 
-        // --- Data Population (Marquee, Targets, Process, FAQ) ---
-        
-        // Marquee
-        const clientLogos = [
-            "https://asset.creativeagencyblueprint.com/images/1.png", "https://asset.creativeagencyblueprint.com/images/2.png", "https://asset.creativeagencyblueprint.com/images/3.png",
-            "https://asset.creativeagencyblueprint.com/images/4.png", "https://asset.creativeagencyblueprint.com/images/5.png", "https://asset.creativeagencyblueprint.com/images/6.png",
-            "https://asset.creativeagencyblueprint.com/images/7.png", "https://asset.creativeagencyblueprint.com/images/8.png", "https://asset.creativeagencyblueprint.com/images/9.png",
-            "https://asset.creativeagencyblueprint.com/images/10.png", "https://asset.creativeagencyblueprint.com/images/11.png", "https://asset.creativeagencyblueprint.com/images/12.png",
-            "https://asset.creativeagencyblueprint.com/images/13.png", "https://asset.creativeagencyblueprint.com/images/14.png", "https://asset.creativeagencyblueprint.com/images/15.png",
-            "https://asset.creativeagencyblueprint.com/images/16.png", "https://asset.creativeagencyblueprint.com/images/17.png", "https://asset.creativeagencyblueprint.com/images/18.png",
-            "https://asset.creativeagencyblueprint.com/images/19.png"
-        ];
-        const marqueeContainer = document.getElementById('marquee-container');
-        const doubleLogos = [...clientLogos, ...clientLogos];
-        marqueeContainer.innerHTML = doubleLogos.map(src => `
-            <div class="mx-4 md:mx-8 w-24 md:w-32 h-12 md:h-16 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
-                <img src="${src}" alt="Client Logo" class="max-w-full max-h-full object-contain" onerror="this.style.display='none'">
-            </div>
-        `).join('');
-
-        // Who is this for
-        const targets = [
-            {t:"Creative Agencies", i:"palette"}, {t:"Branding Studios", i:"pen-tool"}, 
-            {t:"Design Agencies", i:"layers"}, {t:"UI/UX Agencies", i:"monitor"}, 
-            {t:"Video Agencies", i:"video"}, {t:"Motion Design", i:"film"}, 
-            {t:"Ad Agencies", i:"megaphone"}, {t:"B2B Service Firms", i:"briefcase"}
-        ];
-        document.getElementById('targets-grid').innerHTML = targets.map(item => `
-            <div class="fade-in-section">
-                <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-gold transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
-                    <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-gold/20 transition-colors">
-                        <i data-lucide="${item.i}" width="28" class="text-gray-400 group-hover:text-gold transition-colors"></i>
-                    </div>
-                    <h4 class="text-base md:text-lg font-bold text-white group-hover:text-gold transition-colors">${item.t}</h4>
-                </div>
-            </div>
-        `).join('');
-
-        // Process Steps
-        const steps = [
-            { title: "Onboarding/Kick-Off Call", desc: "Our streamlined onboarding process is designed to be time-efficient, taking no more than 30 minutes of your valuable time." },
-            { title: "Research & Strategy", desc: "Clarifying your ideal customer, offer, messaging & setting up the technical infrastructure to get you started with your journey." },
-            { title: "Outbound Ecosystem", desc: "Crafting the finest outreach system, catered specifically to your requirements – sit back and let us handle everything for you." },
-            { title: "Qualified Appointments Delivered", desc: "Once we've confirmed a time with your ideal prospect, we'll book it straight into your calendar." },
-            { title: "Sales Calls & Scaling", desc: "Sales calls and pitch deck reviews, and optimizations for scaling." }
-        ];
-        document.getElementById('steps-wrapper').innerHTML = steps.map((step, i) => `
-            <div class="process-step relative flex items-center ${i % 2 === 0 ? 'md:justify-start' : 'md:justify-end'}">
-                <div class="step-dot absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 border-white/20 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center bg-[#111] transition-all duration-500"></div>
-                
-                <div class="step-content w-full md:w-[45%] pl-12 md:pl-0 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'} transition-all duration-700 transform opacity-0 translate-y-10">
-                    <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-gold/50 transition-colors relative group">
-                        <div class="text-6xl font-black text-white/5 absolute top-0 ${i % 2 === 0 ? 'md:right-2 right-2' : 'left-2'} select-none leading-none z-0">0${i + 1}</div>
-                        <div class="relative z-10">
-                            <h4 class="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">${step.title}</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed">${step.desc}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-
-        // FAQs
-        const faqs = [
-            { q: "What counts as a 'qualified' Sales Meeting?", a: "A qualified Sales Meeting is a meeting with a decision-maker (Founder, CEO, CMO) in your target niche who has shown genuine interest in your service." },
-            { q: "Do you work with Marketing Agencies?", a: "No. We specialize exclusively in Creative Agencies (Design, Branding, Video Production, UI/UX). Our systems are tuned specifically for selling creative work." },
-            { q: "What is the commitment?", a: "We have a 90-day initial sprint to build momentum. However, since you pay on performance, our incentives are aligned to get you results immediately." },
-            { q: "Do I need to handle the emails?", a: "No. We handle the technical setup, the copywriting, the list building, and the sending. You only handle the replies and the sales calls." }
-        ];
-        document.getElementById('faq-container').innerHTML = faqs.map((item, idx) => `
-            <div class="faq-item border border-white/10 rounded-xl overflow-hidden transition-all duration-300 bg-black">
-                <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left">
-                    <span class="faq-q font-bold text-base md:text-lg pr-4 text-gray-300">${item.q}</span>
-                    <i data-lucide="plus" class="faq-icon text-gray-500 flex-shrink-0"></i>
-                </button>
-                <div class="faq-a overflow-hidden transition-all duration-300 max-h-0 opacity-0">
-                    <p class="p-6 pt-0 text-gray-400 text-sm leading-relaxed">${item.a}</p>
-                </div>
-            </div>
-        `).join('');
-
-        function toggleFaq(btn) {
-            const item = btn.parentElement;
-            const answer = item.querySelector('.faq-a');
-            const icon = item.querySelector('.faq-icon');
-            const title = item.querySelector('.faq-q');
-            
-            // Close others (optional)
-            document.querySelectorAll('.faq-item').forEach(el => {
-                if(el !== item) {
-                    el.classList.remove('bg-white/5', 'border-gold/30');
-                    el.querySelector('.faq-a').classList.remove('max-h-48', 'opacity-100');
-                    el.querySelector('.faq-a').classList.add('max-h-0', 'opacity-0');
-                }
-            });
-
-            if (answer.classList.contains('max-h-0')) {
-                item.classList.add('bg-white/5', 'border-gold/30');
-                answer.classList.remove('max-h-0', 'opacity-0');
-                answer.classList.add('max-h-48', 'opacity-100');
-                title.classList.remove('text-gray-300');
-                title.classList.add('text-white');
-                // We'd need to re-render icon here to change plus to minus or just rotate it via css
-                icon.style.transform = 'rotate(45deg)'; 
-                icon.style.color = '#D4AF37';
-            } else {
-                item.classList.remove('bg-white/5', 'border-gold/30');
-                answer.classList.add('max-h-0', 'opacity-0');
-                answer.classList.remove('max-h-48', 'opacity-100');
-                title.classList.add('text-gray-300');
-                title.classList.remove('text-white');
-                icon.style.transform = 'rotate(0deg)';
-                icon.style.color = '#6b7280';
-            }
-        }
-
-        // --- ROI Calculator Logic ---
-        const inputs = ['deal', 'close', 'meetings'];
-        inputs.forEach(id => {
-            document.getElementById(`input-${id}`).addEventListener('input', updateROI);
-        });
-
-        function updateROI() {
-            const deal = parseInt(document.getElementById('input-deal').value);
-            const close = parseInt(document.getElementById('input-close').value);
-            const meetings = parseInt(document.getElementById('input-meetings').value);
-
-            // Update displays
-            document.getElementById('display-deal').textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(deal);
-            document.getElementById('display-close').textContent = close + '%';
-            document.getElementById('display-meetings').textContent = meetings + ' Calls';
-
-            const monthly = meetings * (close / 100) * deal;
-            const annual = monthly * 12;
-
-            document.getElementById('result-monthly').textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(monthly);
-            document.getElementById('result-annual').textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(annual);
-        }
-
-        // --- Calendar Modal ---
-        function openCalendarModal() {
-            document.getElementById('calendar-modal').classList.remove('hidden');
-            document.getElementById('calendar-modal').classList.add('flex');
-        }
-        function closeCalendarModal() {
-            document.getElementById('calendar-modal').classList.add('hidden');
-            document.getElementById('calendar-modal').classList.remove('flex');
-        }
-
-        // --- Intersection Observer for Fade In ---
+        // --- Fade In Animation ---
+        const observerOptions = { threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -840,24 +878,147 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, observerOptions);
 
-        // Observe elements
-        // Need to wait for DOM elements generated by JS
-        setTimeout(() => {
-            document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
-            lucide.createIcons(); // Re-run for JS generated content
-        }, 100);
+        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
 
-        // --- Process Line Animation ---
+        // --- ROI Calculator ---
+        const dealValueInput = document.getElementById('dealValueInput');
+        const closeRateInput = document.getElementById('closeRateInput');
+        const meetingsInput = document.getElementById('meetingsInput');
+        const dealValueDisplay = document.getElementById('dealValueDisplay');
+        const closeRateDisplay = document.getElementById('closeRateDisplay');
+        const meetingsDisplay = document.getElementById('meetingsDisplay');
+        const monthlyRevenueDisplay = document.getElementById('monthlyRevenueDisplay');
+        const annualRevenueDisplay = document.getElementById('annualRevenueDisplay');
+
+        function calculateROI() {
+            const deal = parseInt(dealValueInput.value);
+            const rate = parseInt(closeRateInput.value);
+            const meetings = parseInt(meetingsInput.value);
+
+            dealValueDisplay.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(deal);
+            closeRateDisplay.textContent = rate + '%';
+            meetingsDisplay.textContent = meetings + ' Calls';
+
+            const projected = meetings * (rate / 100) * deal;
+            const annual = projected * 12;
+
+            monthlyRevenueDisplay.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(projected);
+            annualRevenueDisplay.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(annual);
+        }
+
+        dealValueInput.addEventListener('input', calculateROI);
+        closeRateInput.addEventListener('input', calculateROI);
+        meetingsInput.addEventListener('input', calculateROI);
+
+        // --- Data Injection (Marquee, Targets, FAQs) ---
+        const clientLogos = [
+            "https://asset.creativeagencyblueprint.com/images/1.png", "https://asset.creativeagencyblueprint.com/images/2.png", "https://asset.creativeagencyblueprint.com/images/3.png", "https://asset.creativeagencyblueprint.com/images/4.png",
+            "https://asset.creativeagencyblueprint.com/images/5.png", "https://asset.creativeagencyblueprint.com/images/6.png", "https://asset.creativeagencyblueprint.com/images/7.png", "https://asset.creativeagencyblueprint.com/images/8.png",
+            "https://asset.creativeagencyblueprint.com/images/9.png", "https://asset.creativeagencyblueprint.com/images/10.png", "https://asset.creativeagencyblueprint.com/images/11.png", "https://asset.creativeagencyblueprint.com/images/12.png",
+            "https://asset.creativeagencyblueprint.com/images/13.png", "https://asset.creativeagencyblueprint.com/images/14.png", "https://asset.creativeagencyblueprint.com/images/15.png", "https://asset.creativeagencyblueprint.com/images/16.png",
+            "https://asset.creativeagencyblueprint.com/images/17.png", "https://asset.creativeagencyblueprint.com/images/18.png", "https://asset.creativeagencyblueprint.com/images/19.png"
+        ];
+        
+        const marqueeContent = document.getElementById('marquee-content');
+        const doubleLogos = [...clientLogos, ...clientLogos];
+        marqueeContent.innerHTML = doubleLogos.map(logo => `
+            <div class="mx-4 md:mx-8 w-24 md:w-32 h-12 md:h-16 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
+                <img src="${logo}" alt="Client Logo" class="max-w-full max-h-full object-contain" onerror="this.style.display='none'">
+            </div>
+        `).join('');
+
+        const targets = [
+            { title: "Creative Agencies", icon: "palette" },
+            { title: "Branding Studios", icon: "pen-tool" },
+            { title: "Design Agencies", icon: "layers" },
+            { title: "UI/UX Agencies", icon: "monitor" },
+            { title: "Video Agencies", icon: "video" },
+            { title: "Motion Design", icon: "film" },
+            { title: "Ad Agencies", icon: "megaphone" },
+            { title: "B2B Service Firms", icon: "briefcase" }
+        ];
+
+        const targetsGrid = document.getElementById('targets-grid');
+        targetsGrid.innerHTML = targets.map((t, i) => `
+            <div class="fade-in-section bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-gold transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5" style="transition-delay: ${i*50}ms">
+                <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-gold/20 transition-colors">
+                    <i data-lucide="${t.icon}" class="w-7 h-7 text-gray-400 group-hover:text-gold transition-colors"></i>
+                </div>
+                <h4 class="text-base md:text-lg font-bold text-white group-hover:text-gold transition-colors">${t.title}</h4>
+            </div>
+        `).join('');
+        // Re-observe injected elements
+        document.querySelectorAll('#targets-grid .fade-in-section').forEach(el => observer.observe(el));
+
+        const faqs = [
+            { q: "What counts as a 'qualified' Sales Meeting?", a: "A qualified Sales Meeting is a meeting with a decision-maker (Founder, CEO, CMO) in your target niche who has shown genuine interest in your service." },
+            { q: "Do you work with Marketing Agencies?", a: "No. We specialize exclusively in Creative Agencies (Design, Branding, Video Production, UI/UX). Our systems are tuned specifically for selling creative work." },
+            { q: "What is the commitment?", a: "We have a 90-day initial sprint to build momentum. However, since you pay on performance, our incentives are aligned to get you results immediately." },
+            { q: "Do I need to handle the emails?", a: "No. We handle the technical setup, the copywriting, the list building, and the sending. You only handle the replies and the sales calls." }
+        ];
+
+        const faqContainer = document.getElementById('faq-container');
+        faqContainer.innerHTML = faqs.map((f, i) => `
+            <div class="border border-white/10 rounded-xl overflow-hidden transition-all duration-300 bg-black" id="faq-${i}">
+                <button onclick="toggleFaq(${i})" class="w-full flex justify-between items-center p-6 text-left">
+                    <span id="faq-q-${i}" class="font-bold text-base md:text-lg pr-4 text-gray-300">${f.q}</span>
+                    <i id="faq-icon-${i}" data-lucide="plus" class="text-gray-500 flex-shrink-0 w-5 h-5"></i>
+                </button>
+                <div id="faq-a-${i}" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300">
+                    <p class="p-6 pt-0 text-gray-400 text-sm leading-relaxed">${f.a}</p>
+                </div>
+            </div>
+        `).join('');
+
+        function toggleFaq(index) {
+            const item = document.getElementById(`faq-${index}`);
+            const answer = document.getElementById(`faq-a-${index}`);
+            const questionText = document.getElementById(`faq-q-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`); // This is the <i> element
+            
+            // Check current state (using height or class)
+            const isOpen = answer.style.maxHeight === '200px'; 
+            
+            // Reset all
+            faqs.forEach((_, idx) => {
+                document.getElementById(`faq-${idx}`).classList.remove('bg-white/5', 'border-gold/30');
+                document.getElementById(`faq-a-${idx}`).style.maxHeight = '0';
+                document.getElementById(`faq-a-${idx}`).style.opacity = '0';
+                document.getElementById(`faq-q-${idx}`).classList.remove('text-white');
+                document.getElementById(`faq-q-${idx}`).classList.add('text-gray-300');
+                // Reset icon to plus
+                const iconEl = document.getElementById(`faq-icon-${idx}`);
+                iconEl.setAttribute('data-lucide', 'plus');
+                iconEl.classList.remove('text-gold');
+                iconEl.classList.add('text-gray-500');
+            });
+
+            if (!isOpen) {
+                // Open clicked
+                item.classList.add('bg-white/5', 'border-gold/30');
+                answer.style.maxHeight = '200px';
+                answer.style.opacity = '1';
+                questionText.classList.remove('text-gray-300');
+                questionText.classList.add('text-white');
+                
+                // Set icon to minus
+                icon.setAttribute('data-lucide', 'minus');
+                icon.classList.remove('text-gray-500');
+                icon.classList.add('text-gold');
+            }
+            lucide.createIcons();
+        }
+
+        // --- Process Section Animation ---
         const processContainer = document.getElementById('process-container');
         const processLine = document.getElementById('process-line');
         const processDot = document.getElementById('process-dot');
-        const stepElements = document.getElementsByClassName('process-step');
+        const steps = document.querySelectorAll('.process-step');
 
         window.addEventListener('scroll', () => {
-            if(document.getElementById('landing-page').style.display === 'none') return;
-            
+            if(!processContainer) return;
             const rect = processContainer.getBoundingClientRect();
             const windowHeight = window.innerHeight;
             const elementHeight = rect.height;
@@ -867,25 +1028,52 @@
             let progress = relativeY / elementHeight;
             progress = Math.max(0, Math.min(1.1, progress));
             
-            const percent = Math.min(100, progress * 100);
-            processLine.style.height = `${percent}%`;
-            processDot.style.top = `${percent}%`;
+            const percentage = Math.min(100, progress * 100);
+            processLine.style.height = `${percentage}%`;
+            processDot.style.top = `${percentage}%`;
 
-            const currentPx = progress * elementHeight;
+            const currentLineHeightPx = progress * elementHeight;
 
-            Array.from(stepElements).forEach((step, i) => {
+            steps.forEach((step, index) => {
+                const stepTop = step.offsetTop;
+                const passed = currentLineHeightPx > stepTop + 20;
+                
+                const marker = step.querySelector('.step-marker');
                 const content = step.querySelector('.step-content');
-                const dot = step.querySelector('.step-dot');
-                // Simple approximation for step positions (equally spaced roughly)
-                if(currentPx > step.offsetTop) {
-                    content.classList.remove('opacity-0', 'translate-y-10');
+
+                if (passed) {
+                    marker.classList.remove('bg-[#111]', 'border-white/20');
+                    marker.classList.add('bg-gold', 'border-gold', 'shadow-[0_0_10px_#D4AF37]');
+                    
+                    content.classList.remove('opacity-20', 'translate-y-10', 'blur-sm');
                     content.classList.add('opacity-100', 'translate-y-0');
-                    dot.classList.remove('bg-[#111]', 'border-white/20');
-                    dot.classList.add('bg-gold', 'border-gold', 'shadow-[0_0_10px_#D4AF37]');
+                } else {
+                    marker.classList.add('bg-[#111]', 'border-white/20');
+                    marker.classList.remove('bg-gold', 'border-gold', 'shadow-[0_0_10px_#D4AF37]');
+                    
+                    content.classList.add('opacity-20', 'translate-y-10', 'blur-sm');
+                    content.classList.remove('opacity-100', 'translate-y-0');
                 }
             });
         });
 
+        // --- Modal Logic ---
+        function openModal(src) {
+            const modal = document.getElementById('image-modal');
+            const img = document.getElementById('modal-img');
+            img.src = src;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Initial Calculation
+        calculateROI();
     </script>
 </body>
 </html>

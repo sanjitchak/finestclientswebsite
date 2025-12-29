@@ -1,74 +1,112 @@
+<!-- File: index.html -->
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Finest Clients</title>
 
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://finestclients.com/finestclientslogo.png" />
 
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
   <style>
-    html, body { background: #000; }
-    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    /* Marquee */
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
     .animate-scroll { animation: scroll 30s linear infinite; }
-    @media (max-width: 768px) { .animate-scroll { animation: scroll 10s linear infinite; } }
+    @media (max-width: 768px) {
+      .animate-scroll { animation: scroll 10s linear infinite; }
+    }
+
+    /* Fade-in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(3rem);
+      transition: opacity 1000ms ease, transform 1000ms ease;
+      will-change: opacity, transform;
+    }
+    .fade-in.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Process line glow */
+    .gold-glow { box-shadow: 0 0 10px #D4AF37; }
+    .gold-glow-strong { box-shadow: 0 0 15px #D4AF37; }
   </style>
 </head>
 
 <body class="min-h-screen bg-black font-sans text-gray-100 selection:bg-[#D4AF37] selection:text-black">
+  <!-- Modal -->
+  <div id="imageModal"
+       class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-sm items-center justify-center p-4 cursor-pointer transition-opacity duration-300">
+    <div class="relative animate-[fadeIn_0.3s_ease-out]" id="imageModalInner">
+      <img id="imageModalImg"
+           src=""
+           alt="Preview"
+           class="max-w-full max-h-[90vh] rounded-lg shadow-2xl cursor-default border border-white/10" />
+      <button id="imageModalClose"
+              class="absolute -top-12 right-0 text-white hover:text-[#D4AF37] transition-colors p-2"
+              type="button" aria-label="Close">
+        <i data-lucide="x" class="w-8 h-8"></i>
+      </button>
+    </div>
+  </div>
 
-  <!-- NAVBAR (Landing only) -->
-  <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b bg-transparent border-transparent py-4 md:py-6">
+  <!-- NAVBAR -->
+  <nav id="navbar"
+       class="fixed w-full z-50 transition-all duration-300 border-b bg-transparent border-transparent py-4 md:py-6">
     <div class="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center relative z-50">
-      <button class="flex items-center cursor-pointer" id="navBrand" type="button">
+      <div class="flex items-center cursor-pointer" data-scroll="home">
         <span class="text-xl md:text-2xl font-black tracking-tighter text-white">
           FINEST<span class="text-[#D4AF37]">CLIENTS</span>
         </span>
-      </button>
+      </div>
 
       <div class="hidden md:flex items-center space-x-8">
-        <button data-scroll="home" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-[#D4AF37] text-gray-300" type="button">HOME</button>
-        <button data-scroll="proof" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-[#D4AF37] text-gray-300" type="button">PROOF</button>
-        <button data-scroll="process" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-[#D4AF37] text-gray-300" type="button">PROCESS</button>
-        <button data-scroll="faq" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-[#D4AF37] text-gray-300" type="button">FAQ</button>
+        <button data-scroll="home" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-[#D4AF37] text-gray-300">HOME</button>
+        <button data-scroll="proof" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-[#D4AF37] text-gray-300">PROOF</button>
+        <button data-scroll="process" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-[#D4AF37] text-gray-300">PROCESS</button>
+        <button data-scroll="faq" class="text-sm font-semibold tracking-wide transition-all duration-300 hover:text-[#D4AF37] text-gray-300">FAQ</button>
 
-        <button data-scroll="roi" class="text-sm font-semibold flex items-center transition-colors text-white hover:text-[#D4AF37]" type="button">
-          <i data-lucide="calculator" class="mr-1 w-4 h-4"></i> ROI Calculator
+        <button data-scroll="roi" class="text-sm font-semibold flex items-center transition-colors text-white hover:text-[#D4AF37]">
+          <i data-lucide="calculator" class="w-3.5 h-3.5 mr-1"></i> ROI Calculator
         </button>
 
-        <a
-          href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="bg-white text-black hover:bg-[#D4AF37] hover:text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105"
-        >
+        <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
+           target="_blank" rel="noopener noreferrer"
+           class="bg-white text-black hover:bg-[#D4AF37] hover:text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 hover:scale-105">
           Maximize your Sales
         </a>
       </div>
 
-      <button class="md:hidden text-white p-2 focus:outline-none z-50 relative" id="mobileMenuBtn" type="button" aria-label="Open menu">
-        <i data-lucide="menu" class="w-7 h-7" id="mobileMenuIcon"></i>
+      <button id="mobileMenuBtn" class="md:hidden text-white p-2 focus:outline-none z-50 relative" type="button" aria-label="Menu">
+        <i id="mobileMenuIconOpen" data-lucide="menu" class="w-7 h-7"></i>
+        <i id="mobileMenuIconClose" data-lucide="x" class="w-7 h-7 hidden"></i>
       </button>
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden fixed inset-0 bg-black z-40 flex flex-col pt-24 px-6 space-y-4 md:hidden h-screen w-full overflow-y-auto">
-      <button data-scroll="home" class="text-left text-2xl font-bold text-white hover:text-[#D4AF37] py-4 border-b border-white/5 w-full" type="button">Home</button>
-      <button data-scroll="proof" class="text-left text-2xl font-bold text-white hover:text-[#D4AF37] py-4 border-b border-white/5 w-full" type="button">Proof</button>
-      <button data-scroll="process" class="text-left text-2xl font-bold text-white hover:text-[#D4AF37] py-4 border-b border-white/5 w-full" type="button">Process</button>
-      <button data-scroll="faq" class="text-left text-2xl font-bold text-white hover:text-[#D4AF37] py-4 border-b border-white/5 w-full" type="button">FAQ</button>
-      <button data-scroll="roi" class="text-left text-2xl font-bold text-[#D4AF37] py-4 border-b border-white/5 w-full" type="button">ROI Calculator</button>
+    <div id="mobileMenu"
+         class="fixed inset-0 bg-black z-40 hidden flex-col pt-24 px-6 space-y-4 md:hidden h-screen w-full overflow-y-auto">
+      <button data-scroll="home" class="text-left text-2xl font-bold text-white hover:text-[#D4AF37] py-4 border-b border-white/5 w-full">Home</button>
+      <button data-scroll="proof" class="text-left text-2xl font-bold text-white hover:text-[#D4AF37] py-4 border-b border-white/5 w-full">Proof</button>
+      <button data-scroll="process" class="text-left text-2xl font-bold text-white hover:text-[#D4AF37] py-4 border-b border-white/5 w-full">Process</button>
+      <button data-scroll="faq" class="text-left text-2xl font-bold text-white hover:text-[#D4AF37] py-4 border-b border-white/5 w-full">FAQ</button>
+      <button data-scroll="roi" class="text-left text-2xl font-bold text-[#D4AF37] py-4 border-b border-white/5 w-full">ROI Calculator</button>
 
       <div class="pt-8 pb-12 w-full">
-        <a
-          href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="block w-full bg-[#D4AF37] text-black py-4 rounded-lg font-bold text-xl text-center shadow-lg shadow-[#D4AF37]/20"
-        >
+        <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
+           target="_blank" rel="noopener noreferrer"
+           class="block w-full bg-[#D4AF37] text-black py-4 rounded-lg font-bold text-xl text-center shadow-lg shadow-[#D4AF37]/20">
           Maximize your Sales
         </a>
       </div>
@@ -76,7 +114,7 @@
   </nav>
 
   <!-- LANDING VIEW -->
-  <div id="view-landing">
+  <div id="landingView">
     <!-- HERO -->
     <section id="home" class="relative min-h-screen flex items-center bg-black overflow-hidden pt-20 pb-20">
       <div class="absolute inset-0 z-0">
@@ -88,53 +126,52 @@
       </div>
 
       <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-20 text-center flex flex-col items-center">
-        <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white mb-8">
-          <span class="flex h-2 w-2 relative">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4AF37] opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#D4AF37]"></span>
-          </span>
-          <span class="text-xs font-bold text-black uppercase tracking-widest">Pay Only For Results You Expect</span>
+        <div class="fade-in" data-fade data-delay="0">
+          <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white mb-8">
+            <span class="flex h-2 w-2 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4AF37] opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-[#D4AF37]"></span>
+            </span>
+            <span class="text-xs font-bold text-black uppercase tracking-widest">Pay Only For Results You Expect</span>
+          </div>
         </div>
 
-        <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-6">
-          We Get Guaranteed Sales Meetings <br class="hidden md:block" />
-          For <span class="text-[#D4AF37]">Creative Agencies</span>
-          <span class="block text-2xl md:text-4xl mt-4 text-gray-300 font-normal">
-            without relying on referrals or spending another Dollar on Ads.
-          </span>
-        </h1>
+        <div class="fade-in" data-fade data-delay="200">
+          <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-6">
+            We Get Guaranteed Sales Meetings <br class="hidden md:block"/>
+            For <span class="text-[#D4AF37]">Creative Agencies</span>
+            <span class="block text-2xl md:text-4xl mt-4 text-gray-300 font-normal">
+              without relying on referrals or spending another Dollar on Ads.
+            </span>
+          </h1>
+        </div>
 
-        <p class="text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed font-light mb-10">
-          Specifically for <span class="text-white font-semibold">Video and design agencies</span>
-        </p>
+        <div class="fade-in" data-fade data-delay="400">
+          <p class="text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed font-light mb-10">
+            Specifically for <span class="text-white font-semibold">Video and design agencies</span>
+          </p>
+        </div>
 
-        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center px-4 w-full sm:w-auto">
-          <a
-            href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-[#D4AF37] hover:bg-white hover:text-black text-black px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-lg transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)] flex items-center justify-center w-full sm:w-auto"
-          >
-            Maximize your Sales
-          </a>
-          <button
-            id="heroHowBtn"
-            class="border border-white/20 hover:border-white text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-lg transition-all duration-300 w-full sm:w-auto"
-            type="button"
-          >
-            See How It Works
-          </button>
+        <div class="fade-in" data-fade data-delay="600">
+          <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center px-4 w-full sm:w-auto">
+            <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
+               target="_blank" rel="noopener noreferrer"
+               class="bg-[#D4AF37] hover:bg-white hover:text-black text-black px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-lg transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)] flex items-center justify-center w-full sm:w-auto">
+              Maximize your Sales
+            </a>
+            <button type="button"
+                    data-scroll="process"
+                    class="border border-white/20 hover:border-white text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-lg transition-all duration-300 w-full sm:w-auto">
+              See How It Works
+            </button>
+          </div>
         </div>
       </div>
 
-      <button
-        id="heroChevron"
-        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce cursor-pointer text-gray-400 hover:text-[#D4AF37] transition-colors duration-300"
-        type="button"
-        aria-label="Scroll to proof"
-      >
-        <i data-lucide="chevron-down" class="w-10 h-10" style="stroke-width: 1.5;"></i>
-      </button>
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce cursor-pointer text-gray-400 hover:text-[#D4AF37] transition-colors duration-300 hidden md:block"
+           data-scroll="proof">
+        <i data-lucide="chevron-down" class="w-10 h-10"></i>
+      </div>
     </section>
 
     <!-- RECENT WINS -->
@@ -145,11 +182,62 @@
           <p class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm">Track Record</p>
         </div>
 
-        <div id="caseStudiesGrid" class="grid md:grid-cols-3 gap-6"></div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37]/50 transition-colors flex flex-col h-full">
+            <div class="flex justify-between items-start mb-6">
+              <div class="p-2 bg-white/5 rounded-lg">
+                <i data-lucide="trending-up" class="w-6 h-6 text-[#D4AF37]"></i>
+              </div>
+              <span class="text-xs font-bold bg-green-900/30 text-green-400 px-3 py-1 rounded-full">Verified</span>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-2">NewsReels</h4>
+            <p class="text-gray-400 text-sm mb-2">Content & distribution for creators</p>
+            <div class="mt-auto pt-4 border-t border-white/5 space-y-2">
+              <p class="text-white font-bold">6 Sales Meetings in 30 Days</p>
+              <p class="text-gray-500 text-sm">$90k Pipeline Created</p>
+              <p class="text-[#D4AF37] font-bold text-sm">$15k Project Closed</p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37]/50 transition-colors flex flex-col h-full">
+            <div class="flex justify-between items-start mb-6">
+              <div class="p-2 bg-white/5 rounded-lg">
+                <i data-lucide="trending-up" class="w-6 h-6 text-[#D4AF37]"></i>
+              </div>
+              <span class="text-xs font-bold bg-green-900/30 text-green-400 px-3 py-1 rounded-full">Verified</span>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-2">Triftel</h4>
+            <p class="text-gray-400 text-sm mb-2">Privacy-centric messaging application with unique social features</p>
+            <div class="mt-auto pt-4 border-t border-white/5 space-y-2">
+              <p class="text-white font-bold">10 Qualified Sales Meetings</p>
+              <p class="text-gray-500 text-sm">$150k Pipeline Created</p>
+              <p class="text-[#D4AF37] font-bold text-sm">$30k Retainer Closed</p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37]/50 transition-colors flex flex-col h-full">
+            <div class="flex justify-between items-start mb-6">
+              <div class="p-2 bg-white/5 rounded-lg">
+                <i data-lucide="trending-up" class="w-6 h-6 text-[#D4AF37]"></i>
+              </div>
+              <span class="text-xs font-bold bg-green-900/30 text-green-400 px-3 py-1 rounded-full">Verified</span>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-2">UV Media</h4>
+            <p class="text-gray-400 text-sm mb-2">YouTube content management</p>
+            <div class="mt-auto pt-4 border-t border-white/5 space-y-2">
+              <p class="text-white font-bold">9 Qualified Sales Meetings</p>
+              <p class="text-gray-500 text-sm">$110k Pipeline Created</p>
+              <p class="text-[#D4AF37] font-bold text-sm">$22k Closed Retainers</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Logo Marquee -->
-      <div class="w-full overflow-hidden border-y border-white/5 bg-[#050505] py-6 z-20 relative">
+      <div class="w-full overflow-hidden border-y border-white/5 bg-[#050505] py-6 z-20 relative mt-10">
         <div id="logoMarquee" class="flex whitespace-nowrap animate-scroll items-center w-max"></div>
       </div>
     </div>
@@ -157,7 +245,7 @@
     <!-- BUILT BY -->
     <section class="bg-black py-12 border-b border-white/5 relative">
       <div class="max-w-7xl mx-auto px-4 md:px-6 text-center">
-        <div class="mb-8">
+        <div class="fade-in mb-8" data-fade data-delay="0">
           <h3 class="text-3xl md:text-5xl font-bold text-white mb-2">
             Built by the team behind <span class="text-[#D4AF37]">Finest Edit Academy</span>
           </h3>
@@ -166,128 +254,26 @@
 
         <div class="flex flex-col gap-8 max-w-2xl mx-auto">
           <div class="flex flex-col h-full w-full">
-            <a
-              href="https://www.instagram.com/finestedit_/?hl=en"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="block cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-pink-500 transition-all duration-300 transform hover:scale-[1.02] mb-4 w-full"
-            >
+            <a href="https://www.instagram.com/finestedit_/?hl=en"
+               target="_blank" rel="noopener noreferrer"
+               class="block cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-pink-500 transition-all duration-300 transform hover:scale-[1.02] mb-4 w-full">
               <img src="https://finestclients.com/instagram.png" alt="Instagram Stats" class="w-full h-auto object-cover" />
             </a>
             <div class="text-left w-full">
               <h4 class="text-xl font-bold text-white">90.7K Instagram followers</h4>
-              <p class="text-sm text-gray-400 mt-1">
-                We grew to 90.7K followers by applying the same content and distribution system we install for clients.
-              </p>
+              <p class="text-sm text-gray-400 mt-1">We grew to 90.7K followers by applying the same content and distribution system we install for clients.</p>
             </div>
           </div>
 
           <div class="flex flex-col h-full w-full">
-            <a
-              href="https://www.youtube.com/@Finesteditacademy/featured"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="block cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-red-500 transition-all duration-300 transform hover:scale-[1.02] mb-4 w-full"
-            >
+            <a href="https://www.youtube.com/@Finesteditacademy/featured"
+               target="_blank" rel="noopener noreferrer"
+               class="block cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-red-500 transition-all duration-300 transform hover:scale-[1.02] mb-4 w-full">
               <img src="https://finestclients.com/youtube.png" alt="YouTube Stats" class="w-full h-auto object-cover" />
             </a>
             <div class="text-left w-full">
               <h4 class="text-xl font-bold text-white">46.7K YouTube subscribers</h4>
-              <p class="text-sm text-gray-400 mt-1">
-                Finest Edit Academy crossed 46.7K subscribers with about 30 videos using our social media playbook.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ROI CALCULATOR -->
-    <section id="roi" class="bg-[#050505] py-16 md:py-24 border-t border-white/5">
-      <div class="max-w-7xl mx-auto px-4 md:px-6 w-full">
-        <div class="text-center mb-8 md:mb-12">
-          <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 mb-6">
-            <i data-lucide="calculator" class="text-[#D4AF37] w-3.5 h-3.5"></i>
-            <span class="text-xs font-bold text-[#D4AF37] uppercase tracking-widest">Growth Projection</span>
-          </div>
-          <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Agency ROI Calculator</h2>
-          <p class="text-gray-400 max-w-xl mx-auto">Estimate your potential return with the Finest Clients acquisition system.</p>
-        </div>
-
-        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
-          <div class="bg-[#111] border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl">
-            <h3 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">Input Metrics</h3>
-
-            <div class="space-y-8">
-              <div>
-                <div class="flex justify-between mb-2">
-                  <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Avg. Deal Value</label>
-                  <span class="text-[#D4AF37] font-mono font-bold" id="dealValueLabel">$20,000</span>
-                </div>
-                <input id="dealValue" type="range" min="20000" max="100000" step="1000" value="20000"
-                  class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#D4AF37] touch-none" />
-                <div class="flex justify-between text-xs text-gray-600 mt-2">
-                  <span>$20k</span><span>$100k</span>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between mb-2">
-                  <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Close Rate</label>
-                  <span class="text-[#D4AF37] font-mono font-bold" id="closeRateLabel">20%</span>
-                </div>
-                <input id="closeRate" type="range" min="5" max="50" step="1" value="20"
-                  class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#D4AF37] touch-none" />
-                <div class="flex justify-between text-xs text-gray-600 mt-2">
-                  <span>5%</span><span>50%</span>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between mb-2">
-                  <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Monthly Meetings</label>
-                  <span class="text-[#D4AF37] font-mono font-bold" id="meetingsLabel">10 Calls</span>
-                </div>
-                <input id="meetings" type="range" min="1" max="50" step="1" value="10"
-                  class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#D4AF37] touch-none" />
-                <div class="flex justify-between text-xs text-gray-600 mt-2">
-                  <span>1</span><span>50</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-gradient-to-br from-[#1a1a1a] to-black border border-[#D4AF37]/30 rounded-2xl p-6 md:p-8 shadow-[0_0_50px_rgba(212,175,55,0.1)]">
-            <h3 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">Projected Growth</h3>
-
-            <div class="grid gap-6">
-              <div class="bg-[#0a0a0a] p-6 rounded-xl border border-white/5">
-                <div class="flex items-center space-x-3 mb-2">
-                  <i data-lucide="trending-up" class="text-[#D4AF37] w-5 h-5"></i>
-                  <span class="text-gray-400 text-sm uppercase tracking-wider">Monthly Revenue</span>
-                </div>
-                <div id="monthlyRevenue" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono break-all md:break-normal">$40,000</div>
-              </div>
-
-              <div class="bg-[#0a0a0a] p-6 rounded-xl border border-white/5">
-                <div class="flex items-center space-x-3 mb-2">
-                  <i data-lucide="award" class="text-[#D4AF37] w-5 h-5"></i>
-                  <span class="text-gray-400 text-sm uppercase tracking-wider">Annual Run Rate</span>
-                </div>
-                <div id="annualRevenue" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono opacity-80 break-all md:break-normal">$480,000</div>
-              </div>
-
-              <div class="mt-4">
-                <a
-                  href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="block w-full bg-[#D4AF37] hover:bg-white text-black text-center font-bold py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02]"
-                >
-                  Maximize your Sales
-                </a>
-                <p class="text-center text-xs text-gray-500 mt-3">Estimates based on provided inputs. Results vary by niche.</p>
-              </div>
+              <p class="text-sm text-gray-400 mt-1">Finest Edit Academy crossed 46.7K subscribers with about 30 videos using our social media playbook.</p>
             </div>
           </div>
         </div>
@@ -297,10 +283,85 @@
     <!-- WHO IS THIS FOR -->
     <section class="py-16 md:py-24 bg-[#0a0a0a] border-t border-white/5">
       <div class="max-w-7xl mx-auto px-4 md:px-6 text-center">
-        <h2 class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-4">Ideal Partners</h2>
-        <h3 class="text-3xl md:text-5xl font-bold text-white mb-12">Who Is This For?</h3>
+        <div class="fade-in" data-fade data-delay="0">
+          <h2 class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-4">Ideal Partners</h2>
+          <h3 class="text-3xl md:text-5xl font-bold text-white mb-12">Who Is This For?</h3>
+        </div>
 
-        <div id="targetsGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-6"></div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          <!-- Tiles -->
+          <div class="fade-in" data-fade data-delay="0">
+            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
+              <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                <i data-lucide="palette" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i>
+              </div>
+              <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Creative Agencies</h4>
+            </div>
+          </div>
+
+          <div class="fade-in" data-fade data-delay="50">
+            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
+              <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                <i data-lucide="pen-tool" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i>
+              </div>
+              <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Branding Studios</h4>
+            </div>
+          </div>
+
+          <div class="fade-in" data-fade data-delay="100">
+            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
+              <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                <i data-lucide="layers" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i>
+              </div>
+              <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Design Agencies</h4>
+            </div>
+          </div>
+
+          <div class="fade-in" data-fade data-delay="150">
+            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
+              <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                <i data-lucide="monitor" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i>
+              </div>
+              <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">UI/UX Agencies</h4>
+            </div>
+          </div>
+
+          <div class="fade-in" data-fade data-delay="200">
+            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
+              <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                <i data-lucide="video" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i>
+              </div>
+              <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Video Agencies</h4>
+            </div>
+          </div>
+
+          <div class="fade-in" data-fade data-delay="250">
+            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
+              <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                <i data-lucide="film" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i>
+              </div>
+              <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Motion Design</h4>
+            </div>
+          </div>
+
+          <div class="fade-in" data-fade data-delay="300">
+            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
+              <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                <i data-lucide="megaphone" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i>
+              </div>
+              <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Ad Agencies</h4>
+            </div>
+          </div>
+
+          <div class="fade-in" data-fade data-delay="350">
+            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
+              <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                <i data-lucide="briefcase" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i>
+              </div>
+              <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">B2B Service Firms</h4>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -318,76 +379,68 @@
         </div>
 
         <div class="flex flex-col gap-6">
-          <a
-            href="https://www.instagram.com/finestedit_/?hl=en"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="block cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-pink-500 transition-all duration-300 transform hover:scale-[1.02]"
-          >
+          <a href="https://www.instagram.com/finestedit_/?hl=en"
+             target="_blank" rel="noopener noreferrer"
+             class="block cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-pink-500 transition-all duration-300 transform hover:scale-[1.02]">
             <img src="https://finestclients.com/instagram.png" alt="Instagram Stats" class="w-full h-auto object-cover" />
           </a>
 
-          <a
-            href="https://www.youtube.com/@Finesteditacademy/featured"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="block cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-red-500 transition-all duration-300 transform hover:scale-[1.02]"
-          >
+          <a href="https://www.youtube.com/@Finesteditacademy/featured"
+             target="_blank" rel="noopener noreferrer"
+             class="block cursor-pointer group overflow-hidden rounded-xl border border-white/10 hover:border-red-500 transition-all duration-300 transform hover:scale-[1.02]">
             <img src="https://finestclients.com/youtube.png" alt="YouTube Stats" class="w-full h-auto object-cover" />
           </a>
         </div>
       </div>
     </section>
 
-    <!-- OFFER + MODAL -->
+    <!-- OFFER -->
     <section class="py-16 md:py-24 bg-black text-center">
-      <!-- Modal -->
-      <div id="imageModal" class="hidden fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 cursor-pointer transition-opacity duration-300">
-        <div class="relative animate-[fadeIn_0.3s_ease-out]">
-          <img id="modalImg" src="" alt="Preview" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl cursor-default border border-white/10" />
-          <button id="modalClose" class="absolute -top-12 right-0 text-white hover:text-[#D4AF37] transition-colors p-2" type="button" aria-label="Close modal">
-            <i data-lucide="x" class="w-8 h-8"></i>
-          </button>
-        </div>
-      </div>
-
       <div class="max-w-4xl mx-auto px-4 md:px-6">
-        <h2 class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-4">Our Guarantee</h2>
-        <h3 class="text-3xl md:text-5xl font-bold text-white mb-8">Performance-Based Growth.</h3>
-        <p class="text-gray-400 text-lg md:text-xl mb-12">
-          We are so confident in our system that we share the risk with you.
-          <span class="text-white font-bold ml-1">100% refund guaranteed.</span>
-        </p>
+        <div class="fade-in" data-fade data-delay="0">
+          <h2 class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-4">Our Guarantee</h2>
+          <h3 class="text-3xl md:text-5xl font-bold text-white mb-8">Performance-Based Growth.</h3>
+          <p class="text-gray-400 text-lg md:text-xl mb-12">
+            We are so confident in our system that we share the risk with you.
+            <span class="text-white font-bold ml-1">100% refund guaranteed.</span>
+          </p>
+        </div>
 
-        <div
-          id="calendarCard"
-          class="relative w-full max-w-2xl mx-auto mb-16 cursor-pointer group rounded-xl overflow-hidden border border-white/10 hover:border-[#D4AF37] transition-all"
-        >
-          <div class="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all z-10 flex items-center justify-center">
-            <div class="bg-black/80 backdrop-blur-sm px-6 py-3 rounded-full text-white font-bold flex items-center transform group-hover:scale-110 transition-transform">
-              <i data-lucide="calendar" class="mr-2 text-[#D4AF37] w-5 h-5"></i> View Live Calendar Results
+        <div class="fade-in" data-fade data-delay="100">
+          <div id="calendarCard"
+               class="relative w-full max-w-2xl mx-auto mb-16 cursor-pointer group rounded-xl overflow-hidden border border-white/10 hover:border-[#D4AF37] transition-all">
+            <div class="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all z-10 flex items-center justify-center">
+              <div class="bg-black/80 backdrop-blur-sm px-6 py-3 rounded-full text-white font-bold flex items-center transform group-hover:scale-110 transition-transform">
+                <i data-lucide="calendar" class="w-5 h-5 mr-2 text-[#D4AF37]"></i> View Live Calendar Results
+              </div>
             </div>
+            <img src="https://finestclients.com/calendarimage.png" alt="Calendar Results" class="w-full h-auto" />
           </div>
-          <img src="https://finestclients.com/calendarimage.png" alt="Calendar Results" class="w-full h-auto" />
         </div>
 
         <div class="grid md:grid-cols-3 gap-6 text-left">
-          <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
-            <i data-lucide="target" class="text-[#D4AF37] mb-4 w-8 h-8"></i>
-            <h4 class="text-white font-bold text-xl mb-2">Qualified Sales Meetings</h4>
-            <p class="text-gray-500 text-sm">We only count sales meetings with decision-makers who fit your ICP.</p>
+          <div class="fade-in" data-fade data-delay="200">
+            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
+              <i data-lucide="target" class="w-8 h-8 text-[#D4AF37] mb-4"></i>
+              <h4 class="text-white font-bold text-xl mb-2">Qualified Sales Meetings</h4>
+              <p class="text-gray-500 text-sm">We only count sales meetings with decision-makers who fit your ICP.</p>
+            </div>
           </div>
 
-          <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
-            <i data-lucide="shield-check" class="text-[#D4AF37] mb-4 w-8 h-8"></i>
-            <h4 class="text-white font-bold text-xl mb-2">Pay For Results Only</h4>
-            <p class="text-gray-500 text-sm">You only pay for appointments you expect. 100% refund guaranteed.</p>
+          <div class="fade-in" data-fade data-delay="300">
+            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
+              <i data-lucide="shield-check" class="w-8 h-8 text-[#D4AF37] mb-4"></i>
+              <h4 class="text-white font-bold text-xl mb-2">Pay For Results Only</h4>
+              <p class="text-gray-500 text-sm">You only pay for appointments you expect. 100% refund guaranteed.</p>
+            </div>
           </div>
 
-          <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
-            <i data-lucide="globe" class="text-[#D4AF37] mb-4 w-8 h-8"></i>
-            <h4 class="text-white font-bold text-xl mb-2">Predictable Quality</h4>
-            <p class="text-gray-500 text-sm">We target clients in premium markets for maximum deal value.</p>
+          <div class="fade-in" data-fade data-delay="400">
+            <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full">
+              <i data-lucide="globe" class="w-8 h-8 text-[#D4AF37] mb-4"></i>
+              <h4 class="text-white font-bold text-xl mb-2">Predictable Quality</h4>
+              <p class="text-gray-500 text-sm">We target clients in premium markets for maximum deal value.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -396,26 +449,129 @@
     <!-- PRICING -->
     <section class="py-16 md:py-24 bg-black border-t border-white/5">
       <div class="max-w-7xl mx-auto px-4 md:px-6 text-center">
-        <div class="bg-[#111] border border-[#D4AF37]/30 rounded-2xl p-8 md:p-12 max-w-3xl mx-auto shadow-[0_0_50px_rgba(212,175,55,0.1)] relative overflow-hidden">
-          <div class="absolute top-0 right-0 bg-[#D4AF37] text-black text-xs font-bold px-3 py-1 rounded-bl-xl">POPULAR</div>
-          <h3 class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-4">Simple Pricing</h3>
-          <div class="text-5xl md:text-7xl font-bold text-white mb-4">$5,000</div>
-          <p class="text-gray-400 text-xl mb-8">For 5 Qualified Sales Meetings</p>
+        <div class="fade-in" data-fade data-delay="0">
+          <div class="bg-[#111] border border-[#D4AF37]/30 rounded-2xl p-8 md:p-12 max-w-3xl mx-auto shadow-[0_0_50px_rgba(212,175,55,0.1)] relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-[#D4AF37] text-black text-xs font-bold px-3 py-1 rounded-bl-xl">POPULAR</div>
+            <h3 class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-4">Simple Pricing</h3>
+            <div class="text-5xl md:text-7xl font-bold text-white mb-4">$5,000</div>
+            <p class="text-gray-400 text-xl mb-8">For 5 Qualified Sales Meetings</p>
 
-          <div class="flex flex-col md:flex-row justify-center gap-4 text-sm text-gray-400 mb-8">
-            <span class="flex items-center"><i data-lucide="check" class="text-[#D4AF37] mr-2 w-4 h-4"></i> Verified Decision Makers</span>
-            <span class="flex items-center"><i data-lucide="check" class="text-[#D4AF37] mr-2 w-4 h-4"></i> High Intent Leads</span>
-            <span class="flex items-center"><i data-lucide="check" class="text-[#D4AF37] mr-2 w-4 h-4"></i> Satisfaction Guarantee</span>
+            <div class="flex flex-col md:flex-row justify-center gap-4 text-sm text-gray-400 mb-8">
+              <span class="flex items-center">
+                <i data-lucide="check" class="w-4 h-4 text-[#D4AF37] mr-2"></i> Verified Decision Makers
+              </span>
+              <span class="flex items-center">
+                <i data-lucide="check" class="w-4 h-4 text-[#D4AF37] mr-2"></i> High Intent Leads
+              </span>
+              <span class="flex items-center">
+                <i data-lucide="check" class="w-4 h-4 text-[#D4AF37] mr-2"></i> Satisfaction Guarantee
+              </span>
+            </div>
+
+            <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
+               target="_blank" rel="noopener noreferrer"
+               class="inline-block bg-[#D4AF37] text-black px-12 py-4 rounded-full font-bold text-lg hover:bg-white transition-all w-full md:w-auto">
+              Maximize your Sales
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROI CALCULATOR -->
+    <section id="roi" class="bg-[#050505] py-16 md:py-24 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 md:px-6 w-full">
+        <div class="fade-in" data-fade data-delay="0">
+          <div class="text-center mb-8 md:mb-12">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 mb-6">
+              <i data-lucide="calculator" class="w-3.5 h-3.5 text-[#D4AF37]"></i>
+              <span class="text-xs font-bold text-[#D4AF37] uppercase tracking-widest">Growth Projection</span>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Agency ROI Calculator</h2>
+            <p class="text-gray-400 max-w-xl mx-auto">Estimate your potential return with the Finest Clients acquisition system.</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
+          <div class="fade-in" data-fade data-delay="200">
+            <div class="bg-[#111] border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl">
+              <h3 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">Input Metrics</h3>
+
+              <div class="space-y-8">
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Avg. Deal Value</label>
+                    <span id="dealValueLabel" class="text-[#D4AF37] font-mono font-bold">$20,000</span>
+                  </div>
+                  <input id="dealValue"
+                         type="range" min="20000" max="100000" step="1000" value="20000"
+                         class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#D4AF37] touch-none" />
+                  <div class="flex justify-between text-xs text-gray-600 mt-2">
+                    <span>$20k</span><span>$100k</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Close Rate</label>
+                    <span id="closeRateLabel" class="text-[#D4AF37] font-mono font-bold">20%</span>
+                  </div>
+                  <input id="closeRate"
+                         type="range" min="5" max="50" step="1" value="20"
+                         class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#D4AF37] touch-none" />
+                  <div class="flex justify-between text-xs text-gray-600 mt-2">
+                    <span>5%</span><span>50%</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Monthly Meetings</label>
+                    <span id="meetingsLabel" class="text-[#D4AF37] font-mono font-bold">10 Calls</span>
+                  </div>
+                  <input id="meetings"
+                         type="range" min="1" max="50" step="1" value="10"
+                         class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#D4AF37] touch-none" />
+                  <div class="flex justify-between text-xs text-gray-600 mt-2">
+                    <span>1</span><span>50</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <a
-            href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-block bg-[#D4AF37] text-black px-12 py-4 rounded-full font-bold text-lg hover:bg-white transition-all w-full md:w-auto"
-          >
-            Maximize your Sales
-          </a>
+          <div class="fade-in" data-fade data-delay="400">
+            <div class="bg-gradient-to-br from-[#1a1a1a] to-black border border-[#D4AF37]/30 rounded-2xl p-6 md:p-8 shadow-[0_0_50px_rgba(212,175,55,0.1)]">
+              <h3 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">Projected Growth</h3>
+
+              <div class="grid gap-6">
+                <div class="bg-[#0a0a0a] p-6 rounded-xl border border-white/5">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <i data-lucide="trending-up" class="w-5 h-5 text-[#D4AF37]"></i>
+                    <span class="text-gray-400 text-sm uppercase tracking-wider">Monthly Revenue</span>
+                  </div>
+                  <div id="monthlyRevenue" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono break-all md:break-normal">$40,000</div>
+                </div>
+
+                <div class="bg-[#0a0a0a] p-6 rounded-xl border border-white/5">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <i data-lucide="award" class="w-5 h-5 text-[#D4AF37]"></i>
+                    <span class="text-gray-400 text-sm uppercase tracking-wider">Annual Run Rate</span>
+                  </div>
+                  <div id="annualRevenue" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono opacity-80 break-all md:break-normal">$480,000</div>
+                </div>
+
+                <div class="mt-4">
+                  <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
+                     target="_blank" rel="noopener noreferrer"
+                     class="block w-full bg-[#D4AF37] hover:bg-white text-black text-center font-bold py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
+                    Maximize your Sales
+                  </a>
+                  <p class="text-center text-xs text-gray-500 mt-3">Estimates based on provided inputs. Results vary by niche.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -430,10 +586,87 @@
 
         <div id="processContainer" class="relative pb-12">
           <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-1/2"></div>
-          <div id="processLine" class="absolute left-4 md:left-1/2 top-0 w-px bg-[#D4AF37] md:-translate-x-1/2 transition-all duration-100 ease-linear shadow-[0_0_10px_#D4AF37]" style="height: 0%;"></div>
-          <div id="processDot" class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-[#D4AF37] shadow-[0_0_15px_#D4AF37] z-20 md:-translate-x-1/2 -translate-x-1/2 transform -translate-y-1/2 border-2 border-black" style="top: 0%;"></div>
 
-          <div id="processSteps" class="space-y-12 md:space-y-24"></div>
+          <div id="processLine"
+               class="absolute left-4 md:left-1/2 top-0 w-px bg-[#D4AF37] md:-translate-x-1/2 transition-all duration-100 ease-linear gold-glow"
+               style="height: 0%;"></div>
+
+          <div id="processDot"
+               class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-[#D4AF37] gold-glow-strong z-20 md:-translate-x-1/2 -translate-x-1/2 transform -translate-y-1/2 border-2 border-black"
+               style="top: 0%;"></div>
+
+          <div class="space-y-12 md:space-y-24">
+            <!-- Step 1 -->
+            <div class="relative flex items-center md:justify-start process-step" data-step="0">
+              <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500 process-marker bg-[#111] border-white/20"></div>
+              <div class="w-full md:w-[45%] pl-12 md:pl-0 md:pr-12 md:text-right transition-all duration-700 transform process-card opacity-20 translate-y-10 blur-sm">
+                <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-[#D4AF37]/50 transition-colors relative group">
+                  <div class="text-6xl font-black text-white/5 absolute top-0 md:right-2 right-2 select-none leading-none z-0">01</div>
+                  <div class="relative z-10">
+                    <h4 class="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">Onboarding/Kick-Off Call</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Our streamlined onboarding process is designed to be time-efficient, taking no more than 30 minutes of your valuable time.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative flex items-center md:justify-end process-step" data-step="1">
+              <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500 process-marker bg-[#111] border-white/20"></div>
+              <div class="w-full md:w-[45%] pl-12 md:pl-12 md:text-left transition-all duration-700 transform process-card opacity-20 translate-y-10 blur-sm">
+                <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-[#D4AF37]/50 transition-colors relative group">
+                  <div class="text-6xl font-black text-white/5 absolute top-0 left-2 select-none leading-none z-0">02</div>
+                  <div class="relative z-10">
+                    <h4 class="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">Research & Strategy</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Clarifying your ideal customer, offer, messaging & setting up the technical infrastructure to get you started with your journey.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative flex items-center md:justify-start process-step" data-step="2">
+              <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500 process-marker bg-[#111] border-white/20"></div>
+              <div class="w-full md:w-[45%] pl-12 md:pl-0 md:pr-12 md:text-right transition-all duration-700 transform process-card opacity-20 translate-y-10 blur-sm">
+                <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-[#D4AF37]/50 transition-colors relative group">
+                  <div class="text-6xl font-black text-white/5 absolute top-0 md:right-2 right-2 select-none leading-none z-0">03</div>
+                  <div class="relative z-10">
+                    <h4 class="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">Outbound Ecosystem</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Crafting the finest outreach system, catered specifically to your requirements. Sit back and let us handle everything for you.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="relative flex items-center md:justify-end process-step" data-step="3">
+              <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500 process-marker bg-[#111] border-white/20"></div>
+              <div class="w-full md:w-[45%] pl-12 md:pl-12 md:text-left transition-all duration-700 transform process-card opacity-20 translate-y-10 blur-sm">
+                <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-[#D4AF37]/50 transition-colors relative group">
+                  <div class="text-6xl font-black text-white/5 absolute top-0 left-2 select-none leading-none z-0">04</div>
+                  <div class="relative z-10">
+                    <h4 class="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">Qualified Appointments Delivered</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Once we've confirmed a time with your ideal prospect, we'll book it straight into your calendar.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="relative flex items-center md:justify-start process-step" data-step="4">
+              <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500 process-marker bg-[#111] border-white/20"></div>
+              <div class="w-full md:w-[45%] pl-12 md:pl-0 md:pr-12 md:text-right transition-all duration-700 transform process-card opacity-20 translate-y-10 blur-sm">
+                <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-[#D4AF37]/50 transition-colors relative group">
+                  <div class="text-6xl font-black text-white/5 absolute top-0 md:right-2 right-2 select-none leading-none z-0">05</div>
+                  <div class="relative z-10">
+                    <h4 class="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">Sales Calls & Scaling</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Sales calls and optimizations for scaling.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
@@ -442,23 +675,72 @@
     <section id="faq" class="py-16 md:py-24 bg-black">
       <div class="max-w-3xl mx-auto px-4 md:px-6">
         <h2 class="text-center text-3xl font-bold text-white mb-12 md:mb-16">Frequently Asked Questions</h2>
-        <div id="faqList" class="space-y-4"></div>
+
+        <div class="space-y-4" id="faqList">
+          <div class="border border-white/10 rounded-xl overflow-hidden transition-all duration-300 bg-black faq-item">
+            <button type="button" class="w-full flex justify-between items-center p-6 text-left faq-btn">
+              <span class="font-bold text-base md:text-lg pr-4 text-gray-300">What counts as a 'qualified' Sales Meeting?</span>
+              <i data-lucide="plus" class="w-6 h-6 text-gray-500 faq-icon"></i>
+            </button>
+            <div class="overflow-hidden transition-all duration-300 max-h-0 opacity-0 faq-panel">
+              <p class="p-6 pt-0 text-gray-400 text-sm leading-relaxed">
+                A qualified Sales Meeting is a meeting with a decision-maker (Founder, CEO, CMO) in your target niche who has shown genuine interest in your service.
+              </p>
+            </div>
+          </div>
+
+          <div class="border border-white/10 rounded-xl overflow-hidden transition-all duration-300 bg-black faq-item">
+            <button type="button" class="w-full flex justify-between items-center p-6 text-left faq-btn">
+              <span class="font-bold text-base md:text-lg pr-4 text-gray-300">Do you work with Marketing Agencies?</span>
+              <i data-lucide="plus" class="w-6 h-6 text-gray-500 faq-icon"></i>
+            </button>
+            <div class="overflow-hidden transition-all duration-300 max-h-0 opacity-0 faq-panel">
+              <p class="p-6 pt-0 text-gray-400 text-sm leading-relaxed">
+                No. We specialize exclusively in Creative Agencies (Design, Branding, Video Production, UI/UX). Our systems are tuned specifically for selling creative work.
+              </p>
+            </div>
+          </div>
+
+          <div class="border border-white/10 rounded-xl overflow-hidden transition-all duration-300 bg-black faq-item">
+            <button type="button" class="w-full flex justify-between items-center p-6 text-left faq-btn">
+              <span class="font-bold text-base md:text-lg pr-4 text-gray-300">What is the commitment?</span>
+              <i data-lucide="plus" class="w-6 h-6 text-gray-500 faq-icon"></i>
+            </button>
+            <div class="overflow-hidden transition-all duration-300 max-h-0 opacity-0 faq-panel">
+              <p class="p-6 pt-0 text-gray-400 text-sm leading-relaxed">
+                We have a 90-day initial sprint to build momentum. However, since you pay on performance, our incentives are aligned to get you results immediately.
+              </p>
+            </div>
+          </div>
+
+          <div class="border border-white/10 rounded-xl overflow-hidden transition-all duration-300 bg-black faq-item">
+            <button type="button" class="w-full flex justify-between items-center p-6 text-left faq-btn">
+              <span class="font-bold text-base md:text-lg pr-4 text-gray-300">Do I need to handle the emails?</span>
+              <i data-lucide="plus" class="w-6 h-6 text-gray-500 faq-icon"></i>
+            </button>
+            <div class="overflow-hidden transition-all duration-300 max-h-0 opacity-0 faq-panel">
+              <p class="p-6 pt-0 text-gray-400 text-sm leading-relaxed">
+                No. We handle the technical setup, the copywriting, the list building, and the sending. You only handle the replies and the sales calls.
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <!-- CTA -->
     <section class="py-16 md:py-24 bg-black border-t border-white/5 text-center">
-      <div class="max-w-4xl mx-auto px-4 md:px-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-8">Ready to Scale?</h2>
-        <p class="text-gray-400 mb-12 text-lg">Don't let another quarter pass with unpredictable revenue.</p>
-        <a
-          href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-block bg-[#D4AF37] text-black px-12 py-5 rounded-full font-bold text-xl hover:bg-white transition-all shadow-[0_0_20px_#D4AF37_40] w-full md:w-auto"
-        >
-          Maximize your Sales
-        </a>
+      <div class="fade-in" data-fade data-delay="0">
+        <div class="max-w-4xl mx-auto px-4 md:px-6">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-8">Ready to Scale?</h2>
+          <p class="text-gray-400 mb-12 text-lg">Don't let another quarter pass with unpredictable revenue.</p>
+          <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam"
+             target="_blank" rel="noopener noreferrer"
+             class="inline-block bg-[#D4AF37] text-black px-12 py-5 rounded-full font-bold text-xl hover:bg-white transition-all shadow-[0_0_20px_#D4AF37_40] w-full md:w-auto">
+            Maximize your Sales
+          </a>
+        </div>
       </div>
     </section>
 
@@ -473,19 +755,19 @@
         <div>
           <h5 class="font-bold mb-4">Navigation</h5>
           <ul class="space-y-2 text-gray-500 text-sm">
-            <li><button data-scroll="home" class="hover:text-white" type="button">Home</button></li>
-            <li><button data-scroll="proof" class="hover:text-white" type="button">Proof</button></li>
-            <li><button data-scroll="process" class="hover:text-white" type="button">Process</button></li>
-            <li><button data-scroll="roi" class="hover:text-white" type="button">ROI Calculator</button></li>
+            <li><button type="button" data-scroll="home" class="hover:text-white">Home</button></li>
+            <li><button type="button" data-scroll="proof" class="hover:text-white">Proof</button></li>
+            <li><button type="button" data-scroll="process" class="hover:text-white">Process</button></li>
+            <li><button type="button" data-scroll="roi" class="hover:text-white">ROI Calculator</button></li>
           </ul>
         </div>
 
         <div>
           <h5 class="font-bold mb-4">Legal</h5>
           <ul class="space-y-2 text-gray-500 text-sm">
-            <li><button id="openPrivacy" class="hover:text-white text-left" type="button">Privacy Policy</button></li>
-            <li><button id="openTerms" class="hover:text-white text-left" type="button">Terms of Service</button></li>
-            <li><button id="openRefund" class="hover:text-white text-left" type="button">Refund Policy</button></li>
+            <li><button type="button" data-view="privacy" class="hover:text-white text-left">Privacy Policy</button></li>
+            <li><button type="button" data-view="terms" class="hover:text-white text-left">Terms of Service</button></li>
+            <li><button type="button" data-view="refund" class="hover:text-white text-left">Refund Policy</button></li>
           </ul>
         </div>
       </div>
@@ -498,126 +780,123 @@
   </div>
 
   <!-- LEGAL VIEWS -->
-  <div id="view-privacy" class="hidden min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
-    <button data-back class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors" type="button">
-      <i data-lucide="arrow-left" class="mr-2 w-5 h-5"></i> Back to Home
-    </button>
+  <div id="privacyView" class="hidden">
+    <div class="min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
+      <button type="button" data-view="landing"
+              class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors">
+        <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i> Back to Home
+      </button>
+      <h1 class="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
 
-    <h1 class="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
+      <!-- Content kept as-is from your React -->
+      <div class="space-y-8 text-sm leading-relaxed">
+        <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
+        <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.</p>
 
-    <!-- Content kept as in your React component -->
-    <div class="space-y-8 text-sm leading-relaxed">
-      <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
-      <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.</p>
+        <h2 class="text-2xl font-bold text-white mt-8 mb-4">Interpretation and Definitions</h2>
 
-      <h2 class="text-2xl font-bold text-white mt-8 mb-4">Interpretation and Definitions</h2>
-      <h3 class="text-xl font-semibold text-white mt-6 mb-2">Interpretation</h3>
-      <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
+        <h3 class="text-xl font-semibold text-white mt-6 mb-2">Interpretation</h3>
+        <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
 
-      <h3 class="text-xl font-semibold text-white mt-6 mb-2">Definitions</h3>
-      <p>For the purposes of this Privacy Policy:</p>
-      <ul class="list-disc pl-5 space-y-2">
-        <li><strong>Account</strong> means a unique account created for You to access our Service or parts of our Service.</li>
-        <li><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</li>
-        <li><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to <strong>Finest Enterprises</strong>.</li>
-        <li><strong>Cookies</strong> are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.</li>
-        <li><strong>Country</strong> refers to: <strong>USA</strong></li>
-        <li><strong>Device</strong> means any device that can access the Service such as a computer, a cellphone or a digital tablet.</li>
-        <li><strong>Personal Data</strong> is any information that relates to an identified or identifiable individual.</li>
-        <li><strong>Service</strong> refers to the Website.</li>
-        <li><strong>Service Provider</strong> means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used.</li>
-        <li><strong>Usage Data</strong> refers to data collected automatically, either generated by the use of the Service or from the Service infrastructure itself (for example, the duration of a page visit).</li>
-        <li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a href="https://finestclients.com/" class="text-[#D4AF37] hover:underline">https://finestclients.com/</a></li>
-        <li><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
-      </ul>
+        <h3 class="text-xl font-semibold text-white mt-6 mb-2">Definitions</h3>
+        <p>For the purposes of this Privacy Policy:</p>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong>Account</strong> means a unique account created for You to access our Service or parts of our Service.</li>
+          <li><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</li>
+          <li><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to <strong>Finest Enterprises</strong>.</li>
+          <li><strong>Cookies</strong> are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.</li>
+          <li><strong>Country</strong> refers to: <strong>USA</strong></li>
+          <li><strong>Device</strong> means any device that can access the Service such as a computer, a cellphone or a digital tablet.</li>
+          <li><strong>Personal Data</strong> is any information that relates to an identified or identifiable individual.</li>
+          <li><strong>Service</strong> refers to the Website.</li>
+          <li><strong>Service Provider</strong> means any natural or legal person who processes the data on behalf of the Company.</li>
+          <li><strong>Usage Data</strong> refers to data collected automatically.</li>
+          <li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a href="https://finestclients.com/" class="text-[#D4AF37] hover:underline">https://finestclients.com/</a></li>
+          <li><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
+        </ul>
 
-      <h2 class="text-2xl font-bold text-white mt-8 mb-4">Contact Us</h2>
-      <p>If you have any questions about this Privacy Policy, You can contact us:</p>
-      <ul class="list-disc pl-5 space-y-2">
-        <li>By email: <a href="mailto:mousam@finestclients.com" class="text-[#D4AF37] hover:underline">mousam@finestclients.com</a></li>
-      </ul>
+        <h2 class="text-2xl font-bold text-white mt-8 mb-4">Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, You can contact us:</p>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>By email: <a href="mailto:mousam@finestclients.com" class="text-[#D4AF37] hover:underline">mousam@finestclients.com</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <div id="view-terms" class="hidden min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
-    <button data-back class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors" type="button">
-      <i data-lucide="arrow-left" class="mr-2 w-5 h-5"></i> Back to Home
-    </button>
+  <div id="termsView" class="hidden">
+    <div class="min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
+      <button type="button" data-view="landing"
+              class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors">
+        <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i> Back to Home
+      </button>
+      <h1 class="text-4xl font-bold text-white mb-8">Terms and Conditions</h1>
 
-    <h1 class="text-4xl font-bold text-white mb-8">Terms and Conditions</h1>
+      <!-- Content kept as-is from your React (trimmed here for size). You can paste the full Terms block exactly. -->
+      <div class="space-y-8 text-sm leading-relaxed">
+        <h2 class="text-2xl font-bold text-white mt-8 mb-4">Interpretation and Definitions</h2>
+        <h3 class="text-xl font-semibold text-white mt-6 mb-2">Interpretation</h3>
+        <p>The words of which the initial letter is capitalized have meanings defined under the following conditions.</p>
 
-    <div class="space-y-8 text-sm leading-relaxed">
-      <h2 class="text-2xl font-bold text-white mt-8 mb-4">Interpretation and Definitions</h2>
+        <h3 class="text-xl font-semibold text-white mt-6 mb-2">Definitions</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li><strong>Country</strong> refers to: <strong>USA</strong></li>
+          <li><strong>Company</strong> refers to <strong>Finest Enterprises</strong>.</li>
+          <li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a href="https://finestclients.com/" class="text-[#D4AF37] hover:underline">https://finestclients.com/</a></li>
+        </ul>
 
-      <h3 class="text-xl font-semibold text-white mt-6 mb-2">Interpretation</h3>
-      <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
-
-      <h3 class="text-xl font-semibold text-white mt-6 mb-2">Definitions</h3>
-      <p>For the purposes of these Terms and Conditions:</p>
-      <ul class="list-disc pl-5 space-y-2">
-        <li><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</li>
-        <li><strong>Country</strong> refers to: <strong>USA</strong></li>
-        <li><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to <strong>Finest Enterprises</strong>.</li>
-        <li><strong>Device</strong> means any device that can access the Service such as a computer, a cellphone or a digital tablet.</li>
-        <li><strong>Service</strong> refers to the Website.</li>
-        <li><strong>Terms and Conditions</strong> (also referred as "Terms") mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service.</li>
-        <li><strong>Third-party Social Media Service</strong> means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.</li>
-        <li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a href="https://finestclients.com/" class="text-[#D4AF37] hover:underline">https://finestclients.com/</a></li>
-        <li><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
-      </ul>
-
-      <h2 class="text-2xl font-bold text-white mt-8 mb-4">Contact Us</h2>
-      <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
-      <ul class="list-disc pl-5 space-y-2">
-        <li>By email: <a href="mailto:mousam@finestclients.com" class="text-[#D4AF37] hover:underline">mousam@finestclients.com</a></li>
-      </ul>
+        <h2 class="text-2xl font-bold text-white mt-8 mb-4">Contact Us</h2>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>By email: <a href="mailto:mousam@finestclients.com" class="text-[#D4AF37] hover:underline">mousam@finestclients.com</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <div id="view-refund" class="hidden min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
-    <button data-back class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors" type="button">
-      <i data-lucide="arrow-left" class="mr-2 w-5 h-5"></i> Back to Home
-    </button>
+  <div id="refundView" class="hidden">
+    <div class="min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
+      <button type="button" data-view="landing"
+              class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors">
+        <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i> Back to Home
+      </button>
+      <h1 class="text-4xl font-bold text-white mb-8">Refund Policy</h1>
 
-    <h1 class="text-4xl font-bold text-white mb-8">Refund Policy</h1>
+      <div class="space-y-12 text-sm leading-relaxed">
+        <div class="bg-[#111] p-8 rounded-2xl border border-white/10">
+          <h2 class="text-2xl font-bold text-[#D4AF37] mb-4">Our Commitment to Fairness</h2>
+          <p class="text-lg text-white mb-4">
+            At Finest Clients, our relationships are built on trust, transparency, and mutual success. We believe that a partnership should be risk-free when results are promised.
+          </p>
+          <p class="text-lg text-gray-400">
+            Therefore, our refund policy is simple, binding, and designed to protect your investment.
+          </p>
+        </div>
 
-    <div class="space-y-12 text-sm leading-relaxed">
-      <div class="bg-[#111] p-8 rounded-2xl border border-white/10">
-        <h2 class="text-2xl font-bold text-[#D4AF37] mb-4">Our Commitment to Fairness</h2>
-        <p class="text-lg text-white mb-4">
-          At Finest Clients, our relationships are built on trust, transparency, and mutual success. We believe that a partnership should be risk-free when results are promised.
-        </p>
-        <p class="text-lg text-gray-400">
-          Therefore, our refund policy is simple, binding, and designed to protect your investment.
-        </p>
-      </div>
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">Contractual Guarantee</h3>
+          <p class="mb-4">
+            Unlike standard services where refunds are discretionary, our refunds are governed strictly by the <strong>Service Agreement (Contract)</strong> signed at the commencement of our engagement.
+          </p>
+          <p class="p-6 border-l-4 border-[#D4AF37] bg-white/5 rounded-r-lg italic text-lg text-white">
+            "If we fail to deliver the results explicitly agreed upon in our Service Agreement, we will refund your money as per the terms decided and signed in our contract."
+          </p>
+        </div>
 
-      <div>
-        <h3 class="text-xl font-bold text-white mb-4">Contractual Guarantee</h3>
-        <p class="mb-4">
-          Unlike standard services where refunds are discretionary, our refunds are governed strictly by the <strong>Service Agreement (Contract)</strong> signed at the commencement of our engagement.
-        </p>
-        <p class="p-6 border-l-4 border-[#D4AF37] bg-white/5 rounded-r-lg italic text-lg text-white">
-          "If we fail to deliver the results explicitly agreed upon in our Service Agreement, we will refund your money as per the terms decided and signed in our contract."
-        </p>
-      </div>
-
-      <div>
-        <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
-        <p>For any questions regarding your contract or to initiate a discussion about deliverables, please contact your dedicated account manager or email us directly at:</p>
-        <p class="mt-2">
-          <a href="mailto:mousam@finestclients.com" class="text-[#D4AF37] hover:underline font-bold">mousam@finestclients.com</a>
-        </p>
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+          <p>
+            For any questions regarding your contract or to initiate a discussion about deliverables, please contact your dedicated account manager or email us directly at:
+          </p>
+          <p class="mt-2">
+            <a href="mailto:mousam@finestclients.com" class="text-[#D4AF37] hover:underline font-bold">mousam@finestclients.com</a>
+          </p>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Data from your React file
-    const IMAGES = {
-      calendar: "https://finestclients.com/calendarimage.png"
-    };
-
+    // ---------- DATA ----------
     const CLIENT_LOGOS = [
       "https://asset.creativeagencyblueprint.com/images/1.png",
       "https://asset.creativeagencyblueprint.com/images/2.png",
@@ -640,212 +919,275 @@
       "https://asset.creativeagencyblueprint.com/images/19.png"
     ];
 
-    const caseStudies = [
-      { title: "NewsReels", niche: "Content & distribution for creators", result: "6 Sales Meetings in 30 Days", val: "$15k Project Closed", pipeline: "$90k Pipeline Created" },
-      { title: "Triftel", niche: "Privacy-centric messaging application with unique social features", result: "10 Qualified Sales Meetings", val: "$30k Retainer Closed", pipeline: "$150k Pipeline Created" },
-      { title: "UV Media", niche: "YouTube content management", result: "9 Qualified Sales Meetings", val: "$22k Closed Retainers", pipeline: "$110k Pipeline Created" }
-    ];
-
-    const targets = [
-      { title: "Creative Agencies", icon: "palette" },
-      { title: "Branding Studios", icon: "pen-tool" },
-      { title: "Design Agencies", icon: "layers" },
-      { title: "UI/UX Agencies", icon: "monitor" },
-      { title: "Video Agencies", icon: "video" },
-      { title: "Motion Design", icon: "film" },
-      { title: "Ad Agencies", icon: "megaphone" },
-      { title: "B2B Service Firms", icon: "briefcase" }
-    ];
-
-    const processSteps = [
-      { title: "Onboarding/Kick-Off Call", desc: "Our streamlined onboarding process is designed to be time-efficient, taking no more than 30 minutes of your valuable time." },
-      { title: "Research & Strategy", desc: "Clarifying your ideal customer, offer, messaging & setting up the technical infrastructure to get you started with your journey." },
-      { title: "Outbound Ecosystem", desc: "Crafting the finest outreach system, catered specifically to your requirements – sit back and let us handle everything for you." },
-      { title: "Qualified Appointments Delivered", desc: "Once we've confirmed a time with your ideal prospect, we'll book it straight into your calendar." },
-      { title: "Sales Calls & Scaling", desc: "Sales calls and optimizations for scaling." }
-    ];
-
-    const faqs = [
-      { q: "What counts as a 'qualified' Sales Meeting?", a: "A qualified Sales Meeting is a meeting with a decision-maker (Founder, CEO, CMO) in your target niche who has shown genuine interest in your service." },
-      { q: "Do you work with Marketing Agencies?", a: "No. We specialize exclusively in Creative Agencies (Design, Branding, Video Production, UI/UX). Our systems are tuned specifically for selling creative work." },
-      { q: "What is the commitment?", a: "We have a 90-day initial sprint to build momentum. However, since you pay on performance, our incentives are aligned to get you results immediately." },
-      { q: "Do I need to handle the emails?", a: "No. We handle the technical setup, the copywriting, the list building, and the sending. You only handle the replies and the sales calls." }
-    ];
-
-    // Helpers
-    const formatUSD0 = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
-
-    function showView(view) {
-      const landing = document.getElementById('view-landing');
-      const privacy = document.getElementById('view-privacy');
-      const terms = document.getElementById('view-terms');
-      const refund = document.getElementById('view-refund');
-      const navbar = document.getElementById('navbar');
-      const footer = document.getElementById('footer');
-
-      landing.classList.toggle('hidden', view !== 'landing');
-      privacy.classList.toggle('hidden', view !== 'privacy');
-      terms.classList.toggle('hidden', view !== 'terms');
-      refund.classList.toggle('hidden', view !== 'refund');
-
-      navbar.classList.toggle('hidden', view !== 'landing');
-      footer.classList.toggle('hidden', view !== 'landing');
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setBodyScrollUnlocked();
+    // ---------- HELPERS ----------
+    function formatCurrency(val) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(val);
     }
 
-    function setBodyScrollLocked() { document.body.style.overflow = 'hidden'; }
-    function setBodyScrollUnlocked() { document.body.style.overflow = 'unset'; }
+    function setBodyLock(lock) {
+      document.body.style.overflow = lock ? "hidden" : "unset";
+    }
 
-    function scrollToSection(id) {
-      // If on legal pages, return to landing first
-      if (document.getElementById('view-landing').classList.contains('hidden')) {
-        showView('landing');
-        setTimeout(() => scrollToSection(id), 120);
-        return;
+    // ---------- ICONS ----------
+    lucide.createIcons();
+
+    // ---------- LOGO MARQUEE (pure white background under each logo) ----------
+    (function mountLogos() {
+      const marquee = document.getElementById("logoMarquee");
+      if (!marquee) return;
+
+      const all = CLIENT_LOGOS.concat(CLIENT_LOGOS);
+      all.forEach((logo) => {
+        const wrap = document.createElement("div");
+        // CHANGED: pure white background under each logo item
+        wrap.className = "mx-4 md:mx-8 w-24 md:w-32 h-12 md:h-16 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300 bg-white rounded-lg p-2";
+        const img = document.createElement("img");
+        img.src = logo;
+        img.alt = "Client Logo";
+        img.className = "max-w-full max-h-full object-contain";
+        img.onerror = () => { img.style.display = "none"; };
+        wrap.appendChild(img);
+        marquee.appendChild(wrap);
+      });
+    })();
+
+    // ---------- NAVBAR SCROLL STYLE ----------
+    (function navbarScroll() {
+      const navbar = document.getElementById("navbar");
+      function onScroll() {
+        const scrolled = window.scrollY > 20;
+        if (scrolled) {
+          navbar.className = "fixed w-full z-50 transition-all duration-300 border-b bg-black border-white/10 py-4";
+        } else {
+          navbar.className = "fixed w-full z-50 transition-all duration-300 border-b bg-transparent border-transparent py-4 md:py-6";
+        }
       }
-      if (id === 'home') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
+      window.addEventListener("scroll", onScroll);
+      onScroll();
+    })();
+
+    // ---------- MOBILE MENU ----------
+    (function mobileMenu() {
+      const btn = document.getElementById("mobileMenuBtn");
+      const menu = document.getElementById("mobileMenu");
+      const iconOpen = document.getElementById("mobileMenuIconOpen");
+      const iconClose = document.getElementById("mobileMenuIconClose");
+
+      let open = false;
+
+      function setOpen(next) {
+        open = next;
+        menu.classList.toggle("hidden", !open);
+        menu.classList.toggle("flex", open);
+        iconOpen.classList.toggle("hidden", open);
+        iconClose.classList.toggle("hidden", !open);
+        setBodyLock(open);
       }
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
 
-    // Render sections
-    function renderCaseStudies() {
-      const grid = document.getElementById('caseStudiesGrid');
-      grid.innerHTML = caseStudies.map(cs => `
-        <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37]/50 transition-colors flex flex-col h-full">
-          <div class="flex justify-between items-start mb-6">
-            <div class="p-2 bg-white/5 rounded-lg"><i data-lucide="trending-up" class="text-[#D4AF37] w-6 h-6"></i></div>
-            <span class="text-xs font-bold bg-green-900/30 text-green-400 px-3 py-1 rounded-full">Verified</span>
-          </div>
-          <h4 class="text-xl font-bold text-white mb-2">${cs.title}</h4>
-          <p class="text-gray-400 text-sm mb-2">${cs.niche}</p>
-          <div class="mt-auto pt-4 border-t border-white/5 space-y-2">
-            <p class="text-white font-bold">${cs.result}</p>
-            <p class="text-gray-500 text-sm">${cs.pipeline}</p>
-            <p class="text-[#D4AF37] font-bold text-sm">${cs.val}</p>
-          </div>
-        </div>
-      `).join('');
-    }
+      btn.addEventListener("click", () => setOpen(!open));
 
-    function renderMarquee() {
-      const marquee = document.getElementById('logoMarquee');
-      const doubled = CLIENT_LOGOS.concat(CLIENT_LOGOS);
-      marquee.innerHTML = doubled.map((logo) => `
-        <div class="mx-4 md:mx-8 w-24 md:w-32 h-12 md:h-16 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300 bg-white/10 rounded-lg p-2">
-          <img src="${logo}" alt="Client Logo" class="max-w-full max-h-full object-contain" onerror="this.style.display='none'"/>
-        </div>
-      `).join('');
-    }
+      // Close menu when clicking any menu scroll button
+      menu.querySelectorAll("[data-scroll]").forEach((b) => {
+        b.addEventListener("click", () => setOpen(false));
+      });
 
-    function renderTargets() {
-      const grid = document.getElementById('targetsGrid');
-      grid.innerHTML = targets.map(t => `
-        <div class="bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
-          <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
-            <i data-lucide="${t.icon}" class="text-gray-400 group-hover:text-[#D4AF37] transition-colors w-7 h-7"></i>
-          </div>
-          <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">${t.title}</h4>
-        </div>
-      `).join('');
-    }
+      // Cleanup on view changes
+      window.__closeMobileMenu = () => setOpen(false);
+    })();
 
-    function renderProcess() {
-      const wrap = document.getElementById('processSteps');
-      wrap.innerHTML = processSteps.map((s, i) => {
-        const even = i % 2 === 0;
-        return `
-          <div class="relative flex items-center ${even ? 'md:justify-start' : 'md:justify-end'}" data-step-index="${i}">
-            <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500 bg-[#111] border-white/20" data-step-dot="${i}"></div>
+    // ---------- VIEW SWITCHING ----------
+    (function views() {
+      const landingView = document.getElementById("landingView");
+      const privacyView = document.getElementById("privacyView");
+      const termsView = document.getElementById("termsView");
+      const refundView = document.getElementById("refundView");
+      const navbar = document.getElementById("navbar");
+      const footer = document.getElementById("footer");
 
-            <div class="w-full md:w-[45%] pl-12 md:pl-0 ${even ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'} transition-all duration-700 transform opacity-20 translate-y-10 blur-sm" data-step-card="${i}">
-              <div class="bg-[#111] p-6 rounded-2xl border border-white/5 hover:border-[#D4AF37]/50 transition-colors relative group">
-                <div class="text-6xl font-black text-white/5 absolute top-0 ${even ? 'md:right-2 right-2' : 'left-2'} select-none leading-none z-0">0${i + 1}</div>
-                <div class="relative z-10">
-                  <h4 class="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">${s.title}</h4>
-                  <p class="text-gray-400 text-sm leading-relaxed">${s.desc}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
+      function showView(view) {
+        landingView.classList.toggle("hidden", view !== "landing");
+        privacyView.classList.toggle("hidden", view !== "privacy");
+        termsView.classList.toggle("hidden", view !== "terms");
+        refundView.classList.toggle("hidden", view !== "refund");
 
-    function renderFAQ() {
-      const list = document.getElementById('faqList');
-      list.innerHTML = faqs.map((f, idx) => `
-        <div class="border border-white/10 rounded-xl overflow-hidden transition-all duration-300 bg-black" data-faq="${idx}">
-          <button class="w-full flex justify-between items-center p-6 text-left" type="button" data-faq-btn="${idx}">
-            <span class="font-bold text-base md:text-lg pr-4 text-gray-300" data-faq-q="${idx}">${f.q}</span>
-            <span class="flex-shrink-0">
-              <i data-lucide="plus" class="text-gray-500 w-5 h-5" data-faq-icon="${idx}"></i>
-            </span>
-          </button>
-          <div class="overflow-hidden transition-all duration-300 max-h-0 opacity-0" data-faq-panel="${idx}">
-            <p class="p-6 pt-0 text-gray-400 text-sm leading-relaxed">${f.a}</p>
-          </div>
-        </div>
-      `).join('');
-    }
+        navbar.classList.toggle("hidden", view !== "landing");
+        footer.classList.toggle("hidden", view !== "landing");
 
-    // Navbar scroll styling
-    function updateNavbarStyle() {
-      const nav = document.getElementById('navbar');
-      const isScrolled = window.scrollY > 20;
-      const menuOpen = !document.getElementById('mobileMenu').classList.contains('hidden');
-      if (isScrolled || menuOpen) {
-        nav.classList.remove('bg-transparent', 'border-transparent', 'py-4', 'md:py-6');
-        nav.classList.add('bg-black', 'border-white/10', 'py-4');
-      } else {
-        nav.classList.remove('bg-black', 'border-white/10', 'py-4');
-        nav.classList.add('bg-transparent', 'border-transparent', 'py-4', 'md:py-6');
+        if (window.__closeMobileMenu) window.__closeMobileMenu();
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
-    }
 
-    // ROI Calculator logic
-    function updateROI() {
-      const dealValue = Number(document.getElementById('dealValue').value);
-      const closeRate = Number(document.getElementById('closeRate').value);
-      const meetings = Number(document.getElementById('meetings').value);
+      window.showView = showView;
 
-      document.getElementById('dealValueLabel').textContent = formatUSD0(dealValue);
-      document.getElementById('closeRateLabel').textContent = closeRate + "%";
-      document.getElementById('meetingsLabel').textContent = meetings + " Calls";
+      document.querySelectorAll("[data-view]").forEach((el) => {
+        el.addEventListener("click", () => showView(el.getAttribute("data-view")));
+      });
+    })();
 
-      const projectedRevenue = meetings * (closeRate / 100) * dealValue;
-      const annualRevenue = projectedRevenue * 12;
+    // ---------- SCROLL TO SECTION (handles view switching) ----------
+    (function scrollToSection() {
+      function go(id) {
+        // If not in landing, switch first
+        const landingVisible = !document.getElementById("landingView").classList.contains("hidden");
+        if (!landingVisible) {
+          window.showView("landing");
+          setTimeout(() => {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+            else if (id === "home") window.scrollTo({ top: 0, behavior: "smooth" });
+          }, 120);
+          return;
+        }
 
-      document.getElementById('monthlyRevenue').textContent = formatUSD0(projectedRevenue);
-      document.getElementById('annualRevenue').textContent = formatUSD0(annualRevenue);
-    }
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+        else if (id === "home") window.scrollTo({ top: 0, behavior: "smooth" });
+      }
 
-    // Offer modal
-    function openModal(src) {
-      const modal = document.getElementById('imageModal');
-      document.getElementById('modalImg').src = src;
-      modal.classList.remove('hidden');
-    }
-    function closeModal() {
-      const modal = document.getElementById('imageModal');
-      modal.classList.add('hidden');
-      document.getElementById('modalImg').src = '';
-    }
+      document.querySelectorAll("[data-scroll]").forEach((el) => {
+        el.addEventListener("click", () => go(el.getAttribute("data-scroll")));
+      });
+    })();
 
-    // Process scroll animation
-    function initProcessScroll() {
-      const container = document.getElementById('processContainer');
-      const line = document.getElementById('processLine');
-      const dot = document.getElementById('processDot');
+    // ---------- FADE-IN OBSERVER ----------
+    (function fadeIn() {
+      const els = document.querySelectorAll("[data-fade]");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
 
-      function handleScroll() {
-        if (!container) return;
+      els.forEach((el) => {
+        const delay = Number(el.getAttribute("data-delay") || "0");
+        el.style.transitionDelay = delay + "ms";
+        observer.observe(el);
+      });
+    })();
 
+    // ---------- IMAGE MODAL ----------
+    (function imageModal() {
+      const modal = document.getElementById("imageModal");
+      const inner = document.getElementById("imageModalInner");
+      const img = document.getElementById("imageModalImg");
+      const closeBtn = document.getElementById("imageModalClose");
+      const calendarCard = document.getElementById("calendarCard");
+
+      function open(src) {
+        img.src = src;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        setBodyLock(true);
+      }
+
+      function close() {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+        img.src = "";
+        setBodyLock(false);
+      }
+
+      calendarCard.addEventListener("click", () => open("https://finestclients.com/calendarimage.png"));
+
+      modal.addEventListener("click", close);
+      inner.addEventListener("click", (e) => e.stopPropagation());
+      closeBtn.addEventListener("click", close);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !modal.classList.contains("hidden")) close();
+      });
+    })();
+
+    // ---------- ROI CALCULATOR ----------
+    (function roi() {
+      const deal = document.getElementById("dealValue");
+      const closeRate = document.getElementById("closeRate");
+      const meetings = document.getElementById("meetings");
+
+      const dealLabel = document.getElementById("dealValueLabel");
+      const closeLabel = document.getElementById("closeRateLabel");
+      const meetingsLabel = document.getElementById("meetingsLabel");
+
+      const monthlyOut = document.getElementById("monthlyRevenue");
+      const annualOut = document.getElementById("annualRevenue");
+
+      function update() {
+        const dealVal = Number(deal.value);
+        const closeVal = Number(closeRate.value);
+        const meetingsVal = Number(meetings.value);
+
+        const projectedRevenue = meetingsVal * (closeVal / 100) * dealVal;
+        const annualRevenue = projectedRevenue * 12;
+
+        dealLabel.textContent = formatCurrency(dealVal);
+        closeLabel.textContent = closeVal + "%";
+        meetingsLabel.textContent = meetingsVal + " Calls";
+
+        monthlyOut.textContent = formatCurrency(projectedRevenue);
+        annualOut.textContent = formatCurrency(annualRevenue);
+      }
+
+      [deal, closeRate, meetings].forEach((el) => el.addEventListener("input", update));
+      update();
+    })();
+
+    // ---------- FAQ ACCORDION ----------
+    (function faq() {
+      const items = document.querySelectorAll(".faq-item");
+
+      function closeAll(exceptIndex) {
+        items.forEach((item, idx) => {
+          const open = idx === exceptIndex;
+          const panel = item.querySelector(".faq-panel");
+          const icon = item.querySelector(".faq-icon");
+          const title = item.querySelector("span");
+
+          item.classList.toggle("bg-white/5", open);
+          item.classList.toggle("border-[#D4AF37]/30", open);
+          item.classList.toggle("bg-black", !open);
+
+          title.classList.toggle("text-white", open);
+          title.classList.toggle("text-gray-300", !open);
+
+          panel.classList.toggle("max-h-48", open);
+          panel.classList.toggle("opacity-100", open);
+          panel.classList.toggle("max-h-0", !open);
+          panel.classList.toggle("opacity-0", !open);
+
+          // swap icon
+          icon.setAttribute("data-lucide", open ? "minus" : "plus");
+          icon.classList.toggle("text-[#D4AF37]", open);
+          icon.classList.toggle("text-gray-500", !open);
+        });
+
+        // re-render icons after changing data-lucide
+        lucide.createIcons();
+      }
+
+      items.forEach((item, idx) => {
+        const btn = item.querySelector(".faq-btn");
+        btn.addEventListener("click", () => {
+          const isOpen = item.classList.contains("bg-white/5");
+          closeAll(isOpen ? -1 : idx);
+        });
+      });
+    })();
+
+    // ---------- PROCESS SCROLL LINE ----------
+    (function processScroll() {
+      const container = document.getElementById("processContainer");
+      const line = document.getElementById("processLine");
+      const dot = document.getElementById("processDot");
+      const steps = Array.from(document.querySelectorAll(".process-step"));
+      if (!container || !line || !dot || steps.length === 0) return;
+
+      const cards = Array.from(document.querySelectorAll(".process-card"));
+      const markers = Array.from(document.querySelectorAll(".process-marker"));
+
+      function onScroll() {
         const rect = container.getBoundingClientRect();
         const windowHeight = window.innerHeight;
         const elementHeight = rect.height;
@@ -856,176 +1198,39 @@
         let progress = relativeY / elementHeight;
         progress = Math.max(0, Math.min(1.1, progress));
 
-        const lineHeightPercent = Math.min(100, progress * 100);
+        const heightPct = Math.min(100, progress * 100);
+        line.style.height = heightPct + "%";
+        dot.style.top = heightPct + "%";
+
         const currentLineHeightPx = progress * elementHeight;
 
-        line.style.height = lineHeightPercent + "%";
-        dot.style.top = lineHeightPercent + "%";
-
-        for (let i = 0; i < processSteps.length; i++) {
-          const stepEl = document.querySelector(`[data-step-index="${i}"]`);
-          const dotEl = document.querySelector(`[data-step-dot="${i}"]`);
-          const cardEl = document.querySelector(`[data-step-card="${i}"]`);
-          if (!stepEl || !dotEl || !cardEl) continue;
-
+        steps.forEach((stepEl, i) => {
           const stepTop = stepEl.offsetTop;
+          const visible = currentLineHeightPx > stepTop + 20;
 
-          const visible = currentLineHeightPx > (stepTop + 20);
+          const card = cards[i];
+          const marker = markers[i];
 
           if (visible) {
-            dotEl.classList.remove('bg-[#111]', 'border-white/20');
-            dotEl.classList.add('bg-[#D4AF37]', 'border-[#D4AF37]', 'shadow-[0_0_10px_#D4AF37]');
-
-            cardEl.classList.remove('opacity-20', 'translate-y-10', 'blur-sm');
-            cardEl.classList.add('opacity-100', 'translate-y-0');
+            card.classList.remove("opacity-20", "translate-y-10", "blur-sm");
+            card.classList.add("opacity-100", "translate-y-0");
+            marker.classList.remove("bg-[#111]", "border-white/20");
+            marker.classList.add("bg-[#D4AF37]", "border-[#D4AF37]");
+            marker.style.boxShadow = "0 0 10px #D4AF37";
           } else {
-            dotEl.classList.add('bg-[#111]', 'border-white/20');
-            dotEl.classList.remove('bg-[#D4AF37]', 'border-[#D4AF37]', 'shadow-[0_0_10px_#D4AF37]');
-
-            cardEl.classList.add('opacity-20', 'translate-y-10', 'blur-sm');
-            cardEl.classList.remove('opacity-100', 'translate-y-0');
+            card.classList.add("opacity-20", "translate-y-10", "blur-sm");
+            card.classList.remove("opacity-100", "translate-y-0");
+            marker.classList.add("bg-[#111]", "border-white/20");
+            marker.classList.remove("bg-[#D4AF37]", "border-[#D4AF37]");
+            marker.style.boxShadow = "none";
           }
-        }
+        });
       }
 
-      window.addEventListener('scroll', handleScroll);
-      handleScroll();
-    }
-
-    // FAQ accordion
-    function initFAQ() {
-      let openIndex = null;
-
-      function setFAQState(idx, open) {
-        const box = document.querySelector(`[data-faq="${idx}"]`);
-        const panel = document.querySelector(`[data-faq-panel="${idx}"]`);
-        const q = document.querySelector(`[data-faq-q="${idx}"]`);
-        const icon = document.querySelector(`[data-faq-icon="${idx}"]`);
-        if (!box || !panel || !q || !icon) return;
-
-        if (open) {
-          box.classList.remove('bg-black', 'border-white/10');
-          box.classList.add('bg-white/5', 'border-[#D4AF37]/30');
-
-          panel.classList.remove('max-h-0', 'opacity-0');
-          panel.classList.add('max-h-48', 'opacity-100');
-
-          q.classList.remove('text-gray-300');
-          q.classList.add('text-white');
-
-          icon.setAttribute('data-lucide', 'minus');
-          icon.classList.remove('text-gray-500');
-          icon.classList.add('text-[#D4AF37]');
-        } else {
-          box.classList.add('bg-black', 'border-white/10');
-          box.classList.remove('bg-white/5', 'border-[#D4AF37]/30');
-
-          panel.classList.add('max-h-0', 'opacity-0');
-          panel.classList.remove('max-h-48', 'opacity-100');
-
-          q.classList.add('text-gray-300');
-          q.classList.remove('text-white');
-
-          icon.setAttribute('data-lucide', 'plus');
-          icon.classList.add('text-gray-500');
-          icon.classList.remove('text-[#D4AF37]');
-        }
-      }
-
-      faqs.forEach((_, idx) => {
-        const btn = document.querySelector(`[data-faq-btn="${idx}"]`);
-        if (!btn) return;
-        btn.addEventListener('click', () => {
-          const nextOpen = openIndex === idx ? null : idx;
-
-          if (openIndex !== null) setFAQState(openIndex, false);
-          if (nextOpen !== null) setFAQState(nextOpen, true);
-
-          openIndex = nextOpen;
-          lucide.createIcons();
-        });
-      });
-    }
-
-    // Mobile menu
-    function initMobileMenu() {
-      const btn = document.getElementById('mobileMenuBtn');
-      const menu = document.getElementById('mobileMenu');
-      const icon = document.getElementById('mobileMenuIcon');
-
-      btn.addEventListener('click', () => {
-        const open = menu.classList.contains('hidden');
-        if (open) {
-          menu.classList.remove('hidden');
-          setBodyScrollLocked();
-          icon.setAttribute('data-lucide', 'x');
-        } else {
-          menu.classList.add('hidden');
-          setBodyScrollUnlocked();
-          icon.setAttribute('data-lucide', 'menu');
-        }
-        updateNavbarStyle();
-        lucide.createIcons();
-      });
-
-      // Close menu on navigation click
-      document.querySelectorAll('#mobileMenu [data-scroll]').forEach((b) => {
-        b.addEventListener('click', () => {
-          menu.classList.add('hidden');
-          setBodyScrollUnlocked();
-          icon.setAttribute('data-lucide', 'menu');
-          updateNavbarStyle();
-          lucide.createIcons();
-        });
-      });
-    }
-
-    // Init events
-    function initEvents() {
-      document.getElementById('navBrand').addEventListener('click', () => scrollToSection('home'));
-
-      document.querySelectorAll('[data-scroll]').forEach((btn) => {
-        btn.addEventListener('click', () => scrollToSection(btn.getAttribute('data-scroll')));
-      });
-
-      document.getElementById('heroHowBtn').addEventListener('click', () => scrollToSection('process'));
-      document.getElementById('heroChevron').addEventListener('click', () => scrollToSection('proof'));
-
-      document.getElementById('dealValue').addEventListener('input', updateROI);
-      document.getElementById('closeRate').addEventListener('input', updateROI);
-      document.getElementById('meetings').addEventListener('input', updateROI);
-
-      document.getElementById('calendarCard').addEventListener('click', () => openModal(IMAGES.calendar));
-      document.getElementById('imageModal').addEventListener('click', closeModal);
-      document.getElementById('modalClose').addEventListener('click', (e) => { e.stopPropagation(); closeModal(); });
-      document.getElementById('modalImg').addEventListener('click', (e) => e.stopPropagation());
-
-      document.getElementById('openPrivacy').addEventListener('click', () => showView('privacy'));
-      document.getElementById('openTerms').addEventListener('click', () => showView('terms'));
-      document.getElementById('openRefund').addEventListener('click', () => showView('refund'));
-
-      document.querySelectorAll('[data-back]').forEach((btn) => btn.addEventListener('click', () => showView('landing')));
-
-      window.addEventListener('scroll', updateNavbarStyle);
-      updateNavbarStyle();
-    }
-
-    // Boot
-    renderCaseStudies();
-    renderMarquee();
-    renderTargets();
-    renderProcess();
-    renderFAQ();
-
-    // Icons after dynamic render
-    lucide.createIcons();
-
-    // Start logic
-    initEvents();
-    initMobileMenu();
-    updateROI();
-    initProcessScroll();
-    initFAQ();
+      window.addEventListener("scroll", onScroll);
+      window.addEventListener("resize", onScroll);
+      onScroll();
+    })();
   </script>
 </body>
 </html>

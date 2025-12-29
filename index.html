@@ -49,6 +49,11 @@
         .animate-scroll {
             animation: scroll 30s linear infinite;
         }
+        
+        /* Faster scroll for mobile if needed, or slower */
+        @media (max-width: 768px) {
+            .animate-scroll { animation: scroll 20s linear infinite; }
+        }
 
         @keyframes spin {
             from { transform: rotate(0deg); }
@@ -292,6 +297,7 @@
                     <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
                         <div class="fade-in-section bg-[#111] border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl" style="transition-delay: 200ms;">
                             <h3 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">Input Metrics</h3>
+                            
                             <div class="space-y-8">
                                 <div>
                                     <div class="flex justify-between mb-2">
@@ -299,46 +305,66 @@
                                         <span id="display-deal" class="text-[#D4AF37] font-mono font-bold">$15,000</span>
                                     </div>
                                     <input type="range" id="input-deal" min="1000" max="50000" step="1000" value="15000" class="w-full touch-none">
-                                    <div class="flex justify-between text-xs text-gray-600 mt-2"><span>$1k</span><span>$50k</span></div>
+                                    <div class="flex justify-between text-xs text-gray-600 mt-2">
+                                        <span>$1k</span>
+                                        <span>$50k</span>
+                                    </div>
                                 </div>
+
                                 <div>
                                     <div class="flex justify-between mb-2">
                                         <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Close Rate</label>
                                         <span id="display-rate" class="text-[#D4AF37] font-mono font-bold">20%</span>
                                     </div>
                                     <input type="range" id="input-rate" min="5" max="50" step="1" value="20" class="w-full touch-none">
-                                    <div class="flex justify-between text-xs text-gray-600 mt-2"><span>5%</span><span>50%</span></div>
+                                    <div class="flex justify-between text-xs text-gray-600 mt-2">
+                                        <span>5%</span>
+                                        <span>50%</span>
+                                    </div>
                                 </div>
+
                                 <div>
                                     <div class="flex justify-between mb-2">
                                         <label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Monthly Meetings</label>
                                         <span id="display-meetings" class="text-[#D4AF37] font-mono font-bold">10 Calls</span>
                                     </div>
                                     <input type="range" id="input-meetings" min="1" max="50" step="1" value="10" class="w-full touch-none">
-                                    <div class="flex justify-between text-xs text-gray-600 mt-2"><span>1</span><span>50</span></div>
+                                    <div class="flex justify-between text-xs text-gray-600 mt-2">
+                                        <span>1</span>
+                                        <span>50</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="fade-in-section bg-gradient-to-br from-[#1a1a1a] to-black border border-[#D4AF37]/30 rounded-2xl p-6 md:p-8 shadow-[0_0_50px_rgba(212,175,55,0.1)]" style="transition-delay: 400ms;">
                             <h3 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">Projected Growth</h3>
+                            
                             <div class="grid gap-6">
                                 <div class="bg-[#0a0a0a] p-6 rounded-xl border border-white/5">
                                     <div class="flex items-center space-x-3 mb-2">
                                         <i data-lucide="trending-up" class="text-[#D4AF37] w-5 h-5"></i>
                                         <span class="text-gray-400 text-sm uppercase tracking-wider">Monthly Revenue</span>
                                     </div>
-                                    <div id="output-monthly" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono break-all md:break-normal">$30,000</div>
+                                    <div id="output-monthly" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono break-all md:break-normal">
+                                        $30,000
+                                    </div>
                                 </div>
+
                                 <div class="bg-[#0a0a0a] p-6 rounded-xl border border-white/5">
                                     <div class="flex items-center space-x-3 mb-2">
                                         <i data-lucide="award" class="text-[#D4AF37] w-5 h-5"></i>
                                         <span class="text-gray-400 text-sm uppercase tracking-wider">Annual Run Rate</span>
                                     </div>
-                                    <div id="output-annual" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono opacity-80 break-all md:break-normal">$360,000</div>
+                                    <div id="output-annual" class="text-2xl sm:text-3xl md:text-5xl font-bold text-white font-mono opacity-80 break-all md:break-normal">
+                                        $360,000
+                                    </div>
                                 </div>
+                                
                                 <div class="mt-4">
-                                    <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" class="block w-full bg-[#D4AF37] hover:bg-white text-black text-center font-bold py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02]">Maximize your Sales</a>
+                                    <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" class="block w-full bg-[#D4AF37] hover:bg-white text-black text-center font-bold py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02]">
+                                        Maximize your Sales
+                                    </a>
                                     <p class="text-center text-xs text-gray-500 mt-3">Estimates based on provided inputs. Results vary by niche.</p>
                                 </div>
                             </div>
@@ -355,36 +381,52 @@
                     </div>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-6" id="target-grid">
                         <div class="fade-in-section bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
-                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors"><i data-lucide="palette" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i></div>
-                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37]">Creative Agencies</h4>
+                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                                <i data-lucide="palette" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Creative Agencies</h4>
                         </div>
                         <div class="fade-in-section bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
-                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors"><i data-lucide="pen-tool" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i></div>
-                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37]">Branding Studios</h4>
+                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                                <i data-lucide="pen-tool" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Branding Studios</h4>
                         </div>
                         <div class="fade-in-section bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
-                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors"><i data-lucide="layers" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i></div>
-                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37]">Design Agencies</h4>
+                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                                <i data-lucide="layers" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Design Agencies</h4>
                         </div>
                         <div class="fade-in-section bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
-                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors"><i data-lucide="monitor" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i></div>
-                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37]">UI/UX Agencies</h4>
+                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                                <i data-lucide="monitor" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">UI/UX Agencies</h4>
                         </div>
                         <div class="fade-in-section bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
-                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors"><i data-lucide="video" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i></div>
-                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37]">Video Agencies</h4>
+                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                                <i data-lucide="video" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Video Agencies</h4>
                         </div>
                         <div class="fade-in-section bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
-                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors"><i data-lucide="film" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i></div>
-                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37]">Motion Design</h4>
+                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                                <i data-lucide="film" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Motion Design</h4>
                         </div>
                         <div class="fade-in-section bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
-                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors"><i data-lucide="megaphone" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i></div>
-                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37]">Ad Agencies</h4>
+                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                                <i data-lucide="megaphone" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">Ad Agencies</h4>
                         </div>
                         <div class="fade-in-section bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 hover:border-[#D4AF37] transition-all group flex flex-col items-center justify-center h-full hover:bg-white/5">
-                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors"><i data-lucide="briefcase" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37]"></i></div>
-                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37]">B2B Service Firms</h4>
+                            <div class="p-4 bg-white/5 rounded-full mb-4 md:mb-6 group-hover:bg-[#D4AF37]/20 transition-colors">
+                                <i data-lucide="briefcase" class="w-7 h-7 text-gray-400 group-hover:text-[#D4AF37] transition-colors"></i>
+                            </div>
+                            <h4 class="text-base md:text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors">B2B Service Firms</h4>
                         </div>
                     </div>
                 </div>
@@ -395,8 +437,12 @@
                     <div>
                         <h2 class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-4">Who We Are</h2>
                         <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Your Skills Got You Here. Systems Get You Further.</h3>
-                        <p class="text-gray-400 text-lg mb-6 leading-relaxed">In 2019, I started my agency. We had the talent, but every month felt like a survival game. I watched agencies with half our skill land clients we couldn't even meet. I realized the problem wasn't our work, it was that we relied on hope while they had systems.</p>
-                        <p class="text-gray-400 text-lg leading-relaxed">So, I built a predictable, repeatable engine to generate predictable quality Sales meetings without referrals. Now, Finest Clients exists to install that exact system into your studio, so you can stop the feast-or-famine cycle and finally run like a real business.</p>
+                        <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                            In 2019, I started my agency. We had the talent, but every month felt like a survival game. I watched agencies with half our skill land clients we couldn't even meet. I realized the problem wasn't our work, it was that we relied on hope while they had systems.
+                        </p>
+                        <p class="text-gray-400 text-lg leading-relaxed">
+                            So, I built a predictable, repeatable engine to generate predictable quality Sales meetings without referrals. Now, Finest Clients exists to install that exact system into your studio, so you can stop the feast-or-famine cycle and finally run like a real business.
+                        </p>
                     </div>
                     <div class="relative">
                         <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop" alt="Our Team" class="rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 w-full">
@@ -423,6 +469,7 @@
                                 <li class="flex items-start text-gray-400"><i data-lucide="minus" class="mr-3 mt-1 text-red-500 w-4 h-4 flex-shrink-0"></i>Founders stuck doing sales instead of creative</li>
                             </ul>
                         </div>
+                        
                         <div class="fade-in-section p-6 md:p-10 rounded-3xl bg-[#111] border border-[#D4AF37]/30 h-full relative overflow-hidden" style="transition-delay: 200ms;">
                             <div class="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37] blur-[80px] opacity-10"></div>
                             <div class="flex items-center space-x-4 mb-8">
@@ -445,8 +492,11 @@
                     <div class="fade-in-section">
                         <h2 class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-4">Our Guarantee</h2>
                         <h3 class="text-3xl md:text-5xl font-bold text-white mb-8">Performance-Based Growth.</h3>
-                        <p class="text-gray-400 text-lg md:text-xl mb-12">We are so confident in our system that we share the risk with you.</p>
+                        <p class="text-gray-400 text-lg md:text-xl mb-12">
+                            We are so confident in our system that we share the risk with you. 
+                        </p>
                     </div>
+
                     <div class="fade-in-section relative w-full max-w-2xl mx-auto mb-16 cursor-pointer group rounded-xl overflow-hidden border border-white/10 hover:border-[#D4AF37] transition-all" onclick="openModal('https://finestclients.com/calendarimage.png')" style="transition-delay: 100ms;">
                         <div class="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all z-10 flex items-center justify-center">
                             <div class="bg-black/80 backdrop-blur-sm px-6 py-3 rounded-full text-white font-bold flex items-center transform group-hover:scale-110 transition-transform">
@@ -455,6 +505,7 @@
                         </div>
                         <img src="https://finestclients.com/calendarimage.png" alt="Calendar Results" class="w-full h-auto">
                     </div>
+                    
                     <div class="grid md:grid-cols-3 gap-6 text-left">
                         <div class="fade-in-section bg-[#111] p-6 md:p-8 rounded-2xl border border-white/10 h-full" style="transition-delay: 200ms;">
                             <i data-lucide="target" class="text-[#D4AF37] mb-4 w-8 h-8"></i>
@@ -483,12 +534,16 @@
                             <h3 class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-4">Simple Pricing</h3>
                             <div class="text-5xl md:text-7xl font-bold text-white mb-4">$5,000</div>
                             <p class="text-gray-400 text-xl mb-8">For 5 Qualified Sales Meetings</p>
+                            
                             <div class="flex flex-col md:flex-row justify-center gap-4 text-sm text-gray-400 mb-8">
                                 <span class="flex items-center justify-center"><i data-lucide="check" class="text-[#D4AF37] mr-2 w-4 h-4"></i> Verified Decision Makers</span>
                                 <span class="flex items-center justify-center"><i data-lucide="check" class="text-[#D4AF37] mr-2 w-4 h-4"></i> High Intent Leads</span>
                                 <span class="flex items-center justify-center"><i data-lucide="check" class="text-[#D4AF37] mr-2 w-4 h-4"></i> Satisfaction Guarantee</span>
                             </div>
-                            <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#D4AF37] text-black px-12 py-4 rounded-full font-bold text-lg hover:bg-white transition-all w-full md:w-auto">Maximize your Sales</a>
+
+                            <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#D4AF37] text-black px-12 py-4 rounded-full font-bold text-lg hover:bg-white transition-all w-full md:w-auto">
+                                Maximize your Sales
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -500,10 +555,14 @@
                         <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Simple 5-Step Process</h2>
                         <p class="text-gray-400">Your roadmap to predictable growth.</p>
                     </div>
+                    
                     <div id="process-container" class="relative pb-12">
                         <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-1/2"></div>
+
                         <div id="process-line" class="absolute left-4 md:left-1/2 top-0 w-px bg-[#D4AF37] md:-translate-x-1/2 transition-all duration-100 ease-linear shadow-[0_0_10px_#D4AF37]" style="height: 0%"></div>
+
                         <div id="process-dot" class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-[#D4AF37] shadow-[0_0_15px_#D4AF37] z-20 md:-translate-x-1/2 -translate-x-1/2 transform -translate-y-1/2 border-2 border-black" style="top: 0%"></div>
+
                         <div class="space-y-12 md:space-y-24">
                             <div class="step-item relative flex items-center md:justify-start">
                                 <div class="step-marker absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 border-white/20 bg-[#111] z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500"></div>
@@ -517,6 +576,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="step-item relative flex items-center md:justify-end">
                                 <div class="step-marker absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 border-white/20 bg-[#111] z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500"></div>
                                 <div class="step-content w-full md:w-[45%] pl-12 md:pl-12 md:text-left opacity-0 translate-y-10">
@@ -529,6 +589,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="step-item relative flex items-center md:justify-start">
                                 <div class="step-marker absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 border-white/20 bg-[#111] z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500"></div>
                                 <div class="step-content w-full md:w-[45%] pl-12 md:pl-0 md:pr-12 md:text-right opacity-0 translate-y-10">
@@ -541,6 +602,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="step-item relative flex items-center md:justify-end">
                                 <div class="step-marker absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 border-white/20 bg-[#111] z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500"></div>
                                 <div class="step-content w-full md:w-[45%] pl-12 md:pl-12 md:text-left opacity-0 translate-y-10">
@@ -553,6 +615,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="step-item relative flex items-center md:justify-start">
                                 <div class="step-marker absolute left-4 md:left-1/2 w-4 h-4 rounded-full border-2 border-white/20 bg-[#111] z-10 md:-translate-x-1/2 -translate-x-1/2 flex items-center justify-center transition-all duration-500"></div>
                                 <div class="step-content w-full md:w-[45%] pl-12 md:pl-0 md:pr-12 md:text-right opacity-0 translate-y-10">
@@ -620,12 +683,14 @@
                     <p class="text-gray-400 mb-12 text-lg">Don't let another quarter pass with unpredictable revenue.</p>
                     <a href="https://calendly.com/mousam-finestclients/meeting-with-mousam" target="_blank" rel="noopener noreferrer" class="relative inline-block overflow-hidden group focus:outline-none focus:ring-0 rounded-full">
                         <span class="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from 90deg at 50% 50%,#0000 0%,#D4AF37 50%,#0000 100%)]"></span>
-                        <span class="inline-flex h-full w-full cursor-pointer items-center justify-center bg-[#D4AF37] hover:bg-white px-12 py-5 text-xl font-bold text-black transition-all backdrop-blur-3xl rounded-full m-[1px]">Maximize your Sales</span>
+                        <span class="inline-flex h-full w-full cursor-pointer items-center justify-center bg-[#D4AF37] hover:bg-white px-12 py-5 text-xl font-bold text-black transition-all backdrop-blur-3xl rounded-full m-[1px]">
+                            Maximize your Sales
+                        </span>
                     </a>
                 </div>
             </section>
         </div> <div id="view-privacy" class="hidden-view min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
-            <button onclick="navigate('privacy', 'home')" class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors">
+            <button onclick="navigate('landing', 'home')" class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors">
                 <i data-lucide="arrow-left" class="mr-2"></i> Back to Home
             </button>
             <h1 class="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
@@ -660,7 +725,7 @@
         </div>
 
         <div id="view-terms" class="hidden-view min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
-            <button onclick="navigate('terms', 'home')" class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors">
+            <button onclick="navigate('landing', 'home')" class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors">
                 <i data-lucide="arrow-left" class="mr-2"></i> Back to Home
             </button>
             <h1 class="text-4xl font-bold text-white mb-8">Terms and Conditions</h1>
@@ -690,7 +755,7 @@
         </div>
 
         <div id="view-refund" class="hidden-view min-h-screen bg-black text-gray-300 pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
-            <button onclick="navigate('refund', 'home')" class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors">
+            <button onclick="navigate('landing', 'home')" class="mb-8 flex items-center text-[#D4AF37] hover:text-white transition-colors">
                 <i data-lucide="arrow-left" class="mr-2"></i> Back to Home
             </button>
             <h1 class="text-4xl font-bold text-white mb-8">Refund Policy</h1>

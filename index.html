@@ -231,29 +231,20 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
             </div>
             <h3 class="optin-modal-title">Book Your Strategy Call</h3>
-            <p class="optin-modal-subtitle">Enter your email to secure your spot</p>
+            <p class="optin-modal-subtitle">Enter your details to secure your spot</p>
             
-            <div class="optin-benefits">
-                <div class="optin-benefit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Free 45 minutes - 1 hour of consultation</span>
-                </div>
-                <div class="optin-benefit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Custom growth roadmap for your agency</span>
-                </div>
-                <div class="optin-benefit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>No obligation, just value</span>
-                </div>
-            </div>
+     
             
             <form id="optinForm" class="optin-form" onsubmit="handleOptinSubmit(event)">
+                <div class="optin-input-wrapper">
+                    <svg class="optin-input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <input type="text" id="optinName" class="optin-input" placeholder="Enter your name" required>
+                </div>
                 <div class="optin-input-wrapper">
                     <svg class="optin-input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     <input type="email" id="optinEmail" class="optin-input" placeholder="Enter your email address" required>
                 </div>
-                <p id="optinError" class="optin-error">Please enter a valid email address</p>
+                <p id="optinError" class="optin-error">Please enter valid information</p>
                 <button type="submit" id="optinSubmit" class="optin-submit">
                     <span id="submitText">Continue to Book Call</span>
                     <div id="submitSpinner" class="spinner" style="display:none"></div>
@@ -291,7 +282,7 @@
         // ============================================
         // CONFIGURATION - UPDATE THIS URL
         // ============================================
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBt6hU-8-NtF4T69axXxNEjIAQcvMbaGTxf0xQwEA5SygZSZnOPu5oDG0Q0ZFDqlW7BA/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwW-pjnzUijLDIdjhb2PMzNHikyu6gEXoe6bgk4_DVLSs-CmpoxHUryh2fiKHt6n6LoOQ/exec';
         const CALENDLY_URL = 'https://calendly.com/mousam-finestclients/meeting-with-mousam';
         // ============================================
 
@@ -310,9 +301,9 @@
             const modal = document.getElementById('optinModal');
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            // Focus on email input
+            // Focus on name input
             setTimeout(() => {
-                document.getElementById('optinEmail').focus();
+                document.getElementById('optinName').focus();
             }, 100);
         }
 
@@ -336,11 +327,19 @@
         async function handleOptinSubmit(event) {
             event.preventDefault();
             
+            const name = document.getElementById('optinName').value.trim();
             const email = document.getElementById('optinEmail').value.trim();
             const submitBtn = document.getElementById('optinSubmit');
             const submitText = document.getElementById('submitText');
             const spinner = document.getElementById('submitSpinner');
             const errorEl = document.getElementById('optinError');
+            
+            // Validate name
+            if (!name || name.length < 2) {
+                errorEl.textContent = 'Please enter your name';
+                errorEl.classList.add('show');
+                return;
+            }
             
             // Validate email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -367,19 +366,22 @@
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
+                            name: name,
                             email: email,
                             source: 'Finest Clients Landing Page'
                         })
                     });
                 }
                 
-                // Redirect to Calendly
-                window.location.href = CALENDLY_URL;
+                // Redirect to Calendly with pre-filled name and email
+                const calendlyWithParams = CALENDLY_URL + '?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
+                window.location.href = calendlyWithParams;
                 
             } catch (error) {
                 console.error('Error:', error);
                 // Still redirect to Calendly even if sheet save fails
-                window.location.href = CALENDLY_URL;
+                const calendlyWithParams = CALENDLY_URL + '?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
+                window.location.href = calendlyWithParams;
             }
         }
 
@@ -402,4 +404,3 @@
     </script>
 </body>
 </html>
- 

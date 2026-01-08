@@ -1,257 +1,2390 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finest Clients - Guaranteed Sales Meetings for Creative Agencies</title>
     <link rel="icon" type="image/png" href="https://finestclients.com/finestclientslogo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GFMCSHSLCE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GFMCSHSLCE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'G-GFMCSHSLCE');
-</script>
+        gtag('config', 'G-GFMCSHSLCE');
+    </script>
     <style>
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth}
-        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#000;color:#f3f4f6;line-height:1.6;min-height:100vh}
-        ::selection{background:#D4AF37;color:#000}
-        img{max-width:100%;height:auto;display:block}
-        a{text-decoration:none;color:inherit}
-        button{font-family:inherit;cursor:pointer;border:none;background:none}
-        ul{list-style:none}
-        :root{--gold:#D4AF37;--card:#111;--gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;--gray-600:#4b5563;--white-5:rgba(255,255,255,0.05);--white-10:rgba(255,255,255,0.1);--white-20:rgba(255,255,255,0.2);--gold-10:rgba(212,175,55,0.1);--gold-20:rgba(212,175,55,0.2);--gold-30:rgba(212,175,55,0.3)}
-        ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#000}::-webkit-scrollbar-thumb{background:#333;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:var(--gold)}
-        @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-        @keyframes ping{75%,100%{transform:scale(2);opacity:0}}
-        @keyframes bounce{0%,100%{transform:translateY(-25%) translateX(-50%)}50%{transform:translateY(0) translateX(-50%)}}
-        @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-        .animate-scroll{animation:scroll 40s linear infinite}
-        .animate-ping{animation:ping 1s cubic-bezier(0,0,0.2,1) infinite}
-        .animate-bounce{animation:bounce 1s infinite}
-        .fade-in{opacity:0;transform:translateY(48px);transition:opacity 1s,transform 1s}.fade-in.visible{opacity:1;transform:translateY(0)}
-        .hidden{display:none!important}
-        .container{max-width:1280px;margin:0 auto;padding:0 16px}@media(min-width:768px){.container{padding:0 24px}}
-        .navbar{position:fixed;width:100%;z-index:50;transition:all .3s;border-bottom:1px solid transparent;padding:16px 0}
-        @media(min-width:768px){.navbar{padding:24px 0}}
-        .navbar.scrolled{background:#000;border-bottom-color:var(--white-10);padding:16px 0}
-        .navbar-inner{max-width:1280px;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:50}
-        @media(min-width:768px){.navbar-inner{padding:0 24px}}
-        .logo{font-size:20px;font-weight:900;letter-spacing:-0.05em;color:#fff;cursor:pointer}@media(min-width:768px){.logo{font-size:24px}}
-        .logo-accent{color:var(--gold)}
-        .nav-links{display:none;align-items:center;gap:32px}@media(min-width:768px){.nav-links{display:flex}}
-        .nav-link{font-size:14px;font-weight:600;letter-spacing:0.05em;color:var(--gray-300);transition:color .3s}.nav-link:hover{color:var(--gold)}
-        .nav-link-icon{display:flex;align-items:center;color:#fff}.nav-link-icon svg{margin-right:4px}
-        .nav-cta{background:#fff;color:#000;padding:10px 24px;border-radius:9999px;font-size:14px;font-weight:700;transition:all .3s}.nav-cta:hover{background:var(--gold);transform:scale(1.05)}
-        .menu-btn{display:block;padding:8px;color:#fff;z-index:50;position:relative}@media(min-width:768px){.menu-btn{display:none}}
-        .mobile-menu{position:fixed;inset:0;background:#000;z-index:40;display:flex;flex-direction:column;padding:96px 24px 0;height:100vh;width:100%;overflow-y:auto}
-        .mobile-menu-link{text-align:left;font-size:24px;font-weight:700;color:#fff;padding:16px 0;border-bottom:1px solid var(--white-5);width:100%;transition:color .3s}.mobile-menu-link:hover{color:var(--gold)}.mobile-menu-link.gold{color:var(--gold)}
-        .mobile-menu-cta{display:block;width:100%;background:var(--gold);color:#000;padding:16px;border-radius:8px;font-weight:700;font-size:20px;text-align:center;margin:32px 0 48px}
-        .hero{position:relative;min-height:100vh;display:flex;align-items:center;background:#000;overflow:hidden;padding:80px 0}
-        .hero-bg{position:absolute;inset:0;z-index:0}.hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.6);z-index:10}.hero-video{width:100%;height:100%;object-fit:cover}.hero-glow{position:absolute;top:-10%;right:-5%;width:500px;height:500px;background:var(--gold);border-radius:50%;filter:blur(150px);opacity:0.2}
-        .hero-content{max-width:1280px;margin:0 auto;padding:0 16px;position:relative;z-index:20;text-align:center;display:flex;flex-direction:column;align-items:center}@media(min-width:768px){.hero-content{padding:0 24px}}
-        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:9999px;background:#fff;margin-bottom:32px}
-.hero-badge-dot{
-  position:relative;
-  display:inline-flex;
-  width:8px;
-  height:8px;
-  flex:0 0 8px;
-  vertical-align:middle;
-}
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
 
-.hero-badge-dot-ping{
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-  background:var(--gold);
-  opacity:0.75;
-  animation:ping 1s cubic-bezier(0,0,0.2,1) infinite;
-}
+        html {
+            scroll-behavior: smooth
+        }
 
-.hero-badge-dot-solid{
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-  background:var(--gold);
-}
-        .hero-badge-text{font-size:12px;font-weight:700;color:#000;text-transform:uppercase;letter-spacing:0.1em}
-        .hero-title{font-size:36px;font-weight:700;color:#fff;line-height:1.1;letter-spacing:-0.025em;margin-bottom:24px}@media(min-width:640px){.hero-title{font-size:48px}}@media(min-width:768px){.hero-title{font-size:72px}}
-        .hero-title-gold{color:var(--gold)}
-        .hero-subtitle{display:block;font-size:24px;margin-top:16px;color:var(--gray-300);font-weight:400}@media(min-width:768px){.hero-subtitle{font-size:32px}}
-        .hero-desc{color:var(--gray-400);font-size:18px;max-width:768px;margin:0 auto 40px;line-height:1.6;font-weight:300}@media(min-width:768px){.hero-desc{font-size:24px}}
-        .hero-desc-highlight{color:#fff;font-weight:600}
-        .hero-buttons{display:flex;flex-direction:column;gap:16px;justify-content:center;padding:0 16px;width:100%}@media(min-width:640px){.hero-buttons{flex-direction:row;width:auto}}
-        .btn-primary{background:var(--gold);color:#000;padding:16px 32px;border-radius:9999px;font-weight:700;font-size:18px;transition:all .3s;box-shadow:0 0 20px var(--gold-30);display:flex;align-items:center;justify-content:center;width:100%}@media(min-width:640px){.btn-primary{width:auto}}@media(min-width:768px){.btn-primary{padding:20px 40px}}.btn-primary:hover{background:#fff;color:#000}
-        .btn-secondary{border:1px solid var(--white-20);color:#fff;padding:16px 32px;border-radius:9999px;font-weight:700;font-size:18px;transition:all .3s;width:100%;background:transparent}@media(min-width:640px){.btn-secondary{width:auto}}@media(min-width:768px){.btn-secondary{padding:20px 40px}}.btn-secondary:hover{border-color:#fff}
-        .hero-scroll{position:absolute;bottom:32px;left:50%;z-index:20;animation:bounce 1s infinite;cursor:pointer;color:var(--gray-400);transition:color .3s}.hero-scroll:hover{color:var(--gold)}
-        .section{padding:64px 0}@media(min-width:768px){.section{padding:96px 0}}
-        .section-dark{background:#050505}.section-border-t{border-top:1px solid var(--white-5)}.section-border-b{border-bottom:1px solid var(--white-5)}
-        .section-header{text-align:center;margin-bottom:48px}
-        .section-label{color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:14px;margin-bottom:16px}
-        .section-title{font-size:30px;font-weight:700;color:#fff;margin-bottom:8px}@media(min-width:768px){.section-title{font-size:48px}}
-        .section-desc{color:var(--gray-400);max-width:640px;margin:0 auto}
-        .case-grid{display:grid;gap:24px}@media(min-width:768px){.case-grid{grid-template-columns:repeat(3,1fr)}}
-        .case-card{background:var(--card);padding:24px;border-radius:16px;border:1px solid var(--white-10);display:flex;flex-direction:column;height:100%;transition:border-color .3s}@media(min-width:768px){.case-card{padding:32px}}.case-card:hover{border-color:var(--gold-30)}
-        .case-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px}
-        .case-card-icon{padding:8px;background:var(--white-5);border-radius:8px}
-        .case-card-badge{font-size:12px;font-weight:700;background:rgba(20,83,45,0.3);color:#4ade80;padding:4px 12px;border-radius:9999px}
-        .case-card-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
-        .case-card-niche{color:var(--gray-400);font-size:14px;margin-bottom:8px}
-        .case-card-footer{margin-top:auto;padding-top:16px;border-top:1px solid var(--white-5)}
-        .case-card-footer>*+*{margin-top:8px}
-        .case-card-result{color:#fff;font-weight:700}
-        .case-card-pipeline{color:var(--gray-500);font-size:14px}
-        .case-card-value{color:var(--gold);font-weight:700;font-size:14px}
-        .marquee{width:100%;overflow:hidden;border-top:1px solid var(--white-5);border-bottom:1px solid var(--white-5);background:#050505;padding:24px 0;position:relative;z-index:20;margin-top:64px}
-.marquee-track{display:flex;white-space:nowrap;animation:scroll 60s linear infinite;align-items:center;width:max-content}
-@media(max-width:768px){.marquee-track{animation-duration:30s}}
-        .marquee-item{margin:0 16px;width:96px;height:48px;display:flex;align-items:center;justify-content:center;opacity:0.7;transition:opacity .3s;background:var(--white-10);border-radius:8px;padding:8px}@media(min-width:768px){.marquee-item{margin:0 32px;width:128px;height:64px}}.marquee-item:hover{opacity:1}.marquee-item img{max-width:100%;max-height:100%;object-fit:contain}
-        .target-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}@media(min-width:640px){.target-grid{grid-template-columns:repeat(4,1fr)}}
-        .target-card{background:var(--card);padding:24px;border-radius:16px;border:1px solid var(--white-10);display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;transition:all .3s}@media(min-width:768px){.target-card{padding:32px}}.target-card:hover{border-color:var(--gold);background:var(--white-5)}
-        .target-card-icon{padding:16px;background:var(--white-5);border-radius:50%;margin-bottom:16px;transition:background .3s}@media(min-width:768px){.target-card-icon{margin-bottom:24px}}.target-card:hover .target-card-icon{background:var(--gold-20)}
-        .target-card-icon svg{color:var(--gray-400);transition:color .3s}.target-card:hover .target-card-icon svg{color:var(--gold)}
-        .target-card-title{font-size:16px;font-weight:700;color:#fff;transition:color .3s;text-align:center}@media(min-width:768px){.target-card-title{font-size:18px}}.target-card:hover .target-card-title{color:var(--gold)}
-        .two-col{display:grid;gap:48px;align-items:center}@media(min-width:768px){.two-col{grid-template-columns:repeat(2,1fr);gap:64px}}
-        .two-col-text h3{font-size:30px;font-weight:700;color:#fff;margin-bottom:24px}@media(min-width:768px){.two-col-text h3{font-size:48px}}
-        .two-col-text p{color:var(--gray-400);font-size:18px;margin-bottom:24px;line-height:1.6}
-        .social-link{display:block;cursor:pointer;overflow:hidden;border-radius:12px;border:1px solid var(--white-10);transition:all .3s}.social-link:hover{transform:scale(1.02)}.social-link.instagram:hover{border-color:#ec4899}.social-link.youtube:hover{border-color:#ef4444}.social-link img{width:100%;height:auto}
-        .social-card{display:flex;flex-direction:column;height:100%;width:100%}
-        .social-card-text{text-align:left;width:100%;margin-top:16px}.social-card-text h4{font-size:20px;font-weight:700;color:#fff}.social-card-text p{font-size:14px;color:var(--gray-400);margin-top:4px}
-        .built-by-cards{display:flex;flex-direction:column;gap:32px;max-width:672px;margin:0 auto}
-        .offer-grid{display:grid;gap:24px;text-align:left}@media(min-width:768px){.offer-grid{grid-template-columns:repeat(3,1fr)}}
-        .offer-card{background:var(--card);padding:24px;border-radius:16px;border:1px solid var(--white-10);height:100%}@media(min-width:768px){.offer-card{padding:32px}}.offer-card svg{margin-bottom:16px}.offer-card h4{color:#fff;font-weight:700;font-size:20px;margin-bottom:8px}.offer-card p{color:var(--gray-500);font-size:14px}
-        .calendar-preview{position:relative;width:100%;max-width:672px;margin:0 auto 64px;cursor:pointer;border-radius:12px;overflow:hidden;border:1px solid var(--white-10);transition:border-color .3s}.calendar-preview:hover{border-color:var(--gold)}
-        .calendar-preview-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.5);z-index:10;display:flex;align-items:center;justify-content:center;transition:background .3s}.calendar-preview:hover .calendar-preview-overlay{background:rgba(0,0,0,0.2)}
-        .calendar-preview-btn{background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);padding:12px 24px;border-radius:9999px;color:#fff;font-weight:700;display:flex;align-items:center;transition:transform .3s}.calendar-preview:hover .calendar-preview-btn{transform:scale(1.1)}.calendar-preview-btn svg{margin-right:8px;color:var(--gold)}
-        .pricing-card{background:var(--card);border:1px solid var(--gold-30);border-radius:16px;padding:32px;max-width:768px;margin:0 auto;box-shadow:0 0 50px rgba(212,175,55,0.1);position:relative;overflow:hidden}@media(min-width:768px){.pricing-card{padding:48px}}
-        .pricing-badge{position:absolute;top:0;right:0;background:var(--gold);color:#000;font-size:12px;font-weight:700;padding:4px 12px;border-bottom-left-radius:12px}
-        .pricing-label{color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:14px;margin-bottom:16px}
-        .pricing-amount{font-size:48px;font-weight:700;color:#fff;margin-bottom:16px}@media(min-width:768px){.pricing-amount{font-size:72px}}
-        .pricing-desc{color:var(--gray-400);font-size:20px;margin-bottom:32px}
-        .pricing-features{display:flex;flex-direction:column;gap:16px;justify-content:center;font-size:14px;color:var(--gray-400);margin-bottom:32px}@media(min-width:768px){.pricing-features{flex-direction:row}}
-        .pricing-feature{display:flex;align-items:center;justify-content:center}.pricing-feature svg{margin-right:8px;color:var(--gold)}
-        .pricing-cta{display:inline-block;background:var(--gold);color:#000;padding:16px 48px;border-radius:9999px;font-weight:700;font-size:18px;transition:background .3s;width:100%;text-align:center}@media(min-width:768px){.pricing-cta{width:auto}}.pricing-cta:hover{background:#fff}
-       .pricing-cta-paypal{
-  background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
-  color: #fff;
-  border: 1px solid var(--gold-30);
-  box-shadow: 0 0 30px rgba(212,175,55,0.18);
-}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #f3f4f6;
+            line-height: 1.6;
+            min-height: 100vh
+        }
 
-.pricing-cta-paypal:hover{
-  background: var(--gold);
-  color: #000;
-  border-color: var(--gold);
-}
-        .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:9999px;border:1px solid var(--gold-30);background:var(--gold-10);margin-bottom:24px}.badge svg{color:var(--gold)}.badge span{font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em}
-        .calculator-grid{display:grid;gap:32px;align-items:flex-start}@media(min-width:1024px){.calculator-grid{grid-template-columns:repeat(2,1fr);gap:48px}}
-        .calculator-inputs{background:var(--card);border:1px solid var(--white-10);border-radius:16px;padding:24px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25)}@media(min-width:768px){.calculator-inputs{padding:32px}}.calculator-inputs h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--white-10)}
-        .calculator-inputs-fields{display:flex;flex-direction:column;gap:32px}
-        .calculator-field-header{display:flex;justify-content:space-between;margin-bottom:8px}
-        .calculator-field-label{font-size:14px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.1em}
-        .calculator-field-value{color:var(--gold);font-family:monospace;font-weight:700}
-        .calculator-range{width:100%;height:8px;background:#1f2937;border-radius:9999px;-webkit-appearance:none;appearance:none;cursor:pointer}
-        .calculator-range::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 0 10px rgba(212,175,55,0.5)}
-        .calculator-range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--gold);cursor:pointer;border:none}
-        .calculator-range-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--gray-600);margin-top:8px}
-        .calculator-outputs{background:linear-gradient(to bottom right,#1a1a1a,#000);border:1px solid var(--gold-30);border-radius:16px;padding:24px;box-shadow:0 0 50px rgba(212,175,55,0.1)}@media(min-width:768px){.calculator-outputs{padding:32px}}.calculator-outputs h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--white-10)}
-        .calculator-outputs-grid{display:grid;gap:24px}
-        .calculator-output-card{background:#0a0a0a;padding:24px;border-radius:12px;border:1px solid var(--white-5)}
-        .calculator-output-header{display:flex;align-items:center;gap:12px;margin-bottom:8px}.calculator-output-header svg{color:var(--gold)}.calculator-output-header span{color:var(--gray-400);font-size:14px;text-transform:uppercase;letter-spacing:0.05em}
-        .calculator-output-value{font-size:24px;font-weight:700;color:#fff;font-family:monospace;word-break:break-all}@media(min-width:640px){.calculator-output-value{font-size:30px}}@media(min-width:768px){.calculator-output-value{font-size:48px;word-break:normal}}.calculator-output-value.secondary{opacity:0.8}
-        .calculator-cta{margin-top:16px}.calculator-cta a,.calculator-cta button{display:block;width:100%;background:var(--gold);color:#000;text-align:center;font-weight:700;padding:16px;border-radius:8px;transition:all .3s;font-size:16px;border:none;cursor:pointer}.calculator-cta a:hover,.calculator-cta button:hover{background:#fff;transform:scale(1.02)}.calculator-cta p{text-align:center;font-size:12px;color:var(--gray-500);margin-top:12px}
-        .process-container{position:relative;padding-bottom:48px}
-        .process-line-bg{position:absolute;left:16px;top:0;bottom:0;width:1px;background:var(--white-10)}@media(min-width:768px){.process-line-bg{left:50%;transform:translateX(-50%)}}
-        .process-line-fg{position:absolute;left:16px;top:0;width:1px;background:var(--gold);box-shadow:0 0 10px var(--gold);transition:height .1s linear}@media(min-width:768px){.process-line-fg{left:50%;transform:translateX(-50%)}}
-        .process-dot-main{position:absolute;left:16px;width:16px;height:16px;border-radius:50%;background:var(--gold);box-shadow:0 0 15px var(--gold);z-index:20;transform:translate(-50%,-50%);border:2px solid #000}@media(min-width:768px){.process-dot-main{left:50%}}
-        .process-steps{display:flex;flex-direction:column;gap:48px}@media(min-width:768px){.process-steps{gap:96px}}
-        .process-step{position:relative;display:flex;align-items:center;transition:all .7s}.process-step.inactive{opacity:0.2;transform:translateY(40px);filter:blur(4px)}@media(min-width:768px){.process-step:nth-child(odd){justify-content:flex-start}.process-step:nth-child(even){justify-content:flex-end}}
-        .process-step-dot{position:absolute;left:16px;width:16px;height:16px;border-radius:50%;border:2px solid var(--white-20);background:var(--card);z-index:10;transform:translateX(-50%);transition:all .5s}@media(min-width:768px){.process-step-dot{left:50%}}.process-step-dot.active{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px var(--gold)}
-        .process-step-content{width:100%;padding-left:48px}@media(min-width:768px){.process-step-content{width:45%;padding-left:0}.process-step:nth-child(odd) .process-step-content{padding-right:48px;text-align:right}.process-step:nth-child(even) .process-step-content{padding-left:48px;text-align:left}}
-        .process-step-card{background:var(--card);padding:24px;border-radius:16px;border:1px solid var(--white-5);position:relative;transition:border-color .3s}.process-step-card:hover{border-color:var(--gold-30)}
-        .process-step-number{position:absolute;top:0;right:8px;font-size:48px;font-weight:900;color:var(--white-5);user-select:none;line-height:1;z-index:0}
-        .process-step-inner{position:relative;z-index:10}.process-step-card h4{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;transition:color .3s}.process-step-card:hover h4{color:var(--gold)}.process-step-card p{color:var(--gray-400);font-size:14px;line-height:1.6}
-        .faq-list{display:flex;flex-direction:column;gap:16px}
-        .faq-item{border:1px solid var(--white-10);border-radius:12px;overflow:hidden;transition:all .3s;background:#000}.faq-item.open{background:var(--white-5);border-color:var(--gold-30)}
-        .faq-btn{width:100%;display:flex;justify-content:space-between;align-items:center;padding:24px;text-align:left}.faq-btn span{font-weight:700;font-size:16px;padding-right:16px;color:var(--gray-300);transition:color .3s}@media(min-width:768px){.faq-btn span{font-size:18px}}.faq-item.open .faq-btn span{color:#fff}
-        .faq-icon{flex-shrink:0;color:var(--gray-500);transition:color .3s}.faq-item.open .faq-icon{color:var(--gold)}
-        .faq-content{overflow:hidden;max-height:0;opacity:0;transition:all .3s}.faq-item.open .faq-content{max-height:200px;opacity:1}.faq-content p{padding:0 24px 24px;color:var(--gray-400);font-size:14px;line-height:1.6}
-        .cta-section{text-align:center}.cta-section h2{font-size:30px;font-weight:700;color:#fff;margin-bottom:32px}@media(min-width:768px){.cta-section h2{font-size:36px}}.cta-section p{color:var(--gray-400);margin-bottom:48px;font-size:18px}
-        .cta-btn{display:inline-block;background:var(--gold);color:#000;padding:20px 48px;border-radius:9999px;font-weight:700;font-size:20px;transition:all .3s;box-shadow:0 0 20px rgba(212,175,55,0.4);width:100%;text-align:center}@media(min-width:768px){.cta-btn{width:auto}}.cta-btn:hover{background:#fff}
-        .footer{background:#000;color:#fff;padding-top:64px;padding-bottom:48px;border-top:1px solid var(--white-5)}@media(min-width:768px){.footer{padding-top:96px}}
-        .footer-grid{display:grid;gap:48px;margin-bottom:64px}@media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr}}
-        .footer-brand{font-size:24px;font-weight:900;letter-spacing:-0.05em;margin-bottom:16px}.footer-brand-accent{color:var(--gold)}
-        .footer-desc{color:var(--gray-500);max-width:384px}
-        .footer-nav h5{font-weight:700;margin-bottom:16px}.footer-nav ul{display:flex;flex-direction:column;gap:8px}.footer-nav button{color:var(--gray-500);font-size:14px;text-align:left;transition:color .3s}.footer-nav button:hover{color:#fff}
-        .footer-bottom{border-top:1px solid var(--white-5);padding-top:32px;display:flex;flex-direction:column;gap:16px;justify-content:space-between;align-items:center;color:var(--gray-600);font-size:12px}@media(min-width:768px){.footer-bottom{flex-direction:row;gap:0}}
-        .modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.9);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:16px;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}.modal.active{opacity:1;visibility:visible}
-        .modal-content{position:relative;width:100%;max-width:896px}.modal video{width:100%;height:auto;border-radius:8px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);cursor:default;border:1px solid var(--white-10)}
-        .modal-close{position:absolute;top:-48px;right:0;color:#fff;padding:8px;transition:color .3s}.modal-close:hover{color:var(--gold)}
-        .legal-page{min-height:100vh;background:#000;color:var(--gray-300);padding:128px 24px 96px;max-width:896px;margin:0 auto}@media(min-width:768px){.legal-page{padding:128px 48px 96px}}
-        .legal-back{display:flex;align-items:center;color:var(--gold);margin-bottom:32px;transition:color .3s}.legal-back:hover{color:#fff}.legal-back svg{margin-right:8px}
-        .legal-page h1{font-size:36px;font-weight:700;color:#fff;margin-bottom:32px}.legal-page h2{font-size:24px;font-weight:700;color:#fff;margin-top:32px;margin-bottom:16px}.legal-page h3{font-size:20px;font-weight:600;color:#fff;margin-top:24px;margin-bottom:8px}
-        .legal-content{font-size:14px;line-height:1.8}.legal-content>*+*{margin-top:16px}.legal-content ul{list-style:disc;padding-left:20px}.legal-content ul li{margin-top:8px}.legal-content a{color:var(--gold)}.legal-content a:hover{text-decoration:underline}
-        .refund-highlight{background:var(--card);padding:32px;border-radius:16px;border:1px solid var(--white-10)}.refund-highlight h2{color:var(--gold);margin-top:0}.refund-highlight p:first-of-type{font-size:18px;color:#fff}
-        .refund-quote{padding:24px;border-left:4px solid var(--gold);background:var(--white-5);border-radius:0 8px 8px 0;font-style:italic;font-size:18px;color:#fff}
-        .hide-mobile{display:none}@media(min-width:768px){.hide-mobile{display:block}}
+        ::selection {
+            background: #D4AF37;
+            color: #000
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none
+        }
+
+        ul {
+            list-style: none
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --card: #111;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --white-5: rgba(255, 255, 255, 0.05);
+            --white-10: rgba(255, 255, 255, 0.1);
+            --white-20: rgba(255, 255, 255, 0.2);
+            --gold-10: rgba(212, 175, 55, 0.1);
+            --gold-20: rgba(212, 175, 55, 0.2);
+            --gold-30: rgba(212, 175, 55, 0.3)
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold)
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-50%)
+            }
+        }
+
+        @keyframes ping {
+
+            75%,
+            100% {
+                transform: scale(2);
+                opacity: 0
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(-25%) translateX(-50%)
+            }
+
+            50% {
+                transform: translateY(0) translateX(-50%)
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg)
+            }
+
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+
+        .animate-scroll {
+            animation: scroll 40s linear infinite
+        }
+
+        .animate-ping {
+            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite
+        }
+
+        .animate-bounce {
+            animation: bounce 1s infinite
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(48px);
+            transition: opacity 1s, transform 1s
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .hidden {
+            display: none !important
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px
+        }
+
+        @media(min-width:768px) {
+            .container {
+                padding: 0 24px
+            }
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            z-index: 50;
+            transition: all .3s;
+            border-bottom: 1px solid transparent;
+            padding: 16px 0
+        }
+
+        @media(min-width:768px) {
+            .navbar {
+                padding: 24px 0
+            }
+        }
+
+        .navbar.scrolled {
+            background: #000;
+            border-bottom-color: var(--white-10);
+            padding: 16px 0
+        }
+
+        .navbar-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 50
+        }
+
+        @media(min-width:768px) {
+            .navbar-inner {
+                padding: 0 24px
+            }
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: #fff;
+            cursor: pointer
+        }
+
+        @media(min-width:768px) {
+            .logo {
+                font-size: 24px
+            }
+        }
+
+        .logo-accent {
+            color: var(--gold)
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 32px
+        }
+
+        @media(min-width:768px) {
+            .nav-links {
+                display: flex
+            }
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--gray-300);
+            transition: color .3s
+        }
+
+        .nav-link:hover {
+            color: var(--gold)
+        }
+
+        .nav-link-icon {
+            display: flex;
+            align-items: center;
+            color: #fff
+        }
+
+        .nav-link-icon svg {
+            margin-right: 4px
+        }
+
+        .nav-cta {
+            background: #fff;
+            color: #000;
+            padding: 10px 24px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all .3s
+        }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            transform: scale(1.05)
+        }
+
+        .menu-btn {
+            display: block;
+            padding: 8px;
+            color: #fff;
+            z-index: 50;
+            position: relative
+        }
+
+        @media(min-width:768px) {
+            .menu-btn {
+                display: none
+            }
+        }
+
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            padding: 96px 24px 0;
+            height: 100vh;
+            width: 100%;
+            overflow-y: auto
+        }
+
+        .mobile-menu-link {
+            text-align: left;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--white-5);
+            width: 100%;
+            transition: color .3s
+        }
+
+        .mobile-menu-link:hover {
+            color: var(--gold)
+        }
+
+        .mobile-menu-link.gold {
+            color: var(--gold)
+        }
+
+        .mobile-menu-cta {
+            display: block;
+            width: 100%;
+            background: var(--gold);
+            color: #000;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 20px;
+            text-align: center;
+            margin: 32px 0 48px
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: #000;
+            overflow: hidden;
+            padding: 80px 0
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 10
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background: var(--gold);
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.2
+        }
+
+        .hero-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        @media(min-width:768px) {
+            .hero-content {
+                padding: 0 24px
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            background: #fff;
+            margin-bottom: 32px
+        }
+
+        .hero-badge-dot {
+            position: relative;
+            display: inline-flex;
+            width: 8px;
+            height: 8px;
+            flex: 0 0 8px;
+            vertical-align: middle;
+        }
+
+        .hero-badge-dot-ping {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.75;
+            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .hero-badge-dot-solid {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .hero-badge-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 0.1em
+        }
+
+        .hero-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+            margin-bottom: 24px
+        }
+
+        @media(min-width:640px) {
+            .hero-title {
+                font-size: 48px
+            }
+        }
+
+        @media(min-width:768px) {
+            .hero-title {
+                font-size: 72px
+            }
+        }
+
+        .hero-title-gold {
+            color: var(--gold)
+        }
+
+        .hero-subtitle {
+            display: block;
+            font-size: 24px;
+            margin-top: 16px;
+            color: var(--gray-300);
+            font-weight: 400
+        }
+
+        @media(min-width:768px) {
+            .hero-subtitle {
+                font-size: 32px
+            }
+        }
+
+        .hero-desc {
+            color: var(--gray-400);
+            font-size: 18px;
+            max-width: 768px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            font-weight: 300
+        }
+
+        @media(min-width:768px) {
+            .hero-desc {
+                font-size: 24px
+            }
+        }
+
+        .hero-desc-highlight {
+            color: #fff;
+            font-weight: 600
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+            padding: 0 16px;
+            width: 100%
+        }
+
+        @media(min-width:640px) {
+            .hero-buttons {
+                flex-direction: row;
+                width: auto
+            }
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: #000;
+            padding: 16px 32px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all .3s;
+            box-shadow: 0 0 20px var(--gold-30);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%
+        }
+
+        @media(min-width:640px) {
+            .btn-primary {
+                width: auto
+            }
+        }
+
+        @media(min-width:768px) {
+            .btn-primary {
+                padding: 20px 40px
+            }
+        }
+
+        .btn-primary:hover {
+            background: #fff;
+            color: #000
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--white-20);
+            color: #fff;
+            padding: 16px 32px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all .3s;
+            width: 100%;
+            background: transparent
+        }
+
+        @media(min-width:640px) {
+            .btn-secondary {
+                width: auto
+            }
+        }
+
+        @media(min-width:768px) {
+            .btn-secondary {
+                padding: 20px 40px
+            }
+        }
+
+        .btn-secondary:hover {
+            border-color: #fff
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            z-index: 20;
+            animation: bounce 1s infinite;
+            cursor: pointer;
+            color: var(--gray-400);
+            transition: color .3s
+        }
+
+        .hero-scroll:hover {
+            color: var(--gold)
+        }
+
+        .section {
+            padding: 64px 0
+        }
+
+        @media(min-width:768px) {
+            .section {
+                padding: 96px 0
+            }
+        }
+
+        .section-dark {
+            background: #050505
+        }
+
+        .section-border-t {
+            border-top: 1px solid var(--white-5)
+        }
+
+        .section-border-b {
+            border-bottom: 1px solid var(--white-5)
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px
+        }
+
+        .section-label {
+            color: var(--gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 14px;
+            margin-bottom: 16px
+        }
+
+        .section-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px
+        }
+
+        @media(min-width:768px) {
+            .section-title {
+                font-size: 48px
+            }
+        }
+
+        .section-desc {
+            color: var(--gray-400);
+            max-width: 640px;
+            margin: 0 auto
+        }
+
+        .case-grid {
+            display: grid;
+            gap: 24px
+        }
+
+        @media(min-width:768px) {
+            .case-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+        }
+
+        .case-card {
+            background: var(--card);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--white-10);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: border-color .3s
+        }
+
+        @media(min-width:768px) {
+            .case-card {
+                padding: 32px
+            }
+        }
+
+        .case-card:hover {
+            border-color: var(--gold-30)
+        }
+
+        .case-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px
+        }
+
+        .case-card-icon {
+            padding: 8px;
+            background: var(--white-5);
+            border-radius: 8px
+        }
+
+        .case-card-badge {
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(20, 83, 45, 0.3);
+            color: #4ade80;
+            padding: 4px 12px;
+            border-radius: 9999px
+        }
+
+        .case-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px
+        }
+
+        .case-card-niche {
+            color: var(--gray-400);
+            font-size: 14px;
+            margin-bottom: 8px
+        }
+
+        .case-card-footer {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid var(--white-5)
+        }
+
+        .case-card-footer>*+* {
+            margin-top: 8px
+        }
+
+        .case-card-result {
+            color: #fff;
+            font-weight: 700
+        }
+
+        .case-card-pipeline {
+            color: var(--gray-500);
+            font-size: 14px
+        }
+
+        .case-card-value {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 14px
+        }
+
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            border-top: 1px solid var(--white-5);
+            border-bottom: 1px solid var(--white-5);
+            background: #050505;
+            padding: 24px 0;
+            position: relative;
+            z-index: 20;
+            margin-top: 64px
+        }
+
+        .marquee-track {
+            display: flex;
+            white-space: nowrap;
+            animation: scroll 60s linear infinite;
+            align-items: center;
+            width: max-content
+        }
+
+        @media(max-width:768px) {
+            .marquee-track {
+                animation-duration: 30s
+            }
+        }
+
+        .marquee-item {
+            margin: 0 16px;
+            width: 96px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            transition: opacity .3s;
+            background: var(--white-10);
+            border-radius: 8px;
+            padding: 8px
+        }
+
+        @media(min-width:768px) {
+            .marquee-item {
+                margin: 0 32px;
+                width: 128px;
+                height: 64px
+            }
+        }
+
+        .marquee-item:hover {
+            opacity: 1
+        }
+
+        .marquee-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain
+        }
+
+        .target-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px
+        }
+
+        @media(min-width:640px) {
+            .target-grid {
+                grid-template-columns: repeat(4, 1fr)
+            }
+        }
+
+        .target-card {
+            background: var(--card);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--white-10);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            transition: all .3s
+        }
+
+        @media(min-width:768px) {
+            .target-card {
+                padding: 32px
+            }
+        }
+
+        .target-card:hover {
+            border-color: var(--gold);
+            background: var(--white-5)
+        }
+
+        .target-card-icon {
+            padding: 16px;
+            background: var(--white-5);
+            border-radius: 50%;
+            margin-bottom: 16px;
+            transition: background .3s
+        }
+
+        @media(min-width:768px) {
+            .target-card-icon {
+                margin-bottom: 24px
+            }
+        }
+
+        .target-card:hover .target-card-icon {
+            background: var(--gold-20)
+        }
+
+        .target-card-icon svg {
+            color: var(--gray-400);
+            transition: color .3s
+        }
+
+        .target-card:hover .target-card-icon svg {
+            color: var(--gold)
+        }
+
+        .target-card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            transition: color .3s;
+            text-align: center
+        }
+
+        @media(min-width:768px) {
+            .target-card-title {
+                font-size: 18px
+            }
+        }
+
+        .target-card:hover .target-card-title {
+            color: var(--gold)
+        }
+
+        .two-col {
+            display: grid;
+            gap: 48px;
+            align-items: center
+        }
+
+        @media(min-width:768px) {
+            .two-col {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 64px
+            }
+        }
+
+        .two-col-text h3 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 24px
+        }
+
+        @media(min-width:768px) {
+            .two-col-text h3 {
+                font-size: 48px
+            }
+        }
+
+        .two-col-text p {
+            color: var(--gray-400);
+            font-size: 18px;
+            margin-bottom: 24px;
+            line-height: 1.6
+        }
+
+        .social-link {
+            display: block;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--white-10);
+            transition: all .3s
+        }
+
+        .social-link:hover {
+            transform: scale(1.02)
+        }
+
+        .social-link.instagram:hover {
+            border-color: #ec4899
+        }
+
+        .social-link.youtube:hover {
+            border-color: #ef4444
+        }
+
+        .social-link img {
+            width: 100%;
+            height: auto
+        }
+
+        .social-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%
+        }
+
+        .social-card-text {
+            text-align: left;
+            width: 100%;
+            margin-top: 16px
+        }
+
+        .social-card-text h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff
+        }
+
+        .social-card-text p {
+            font-size: 14px;
+            color: var(--gray-400);
+            margin-top: 4px
+        }
+
+        .built-by-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            max-width: 672px;
+            margin: 0 auto
+        }
+
+        .offer-grid {
+            display: grid;
+            gap: 24px;
+            text-align: left
+        }
+
+        @media(min-width:768px) {
+            .offer-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+        }
+
+        .offer-card {
+            background: var(--card);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--white-10);
+            height: 100%
+        }
+
+        @media(min-width:768px) {
+            .offer-card {
+                padding: 32px
+            }
+        }
+
+        .offer-card svg {
+            margin-bottom: 16px
+        }
+
+        .offer-card h4 {
+            color: #fff;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 8px
+        }
+
+        .offer-card p {
+            color: var(--gray-500);
+            font-size: 14px
+        }
+
+        .calendar-preview {
+            position: relative;
+            width: 100%;
+            max-width: 672px;
+            margin: 0 auto 64px;
+            cursor: pointer;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--white-10);
+            transition: border-color .3s
+        }
+
+        .calendar-preview:hover {
+            border-color: var(--gold)
+        }
+
+        .calendar-preview-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .3s
+        }
+
+        .calendar-preview:hover .calendar-preview-overlay {
+            background: rgba(0, 0, 0, 0.2)
+        }
+
+        .calendar-preview-btn {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            padding: 12px 24px;
+            border-radius: 9999px;
+            color: #fff;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            transition: transform .3s
+        }
+
+        .calendar-preview:hover .calendar-preview-btn {
+            transform: scale(1.1)
+        }
+
+        .calendar-preview-btn svg {
+            margin-right: 8px;
+            color: var(--gold)
+        }
+
+        .pricing-card {
+            background: var(--card);
+            border: 1px solid var(--gold-30);
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 768px;
+            margin: 0 auto;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);
+            position: relative;
+            overflow: hidden
+        }
+
+        @media(min-width:768px) {
+            .pricing-card {
+                padding: 48px
+            }
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--gold);
+            color: #000;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-bottom-left-radius: 12px
+        }
+
+        .pricing-label {
+            color: var(--gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 14px;
+            margin-bottom: 16px
+        }
+
+        .pricing-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px
+        }
+
+        @media(min-width:768px) {
+            .pricing-amount {
+                font-size: 72px
+            }
+        }
+
+        .pricing-desc {
+            color: var(--gray-400);
+            font-size: 20px;
+            margin-bottom: 32px
+        }
+
+        .pricing-features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--gray-400);
+            margin-bottom: 32px
+        }
+
+        @media(min-width:768px) {
+            .pricing-features {
+                flex-direction: row
+            }
+        }
+
+        .pricing-feature {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .pricing-feature svg {
+            margin-right: 8px;
+            color: var(--gold)
+        }
+
+        .pricing-cta {
+            display: inline-block;
+            background: var(--gold);
+            color: #000;
+            padding: 16px 48px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: background .3s;
+            width: 100%;
+            text-align: center
+        }
+
+        @media(min-width:768px) {
+            .pricing-cta {
+                width: auto
+            }
+        }
+
+        .pricing-cta:hover {
+            background: #fff
+        }
+
+        .pricing-cta-paypal {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+            color: #fff;
+            border: 1px solid var(--gold-30);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.18);
+        }
+
+        .pricing-cta-paypal:hover {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            border: 1px solid var(--gold-30);
+            background: var(--gold-10);
+            margin-bottom: 24px
+        }
+
+        .badge svg {
+            color: var(--gold)
+        }
+
+        .badge span {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em
+        }
+
+        .calculator-grid {
+            display: grid;
+            gap: 32px;
+            align-items: flex-start
+        }
+
+        @media(min-width:1024px) {
+            .calculator-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 48px
+            }
+        }
+
+        .calculator-inputs {
+            background: var(--card);
+            border: 1px solid var(--white-10);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25)
+        }
+
+        @media(min-width:768px) {
+            .calculator-inputs {
+                padding: 32px
+            }
+        }
+
+        .calculator-inputs h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--white-10)
+        }
+
+        .calculator-inputs-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 32px
+        }
+
+        .calculator-field-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px
+        }
+
+        .calculator-field-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.1em
+        }
+
+        .calculator-field-value {
+            color: var(--gold);
+            font-family: monospace;
+            font-weight: 700
+        }
+
+        .calculator-range {
+            width: 100%;
+            height: 8px;
+            background: #1f2937;
+            border-radius: 9999px;
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer
+        }
+
+        .calculator-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gold);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5)
+        }
+
+        .calculator-range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gold);
+            cursor: pointer;
+            border: none
+        }
+
+        .calculator-range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--gray-600);
+            margin-top: 8px
+        }
+
+        .calculator-outputs {
+            background: linear-gradient(to bottom right, #1a1a1a, #000);
+            border: 1px solid var(--gold-30);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.1)
+        }
+
+        @media(min-width:768px) {
+            .calculator-outputs {
+                padding: 32px
+            }
+        }
+
+        .calculator-outputs h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--white-10)
+        }
+
+        .calculator-outputs-grid {
+            display: grid;
+            gap: 24px
+        }
+
+        .calculator-output-card {
+            background: #0a0a0a;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--white-5)
+        }
+
+        .calculator-output-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px
+        }
+
+        .calculator-output-header svg {
+            color: var(--gold)
+        }
+
+        .calculator-output-header span {
+            color: var(--gray-400);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em
+        }
+
+        .calculator-output-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            font-family: monospace;
+            word-break: break-all
+        }
+
+        @media(min-width:640px) {
+            .calculator-output-value {
+                font-size: 30px
+            }
+        }
+
+        @media(min-width:768px) {
+            .calculator-output-value {
+                font-size: 48px;
+                word-break: normal
+            }
+        }
+
+        .calculator-output-value.secondary {
+            opacity: 0.8
+        }
+
+        .calculator-cta {
+            margin-top: 16px
+        }
+
+        .calculator-cta a,
+        .calculator-cta button {
+            display: block;
+            width: 100%;
+            background: var(--gold);
+            color: #000;
+            text-align: center;
+            font-weight: 700;
+            padding: 16px;
+            border-radius: 8px;
+            transition: all .3s;
+            font-size: 16px;
+            border: none;
+            cursor: pointer
+        }
+
+        .calculator-cta a:hover,
+        .calculator-cta button:hover {
+            background: #fff;
+            transform: scale(1.02)
+        }
+
+        .calculator-cta p {
+            text-align: center;
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 12px
+        }
+
+        .process-container {
+            position: relative;
+            padding-bottom: 48px
+        }
+
+        .process-line-bg {
+            position: absolute;
+            left: 16px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--white-10)
+        }
+
+        @media(min-width:768px) {
+            .process-line-bg {
+                left: 50%;
+                transform: translateX(-50%)
+            }
+        }
+
+        .process-line-fg {
+            position: absolute;
+            left: 16px;
+            top: 0;
+            width: 1px;
+            background: var(--gold);
+            box-shadow: 0 0 10px var(--gold);
+            transition: height .1s linear
+        }
+
+        @media(min-width:768px) {
+            .process-line-fg {
+                left: 50%;
+                transform: translateX(-50%)
+            }
+        }
+
+        .process-dot-main {
+            position: absolute;
+            left: 16px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 15px var(--gold);
+            z-index: 20;
+            transform: translate(-50%, -50%);
+            border: 2px solid #000
+        }
+
+        @media(min-width:768px) {
+            .process-dot-main {
+                left: 50%
+            }
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 48px
+        }
+
+        @media(min-width:768px) {
+            .process-steps {
+                gap: 96px
+            }
+        }
+
+        .process-step {
+            position: relative;
+            display: flex;
+            align-items: center;
+            transition: all .7s
+        }
+
+        .process-step.inactive {
+            opacity: 0.2;
+            transform: translateY(40px);
+            filter: blur(4px)
+        }
+
+        @media(min-width:768px) {
+            .process-step:nth-child(odd) {
+                justify-content: flex-start
+            }
+
+            .process-step:nth-child(even) {
+                justify-content: flex-end
+            }
+        }
+
+        .process-step-dot {
+            position: absolute;
+            left: 16px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid var(--white-20);
+            background: var(--card);
+            z-index: 10;
+            transform: translateX(-50%);
+            transition: all .5s
+        }
+
+        @media(min-width:768px) {
+            .process-step-dot {
+                left: 50%
+            }
+        }
+
+        .process-step-dot.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            box-shadow: 0 0 10px var(--gold)
+        }
+
+        .process-step-content {
+            width: 100%;
+            padding-left: 48px
+        }
+
+        @media(min-width:768px) {
+            .process-step-content {
+                width: 45%;
+                padding-left: 0
+            }
+
+            .process-step:nth-child(odd) .process-step-content {
+                padding-right: 48px;
+                text-align: right
+            }
+
+            .process-step:nth-child(even) .process-step-content {
+                padding-left: 48px;
+                text-align: left
+            }
+        }
+
+        .process-step-card {
+            background: var(--card);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--white-5);
+            position: relative;
+            transition: border-color .3s
+        }
+
+        .process-step-card:hover {
+            border-color: var(--gold-30)
+        }
+
+        .process-step-number {
+            position: absolute;
+            top: 0;
+            right: 8px;
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--white-5);
+            user-select: none;
+            line-height: 1;
+            z-index: 0
+        }
+
+        .process-step-inner {
+            position: relative;
+            z-index: 10
+        }
+
+        .process-step-card h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            transition: color .3s
+        }
+
+        .process-step-card:hover h4 {
+            color: var(--gold)
+        }
+
+        .process-step-card p {
+            color: var(--gray-400);
+            font-size: 14px;
+            line-height: 1.6
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px
+        }
+
+        .faq-item {
+            border: 1px solid var(--white-10);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all .3s;
+            background: #000
+        }
+
+        .faq-item.open {
+            background: var(--white-5);
+            border-color: var(--gold-30)
+        }
+
+        .faq-btn {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            text-align: left
+        }
+
+        .faq-btn span {
+            font-weight: 700;
+            font-size: 16px;
+            padding-right: 16px;
+            color: var(--gray-300);
+            transition: color .3s
+        }
+
+        @media(min-width:768px) {
+            .faq-btn span {
+                font-size: 18px
+            }
+        }
+
+        .faq-item.open .faq-btn span {
+            color: #fff
+        }
+
+        .faq-icon {
+            flex-shrink: 0;
+            color: var(--gray-500);
+            transition: color .3s
+        }
+
+        .faq-item.open .faq-icon {
+            color: var(--gold)
+        }
+
+        .faq-content {
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: all .3s
+        }
+
+        .faq-item.open .faq-content {
+            max-height: 200px;
+            opacity: 1
+        }
+
+        .faq-content p {
+            padding: 0 24px 24px;
+            color: var(--gray-400);
+            font-size: 14px;
+            line-height: 1.6
+        }
+
+        .cta-section {
+            text-align: center
+        }
+
+        .cta-section h2 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 32px
+        }
+
+        @media(min-width:768px) {
+            .cta-section h2 {
+                font-size: 36px
+            }
+        }
+
+        .cta-section p {
+            color: var(--gray-400);
+            margin-bottom: 48px;
+            font-size: 18px
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--gold);
+            color: #000;
+            padding: 20px 48px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 20px;
+            transition: all .3s;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            width: 100%;
+            text-align: center
+        }
+
+        @media(min-width:768px) {
+            .cta-btn {
+                width: auto
+            }
+        }
+
+        .cta-btn:hover {
+            background: #fff
+        }
+
+        .footer {
+            background: #000;
+            color: #fff;
+            padding-top: 64px;
+            padding-bottom: 48px;
+            border-top: 1px solid var(--white-5)
+        }
+
+        @media(min-width:768px) {
+            .footer {
+                padding-top: 96px
+            }
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 48px;
+            margin-bottom: 64px
+        }
+
+        @media(min-width:768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr
+            }
+        }
+
+        .footer-brand {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            margin-bottom: 16px
+        }
+
+        .footer-brand-accent {
+            color: var(--gold)
+        }
+
+        .footer-desc {
+            color: var(--gray-500);
+            max-width: 384px
+        }
+
+        .footer-nav h5 {
+            font-weight: 700;
+            margin-bottom: 16px
+        }
+
+        .footer-nav ul {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .footer-nav button {
+            color: var(--gray-500);
+            font-size: 14px;
+            text-align: left;
+            transition: color .3s
+        }
+
+        .footer-nav button:hover {
+            color: #fff
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--white-5);
+            padding-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray-600);
+            font-size: 12px
+        }
+
+        @media(min-width:768px) {
+            .footer-bottom {
+                flex-direction: row;
+                gap: 0
+            }
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s, visibility .3s
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible
+        }
+
+        .modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 896px
+        }
+
+        .modal video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            cursor: default;
+            border: 1px solid var(--white-10)
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -48px;
+            right: 0;
+            color: #fff;
+            padding: 8px;
+            transition: color .3s
+        }
+
+        .modal-close:hover {
+            color: var(--gold)
+        }
+
+        .legal-page {
+            min-height: 100vh;
+            background: #000;
+            color: var(--gray-300);
+            padding: 128px 24px 96px;
+            max-width: 896px;
+            margin: 0 auto
+        }
+
+        @media(min-width:768px) {
+            .legal-page {
+                padding: 128px 48px 96px
+            }
+        }
+
+        .legal-back {
+            display: flex;
+            align-items: center;
+            color: var(--gold);
+            margin-bottom: 32px;
+            transition: color .3s
+        }
+
+        .legal-back:hover {
+            color: #fff
+        }
+
+        .legal-back svg {
+            margin-right: 8px
+        }
+
+        .legal-page h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 32px
+        }
+
+        .legal-page h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 32px;
+            margin-bottom: 16px
+        }
+
+        .legal-page h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 24px;
+            margin-bottom: 8px
+        }
+
+        .legal-content {
+            font-size: 14px;
+            line-height: 1.8
+        }
+
+        .legal-content>*+* {
+            margin-top: 16px
+        }
+
+        .legal-content ul {
+            list-style: disc;
+            padding-left: 20px
+        }
+
+        .legal-content ul li {
+            margin-top: 8px
+        }
+
+        .legal-content a {
+            color: var(--gold)
+        }
+
+        .legal-content a:hover {
+            text-decoration: underline
+        }
+
+        .refund-highlight {
+            background: var(--card);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--white-10)
+        }
+
+        .refund-highlight h2 {
+            color: var(--gold);
+            margin-top: 0
+        }
+
+        .refund-highlight p:first-of-type {
+            font-size: 18px;
+            color: #fff
+        }
+
+        .refund-quote {
+            padding: 24px;
+            border-left: 4px solid var(--gold);
+            background: var(--white-5);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            font-size: 18px;
+            color: #fff
+        }
+
+        .hide-mobile {
+            display: none
+        }
+
+        @media(min-width:768px) {
+            .hide-mobile {
+                display: block
+            }
+        }
 
         /* Email Optin Modal Styles */
-        .optin-modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.95);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
-        .optin-modal.active{opacity:1;visibility:visible}
-        .optin-modal-content{position:relative;width:100%;max-width:480px;background:linear-gradient(135deg,#111 0%,#000 100%);border:1px solid var(--gold-30);border-radius:24px;padding:40px 32px;box-shadow:0 0 80px rgba(212,175,55,0.15);cursor:default}
-        .optin-modal-close{position:absolute;top:16px;right:16px;color:var(--gray-500);padding:8px;transition:color .3s;background:none;border:none;cursor:pointer}
-        .optin-modal-close:hover{color:#fff}
-        .optin-modal-icon{width:64px;height:64px;background:var(--gold-20);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
-        .optin-modal-icon svg{color:var(--gold)}
-        .optin-modal-title{font-size:28px;font-weight:700;color:#fff;text-align:center;margin-bottom:8px}
-        .optin-modal-subtitle{color:var(--gray-400);text-align:center;margin-bottom:32px;font-size:16px}
-        .optin-form{display:flex;flex-direction:column;gap:16px}
-        .optin-input-wrapper{position:relative}
-        .optin-input{width:100%;padding:16px 20px;padding-left:48px;background:#1a1a1a;border:1px solid var(--white-20);border-radius:12px;color:#fff;font-size:16px;transition:all .3s;outline:none}
-        .optin-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-20)}
-        .optin-input::placeholder{color:var(--gray-500)}
-        .optin-input-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--gray-500)}
-        .optin-submit{width:100%;padding:16px 32px;background:var(--gold);color:#000;font-weight:700;font-size:18px;border:none;border-radius:12px;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px}
-        .optin-submit:hover{background:#fff;transform:translateY(-2px)}
-        .optin-submit:disabled{opacity:0.7;cursor:not-allowed;transform:none}
-        .optin-submit .spinner{width:20px;height:20px;border:2px solid transparent;border-top-color:#000;border-radius:50%;animation:spin 1s linear infinite}
-        .optin-privacy{text-align:center;font-size:12px;color:var(--gray-500);margin-top:8px}
-        .optin-privacy svg{display:inline;vertical-align:middle;margin-right:4px}
-        .optin-error{color:#ef4444;font-size:14px;text-align:center;display:none}
-        .optin-error.show{display:block}
-        .optin-benefits{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;padding:16px;background:var(--white-5);border-radius:12px}
-        .optin-benefit{display:flex;align-items:center;gap:12px;color:var(--gray-300);font-size:14px}
-        .optin-benefit svg{color:var(--gold);flex-shrink:0}
+        .optin-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s, visibility .3s
+        }
+
+        .optin-modal.active {
+            opacity: 1;
+            visibility: visible
+        }
+
+        .optin-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            background: linear-gradient(135deg, #111 0%, #000 100%);
+            border: 1px solid var(--gold-30);
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 0 80px rgba(212, 175, 55, 0.15);
+            cursor: default
+        }
+
+        .optin-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            color: var(--gray-500);
+            padding: 8px;
+            transition: color .3s;
+            background: none;
+            border: none;
+            cursor: pointer
+        }
+
+        .optin-modal-close:hover {
+            color: #fff
+        }
+
+        .optin-modal-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gold-20);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px
+        }
+
+        .optin-modal-icon svg {
+            color: var(--gold)
+        }
+
+        .optin-modal-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 8px
+        }
+
+        .optin-modal-subtitle {
+            color: var(--gray-400);
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 16px
+        }
+
+        .optin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px
+        }
+
+        .optin-input-wrapper {
+            position: relative
+        }
+
+        .optin-input {
+            width: 100%;
+            padding: 16px 20px;
+            padding-left: 48px;
+            background: #1a1a1a;
+            border: 1px solid var(--white-20);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            transition: all .3s;
+            outline: none
+        }
+
+        .optin-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-20)
+        }
+
+        .optin-input::placeholder {
+            color: var(--gray-500)
+        }
+
+        .optin-input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500)
+        }
+
+        .optin-submit {
+            width: 100%;
+            padding: 16px 32px;
+            background: var(--gold);
+            color: #000;
+            font-weight: 700;
+            font-size: 18px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px
+        }
+
+        .optin-submit:hover {
+            background: #fff;
+            transform: translateY(-2px)
+        }
+
+        .optin-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none
+        }
+
+        .optin-submit .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite
+        }
+
+        .optin-privacy {
+            text-align: center;
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 8px
+        }
+
+        .optin-privacy svg {
+            display: inline;
+            vertical-align: middle;
+            margin-right: 4px
+        }
+
+        .optin-error {
+            color: #ef4444;
+            font-size: 14px;
+            text-align: center;
+            display: none
+        }
+
+        .optin-error.show {
+            display: block
+        }
+
+        .optin-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: var(--white-5);
+            border-radius: 12px
+        }
+
+        .optin-benefit {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--gray-300);
+            font-size: 14px
+        }
+
+        .optin-benefit svg {
+            color: var(--gold);
+            flex-shrink: 0
+        }
+
+        /* ROI Calculator (gold theme, same layout as screenshot) */
+:root{
+  --roi-accent: var(--gold);
+  --roi-accent-2: rgba(212,175,55,0.85);
+  --roi-panel: rgba(255,255,255,0.06);
+  --roi-border: rgba(255,255,255,0.08);
+  --roi-track: rgba(255,255,255,0.70);
+}
+
+.roi-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid var(--roi-border);
+  border-radius: 24px;
+  padding: 56px 64px;
+}
+
+@media (max-width: 768px){
+  .roi-card{ padding: 28px 18px; }
+}
+
+.roi-grid{
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 56px;
+  align-items: start;
+}
+
+@media (max-width: 900px){
+  .roi-grid{ grid-template-columns: 1fr; gap: 28px; }
+}
+
+.roi-left{
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.roi-field{ width: 100%; }
+
+.roi-label{
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 10px;
+}
+
+.roi-value{
+  font-size: 22px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.95);
+  margin-bottom: 16px;
+}
+
+.roi-range{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--roi-track);
+  outline: none;
+}
+
+.roi-range::-webkit-slider-runnable-track{
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--roi-track);
+}
+
+.roi-range::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--roi-accent);
+  border: 0;
+  margin-top: -7px;
+  box-shadow: 0 0 0 6px rgba(212,175,55,0.14);
+}
+
+.roi-range::-moz-range-track{
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--roi-track);
+}
+
+.roi-range::-moz-range-thumb{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--roi-accent);
+  border: 0;
+  box-shadow: 0 0 0 6px rgba(212,175,55,0.14);
+}
+
+.roi-right{
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  justify-content: flex-start;
+}
+
+.roi-right-top{ padding-top: 6px; }
+
+.roi-output-label{
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 12px;
+}
+
+.roi-output{
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--roi-accent);
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px){
+  .roi-output{ font-size: 42px; }
+}
+
+.roi-cta{
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  height: 56px;
+  border-radius: 12px;
+  border: 1px solid rgba(212,175,55,0.85);
+  background: transparent;
+  overflow: hidden;
+}
+
+.roi-cta-icon{
+  width: 64px;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(212,175,55,1), rgba(212,175,55,0.78));
+  color: #000;
+}
+
+.roi-cta-text{
+  padding: 0 18px;
+  color: rgba(255,255,255,0.95);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.roi-cta:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(212,175,55,0.18);
+  border-color: rgba(212,175,55,1);
+}
     </style>
 </head>
+
 <body>
     <!-- Email Optin Modal -->
     <div id="optinModal" class="optin-modal">
         <div class="optin-modal-content" onclick="event.stopPropagation()">
             <button onclick="closeOptinModal()" class="optin-modal-close">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
             </button>
             <div class="optin-modal-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
             </div>
             <h3 class="optin-modal-title">Book Your Strategy Call</h3>
             <p class="optin-modal-subtitle">Enter your details to secure your spot</p>
-            
-     
-            
+
+
+
             <form id="optinForm" class="optin-form" onsubmit="handleOptinSubmit(event)">
                 <div class="optin-input-wrapper">
-                    <svg class="optin-input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <svg class="optin-input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
                     <input type="text" id="optinName" class="optin-input" placeholder="Enter your name" required>
                 </div>
                 <div class="optin-input-wrapper">
-                    <svg class="optin-input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    <input type="email" id="optinEmail" class="optin-input" placeholder="Enter your email address" required>
+                    <svg class="optin-input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <input type="email" id="optinEmail" class="optin-input" placeholder="Enter your email address"
+                        required>
                 </div>
                 <p id="optinError" class="optin-error">Please enter valid information</p>
                 <button type="submit" id="optinSubmit" class="optin-submit">
@@ -260,33 +2393,849 @@
                 </button>
             </form>
             <p class="optin-privacy">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
                 Your information is secure and will never be shared
             </p>
         </div>
     </div>
 
-    <div id="videoModal" class="modal"><div class="modal-content"><video id="modalVideo" controls></video><button onclick="closeVideoModal()" class="modal-close"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div></div>
-    <div id="landingPage">
-        <nav id="navbar" class="navbar"><div class="navbar-inner"><div class="logo" onclick="scrollToSection('home')">FINEST<span class="logo-accent">CLIENTS</span></div><div class="nav-links"><button onclick="scrollToSection('home')" class="nav-link">HOME</button><button onclick="scrollToSection('proof')" class="nav-link">PROOF</button><button onclick="scrollToSection('process')" class="nav-link">PROCESS</button><button onclick="scrollToSection('faq')" class="nav-link">FAQ</button><button onclick="scrollToSection('roi')" class="nav-link nav-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="12" y2="14"></line></svg>ROI Calculator</button><button onclick="openOptinModal()" class="nav-cta">Maximize your Sales</button></div><button id="menuBtn" class="menu-btn" onclick="toggleMobileMenu()"><svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg><svg id="closeIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div id="mobileMenu" class="mobile-menu hidden"><button onclick="scrollToSection('home'); toggleMobileMenu();" class="mobile-menu-link">Home</button><button onclick="scrollToSection('proof'); toggleMobileMenu();" class="mobile-menu-link">Proof</button><button onclick="scrollToSection('process'); toggleMobileMenu();" class="mobile-menu-link">Process</button><button onclick="scrollToSection('faq'); toggleMobileMenu();" class="mobile-menu-link">FAQ</button><button onclick="scrollToSection('roi'); toggleMobileMenu();" class="mobile-menu-link gold">ROI Calculator</button><button onclick="openOptinModal(); toggleMobileMenu();" class="mobile-menu-cta">Maximize your Sales</button></div></nav>
-        <section id="home" class="hero"><div class="hero-bg"><div class="hero-overlay"></div><video autoplay loop muted playsinline class="hero-video"><source src="https://asset.creativeagencyblueprint.com/file.mp4" type="video/mp4"></video><div class="hero-glow"></div></div><div class="hero-content"><div class="fade-in"><div class="hero-badge"><span class="hero-badge-dot"><span class="hero-badge-dot-ping"></span><span class="hero-badge-dot-solid"></span></span><span class="hero-badge-text">Pay Only For Results You Expect</span></div></div><div class="fade-in" style="transition-delay:200ms"><h1 class="hero-title">We Get Guaranteed Sales Meetings <br class="hide-mobile"/>For <span class="hero-title-gold">Creative Agencies</span><span class="hero-subtitle">without relying on referrals or spending another Dollar on Ads.</span></h1></div><div class="fade-in" style="transition-delay:400ms"><p class="hero-desc">Specifically for <span class="hero-desc-highlight">Video and design agencies</span></p></div><div class="fade-in" style="transition-delay:600ms"><div class="hero-buttons"><button onclick="openOptinModal()" class="btn-primary">Maximize your Sales</button><button onclick="scrollToSection('process')" class="btn-secondary">See How It Works</button></div></div></div><div class="hero-scroll" onclick="scrollToSection('proof')"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div></section>
-        <section id="proof" class="section" style="background:#000;border-bottom:1px solid rgba(255,255,255,0.05)"><div class="container"><div class="section-header"><h3 class="section-title">Recent Client Wins</h3><p class="section-label">Track Record</p></div><div class="case-grid"><div class="fade-in case-card"><div class="case-card-header"><div class="case-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div><span class="case-card-badge">Verified</span></div><h4 class="case-card-title">NewsReels</h4><p class="case-card-niche">Content & distribution for creators</p><div class="case-card-footer"><p class="case-card-result">6 Sales Meetings in 30 Days</p><p class="case-card-pipeline">$90k Pipeline Created</p><p class="case-card-value">$15k Project Closed</p></div></div><div class="fade-in case-card" style="transition-delay:100ms"><div class="case-card-header"><div class="case-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div><span class="case-card-badge">Verified</span></div><h4 class="case-card-title">Triftel</h4><p class="case-card-niche">Privacy-centric messaging application</p><div class="case-card-footer"><p class="case-card-result">10 Qualified Sales Meetings</p><p class="case-card-pipeline">$150k Pipeline Created</p><p class="case-card-value">$30k Retainer Closed</p></div></div><div class="fade-in case-card" style="transition-delay:200ms"><div class="case-card-header"><div class="case-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div><span class="case-card-badge">Verified</span></div><h4 class="case-card-title">UV Media</h4><p class="case-card-niche">YouTube content management</p><div class="case-card-footer"><p class="case-card-result">9 Qualified Sales Meetings</p><p class="case-card-pipeline">$110k Pipeline Created</p><p class="case-card-value">$22k Closed Retainers</p></div></div></div></div><div class="marquee"><div class="marquee-track"><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/1.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/2.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/3.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/4.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/5.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/6.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/7.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/8.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/9.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/10.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/11.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/12.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/13.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/14.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/15.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/16.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/17.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/18.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/19.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/1.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/2.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/3.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/4.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/5.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/6.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/7.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/8.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/9.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/10.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/11.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/12.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/13.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/14.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/15.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/16.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/17.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/18.png" alt="Logo"></div><div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/19.png" alt="Logo"></div></div></div></section>
-        <section class="section section-border-b" style="background:#000;padding-top:48px;padding-bottom:48px"><div class="container" style="text-align:center"><div class="fade-in" style="margin-bottom:32px"><h3 class="section-title">Built by the team behind <span style="color:var(--gold)">Finest Edit Academy</span></h3><p class="section-desc">We don't just sell the system, we use it ourselves. Click images to verify.</p></div><div class="built-by-cards"><div class="social-card"><a href="https://www.instagram.com/finestedit_/?hl=en" target="_blank" rel="noopener noreferrer" class="social-link instagram"><img src="https://finestclients.com/instagram.png" alt="Instagram Stats"></a><div class="social-card-text"><h4>90.7K Instagram followers</h4><p>We grew to 90.7K followers by applying the same content and distribution system we install for clients.</p></div></div><div class="social-card"><a href="https://www.youtube.com/@Finesteditacademy/featured" target="_blank" rel="noopener noreferrer" class="social-link youtube"><img src="https://finestclients.com/youtube.png" alt="YouTube Stats"></a><div class="social-card-text"><h4>46.7K YouTube subscribers</h4><p>Finest Edit Academy crossed 46.7K subscribers with about 30 videos using our social media playbook.</p></div></div></div></div></section>
-        <section class="section section-dark section-border-t"><div class="container" style="text-align:center"><div class="fade-in"><p class="section-label">Ideal Partners</p><h3 class="section-title" style="margin-bottom:48px">Who Is This For?</h3></div><div class="target-grid"><div class="fade-in target-card"><div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"></path></svg></div><h4 class="target-card-title">Creative Agencies</h4></div><div class="fade-in target-card" style="transition-delay:50ms"><div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"></path><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="m2 2 7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg></div><h4 class="target-card-title">Branding Studios</h4></div><div class="fade-in target-card" style="transition-delay:100ms"><div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path></svg></div><h4 class="target-card-title">Design Agencies</h4></div><div class="fade-in target-card" style="transition-delay:150ms"><div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div><h4 class="target-card-title">UI/UX Agencies</h4></div><div class="fade-in target-card" style="transition-delay:200ms"><div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"></path><rect width="14" height="12" x="2" y="6" rx="2" ry="2"></rect></svg></div><h4 class="target-card-title">Video Agencies</h4></div><div class="fade-in target-card" style="transition-delay:250ms"><div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M7 3v18"></path><path d="M3 7.5h4"></path><path d="M3 12h18"></path><path d="M3 16.5h4"></path><path d="M17 3v18"></path><path d="M17 7.5h4"></path><path d="M17 16.5h4"></path></svg></div><h4 class="target-card-title">Motion Design</h4></div><div class="fade-in target-card" style="transition-delay:300ms"><div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg></div><h4 class="target-card-title">Ad Agencies</h4></div><div class="fade-in target-card" style="transition-delay:350ms"><div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div><h4 class="target-card-title">B2B Service Firms</h4></div></div></div></section>
-        <section class="section" style="background:#000"><div class="container"><div class="two-col"><div class="fade-in two-col-text"><h3>Who We Are</h3><p>In 2019, I started my agency. We had the talent, but every month felt like a survival game. I watched agencies with half our skill land clients we couldn't even meet. I realized the problem wasn't our work, it was that we relied on hope while they had systems.</p><p>So, I built a predictable, repeatable engine to generate predictable quality Sales meetings without referrals. Now, Finest Clients exists to install that exact system into your studio, so you can stop the feast-or-famine cycle and finally run like a real business.</p></div><div style="display:flex;flex-direction:column;gap:24px"><a href="https://www.instagram.com/finestedit_/?hl=en" target="_blank" rel="noopener noreferrer" class="social-link instagram"><img src="https://finestclients.com/instagram.png" alt="Instagram Stats"></a><a href="https://www.youtube.com/@Finesteditacademy/featured" target="_blank" rel="noopener noreferrer" class="social-link youtube"><img src="https://finestclients.com/youtube.png" alt="YouTube Stats"></a></div></div></div></section>
-        <section class="section" style="background:#000;text-align:center"><div class="container" style="max-width:896px"><div class="fade-in"><p class="section-label">Our Guarantee</p><h3 class="section-title" style="margin-bottom:32px">Performance-Based Growth.</h3><p class="section-desc" style="font-size:18px;margin-bottom:48px">We are so confident in our system that we share the risk with you. <span style="color:#fff;font-weight:700;margin-left:4px">100% refund guaranteed.</span></p></div><div class="fade-in" style="transition-delay:100ms"><div class="calendar-preview" onclick="openVideoModal('https://finestclients.com/calendarvideo.mp4')"><div class="calendar-preview-overlay"><div class="calendar-preview-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>View Live Calendar Results</div></div><img src="https://finestclients.com/calendarimage.png" alt="Calendar Results"></div></div><div class="offer-grid"><div class="fade-in offer-card" style="transition-delay:200ms"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg><h4>Qualified Sales Meetings</h4><p>We only count sales meetings with decision-makers who fit your ICP.</p></div><div class="fade-in offer-card" style="transition-delay:300ms"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg><h4>Pay For Results Only</h4><p>You only pay for appointments you expect. 100% refund guaranteed.</p></div><div class="fade-in offer-card" style="transition-delay:400ms"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><h4>Predictable Quality</h4><p>We target clients in premium markets for maximum deal value.</p></div></div></div></section>
-        <section class="section section-border-t" style="background:#000"><div class="container" style="text-align:center"><div class="fade-in"><div class="pricing-card"><div class="pricing-badge">POPULAR</div><p class="pricing-label">Simple Pricing</p><div class="pricing-amount">$5,000</div><p class="pricing-desc">For 5 Qualified Sales Meetings</p><div class="pricing-features"><span class="pricing-feature"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Verified Decision Makers</span><span class="pricing-feature"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>High Intent Leads</span><span class="pricing-feature"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Satisfaction Guarantee</span></div><a href="https://www.paypal.com/ncp/payment/EQEEZ4MKULLKC" target="_blank" rel="noopener noreferrer" class="pricing-cta pricing-cta-paypal">
-  Buy Now
-</a></div></div></div></section>
-        <section id="roi" class="section section-dark section-border-t"><div class="container"><div class="fade-in"><div class="section-header"><div class="badge"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="12" y2="14"></line></svg><span>Growth Projection</span></div><h2 class="section-title">Agency ROI Calculator</h2><p class="section-desc">Estimate your potential return with the Finest Clients acquisition system.</p></div></div><div class="calculator-grid"><div class="fade-in" style="transition-delay:200ms"><div class="calculator-inputs"><h3>Input Metrics</h3><div class="calculator-inputs-fields"><div><div class="calculator-field-header"><label class="calculator-field-label">Avg. Deal Value</label><span id="dealValueDisplay" class="calculator-field-value">$20,000</span></div><input type="range" id="dealValue" min="20000" max="100000" step="1000" value="20000" oninput="updateCalculator()" class="calculator-range"><div class="calculator-range-labels"><span>$20k</span><span>$100k</span></div></div><div><div class="calculator-field-header"><label class="calculator-field-label">Close Rate</label><span id="closeRateDisplay" class="calculator-field-value">20%</span></div><input type="range" id="closeRate" min="5" max="50" step="1" value="20" oninput="updateCalculator()" class="calculator-range"><div class="calculator-range-labels"><span>5%</span><span>50%</span></div></div><div><div class="calculator-field-header"><label class="calculator-field-label">Monthly Meetings</label><span id="meetingsDisplay" class="calculator-field-value">10 Calls</span></div><input type="range" id="meetings" min="1" max="50" step="1" value="10" oninput="updateCalculator()" class="calculator-range"><div class="calculator-range-labels"><span>1</span><span>50</span></div></div></div></div></div><div class="fade-in" style="transition-delay:400ms"><div class="calculator-outputs"><h3>Projected Growth</h3><div class="calculator-outputs-grid"><div class="calculator-output-card"><div class="calculator-output-header"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg><span>Monthly Revenue</span></div><div id="monthlyRevenue" class="calculator-output-value">$40,000</div></div><div class="calculator-output-card"><div class="calculator-output-header"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg><span>Annual Run Rate</span></div><div id="annualRevenue" class="calculator-output-value secondary">$480,000</div></div><div class="calculator-cta"><button onclick="openOptinModal()">Maximize your Sales</button><p>Estimates based on provided inputs. Results vary by niche.</p></div></div></div></div></div></div></section>
-        <section id="process" class="section section-dark section-border-t"><div class="container" style="max-width:1024px"><div class="section-header" style="margin-bottom:80px"><h2 class="section-title">Simple 5-Step Process</h2><p class="section-desc">Your roadmap to predictable growth.</p></div><div id="processContainer" class="process-container"><div class="process-line-bg"></div><div id="processLine" class="process-line-fg" style="height:0%"></div><div id="processDot" class="process-dot-main" style="top:0%"></div><div class="process-steps"><div class="process-step inactive" data-step="0"><div class="process-step-dot"></div><div class="process-step-content"><div class="process-step-card"><div class="process-step-number">01</div><div class="process-step-inner"><h4>Onboarding/Kick-Off Call</h4><p>Our streamlined onboarding process is designed to be time-efficient, taking no more than 30 minutes of your valuable time.</p></div></div></div></div><div class="process-step inactive" data-step="1"><div class="process-step-dot"></div><div class="process-step-content"><div class="process-step-card"><div class="process-step-number">02</div><div class="process-step-inner"><h4>Research & Strategy</h4><p>Clarifying your ideal customer, offer, messaging & setting up the technical infrastructure to get you started with your journey.</p></div></div></div></div><div class="process-step inactive" data-step="2"><div class="process-step-dot"></div><div class="process-step-content"><div class="process-step-card"><div class="process-step-number">03</div><div class="process-step-inner"><h4>Outbound Ecosystem</h4><p>Crafting the finest outreach system, catered specifically to your requirements – sit back and let us handle everything for you.</p></div></div></div></div><div class="process-step inactive" data-step="3"><div class="process-step-dot"></div><div class="process-step-content"><div class="process-step-card"><div class="process-step-number">04</div><div class="process-step-inner"><h4>Qualified Appointments Delivered</h4><p>Once we've confirmed a time with your ideal prospect, we'll book it straight into your calendar.</p></div></div></div></div><div class="process-step inactive" data-step="4"><div class="process-step-dot"></div><div class="process-step-content"><div class="process-step-card"><div class="process-step-number">05</div><div class="process-step-inner"><h4>Sales Calls & Scaling</h4><p>Sales calls and optimizations for scaling.</p></div></div></div></div></div></div></div></section>
-        <section id="faq" class="section" style="background:#000"><div class="container" style="max-width:768px"><h2 class="section-title" style="text-align:center;margin-bottom:48px">Frequently Asked Questions</h2><div class="faq-list"><div class="faq-item" data-faq="0"><button onclick="toggleFaq(0)" class="faq-btn"><span>What counts as a 'qualified' Sales Meeting?</span><svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button><div class="faq-content"><p>A qualified Sales Meeting is a meeting with a decision-maker (Founder, CEO, CMO) in your target niche who has shown genuine interest in your service.</p></div></div><div class="faq-item" data-faq="1"><button onclick="toggleFaq(1)" class="faq-btn"><span>Do you work with Marketing Agencies?</span><svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button><div class="faq-content"><p>No. We specialize exclusively in Creative Agencies (Design, Branding, Video Production, UI/UX). Our systems are tuned specifically for selling creative work.</p></div></div><div class="faq-item" data-faq="2"><button onclick="toggleFaq(2)" class="faq-btn"><span>What is the commitment?</span><svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button><div class="faq-content"><p>We have a 90-day initial sprint to build momentum. However, since you pay on performance, our incentives are aligned to get you results immediately.</p></div></div><div class="faq-item" data-faq="3"><button onclick="toggleFaq(3)" class="faq-btn"><span>Do I need to handle the emails?</span><svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button><div class="faq-content"><p>No. We handle the technical setup, the copywriting, the list building, and the sending. You only handle the replies and the sales calls.</p></div></div></div></div></section>
-        <section class="section section-border-t cta-section" style="background:#000"><div class="fade-in container" style="max-width:896px"><h2>Ready to Scale?</h2><p>Don't let another quarter pass with unpredictable revenue.</p><button onclick="openOptinModal()" class="cta-btn">Maximize your Sales</button></div></section>
-        <footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-brand">FINEST<span class="footer-brand-accent">CLIENTS</span></div><p class="footer-desc">The elite growth infrastructure for Creative Agencies.</p></div><div class="footer-nav"><h5>Navigation</h5><ul><li><button onclick="scrollToSection('home')">Home</button></li><li><button onclick="scrollToSection('proof')">Proof</button></li><li><button onclick="scrollToSection('process')">Process</button></li><li><button onclick="scrollToSection('roi')">ROI Calculator</button></li></ul></div><div class="footer-nav"><h5>Legal</h5><ul><li><button onclick="showPage('privacy')">Privacy Policy</button></li><li><button onclick="showPage('terms')">Terms of Service</button></li><li><button onclick="showPage('refund')">Refund Policy</button></li></ul></div></div><div class="footer-bottom"><p>© 2025 Finest Clients. All rights reserved.</p><p>Designed for Excellence</p></div></div></footer>
+    <div id="videoModal" class="modal">
+        <div class="modal-content"><video id="modalVideo" controls></video><button onclick="closeVideoModal()"
+                class="modal-close"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg></button></div>
     </div>
-    <div id="privacyPage" class="legal-page hidden"><button onclick="showPage('landing')" class="legal-back"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>Back to Home</button><h1>Privacy Policy</h1><div class="legal-content"><p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p><p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.</p><h2>Interpretation and Definitions</h2><h3>Interpretation</h3><p>The words of which the initial letter is capitalized have meanings defined under the following conditions.</p><h3>Definitions</h3><p>For the purposes of this Privacy Policy:</p><ul><li><strong>Account</strong> means a unique account created for You to access our Service.</li><li><strong>Company</strong> refers to <strong>Finest Enterprises</strong>.</li><li><strong>Country</strong> refers to: <strong>USA</strong></li><li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a href="https://finestclients.com/">https://finestclients.com/</a></li><li><strong>You</strong> means the individual accessing or using the Service.</li></ul><h2>Contact Us</h2><p>If you have any questions about this Privacy Policy, You can contact us:</p><ul><li>By email: <a href="mailto:mousam@finestclients.com">mousam@finestclients.com</a></li></ul></div></div>
-    <div id="termsPage" class="legal-page hidden"><button onclick="showPage('landing')" class="legal-back"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>Back to Home</button><h1>Terms and Conditions</h1><div class="legal-content"><h2>Interpretation and Definitions</h2><h3>Interpretation</h3><p>The words of which the initial letter is capitalized have meanings defined under the following conditions.</p><h3>Definitions</h3><p>For the purposes of these Terms and Conditions:</p><ul><li><strong>Company</strong> refers to <strong>Finest Enterprises</strong>.</li><li><strong>Country</strong> refers to: <strong>USA</strong></li><li><strong>Service</strong> refers to the Website.</li><li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a href="https://finestclients.com/">https://finestclients.com/</a></li><li><strong>You</strong> means the individual accessing or using the Service.</li></ul><h2>Acknowledgment</h2><p>These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company.</p><p>By accessing or using the Service You agree to be bound by these Terms and Conditions.</p><h2>Contact Us</h2><p>If you have any questions about these Terms and Conditions, You can contact us:</p><ul><li>By email: <a href="mailto:mousam@finestclients.com">mousam@finestclients.com</a></li></ul></div></div>
-    <div id="refundPage" class="legal-page hidden"><button onclick="showPage('landing')" class="legal-back"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>Back to Home</button><h1>Refund Policy</h1><div class="legal-content"><div class="refund-highlight"><h2>Our Commitment to Fairness</h2><p>At Finest Clients, our relationships are built on trust, transparency, and mutual success. We believe that a partnership should be risk-free when results are promised.</p><p style="color:var(--gray-400);font-size:18px">Therefore, our refund policy is simple, binding, and designed to protect your investment.</p></div><h3>Contractual Guarantee</h3><p>Unlike standard services where refunds are discretionary, our refunds are governed strictly by the <strong>Service Agreement (Contract)</strong> signed at the commencement of our engagement.</p><p class="refund-quote">"If we fail to deliver the results explicitly agreed upon in our Service Agreement, we will refund your money as per the terms decided and signed in our contract."</p><h3>Governing Terms</h3><ul><li><strong>Performance-Based Security:</strong> Your investment is tied to deliverables. If the specific KPIs or meeting quotas outlined in your contract are not met within the stipulated timeframe, you are eligible for a refund as detailed in your specific agreement.</li><li><strong>Execution of Refunds:</strong> Refund requests are processed in strict accordance with the stipulations agreed upon in your Master Services Agreement.</li><li><strong>Processing Time:</strong> Once a refund condition is verified and approved as per the contract, the funds will be returned within the timeframe specified in your agreement (typically 7-14 business days).</li></ul><h3>Contact Us</h3><p>For any questions regarding your contract or to initiate a discussion about deliverables, please contact us at:</p><p><a href="mailto:mousam@finestclients.com"><strong>mousam@finestclients.com</strong></a></p></div></div>
+    <div id="landingPage">
+        <nav id="navbar" class="navbar">
+            <div class="navbar-inner">
+                <div class="logo" onclick="scrollToSection('home')">FINEST<span class="logo-accent">CLIENTS</span></div>
+                <div class="nav-links"><button onclick="scrollToSection('home')" class="nav-link">HOME</button><button
+                        onclick="scrollToSection('proof')" class="nav-link">PROOF</button><button
+                        onclick="scrollToSection('process')" class="nav-link">PROCESS</button><button
+                        onclick="scrollToSection('faq')" class="nav-link">FAQ</button><button
+                        onclick="scrollToSection('roi')" class="nav-link nav-link-icon"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                            <line x1="8" y1="6" x2="16" y2="6"></line>
+                            <line x1="8" y1="10" x2="16" y2="10"></line>
+                            <line x1="8" y1="14" x2="12" y2="14"></line>
+                        </svg>ROI Calculator</button><button onclick="openOptinModal()" class="nav-cta">Maximize your
+                        Sales</button></div><button id="menuBtn" class="menu-btn" onclick="toggleMobileMenu()"><svg
+                        id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg><svg id="closeIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg></button>
+            </div>
+            <div id="mobileMenu" class="mobile-menu hidden"><button
+                    onclick="scrollToSection('home'); toggleMobileMenu();" class="mobile-menu-link">Home</button><button
+                    onclick="scrollToSection('proof'); toggleMobileMenu();"
+                    class="mobile-menu-link">Proof</button><button
+                    onclick="scrollToSection('process'); toggleMobileMenu();"
+                    class="mobile-menu-link">Process</button><button
+                    onclick="scrollToSection('faq'); toggleMobileMenu();" class="mobile-menu-link">FAQ</button><button
+                    onclick="scrollToSection('roi'); toggleMobileMenu();" class="mobile-menu-link gold">ROI
+                    Calculator</button><button onclick="openOptinModal(); toggleMobileMenu();"
+                    class="mobile-menu-cta">Maximize your Sales</button></div>
+        </nav>
+        <section id="home" class="hero">
+            <div class="hero-bg">
+                <div class="hero-overlay"></div><video autoplay loop muted playsinline class="hero-video">
+                    <source src="https://asset.creativeagencyblueprint.com/file.mp4" type="video/mp4">
+                </video>
+                <div class="hero-glow"></div>
+            </div>
+            <div class="hero-content">
+                <div class="fade-in">
+                    <div class="hero-badge"><span class="hero-badge-dot"><span class="hero-badge-dot-ping"></span><span
+                                class="hero-badge-dot-solid"></span></span><span class="hero-badge-text">Pay Only For
+                            Results You Expect</span></div>
+                </div>
+                <div class="fade-in" style="transition-delay:200ms">
+                    <h1 class="hero-title">We Get Guaranteed Sales Meetings <br class="hide-mobile" />For <span
+                            class="hero-title-gold">Creative Agencies</span><span class="hero-subtitle">without relying
+                            on referrals or spending another Dollar on Ads.</span></h1>
+                </div>
+                <div class="fade-in" style="transition-delay:400ms">
+                    <p class="hero-desc">Specifically for <span class="hero-desc-highlight">Video and design
+                            agencies</span></p>
+                </div>
+                <div class="fade-in" style="transition-delay:600ms">
+                    <div class="hero-buttons"><button onclick="openOptinModal()" class="btn-primary">Maximize your
+                            Sales</button><button onclick="scrollToSection('process')" class="btn-secondary">See How It
+                            Works</button></div>
+                </div>
+            </div>
+            <div class="hero-scroll" onclick="scrollToSection('proof')"><svg xmlns="http://www.w3.org/2000/svg"
+                    width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></div>
+        </section>
+        <section id="proof" class="section" style="background:#000;border-bottom:1px solid rgba(255,255,255,0.05)">
+            <div class="container">
+                <div class="section-header">
+                    <h3 class="section-title">Recent Client Wins</h3>
+                    <p class="section-label">Track Record</p>
+                </div>
+                <div class="case-grid">
+                    <div class="fade-in case-card">
+                        <div class="case-card-header">
+                            <div class="case-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                    <polyline points="17 6 23 6 23 12"></polyline>
+                                </svg></div><span class="case-card-badge">Verified</span>
+                        </div>
+                        <h4 class="case-card-title">NewsReels</h4>
+                        <p class="case-card-niche">Content & distribution for creators</p>
+                        <div class="case-card-footer">
+                            <p class="case-card-result">6 Sales Meetings in 30 Days</p>
+                            <p class="case-card-pipeline">$90k Pipeline Created</p>
+                            <p class="case-card-value">$15k Project Closed</p>
+                        </div>
+                    </div>
+                    <div class="fade-in case-card" style="transition-delay:100ms">
+                        <div class="case-card-header">
+                            <div class="case-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                    <polyline points="17 6 23 6 23 12"></polyline>
+                                </svg></div><span class="case-card-badge">Verified</span>
+                        </div>
+                        <h4 class="case-card-title">Triftel</h4>
+                        <p class="case-card-niche">Privacy-centric messaging application</p>
+                        <div class="case-card-footer">
+                            <p class="case-card-result">10 Qualified Sales Meetings</p>
+                            <p class="case-card-pipeline">$150k Pipeline Created</p>
+                            <p class="case-card-value">$30k Retainer Closed</p>
+                        </div>
+                    </div>
+                    <div class="fade-in case-card" style="transition-delay:200ms">
+                        <div class="case-card-header">
+                            <div class="case-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                    <polyline points="17 6 23 6 23 12"></polyline>
+                                </svg></div><span class="case-card-badge">Verified</span>
+                        </div>
+                        <h4 class="case-card-title">UV Media</h4>
+                        <p class="case-card-niche">YouTube content management</p>
+                        <div class="case-card-footer">
+                            <p class="case-card-result">9 Qualified Sales Meetings</p>
+                            <p class="case-card-pipeline">$110k Pipeline Created</p>
+                            <p class="case-card-value">$22k Closed Retainers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marquee">
+                <div class="marquee-track">
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/1.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/2.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/3.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/4.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/5.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/6.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/7.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/8.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/9.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/10.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/11.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/12.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/13.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/14.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/15.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/16.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/17.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/18.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/19.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/1.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/2.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/3.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/4.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/5.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/6.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/7.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/8.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/9.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/10.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/11.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/12.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/13.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/14.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/15.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/16.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/17.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/18.png"
+                            alt="Logo"></div>
+                    <div class="marquee-item"><img src="https://asset.creativeagencyblueprint.com/images/19.png"
+                            alt="Logo"></div>
+                </div>
+            </div>
+        </section>
+        <section class="section section-border-b" style="background:#000;padding-top:48px;padding-bottom:48px">
+            <div class="container" style="text-align:center">
+                <div class="fade-in" style="margin-bottom:32px">
+                    <h3 class="section-title">Built by the team behind <span style="color:var(--gold)">Finest Edit
+                            Academy</span></h3>
+                    <p class="section-desc">We don't just sell the system, we use it ourselves. Click images to verify.
+                    </p>
+                </div>
+                <div class="built-by-cards">
+                    <div class="social-card"><a href="https://www.instagram.com/finestedit_/?hl=en" target="_blank"
+                            rel="noopener noreferrer" class="social-link instagram"><img
+                                src="https://finestclients.com/instagram.png" alt="Instagram Stats"></a>
+                        <div class="social-card-text">
+                            <h4>90.7K Instagram followers</h4>
+                            <p>We grew to 90.7K followers by applying the same content and distribution system we
+                                install for clients.</p>
+                        </div>
+                    </div>
+                    <div class="social-card"><a href="https://www.youtube.com/@Finesteditacademy/featured"
+                            target="_blank" rel="noopener noreferrer" class="social-link youtube"><img
+                                src="https://finestclients.com/youtube.png" alt="YouTube Stats"></a>
+                        <div class="social-card-text">
+                            <h4>46.7K YouTube subscribers</h4>
+                            <p>Finest Edit Academy crossed 46.7K subscribers with about 30 videos using our social media
+                                playbook.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section section-dark section-border-t">
+            <div class="container" style="text-align:center">
+                <div class="fade-in">
+                    <p class="section-label">Ideal Partners</p>
+                    <h3 class="section-title" style="margin-bottom:48px">Who Is This For?</h3>
+                </div>
+                <div class="target-grid">
+                    <div class="fade-in target-card">
+                        <div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="13.5" cy="6.5" r=".5"></circle>
+                                <circle cx="17.5" cy="10.5" r=".5"></circle>
+                                <circle cx="8.5" cy="7.5" r=".5"></circle>
+                                <circle cx="6.5" cy="12.5" r=".5"></circle>
+                                <path
+                                    d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z">
+                                </path>
+                            </svg></div>
+                        <h4 class="target-card-title">Creative Agencies</h4>
+                    </div>
+                    <div class="fade-in target-card" style="transition-delay:50ms">
+                        <div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m12 19 7-7 3 3-7 7-3-3z"></path>
+                                <path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                                <path d="m2 2 7.586 7.586"></path>
+                                <circle cx="11" cy="11" r="2"></circle>
+                            </svg></div>
+                        <h4 class="target-card-title">Branding Studios</h4>
+                    </div>
+                    <div class="fade-in target-card" style="transition-delay:100ms">
+                        <div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z">
+                                </path>
+                                <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path>
+                                <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path>
+                            </svg></div>
+                        <h4 class="target-card-title">Design Agencies</h4>
+                    </div>
+                    <div class="fade-in target-card" style="transition-delay:150ms">
+                        <div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg></div>
+                        <h4 class="target-card-title">UI/UX Agencies</h4>
+                    </div>
+                    <div class="fade-in target-card" style="transition-delay:200ms">
+                        <div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m22 8-6 4 6 4V8Z"></path>
+                                <rect width="14" height="12" x="2" y="6" rx="2" ry="2"></rect>
+                            </svg></div>
+                        <h4 class="target-card-title">Video Agencies</h4>
+                    </div>
+                    <div class="fade-in target-card" style="transition-delay:250ms">
+                        <div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                <path d="M7 3v18"></path>
+                                <path d="M3 7.5h4"></path>
+                                <path d="M3 12h18"></path>
+                                <path d="M3 16.5h4"></path>
+                                <path d="M17 3v18"></path>
+                                <path d="M17 7.5h4"></path>
+                                <path d="M17 16.5h4"></path>
+                            </svg></div>
+                        <h4 class="target-card-title">Motion Design</h4>
+                    </div>
+                    <div class="fade-in target-card" style="transition-delay:300ms">
+                        <div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m3 11 18-5v12L3 14v-3z"></path>
+                                <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path>
+                            </svg></div>
+                        <h4 class="target-card-title">Ad Agencies</h4>
+                    </div>
+                    <div class="fade-in target-card" style="transition-delay:350ms">
+                        <div class="target-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg></div>
+                        <h4 class="target-card-title">B2B Service Firms</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section" style="background:#000">
+            <div class="container">
+                <div class="two-col">
+                    <div class="fade-in two-col-text">
+                        <h3>Who We Are</h3>
+                        <p>In 2019, I started my agency. We had the talent, but every month felt like a survival game. I
+                            watched agencies with half our skill land clients we couldn't even meet. I realized the
+                            problem wasn't our work, it was that we relied on hope while they had systems.</p>
+                        <p>So, I built a predictable, repeatable engine to generate predictable quality Sales meetings
+                            without referrals. Now, Finest Clients exists to install that exact system into your studio,
+                            so you can stop the feast-or-famine cycle and finally run like a real business.</p>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:24px"><a
+                            href="https://www.instagram.com/finestedit_/?hl=en" target="_blank"
+                            rel="noopener noreferrer" class="social-link instagram"><img
+                                src="https://finestclients.com/instagram.png" alt="Instagram Stats"></a><a
+                            href="https://www.youtube.com/@Finesteditacademy/featured" target="_blank"
+                            rel="noopener noreferrer" class="social-link youtube"><img
+                                src="https://finestclients.com/youtube.png" alt="YouTube Stats"></a></div>
+                </div>
+            </div>
+        </section>
+        <section class="section" style="background:#000;text-align:center">
+            <div class="container" style="max-width:896px">
+                <div class="fade-in">
+                    <p class="section-label">Our Guarantee</p>
+                    <h3 class="section-title" style="margin-bottom:32px">Performance-Based Growth.</h3>
+                    <p class="section-desc" style="font-size:18px;margin-bottom:48px">We are so confident in our system
+                        that we share the risk with you. <span style="color:#fff;font-weight:700;margin-left:4px">100%
+                            refund guaranteed.</span></p>
+                </div>
+                <div class="fade-in" style="transition-delay:100ms">
+                    <div class="calendar-preview"
+                        onclick="openVideoModal('https://finestclients.com/calendarvideo.mp4')">
+                        <div class="calendar-preview-overlay">
+                            <div class="calendar-preview-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                    height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>View Live Calendar Results</div>
+                        </div><img src="https://finestclients.com/calendarimage.png" alt="Calendar Results">
+                    </div>
+                </div>
+                <div class="offer-grid">
+                    <div class="fade-in offer-card" style="transition-delay:200ms"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                        <h4>Qualified Sales Meetings</h4>
+                        <p>We only count sales meetings with decision-makers who fit your ICP.</p>
+                    </div>
+                    <div class="fade-in offer-card" style="transition-delay:300ms"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                        <h4>Pay For Results Only</h4>
+                        <p>You only pay for appointments you expect. 100% refund guaranteed.</p>
+                    </div>
+                    <div class="fade-in offer-card" style="transition-delay:400ms"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                        <h4>Predictable Quality</h4>
+                        <p>We target clients in premium markets for maximum deal value.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section section-border-t" style="background:#000">
+            <div class="container" style="text-align:center">
+                <div class="fade-in">
+                    <div class="pricing-card">
+                        <div class="pricing-badge">POPULAR</div>
+                        <p class="pricing-label">Simple Pricing</p>
+                        <div class="pricing-amount">$5,000</div>
+                        <p class="pricing-desc">For 5 Qualified Sales Meetings</p>
+                        <div class="pricing-features"><span class="pricing-feature"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>Verified Decision Makers</span><span class="pricing-feature"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>High Intent Leads</span><span class="pricing-feature"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>Satisfaction Guarantee</span></div><a
+                            href="https://www.paypal.com/ncp/payment/EQEEZ4MKULLKC" target="_blank"
+                            rel="noopener noreferrer" class="pricing-cta pricing-cta-paypal">
+                            Buy Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+<section id="roi" class="section section-dark section-border-t">
+  <div class="container">
+    <div class="fade-in">
+  <div class="section-header">
+    <div class="badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+        <line x1="8" y1="6" x2="16" y2="6"></line>
+        <line x1="8" y1="10" x2="16" y2="10"></line>
+        <line x1="8" y1="14" x2="12" y2="14"></line>
+      </svg>
+      <span>Growth Projection</span>
+    </div>
+    <h2 class="section-title">Agency ROI Calculator</h2>
+    <p class="section-desc">Estimate your potential return with the Finest Clients acquisition system.</p>
+  </div>
+</div>
+    <div class="roi-card">
+      <div class="roi-grid">
+        <!-- LEFT: Inputs -->
+        <div class="roi-left">
+          <div class="roi-field">
+            <div class="roi-label">Average # Of Monthly Appointments</div>
+            <div id="roiAppointmentsVal" class="roi-value">5</div>
+         <input
+  type="range"
+  id="roiAppointments"
+  class="roi-range"
+  min="5"
+  max="50"
+  step="1"
+  value="5"
+  oninput="updateCalculator()"
+/>
+          </div>
+
+          <div class="roi-field">
+            <div class="roi-label">Close Ratio (After Appointment) %</div>
+            <div id="roiCloseRateVal" class="roi-value">1</div>
+            <input
+              type="range"
+              id="roiCloseRate"
+              class="roi-range"
+              min="1"
+              max="50"
+              step="1"
+              value="1"
+              oninput="updateCalculator()"
+              aria-label="Close ratio after appointment"
+            />
+          </div>
+
+          <div class="roi-field">
+            <div class="roi-label">Annual Contract Value (ACV), $</div>
+            <div id="roiAcvVal" class="roi-value">25000</div>
+      <input
+  type="range"
+  id="roiAcv"
+  class="roi-range"
+  min="25000"
+  max="200000"
+  step="1000"
+  value="25000"
+  oninput="updateCalculator()"
+/>
+          </div>
+        </div>
+
+        <!-- RIGHT: Output + CTA -->
+        <div class="roi-right">
+          <div class="roi-right-top">
+            <div class="roi-output-label">Your Sales Per Year</div>
+            <div id="roiAnnualSales" class="roi-output">$15,000</div>
+          </div>
+
+          <button class="roi-cta" onclick="openOptinModal()" type="button" aria-label="Discuss pricing">
+            <span class="roi-cta-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h12"></path>
+                <path d="M13 6l6 6-6 6"></path>
+              </svg>
+            </span>
+            <span class="roi-cta-text">Discuss Pricing</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+        <section id="process" class="section section-dark section-border-t">
+            <div class="container" style="max-width:1024px">
+                <div class="section-header" style="margin-bottom:80px">
+                    <h2 class="section-title">Simple 5-Step Process</h2>
+                    <p class="section-desc">Your roadmap to predictable growth.</p>
+                </div>
+                <div id="processContainer" class="process-container">
+                    <div class="process-line-bg"></div>
+                    <div id="processLine" class="process-line-fg" style="height:0%"></div>
+                    <div id="processDot" class="process-dot-main" style="top:0%"></div>
+                    <div class="process-steps">
+                        <div class="process-step inactive" data-step="0">
+                            <div class="process-step-dot"></div>
+                            <div class="process-step-content">
+                                <div class="process-step-card">
+                                    <div class="process-step-number">01</div>
+                                    <div class="process-step-inner">
+                                        <h4>Onboarding/Kick-Off Call</h4>
+                                        <p>Our streamlined onboarding process is designed to be time-efficient, taking
+                                            no more than 30 minutes of your valuable time.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step inactive" data-step="1">
+                            <div class="process-step-dot"></div>
+                            <div class="process-step-content">
+                                <div class="process-step-card">
+                                    <div class="process-step-number">02</div>
+                                    <div class="process-step-inner">
+                                        <h4>Research & Strategy</h4>
+                                        <p>Clarifying your ideal customer, offer, messaging & setting up the technical
+                                            infrastructure to get you started with your journey.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step inactive" data-step="2">
+                            <div class="process-step-dot"></div>
+                            <div class="process-step-content">
+                                <div class="process-step-card">
+                                    <div class="process-step-number">03</div>
+                                    <div class="process-step-inner">
+                                        <h4>Outbound Ecosystem</h4>
+                                        <p>Crafting the finest outreach system, catered specifically to your
+                                            requirements – sit back and let us handle everything for you.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step inactive" data-step="3">
+                            <div class="process-step-dot"></div>
+                            <div class="process-step-content">
+                                <div class="process-step-card">
+                                    <div class="process-step-number">04</div>
+                                    <div class="process-step-inner">
+                                        <h4>Qualified Appointments Delivered</h4>
+                                        <p>Once we've confirmed a time with your ideal prospect, we'll book it straight
+                                            into your calendar.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step inactive" data-step="4">
+                            <div class="process-step-dot"></div>
+                            <div class="process-step-content">
+                                <div class="process-step-card">
+                                    <div class="process-step-number">05</div>
+                                    <div class="process-step-inner">
+                                        <h4>Sales Calls & Scaling</h4>
+                                        <p>Sales calls and optimizations for scaling.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="faq" class="section" style="background:#000">
+            <div class="container" style="max-width:768px">
+                <h2 class="section-title" style="text-align:center;margin-bottom:48px">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <div class="faq-item" data-faq="0"><button onclick="toggleFaq(0)" class="faq-btn"><span>What counts
+                                as a 'qualified' Sales Meeting?</span><svg class="faq-icon"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg></button>
+                        <div class="faq-content">
+                            <p>A qualified Sales Meeting is a meeting with a decision-maker (Founder, CEO, CMO) in your
+                                target niche who has shown genuine interest in your service.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" data-faq="1"><button onclick="toggleFaq(1)" class="faq-btn"><span>Do you work
+                                with Marketing Agencies?</span><svg class="faq-icon" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg></button>
+                        <div class="faq-content">
+                            <p>No. We specialize exclusively in Creative Agencies (Design, Branding, Video Production,
+                                UI/UX). Our systems are tuned specifically for selling creative work.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" data-faq="2"><button onclick="toggleFaq(2)" class="faq-btn"><span>What is the
+                                commitment?</span><svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg></button>
+                        <div class="faq-content">
+                            <p>We have a 90-day initial sprint to build momentum. However, since you pay on performance,
+                                our incentives are aligned to get you results immediately.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" data-faq="3"><button onclick="toggleFaq(3)" class="faq-btn"><span>Do I need to
+                                handle the emails?</span><svg class="faq-icon" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg></button>
+                        <div class="faq-content">
+                            <p>No. We handle the technical setup, the copywriting, the list building, and the sending.
+                                You only handle the replies and the sales calls.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section section-border-t cta-section" style="background:#000">
+            <div class="fade-in container" style="max-width:896px">
+                <h2>Ready to Scale?</h2>
+                <p>Don't let another quarter pass with unpredictable revenue.</p><button onclick="openOptinModal()"
+                    class="cta-btn">Maximize your Sales</button>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div>
+                        <div class="footer-brand">FINEST<span class="footer-brand-accent">CLIENTS</span></div>
+                        <p class="footer-desc">The elite growth infrastructure for Creative Agencies.</p>
+                    </div>
+                    <div class="footer-nav">
+                        <h5>Navigation</h5>
+                        <ul>
+                            <li><button onclick="scrollToSection('home')">Home</button></li>
+                            <li><button onclick="scrollToSection('proof')">Proof</button></li>
+                            <li><button onclick="scrollToSection('process')">Process</button></li>
+                            <li><button onclick="scrollToSection('roi')">ROI Calculator</button></li>
+                        </ul>
+                    </div>
+                    <div class="footer-nav">
+                        <h5>Legal</h5>
+                        <ul>
+                            <li><button onclick="showPage('privacy')">Privacy Policy</button></li>
+                            <li><button onclick="showPage('terms')">Terms of Service</button></li>
+                            <li><button onclick="showPage('refund')">Refund Policy</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2025 Finest Clients. All rights reserved.</p>
+                    <p>Designed for Excellence</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div id="privacyPage" class="legal-page hidden"><button onclick="showPage('landing')" class="legal-back"><svg
+                xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>Back to Home</button>
+        <h1>Privacy Policy</h1>
+        <div class="legal-content">
+            <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your
+                information when You use the Service and tells You about Your privacy rights and how the law protects
+                You.</p>
+            <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the
+                collection and use of information in accordance with this Privacy Policy.</p>
+            <h2>Interpretation and Definitions</h2>
+            <h3>Interpretation</h3>
+            <p>The words of which the initial letter is capitalized have meanings defined under the following
+                conditions.</p>
+            <h3>Definitions</h3>
+            <p>For the purposes of this Privacy Policy:</p>
+            <ul>
+                <li><strong>Account</strong> means a unique account created for You to access our Service.</li>
+                <li><strong>Company</strong> refers to <strong>Finest Enterprises</strong>.</li>
+                <li><strong>Country</strong> refers to: <strong>USA</strong></li>
+                <li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a
+                        href="https://finestclients.com/">https://finestclients.com/</a></li>
+                <li><strong>You</strong> means the individual accessing or using the Service.</li>
+            </ul>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, You can contact us:</p>
+            <ul>
+                <li>By email: <a href="mailto:mousam@finestclients.com">mousam@finestclients.com</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="termsPage" class="legal-page hidden"><button onclick="showPage('landing')" class="legal-back"><svg
+                xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>Back to Home</button>
+        <h1>Terms and Conditions</h1>
+        <div class="legal-content">
+            <h2>Interpretation and Definitions</h2>
+            <h3>Interpretation</h3>
+            <p>The words of which the initial letter is capitalized have meanings defined under the following
+                conditions.</p>
+            <h3>Definitions</h3>
+            <p>For the purposes of these Terms and Conditions:</p>
+            <ul>
+                <li><strong>Company</strong> refers to <strong>Finest Enterprises</strong>.</li>
+                <li><strong>Country</strong> refers to: <strong>USA</strong></li>
+                <li><strong>Service</strong> refers to the Website.</li>
+                <li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a
+                        href="https://finestclients.com/">https://finestclients.com/</a></li>
+                <li><strong>You</strong> means the individual accessing or using the Service.</li>
+            </ul>
+            <h2>Acknowledgment</h2>
+            <p>These are the Terms and Conditions governing the use of this Service and the agreement that operates
+                between You and the Company.</p>
+            <p>By accessing or using the Service You agree to be bound by these Terms and Conditions.</p>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
+            <ul>
+                <li>By email: <a href="mailto:mousam@finestclients.com">mousam@finestclients.com</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="refundPage" class="legal-page hidden"><button onclick="showPage('landing')" class="legal-back"><svg
+                xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>Back to Home</button>
+        <h1>Refund Policy</h1>
+        <div class="legal-content">
+            <div class="refund-highlight">
+                <h2>Our Commitment to Fairness</h2>
+                <p>At Finest Clients, our relationships are built on trust, transparency, and mutual success. We believe
+                    that a partnership should be risk-free when results are promised.</p>
+                <p style="color:var(--gray-400);font-size:18px">Therefore, our refund policy is simple, binding, and
+                    designed to protect your investment.</p>
+            </div>
+            <h3>Contractual Guarantee</h3>
+            <p>Unlike standard services where refunds are discretionary, our refunds are governed strictly by the
+                <strong>Service Agreement (Contract)</strong> signed at the commencement of our engagement.</p>
+            <p class="refund-quote">"If we fail to deliver the results explicitly agreed upon in our Service Agreement,
+                we will refund your money as per the terms decided and signed in our contract."</p>
+            <h3>Governing Terms</h3>
+            <ul>
+                <li><strong>Performance-Based Security:</strong> Your investment is tied to deliverables. If the
+                    specific KPIs or meeting quotas outlined in your contract are not met within the stipulated
+                    timeframe, you are eligible for a refund as detailed in your specific agreement.</li>
+                <li><strong>Execution of Refunds:</strong> Refund requests are processed in strict accordance with the
+                    stipulations agreed upon in your Master Services Agreement.</li>
+                <li><strong>Processing Time:</strong> Once a refund condition is verified and approved as per the
+                    contract, the funds will be returned within the timeframe specified in your agreement (typically
+                    7-14 business days).</li>
+            </ul>
+            <h3>Contact Us</h3>
+            <p>For any questions regarding your contract or to initiate a discussion about deliverables, please contact
+                us at:</p>
+            <p><a href="mailto:mousam@finestclients.com"><strong>mousam@finestclients.com</strong></a></p>
+        </div>
+    </div>
     <script>
         // ============================================
         // CONFIGURATION - UPDATE THIS URL
@@ -295,15 +3244,15 @@
         const CALENDLY_URL = 'https://calendly.com/mousam-finestclients/meeting-with-mousam';
         // ============================================
 
-        let mobileMenuOpen=false;
-        function toggleMobileMenu(){mobileMenuOpen=!mobileMenuOpen;const m=document.getElementById('mobileMenu'),mi=document.getElementById('menuIcon'),ci=document.getElementById('closeIcon');if(mobileMenuOpen){m.classList.remove('hidden');mi.classList.add('hidden');ci.classList.remove('hidden');document.body.style.overflow='hidden'}else{m.classList.add('hidden');mi.classList.remove('hidden');ci.classList.add('hidden');document.body.style.overflow='unset'}}
-        window.addEventListener('scroll',()=>{const n=document.getElementById('navbar');if(window.scrollY>20||mobileMenuOpen){n.classList.add('scrolled')}else{n.classList.remove('scrolled')}});
-        function scrollToSection(id){const cp=getCurrentPage();if(cp!=='landing'){showPage('landing');setTimeout(()=>{if(id==='home'){window.scrollTo({top:0,behavior:'smooth'})}else{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'})}},100)}else{if(id==='home'){window.scrollTo({top:0,behavior:'smooth'})}else{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'})}}}
-        function getCurrentPage(){if(!document.getElementById('landingPage').classList.contains('hidden'))return'landing';if(!document.getElementById('privacyPage').classList.contains('hidden'))return'privacy';if(!document.getElementById('termsPage').classList.contains('hidden'))return'terms';if(!document.getElementById('refundPage').classList.contains('hidden'))return'refund';return'landing'}
-        function showPage(page){document.getElementById('landingPage').classList.add('hidden');document.getElementById('privacyPage').classList.add('hidden');document.getElementById('termsPage').classList.add('hidden');document.getElementById('refundPage').classList.add('hidden');if(page==='landing'){document.getElementById('landingPage').classList.remove('hidden')}else if(page==='privacy'){document.getElementById('privacyPage').classList.remove('hidden')}else if(page==='terms'){document.getElementById('termsPage').classList.remove('hidden')}else if(page==='refund'){document.getElementById('refundPage').classList.remove('hidden')}window.scrollTo({top:0,behavior:'smooth'})}
-        function openVideoModal(src){const m=document.getElementById('videoModal'),v=document.getElementById('modalVideo');v.src=src;m.classList.add('active');document.body.style.overflow='hidden'}
-        function closeVideoModal(){const m=document.getElementById('videoModal'),v=document.getElementById('modalVideo');v.pause();v.src='';m.classList.remove('active');document.body.style.overflow='unset'}
-        document.getElementById('videoModal').addEventListener('click',(e)=>{if(e.target===document.getElementById('videoModal')){closeVideoModal()}});
+        let mobileMenuOpen = false;
+        function toggleMobileMenu() { mobileMenuOpen = !mobileMenuOpen; const m = document.getElementById('mobileMenu'), mi = document.getElementById('menuIcon'), ci = document.getElementById('closeIcon'); if (mobileMenuOpen) { m.classList.remove('hidden'); mi.classList.add('hidden'); ci.classList.remove('hidden'); document.body.style.overflow = 'hidden' } else { m.classList.add('hidden'); mi.classList.remove('hidden'); ci.classList.add('hidden'); document.body.style.overflow = 'unset' } }
+        window.addEventListener('scroll', () => { const n = document.getElementById('navbar'); if (window.scrollY > 20 || mobileMenuOpen) { n.classList.add('scrolled') } else { n.classList.remove('scrolled') } });
+        function scrollToSection(id) { const cp = getCurrentPage(); if (cp !== 'landing') { showPage('landing'); setTimeout(() => { if (id === 'home') { window.scrollTo({ top: 0, behavior: 'smooth' }) } else { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }) } }, 100) } else { if (id === 'home') { window.scrollTo({ top: 0, behavior: 'smooth' }) } else { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }) } } }
+        function getCurrentPage() { if (!document.getElementById('landingPage').classList.contains('hidden')) return 'landing'; if (!document.getElementById('privacyPage').classList.contains('hidden')) return 'privacy'; if (!document.getElementById('termsPage').classList.contains('hidden')) return 'terms'; if (!document.getElementById('refundPage').classList.contains('hidden')) return 'refund'; return 'landing' }
+        function showPage(page) { document.getElementById('landingPage').classList.add('hidden'); document.getElementById('privacyPage').classList.add('hidden'); document.getElementById('termsPage').classList.add('hidden'); document.getElementById('refundPage').classList.add('hidden'); if (page === 'landing') { document.getElementById('landingPage').classList.remove('hidden') } else if (page === 'privacy') { document.getElementById('privacyPage').classList.remove('hidden') } else if (page === 'terms') { document.getElementById('termsPage').classList.remove('hidden') } else if (page === 'refund') { document.getElementById('refundPage').classList.remove('hidden') } window.scrollTo({ top: 0, behavior: 'smooth' }) }
+        function openVideoModal(src) { const m = document.getElementById('videoModal'), v = document.getElementById('modalVideo'); v.src = src; m.classList.add('active'); document.body.style.overflow = 'hidden' }
+        function closeVideoModal() { const m = document.getElementById('videoModal'), v = document.getElementById('modalVideo'); v.pause(); v.src = ''; m.classList.remove('active'); document.body.style.overflow = 'unset' }
+        document.getElementById('videoModal').addEventListener('click', (e) => { if (e.target === document.getElementById('videoModal')) { closeVideoModal() } });
 
         // Email Optin Modal Functions
         function openOptinModal() {
@@ -335,21 +3284,21 @@
         // Handle form submission
         async function handleOptinSubmit(event) {
             event.preventDefault();
-            
+
             const name = document.getElementById('optinName').value.trim();
             const email = document.getElementById('optinEmail').value.trim();
             const submitBtn = document.getElementById('optinSubmit');
             const submitText = document.getElementById('submitText');
             const spinner = document.getElementById('submitSpinner');
             const errorEl = document.getElementById('optinError');
-            
+
             // Validate name
             if (!name || name.length < 2) {
                 errorEl.textContent = 'Please enter your name';
                 errorEl.classList.add('show');
                 return;
             }
-            
+
             // Validate email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
@@ -357,14 +3306,14 @@
                 errorEl.classList.add('show');
                 return;
             }
-            
+
             errorEl.classList.remove('show');
-            
+
             // Show loading state
             submitBtn.disabled = true;
             submitText.textContent = 'Processing...';
             spinner.style.display = 'block';
-            
+
             try {
                 // Send to Google Sheets
                 if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
@@ -381,11 +3330,11 @@
                         })
                     });
                 }
-                
+
                 // Redirect to Calendly with pre-filled name and email
                 const calendlyWithParams = CALENDLY_URL + '?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
                 window.location.href = calendlyWithParams;
-                
+
             } catch (error) {
                 console.error('Error:', error);
                 // Still redirect to Calendly even if sheet save fails
@@ -402,14 +3351,26 @@
             }
         });
 
-        function updateCalculator(){const dv=parseInt(document.getElementById('dealValue').value),cr=parseInt(document.getElementById('closeRate').value),mt=parseInt(document.getElementById('meetings').value),pr=mt*(cr/100)*dv,ar=pr*12;document.getElementById('dealValueDisplay').textContent=formatCurrency(dv);document.getElementById('closeRateDisplay').textContent=cr+'%';document.getElementById('meetingsDisplay').textContent=mt+' Calls';document.getElementById('monthlyRevenue').textContent=formatCurrency(pr);document.getElementById('annualRevenue').textContent=formatCurrency(ar)}
-        function formatCurrency(val){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(val)}
-        let openFaqIndex=null;
-        function toggleFaq(index){const items=document.querySelectorAll('.faq-item');items.forEach((item,i)=>{const icon=item.querySelector('.faq-icon');if(i===index&&openFaqIndex!==index){item.classList.add('open');icon.innerHTML='<line x1="5" y1="12" x2="19" y2="12"></line>';openFaqIndex=index}else{item.classList.remove('open');icon.innerHTML='<line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>'}});if(openFaqIndex===index&&!document.querySelector('.faq-item.open')){openFaqIndex=null}}
-        const fadeObserver=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');fadeObserver.unobserve(entry.target)}})},{threshold:0.1});
-        document.querySelectorAll('.fade-in').forEach(el=>{fadeObserver.observe(el)});
-        function handleProcessScroll(){const c=document.getElementById('processContainer');if(!c)return;const r=c.getBoundingClientRect(),wh=window.innerHeight,eh=r.height,so=wh*0.5,ry=so-r.top;let p=ry/eh;p=Math.max(0,Math.min(1.1,p));const clh=p*eh,lp=Math.min(100,p*100);document.getElementById('processLine').style.height=lp+'%';document.getElementById('processDot').style.top=lp+'%';const steps=document.querySelectorAll('.process-step');steps.forEach((step)=>{const sd=step.querySelector('.process-step-dot');if(clh>step.offsetTop+20){step.classList.remove('inactive');sd.classList.add('active')}else{step.classList.add('inactive');sd.classList.remove('active')}})}
-        window.addEventListener('scroll',handleProcessScroll);handleProcessScroll();updateCalculator();
+function updateCalculator(){
+  const appts = parseInt(document.getElementById('roiAppointments').value, 10);
+  const close = parseFloat(document.getElementById('roiCloseRate').value);
+  const acv = parseInt(document.getElementById('roiAcv').value, 10);
+
+  const annual = appts * 12 * (close / 100) * acv;
+
+  document.getElementById('roiAppointmentsVal').textContent = String(appts);
+  document.getElementById('roiCloseRateVal').textContent = String(close);
+  document.getElementById('roiAcvVal').textContent = String(acv); // matches screenshot (no commas)
+
+  document.getElementById('roiAnnualSales').textContent = formatCurrency(Math.round(annual));
+}        function formatCurrency(val) { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val) }
+        let openFaqIndex = null;
+        function toggleFaq(index) { const items = document.querySelectorAll('.faq-item'); items.forEach((item, i) => { const icon = item.querySelector('.faq-icon'); if (i === index && openFaqIndex !== index) { item.classList.add('open'); icon.innerHTML = '<line x1="5" y1="12" x2="19" y2="12"></line>'; openFaqIndex = index } else { item.classList.remove('open'); icon.innerHTML = '<line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>' } }); if (openFaqIndex === index && !document.querySelector('.faq-item.open')) { openFaqIndex = null } }
+        const fadeObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); fadeObserver.unobserve(entry.target) } }) }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => { fadeObserver.observe(el) });
+        function handleProcessScroll() { const c = document.getElementById('processContainer'); if (!c) return; const r = c.getBoundingClientRect(), wh = window.innerHeight, eh = r.height, so = wh * 0.5, ry = so - r.top; let p = ry / eh; p = Math.max(0, Math.min(1.1, p)); const clh = p * eh, lp = Math.min(100, p * 100); document.getElementById('processLine').style.height = lp + '%'; document.getElementById('processDot').style.top = lp + '%'; const steps = document.querySelectorAll('.process-step'); steps.forEach((step) => { const sd = step.querySelector('.process-step-dot'); if (clh > step.offsetTop + 20) { step.classList.remove('inactive'); sd.classList.add('active') } else { step.classList.add('inactive'); sd.classList.remove('active') } }) }
+        window.addEventListener('scroll', handleProcessScroll); handleProcessScroll(); updateCalculator();
     </script>
 </body>
+
 </html>

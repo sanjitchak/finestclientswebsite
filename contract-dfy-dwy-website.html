@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Finest Enterprises - Agreement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg-body: #f3f4f6;
+      --bg-card: #ffffff;
+      --border-subtle: #e5e7eb;
+      --border-strong: #d1d5db;
+      --accent: #111827;
+      --accent-soft: #1f2937;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --radius-lg: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-body);
+      color: var(--text-main);
+    }
+
+    .page-wrapper {
+      max-width: 900px;
+      margin: 0 auto 40px auto;
+    }
+
+    .contract-container {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.15);
+      padding: 40px 48px 32px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    header.contract-header {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+
+    .contract-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .contract-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      line-height: 1.5;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .meta-label {
+      font-weight: 600;
+      color: var(--accent-soft);
+    }
+
+    .section {
+      margin-top: 24px;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--accent-soft);
+      margin: 0 0 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 6px 0;
+    }
+
+    .section ul {
+      margin: 6px 0 8px 1.2rem;
+      padding: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .section ul li {
+      margin: 4px 0;
+    }
+
+    .highlight-box {
+      border-radius: 10px;
+      border: 1px solid var(--border-strong);
+      background: #f9fafb;
+      padding: 14px 16px;
+      margin-top: 8px;
+    }
+
+    .highlight-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-soft);
+      margin-bottom: 4px;
+    }
+
+    .signature-section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .signature-section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+
+    .signature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px 24px;
+      margin-top: 12px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent-soft);
+    }
+
+    .field-input {
+      border-radius: 8px;
+      border: 1px solid var(--border-strong);
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .field-input:focus {
+      border-color: #111827;
+      box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.5);
+    }
+
+    /* Signature input with script font */
+    .signature-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid var(--border-strong);
+      padding: 12px 4px 6px;
+      font-size: 1.6rem;
+      font-family: "Dancing Script", "Segoe Script", cursive;
+      background: transparent;
+      outline: none;
+      text-align: left;
+    }
+
+    .signature-input::placeholder {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .signature-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .actions-bar {
+      margin-top: 24px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .primary-button {
+      border-radius: 999px;
+      border: none;
+      padding: 10px 24px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: #111827;
+      color: #f9fafb;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.25);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .primary-button:hover {
+      background: #020617;
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.3);
+    }
+
+    .primary-button:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
+    }
+
+    .primary-button:focus-visible {
+      outline: 2px solid #111827;
+      outline-offset: 3px;
+    }
+
+    .no-print {
+      /* kept for print styles */
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+
+      .contract-container {
+        padding: 24px 18px 24px;
+      }
+
+      .contract-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+
+      .page-wrapper {
+        margin: 0;
+        max-width: 100%;
+      }
+
+      .contract-container {
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+        padding: 24px 32px;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="contract-container" id="contract">
+      <header class="contract-header">
+        <h1 class="contract-title">Finest Enterprises - Agreement</h1>
+        <p class="contract-subtitle">
+          This Agreement is made and entered into between the signatory at the end of this Agreement
+          (“you” or “your”) and Finest Enterprises (“us,” “we,” “our,” or “Finest Enterprises”),
+          and is effective as of the date of your signature.
+          In consideration of the promises, and of the mutual covenants and conditions contained here,
+          the parties agree to the following terms and conditions.
+        </p>
+        <div class="meta-row">
+          <div><span class="meta-label">Program:</span> Creative Agency Blueprint </div>
+          <div><span class="meta-label">Jurisdiction:</span> Noida, Uttar Pradesh, India</div>
+        </div>
+      </header>
+
+      <section class="section">
+        <h2 class="section-title">Program Deliverables</h2>
+        <p>
+          Subject to the terms of this Agreement, we will provide the following services to you under a phased implementation plan:
+        </p>
+        
+        <div class="highlight-box" style="background-color: #fff; margin-bottom: 15px;">
+          <div class="highlight-label">Phase 1: Month 1 (Initial Setup & Outreach)</div>
+          <p>
+            During the first month, our sole focus is on generating leads for your <strong>Website Development</strong> services.
+          </p>
+          <ul>
+            <li>
+              <strong>Cold Email Campaigns:</strong> We will setup, structure, and execute cold email outreach campaigns specifically targeting website development leads.
+            </li>
+            <li>
+              <strong>Exclusions:</strong> No other services, offer creation, or strategic consulting are included during this phase.
+            </li>
+          </ul>
+        </div>
+
+        <div class="highlight-box" style="background-color: #fff; margin-bottom: 15px;">
+          <div class="highlight-label">Phase 2: Month 2 Onwards (Expansion)</div>
+          <p>
+            Starting from the second month, we will expand the scope to include content support while continuing lead generation.
+          </p>
+          <ul>
+             <li>
+               <strong>Continued Email Outreach:</strong> Ongoing management of cold email campaigns for website development.
+             </li>
+             <li>
+               <strong>YouTube Channel Guidance:</strong> Assignment of a dedicated team member to provide guidance on your YouTube channel (content strategy, topic selection, and performance review).
+             </li>
+          </ul>
+        </div>
+
+        <div class="highlight-box" style="background-color: #f3f4f6;">
+          <div class="highlight-label">Phase 3: Future Roadmap (Conditional)</div>
+          <p>
+            After approximately 2–3 months, contingent upon the successful booking of appointments and results from Phase 1 & 2, the parties may agree to transition to a "Done With You" model. This future phase will include offer creation, sales script optimization, and deeper strategic consulting. This transition is not automatic and will be discussed based on performance data.
+          </p>
+        </div>
+      </section>
+
+   <section class="section">
+  <h2 class="section-title">Fees and Payment</h2>
+
+  <div class="highlight-box">
+    <div class="highlight-label">Monthly Retainer</div>
+    <p>
+      <strong>₹35,000 per month</strong> (Thirty-Five Thousand Indian Rupees).
+    </p>
+    <p style="margin-top: 10px;">
+      <strong>GST Invoice (Optional):</strong> If you require a GST invoice, GST will be charged extra at the applicable rate,
+      and the total payable will be <strong>₹35,000 + GST</strong>.
+    </p>
+  </div>
+
+  <p>
+    This fee covers the Cold Email Campaigns (Month 1) and the addition of YouTube Guidance (Month 2 onwards).
+    Payments must be made in advance of the service month.
+  </p>
+</section>
+
+      <section class="section">
+        <h2 class="section-title">Refund Policy</h2>
+        <p>
+          <strong>Strict No Refund Policy.</strong>
+        </p>
+        <p>
+          All payments made to Finest Enterprises are final and non-refundable. By signing this Agreement, you acknowledge that we do not offer refunds under any circumstances, and you waive any right to initiate chargebacks with your payment provider.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Authorized Representatives</h2>
+        <p>
+          If you are a company, the person signing this Agreement on your behalf guarantees all terms, conditions, obligations, and payments under this Agreement.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Intellectual Property</h2>
+        <p>
+          All materials provided in the Program are the property of Finest Enterprises or its licensors.
+          You may not record, reproduce, or distribute any material without explicit written permission.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Confidentiality and Data Use</h2>
+        <p>
+          We may collect, analyze, and use anonymized or aggregate data from your participation to improve the Program.
+          Your personal data will be handled in compliance with applicable laws and not shared with unauthorized parties.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Termination</h2>
+        <p>
+          We reserve the right to terminate your access at our discretion if you violate this Agreement.
+          Full payment of outstanding fees is required regardless of termination.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Indemnification</h2>
+        <p>
+          You indemnify and hold Finest Enterprises and its representatives harmless from any claims, damages,
+          or liabilities arising from your use of the services.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Governing Law and Dispute Resolution</h2>
+        <p>
+          This Agreement is governed by the laws of India, with exclusive jurisdiction in the courts of Noida, Uttar Pradesh.
+          Disputes may be resolved through mediation or arbitration before court proceedings.
+        </p>
+      </section>
+
+      <section class="signature-section">
+        <h2 class="signature-section-title">Acceptance</h2>
+        <p>
+          By signing below, you agree to the terms of this Agreement, specifically the deliverables roadmap and the non-refundable nature of the fees.
+        </p>
+
+        <div class="signature-grid">
+          <div class="field-group">
+            <label class="field-label" for="signatory-name">Signatory Full Name</label>
+            <input id="signatory-name" class="field-input" type="text" placeholder="Enter full legal name" />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="company-name">Legal Company Name</label>
+            <input id="company-name" class="field-input" type="text" placeholder="Enter company legal name" />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="sign-date">Date</label>
+            <input id="sign-date" class="field-input" type="date" />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="signature-text">Signature</label>
+            <input
+              id="signature-text"
+              class="signature-input"
+              type="text"
+              placeholder="Type your name here"
+            />
+            <div class="signature-hint">
+              Type your name and it will appear in a handwritten style.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions-bar no-print">
+        <button class="primary-button" type="button" onclick="window.print()">
+          Download PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  </body>
+</html>

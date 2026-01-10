@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Finest Enterprises - Agreement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Fonts: Inter + Dancing Script for signature -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg-body: #f3f4f6;
+      --bg-card: #ffffff;
+      --border-subtle: #e5e7eb;
+      --border-strong: #d1d5db;
+      --accent: #111827;
+      --accent-soft: #1f2937;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --radius-lg: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-body);
+      color: var(--text-main);
+    }
+
+    .page-wrapper {
+      max-width: 900px;
+      margin: 0 auto 40px auto;
+    }
+
+    .contract-container {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.15);
+      padding: 40px 48px 32px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    header.contract-header {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+
+    .contract-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .contract-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      line-height: 1.5;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .meta-label {
+      font-weight: 600;
+      color: var(--accent-soft);
+    }
+
+    .section {
+      margin-top: 24px;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--accent-soft);
+      margin: 0 0 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 6px 0;
+    }
+
+    .section ul {
+      margin: 6px 0 8px 1.2rem;
+      padding: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .section ul li {
+      margin: 4px 0;
+    }
+
+    .highlight-box {
+      border-radius: 10px;
+      border: 1px solid var(--border-strong);
+      background: #f9fafb;
+      padding: 14px 16px;
+      margin-top: 8px;
+    }
+
+    .highlight-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-soft);
+      margin-bottom: 4px;
+    }
+
+    .signature-section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .signature-section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+
+    .signature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px 24px;
+      margin-top: 12px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent-soft);
+    }
+
+    .field-input {
+      border-radius: 8px;
+      border: 1px solid var(--border-strong);
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .field-input:focus {
+      border-color: #111827;
+      box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.5);
+    }
+
+    .signature-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid var(--border-strong);
+      padding: 12px 4px 6px;
+      font-size: 1.6rem;
+      font-family: "Dancing Script", "Segoe Script", cursive;
+      background: transparent;
+      outline: none;
+      text-align: left;
+    }
+
+    .signature-input::placeholder {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .signature-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .actions-bar {
+      margin-top: 24px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .primary-button {
+      border-radius: 999px;
+      border: none;
+      padding: 10px 24px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: #111827;
+      color: #f9fafb;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.25);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .primary-button:hover {
+      background: #020617;
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.3);
+    }
+
+    .primary-button:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
+    }
+
+    .primary-button:focus-visible {
+      outline: 2px solid #111827;
+      outline-offset: 3px;
+    }
+
+    .no-print {
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+
+      .contract-container {
+        padding: 24px 18px 24px;
+      }
+
+      .contract-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+
+      .page-wrapper {
+        margin: 0;
+        max-width: 100%;
+      }
+
+      .contract-container {
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+        padding: 24px 32px;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="contract-container" id="contract">
+      <header class="contract-header">
+        <h1 class="contract-title">Finest Enterprises - Agreement</h1>
+        <p class="contract-subtitle">
+          This Agreement is made and entered into between the signatory at the end of this Agreement
+          (“you” or “your”) and Finest Enterprises (“us,” “we,” “our,” or “Finest Enterprises”),
+          and is effective as of the date of your signature.
+          In consideration of the promises, and of the mutual covenants and conditions contained here,
+          the parties agree to the following terms and conditions.
+        </p>
+        <div class="meta-row">
+          <div>
+            <span class="meta-label">Program:</span>
+            Creative Agency Blueprint Program (Done For You)
+          </div>
+          <div><span class="meta-label">Jurisdiction:</span> Noida, Uttar Pradesh, India</div>
+        </div>
+      </header>
+
+      <!-- Program Deliverables -->
+      <section class="section">
+        <h2 class="section-title">Program Deliverables</h2>
+        <p>
+          Subject to the terms of this Agreement, we will use commercially reasonable efforts to provide the following services to you under the Finest Enterprises Incubator Program:
+        </p>
+        <ul>
+          <li>
+            Signature access to The Finest Enterprises Incubator and all client acquisition systems developed by Finest Enterprises.
+          </li>
+
+          <li>
+            Tool stack setup and management for cold email outreach, with an estimated tool cost of ₹15,000 per month payable by you.
+          </li>
+
+          <li>
+            A clear month by month implementation plan:
+            <ul>
+              <li>
+                <strong>Month 1</strong> Set up and launch your cold email system, refine or create your offer, complete domain and technical configuration, and begin done for you content production for your agreed channels.
+              </li>
+              <li>
+                <strong>Month 2</strong> Scale cold email and content output, improve copy and targeting, and, if your budget permits and you approve, start paid ad campaigns on top of email and content. All technical setup for ads is included in the Program; ad spend is paid by you directly to the platforms.
+              </li>
+              <li>
+                <strong>Month 3 and beyond</strong> Ongoing optimisation of cold email, content, and, where applicable, ads to improve appointments, close rates, and overall client acquisition.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Long term done with you support for content marketing and paid ads that does not depend on specific results, delivered through:
+            <ul>
+              <li>
+                An account manager to guide strategy, review assets, and monitor performance.
+              </li>
+              <li>
+                Access to a learning platform for YouTube and Instagram organic content marketing.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Access to one to one calls during the Program for strategy, review, accountability, and troubleshooting.
+          </li>
+
+          <li>
+            Twenty four by seven access to all previous content during the Program duration.
+          </li>
+        </ul>
+
+        <p>
+          Months 1 and 2 focus on cold email and content as the core acquisition channels. Paid ad campaigns are optional and may be activated from Month 2 onward only if you approve the required ad budget.
+        </p>
+
+        <div class="highlight-box">
+          <div class="highlight-label">Client Responsibilities</div>
+          <p>
+            Once the cold email and content systems are live, you are responsible for taking booked appointments, running sales calls, and following up with leads in a timely manner. You also remain responsible for funding all media spend and tool subscriptions.
+          </p>
+        </div>
+
+        <div class="highlight-box">
+          <div class="highlight-label">Tool Cost Options</div>
+          <p>
+            The figures below show a typical comparison between buying tools yourself and using our preferred stack with us.
+          </p>
+
+          <p><strong>Option 1: Doing It Yourself (Retail Cost)</strong></p>
+          <ul>
+            <li>Sendspark (Video AI): ₹8,400 per month (approx. $99).</li>
+            <li>Zapmail (Email infrastructure): ₹6,600 per month (approx. $78).</li>
+            <li>Hypergrowth (CRM): ₹8,300 per month (approx. $97).</li>
+            <li>Prosp.ai (Personalisation): ₹6,700 per month (approx. $79).</li>
+            <li>Million Verifier (Data cleaning): ₹4,000 per month.</li>
+          </ul>
+          <p>
+            <strong>Approximate total monthly cost:</strong> ₹34,000 to ₹35,000 per month.
+          </p>
+
+          <p><strong>Option 2: Working With Us (Partner Cost)</strong></p>
+          <ul>
+            <li>Sendspark (Video AI): ₹8,400 per month.</li>
+            <li>Zapmail (Email infrastructure): ₹6,600 per month.</li>
+            <li>Hypergrowth (CRM): included at no extra cost.</li>
+            <li>Million Verifier (Data cleaning): included at no extra cost.</li>
+            <li>Prosp.ai (Personalisation): not required at the beginning.</li>
+          </ul>
+          <p>
+            <strong>Approximate total monthly cost:</strong> ₹15,000 per month.
+          </p>
+
+          <p><strong>Client costs in both options:</strong></p>
+          <ul>
+                       <li>4 Domains: about ₹1,000x4 per year per domain (approx. $12x4).</li>
+
+            <li>Lead sourcing: about ₹2,100 per 2,000 to 3,000 leads (approx. $25).</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Fees and Payment -->
+      <section class="section">
+        <h2 class="section-title">Fees and Payment</h2>
+        <div class="highlight-box">
+          <div class="highlight-label">Program Fee</div>
+          <p>
+            The fee for the Program is ₹1,80,000 per month, with a minimum commitment of three consecutive months
+            (three month lock in). Fees are payable monthly in advance unless otherwise agreed in writing.
+          </p>
+        </div>
+        <div class="highlight-box">
+          <div class="highlight-label">Client Success Extension</div>
+          <p>
+            If, after the initial three paid months, you have not closed at least ten paying clients directly from
+            the systems we build and manage, Finest Enterprises will continue to deliver the same services for up to
+            an additional three months at no additional Program fee, or until you close your first ten clients,
+            whichever happens earlier. After this period, standard monthly billing resumes.
+          </p>
+        </div>
+        <p>
+          If payments are not completed, Finest Enterprises reserves the right to suspend or revoke your access to the Program.
+        </p>
+      </section>
+
+      <!-- Authorized Representatives -->
+      <section class="section">
+        <h2 class="section-title">Authorized Representatives</h2>
+        <p>
+          If you are a company, the person signing this Agreement on your behalf guarantees all terms, conditions,
+          obligations, and payments under this Agreement. For the avoidance of doubt, any employee, agent, or third party
+          authorized by your company who logs into the Program will be considered bound by these terms.
+        </p>
+      </section>
+
+      <!-- Intellectual Property -->
+      <section class="section">
+        <h2 class="section-title">Intellectual Property</h2>
+        <p>
+          All materials provided in the Program are the property of Finest Enterprises or its licensors.
+          You may not record, reproduce, or distribute any material without explicit written permission.
+          By participating, you permit us to use your voice, likeness, and results for promotional purposes.
+        </p>
+      </section>
+
+      <!-- Confidentiality and Data Use -->
+      <section class="section">
+        <h2 class="section-title">Confidentiality and Data Use</h2>
+        <p>
+          We may collect, analyze, and use anonymized or aggregate data from your participation to improve the Program.
+          Your personal data will be handled in compliance with applicable laws and not shared with unauthorized parties.
+        </p>
+      </section>
+
+      <!-- Compliance with Laws -->
+      <section class="section">
+        <h2 class="section-title">Compliance with Laws</h2>
+        <p>
+          You agree to use the Program in compliance with our policies and applicable laws.
+          We reserve the right to suspend your access for any violations.
+        </p>
+      </section>
+
+      <!-- Termination and Ejection -->
+      <section class="section">
+        <h2 class="section-title">Termination and Ejection</h2>
+        <p>
+          We reserve the right to terminate your access at our discretion if you violate this Agreement
+          or take actions adverse to Finest Enterprises. Full payment of fees is required regardless of termination.
+        </p>
+      </section>
+
+      <!-- Indemnification -->
+      <section class="section">
+        <h2 class="section-title">Indemnification</h2>
+        <p>
+          You indemnify and hold Finest Enterprises and its representatives harmless from any claims, damages,
+          or liabilities arising from your use of the Program.
+        </p>
+      </section>
+
+      <!-- Program Duration -->
+      <section class="section">
+        <h2 class="section-title">Program Duration</h2>
+        <p>
+          This Agreement remains in effect for as long as you retain login access to the Program and for a minimum of six months thereafter.
+        </p>
+        <p>
+          We may update these terms at any time with prior notice. Continued participation constitutes acceptance of the updated terms.
+        </p>
+      </section>
+
+      <!-- Voluntary Participation -->
+      <section class="section">
+        <h2 class="section-title">Voluntary Participation</h2>
+        <p>
+          Your decision to join the Program is entirely voluntary.
+          We do not guarantee specific results, and your success depends on your effort and implementation.
+        </p>
+      </section>
+
+      <!-- Limitation of Liability -->
+      <section class="section">
+        <h2 class="section-title">Limitation of Liability</h2>
+        <p>
+          Finest Enterprises is not liable for:
+        </p>
+        <ul>
+          <li>Errors or interruptions in Program delivery.</li>
+          <li>Indirect or consequential damages.</li>
+          <li>Loss of business, data, or revenue.</li>
+        </ul>
+        <p>
+          Our liability is capped at the fees you paid us in the 12 months preceding the claim.
+        </p>
+      </section>
+
+      <!-- Governing Law and Dispute Resolution -->
+      <section class="section">
+        <h2 class="section-title">Governing Law and Dispute Resolution</h2>
+        <p>
+          This Agreement is governed by the laws of India, with exclusive jurisdiction in the courts of Noida, Uttar Pradesh.
+          Disputes may be resolved through mediation or arbitration before court proceedings.
+        </p>
+        <p>
+          All applicable taxes will be added to the Program fee and are payable by you.
+        </p>
+      </section>
+
+      <!-- Acceptance and Signature -->
+      <section class="signature-section">
+        <h2 class="signature-section-title">Acceptance</h2>
+        <p>
+          By signing below, you agree to the terms of this Agreement and authorize all charges as outlined.
+        </p>
+
+        <div class="signature-grid">
+          <div class="field-group">
+            <label class="field-label" for="signatory-name">Signatory Full Name</label>
+            <input id="signatory-name" class="field-input" type="text" placeholder="Enter full legal name" />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="company-name">Legal Company Name</label>
+            <input id="company-name" class="field-input" type="text" placeholder="Enter company legal name" />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="sign-date">Date</label>
+            <input id="sign-date" class="field-input" type="date" />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="signature-text">Signature</label>
+            <input
+              id="signature-text"
+              class="signature-input"
+              type="text"
+              placeholder="Type your name here"
+            />
+            <div class="signature-hint">
+              Type your name and it will appear in a handwritten style.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions-bar no-print">
+        <button class="primary-button" type="button" onclick="window.print()">
+          Download PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- window.print handles saving as PDF -->
+</body>
+</html>

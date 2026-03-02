@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finest Clients - Client Acquisition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Base Variables & Reset */
+        :root {
+            --bg-dark: #000000;
+            --text-main: #f8fafc;
+            --text-muted: #cccccc;
+            
+            --btn-blue: #D4AF37;
+            --btn-glow: rgba(212, 175, 55, 0.4);
+            
+            --red-bg: #111111;
+            --red-border: #333333;
+            --red-text: #cccccc;
+            --red-icon: #D4AF37;
+            
+            --green-bg: #1a1600;
+            --green-border: #D4AF37;
+            --green-text: #ffffff;
+            --green-icon: #D4AF37;
+            
+            --card-dark: #0a0a0a;
+            --border-subtle: #222222;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glows */
+        .glow-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15), transparent 50%),
+                        radial-gradient(circle at 50% 100%, rgba(170, 140, 44, 0.1), transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section { padding: 60px 0; }
+
+        /* Typography */
+        h1, h2, h3, h4 { text-align: center; line-height: 1.2; font-weight: 800; }
+        
+        .eyebrow {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #D4AF37;
+        }
+        .eyebrow-red { color: #D4AF37; }
+
+        h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 20px; }
+        h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 20px; }
+        
+        .subheadline {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .text-green { color: #D4AF37; }
+
+        /* Button */
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 450px;
+            margin: 40px auto;
+            padding: 18px 20px;
+            background: linear-gradient(to right, #D4AF37, #AA8C2C);
+            color: #000000;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 900;
+            border-radius: 6px;
+            box-shadow: 0 0 25px var(--btn-glow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.8);
+        }
+
+        /* Video Placeholders */
+        .video-box {
+            background: #000;
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            position: relative;
+            aspect-ratio: 16/9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .video-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #111111 0%, #000 100%);
+            z-index: 1;
+        }
+        .yt-play {
+            width: 70px; height: 50px;
+            z-index: 3;
+            transition: transform 0.2s;
+        }
+        .video-box:hover .yt-play { transform: scale(1.1); }
+        .thumb-overlay {
+            position: absolute;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Testimonials Layout */
+        .testimonial-featured { margin-bottom: 30px; }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 600px) { .testimonial-grid { grid-template-columns: 1fr 1fr; } }
+
+        .t-header { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; justify-content: center; }
+        .testimonial-grid .t-header { justify-content: flex-start; }
+        .t-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--border-subtle); display: flex; align-items: center; justify-content: center; }
+        .t-avatar svg { width: 24px; height: 24px; fill: #cccccc; }
+        .t-info { text-align: left; }
+        .t-name { font-weight: 700; font-size: 1rem; color: #fff; line-height: 1.2; }
+        .t-title { font-size: 0.8rem; color: #D4AF37; }
+        .t-quote { font-style: italic; font-size: 0.95rem; margin-bottom: 15px; color: var(--text-muted); }
+
+        /* Grids for Features */
+        .grid-2 { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px; }
+        @media (min-width: 600px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+        
+        .grid-3 { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px; }
+        @media (min-width: 768px) { .grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+        /* Feature Cards */
+        .card { padding: 25px; border-radius: 8px; border: 1px solid var(--border-subtle); }
+        .card h3 { text-align: left; font-size: 1.1rem; margin-bottom: 10px; font-weight: 700; }
+        .card p { font-size: 0.95rem; }
+        .card-icon { width: 32px; height: 32px; margin-bottom: 15px; }
+
+        /* Red Cards (Problem) -> Now Dark/Gold */
+        .card-red { background: var(--red-bg); border-color: var(--red-border); }
+        .card-red h3 { color: #fff; }
+        .card-red p { color: var(--red-text); }
+        .card-red .card-icon { fill: var(--red-icon); }
+
+        /* Green Cards (Solution) -> Now Dark/Gold */
+        .card-green { background: var(--green-bg); border-color: var(--green-border); }
+        .card-green h3 { color: #fff; }
+        .card-green p { color: var(--green-text); }
+        .card-green .card-icon { fill: var(--green-icon); }
+
+        /* Dark Cards (Offer) */
+        .card-dark { background: var(--card-dark); text-align: center; }
+        .card-dark h3 { text-align: center; color: #fff; }
+        .card-dark p { color: var(--text-muted); }
+        .card-dark .card-icon { fill: #D4AF37; margin: 0 auto 15px; }
+
+        /* Snake Flowchart */
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 50px 0;
+            position: relative;
+        }
+        .flow-row {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        @media (min-width: 768px) {
+            .flow-row { flex-direction: row; justify-content: center; }
+            .flow-reverse { flex-direction: row-reverse; }
+        }
+        .flow-box {
+            background: #111111;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+            width: 100%;
+            max-width: 220px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #333333;
+            z-index: 2;
+        }
+        .flow-highlight {
+            border-color: #D4AF37;
+            background: #1a1600;
+            position: relative;
+        }
+        .flow-arrow {
+            width: 24px; height: 24px; fill: #64748b;
+            transform: rotate(90deg);
+        }
+        @media (min-width: 768px) {
+            .flow-arrow { transform: rotate(0deg); }
+            .flow-reverse .flow-arrow { transform: rotate(180deg); }
+        }
+        
+        .red-scribble {
+            position: absolute;
+            top: -30px;
+            left: -10px;
+            color: #D4AF37;
+            font-family: cursive;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transform: rotate(-10deg);
+            pointer-events: none;
+            z-index: 10;
+        }
+        .red-scribble svg { width: 30px; height: 30px; fill: none; stroke: #D4AF37; stroke-width: 2; }
+        
+        @media (max-width: 767px) {
+            .red-scribble { left: 0px; top: -20px; }
+            .flow-reverse .flow-arrow { transform: rotate(90deg); } /* Keep pointing down on mobile */
+        }
+
+        /* Comparison Section */
+        .comp-wrap { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+        @media (min-width: 768px) { .comp-wrap { flex-direction: row; } }
+        
+        .comp-col { flex: 1; padding: 40px; border-radius: 12px; }
+        .comp-dark { background: #0a0a0a; border: 1px solid var(--border-subtle); }
+        .comp-blue { background: linear-gradient(135deg, #1a1600, #000000); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); border: 1px solid #D4AF37; }
+        
+        .comp-title { font-size: 1.3rem; font-weight: 800; text-align: center; margin-bottom: 30px; color: #fff; }
+        .comp-list { list-style: none; }
+        .comp-list li { margin-bottom: 20px; display: flex; gap: 15px; font-size: 1rem; color: #a3a3a3; align-items: flex-start; }
+        .comp-blue .comp-list li { color: #fff; }
+        .comp-list svg { width: 24px; height: 24px; flex-shrink: 0; }
+
+        /* FAQ Section */
+        .faq-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        @media (min-width: 768px) {
+            .faq-layout { flex-direction: row; align-items: flex-start; }
+        }
+        .faq-left { flex: 0 0 30%; }
+        .faq-left h2 { text-align: left; font-size: 2.5rem; line-height: 1.1; }
+        
+        .faq-right { flex: 1; border: 1px solid var(--border-subtle); border-radius: 8px; background: var(--card-dark); }
+        .faq-item { border-bottom: 1px solid var(--border-subtle); }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-btn {
+            width: 100%; text-align: left; background: none; border: none;
+            color: #fff; padding: 25px 20px; font-size: 1.05rem; font-weight: 700;
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .faq-content {
+            padding: 0 20px; max-height: 0; overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-muted);
+        }
+        .faq-item.active .faq-content { padding: 0 20px 25px; max-height: 300px; }
+        .faq-icon { transition: transform 0.3s; fill: #fff; width: 24px; height: 24px; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+        /* Footer */
+        footer { text-align: center; padding: 60px 20px 40px; border-top: 1px solid var(--border-subtle); margin-top: 60px; }
+        .footer-legal { font-size: 0.8rem; color: #666666; max-width: 700px; margin: 20px auto 0; }
+        
+        /* Utility */
+        .yt-icon { fill: #D4AF37; width: 24px; height: 24px; }
+    </style>
+</head>
+<body>
+    <div class="glow-bg"></div>
+
+    <section>
+        <div class="container">
+            <p class="eyebrow">Coaches & Consultants Who Want High-Ticket Clients From YouTube</p>
+            <h1>We Create YouTube Videos That Book Sales Calls. Or You Do Not Pay.<br><span style="font-size: 0.7em; color: var(--text-muted); font-weight: 600;">(4 Videos. 90 Days. 10 Qualified Calls.)</span></h1>
+            <p class="subheadline">We handle the strategy. We write the scripts. We edit the video. We post it to your channel. You record for four hours a month and close the deals. Completely done for you.</p>
+
+            <div style="max-width: 800px; margin: 0 auto; margin-bottom: 25px; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+                <script src="https://fast.wistia.com/player.js" async></script><script src="https://fast.wistia.com/embed/h8itjpknpn.js" async type="module"></script><style>wistia-player[media-id='h8itjpknpn']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/h8itjpknpn/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> <wistia-player media-id="h8itjpknpn" aspect="1.7777777777777777"></wistia-player>
+            </div>
+
+            <a href="#book" class="cta-btn">>> BOOK YOUR CALL NOW <<</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Does It Actually Work?</h2>
+            <p class="subheadline">We've Built & Scaled YouTube Channels For The Biggest Coaches & Agency Owners In The Space</p>
+
+            <!-- Eddie (Big) -->
+            <div class="testimonial-featured">
+                <div class="t-header">
+                    <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                    <div class="t-info">
+                        <div class="t-name">Eddie Cumberbatch</div>
+                        <div class="t-title">Founder - Growth Operator</div>
+                    </div>
+                </div>
+                <div class="video-box" style="max-width: 700px; margin: 0 auto;">
+                    <div class="video-bg" style="background: radial-gradient(circle, #333, #000);"></div>
+                    <div class="thumb-overlay" style="background:#fff; width: auto; padding: 15px 40px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.8); border: 1px solid #D4AF37;">
+                        <div style="color: #D4AF37; font-size: 1.5rem; font-weight: 900; line-height: 1;">FROM $54K/MO</div>
+                        <div style="font-size: 0.8rem; color: #000; font-weight: 700; margin: 5px 0;">THIS MONTH</div>
+                        <div style="font-size: 3rem; font-weight: 900; color: #000; line-height: 1;">$421,156</div>
+                    </div>
+                    <svg class="yt-play" viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                </div>
+            </div>
+
+            <!-- 4 Small Videos Grid -->
+            <div class="testimonial-grid">
+                <div>
+                    <div class="t-header">
+                        <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div class="t-info">
+                            <div class="t-name">Daniel Fazio</div>
+                            <div class="t-title">Client Ascension & ListKit</div>
+                        </div>
+                    </div>
+                    <div class="video-box">
+                        <div class="video-bg" style="background: radial-gradient(circle, #222, #000);"></div>
+                        <div class="thumb-overlay" style="background:#000; padding: 10px; width:auto; transform: rotate(-3deg); border: 1px solid #D4AF37;">
+                            <span style="color:#D4AF37; font-weight: 900; font-size: 1.5rem;">$108K</span><br><span style="color:#fff; font-weight:900; font-size: 1.2rem;">IN 82 DAYS</span>
+                        </div>
+                        <svg class="yt-play" viewBox="0 0 68 48" style="width: 50px; height: 35px;"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="t-header">
+                        <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div class="t-info">
+                            <div class="t-name">Matt Lucero</div>
+                            <div class="t-title">Agency Owner</div>
+                        </div>
+                    </div>
+                    <div class="video-box">
+                        <div class="video-bg" style="background: radial-gradient(circle, #222, #000);"></div>
+                        <div class="thumb-overlay" style="background:#D4AF37; padding: 10px; width:auto; border-radius: 4px;">
+                            <span style="color:#000; font-weight: 900; font-size: 1.5rem;">+$20,000</span><br><span style="color:#000; font-weight:900; font-size: 1rem;">FROM YOUTUBE</span>
+                        </div>
+                        <svg class="yt-play" viewBox="0 0 68 48" style="width: 50px; height: 35px;"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="t-header">
+                        <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div class="t-info">
+                            <div class="t-name">Othmane</div>
+                            <div class="t-title">Scale Metrics</div>
+                        </div>
+                    </div>
+                    <div class="video-box">
+                        <div class="video-bg" style="background: radial-gradient(circle, #222, #000);"></div>
+                        <div class="thumb-overlay" style="text-shadow: 2px 2px 4px #000; line-height: 1.1;">
+                            <span style="color:#D4AF37; font-weight: 900; font-size: 1.5rem;">CLOSED A DEAL</span><br><span style="color:#fff; font-weight:900; font-size: 1.2rem;">IN THE FIRST<br>3 WEEKS</span>
+                        </div>
+                        <svg class="yt-play" viewBox="0 0 68 48" style="width: 50px; height: 35px;"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="t-header">
+                        <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div class="t-info">
+                            <div class="t-name">Charles Tichenor</div>
+                            <div class="t-title">Disrupter School</div>
+                        </div>
+                    </div>
+                    <div class="video-box">
+                        <div class="video-bg" style="background: radial-gradient(circle, #222, #000);"></div>
+                        <div class="thumb-overlay" style="background:#0a0a0a; padding: 10px; width:auto; border: 3px solid #D4AF37; border-radius: 4px;">
+                            <span style="color:#D4AF37; font-weight: 900; font-size: 1.5rem;">$75,000/month</span>
+                        </div>
+                        <svg class="yt-play" viewBox="0 0 68 48" style="width: 50px; height: 35px;"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#book" class="cta-btn">>> BOOK YOUR CALL NOW <<</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <p class="eyebrow eyebrow-red">You Tried YouTube And It Failed.</p>
+            <h2>Doing More Of The Same Will Not Fix It.</h2>
+            <p class="subheadline">You hired an editor. You posted videos. You got views. You got no clients. The problem is not the platform. The problem is you are still the bottleneck.</p>
+            <h3 style="margin-bottom: 30px; font-size: 1.2rem; text-align: center;">How to guarantee YouTube fails:</h3>
+
+            <div class="grid-2">
+                <div class="card card-red">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                    <h3>Hire a random editor and hope.</h3>
+                    <p>Editors make flashy cuts. They do not understand your high ticket offer. They cannot sell it. Strategy creates revenue. Edits do not.</p>
+                </div>
+                <div class="card card-red">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                    <h3>Trust your value is enough.</h3>
+                    <p>Good information is useless without packaging. You need SEO. You need clickable thumbnails. You need structure. Value without strategy fails.</p>
+                </div>
+                <div class="card card-red">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                    <h3>Try to copy massive creators.</h3>
+                    <p>You are not an entertainer. You are a business owner. Copying viral creators destroys your authority. You need content that builds trust with high net worth buyers.</p>
+                </div>
+                <div class="card card-red">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49-.12-.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
+                    <h3>Do everything yourself.</h3>
+                    <p>Scripting and filming and editing burns you out. Your channel dies the second you sign a new client. Consistency stops. Lead flow crashes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 style="color: #fff;">10 Qualified Calls In 90 Days. Guaranteed.</h2>
+            <p class="subheadline">We build your YouTube client machine. We do the work. You just show up and speak. Here is what happens when you commit.</p>
+
+            <div class="grid-2">
+                <div class="card card-green">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+                    <h3>Book your best sales calls.</h3>
+                    <p>Prospects search YouTube when their pain peaks. They find your video. They book a call. You convert them instantly.</p>
+                </div>
+                <div class="card card-green">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <h3>Improve your other marketing.</h3>
+                    <p>Prospects see your ad. They search your name. They watch your YouTube channel. They buy. Everything converts better.</p>
+                </div>
+                <div class="card card-green">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    <h3>Filter out the unqualified.</h3>
+                    <p>YouTube eliminates time wasters. People qualify themselves through your content. They only book when they want in.</p>
+                </div>
+                <div class="card card-green">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                    <h3>Turn closers into cashiers.</h3>
+                    <p>Prospects watch 45 minutes of your content before the call. They show up ready to buy. You just collect the payment.</p>
+                </div>
+                <div class="card card-green">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                    <h3>Create compounding lead flow.</h3>
+                    <p>Videos rank in search forever. A video you post today will book calls three years from now. You build a permanent asset.</p>
+                </div>
+                <div class="card card-green">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <h3>Dominate your specific niche.</h3>
+                    <p>We give you niche exclusivity. We refuse to build a channel for your competitor. You own the space.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; font-size: 1.15rem; font-weight: 800; color: #D4AF37; border: 1px solid #D4AF37; padding: 20px; border-radius: 8px; background: rgba(26, 22, 0, 0.5);">
+                4 hours a month. 4 videos a month. 10 qualified calls in 90 days. Or we work free until you get them.
+            </div>
+
+            <a href="#book" class="cta-btn">>> BOOK YOUR CALL NOW <<</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <p class="eyebrow">The Done-For-You Mechanism.</p>
+            <h2>We Build The Machine. You Just Record.</h2>
+            <p class="subheadline">Stop guessing. Stop managing freelancers. We handle the entire pipeline.</p>
+
+            <div class="grid-3">
+                <div class="card card-dark">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
+                    <h3>Topic Research</h3>
+                    <p>We research buyer intent topics. We use search demand data. You approve the topics before we start.</p>
+                </div>
+                <div class="card card-dark">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                    <h3>Video Scripting</h3>
+                    <p>We write the exact hook. We outline the video. We write the calls to action. You just talk through the script.</p>
+                </div>
+                <div class="card card-dark">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M18 4v16H6V4h12m0-2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 16h8v2H8v-2zm0-4h8v2H8v-2zm0-4h8v2H8V8z"/></svg>
+                    <h3>Video Editing</h3>
+                    <p>We make strategic cuts. We add graphics. We optimize the video for retention and authority. No cheap templates.</p>
+                </div>
+                <div class="card card-dark">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                    <h3>Thumbnail Design</h3>
+                    <p>We design two custom thumbnails per video. We test them against each other for clicks. We scale the winner.</p>
+                </div>
+                <div class="card card-dark">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+                    <h3>Video Packaging</h3>
+                    <p>We write the titles. We write the descriptions. We add the tags. We position your video to convert.</p>
+                </div>
+                <div class="card card-dark">
+                    <svg class="card-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <h3>Search Engine Optimization</h3>
+                    <p>We rank your content for the exact keywords your buyers search. You show up when they look for a solution.</p>
+                </div>
+            </div>
+
+            <a href="#book" class="cta-btn">>> BOOK YOUR CALL NOW <<</a>
+            
+            <h3 style="margin-top: 60px;">Your 90 Day Timeline</h3>
+            
+            <div class="flowchart">
+                <div class="flow-row">
+                    <div class="flow-box">Onboarding<br>And Strategy</div>
+                    <svg class="flow-arrow" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    <div class="flow-box">Scripts<br>Delivered</div>
+                    <svg class="flow-arrow" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    <div class="flow-box flow-highlight">
+                        <div class="red-scribble">
+                            Your Job
+                            <svg viewBox="0 0 100 50"><path d="M10 25 Q 40 10 90 25 L 80 15 M 90 25 L 80 35" /></svg>
+                        </div>
+                        You Record
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: center; width: 100%;">
+                    <svg class="flow-arrow" style="transform: rotate(90deg);" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </div>
+                <div class="flow-row">
+                    <div class="flow-box">Editing And<br>SEO</div>
+                    <svg class="flow-arrow" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    <div class="flow-box">First Video<br>Live</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF 2 -->
+    <section>
+        <div class="container">
+            <h2>Client Interviews & Testimonials</h2>
+            
+            <!-- Eddie (Big) -->
+            <div class="testimonial-featured">
+                <div class="t-header">
+                    <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                    <div class="t-info">
+                        <div class="t-name">Eddie Cumberbatch</div>
+                        <div class="t-title">Founder - Growth Operator</div>
+                    </div>
+                </div>
+                <div class="video-box" style="max-width: 700px; margin: 0 auto;">
+                    <div class="video-bg" style="background: radial-gradient(circle, #333, #000);"></div>
+                    <div class="thumb-overlay" style="background:#fff; width: auto; padding: 15px 40px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.8); border: 1px solid #D4AF37;">
+                        <div style="color: #D4AF37; font-size: 1.5rem; font-weight: 900; line-height: 1;">FROM $54K/MO</div>
+                        <div style="font-size: 0.8rem; color: #000; font-weight: 700; margin: 5px 0;">THIS MONTH</div>
+                        <div style="font-size: 3rem; font-weight: 900; color: #000; line-height: 1;">$421,156</div>
+                    </div>
+                    <svg class="yt-play" viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                </div>
+            </div>
+
+            <!-- 4 Small Videos Grid -->
+            <div class="testimonial-grid">
+                <div>
+                    <div class="t-header">
+                        <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div class="t-info">
+                            <div class="t-name">Daniel Fazio</div>
+                            <div class="t-title">Client Ascension & ListKit</div>
+                        </div>
+                    </div>
+                    <div class="video-box">
+                        <div class="video-bg" style="background: radial-gradient(circle, #222, #000);"></div>
+                        <div class="thumb-overlay" style="background:#000; padding: 10px; width:auto; transform: rotate(-3deg); border: 1px solid #D4AF37;">
+                            <span style="color:#D4AF37; font-weight: 900; font-size: 1.5rem;">$108K</span><br><span style="color:#fff; font-weight:900; font-size: 1.2rem;">IN 82 DAYS</span>
+                        </div>
+                        <svg class="yt-play" viewBox="0 0 68 48" style="width: 50px; height: 35px;"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="t-header">
+                        <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div class="t-info">
+                            <div class="t-name">Matt Lucero</div>
+                            <div class="t-title">Agency Owner</div>
+                        </div>
+                    </div>
+                    <div class="video-box">
+                        <div class="video-bg" style="background: radial-gradient(circle, #222, #000);"></div>
+                        <div class="thumb-overlay" style="background:#D4AF37; padding: 10px; width:auto; border-radius: 4px;">
+                            <span style="color:#000; font-weight: 900; font-size: 1.5rem;">+$20,000</span><br><span style="color:#000; font-weight:900; font-size: 1rem;">FROM YOUTUBE</span>
+                        </div>
+                        <svg class="yt-play" viewBox="0 0 68 48" style="width: 50px; height: 35px;"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="t-header">
+                        <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div class="t-info">
+                            <div class="t-name">Othmane</div>
+                            <div class="t-title">Scale Metrics</div>
+                        </div>
+                    </div>
+                    <div class="video-box">
+                        <div class="video-bg" style="background: radial-gradient(circle, #222, #000);"></div>
+                        <div class="thumb-overlay" style="text-shadow: 2px 2px 4px #000; line-height: 1.1;">
+                            <span style="color:#D4AF37; font-weight: 900; font-size: 1.5rem;">CLOSED A DEAL</span><br><span style="color:#fff; font-weight:900; font-size: 1.2rem;">IN THE FIRST<br>3 WEEKS</span>
+                        </div>
+                        <svg class="yt-play" viewBox="0 0 68 48" style="width: 50px; height: 35px;"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="t-header">
+                        <div class="t-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div class="t-info">
+                            <div class="t-name">Charles Tichenor</div>
+                            <div class="t-title">Disrupter School</div>
+                        </div>
+                    </div>
+                    <div class="video-box">
+                        <div class="video-bg" style="background: radial-gradient(circle, #222, #000);"></div>
+                        <div class="thumb-overlay" style="background:#0a0a0a; padding: 10px; width:auto; border: 3px solid #D4AF37; border-radius: 4px;">
+                            <span style="color:#D4AF37; font-weight: 900; font-size: 1.5rem;">$75,000/month</span>
+                        </div>
+                        <svg class="yt-play" viewBox="0 0 68 48" style="width: 50px; height: 35px;"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#book" class="cta-btn">>> BOOK YOUR CALL NOW <<</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <p class="eyebrow" style="color: #D4AF37;">Browsers vs Buyers</p>
+            <h2>YouTube Leads Close Faster Because They Already Trust You.</h2>
+
+            <div class="comp-wrap">
+                <div class="comp-col comp-dark">
+                    <div class="comp-title">Leads Without YouTube</div>
+                    <ul class="comp-list">
+                        <li><svg viewBox="0 0 24 24" fill="#a3a3a3"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> Require endless follow ups to make a decision.</li>
+                        <li><svg viewBox="0 0 24 24" fill="#a3a3a3"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> Show up defensive and cold on the call.</li>
+                        <li><svg viewBox="0 0 24 24" fill="#a3a3a3"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> Forget what you actually do halfway through the pitch.</li>
+                        <li><svg viewBox="0 0 24 24" fill="#a3a3a3"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> Throw endless pricing objections at you.</li>
+                    </ul>
+                </div>
+                <div class="comp-col comp-blue">
+                    <div class="comp-title">Leads With YouTube</div>
+                    <ul class="comp-list">
+                        <li><svg viewBox="0 0 24 24" fill="#D4AF37"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Feel like they already know and trust you.</li>
+                        <li><svg viewBox="0 0 24 24" fill="#D4AF37"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Quote your own videos back to you word for word.</li>
+                        <li><svg viewBox="0 0 24 24" fill="#D4AF37"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> View you as the ultimate authority before the call begins.</li>
+                        <li><svg viewBox="0 0 24 24" fill="#D4AF37"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Come in warm and educated and ready to buy.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <a href="#book" class="cta-btn" style="margin-top: 50px;">>> BOOK YOUR CALL NOW <<</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="faq-layout">
+                <div class="faq-left">
+                    <h2>Frequently<br>Asked<br>Questions</h2>
+                </div>
+                
+                <div class="faq-right">
+                    <div class="faq-item">
+                        <button class="faq-btn">What exactly do you do? <svg class="faq-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+                        <div class="faq-content"><p>We handle topic research. We write the scripts. We edit the videos. We optimize the SEO. We post the final videos to your channel.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-btn">What is the guarantee? <svg class="faq-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+                        <div class="faq-content"><p>We guarantee 10 qualified sales calls in 90 days. We work for free until you hit that number. We take the risk.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-btn">What makes a call qualified? <svg class="faq-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+                        <div class="faq-content"><p>They must find you on YouTube. They must be the decision maker. They must have a real need. They must fit your budget. They must show up and stay for 15 minutes.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-btn">How much time will this take me? <svg class="faq-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+                        <div class="faq-content"><p>You will spend 4 hours a month recording. That is it. You batch record all four videos in one afternoon.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-btn">Do I need a big audience? <svg class="faq-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+                        <div class="faq-content"><p>No. You can start with zero subscribers. We target search intent to put your videos in front of buyers.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-btn">Why did YouTube fail for me before? <svg class="faq-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+                        <div class="faq-content"><p>You focused on views instead of buyers. You made content for browsers. We engineer content specifically for high ticket sales.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-btn">Will you work with my competitors? <svg class="faq-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+                        <div class="faq-content"><p>No. We grant strict niche exclusivity. Once you sign with us we reject your direct competitors.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-btn">How do we start? <svg class="faq-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+                        <div class="faq-content"><p>Click the button. Book your 30 minute discovery call. We will review your offer and tell you if you qualify.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2>Time To Stop Relying On Referrals.</h2>
+            
+            <a href="#book" class="cta-btn" style="margin-bottom: 50px;">>> BOOK YOUR CALL NOW <<</a>
+            
+            <p><strong>Finest Clients 2026</strong></p>
+            <p class="footer-legal">This site is not a part of the Facebook TM website or Meta Platforms Inc. Additionally, this site is NOT endorsed by Facebook TM in any way. Facebook TM is a trademark of Meta Platforms Inc.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const parent = button.parentElement;
+                const isActive = parent.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-icon').innerHTML = '<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>';
+                });
+                
+                if (!isActive) {
+                    parent.classList.add('active');
+                    button.querySelector('.faq-icon').innerHTML = '<path d="M19 13H5v-2h14v2z"/>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

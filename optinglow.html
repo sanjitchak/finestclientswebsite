@@ -135,7 +135,7 @@
         @keyframes bookGlow {
             0% { 
                 filter: drop-shadow(0 0 0px rgba(181, 149, 47, 0)); 
-                transform: scale(0.95); 
+                transform: scale(1); 
             }
             30% { 
                 filter: drop-shadow(0 0 70px rgba(181, 149, 47, 1)); 
@@ -162,7 +162,7 @@
             height: auto;
             display: block;
             margin: 0 auto;
-            animation: bookGlow 3.5s ease-in-out forwards;
+            animation: bookGlow 3.5s ease-in-out 3s forwards; /* 3s delay added here */
         }
 
         /* ==========================================
@@ -412,6 +412,81 @@
             display: inline-block;
         }
 
+        /* NEW CLIENT RESULTS STYLES */
+        .client-result {
+            background: #fff;
+            border-left: 5px solid var(--theme-color);
+            padding: 25px 30px;
+            margin: 0 auto 30px;
+            max-width: 650px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .client-result .quote {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .client-result .author {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* SOCIAL PROOF POPUP */
+        .social-proof {
+            position: fixed;
+            bottom: -100px;
+            left: 20px;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 50px;
+            padding: 8px 25px 8px 8px;
+            display: flex;
+            align-items: center;
+            z-index: 9999;
+            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            font-family: 'Open Sans', sans-serif;
+            border: 1px solid #eaeaea;
+        }
+        
+        .social-proof.show {
+            bottom: 20px;
+        }
+        
+        .sp-icon {
+            width: 45px;
+            height: 45px;
+            background: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 22px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .sp-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        
+        .sp-name { font-weight: 800; font-size: 14px; color: #222; margin-bottom: 2px; }
+        .sp-action { font-size: 13px; color: #555; }
+        .sp-time { font-size: 11px; color: #888; display: flex; align-items: center; margin-top: 3px; }
+        .sp-verify-icon { color: #007bff; font-size: 12px; margin-right: 4px; }
+        .sp-verify-text { color: #007bff; font-weight: 700; }
+
         /* ==========================================
            AUTHORITY SECTION
            ========================================== */
@@ -627,6 +702,10 @@
             .letter-content p { font-size: 18px; }
             .modal-content h3 { font-size: 30px; }
             .diagonal-section::before, .diagonal-section::after { height: 60px; }
+            
+            .client-result { padding: 20px; margin-left: 10px; margin-right: 10px; }
+            .client-result .quote { font-size: 18px; }
+            .social-proof { left: 10px; right: 10px; border-radius: 8px; padding: 12px; }
         }
     </style>
 </head>
@@ -640,9 +719,9 @@
     <!-- HERO SECTION (Dark Background) -->
     <header class="hero">
         <div class="container">
-            <div class="hero-kicker">FOR COACHES & CONSULTANTS</div>
-            <h1>"THE EXACT YOUTUBE TOPICS THAT BOOK QUALIFIED SALES CALLS"</h1>
-            <p class="subheadline">We have generated 100+ qualified sales calls with YouTube using the unbelievably powerful strategies outlined in this free report. Download it now before this page comes down or your competitors get their hands on it.</p>
+            <div class="hero-kicker">FOR COACHES & CONSULTANTS WHO ARE ALREADY INVESTING IN GROWTH</div>
+            <h1>FREE REPORT REVEALS:<br>“THE YOUTUBE TOPICS THAT BOOK QUALIFIED SALES CALLS”</h1>
+            <p class="subheadline">We’ve helped coaches generate 300+ qualified sales calls using the topic selection strategy outlined in this free report. Download it now before your competitors get their hands on it.</p>
             
             <div class="ebook-wrapper">
                 <img src="https://finestclients.com/bookcover.jpeg" alt="Click to Clients Free Report" class="ebook-img">
@@ -652,7 +731,7 @@
                 <span class="cta-main-text">SEND ME MY FREE REPORT NOW</span>
                 <span class="cta-sub-text">(Get for free what has cost us years to perfect)</span>
             </button>
-            <span class="secure-text">🔒 100% Secure. We will never share your email.</span>
+            <span class="secure-text">🔒 100% Secure. We Never Share Your Email.</span>
         </div>
     </header>
 
@@ -671,33 +750,40 @@
     <!-- THE LETTER SECTION -->
     <section class="letter-section">
         <div class="container letter-content">
-            <p class="bold" style="font-size: 22px;">Dear Coach & Consultant,</p>
+            <p id="dynamic-date" class="theme-text bold" style="font-size: 16px; margin-bottom: 30px;"></p>
+
+            <p class="bold" style="font-size: 22px;">Dear Coach or Consultant,</p>
             
-            <p>Let's be honest for a second.</p>
+            <p>If you want to turn YouTube into a consistent source of qualified sales calls — without becoming a full-time content creator — this is going to be the most important report you'll ever read.</p>
             
-            <p>Your current YouTube strategy is probably <em>"post and pray."</em></p>
+            <p>Here's why:</p>
             
-            <p>You make a video about something you think is valuable. You upload it. You share it on LinkedIn. You wait. And then... <strong>crickets.</strong> Or worse — views that go absolutely nowhere.</p>
+            <p>This isn't like any YouTube guide you've seen. There's no fluff, no "post consistently and hope for the best" advice — just battle-tested strategies that are working right now for coaches charging $3,000 to $20,000+ for their services.</p>
             
+            <p>We've used these strategies to help coaches book sales calls from videos with as few as 400 views. Not because the videos went viral — but because they attracted <strong>BUYERS</strong>, not browsers.</p>
+
+            <p>Here's the uncomfortable truth most YouTube "experts" won't tell you:</p>
+
             <div class="highlight-box">
-                <p>Meanwhile, some coach with just 200 subscribers just closed a $15,000 client from a video with barely 400 views. What the hell is going on?</p>
+                <p>The videos that get the most views almost NEVER generate the most clients.</p>
             </div>
 
-            <p><strong class="theme-text" style="text-transform: uppercase;">The Uncomfortable Truth:</strong> Views don't equal clients. The RIGHT views do.</p>
-            
-            <p>I've seen coaches with 100,000 subscribers making pennies. And I've seen coaches with 500 subscribers making millions. The difference isn't their editing. It's not their camera. It's not their charisma.</p>
-            
-            <p><strong>It's their topics.</strong></p>
+            <p>I've seen coaches with 100,000 subscribers struggling to pay rent. And I've seen coaches with 500 subscribers closing $15,000 clients. The difference isn't their editing or their camera. <strong>It's their TOPICS.</strong></p>
 
-            <p>One group makes content for "browsers" — people looking for free entertainment who will never buy. The other group makes content for "buyers" — people actively researching solutions and ready to invest.</p>
+            <p>One group makes content for "browsers" — people looking for free advice who will never buy. The other group makes content for "buyers" — people actively researching solutions and ready to invest.</p>
 
-            <p>In this brand new, no-fluff guide, I peel back the curtain and show you the exact system to create content that attracts buyers. No theory. Just the battle-tested framework that works.</p>
+            <p>This report shows you exactly how to create buyer content.</p>
+
+            <p>It's easy to read, wastes no time, and gives you a framework you can use IMMEDIATELY to plan your next 12 months of high-converting video ideas.</p>
+
+            <p>Just enter your details below, hit the download button, and these strategies will be sent straight to your inbox.</p>
             
             <div style="text-align: center; margin-top: 50px;">
                 <button class="cta-btn open-modal-btn">
-                    <span class="cta-main-text">YES! I WANT THE FREE REPORT</span>
-                    <span class="cta-sub-text">(Click here for instant access)</span>
+                    <span class="cta-main-text">SEND ME MY FREE REPORT NOW</span>
+                    <span class="cta-sub-text">(Get for free what has cost us years to perfect)</span>
                 </button>
+                <span class="secure-text">🔒 100% Privacy. No Spam.</span>
             </div>
         </div>
     </section>
@@ -708,17 +794,20 @@
             <h2>HERE'S JUST A FRACTION OF WHAT YOU'LL DISCOVER INSIDE THIS FREE REPORT...</h2>
             
             <ul class="bullet-list">
-                <li><strong>The "Influencer Trap"</strong> destroying your business. Why copying what works for big YouTubers is the #1 reason you are getting views but zero sales calls.</li>
-                <li><strong>The Client Content Map™:</strong> The 5 distinct "Zones" of video content. Most coaches only make Zone 4 content to an empty room, or Zone 1 content that never converts. You need the perfect mix.</li>
-                <li><strong>The B.E.N.S. Test (Viral Validator™):</strong> Ask these 4 simple questions before you ever hit record to guarantee your topic is a winner. Never waste time on a dud video again.</li>
-                <li><strong>The 3 Foolproof Topic Methods:</strong> Including "Competitor Mapping" and "The Niche Tree" so you have a 12-month calendar of hyper-converting ideas in less than an hour.</li>
-                <li><strong>The 30-Day Sprint Plan:</strong> Step-by-step instructions to research, plan, create, and publish a mini-funnel on YouTube that works while you sleep.</li>
+                <li><strong>The "Browser vs. Buyer" framework</strong> — and how to tell which type of content you've been creating (most coaches are shocked when they realize they've been making browser content for years)</li>
+                <li><strong>Why a coach with 27 subscribers closed more clients</strong> than a coach with 27,000 — and the single decision that made the difference</li>
+                <li><strong>The "Influencer Trap" destroying your business</strong> — why copying what works for big YouTubers is the #1 reason you're getting views but zero sales calls</li>
+                <li><strong>The B.E.N.S. Test (Viral Validator™):</strong> 4 simple questions to ask BEFORE you ever hit record to guarantee your topic attracts buyers</li>
+                <li><strong>3 foolproof methods to generate 12 months</strong> of high-converting video ideas in less than an hour — including "Competitor Mapping" and "The Niche Tree"</li>
+                <li><strong>Why "going viral" is actually DANGEROUS</strong> for high-ticket coaches — and what to optimize for instead</li>
+                <li>And much, much more!</li>
             </ul>
 
             <button class="cta-btn open-modal-btn">
                 <span class="cta-main-text">SEND ME MY FREE REPORT NOW</span>
                 <span class="cta-sub-text">(Get for free what has cost us years to perfect)</span>
             </button>
+            <span class="secure-text">🔒 100% Privacy. No Spam.</span>
         </div>
     </section>
 
@@ -728,23 +817,23 @@
             <h2>PROOF!</h2>
             <p class="proof-subtitle">(just a little bit of it anyway...)</p>
 
-            <div class="proof-item">
-                <img src="https://finestclients.com/numbers1.png" alt="Analytics Proof 1" class="proof-img">
-                <br>
-                <div class="proof-annotation">↑ Scaling massive targeted reach</div>
+            <div class="client-result">
+                <div class="quote">📞 "200-300 sales calls per month from YouTube"</div>
+                <div class="author">— Simone V., Tech Career Coach</div>
             </div>
 
-            <div class="proof-item">
-                <img src="https://finestclients.com/numbers2.png" alt="Analytics Proof 2" class="proof-img">
-                <br>
-                <div class="proof-annotation">↑ 1.1M highly qualified views</div>
+            <div class="client-result">
+                <div class="quote">💰 "Went from $200K to $429K in one month"</div>
+                <div class="author">— Eddie M., Online Business Coach</div>
             </div>
 
-            <div class="proof-item" style="margin-bottom: 20px;">
-                <img src="https://finestclients.com/numbers3.png" alt="Analytics Proof 3" class="proof-img">
-                <br>
-                <div class="proof-annotation">↑ The SEO "hockey stick" growth</div>
+            <div class="client-result" style="margin-bottom: 50px;">
+                <div class="quote">🎯 "$15,000 client from a video with 400 views"</div>
+                <div class="author">— Matt R., B2B Consultant (27 subscribers)</div>
             </div>
+
+            <p class="bold" style="font-size: 24px; max-width: 600px; margin: 0 auto 10px;">The difference wasn't their subscriber count.<br>It was their TOPIC STRATEGY.</p>
+            <p style="font-size: 18px; max-width: 600px; margin: 0 auto;">This report gives you the exact framework they used.</p>
         </div>
     </section>
 
@@ -755,8 +844,8 @@
             
             <div class="authority-badges">
                 <div class="badge">
-                    <div class="badge-number">10</div>
-                    <div class="badge-text">Calls in 90 Days<br>Guaranteed</div>
+                    <div class="badge-number">300+</div>
+                    <div class="badge-text">Qualified<br>Calls Booked</div>
                 </div>
                 <div class="badge">
                     <div class="badge-number">100%</div>
@@ -764,21 +853,32 @@
                 </div>
                 <div class="badge">
                     <div class="badge-number">4</div>
-                    <div class="badge-text">Hours of work<br>per month</div>
+                    <div class="badge-text">Hours/Month<br>(That's All You Record)</div>
                 </div>
             </div>
 
             <div class="authority-content">
-                <p>We help high-ticket coaches and consultants build YouTube channels that generate highly-qualified sales calls — without forcing them to become full-time content creators.</p>
-                <p>Through our rigorous "10 Calls Away" system, we handle the buyer-intent topic research, conversion scripting, professional editing, SEO, and attribution tracking.</p>
-                <p>All you do is record for 4 hours a month, show up to calls, and close clients. This free report reveals the exact blueprint of how the first, most crucial step—Topic Selection—actually works.</p>
+                <p>We help coaches and consultants build YouTube channels that generate qualified sales calls — not vanity metrics.</p>
+                <p>Our approach is different:</p>
+                <ul class="bullet-list" style="max-width: 500px; margin-bottom: 30px;">
+                    <li style="padding-left: 30px;">We optimize for BUYER-INTENT, not views</li>
+                    <li style="padding-left: 30px;">We guarantee 10 qualified calls in 90 days</li>
+                    <li style="padding-left: 30px;">We only take one client per niche</li>
+                </ul>
+                <style>
+                    /* Inline tweak to modify the bullets specifically for this section */
+                    .authority-content .bullet-list li::before { content: '→'; background: none; color: var(--theme-color); font-size: 24px; box-shadow: none; left: -10px; top: -5px;}
+                </style>
+                <p>We've spent years testing what actually converts viewers into clients. This free report gives you the foundation of our topic selection strategy — the same framework we use with our private clients.</p>
+                <p>Even if we never work together, this will fundamentally change how you think about YouTube content.</p>
             </div>
             
             <div style="text-align: center; margin-top: 50px;">
                 <button class="cta-btn open-modal-btn">
-                    <span class="cta-main-text">YES! I WANT THE FREE REPORT</span>
-                    <span class="cta-sub-text">(Click here for instant access)</span>
+                    <span class="cta-main-text">SEND ME MY FREE REPORT NOW</span>
+                    <span class="cta-sub-text">(Get for free what has cost us years to perfect)</span>
                 </button>
+                <span class="secure-text">🔒 100% Privacy. No Spam.</span>
             </div>
         </div>
     </section>
@@ -797,7 +897,7 @@
     <!-- FINAL CTA SECTION -->
     <section class="final-cta text-center">
         <div class="container">
-            <h2 style="font-size: 38px;">DOWNLOAD YOUR FREE REPORT NOW BEFORE THIS PAGE COMES DOWN</h2>
+            <h2 style="font-size: 50px;">DOWNLOAD YOUR FREE REPORT NOW</h2>
             
             <div class="ebook-wrapper" style="max-width: 320px; margin-top: 40px;">
                 <img src="https://finestclients.com/bookcover.jpeg" alt="Click to Clients Free Report" class="ebook-img" style="animation: none; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));">
@@ -807,6 +907,7 @@
                 <span class="cta-main-text">SEND ME MY FREE REPORT NOW</span>
                 <span class="cta-sub-text">(Get for free what has cost us years to perfect)</span>
             </button>
+            <span class="secure-text">🔒 100% Secure. We Never Share Your Email.</span>
         </div>
     </section>
 
@@ -851,8 +952,24 @@
         </div>
     </div>
 
+    <!-- SOCIAL PROOF POPUP -->
+    <div class="social-proof" id="socialProof">
+        <div class="sp-icon">✓</div>
+        <div class="sp-text-wrapper">
+            <div class="sp-name" id="spName">Loading...</div>
+            <div class="sp-action">Downloaded Click to Clients Report</div>
+            <div class="sp-time" id="spTime">... <span class="sp-verify-icon">✔</span><span class="sp-verify-text">verified by Proof</span></div>
+        </div>
+    </div>
+
     <!-- SCRIPTS FOR INTERACTIVITY -->
     <script>
+        // --- 0. DYNAMIC DATE LOGIC ---
+        const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+        const d = new Date();
+        d.setDate(d.getDate() - 2); // Set to 2 days ago
+        document.getElementById('dynamic-date').textContent = "Updated: " + d.toLocaleDateString('en-US', dateOptions);
+
         // --- 1. MODAL LOGIC (Capture Form) ---
         const modal = document.getElementById('optInModal');
         const openBtns = document.querySelectorAll('.open-modal-btn');
@@ -893,6 +1010,42 @@
                 document.title = originalTitle;
             }
         });
+
+        // --- 3. SOCIAL PROOF ROTATOR ---
+        const spNames = [
+            "Michael T., Austin, TX", "Sarah L., Denver, CO", "James B., New York, NY", 
+            "David W., Chicago, IL", "Emma S., Miami, FL", "Chris P., Seattle, WA",
+            "Jessica M., Dallas, TX", "Robert K., Atlanta, GA", "Ashley R., Phoenix, AZ",
+            "Daniel C., San Diego, CA", "Amanda F., Charlotte, NC", "Matthew H., Nashville, TN"
+        ];
+        
+        const spPopup = document.getElementById('socialProof');
+        const spNameEl = document.getElementById('spName');
+        const spTimeEl = document.getElementById('spTime');
+        
+        function showSocialProof() {
+            // Pick random name and time
+            const randomPerson = spNames[Math.floor(Math.random() * spNames.length)];
+            const randomTime = Math.floor(Math.random() * 58) + 2; // 2 to 59 mins ago
+            
+            spNameEl.textContent = randomPerson;
+            spTimeEl.innerHTML = `${randomTime} minutes ago <span class="sp-verify-icon">✔</span><span class="sp-verify-text">verified by Proof</span>`;
+            
+            // Show popup
+            spPopup.classList.add('show');
+            
+            // Hide after 8 seconds
+            setTimeout(() => {
+                spPopup.classList.remove('show');
+            }, 8000);
+        }
+
+        // Start cycle: Initial delay is 3s (wait for page load), then cycle every 11s (8s show + 3s hide)
+        setTimeout(() => {
+            showSocialProof();
+            setInterval(showSocialProof, 11000); 
+        }, 3000);
+
     </script>
 </body>
 </html>

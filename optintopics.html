@@ -5,19 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Click to Clients | Free Report</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://finestclients.com/finestclientslogo.png">
     
-    <!-- Google Fonts for King Kong Style Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Anton for the aggressive King Kong style headlines, Caveat for handwritten proof text, Open Sans for body -->
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* ==========================================
-           BASE STYLES & VARIABLES
-           ========================================== */
         :root {
             --theme-color: #B5952F;
             --theme-dark: #8c7324;
@@ -27,6 +21,8 @@
             --bg-white: #ffffff;
             --bg-offwhite: #f3f3f3;
             --kk-dark: #1e1e1e;
+            --success-color: #1f7a1f;
+            --error-color: #b42318;
         }
 
         * {
@@ -45,7 +41,7 @@
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Anton', sans-serif; /* King Kong's aggressive block font */
+            font-family: 'Anton', sans-serif;
             font-weight: 400;
             line-height: 1.1;
             text-transform: uppercase;
@@ -71,9 +67,6 @@
         .bold { font-weight: 800; }
         .italic { font-style: italic; }
 
-        /* ==========================================
-           TOP ALERT BAR 
-           ========================================== */
         .top-bar {
             background-color: #111;
             color: #fff;
@@ -85,9 +78,6 @@
             text-transform: uppercase;
         }
 
-        /* ==========================================
-           HERO SECTION (DARK KK STYLE)
-           ========================================== */
         .hero {
             padding: 50px 0 60px;
             background-color: var(--kk-dark);
@@ -131,7 +121,6 @@
             line-height: 1.5;
         }
 
-        /* Ebook Glow Animation */
         @keyframes bookGlow {
             0% { 
                 filter: drop-shadow(0 0 0px rgba(181, 149, 47, 0)); 
@@ -165,9 +154,6 @@
             animation: bookGlow 3.5s ease-in-out 3s forwards;
         }
 
-        /* ==========================================
-           KING KONG STYLE CTA BUTTONS
-           ========================================== */
         .cta-btn {
             display: block;
             width: 100%;
@@ -194,6 +180,11 @@
         .cta-btn:active {
             transform: translateY(8px);
             box-shadow: 0 0px 0 var(--theme-dark);
+        }
+
+        .cta-btn[disabled] {
+            opacity: 0.85;
+            pointer-events: none;
         }
 
         .cta-main-text {
@@ -226,9 +217,6 @@
             color: #aaa;
         }
 
-        /* ==========================================
-           "AS SEEN ON" LOGO STRIP 
-           ========================================== */
         .logo-strip {
             background-color: var(--bg-white);
             padding: 30px 0;
@@ -249,9 +237,6 @@
             color: #333;
         }
 
-        /* ==========================================
-           LETTER SECTION
-           ========================================== */
         .letter-section {
             padding: 50px 0 80px;
             background-color: var(--bg-white);
@@ -287,9 +272,6 @@
             color: var(--text-dark);
         }
 
-        /* ==========================================
-           DIAGONAL SLANTED SECTIONS (KK STYLE)
-           ========================================== */
         .diagonal-section {
             position: relative;
             padding: 100px 0;
@@ -318,9 +300,6 @@
             transform: skewY(-3deg);
         }
 
-        /* ==========================================
-           BULLETS SECTION
-           ========================================== */
         .bullets-section h2 {
             font-size: 52px;
             margin-bottom: 50px;
@@ -363,9 +342,6 @@
             box-shadow: 0 4px 10px rgba(181, 149, 47, 0.3);
         }
 
-        /* ==========================================
-           PROOF SECTION
-           ========================================== */
         .proof-section {
             padding: 80px 0;
             background-color: var(--bg-white);
@@ -412,7 +388,6 @@
             display: inline-block;
         }
 
-        /* NEW CLIENT RESULTS STYLES */
         .client-result {
             background: #fff;
             border-left: 5px solid var(--theme-color);
@@ -440,7 +415,6 @@
             font-style: italic;
         }
 
-        /* SOCIAL PROOF POPUP */
         .social-proof {
             position: fixed;
             bottom: -100px;
@@ -487,9 +461,6 @@
         .sp-verify-icon { color: #007bff; font-size: 12px; margin-right: 4px; }
         .sp-verify-text { color: #007bff; font-weight: 700; }
 
-        /* ==========================================
-           AUTHORITY SECTION
-           ========================================== */
         .authority-section h2 {
             font-size: 48px;
             text-align: center;
@@ -511,7 +482,6 @@
             position: relative;
         }
 
-        /* Creating a CSS laurel wreath effect for the badges */
         .badge::before, .badge::after {
             content: '🌿';
             position: absolute;
@@ -547,9 +517,6 @@
             margin-right: auto;
         }
 
-        /* ==========================================
-           FINAL CTA SECTION
-           ========================================== */
         .final-cta {
             padding: 80px 0 100px;
             background-color: var(--bg-white);
@@ -565,9 +532,6 @@
             margin-right: auto;
         }
 
-        /* ==========================================
-           FOOTER
-           ========================================== */
         .footer {
             background-color: #111;
             color: #777;
@@ -591,9 +555,6 @@
             margin-bottom: 15px;
         }
 
-        /* ==========================================
-           MODAL (OPT-IN FORM)
-           ========================================== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -648,7 +609,6 @@
 
         .close-modal:hover { color: #fff; }
 
-        /* Progress Bar */
         .progress-container {
             width: 80%;
             max-width: 400px;
@@ -724,7 +684,31 @@
             box-shadow: 0 4px 0 var(--theme-dark);
         }
 
-        /* Responsive Adjustments */
+        .form-message {
+            display: none;
+            margin-top: 18px;
+            padding: 14px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .form-message.success {
+            display: block;
+            background: rgba(31, 122, 31, 0.16);
+            color: #d7ffd7;
+            border: 1px solid rgba(31, 122, 31, 0.45);
+        }
+
+        .form-message.error {
+            display: block;
+            background: rgba(180, 35, 24, 0.16);
+            color: #ffd8d3;
+            border: 1px solid rgba(180, 35, 24, 0.45);
+        }
+
         @media (max-width: 768px) {
             .top-bar { padding: 8px; font-size: 10px; }
             .hero { padding: 25px 0 35px; }
@@ -753,12 +737,10 @@
 </head>
 <body>
 
-    <!-- TOP ALERT BAR -->
     <div class="top-bar">
         FREE REPORT REVEALS: <span style="color: #fff; font-weight: 400;">THE YOUTUBE TOPICS THAT BOOK QUALIFIED SALES CALLS</span>
     </div>
 
-    <!-- HERO SECTION (Dark Background) -->
     <header class="hero">
         <div class="container">
             <div class="hero-kicker">FOR COACHES AND CONSULTANTS WHO ARE ALREADY INVESTING IN GROWTH</div>
@@ -777,7 +759,6 @@
         </div>
     </header>
 
-    <!-- LOGO STRIP 1 -->
     <section class="logo-strip">
         <div class="container">
             <div class="mock-logos">
@@ -789,7 +770,6 @@
         </div>
     </section>
 
-    <!-- THE LETTER SECTION -->
     <section class="letter-section">
         <div class="container letter-content">
             <p id="dynamic-date" class="theme-text bold" style="font-size: 16px; margin-bottom: 30px;"></p>
@@ -830,7 +810,6 @@
         </div>
     </section>
 
-    <!-- DIAGONAL BULLETS SECTION -->
     <section class="diagonal-section bullets-section">
         <div class="container text-center">
             <h2>HERE IS JUST A FRACTION OF WHAT YOU WILL DISCOVER INSIDE THIS FREE REPORT...</h2>
@@ -853,7 +832,6 @@
         </div>
     </section>
 
-    <!-- PROOF SECTION (White Bg) -->
     <section class="proof-section">
         <div class="container text-center">
             <h2>PROOF!</h2>
@@ -888,7 +866,6 @@
         </div>
     </section>
 
-    <!-- DIAGONAL AUTHORITY SECTION -->
     <section class="diagonal-section authority-section">
         <div class="container">
             <h2>WHO IS FINEST CLIENTS TO MAKE SUCH PROMISES?</h2>
@@ -931,7 +908,6 @@
                     <li style="padding-left: 30px;">We only take one client per niche.</li>
                 </ul>
                 <style>
-                    /* Inline tweak to modify the bullets specifically for this section */
                     .authority-content .bullet-list li::before { content: '→'; background: none; color: var(--theme-color); font-size: 24px; box-shadow: none; left: -10px; top: -5px;}
                 </style>
                 <p>We have spent years testing what actually converts viewers into clients. This free report gives you the foundation of our topic selection strategy the same framework we use with our private clients.</p>
@@ -948,7 +924,6 @@
         </div>
     </section>
 
-    <!-- LOGO STRIP 2 -->
     <section class="logo-strip" style="border-top: 1px dashed #ddd;">
         <div class="container">
             <div class="mock-logos">
@@ -959,7 +934,6 @@
         </div>
     </section>
 
-    <!-- FINAL CTA SECTION -->
     <section class="final-cta text-center">
         <div class="container">
             <h2 style="font-size: 50px;">DOWNLOAD YOUR FREE REPORT NOW</h2>
@@ -978,7 +952,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
             <div class="mock-logos" style="margin-bottom: 40px; font-size: 20px; opacity: 0.3;">
@@ -997,7 +970,6 @@
         </div>
     </footer>
 
-    <!-- THE OPT-IN MODAL -->
     <div class="modal-overlay" id="optInModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
@@ -1011,19 +983,19 @@
             
             <form id="leadForm" method="post" action="https://contract.finestclients.com/freereport.php">
                 <div class="form-group">
-                    <input type="text" id="ck_first_name" class="form-control" placeholder="First Name*" required>
+                    <input type="text" id="ck_first_name" name="first_name" class="form-control" placeholder="First Name*" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" id="ck_email" class="form-control" placeholder="Email*" required>
+                    <input type="email" id="ck_email" name="email" class="form-control" placeholder="Email*" required>
                 </div>
-                <button type="submit" class="cta-btn modal-submit-btn">
+                <button type="submit" class="cta-btn modal-submit-btn" id="submitBtn">
                     <span class="cta-main-text" style="font-size: 30px;">GET MY FREE TOPICS</span>
                 </button>
+                <div id="formMessage" class="form-message"></div>
             </form>
         </div>
     </div>
 
-    <!-- SOCIAL PROOF POPUP -->
     <div class="social-proof" id="socialProof">
         <div class="sp-icon">✓</div>
         <div class="sp-text-wrapper">
@@ -1033,18 +1005,19 @@
         </div>
     </div>
 
-    <!-- SCRIPTS FOR INTERACTIVITY -->
     <script>
-        // --- 0. DYNAMIC DATE LOGIC ---
         const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
         const d = new Date();
-        d.setDate(d.getDate() - 2); // Set to 2 days ago
+        d.setDate(d.getDate() - 2);
         document.getElementById('dynamic-date').textContent = "Updated: " + d.toLocaleDateString('en-US', dateOptions);
 
-        // --- 1. MODAL LOGIC (Capture Form & Exit Intent) ---
         const modal = document.getElementById('optInModal');
         const openBtns = document.querySelectorAll('.open-modal-btn');
         const closeBtn = document.getElementById('closeModal');
+        const leadForm = document.getElementById('leadForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+        const originalSubmitBtnHtml = submitBtn.innerHTML;
         let exitModalShown = false;
 
         openBtns.forEach(btn => {
@@ -1057,58 +1030,87 @@
             modal.classList.remove('active');
         });
 
-        // Close modal if clicked outside the content box
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.classList.remove('active');
             }
         });
 
-        // Exit Intent Logic
         document.addEventListener('mouseout', (e) => {
-            // Trigger when mouse moves out of the top of the viewport
             if (e.clientY < 10 && !exitModalShown && !modal.classList.contains('active')) {
                 modal.classList.add('active');
                 exitModalShown = true;
             }
         });
 
-        // Form Submission & Redirect with UTMs
-        document.getElementById('leadForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const firstName = document.getElementById('ck_first_name').value;
-            const email = document.getElementById('ck_email').value;
-            const submitBtn = this.querySelector('button[type="submit"]');
-            
-            // Visual feedback
-            submitBtn.innerHTML = '<span class="cta-main-text" style="font-size: 30px;">PROCESSING...</span>';
-            submitBtn.style.opacity = '0.8';
-            submitBtn.style.pointerEvents = 'none';
+        function showFormMessage(message, type) {
+            formMessage.className = 'form-message ' + type;
+            formMessage.textContent = message;
+        }
 
-            // Collect URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const paramsToKeep = ['utm_source', 'utm_medium', 'utm_content', 'utm_campaign', 'fbclid', 'gclid'];
-            
-            // Base redirect URL
-            const redirectUrl = new URL('https://contract.finestclients.com/freereport.php');
-            
-            // Append form data
-            redirectUrl.searchParams.append('first_name', firstName);
-            redirectUrl.searchParams.append('email', email);
-            
-            // Append tracking parameters if they exist
-            paramsToKeep.forEach(param => {
-                if (urlParams.has(param)) {
-                    redirectUrl.searchParams.append(param, urlParams.get(param));
+        function resetSubmitButton() {
+            submitBtn.innerHTML = originalSubmitBtnHtml;
+            submitBtn.disabled = false;
+        }
+
+        leadForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            formMessage.className = 'form-message';
+            formMessage.textContent = '';
+
+            submitBtn.innerHTML = '<span class="cta-main-text" style="font-size: 30px;">PROCESSING...</span>';
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(leadForm);
+                const urlParams = new URLSearchParams(window.location.search);
+                const paramsToKeep = ['utm_source', 'utm_medium', 'utm_content', 'utm_campaign', 'fbclid', 'gclid'];
+
+                paramsToKeep.forEach(param => {
+                    if (urlParams.has(param)) {
+                        formData.append(param, urlParams.get(param));
+                    }
+                });
+
+                const response = await fetch(leadForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                let result = {};
+                const responseText = await response.text();
+
+                try {
+                    result = JSON.parse(responseText);
+                } catch (jsonError) {
+                    throw new Error('Invalid server response');
                 }
-            });
-            
-            // Redirect user to the PHP script with all data attached
-            window.location.href = redirectUrl.toString();
+
+                if (response.ok && result.success) {
+                    showFormMessage(result.message || 'Success. Please check your inbox.', 'success');
+                    leadForm.reset();
+
+                    setTimeout(() => {
+                        if (result.redirect_url) {
+                            window.location.href = result.redirect_url;
+                        } else {
+                            modal.classList.remove('active');
+                        }
+                    }, 1200);
+                } else {
+                    showFormMessage(result.message || 'Something went wrong. Please try again.', 'error');
+                }
+            } catch (error) {
+                showFormMessage('Something went wrong. Please try again.', 'error');
+            } finally {
+                resetSubmitButton();
+            }
         });
 
-        // --- 2. TAB BLINKING LOGIC ---
         let blinkInterval;
         const originalTitle = document.title;
         const blinkMessage = "(1) New Message";
@@ -1119,16 +1121,15 @@
                 blinkInterval = setInterval(() => {
                     document.title = isOriginal ? originalTitle : blinkMessage;
                     isOriginal = !isOriginal;
-                }, 1000); 
+                }, 1000);
             } else {
                 clearInterval(blinkInterval);
                 document.title = originalTitle;
             }
         });
 
-        // --- 3. SOCIAL PROOF ROTATOR ---
         const spNames = [
-            "Michael T., Austin, TX", "Sarah L., Denver, CO", "James B., New York, NY", 
+            "Michael T., Austin, TX", "Sarah L., Denver, CO", "James B., New York, NY",
             "David W., Chicago, IL", "Emma S., Miami, FL", "Chris P., Seattle, WA",
             "Jessica M., Dallas, TX", "Robert K., Atlanta, GA", "Ashley R., Phoenix, AZ",
             "Daniel C., San Diego, CA", "Amanda F., Charlotte, NC", "Matthew H., Nashville, TN"
@@ -1139,28 +1140,23 @@
         const spTimeEl = document.getElementById('spTime');
         
         function showSocialProof() {
-            // Pick random name and time
             const randomPerson = spNames[Math.floor(Math.random() * spNames.length)];
-            const randomTime = Math.floor(Math.random() * 58) + 2; // 2 to 59 mins ago
+            const randomTime = Math.floor(Math.random() * 58) + 2;
             
             spNameEl.textContent = randomPerson;
             spTimeEl.innerHTML = `${randomTime} minutes ago <span class="sp-verify-icon">✔</span><span class="sp-verify-text">verified by Proof</span>`;
             
-            // Show popup
             spPopup.classList.add('show');
             
-            // Hide after 8 seconds
             setTimeout(() => {
                 spPopup.classList.remove('show');
             }, 8000);
         }
 
-        // Start cycle: Initial delay is 3s (wait for page load), then cycle every 11s (8s show + 3s hide)
         setTimeout(() => {
             showSocialProof();
-            setInterval(showSocialProof, 11000); 
+            setInterval(showSocialProof, 11000);
         }, 3000);
-
     </script>
 </body>
 </html>

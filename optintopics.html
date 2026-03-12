@@ -981,18 +981,18 @@
             <h3>DOWNLOAD YOUR FREE REPORT NOW BEFORE THIS PAGE COMES DOWN</h3>
             <p>This <strong>FREE Report</strong> reveals the most <strong>powerful YouTube topics</strong> for growing traffic, leads and sales. Get for free what others have paid $1000's to receive.</p>
             
-            <form id="leadForm" method="post" action="https://contract.finestclients.com/freereport.php">
-                <div class="form-group">
-                    <input type="text" id="ck_first_name" name="first_name" class="form-control" placeholder="First Name*" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="ck_email" name="email" class="form-control" placeholder="Email*" required>
-                </div>
-                <button type="submit" class="cta-btn modal-submit-btn" id="submitBtn">
-                    <span class="cta-main-text" style="font-size: 30px;">GET MY FREE TOPICS</span>
-                </button>
-                <div id="formMessage" class="form-message"></div>
-            </form>
+         <form id="leadForm" method="post" action="https://contract.finestclients.com/freereport.php">
+    <div class="form-group">
+        <input type="text" id="ck_first_name" name="first_name" class="form-control" placeholder="First Name*" required>
+    </div>
+    <div class="form-group">
+        <input type="email" id="ck_email" name="email" class="form-control" placeholder="Email*" required>
+    </div>
+    <button type="submit" class="cta-btn modal-submit-btn" id="submitBtn">
+        <span class="cta-main-text" style="font-size: 30px;">GET MY FREE TOPICS</span>
+    </button>
+    <div id="formMessage" class="form-message"></div>
+</form>
         </div>
     </div>
 
@@ -1004,159 +1004,160 @@
             <div class="sp-time" id="spTime">... <span class="sp-verify-icon">✔</span><span class="sp-verify-text">verified by Proof</span></div>
         </div>
     </div>
+<script>
+    const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+    const d = new Date();
+    d.setDate(d.getDate() - 2);
+    document.getElementById('dynamic-date').textContent = "Updated: " + d.toLocaleDateString('en-US', dateOptions);
 
-    <script>
-        const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
-        const d = new Date();
-        d.setDate(d.getDate() - 2);
-        document.getElementById('dynamic-date').textContent = "Updated: " + d.toLocaleDateString('en-US', dateOptions);
+    const modal = document.getElementById('optInModal');
+    const openBtns = document.querySelectorAll('.open-modal-btn');
+    const closeBtn = document.getElementById('closeModal');
+    const leadForm = document.getElementById('leadForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('formMessage');
+    const originalSubmitBtnHtml = submitBtn.innerHTML;
+    let exitModalShown = false;
 
-        const modal = document.getElementById('optInModal');
-        const openBtns = document.querySelectorAll('.open-modal-btn');
-        const closeBtn = document.getElementById('closeModal');
-        const leadForm = document.getElementById('leadForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const formMessage = document.getElementById('formMessage');
-        const originalSubmitBtnHtml = submitBtn.innerHTML;
-        let exitModalShown = false;
-
-        openBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                modal.classList.add('active');
-            });
+    openBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.classList.add('active');
         });
+    });
 
-        closeBtn.addEventListener('click', () => {
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
             modal.classList.remove('active');
-        });
+        }
+    });
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
+    document.addEventListener('mouseout', (e) => {
+        if (e.clientY < 10 && !exitModalShown && !modal.classList.contains('active')) {
+            modal.classList.add('active');
+            exitModalShown = true;
+        }
+    });
+
+    function showFormMessage(message, type) {
+        formMessage.className = 'form-message ' + type;
+        formMessage.textContent = message;
+    }
+
+    function resetSubmitButton() {
+        submitBtn.innerHTML = originalSubmitBtnHtml;
+        submitBtn.disabled = false;
+    }
+
+    leadForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        formMessage.className = 'form-message';
+        formMessage.textContent = '';
+
+        submitBtn.innerHTML = '<span class="cta-main-text" style="font-size: 30px;">PROCESSING...</span>';
+        submitBtn.disabled = true;
+
+        try {
+            const formData = new FormData(leadForm);
+            const urlParams = new URLSearchParams(window.location.search);
+            const paramsToKeep = ['utm_source', 'utm_medium', 'utm_content', 'utm_campaign', 'fbclid', 'gclid'];
+
+            paramsToKeep.forEach(param => {
+                if (urlParams.has(param)) {
+                    formData.append(param, urlParams.get(param));
+                }
+            });
+
+            formData.append('page_url', window.location.href);
+
+            const response = await fetch(leadForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                if (result.redirect_url) {
+                    window.location.href = result.redirect_url;
+                    return;
+                }
+
+                showFormMessage(result.message || 'Success. Please check your inbox.', 'success');
+                leadForm.reset();
                 modal.classList.remove('active');
-            }
-        });
-
-        document.addEventListener('mouseout', (e) => {
-            if (e.clientY < 10 && !exitModalShown && !modal.classList.contains('active')) {
-                modal.classList.add('active');
-                exitModalShown = true;
-            }
-        });
-
-        function showFormMessage(message, type) {
-            formMessage.className = 'form-message ' + type;
-            formMessage.textContent = message;
-        }
-
-        function resetSubmitButton() {
-            submitBtn.innerHTML = originalSubmitBtnHtml;
-            submitBtn.disabled = false;
-        }
-
-        leadForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            formMessage.className = 'form-message';
-            formMessage.textContent = '';
-
-            submitBtn.innerHTML = '<span class="cta-main-text" style="font-size: 30px;">PROCESSING...</span>';
-            submitBtn.disabled = true;
-
-            try {
-                const formData = new FormData(leadForm);
-                const urlParams = new URLSearchParams(window.location.search);
-                const paramsToKeep = ['utm_source', 'utm_medium', 'utm_content', 'utm_campaign', 'fbclid', 'gclid'];
-
-                paramsToKeep.forEach(param => {
-                    if (urlParams.has(param)) {
-                        formData.append(param, urlParams.get(param));
-                    }
-                });
-
-                const response = await fetch(leadForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                let result = {};
-                const responseText = await response.text();
-
-                try {
-                    result = JSON.parse(responseText);
-                } catch (jsonError) {
-                    throw new Error('Invalid server response');
-                }
-
-                if (response.ok && result.success) {
-                    showFormMessage(result.message || 'Success. Please check your inbox.', 'success');
-                    leadForm.reset();
-
-                    setTimeout(() => {
-                        if (result.redirect_url) {
-                            window.location.href = result.redirect_url;
-                        } else {
-                            modal.classList.remove('active');
-                        }
-                    }, 1200);
-                } else {
-                    showFormMessage(result.message || 'Something went wrong. Please try again.', 'error');
-                }
-            } catch (error) {
-                showFormMessage('Something went wrong. Please try again.', 'error');
-            } finally {
-                resetSubmitButton();
-            }
-        });
-
-        let blinkInterval;
-        const originalTitle = document.title;
-        const blinkMessage = "(1) New Message";
-
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                let isOriginal = false;
-                blinkInterval = setInterval(() => {
-                    document.title = isOriginal ? originalTitle : blinkMessage;
-                    isOriginal = !isOriginal;
-                }, 1000);
             } else {
-                clearInterval(blinkInterval);
-                document.title = originalTitle;
+                showFormMessage(result.message || 'Something went wrong. Please try again.', 'error');
             }
-        });
-
-        const spNames = [
-            "Michael T., Austin, TX", "Sarah L., Denver, CO", "James B., New York, NY",
-            "David W., Chicago, IL", "Emma S., Miami, FL", "Chris P., Seattle, WA",
-            "Jessica M., Dallas, TX", "Robert K., Atlanta, GA", "Ashley R., Phoenix, AZ",
-            "Daniel C., San Diego, CA", "Amanda F., Charlotte, NC", "Matthew H., Nashville, TN"
-        ];
-        
-        const spPopup = document.getElementById('socialProof');
-        const spNameEl = document.getElementById('spName');
-        const spTimeEl = document.getElementById('spTime');
-        
-        function showSocialProof() {
-            const randomPerson = spNames[Math.floor(Math.random() * spNames.length)];
-            const randomTime = Math.floor(Math.random() * 58) + 2;
-            
-            spNameEl.textContent = randomPerson;
-            spTimeEl.innerHTML = `${randomTime} minutes ago <span class="sp-verify-icon">✔</span><span class="sp-verify-text">verified by Proof</span>`;
-            
-            spPopup.classList.add('show');
-            
-            setTimeout(() => {
-                spPopup.classList.remove('show');
-            }, 8000);
+        } catch (error) {
+            showFormMessage('Something went wrong. Please try again.', 'error');
+        } finally {
+            resetSubmitButton();
         }
+    });
+
+    let blinkInterval;
+    const originalTitle = document.title;
+    const blinkMessage = "(1) New Message";
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            let isOriginal = false;
+            blinkInterval = setInterval(() => {
+                document.title = isOriginal ? originalTitle : blinkMessage;
+                isOriginal = !isOriginal;
+            }, 1000);
+        } else {
+            clearInterval(blinkInterval);
+            document.title = originalTitle;
+        }
+    });
+
+    const spNames = [
+        "Michael T., Austin, TX",
+        "Sarah L., Denver, CO",
+        "James B., New York, NY",
+        "David W., Chicago, IL",
+        "Emma S., Miami, FL",
+        "Chris P., Seattle, WA",
+        "Jessica M., Dallas, TX",
+        "Robert K., Atlanta, GA",
+        "Ashley R., Phoenix, AZ",
+        "Daniel C., San Diego, CA",
+        "Amanda F., Charlotte, NC",
+        "Matthew H., Nashville, TN"
+    ];
+
+    const spPopup = document.getElementById('socialProof');
+    const spNameEl = document.getElementById('spName');
+    const spTimeEl = document.getElementById('spTime');
+
+    function showSocialProof() {
+        const randomPerson = spNames[Math.floor(Math.random() * spNames.length)];
+        const randomTime = Math.floor(Math.random() * 58) + 2;
+
+        spNameEl.textContent = randomPerson;
+        spTimeEl.innerHTML = `${randomTime} minutes ago <span class="sp-verify-icon">✔</span><span class="sp-verify-text">verified by Proof</span>`;
+
+        spPopup.classList.add('show');
 
         setTimeout(() => {
-            showSocialProof();
-            setInterval(showSocialProof, 11000);
-        }, 3000);
-    </script>
+            spPopup.classList.remove('show');
+        }, 8000);
+    }
+
+    setTimeout(() => {
+        showSocialProof();
+        setInterval(showSocialProof, 11000);
+    }, 3000);
+</script>
+ 
 </body>
 </html>

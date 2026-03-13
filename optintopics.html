@@ -396,6 +396,7 @@
             padding: 8px 25px 8px 8px;
             display: flex;
             align-items: center;
+            /* Changed z-index from 9999 to 9999 (lower than modal) to fix overlap issue */
             z-index: 9999;
             transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             font-family: 'Open Sans', sans-serif;
@@ -538,7 +539,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            /* Changed z-index from 1000 to 10000 so it sits above everything, including social proof popup */
+            z-index: 10000;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;

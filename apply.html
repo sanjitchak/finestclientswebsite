@@ -91,7 +91,7 @@
         <span class="text-green-100 font-normal text-sm ml-1">(If it's not there in 2 minutes, check your spam folder and drag it to Primary.)</span>
     </div>
 
-    <section class="pt-12 pb-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
+    <section id="main-video" class="pt-12 pb-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
         <h2 class="text-3xl md:text-4xl font-black mb-4 text-gray-900 leading-tight">
             Before You Read The PDF, Watch This.<br>
             <span class="text-brand-gold">It Reveals The One Thing The PDF Can't Give You.</span>
@@ -811,7 +811,17 @@
 
         // Function to close the popup
         const closePopup = () => {
-            if (exitPopup) exitPopup.classList.add('hidden');
+            if (exitPopup) {
+                exitPopup.classList.add('hidden');
+                
+                // Scroll up smoothly to the main video
+                const videoSection = document.getElementById('main-video');
+                if (videoSection) {
+                    videoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); // Fallback
+                }
+            }
         };
 
         // Close when clicking ANYWHERE on the popup overlay
@@ -830,12 +840,12 @@
                 
                 let showMessage = true;
                 // Instantly set the title without waiting for the first interval tick
-                document.title = "🔴 (1) New Message";
+                document.title = "(1) New Message";
                 
                 // Toggle between the new message and the original title every 1 second (1000ms)
                 blinkInterval = setInterval(() => {
                     showMessage = !showMessage;
-                    document.title = showMessage ? "🔴 (1) New Message" : originalTitle;
+                    document.title = showMessage ? "(1) New Message" : originalTitle;
                 }, 1000);
             } else {
                 // Stop blinking and restore original title when they come back

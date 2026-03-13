@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/png" href="https://finestclients.com/finestclientslogo.png">
 
+    <!-- Wistia Core Player Script -->
+    <script src="https://fast.wistia.com/player.js" async></script>
+
     <!-- Error Suppression Script for benign ResizeObserver warnings caused by 3rd-party video embeds -->
     <script>
         window.addEventListener('error', function(e) {
@@ -68,11 +71,6 @@
         @media (max-width: 767px) {
             .red-scribble { left: 0px; top: -20px; }
         }
-
-        /* Testimonial Thumbnail Overlays */
-        .video-box-bg {
-            background: radial-gradient(circle at center, #222222 0%, #000000 100%);
-        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 selection:bg-brand-gold selection:text-gray-900">
@@ -91,7 +89,9 @@
         </h2>
         
         <!-- Video Embed -->
-  <script src="https://fast.wistia.com/player.js" async></script><script src="https://fast.wistia.com/embed/o0xutqmnvx.js" async type="module"></script><style>wistia-player[media-id='o0xutqmnvx']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/o0xutqmnvx/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> <wistia-player media-id="o0xutqmnvx" aspect="1.7777777777777777"></wistia-player>
+        <div class="rounded-xl overflow-hidden shadow-2xl border-4 border-gray-900">
+            <script src="https://fast.wistia.com/embed/o0xutqmnvx.js" async type="module"></script><style>wistia-player[media-id='o0xutqmnvx']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/o0xutqmnvx/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> <wistia-player media-id="o0xutqmnvx" aspect="1.7777777777777777"></wistia-player>
+        </div>
         
         <div class="text-center mt-10">
             <a href="#book" class="inline-flex items-center justify-center w-full max-w-md bg-brand-gold hover:bg-brand-dark text-gray-900 font-black py-5 px-6 rounded-lg text-xl shadow-[0_4px_0_#B5952F] hover:shadow-[0_2px_0_#B5952F] hover:translate-y-[2px] transition-all uppercase">
@@ -132,88 +132,83 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto mb-10">
-                <!-- 1. Othmane -->
+                <!-- 1. Avi Arya -->
                 <div class="flex flex-col">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200"><svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200"><i class="fa-solid fa-user text-xl"></i></div>
                         <div>
-                            <div class="font-black text-gray-900 text-lg leading-tight">Othmane</div>
-                            <div class="text-brand-dark font-bold text-sm uppercase tracking-wide">Scale Metrics</div>
-                        </div>
-                    </div>
-                    <div class="relative rounded-xl overflow-hidden shadow-lg border-2 border-gray-100 aspect-video video-box-bg flex items-center justify-center mb-4">
-                        <div class="z-10 text-center drop-shadow-lg p-4">
-                            <div class="text-brand-gold font-black text-2xl md:text-3xl leading-none shadow-black drop-shadow-md">CLOSED FIRST CLIENT</div>
-                            <div class="text-white font-black text-xl md:text-2xl leading-tight shadow-black drop-shadow-md mt-1">IN 3 WEEKS</div>
-                        </div>
-                        <svg class="w-16 h-16 absolute z-20 opacity-50" viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
-                    </div>
-                    <div class="bg-gray-50 p-5 rounded-lg border-l-4 border-brand-gold flex-grow">
-                        <p class="text-gray-600 font-medium italic text-lg leading-relaxed">"I was skeptical YouTube would work for my niche. First video. First client. Now I'm a believer."</p>
-                    </div>
-                </div>
-
-                <!-- 2. Matt -->
-                <div class="flex flex-col">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200"><svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
-                        <div>
-                            <div class="font-black text-gray-900 text-lg leading-tight">Matt Lucero</div>
+                            <div class="font-black text-gray-900 text-lg leading-tight">Avi Arya</div>
                             <div class="text-brand-dark font-bold text-sm uppercase tracking-wide">Agency Owner</div>
                         </div>
                     </div>
-                    <div class="relative rounded-xl overflow-hidden shadow-lg border-2 border-gray-100 aspect-video video-box-bg flex items-center justify-center mb-4">
-                        <div class="z-10 bg-brand-gold px-6 py-3 rounded text-center shadow-xl transform rotate-2">
-                            <div class="text-black font-black text-2xl leading-none">NEW DEALS</div>
-                            <div class="text-black font-black text-base leading-tight mt-1">FROM YOUTUBE</div>
-                        </div>
-                        <svg class="w-16 h-16 absolute z-20 opacity-50" viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                    <div class="relative rounded-xl overflow-hidden shadow-lg border-2 border-gray-100 aspect-video mb-4 bg-black">
+                        <!-- Wistia Embed 1 -->
+                        <script src="https://fast.wistia.com/embed/pwm2j4vyyw.js" async type="module"></script>
+                        <style>wistia-player[media-id='pwm2j4vyyw']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/pwm2j4vyyw/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                        <wistia-player media-id="pwm2j4vyyw" aspect="1.7777777777777777"></wistia-player>
                     </div>
                     <div class="bg-gray-50 p-5 rounded-lg border-l-4 border-brand-gold flex-grow">
-                        <p class="text-gray-600 font-medium italic text-lg leading-relaxed">"Finally have a lead source I control. No more waiting on referrals."</p>
+                        <p class="text-gray-600 font-medium italic text-lg leading-relaxed">"YouTube became our #1 acquisition channel faster than any paid ads we've tested. Unbelievable results."</p>
                     </div>
                 </div>
 
-                <!-- 3. Daniel -->
+                <!-- 2. Everything Money Real Estate -->
                 <div class="flex flex-col">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200"><svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200"><i class="fa-solid fa-user text-xl"></i></div>
                         <div>
-                            <div class="font-black text-gray-900 text-lg leading-tight">Daniel Fazio</div>
-                            <div class="text-brand-dark font-bold text-sm uppercase tracking-wide">Client Ascension & ListKit</div>
+                            <div class="font-black text-gray-900 text-lg leading-tight">Everything Money</div>
+                            <div class="text-brand-dark font-bold text-sm uppercase tracking-wide">Real Estate</div>
                         </div>
                     </div>
-                    <div class="relative rounded-xl overflow-hidden shadow-lg border-2 border-gray-100 aspect-video video-box-bg flex items-center justify-center mb-4">
-                        <div class="z-10 bg-black px-6 py-3 text-center transform -rotate-2 border border-brand-gold shadow-2xl">
-                            <div class="text-brand-gold font-black text-2xl leading-none">SCALED FAST</div>
-                            <div class="text-white font-black text-xl leading-tight mt-1">IN 82 DAYS</div>
-                        </div>
-                        <svg class="w-16 h-16 absolute z-20 opacity-50" viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                    <div class="relative rounded-xl overflow-hidden shadow-lg border-2 border-gray-100 aspect-video mb-4 bg-black">
+                        <!-- Wistia Embed 2 -->
+                        <script src="https://fast.wistia.com/embed/smewxk5cyy.js" async type="module"></script>
+                        <style>wistia-player[media-id='smewxk5cyy']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/smewxk5cyy/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                        <wistia-player media-id="smewxk5cyy" aspect="1.7777777777777777"></wistia-player>
                     </div>
                     <div class="bg-gray-50 p-5 rounded-lg border-l-4 border-brand-gold flex-grow">
-                        <p class="text-gray-600 font-medium italic text-lg leading-relaxed">"YouTube became our #1 acquisition channel faster than any paid ads we've tested."</p>
+                        <p class="text-gray-600 font-medium italic text-lg leading-relaxed">"Finally have a lead source I control. No more waiting on referrals. High-intent buyers consistently booking."</p>
                     </div>
                 </div>
 
-                <!-- 4. Eddie -->
+                <!-- 3. David Ellis -->
                 <div class="flex flex-col">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200"><svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200"><i class="fa-solid fa-user text-xl"></i></div>
                         <div>
-                            <div class="font-black text-gray-900 text-lg leading-tight">Eddie Cumberbatch</div>
-                            <div class="text-brand-dark font-bold text-sm uppercase tracking-wide">Founder - Growth Operator</div>
+                            <div class="font-black text-gray-900 text-lg leading-tight">David Ellis</div>
+                            <div class="text-brand-dark font-bold text-sm uppercase tracking-wide">Growth Consulting</div>
                         </div>
                     </div>
-                    <div class="relative rounded-xl overflow-hidden shadow-lg border-2 border-gray-100 aspect-video video-box-bg flex flex-col items-center justify-center mb-4">
-                        <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
-                        <div class="z-10 bg-white px-6 py-4 rounded-lg text-center shadow-2xl border-2 border-brand-gold">
-                            <div class="text-gray-500 font-black text-xs md:text-sm leading-none line-through mb-2">STUCK AT PLATEAU</div>
-                            <div class="text-gray-900 font-black text-2xl md:text-3xl leading-none">&rarr; SCALED RAPIDLY</div>
-                        </div>
-                        <svg class="w-16 h-16 absolute z-20 opacity-50" viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#D4AF37"/><path d="M45 24L27 14v20z" fill="#FFFFFF"/></svg>
+                    <div class="relative rounded-xl overflow-hidden shadow-lg border-2 border-gray-100 aspect-video mb-4 bg-black">
+                        <!-- Wistia Embed 3 -->
+                        <script src="https://fast.wistia.com/embed/mbhbe4nmv3.js" async type="module"></script>
+                        <style>wistia-player[media-id='mbhbe4nmv3']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/mbhbe4nmv3/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                        <wistia-player media-id="mbhbe4nmv3" aspect="1.7777777777777777"></wistia-player>
                     </div>
                     <div class="bg-gray-50 p-5 rounded-lg border-l-4 border-brand-gold flex-grow">
-                        <p class="text-gray-600 font-medium italic text-lg leading-relaxed">"YouTube compounded everything. Ads convert better. Sales calls close faster."</p>
+                        <p class="text-gray-600 font-medium italic text-lg leading-relaxed">"I was skeptical YouTube would work for my niche. First video. First client. Now I'm a believer in this system."</p>
+                    </div>
+                </div>
+
+                <!-- 4. Anonymous/Agency Client -->
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200"><i class="fa-solid fa-user text-xl"></i></div>
+                        <div>
+                            <div class="font-black text-gray-900 text-lg leading-tight">Scale Partner</div>
+                            <div class="text-brand-dark font-bold text-sm uppercase tracking-wide">Business Owner</div>
+                        </div>
+                    </div>
+                    <div class="relative rounded-xl overflow-hidden shadow-lg border-2 border-gray-100 aspect-video mb-4 bg-black">
+                        <!-- Wistia Embed 4 -->
+                        <script src="https://fast.wistia.com/embed/psv6g87cc1.js" async type="module"></script>
+                        <style>wistia-player[media-id='psv6g87cc1']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/psv6g87cc1/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                        <wistia-player media-id="psv6g87cc1" aspect="1.7777777777777777"></wistia-player>
+                    </div>
+                    <div class="bg-gray-50 p-5 rounded-lg border-l-4 border-brand-gold flex-grow">
+                        <p class="text-gray-600 font-medium italic text-lg leading-relaxed">"YouTube compounded everything. Ads convert better. Sales calls close faster because they already trust you."</p>
                     </div>
                 </div>
             </div>
@@ -557,81 +552,111 @@
                 <!-- FAQ Item 1 -->
                 <div class="faq-item border-b border-gray-200 group">
                     <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-100 transition-colors">
-                        What exactly do you do? 
+                        What exactly do you help with?
                         <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
                     <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-gray-700 font-medium">Topic research. Scripting. Editing. Thumbnails. SEO. Publishing. You record for 4 hours a month. We do everything else.</p>
+                        <p class="pb-6 text-gray-700 font-medium">We handle the entire YouTube growth strategy for you - from scripting and editing to SEO, thumbnails, and posting.<br><br>You just show up to record once a week. Everything else is done-for-you with a focus on getting you more qualified inbound leads.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 2 -->
                 <div class="faq-item border-b border-gray-200 group">
                     <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-100 transition-colors">
-                        What is the guarantee? 
+                        Why YouTube?
                         <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
                     <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-gray-700 font-medium">10 qualified sales calls in 90 days. If you don't hit that number, we keep working for free until you do. No other agency offers this. Ask them.</p>
+                        <p class="pb-6 text-gray-700 font-medium">YouTube is where buyers go when they’re actively searching for a solution.<br><br>It’s high-intent, evergreen, and compounds over time - unlike short-form, ads, or cold outreach. One good video can drive leads for months (or years) without spending a penny on traffic.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 3 -->
                 <div class="faq-item border-b border-gray-200 group">
                     <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-100 transition-colors">
-                        What makes a call "qualified"? 
+                        I’m already seeing good results from other methods. Why do I need this?
                         <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
                     <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-gray-700 font-medium">6 criteria — all must be met: YouTube source. Decision maker. Real need. Budget fit. Showed up. Stayed 15+ minutes.</p>
+                        <p class="pb-6 text-gray-700 font-medium">YouTube is unique in the sense that it's not just a linear acquisition channel.<br><br>Meaning, the value of one video doesn’t stop after it’s published.<br><br>It keeps working. It builds trust while you sleep. It pre-sells for you while you’re on calls. It warms up leads that found you from cold ads, referrals, SEO, or outbound.<br><br>It becomes the backbone of your brand - amplifying everything else you're doing, without demanding your full attention every day.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 4 -->
                 <div class="faq-item border-b border-gray-200 group">
                     <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-100 transition-colors">
-                        How much time will this take me? 
+                        How much time will this take me?
                         <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
                     <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-gray-700 font-medium">4 hours per month. You batch record all 4 videos in one afternoon. That's it.</p>
+                        <p class="pb-6 text-gray-700 font-medium">Most clients spend just 60-90 minutes a week filming. Or they batch record for a few hours once per month. We handle everything else, scripting, editing, posting, optimization, so you can focus on what you do best.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 5 -->
                 <div class="faq-item border-b border-gray-200 group">
                     <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-100 transition-colors">
-                        Do I need subscribers to start? 
+                        How do I know this will actually work for me?
                         <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
                     <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-gray-700 font-medium">No. We target search intent, not subscriber count. We've booked calls from channels with under 100 subscribers.</p>
+                        <p class="pb-6 text-gray-700 font-medium">This system isn’t built for influencers. It’s built for operators. Founders. Coaches. Agency owners. People who know how to close, they just need more warm, ready-to-buy prospects.<br><br>If you’ve got a solid offer, you’re good on camera (or at least willing to try), and you can commit to one video per week… we’ll handle the rest.<br><br>And if you’re still unsure - that’s exactly why we start every relationship with a call. So we can make sure it’s a fit before we build anything.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 6 -->
                 <div class="faq-item border-b border-gray-200 group">
                     <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-100 transition-colors">
-                        Why did YouTube fail for me before? 
+                        Do I need to come up with the content ideas myself?
                         <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
                     <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-gray-700 font-medium">You focused on views instead of buyers. You made content for browsers. We engineer content specifically for high-ticket sales.</p>
+                        <p class="pb-6 text-gray-700 font-medium">No. We ideate the topics, research the angles, and write the entire script. You just show up and record with a strategy that’s already working.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 7 -->
                 <div class="faq-item border-b border-gray-200 group">
                     <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-100 transition-colors">
-                        Will you work with my competitors? 
+                        What kind of results can I expect?
                         <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
                     <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-gray-700 font-medium">No. Once you sign, we reject direct competitors. You get niche exclusivity.</p>
+                        <p class="pb-6 text-gray-700 font-medium">While results do differ depending on 101 different factors... You can typically expect your first inbound sales calls after 1 month of consistent posting.<br><br>After that, the number compounds exponentially.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 8 -->
-                <div class="faq-item group">
+                <div class="faq-item border-b border-gray-200 group">
                     <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-100 transition-colors">
-                        How do we start? 
+                        How is this different from hiring a video editor?
                         <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
                     <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-gray-700 font-medium">Click the button. Book a 30-minute strategy call. We'll review your offer and tell you if you qualify.</p>
+                        <p class="pb-6 text-gray-700 font-medium">We bring strategy. From ideation to scripting to thumbnail to SEO - we build your channel like a high-converting funnel, not a “content machine.”</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 9 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-100 transition-colors">
+                        Do I need a big audience for this to work?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium">Not at all. Some of our best-performing clients had under 300 subscribers when they started. YouTube is search-based - which means you show up in front of buyers, not followers.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 10 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-100 transition-colors">
+                        How quickly can we get started?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium">Once you’re onboarded, we typically deliver your first batch of video scripts within 3–5 business days - and you’ll be recording within the first week.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 11 -->
+                <div class="faq-item group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-100 transition-colors">
+                        What if I’ve tried YouTube before and it didn’t work?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium">That’s exactly why we exist. Most people fail because they post without strategy, poor editing, no optimization, and zero consistency. We fix all of that.</p>
                     </div>
                 </div>
             </div>

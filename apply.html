@@ -828,14 +828,14 @@
                 // Clear any existing intervals just to be safe
                 if (blinkInterval) clearInterval(blinkInterval);
                 
-                let showDot = true;
+                let showMessage = true;
                 // Instantly set the title without waiting for the first interval tick
                 document.title = "🔴 (1) New Message";
                 
-                // Toggle the red dot every 1 second (1000ms) to create a blinking effect
+                // Toggle between the new message and the original title every 1 second (1000ms)
                 blinkInterval = setInterval(() => {
-                    showDot = !showDot;
-                    document.title = showDot ? "🔴 (1) New Message" : "(1) New Message";
+                    showMessage = !showMessage;
+                    document.title = showMessage ? "🔴 (1) New Message" : originalTitle;
                 }, 1000);
             } else {
                 // Stop blinking and restore original title when they come back

@@ -13,16 +13,19 @@
 
     <style>
         :root {
-            --theme-color: #B5952F;
-            --theme-dark: #8c7324;
-            --theme-light: #d1b55c;
-            --text-dark: #111111;
-            --text-body: #333333;
-            --bg-white: #ffffff;
-            --bg-offwhite: #f3f3f3;
-            --kk-dark: #1e1e1e;
-            --success-color: #1f7a1f;
-            --error-color: #b42318;
+            /* Updated Theme Colors */
+            --theme-color: #D4AF37;      /* Primary Gold */
+            --theme-dark: #A88721;       /* Darker Gold for button shadows/hover */
+            --theme-light: #E8CA6A;      /* Lighter Gold */
+            
+            /* Updated Base Colors for Dark Theme */
+            --text-dark: #FFFFFF;        /* Headings and primary text */
+            --text-body: #E0E0E0;        /* Body text */
+            --bg-white: #000000;         /* Pure black base */
+            --bg-offwhite: #0A0A0A;      /* Slightly off-black for alternating sections */
+            --kk-dark: #050505;          /* Very dark hero background */
+            --success-color: #2ea82e;
+            --error-color: #e23e31;
         }
 
         * {
@@ -68,14 +71,15 @@
         .italic { font-style: italic; }
 
         .top-bar {
-            background-color: #111;
-            color: #fff;
+            background-color: #111111;
+            color: #ffffff;
             text-align: center;
             padding: 10px;
             font-size: 12px;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
+            border-bottom: 1px solid #222;
         }
 
         .hero {
@@ -86,7 +90,7 @@
         }
 
         .hero-kicker {
-            background-color: #333333;
+            background-color: #222222;
             color: #ffffff;
             display: inline-flex;
             align-items: center;
@@ -98,6 +102,7 @@
             letter-spacing: 1px;
             margin-bottom: 25px;
             text-transform: uppercase;
+            border: 1px solid #333;
         }
 
         .hero h1 {
@@ -105,13 +110,13 @@
             color: #ffffff;
             margin-bottom: 25px;
             line-height: 1.05;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
         .hero p.subheadline {
             font-size: 20px;
             font-weight: 400;
-            color: #dddddd;
+            color: #cccccc;
             margin-bottom: 40px;
             font-family: 'Open Sans', sans-serif;
             text-transform: none;
@@ -123,19 +128,19 @@
 
         @keyframes bookGlow {
             0% { 
-                filter: drop-shadow(0 0 0px rgba(181, 149, 47, 0)); 
+                filter: drop-shadow(0 0 0px rgba(212, 175, 55, 0)); 
                 transform: scale(1); 
             }
             30% { 
-                filter: drop-shadow(0 0 70px rgba(181, 149, 47, 1)); 
+                filter: drop-shadow(0 0 70px rgba(212, 175, 55, 0.8)); 
                 transform: scale(1.05); 
             }
             60% { 
-                filter: drop-shadow(0 0 70px rgba(181, 149, 47, 0.8)); 
+                filter: drop-shadow(0 0 70px rgba(212, 175, 55, 0.6)); 
                 transform: scale(1.05); 
             }
             100% { 
-                filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4)); 
+                filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8)); 
                 transform: scale(1); 
             }
         }
@@ -152,6 +157,7 @@
             display: block;
             margin: 0 auto;
             animation: bookGlow 3.5s ease-in-out 3s forwards;
+            border-radius: 4px;
         }
 
         .cta-btn {
@@ -160,21 +166,21 @@
             max-width: 650px;
             margin: 0 auto;
             background-color: var(--theme-color);
-            color: #ffffff;
+            color: #000000;
             text-decoration: none;
             padding: 22px 15px;
             border-radius: 4px;
             border: none;
             cursor: pointer;
-            box-shadow: 0 8px 0 var(--theme-dark), 0 15px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 0 var(--theme-dark), 0 15px 25px rgba(0,0,0,0.5);
             transition: all 0.1s ease;
             text-align: center;
         }
 
         .cta-btn:hover {
             transform: translateY(2px);
-            box-shadow: 0 6px 0 var(--theme-dark), 0 10px 15px rgba(0,0,0,0.2);
-            background-color: #c0a037;
+            box-shadow: 0 6px 0 var(--theme-dark), 0 10px 15px rgba(0,0,0,0.5);
+            background-color: #E6C24A;
         }
 
         .cta-btn:active {
@@ -192,29 +198,26 @@
             font-size: 38px;
             display: block;
             letter-spacing: 1px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
             line-height: 1;
+            color: #000000;
         }
 
         .cta-sub-text {
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             display: block;
             margin-top: 8px;
             font-family: 'Open Sans', sans-serif;
+            color: #222222;
         }
 
         .secure-text {
             text-align: center;
             font-size: 12px;
-            color: #888;
+            color: #888888;
             margin-top: 15px;
             display: block;
             font-weight: 600;
-        }
-
-        .hero .secure-text {
-            color: #aaa;
         }
 
         .letter-section {
@@ -231,18 +234,17 @@
 
         .letter-content p {
             font-size: 19px;
-            color: #222;
             margin-bottom: 24px;
             line-height: 1.7;
         }
 
         .highlight-box {
-            background-color: #fffdf5;
+            background-color: #111111;
             border-left: 5px solid var(--theme-color);
             padding: 25px 30px;
             margin: 40px 0;
             font-style: italic;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
         .highlight-box p {
@@ -301,7 +303,6 @@
             position: relative;
             font-weight: 600;
             line-height: 1.5;
-            color: #333;
         }
 
         .bullet-list li::before {
@@ -309,7 +310,7 @@
             position: absolute;
             left: 0;
             top: -2px;
-            color: #ffffff;
+            color: #000000;
             background-color: var(--theme-color);
             width: 36px;
             height: 36px;
@@ -319,7 +320,7 @@
             justify-content: center;
             font-size: 20px;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(181, 149, 47, 0.3);
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
         }
 
         .proof-section {
@@ -338,7 +339,7 @@
         .proof-subtitle {
             font-size: 24px;
             font-weight: 800;
-            color: #555;
+            color: #AAAAAA;
             margin-bottom: 60px;
             font-family: 'Anton', sans-serif;
             text-transform: uppercase;
@@ -373,7 +374,7 @@
             font-family: 'Open Sans', sans-serif;
             font-weight: 800;
             font-size: 22px;
-            color: var(--text-dark);
+            color: #222;
             margin-bottom: 10px;
             line-height: 1.4;
         }
@@ -474,7 +475,7 @@
         .badge-text {
             font-size: 13px;
             font-weight: 800;
-            color: #333;
+            color: #CCCCCC;
             text-transform: uppercase;
         }
 
@@ -503,23 +504,24 @@
         }
 
         .footer {
-            background-color: #111;
-            color: #777;
+            background-color: #050505;
+            color: #888888;
             text-align: center;
             padding: 50px 20px;
             font-size: 13px;
             position: relative;
             z-index: 2;
+            border-top: 1px solid #222;
         }
 
         .footer a {
-            color: #aaa;
+            color: #AAAAAA;
             text-decoration: none;
             margin: 0 10px;
             cursor: pointer;
         }
         
-        .footer a:hover { color: #fff; }
+        .footer a:hover { color: #FFFFFF; }
 
         .footer p {
             font-size: 13px;
@@ -532,7 +534,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.9);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -548,7 +550,7 @@
         }
 
         .modal-content {
-            background: #2b2b2b;
+            background: #111111;
             padding: 40px 50px 50px;
             border-radius: 8px;
             width: 90%;
@@ -557,8 +559,9 @@
             position: relative;
             transform: translateY(-30px);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
             color: #ffffff;
+            border: 1px solid #333333;
         }
 
         .modal-overlay.active .modal-content {
@@ -582,23 +585,24 @@
         
         /* Legal Modals Styling */
         .legal-modal-content {
-            background: #ffffff;
-            color: #333333;
+            background: #111111;
+            color: #E0E0E0;
             padding: 40px;
             max-height: 80vh;
             overflow-y: auto;
             text-align: left;
+            border: 1px solid #333333;
         }
         .legal-modal-content h3 {
-            color: #111111;
+            color: #FFFFFF;
             font-size: 32px;
             margin-bottom: 20px;
-            border-bottom: 2px solid var(--bg-offwhite);
+            border-bottom: 2px solid #333333;
             padding-bottom: 10px;
         }
         .legal-modal-content p, .legal-modal-content ul {
             font-size: 15px;
-            color: #444444;
+            color: #CCCCCC;
             margin-bottom: 15px;
             line-height: 1.6;
         }
@@ -612,22 +616,22 @@
             text-transform: none;
         }
         .legal-modal-content .close-modal {
-            color: #555;
+            color: #AAAAAA;
         }
         .legal-modal-content .close-modal:hover {
-            color: #000;
+            color: #FFFFFF;
         }
 
         .progress-container {
             width: 80%;
             max-width: 400px;
             height: 16px;
-            background-color: #444;
+            background-color: #222222;
             border-radius: 10px;
             margin: 0 auto 30px;
             position: relative;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .progress-fill {
@@ -667,21 +671,26 @@
             width: 100%;
             padding: 18px 20px;
             font-size: 18px;
-            border: none;
+            border: 1px solid #333333;
             border-radius: 4px;
             font-family: inherit;
-            background-color: #ffffff;
-            color: #333;
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+        }
+
+        .form-control::placeholder {
+            color: #888888;
         }
 
         .form-control:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(181, 149, 47, 0.5);
+            border-color: var(--theme-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
         }
         
         .modal-submit-btn {
             background-color: var(--theme-color);
-            color: #ffffff;
+            color: #000000;
             padding: 20px 10px;
             box-shadow: 0 6px 0 var(--theme-dark);
             width: 100%;
@@ -706,16 +715,16 @@
 
         .form-message.success {
             display: block;
-            background: rgba(31, 122, 31, 0.16);
+            background: rgba(46, 168, 46, 0.16);
             color: #d7ffd7;
-            border: 1px solid rgba(31, 122, 31, 0.45);
+            border: 1px solid rgba(46, 168, 46, 0.45);
         }
 
         .form-message.error {
             display: block;
-            background: rgba(180, 35, 24, 0.16);
+            background: rgba(226, 62, 49, 0.16);
             color: #ffd8d3;
-            border: 1px solid rgba(180, 35, 24, 0.45);
+            border: 1px solid rgba(226, 62, 49, 0.45);
         }
 
         @media (max-width: 768px) {
@@ -748,7 +757,7 @@
 <body>
 
     <div class="top-bar">
-        FREE REPORT REVEALS: <span style="color: #fff; font-weight: 400;">THE YOUTUBE TOPICS THAT BOOK QUALIFIED SALES CALLS</span>
+        FREE REPORT REVEALS: <span style="color: #ffffff; font-weight: 400;">THE YOUTUBE TOPICS THAT BOOK QUALIFIED SALES CALLS</span>
     </div>
 
     <header class="hero">
@@ -860,8 +869,8 @@
                 </div>
             </div>
 
-            <p class="bold" style="font-size: 24px; max-width: 600px; margin: 0 auto 10px;">The difference was not their subscriber count.<br>It was their TOPIC STRATEGY.</p>
-            <p style="font-size: 18px; max-width: 600px; margin: 0 auto;">This report gives you the exact framework they used.</p>
+            <p class="bold" style="font-size: 24px; max-width: 600px; margin: 0 auto 10px; color: #FFFFFF;">The difference was not their subscriber count.<br>It was their TOPIC STRATEGY.</p>
+            <p style="font-size: 18px; max-width: 600px; margin: 0 auto; color: #CCCCCC;">This report gives you the exact framework they used.</p>
         </div>
     </section>
 
@@ -884,7 +893,7 @@
                 </div>
             </div>
 
-            <div class="social-proof-images" style="max-width: 700px; margin: 0 auto 50px; text-align: left; background: #000000; padding: 40px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.15);">
+            <div class="social-proof-images" style="max-width: 700px; margin: 0 auto 50px; text-align: left; background: #111111; padding: 40px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); border: 1px solid #333333;">
                 <div style="margin-bottom: 40px;">
                     <img src="https://finestclients.com/instagram.png" alt="Finest Edit Instagram Followers" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
                     <h3 style="font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 24px; color: #ffffff; text-transform: none; letter-spacing: 0; margin-bottom: 10px;">90.7K Instagram followers</h3>
@@ -927,10 +936,10 @@
         <div class="container">
             <h2 style="font-size: 50px;">DOWNLOAD YOUR FREE REPORT NOW</h2>
             
-            <p class="bold" style="font-size: 20px; color: #555; max-width: 600px; margin: 0 auto;">Even if we never work together, this report will fundamentally change how you think about YouTube content.</p>
+            <p class="bold" style="font-size: 20px; color: #AAAAAA; max-width: 600px; margin: 0 auto;">Even if we never work together, this report will fundamentally change how you think about YouTube content.</p>
             
             <div class="ebook-wrapper" style="max-width: 320px; margin-top: 40px;">
-                <img src="https://finestclients.com/bookcover.jpeg" alt="Click to Clients Free Report" class="ebook-img" style="animation: none; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));">
+                <img src="https://finestclients.com/bookcover.jpeg" alt="Click to Clients Free Report" class="ebook-img" style="animation: none; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));">
             </div>
 
             <button class="cta-btn open-modal-btn">
@@ -949,7 +958,7 @@
                 <a class="legal-link" data-type="terms">Terms of Service</a> | 
                 <a class="legal-link" data-type="disclaimer">Disclaimer</a>
             </p>
-            <p style="font-size: 11px; margin-top: 25px; color: #555; line-height: 1.6; max-width: 650px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: 11px; margin-top: 25px; color: #888888; line-height: 1.6; max-width: 650px; margin-left: auto; margin-right: auto;">
                 This site is not a part of the Facebook website or Meta Platforms, Inc., nor is it part of the Google, YouTube, or any other major network. Additionally, this site is NOT endorsed by Meta, Google, or YouTube in any way. FACEBOOK is a trademark of META PLATFORMS, Inc. YOUTUBE and GOOGLE are trademarks of GOOGLE, LLC.
             </p>
         </div>

@@ -217,28 +217,8 @@
             color: #aaa;
         }
 
-        .logo-strip {
-            background-color: var(--bg-white);
-            padding: 30px 0;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .mock-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 40px;
-            opacity: 0.4;
-            font-family: 'Anton', sans-serif;
-            font-size: 28px;
-            color: #333;
-        }
-
         .letter-section {
-            padding: 50px 0 80px;
+            padding: 80px 0 80px;
             background-color: var(--bg-white);
             position: relative;
             z-index: 2;
@@ -376,16 +356,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 1px solid #eee;
             background: #fff;
-        }
-
-        .proof-annotation {
-            color: #d32f2f;
-            font-family: 'Caveat', cursive, sans-serif;
-            font-size: 34px;
-            font-weight: 700;
-            margin-top: 15px;
-            transform: rotate(-3deg);
-            display: inline-block;
         }
 
         .client-result {
@@ -546,6 +516,7 @@
             color: #aaa;
             text-decoration: none;
             margin: 0 10px;
+            cursor: pointer;
         }
         
         .footer a:hover { color: #fff; }
@@ -608,6 +579,44 @@
         }
 
         .close-modal:hover { color: #fff; }
+        
+        /* Legal Modals Styling */
+        .legal-modal-content {
+            background: #ffffff;
+            color: #333333;
+            padding: 40px;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: left;
+        }
+        .legal-modal-content h3 {
+            color: #111111;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--bg-offwhite);
+            padding-bottom: 10px;
+        }
+        .legal-modal-content p, .legal-modal-content ul {
+            font-size: 15px;
+            color: #444444;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .legal-modal-content h4 {
+            color: var(--theme-color);
+            font-size: 20px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            text-transform: none;
+        }
+        .legal-modal-content .close-modal {
+            color: #555;
+        }
+        .legal-modal-content .close-modal:hover {
+            color: #000;
+        }
 
         .progress-container {
             width: 80%;
@@ -727,6 +736,7 @@
             .modal-content { padding: 30px 20px 40px; }
             .modal-content h3 { font-size: 32px; }
             .modal-content p { font-size: 15px; }
+            .legal-modal-content { padding: 25px 15px; }
             .diagonal-section::before, .diagonal-section::after { height: 60px; }
             
             .client-result { padding: 20px; margin-left: 10px; margin-right: 10px; }
@@ -758,17 +768,6 @@
             <span class="secure-text">🔒 100% Secure. We Never Share Your Email.</span>
         </div>
     </header>
-
-    <section class="logo-strip">
-        <div class="container">
-            <div class="mock-logos">
-                <span>FORBES</span>
-                <span>ENTREPRENEUR</span>
-                <span>INC.</span>
-                <span>FAST COMPANY</span>
-            </div>
-        </div>
-    </section>
 
     <section class="letter-section">
         <div class="container letter-content">
@@ -924,16 +923,6 @@
         </div>
     </section>
 
-    <section class="logo-strip" style="border-top: 1px dashed #ddd;">
-        <div class="container">
-            <div class="mock-logos">
-                <span>WALL STREET JOURNAL</span>
-                <span>BUSINESS INSIDER</span>
-                <span>YAHOO! FINANCE</span>
-            </div>
-        </div>
-    </section>
-
     <section class="final-cta text-center">
         <div class="container">
             <h2 style="font-size: 50px;">DOWNLOAD YOUR FREE REPORT NOW</h2>
@@ -954,22 +943,19 @@
 
     <footer class="footer">
         <div class="container">
-            <div class="mock-logos" style="margin-bottom: 40px; font-size: 20px; opacity: 0.3;">
-                <span>STRIPE</span>
-                <span>MASTERCARD</span>
-                <span>VISA</span>
-                <span>PAYPAL</span>
-            </div>
             <p>&copy; 2026 Finest Clients. All rights reserved.</p>
             <p>
-                <a href="#">Privacy Policy</a> | 
-                <a href="#">Terms of Service</a> | 
-                <a href="#">Disclaimer</a>
+                <a class="legal-link" data-type="privacy">Privacy Policy</a> | 
+                <a class="legal-link" data-type="terms">Terms of Service</a> | 
+                <a class="legal-link" data-type="disclaimer">Disclaimer</a>
             </p>
-            <p style="font-size: 11px; margin-top: 20px; color: #555;">This site is not a part of the YouTube website or Google Inc. Additionally, This site is NOT endorsed by YouTube in any way. YOUTUBE is a trademark of GOOGLE, Inc.</p>
+            <p style="font-size: 11px; margin-top: 25px; color: #555; line-height: 1.6; max-width: 650px; margin-left: auto; margin-right: auto;">
+                This site is not a part of the Facebook website or Meta Platforms, Inc., nor is it part of the Google, YouTube, or any other major network. Additionally, this site is NOT endorsed by Meta, Google, or YouTube in any way. FACEBOOK is a trademark of META PLATFORMS, Inc. YOUTUBE and GOOGLE are trademarks of GOOGLE, LLC.
+            </p>
         </div>
     </footer>
 
+    <!-- Main Opt-In Modal -->
     <div class="modal-overlay" id="optInModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
@@ -981,18 +967,29 @@
             <h3>DOWNLOAD YOUR FREE REPORT NOW BEFORE THIS PAGE COMES DOWN</h3>
             <p>This <strong>FREE Report</strong> reveals the most <strong>powerful YouTube topics</strong> for growing traffic, leads and sales. Get for free what others have paid $1000's to receive.</p>
             
-         <form id="leadForm" method="post" action="https://contract.finestclients.com/freereport.php">
-    <div class="form-group">
-        <input type="text" id="ck_first_name" name="first_name" class="form-control" placeholder="First Name*" required>
+            <form id="leadForm" method="post" action="https://contract.finestclients.com/freereport.php">
+                <div class="form-group">
+                    <input type="text" id="ck_first_name" name="first_name" class="form-control" placeholder="First Name*" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="ck_email" name="email" class="form-control" placeholder="Email*" required>
+                </div>
+                <button type="submit" class="cta-btn modal-submit-btn" id="submitBtn">
+                    <span class="cta-main-text" style="font-size: 30px;">GET MY FREE TOPICS</span>
+                </button>
+                <div id="formMessage" class="form-message"></div>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <input type="email" id="ck_email" name="email" class="form-control" placeholder="Email*" required>
-    </div>
-    <button type="submit" class="cta-btn modal-submit-btn" id="submitBtn">
-        <span class="cta-main-text" style="font-size: 30px;">GET MY FREE TOPICS</span>
-    </button>
-    <div id="formMessage" class="form-message"></div>
-</form>
+
+    <!-- Legal Modals (Privacy, Terms, Disclaimer) -->
+    <div class="modal-overlay" id="legalModal">
+        <div class="modal-content legal-modal-content">
+            <span class="close-modal" id="closeLegalModal">&times;</span>
+            <h3 id="legalModalTitle">Document Title</h3>
+            <div id="legalModalBody">
+                <!-- Dynamic Content injected via JS -->
+            </div>
         </div>
     </div>
 
@@ -1004,12 +1001,14 @@
             <div class="sp-time" id="spTime">... <span class="sp-verify-icon">✔</span><span class="sp-verify-text">verified by Proof</span></div>
         </div>
     </div>
+
 <script>
     const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
     const d = new Date();
     d.setDate(d.getDate() - 2);
     document.getElementById('dynamic-date').textContent = "Updated: " + d.toLocaleDateString('en-US', dateOptions);
 
+    // Optin Modal Logic
     const modal = document.getElementById('optInModal');
     const openBtns = document.querySelectorAll('.open-modal-btn');
     const closeBtn = document.getElementById('closeModal');
@@ -1039,6 +1038,82 @@
         if (e.clientY < 10 && !exitModalShown && !modal.classList.contains('active')) {
             modal.classList.add('active');
             exitModalShown = true;
+        }
+    });
+
+    // Legal Modals Logic
+    const legalModal = document.getElementById('legalModal');
+    const closeLegalBtn = document.getElementById('closeLegalModal');
+    const legalLinks = document.querySelectorAll('.legal-link');
+    const legalModalTitle = document.getElementById('legalModalTitle');
+    const legalModalBody = document.getElementById('legalModalBody');
+
+    const legalContent = {
+        'privacy': {
+            title: 'Privacy Policy',
+            body: `
+                <p><strong>Effective Date:</strong> ${new Date().toLocaleDateString('en-US', dateOptions)}</p>
+                <p>We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website (regardless of where you visit it from, including the United States and the EU) and tell you about your privacy rights.</p>
+                <h4>1. Information We Collect</h4>
+                <p>When you opt-in to receive our free report or communications, we may collect the following data: First Name, Email Address, IP Address, and standard browser analytics. By providing this information, you consent to its use in accordance with this policy.</p>
+                <h4>2. International Data Transfers (US & Global Targeting)</h4>
+                <p>We are a business operating from India. By submitting your information, you acknowledge that your data will be transferred to, processed, and stored in servers located globally, including India and the United States, utilizing secure third-party marketing and CRM platforms.</p>
+                <h4>3. US State Privacy Rights (CCPA / CPRA)</h4>
+                <p>If you are a resident of California or another US state with comprehensive privacy laws, you may have specific rights regarding your personal information. These include the right to request access to the personal data we hold about you, request the deletion of your personal data, and the right to opt-out of the "sale" or "sharing" of your personal information. <strong>We do not sell your personal data to third parties.</strong></p>
+                <h4>4. How We Use Your Data</h4>
+                <p>We use your data to deliver the requested content, send you marketing communications related to our services, and analyze website usage to improve our offerings. You may unsubscribe from our emails at any time by clicking the "unsubscribe" link at the bottom of our emails.</p>
+                <h4>5. Data Security</h4>
+                <p>We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used, or accessed in an unauthorized way.</p>
+            `
+        },
+        'terms': {
+            title: 'Terms of Service',
+            body: `
+                <p>By accessing or using our website and opting in for our free reports, you agree to be bound by these Terms of Service.</p>
+                <h4>1. Use of Website and Content</h4>
+                <p>All content provided in our free reports, videos, and on this website is for informational and educational purposes only. It is the intellectual property of Finest Clients. You may view and download the content for your personal, non-commercial use only. You may not reproduce, distribute, or create derivative works without explicit written permission.</p>
+                <h4>2. User Communications</h4>
+                <p>By opting in, you agree to receive communications from us via email. You can opt-out at any time. We are not responsible for any technical issues that prevent you from receiving our emails or accessing the report.</p>
+                <h4>3. Age Restrictions</h4>
+                <p>Our services and products are not intended for individuals under the age of 18. By using this site, you represent that you are at least 18 years of age.</p>
+                <h4>4. Limitation of Liability</h4>
+                <p>In no event shall Finest Clients, its owners, or employees be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with your use of the site or the materials provided.</p>
+                <h4>5. Governing Law</h4>
+                <p>These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions. Any dispute arising under these terms shall be subject to the exclusive jurisdiction of the courts located in India.</p>
+            `
+        },
+        'disclaimer': {
+            title: 'Disclaimer',
+            body: `
+                <p><strong>Earnings and Results Disclaimer:</strong></p>
+                <p>The sales figures, calls booked, and client results stated on this landing page and within the free report are our personal results or the results of our past or current clients. Please understand that these results are not typical, and we are not implying that you will duplicate them (or do anything for that matter).</p>
+                <p>The average person who follows any "how-to" information gets little to no results. We are using these references for example purposes only. Your results will vary and depend on many factors including but not limited to your background, experience, niche, offer, and work ethic.</p>
+                <p>All business entails risk as well as massive and consistent effort and action. If you're not willing to accept that, please do not download this report or opt-in to our materials.</p>
+                <h4>Not Associated with Major Platforms</h4>
+                <p>This site is not a part of the Facebook website or Meta Platforms, Inc., nor is it part of the Google, YouTube, or any other major network. Additionally, this site is NOT endorsed by Meta, Google, or YouTube in any way. FACEBOOK is a trademark of META PLATFORMS, Inc. YOUTUBE and GOOGLE are trademarks of GOOGLE, LLC.</p>
+            `
+        }
+    };
+
+    legalLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const type = link.getAttribute('data-type');
+            if(legalContent[type]) {
+                legalModalTitle.innerHTML = legalContent[type].title;
+                legalModalBody.innerHTML = legalContent[type].body;
+                legalModal.classList.add('active');
+            }
+        });
+    });
+
+    closeLegalBtn.addEventListener('click', () => {
+        legalModal.classList.remove('active');
+    });
+
+    legalModal.addEventListener('click', (e) => {
+        if (e.target === legalModal) {
+            legalModal.classList.remove('active');
         }
     });
 

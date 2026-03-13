@@ -2622,7 +2622,7 @@
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>© 2025 Finest Enterprises. All rights reserved.</p>
+                    <p>© <span id="currentYear">2025</span> Finest Enterprises. All rights reserved.</p>
                     <p>Designed for Excellence</p>
                 </div>
             </div>
@@ -2868,6 +2868,9 @@ function updateCalculator(){
         document.querySelectorAll('.fade-in').forEach(el => { fadeObserver.observe(el) });
         function handleProcessScroll() { const c = document.getElementById('processContainer'); if (!c) return; const r = c.getBoundingClientRect(), wh = window.innerHeight, eh = r.height, so = wh * 0.5, ry = so - r.top; let p = ry / eh; p = Math.max(0, Math.min(1.1, p)); const clh = p * eh, lp = Math.min(100, p * 100); document.getElementById('processLine').style.height = lp + '%'; document.getElementById('processDot').style.top = lp + '%'; const steps = document.querySelectorAll('.process-step'); steps.forEach((step) => { const sd = step.querySelector('.process-step-dot'); if (clh > step.offsetTop + 20) { step.classList.remove('inactive'); sd.classList.add('active') } else { step.classList.add('inactive'); sd.classList.remove('active') } }) }
         window.addEventListener('scroll', handleProcessScroll); handleProcessScroll(); updateCalculator();
+
+        // Update footer year dynamically
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
 

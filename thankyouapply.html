@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed | Finest Clients</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://finestclients.com/finestclientslogo.png">
+
+    <!-- Global Wistia Player Script -->
+    <script src="https://fast.wistia.com/player.js" async></script>
+
+    <!-- Error Suppression Script for benign ResizeObserver warnings caused by 3rd-party video embeds -->
+    <script>
+        window.addEventListener('error', function(e) {
+            if (e.message && (
+                e.message.includes('ResizeObserver loop limit exceeded') || 
+                e.message.includes('ResizeObserver loop completed with undelivered notifications')
+            )) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+            }
+        });
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            gold: '#D4AF37', // Main Gold Color
+                            dark: '#B5952F'  // Darker Gold for hover effects
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Testimonial Thumbnail Overlays */
+        .video-box-bg {
+            background: radial-gradient(circle at center, #222222 0%, #000000 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 selection:bg-brand-gold selection:text-gray-900">
+
+    <!-- Success Banner -->
+    <div class="bg-blue-600 text-white text-center py-3 px-4 text-sm md:text-base font-bold tracking-wide shadow-md relative z-10">
+        <i class="fa-solid fa-calendar-check mr-2 text-xl align-middle"></i> 
+        <span class="align-middle">Your Zoom Link Invite Has Been Emailed To You</span>
+    </div>
+
+    <!-- Section 1: Hero & Main Video -->
+    <section class="pt-16 pb-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center border-b border-gray-200">
+        <h1 class="text-3xl md:text-5xl font-black mb-2 text-gray-900 leading-tight tracking-tight">
+            IMPORTANT: Go Through This Whole Page Before Our Call
+        </h1>
+        <p class="text-gray-600 font-bold mb-8 text-lg">Step 1: Watch The Video Below</p>
+        
+        <!-- Main Video Embed (Placeholder using previous hero video) -->
+        <div class="bg-white p-2 rounded-2xl shadow-xl border border-gray-200 max-w-3xl mx-auto">
+            <div class="rounded-xl overflow-hidden relative aspect-video bg-black">
+                <script src="https://fast.wistia.com/embed/h8itjpknpn.js" async type="module"></script>
+                <style>wistia-player[media-id='h8itjpknpn']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/h8itjpknpn/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style>
+                <wistia-player media-id="h8itjpknpn" aspect="1.7777777777777777"></wistia-player>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: FAQ Videos Grid -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-black text-gray-900">Step 2: Get Your Questions Answered</h2>
+            <div class="w-24 h-1 bg-brand-gold mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            
+            <!-- Video 1 -->
+            <div class="bg-white p-5 rounded-2xl shadow-md border border-gray-200 hover:border-brand-gold transition-colors">
+                <h3 class="text-lg font-black text-center mb-4 text-gray-900 leading-snug min-h-[4rem] flex items-center justify-center px-2">How fast will I see results?</h3>
+                <div class="rounded-lg overflow-hidden relative aspect-video bg-black">
+                    <script src="https://fast.wistia.com/embed/3k837tmdk7.js" async type="module"></script>
+                    <style>wistia-player[media-id='3k837tmdk7']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/3k837tmdk7/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                    <wistia-player media-id="3k837tmdk7" aspect="1.7777777777777777"></wistia-player>
+                </div>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="bg-white p-5 rounded-2xl shadow-md border border-gray-200 hover:border-brand-gold transition-colors">
+                <h3 class="text-lg font-black text-center mb-4 text-gray-900 leading-snug min-h-[4rem] flex items-center justify-center px-2">How much can I make from this? How many leads can I expect?</h3>
+                <div class="rounded-lg overflow-hidden relative aspect-video bg-black">
+                    <script src="https://fast.wistia.com/embed/uuz57o4xjd.js" async type="module"></script>
+                    <style>wistia-player[media-id='uuz57o4xjd']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/uuz57o4xjd/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                    <wistia-player media-id="uuz57o4xjd" aspect="1.7777777777777777"></wistia-player>
+                </div>
+            </div>
+
+            <!-- Video 3 -->
+            <div class="bg-white p-5 rounded-2xl shadow-md border border-gray-200 hover:border-brand-gold transition-colors">
+                <h3 class="text-lg font-black text-center mb-4 text-gray-900 leading-snug min-h-[4rem] flex items-center justify-center px-2">Is this actually hands-off, or do I have to do a lot?</h3>
+                <div class="rounded-lg overflow-hidden relative aspect-video bg-black">
+                    <script src="https://fast.wistia.com/embed/a5vm4nff7r.js" async type="module"></script>
+                    <style>wistia-player[media-id='a5vm4nff7r']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/a5vm4nff7r/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                    <wistia-player media-id="a5vm4nff7r" aspect="1.7777777777777777"></wistia-player>
+                </div>
+            </div>
+
+            <!-- Video 4 -->
+            <div class="bg-white p-5 rounded-2xl shadow-md border border-gray-200 hover:border-brand-gold transition-colors">
+                <h3 class="text-lg font-black text-center mb-4 text-gray-900 leading-snug min-h-[4rem] flex items-center justify-center px-2">Isn't YouTube saturated? There's so many coaches posting now.</h3>
+                <div class="rounded-lg overflow-hidden relative aspect-video bg-black">
+                    <script src="https://fast.wistia.com/embed/zqaoxxm8h1.js" async type="module"></script>
+                    <style>wistia-player[media-id='zqaoxxm8h1']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/zqaoxxm8h1/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                    <wistia-player media-id="zqaoxxm8h1" aspect="1.7777777777777777"></wistia-player>
+                </div>
+            </div>
+
+            <!-- Video 5 -->
+            <div class="bg-white p-5 rounded-2xl shadow-md border border-gray-200 hover:border-brand-gold transition-colors">
+                <h3 class="text-lg font-black text-center mb-4 text-gray-900 leading-snug min-h-[4rem] flex items-center justify-center px-2">How long does it take me to record these videos?</h3>
+                <div class="rounded-lg overflow-hidden relative aspect-video bg-black">
+                    <script src="https://fast.wistia.com/embed/q8kizytntk.js" async type="module"></script>
+                    <style>wistia-player[media-id='q8kizytntk']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/q8kizytntk/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                    <wistia-player media-id="q8kizytntk" aspect="1.7777777777777777"></wistia-player>
+                </div>
+            </div>
+
+            <!-- Video 6 -->
+            <div class="bg-white p-5 rounded-2xl shadow-md border border-gray-200 hover:border-brand-gold transition-colors">
+                <h3 class="text-lg font-black text-center mb-4 text-gray-900 leading-snug min-h-[4rem] flex items-center justify-center px-2">What's the realistic worst case scenario working with you?</h3>
+                <div class="rounded-lg overflow-hidden relative aspect-video bg-black">
+                    <script src="https://fast.wistia.com/embed/9q8t2dgrug.js" async type="module"></script>
+                    <style>wistia-player[media-id='9q8t2dgrug']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/9q8t2dgrug/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                    <wistia-player media-id="9q8t2dgrug" aspect="1.7777777777777777"></wistia-player>
+                </div>
+            </div>
+
+            <!-- Video 7 -->
+            <div class="bg-white p-5 rounded-2xl shadow-md border border-gray-200 hover:border-brand-gold transition-colors">
+                <h3 class="text-lg font-black text-center mb-4 text-gray-900 leading-snug min-h-[4rem] flex items-center justify-center px-2">I don't have a big audience, or I'm starting from 0, will this still work? How long will it take then?</h3>
+                <div class="rounded-lg overflow-hidden relative aspect-video bg-black">
+                    <script src="https://fast.wistia.com/embed/63gomk0f05.js" async type="module"></script>
+                    <style>wistia-player[media-id='63gomk0f05']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/63gomk0f05/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                    <wistia-player media-id="63gomk0f05" aspect="1.7777777777777777"></wistia-player>
+                </div>
+            </div>
+
+            <!-- Video 8 -->
+            <div class="bg-white p-5 rounded-2xl shadow-md border border-gray-200 hover:border-brand-gold transition-colors">
+                <h3 class="text-lg font-black text-center mb-4 text-gray-900 leading-snug min-h-[4rem] flex items-center justify-center px-2">I have very specific topics I like to talk about, how do you ensure that my stuff doesn't sound "generic"?</h3>
+                <div class="rounded-lg overflow-hidden relative aspect-video bg-black">
+                    <script src="https://fast.wistia.com/embed/604pybjvf5.js" async type="module"></script>
+                    <style>wistia-player[media-id='604pybjvf5']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/604pybjvf5/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                    <wistia-player media-id="604pybjvf5" aspect="1.7777777777777777"></wistia-player>
+                </div>
+            </div>
+
+            <!-- Video 9 -->
+            <div class="bg-white p-5 rounded-2xl shadow-md border border-gray-200 hover:border-brand-gold transition-colors">
+                <h3 class="text-lg font-black text-center mb-4 text-gray-900 leading-snug min-h-[4rem] flex items-center justify-center px-2">Do I need to be good on camera?</h3>
+                <div class="rounded-lg overflow-hidden relative aspect-video bg-black">
+                    <script src="https://fast.wistia.com/embed/j8ouz283ng.js" async type="module"></script>
+                    <style>wistia-player[media-id='j8ouz283ng']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/j8ouz283ng/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                    <wistia-player media-id="j8ouz283ng" aspect="1.7777777777777777"></wistia-player>
+                </div>
+            </div>
+
+            <!-- Video 10 -->
+            <div class="bg-white p-5 rounded-2xl shadow-md border border-gray-200 hover:border-brand-gold transition-colors">
+                <h3 class="text-lg font-black text-center mb-4 text-gray-900 leading-snug min-h-[4rem] flex items-center justify-center px-2">Will I just be passed off to an off-shore team?</h3>
+                <div class="rounded-lg overflow-hidden relative aspect-video bg-black">
+                    <script src="https://fast.wistia.com/embed/i5zcamqyy6.js" async type="module"></script>
+                    <style>wistia-player[media-id='i5zcamqyy6']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/i5zcamqyy6/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                    <wistia-player media-id="i5zcamqyy6" aspect="1.7777777777777777"></wistia-player>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 3: Pricing & Action -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-black mb-6">How much does this cost?</h2>
+            <p class="text-lg md:text-2xl font-medium text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+                The investment depends on your content volume, but it’s multiple 4-figures per month depending on your content volume.
+            </p>
+            
+            <a href="https://calendar.google.com/" target="_blank" class="inline-flex items-center justify-center w-full max-w-md bg-blue-500 hover:bg-blue-600 text-white font-black py-5 px-6 rounded-lg text-xl md:text-2xl shadow-[0_4px_0_#2563eb] hover:shadow-[0_2px_0_#2563eb] hover:translate-y-[2px] transition-all tracking-wide">
+                Confirm The Zoom Invite
+            </a>
+            <p class="text-blue-500 text-sm mt-4 font-bold tracking-wide">Zoom link invite inside</p>
+        </div>
+    </section>
+
+    <!-- Section 4: Proof Section -->
+    <section class="py-20 bg-white border-b border-gray-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center rounded-full border border-brand-gold/40 bg-gray-50 px-4 py-2 text-sm font-bold text-brand-dark mb-4">Does It Actually Work?</div>
+                <h2 class="text-3xl md:text-5xl font-black mb-4 text-gray-900">Client Interviews & Testimonials</h2>
+                <div class="w-24 h-1 bg-brand-gold mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <!-- 4 Videos Grid based on provided Wistia Embeds -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                
+                <!-- Video 1: Avi Arya -->
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200 shadow-sm">
+                            <i class="fa-solid fa-user text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-black text-gray-900 text-lg leading-tight">Avi Arya</div>
+                            <div class="text-brand-dark font-bold text-xs uppercase tracking-wide">Internet Moguls</div>
+                        </div>
+                    </div>
+                    <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200 relative aspect-video bg-black transition-transform hover:scale-[1.01] duration-300">
+                        <script src="https://fast.wistia.com/embed/pwm2j4vyyw.js" async type="module"></script>
+                        <style>wistia-player[media-id='pwm2j4vyyw']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/pwm2j4vyyw/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                        <wistia-player media-id="pwm2j4vyyw" aspect="1.7777777777777777"></wistia-player>
+                    </div>
+                </div>
+
+                <!-- Video 2: Everything Money -->
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200 shadow-sm">
+                            <i class="fa-solid fa-building text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-black text-gray-900 text-lg leading-tight">Everything Money</div>
+                            <div class="text-brand-dark font-bold text-xs uppercase tracking-wide">Real Estate</div>
+                        </div>
+                    </div>
+                    <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200 relative aspect-video bg-black transition-transform hover:scale-[1.01] duration-300">
+                        <script src="https://fast.wistia.com/embed/smewxk5cyy.js" async type="module"></script>
+                        <style>wistia-player[media-id='smewxk5cyy']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/smewxk5cyy/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                        <wistia-player media-id="smewxk5cyy" aspect="1.7777777777777777"></wistia-player>
+                    </div>
+                </div>
+
+                <!-- Video 3: David Ellis -->
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200 shadow-sm">
+                            <i class="fa-solid fa-chart-line text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-black text-gray-900 text-lg leading-tight">David Ellis</div>
+                            <div class="text-brand-dark font-bold text-xs uppercase tracking-wide">David Ellis Growth</div>
+                        </div>
+                    </div>
+                    <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200 relative aspect-video bg-black transition-transform hover:scale-[1.01] duration-300">
+                        <script src="https://fast.wistia.com/embed/mbhbe4nmv3.js" async type="module"></script>
+                        <style>wistia-player[media-id='mbhbe4nmv3']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/mbhbe4nmv3/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                        <wistia-player media-id="mbhbe4nmv3" aspect="1.7777777777777777"></wistia-player>
+                    </div>
+                </div>
+
+                <!-- Video 4: Arun Sharma -->
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200 shadow-sm">
+                            <i class="fa-solid fa-graduation-cap text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-black text-gray-900 text-lg leading-tight">Arun Sharma</div>
+                            <div class="text-brand-dark font-bold text-xs uppercase tracking-wide">Mindworkzz</div>
+                        </div>
+                    </div>
+                    <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200 relative aspect-video bg-black transition-transform hover:scale-[1.01] duration-300">
+                        <script src="https://fast.wistia.com/embed/psv6g87cc1.js" async type="module"></script>
+                        <style>wistia-player[media-id='psv6g87cc1']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/psv6g87cc1/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                        <wistia-player media-id="psv6g87cc1" aspect="1.7777777777777777"></wistia-player>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Written FAQ -->
+    <section class="py-20 bg-gray-50 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 items-start">
+            <div class="w-full md:w-1/3 sticky top-10">
+                <h2 class="text-4xl md:text-5xl font-black leading-tight text-gray-900">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="w-full md:w-2/3 bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors">
+                        What exactly do you help with? 
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium leading-relaxed">We handle the entire YouTube growth strategy for you - from scripting and editing to SEO, thumbnails, and posting. <br><br>You just show up to record once a week. Everything else is done-for-you with a focus on getting you more qualified inbound leads.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors">
+                        Why YouTube?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium leading-relaxed">YouTube is where buyers go when they’re actively searching for a solution.<br><br> It’s high-intent, evergreen, and compounds over time - unlike short-form, ads, or cold outreach. One good video can drive leads for months (or years) without spending a penny on traffic.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors">
+                        I’m already seeing good results from other client acquisition methods. Why do I need this?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium leading-relaxed">YouTube is unique in the sense that it's not just a linear acquisition channel.<br><br>Meaning, the value of one video doesn’t stop after it’s published.<br><br>​It keeps working. It builds trust while you sleep. It pre-sells for you while you’re on calls. It warms up leads that found you from cold ads, referrals, SEO, or outbound.<br><br>It becomes the backbone of your brand - amplifying everything else you're doing, without demanding your full attention every day.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 4 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors">
+                        How much time will this take me? 
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium leading-relaxed">Most clients spend just 60-90 minutes a week filming. Or they batch record for a few hours once per month. We handle everything else, scripting, editing, posting, optimization, so you can focus on what you do best.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 5 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors">
+                        How do I know this will actually work for me?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium leading-relaxed">This system isn’t built for influencers. It’s built for operators. Founders. Coaches. Agency owners. People who know how to close, they just need more warm, ready-to-buy prospects.<br><br>If you’ve got a solid offer, you’re good on camera (or at least willing to try), and you can commit to one video per week… we’ll handle the rest.<br><br>And if you’re still unsure - that’s exactly why we start every relationship with a call. So we can make sure it’s a fit before we build anything.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 6 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors">
+                        Do I need to come up with the content ideas myself?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium leading-relaxed">No. We ideate the topics, research the angles, and write the entire script. You just show up and record with a strategy that’s already working.​</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 7 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors">
+                        What kind of results can I expect? 
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium leading-relaxed">While results do differ depending on 101 different factors... You can typically expect your first inbound sales calls after 1 month of consistent posting.<br><br>​After that, the number compounds exponentially.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 8 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors">
+                        How is this different from hiring a video editor or freelancer?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium leading-relaxed">We bring strategy. From ideation to scripting to thumbnail to SEO - we build your channel like a high-converting funnel, not a “content machine.”​</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 9 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors">
+                        Do I need a big audience for this to work?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium leading-relaxed">Not at all. Some of our best-performing clients had under 300 subscribers when they started. YouTube is search-based - which means you show up in front of buyers, not followers.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 10 -->
+                <div class="faq-item border-b border-gray-200 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors">
+                        How quickly can we get started?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium leading-relaxed">Once you’re onboarded, we typically deliver your first batch of video scripts within 3-5 business days - and you’ll be recording within the first week.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 11 -->
+                <div class="faq-item group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-gray-900 p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-gray-50 transition-colors">
+                        What if I’ve tried YouTube before and it didn’t work?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-6 text-gray-700 font-medium leading-relaxed">That’s exactly why we exist. Most people fail because they post without strategy, poor editing, no optimization, and zero consistency. We fix all of that.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 text-center text-sm border-t border-gray-800">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="font-bold text-white mb-4">&copy; 2026 Finest Clients.</p>
+            <p class="text-xs text-gray-500 max-w-2xl mx-auto leading-relaxed">
+                This site is not a part of the YouTube website or Google Inc. 
+                Additionally, this site is NOT endorsed by YouTube in any way. 
+                YouTube is a trademark of Google Inc.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Logic Scripts -->
+    <script>
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const parent = button.parentElement;
+                const content = parent.querySelector('.faq-content');
+                const icon = parent.querySelector('.faq-icon');
+                const isActive = parent.classList.contains('active');
+                
+                // Close all others
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-content').style.maxHeight = null;
+                    item.querySelector('.faq-icon').innerHTML = '<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>';
+                    item.querySelector('.faq-icon').classList.remove('rotate-45');
+                });
+                
+                // Toggle current
+                if (!isActive) {
+                    parent.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.innerHTML = '<path d="M19 13H5v-2h14v2z"/>';
+                    icon.classList.add('rotate-45');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

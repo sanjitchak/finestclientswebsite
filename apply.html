@@ -13,17 +13,26 @@
     <!-- Wistia Core Player Script -->
     <script src="https://fast.wistia.com/player.js" async></script>
 
-    <!-- Error Suppression Script for benign ResizeObserver warnings caused by 3rd-party video embeds -->
+    <!-- Error Suppression Script for benign warnings caused by 3rd-party video embeds in iframes -->
     <script>
         window.addEventListener('error', function(e) {
             if (e.message && (
-                e.message.includes('ResizeObserver loop limit exceeded') || 
-                e.message.includes('ResizeObserver loop completed with undelivered notifications')
+                e.message.includes('ResizeObserver') || 
+                e.message.includes('Script error.')
             )) {
                 e.preventDefault();
                 e.stopImmediatePropagation();
             }
         });
+
+        // Intercept and hide empty object errors `{}` thrown by 3rd party players tracking scripts
+        const originalConsoleError = console.error;
+        console.error = function(...args) {
+            if (args.length === 1 && typeof args[0] === 'object' && args[0] !== null && Object.keys(args[0]).length === 0) {
+                return; // Silently ignore the empty error object
+            }
+            originalConsoleError.apply(console, args);
+        };
     </script>
 
     <script>
@@ -794,7 +803,7 @@
 
         // Show popup when mouse leaves the top of the viewport
         document.addEventListener('mouseleave', (e) => {
-            if (e.clientY < 0 && !exitPopupShown) {
+            if (e.clientY < 0 && !exitPopupShown && exitPopup) {
                 exitPopup.classList.remove('hidden');
                 exitPopupShown = true;
             }
@@ -802,18 +811,35 @@
 
         // Function to close the popup
         const closePopup = () => {
-            exitPopup.classList.add('hidden');
+            if (exitPopup) exitPopup.classList.add('hidden');
         };
 
         // Close when clicking ANYWHERE on the popup overlay
-        exitPopup.addEventListener('click', closePopup);
+        if (exitPopup) {
+            exitPopup.addEventListener('click', closePopup);
+        }
 
         // Dynamic Tab Title (Attention Grabber)
         const originalTitle = document.title;
+        let blinkInterval;
+        
         document.addEventListener("visibilitychange", () => {
             if (document.visibilityState === "hidden") {
-                document.title = "(1) New Message";
+                // Clear any existing intervals just to be safe
+                if (blinkInterval) clearInterval(blinkInterval);
+                
+                let showDot = true;
+                // Instantly set the title without waiting for the first interval tick
+                document.title = "🔴 (1) New Message";
+                
+                // Toggle the red dot every 1 second (1000ms) to create a blinking effect
+                blinkInterval = setInterval(() => {
+                    showDot = !showDot;
+                    document.title = showDot ? "🔴 (1) New Message" : "(1) New Message";
+                }, 1000);
             } else {
+                // Stop blinking and restore original title when they come back
+                if (blinkInterval) clearInterval(blinkInterval);
                 document.title = originalTitle;
             }
         });

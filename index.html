@@ -429,7 +429,8 @@
             align-items: center;
             background: #000;
             overflow: hidden;
-            padding: 120px 0 80px
+            padding: 120px 0 80px;
+            cursor: pointer; /* Suggests interactivity for background */
         }
 
         .hero-bg {
@@ -437,6 +438,18 @@
             inset: 0;
             z-index: 0;
             background: radial-gradient(circle at center, #111 0%, #000 100%);
+        }
+
+        /* Canvas specifically for Tubes Interactive Background */
+        #tubes-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            touch-action: none;
+            opacity: 0.6; /* Slightly transparent to blend with background gradient */
         }
 
         .hero-glow {
@@ -448,7 +461,8 @@
             background: var(--gold);
             border-radius: 50%;
             filter: blur(150px);
-            opacity: 0.15
+            opacity: 0.15;
+            pointer-events: none;
         }
         
         .hero-glow-2 {
@@ -460,7 +474,8 @@
             background: var(--gold);
             border-radius: 50%;
             filter: blur(150px);
-            opacity: 0.1
+            opacity: 0.1;
+            pointer-events: none;
         }
 
         .hero-content {
@@ -472,7 +487,13 @@
             text-align: center;
             display: flex;
             flex-direction: column;
-            align-items: center
+            align-items: center;
+            pointer-events: none; /* Let cursor pass through to canvas background */
+        }
+
+        .hero-content > * {
+            pointer-events: auto; /* Re-enable for inner interactive elements */
+            cursor: default; /* Reset cursor for text */
         }
 
         @media(min-width:768px) {
@@ -530,7 +551,8 @@
             color: #fff;
             line-height: 1.1;
             letter-spacing: -0.025em;
-            margin-bottom: 24px
+            margin-bottom: 24px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8); /* Adds legibility over interactive BG */
         }
 
         @media(min-width:640px) {
@@ -555,7 +577,8 @@
             max-width: 768px;
             margin: 0 auto 24px;
             line-height: 1.6;
-            font-weight: 300
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
         @media(min-width:768px) {
@@ -604,7 +627,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%
+            width: 100%;
+            cursor: pointer;
         }
 
         @media(min-width:640px) {
@@ -633,7 +657,8 @@
             font-size: 18px;
             transition: all .3s;
             width: 100%;
-            background: transparent
+            background: transparent;
+            cursor: pointer;
         }
 
         @media(min-width:640px) {
@@ -2082,7 +2107,9 @@
         </nav>
 
         <section id="home" class="hero">
-            <div class="hero-bg">
+            <div class="hero-bg" id="hero-bg-container">
+                <!-- Added Tubes Canvas Base -->
+                <canvas id="tubes-canvas"></canvas>
                 <div class="hero-glow"></div>
                 <div class="hero-glow-2"></div>
             </div>
@@ -2951,6 +2978,65 @@
         window.addEventListener('scroll', handleProcessScroll); 
         handleProcessScroll(); 
         updateCalculator();
+
+        // ============================================
+        // TUBES INTERACTIVE BACKGROUND INITIALIZATION
+        // ============================================
+        const initTubesBackground = async () => {
+            const canvas = document.getElementById('tubes-canvas');
+            if (!canvas) return;
+
+            try {
+                const module = await import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js');
+                const TubesCursor = module.default;
+
+                // Theme-aligned colors (Gold, White, Dark Gray)
+                const baseColors = ["#D4AF37", "#ffffff", "#4b5563"];
+                const baseLights = ["#D4AF37", "#fef08a", "#ffffff", "#1f2937"];
+
+                const tubesApp = TubesCursor(canvas, {
+                    tubes: {
+                        colors: baseColors,
+                        lights: {
+                            intensity: 150,
+                            colors: baseLights
+                        }
+                    }
+                });
+
+                // Add click interactivity to the Hero section to randomize within brand colors
+                const heroSection = document.getElementById('home');
+                let paletteIndex = 0;
+                
+                // Set up beautiful, on-brand color palettes to rotate through
+                const palettes = [
+                    { colors: ["#D4AF37", "#ffffff", "#333333"], lights: ["#D4AF37", "#fef08a", "#ffffff", "#111111"] },
+                    { colors: ["#FDE047", "#9CA3AF", "#000000"], lights: ["#FDE047", "#ffffff", "#D4AF37", "#222222"] },
+                    { colors: ["#ffffff", "#6B7280", "#111111"], lights: ["#D4AF37", "#ffffff", "#9CA3AF", "#000000"] }
+                ];
+
+                heroSection.addEventListener('click', (e) => {
+                    // Prevent color change if clicking interactive content
+                    if (e.target.closest('button') || e.target.closest('a') || e.target.closest('wistia-player')) {
+                        return;
+                    }
+                    
+                    paletteIndex = (paletteIndex + 1) % palettes.length;
+                    const p = palettes[paletteIndex];
+                    
+                    if (tubesApp && tubesApp.tubes) {
+                        tubesApp.tubes.setColors(p.colors);
+                        tubesApp.tubes.setLightsColors(p.lights);
+                    }
+                });
+
+            } catch (err) {
+                console.error('Failed to init 3D Tubes background:', err);
+            }
+        };
+
+        // Initialize immediately
+        initTubesBackground();
     </script>
 </body>
 

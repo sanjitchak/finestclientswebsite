@@ -733,81 +733,83 @@
             font-size: 18px;
         }
 
-        .case-grid {
-            display: grid;
-            gap: 24px
+        /* Proof Section Overrides adapted from Optin Page */
+        .proof-section {
+            padding: 80px 0;
+            background-color: #000;
+            position: relative;
+            z-index: 2;
         }
 
-        @media(min-width:768px) {
-            .case-grid {
-                grid-template-columns: repeat(3, 1fr)
-            }
-        }
-
-        .case-card {
-            background: var(--card);
-            padding: 24px;
-            border-radius: 16px;
-            border: 1px solid var(--white-10);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            transition: border-color .3s
-        }
-
-        @media(min-width:768px) {
-            .case-card {
-                padding: 32px
-            }
-        }
-
-        .case-card:hover {
-            border-color: var(--gold-30)
-        }
-
-        .case-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 24px
-        }
-
-        .case-card-icon {
-            padding: 8px;
-            background: var(--white-5);
-            border-radius: 8px
-        }
-
-        .case-card-badge {
-            font-size: 12px;
-            font-weight: 700;
-            background: rgba(20, 83, 45, 0.3);
-            color: #4ade80;
-            padding: 4px 12px;
-            border-radius: 9999px
-        }
-
-        .case-card-title {
-            font-size: 20px;
-            font-weight: 700;
+        .proof-section h2 {
+            font-size: 40px;
+            margin-bottom: 0px;
+            letter-spacing: 2px;
+            text-align: center;
             color: #fff;
-            margin-bottom: 8px
+            font-weight: 800;
+            line-height: 1.1;
         }
 
-        .case-card-niche {
-            color: var(--gray-400);
-            font-size: 14px;
-            margin-bottom: 16px
+        @media(min-width:768px) {
+            .proof-section h2 {
+                font-size: 56px;
+            }
         }
 
-        .case-card-result {
-            color: var(--gold);
-            font-weight: 700;
+        .proof-subtitle {
             font-size: 18px;
-            margin-top: auto;
-            padding-top: 16px;
-            border-top: 1px solid var(--white-5)
+            font-weight: 700;
+            color: var(--gray-400);
+            margin-bottom: 60px;
+            margin-top: 8px;
+            text-transform: uppercase;
+            text-align: center;
         }
+
+        .proof-item {
+            margin-bottom: 70px;
+            text-align: center;
+            position: relative;
+        }
+
+        .proof-img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--white-10);
+            background: #000;
+            margin: 0 auto;
+        }
+
+        .client-result {
+            background: var(--card);
+            border-left: 5px solid var(--gold);
+            padding: 24px 32px;
+            margin: 0 auto 32px;
+            max-width: 650px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 0 8px 8px 0;
+            border-top: 1px solid var(--white-5);
+            border-right: 1px solid var(--white-5);
+            border-bottom: 1px solid var(--white-5);
+        }
+
+        .client-result .quote {
+            font-weight: 700;
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .client-result .author {
+            font-size: 16px;
+            color: var(--gray-400);
+            font-style: italic;
+        }
+
 
         .target-grid {
             display: grid;
@@ -2155,55 +2157,47 @@
             </div>
         </section>
 
-        <section id="proof" class="section" style="background:#000;border-bottom:1px solid rgba(255,255,255,0.05)">
-            <div class="container">
-                <div class="section-header">
-                    <h3 class="section-title">Recent Client Wins</h3>
-                    <p class="section-label">Track Record</p>
+        <!-- NEW PROOF SECTION REPLACING RECENT CLIENT WINS -->
+        <section id="proof" class="proof-section section-border-b">
+            <div class="container text-center">
+                <div class="fade-in">
+                    <h2>PROOF!</h2>
+                    <p class="proof-subtitle">(just a little bit of it anyway...)</p>
                 </div>
-                <div class="case-grid">
-                    <div class="fade-in case-card">
-                        <div class="case-card-header">
-                            <div class="case-card-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                    <polyline points="17 6 23 6 23 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="case-card-badge">Verified</span>
-                        </div>
-                        <h4 class="case-card-title">Simone</h4>
-                        <p class="case-card-niche">Tech Career Coach</p>
-                        <p class="case-card-result">From zero to 300 sales calls a month.</p>
+
+                <div class="fade-in proof-item" style="margin-bottom: 50px;">
+                    <a href="https://www.youtube.com/@Arunmsharma" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+                        <img src="https://finestclients.com/asset/images/arun.png" alt="Arun Sharma YouTube Analytics" class="proof-img" style="margin-bottom: 20px;">
+                    </a>
+                    <div class="client-result" style="margin: 0 auto;">
+                        <div class="quote">📞 "200 to 300 sales calls per month from YouTube after 18 months of consistent publishing"</div>
+                        <div class="author">Arun Sharma, CAT Career Coaching</div>
                     </div>
-                    <div class="fade-in case-card" style="transition-delay:100ms">
-                        <div class="case-card-header">
-                            <div class="case-card-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                    <polyline points="17 6 23 6 23 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="case-card-badge">Verified</span>
-                        </div>
-                        <h4 class="case-card-title">Eddie</h4>
-                        <p class="case-card-niche">Online Business Space</p>
-                        <p class="case-card-result">Sales doubled from $200k to $429k in one month.</p>
+                </div>
+
+                <div class="fade-in proof-item" style="margin-bottom: 50px; transition-delay:100ms">
+                    <a href="https://www.youtube.com/@authority-io" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+                        <img src="https://finestclients.com/asset/images/authority.png" alt="Authority IO YouTube Analytics" class="proof-img" style="margin-bottom: 20px;">
+                    </a>
+                    <div class="client-result" style="margin: 0 auto;">
+                        <div class="quote">💰 "Went from $200K to $429K in one month during a product launch supported by 4 YouTube videos"</div>
+                        <div class="author">Authority IO, Online Business Coaching</div>
                     </div>
-                    <div class="fade-in case-card" style="transition-delay:200ms">
-                        <div class="case-card-header">
-                            <div class="case-card-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                    <polyline points="17 6 23 6 23 12"></polyline>
-                                </svg>
-                            </div>
-                            <span class="case-card-badge">Verified</span>
-                        </div>
-                        <h4 class="case-card-title">Matt</h4>
-                        <p class="case-card-niche">B2B Sales Operations</p>
-                        <p class="case-card-result">Closed a $15,000 deal with less than 1,000 views.</p>
+                </div>
+
+                <div class="fade-in proof-item" style="margin-bottom: 70px; transition-delay:200ms">
+                    <a href="https://www.youtube.com/@breakoutfoundersacademy" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+                        <img src="https://finestclients.com/asset/images/ryan.png" alt="Ryan Jackson YouTube Analytics" class="proof-img" style="margin-bottom: 20px;">
+                    </a>
+                    <div class="client-result" style="margin: 0 auto;">
+                        <div class="quote">🎯 "$15,000 client from a video with under 1,000 views"</div>
+                        <div class="author">Ryan Jackson, B2B Service Operations Coach (7 subscribers)</div>
                     </div>
+                </div>
+
+                <div class="fade-in">
+                    <p style="font-weight: 700; font-size: 24px; max-width: 600px; margin: 0 auto 10px; color: #FFFFFF;">The difference was not their subscriber count.<br>It was their TOPIC STRATEGY.</p>
+                    <p style="font-size: 18px; max-width: 600px; margin: 0 auto; color: var(--gray-400);">Our system gives you the exact framework they used.</p>
                 </div>
             </div>
         </section>

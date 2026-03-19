@@ -220,6 +220,69 @@
             font-weight: 600;
         }
 
+        /* --- NEW FEATURED IN SECTION CSS --- */
+        .featured-section {
+            background-color: #ffffff;
+            padding: 50px 0;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .featured-section h3 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            color: #A0A5AA;
+            letter-spacing: 3px;
+            margin-bottom: 35px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .featured-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .featured-logo-wrapper {
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-logo-wrapper:hover {
+            transform: translateY(-3px);
+        }
+
+        .featured-logo {
+            max-height: 35px;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%) opacity(0.6);
+            transition: all 0.4s ease;
+        }
+
+        .featured-logo-wrapper:hover .featured-logo {
+            filter: grayscale(0%) opacity(1);
+        }
+
+        /* Adjust specific logos for visual balance */
+        .logo-abc {
+            max-height: 48px;
+        }
+
+        .logo-nbc {
+            max-height: 48px;
+        }
+        
+        .logo-dj {
+            max-height: 25px;
+        }
+
+        /* ----------------------------------- */
+
         .letter-section {
             padding: 80px 0 80px;
             background-color: var(--bg-white);
@@ -372,9 +435,9 @@
 
         .client-result .quote {
             font-family: 'Open Sans', sans-serif;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 22px;
-            color: #222;
+            color: #000000;
             margin-bottom: 10px;
             line-height: 1.4;
         }
@@ -396,7 +459,6 @@
             padding: 8px 25px 8px 8px;
             display: flex;
             align-items: center;
-            /* Changed z-index from 9999 to 9999 (lower than modal) to fix overlap issue */
             z-index: 9999;
             transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             font-family: 'Open Sans', sans-serif;
@@ -427,7 +489,7 @@
             text-align: left;
         }
         
-        .sp-name { font-weight: 800; font-size: 14px; color: #22; margin-bottom: 2px; }
+        .sp-name { font-weight: 900; font-size: 14px; color: #000000 !important; margin-bottom: 2px; }
         .sp-action { font-size: 13px; color: #555; }
         .sp-time { font-size: 11px; color: #888; display: flex; align-items: center; margin-top: 3px; }
         .sp-verify-icon { color: #007bff; font-size: 12px; margin-right: 4px; }
@@ -539,7 +601,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Changed z-index from 1000 to 10000 so it sits above everything, including social proof popup */
             z-index: 10000;
             opacity: 0;
             pointer-events: none;
@@ -753,6 +814,12 @@
             .client-result { padding: 20px; margin-left: 10px; margin-right: 10px; }
             .client-result .quote { font-size: 18px; }
             .social-proof { left: 10px; right: 10px; border-radius: 8px; padding: 12px; }
+
+            /* Featured Logos Mobile */
+            .featured-logos { gap: 30px; }
+            .featured-logo { max-height: 25px; }
+            .logo-abc, .logo-nbc { max-height: 35px; }
+            .logo-dj { max-height: 20px; }
         }
     </style>
 </head>
@@ -779,6 +846,30 @@
             <span class="secure-text">🔒 100% Secure. We Never Share Your Email.</span>
         </div>
     </header>
+
+    <!-- NEW FEATURED IN SECTION -->
+    <section class="featured-section">
+        <div class="container">
+            <h3>AS FEATURED IN</h3>
+            <div class="featured-logos">
+                <div class="featured-logo-wrapper">
+                    <img src="http://finestclients.com/asset/fox-removebg-preview.png" alt="FOX" class="featured-logo">
+                </div>
+                <div class="featured-logo-wrapper">
+                    <img src="http://finestclients.com/asset/abc-removebg-preview.png" alt="ABC" class="featured-logo logo-abc">
+                </div>
+                <div class="featured-logo-wrapper">
+                    <img src="http://finestclients.com/asset/cbs-removebg-preview.png" alt="CBS" class="featured-logo">
+                </div>
+                <div class="featured-logo-wrapper">
+                    <img src="http://finestclients.com/asset/nbc-removebg-preview.png" alt="NBC" class="featured-logo logo-nbc">
+                </div>
+                <div class="featured-logo-wrapper">
+                    <img src="http://finestclients.com/asset/digitaljournal.webp" alt="Digital Journal" class="featured-logo logo-dj">
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="letter-section">
         <div class="container letter-content">

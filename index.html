@@ -682,6 +682,66 @@
         .btn-secondary:hover {
             border-color: #fff
         }
+        
+        /* As Featured In Section */
+        .featured-section {
+            background-color: #ffffff;
+            padding: 48px 16px;
+            text-align: center;
+        }
+
+        .featured-title {
+            color: #9ca3af;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 36px;
+        }
+
+        .featured-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .featured-logo-link {
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .featured-logo-link img {
+            height: 40px;
+            width: auto;
+            filter: grayscale(100%) opacity(60%);
+            transition: all 0.3s ease;
+        }
+
+        .featured-logo-link:hover img {
+            filter: grayscale(0%) opacity(100%);
+            transform: scale(1.05);
+        }
+
+        /* Tweaked Sizing to Match Visual Weight */
+        .featured-logo-dj img { height: 26px; }
+        .featured-logo-fox img { height: 38px; }
+        .featured-logo-cbs img { height: 42px; }
+        .featured-logo-abc img { height: 46px; }
+        .featured-logo-nbc img { height: 50px; }
+
+        @media(min-width: 768px) {
+            .featured-section { padding: 64px 24px; }
+            .featured-logos { gap: 64px; }
+            .featured-logo-dj img { height: 32px; }
+            .featured-logo-fox img { height: 44px; }
+            .featured-logo-cbs img { height: 50px; }
+            .featured-logo-abc img { height: 54px; }
+            .featured-logo-nbc img { height: 58px; }
+        }
 
         .section {
             padding: 64px 0
@@ -968,36 +1028,6 @@
             text-align: center;
             padding: 48px 16px 72px;
         }
-
-        /* Legacy classes kept for compat if anything else references them */
-        .client-result {
-            background: var(--card);
-            border-left: 5px solid var(--gold);
-            padding: 24px 32px;
-            margin: 0 auto 32px;
-            max-width: 650px;
-            text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-radius: 0 8px 8px 0;
-            border-top: 1px solid var(--white-5);
-            border-right: 1px solid var(--white-5);
-            border-bottom: 1px solid var(--white-5);
-        }
-
-        .client-result .quote {
-            font-weight: 700;
-            font-size: 20px;
-            color: #fff;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .client-result .author {
-            font-size: 16px;
-            color: var(--gray-400);
-            font-style: italic;
-        }
-
 
         .target-grid {
             display: grid;
@@ -2416,10 +2446,11 @@
 
                 <div class="fade-in" style="transition-delay:150ms; width: 100%;">
                     <div class="hero-video-container">
+                        <!-- NEW REPLACED VIDEO -->
                         <script src="https://fast.wistia.com/player.js" async></script>
-                        <script src="https://fast.wistia.com/embed/h8itjpknpn.js" async type="module"></script>
-                        <style>wistia-player[media-id='h8itjpknpn']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/h8itjpknpn/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style>
-                        <wistia-player media-id="h8itjpknpn" aspect="1.7777777777777777"></wistia-player>
+                        <script src="https://fast.wistia.com/embed/vccv2je7m2.js" async type="module"></script>
+                        <style>wistia-player[media-id='vccv2je7m2']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/vccv2je7m2/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                        <wistia-player media-id="vccv2je7m2" aspect="1.7777777777777777"></wistia-player>
                     </div>
                 </div>
                 
@@ -2428,6 +2459,30 @@
                         <button onclick="openOptinModal()" class="btn-primary">Book Your Call Now</button>
                         <button onclick="scrollToSection('process')" class="btn-secondary">See How It Works</button>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW AS FEATURED IN SECTION -->
+        <section class="featured-section">
+            <div class="container fade-in">
+                <h3 class="featured-title">As Featured In</h3>
+                <div class="featured-logos">
+                    <a href="http://finestclients.com/asset/FOXaffiliate.png" target="_blank" rel="noopener noreferrer" class="featured-logo-link featured-logo-fox">
+                        <img src="http://finestclients.com/asset/fox-removebg-preview.png" alt="Fox">
+                    </a>
+                    <a href="http://finestclients.com/asset/ABCAffiliate.png" target="_blank" rel="noopener noreferrer" class="featured-logo-link featured-logo-abc">
+                        <img src="http://finestclients.com/asset/abc-removebg-preview.png" alt="ABC">
+                    </a>
+                    <a href="http://finestclients.com/asset/KotaRadioCBSAffiliate.png" target="_blank" rel="noopener noreferrer" class="featured-logo-link featured-logo-cbs">
+                        <img src="http://finestclients.com/asset/cbs-removebg-preview.png" alt="CBS">
+                    </a>
+                    <a href="http://finestclients.com/asset/nbcaffiliate.png" target="_blank" rel="noopener noreferrer" class="featured-logo-link featured-logo-nbc">
+                        <img src="http://finestclients.com/asset/nbc-removebg-preview.png" alt="NBC">
+                    </a>
+                    <a href="http://finestclients.com/asset/digitaljournalsite.png" target="_blank" rel="noopener noreferrer" class="featured-logo-link featured-logo-dj">
+                        <img src="http://finestclients.com/asset/digitaljournal.webp" alt="Digital Journal">
+                    </a>
                 </div>
             </div>
         </section>

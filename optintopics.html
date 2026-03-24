@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click to Clients | Free Report</title>
+    
+    <link rel="icon" type="image/png" href="https://finestclients.com/finestclientslogo.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Updated Theme Colors */
+            --theme-color: #D4AF37;      /* Primary Gold */
+            --theme-dark: #A88721;       /* Darker Gold for button shadows/hover */
+            --theme-light: #E8CA6A;      /* Lighter Gold */
+            
+            /* Updated Base Colors for Dark Theme */
+            --text-dark: #FFFFFF;        /* Headings and primary text */
+            --text-body: #E0E0E0;        /* Body text */
+            --bg-white: #000000;         /* Pure black base */
+            --bg-offwhite: #0A0A0A;      /* Slightly off-black for alternating sections */
+            --kk-dark: #050505;          /* Very dark hero background */
+            --success-color: #2ea82e;
+            --error-color: #e23e31;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            color: var(--text-body);
+            background-color: var(--bg-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Anton', sans-serif;
+            font-weight: 400;
+            line-height: 1.1;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 22px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .text-center { text-align: center; }
+        .theme-text { color: var(--theme-color); }
+        .bold { font-weight: 800; }
+        .italic { font-style: italic; }
+
+        .top-bar {
+            background-color: #111111;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #222;
+        }
+
+        .hero {
+            padding: 50px 0 60px;
+            background-color: var(--kk-dark);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .hero-kicker {
+            background-color: #222222;
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            border: 1px solid #333;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            color: #ffffff;
+            margin-bottom: 25px;
+            line-height: 1.05;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero p.subheadline {
+            font-size: 20px;
+            font-weight: 400;
+            color: #cccccc;
+            margin-bottom: 40px;
+            font-family: 'Open Sans', sans-serif;
+            text-transform: none;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        @keyframes bookGlow {
+            0% { 
+                filter: drop-shadow(0 0 0px rgba(212, 175, 55, 0)); 
+                transform: scale(1); 
+            }
+            30% { 
+                filter: drop-shadow(0 0 70px rgba(212, 175, 55, 0.8)); 
+                transform: scale(1.05); 
+            }
+            60% { 
+                filter: drop-shadow(0 0 70px rgba(212, 175, 55, 0.6)); 
+                transform: scale(1.05); 
+            }
+            100% { 
+                filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8)); 
+                transform: scale(1); 
+            }
+        }
+
+        .ebook-wrapper {
+            margin: 0 auto 40px;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .ebook-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            animation: bookGlow 3.5s ease-in-out 3s forwards;
+            border-radius: 4px;
+        }
+
+        .cta-btn {
+            display: block;
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: var(--theme-color);
+            color: #000000;
+            text-decoration: none;
+            padding: 22px 15px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 0 var(--theme-dark), 0 15px 25px rgba(0,0,0,0.5);
+            transition: all 0.1s ease;
+            text-align: center;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 6px 0 var(--theme-dark), 0 10px 15px rgba(0,0,0,0.5);
+            background-color: #E6C24A;
+        }
+
+        .cta-btn:active {
+            transform: translateY(8px);
+            box-shadow: 0 0px 0 var(--theme-dark);
+        }
+
+        .cta-btn[disabled] {
+            opacity: 0.85;
+            pointer-events: none;
+        }
+
+        .cta-main-text {
+            font-family: 'Anton', sans-serif;
+            font-size: 38px;
+            display: block;
+            letter-spacing: 1px;
+            line-height: 1;
+            color: #000000;
+        }
+
+        .cta-sub-text {
+            font-size: 16px;
+            font-weight: 700;
+            display: block;
+            margin-top: 8px;
+            font-family: 'Open Sans', sans-serif;
+            color: #222222;
+        }
+
+        .secure-text {
+            text-align: center;
+            font-size: 12px;
+            color: #888888;
+            margin-top: 15px;
+            display: block;
+            font-weight: 600;
+        }
+
+        /* --- NEW FEATURED IN SECTION CSS --- */
+        .featured-section {
+            background-color: #ffffff;
+            padding: 50px 0;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .featured-section h3 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            color: #A0A5AA;
+            letter-spacing: 3px;
+            margin-bottom: 35px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .featured-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .featured-logo-wrapper {
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-logo-wrapper:hover {
+            transform: translateY(-3px);
+        }
+
+        .featured-logo {
+            max-height: 35px;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%) opacity(0.6);
+            transition: all 0.4s ease;
+        }
+
+        .featured-logo-wrapper:hover .featured-logo {
+            filter: grayscale(0%) opacity(1);
+        }
+
+        /* Adjust specific logos for visual balance */
+        .logo-abc {
+            max-height: 48px;
+        }
+
+        .logo-nbc {
+            max-height: 48px;
+        }
+        
+        .logo-dj {
+            max-height: 25px;
+        }
+
+        /* ----------------------------------- */
+
+        .letter-section {
+            padding: 80px 0 80px;
+            background-color: var(--bg-white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .letter-content {
+            text-align: left;
+            max-width: 650px;
+        }
+
+        .letter-content p {
+            font-size: 19px;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .highlight-box {
+            background-color: #111111;
+            border-left: 5px solid var(--theme-color);
+            padding: 25px 30px;
+            margin: 40px 0;
+            font-style: italic;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .highlight-box p {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 0;
+            color: var(--text-dark);
+        }
+
+        .diagonal-section {
+            position: relative;
+            padding: 100px 0;
+            background-color: var(--bg-offwhite);
+            z-index: 1;
+        }
+        
+        .diagonal-section::before,
+        .diagonal-section::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            background-color: var(--bg-offwhite);
+            height: 120px;
+            z-index: -1;
+        }
+        
+        .diagonal-section::before {
+            top: -60px;
+            transform: skewY(-3deg);
+        }
+        
+        .diagonal-section::after {
+            bottom: -60px;
+            transform: skewY(-3deg);
+        }
+
+        .bullets-section h2 {
+            font-size: 52px;
+            margin-bottom: 50px;
+            line-height: 1.05;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin: 0 auto 50px;
+            padding: 0;
+            text-align: left;
+            max-width: 700px;
+        }
+
+        .bullet-list li {
+            font-size: 20px;
+            margin-bottom: 30px;
+            padding-left: 55px;
+            position: relative;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .bullet-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: -2px;
+            color: #000000;
+            background-color: var(--theme-color);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .proof-section {
+            padding: 80px 0;
+            background-color: var(--bg-white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .proof-section h2 {
+            font-size: 75px;
+            margin-bottom: 0px;
+            letter-spacing: 2px;
+        }
+
+        .proof-subtitle {
+            font-size: 24px;
+            font-weight: 800;
+            color: #AAAAAA;
+            margin-bottom: 60px;
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .proof-item {
+            margin-bottom: 70px;
+            text-align: center;
+            position: relative;
+        }
+
+        .proof-img {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+            background: #fff;
+        }
+
+        .client-result {
+            background: #fff;
+            border-left: 5px solid var(--theme-color);
+            padding: 25px 30px;
+            margin: 0 auto 30px;
+            max-width: 650px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .client-result .quote {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 900;
+            font-size: 22px;
+            color: #000000;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .client-result .author {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .social-proof {
+            position: fixed;
+            bottom: -100px;
+            left: 20px;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 50px;
+            padding: 8px 25px 8px 8px;
+            display: flex;
+            align-items: center;
+            z-index: 9999;
+            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            font-family: 'Open Sans', sans-serif;
+            border: 1px solid #eaeaea;
+        }
+        
+        .social-proof.show {
+            bottom: 20px;
+        }
+        
+        .sp-icon {
+            width: 45px;
+            height: 45px;
+            background: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 22px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .sp-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        
+        .sp-name { font-weight: 900; font-size: 14px; color: #000000 !important; margin-bottom: 2px; }
+        .sp-action { font-size: 13px; color: #555; }
+        .sp-time { font-size: 11px; color: #888; display: flex; align-items: center; margin-top: 3px; }
+        .sp-verify-icon { color: #007bff; font-size: 12px; margin-right: 4px; }
+        .sp-verify-text { color: #007bff; font-weight: 700; }
+
+        .authority-section h2 {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .authority-badges {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            text-align: center;
+            padding: 20px;
+            width: 180px;
+            position: relative;
+        }
+
+        .badge::before, .badge::after {
+            content: '🌿';
+            position: absolute;
+            top: 20px;
+            font-size: 24px;
+            opacity: 0.3;
+            filter: grayscale(100%);
+        }
+        .badge::before { left: 0; transform: scaleX(-1); }
+        .badge::after { right: 0; }
+        
+        .badge-number {
+            font-family: 'Anton', sans-serif;
+            font-size: 42px;
+            color: var(--theme-color);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .badge-text {
+            font-size: 13px;
+            font-weight: 800;
+            color: #CCCCCC;
+            text-transform: uppercase;
+        }
+
+        .authority-content p {
+            font-size: 19px;
+            margin-bottom: 25px;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .final-cta {
+            padding: 80px 0 100px;
+            background-color: var(--bg-white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .final-cta h2 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer {
+            background-color: #050505;
+            color: #888888;
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 13px;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid #222;
+        }
+
+        .footer a {
+            color: #AAAAAA;
+            text-decoration: none;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        
+        .footer a:hover { color: #FFFFFF; }
+
+        .footer p {
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #111111;
+            padding: 40px 50px 50px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            transform: translateY(-30px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            color: #ffffff;
+            border: 1px solid #333333;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 36px;
+            font-weight: 300;
+            color: #888;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover { color: #fff; }
+        
+        /* Legal Modals Styling */
+        .legal-modal-content {
+            background: #111111;
+            color: #E0E0E0;
+            padding: 40px;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: left;
+            border: 1px solid #333333;
+        }
+        .legal-modal-content h3 {
+            color: #FFFFFF;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+        .legal-modal-content p, .legal-modal-content ul {
+            font-size: 15px;
+            color: #CCCCCC;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .legal-modal-content h4 {
+            color: var(--theme-color);
+            font-size: 20px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            text-transform: none;
+        }
+        .legal-modal-content .close-modal {
+            color: #AAAAAA;
+        }
+        .legal-modal-content .close-modal:hover {
+            color: #FFFFFF;
+        }
+
+        .progress-container {
+            width: 80%;
+            max-width: 400px;
+            height: 16px;
+            background-color: #222222;
+            border-radius: 10px;
+            margin: 0 auto 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 85%;
+            background-color: var(--theme-color);
+            border-radius: 10px;
+            box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h3 {
+            font-family: 'Anton', sans-serif;
+            font-size: 46px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            letter-spacing: 1px;
+            line-height: 1.05;
+        }
+
+        .modal-content p {
+            font-size: 18px;
+            color: #dddddd;
+            margin-bottom: 30px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 18px 20px;
+            font-size: 18px;
+            border: 1px solid #333333;
+            border-radius: 4px;
+            font-family: inherit;
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+        }
+
+        .form-control::placeholder {
+            color: #888888;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--theme-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+        }
+        
+        .modal-submit-btn {
+            background-color: var(--theme-color);
+            color: #000000;
+            padding: 20px 10px;
+            box-shadow: 0 6px 0 var(--theme-dark);
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .modal-submit-btn:hover {
+            background-color: var(--theme-light);
+            box-shadow: 0 4px 0 var(--theme-dark);
+        }
+
+        .form-message {
+            display: none;
+            margin-top: 18px;
+            padding: 14px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .form-message.success {
+            display: block;
+            background: rgba(46, 168, 46, 0.16);
+            color: #d7ffd7;
+            border: 1px solid rgba(46, 168, 46, 0.45);
+        }
+
+        .form-message.error {
+            display: block;
+            background: rgba(226, 62, 49, 0.16);
+            color: #ffd8d3;
+            border: 1px solid rgba(226, 62, 49, 0.45);
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { padding: 6px; font-size: 9px; }
+            .hero { padding: 15px 0 25px; }
+            .hero-kicker { font-size: 10px; padding: 4px 12px; margin-bottom: 10px; }
+            .hero h1 { font-size: 28px; margin-bottom: 10px; line-height: 1.1; }
+            .hero p.subheadline { display: none; }
+            .ebook-wrapper { max-width: 160px; margin-bottom: 15px; }
+            .cta-btn { padding: 12px 10px; }
+            .cta-main-text { font-size: 20px; }
+            .cta-sub-text { font-size: 11px; margin-top: 2px; }
+            .secure-text { margin-top: 8px; font-size: 10px; }
+
+            .bullets-section h2, .proof-section h2, .authority-section h2, .final-cta h2 { font-size: 36px; }
+            .bullet-list li { font-size: 16px; margin-bottom: 20px;}
+            .letter-content p { font-size: 18px; }
+            .modal-content { padding: 30px 20px 40px; }
+            .modal-content h3 { font-size: 32px; }
+            .modal-content p { font-size: 15px; }
+            .legal-modal-content { padding: 25px 15px; }
+            .diagonal-section::before, .diagonal-section::after { height: 60px; }
+            
+            .client-result { padding: 20px; margin-left: 10px; margin-right: 10px; }
+            .client-result .quote { font-size: 18px; }
+            .social-proof { left: 10px; right: 10px; border-radius: 8px; padding: 12px; }
+
+            /* Featured Logos Mobile */
+            .featured-logos { gap: 30px; }
+            .featured-logo { max-height: 25px; }
+            .logo-abc, .logo-nbc { max-height: 35px; }
+            .logo-dj { max-height: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        FREE REPORT REVEALS: <span style="color: #ffffff; font-weight: 400;">THE YOUTUBE TOPICS THAT BOOK QUALIFIED SALES CALLS</span>
+    </div>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-kicker">FOR COACHES AND CONSULTANTS WHO ARE ALREADY INVESTING IN GROWTH</div>
+            <h1>FREE REPORT REVEALS:<br>“THE YOUTUBE TOPICS THAT BOOK QUALIFIED SALES CALLS”</h1>
+            <p class="subheadline">We have helped coaches generate over 300 qualified sales calls using the topic selection strategy outlined in this free report. Download it now and start planning your next 12 months of high-converting content.</p>
+            
+            <div class="ebook-wrapper">
+                <img src="https://finestclients.com/bookcover.jpeg" alt="Click to Clients Free Report" class="ebook-img">
+            </div>
+
+            <button class="cta-btn open-modal-btn">
+                <span class="cta-main-text">SEND ME MY FREE REPORT NOW</span>
+                <span class="cta-sub-text">(Get for free what has cost us years to perfect)</span>
+            </button>
+            <span class="secure-text">🔒 100% Secure. We Never Share Your Email.</span>
+        </div>
+    </header>
+
+    <!-- NEW FEATURED IN SECTION -->
+    <section class="featured-section">
+        <div class="container">
+            <h3>AS FEATURED IN</h3>
+            <div class="featured-logos">
+                <div class="featured-logo-wrapper">
+                    <img src="http://finestclients.com/asset/fox-removebg-preview.png" alt="FOX" class="featured-logo">
+                </div>
+                <div class="featured-logo-wrapper">
+                    <img src="http://finestclients.com/asset/abc-removebg-preview.png" alt="ABC" class="featured-logo logo-abc">
+                </div>
+                <div class="featured-logo-wrapper">
+                    <img src="http://finestclients.com/asset/cbs-removebg-preview.png" alt="CBS" class="featured-logo">
+                </div>
+                <div class="featured-logo-wrapper">
+                    <img src="http://finestclients.com/asset/nbc-removebg-preview.png" alt="NBC" class="featured-logo logo-nbc">
+                </div>
+                <div class="featured-logo-wrapper">
+                    <img src="http://finestclients.com/asset/digitaljournal.webp" alt="Digital Journal" class="featured-logo logo-dj">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="letter-section">
+        <div class="container letter-content">
+            <p id="dynamic-date" class="theme-text bold" style="font-size: 16px; margin-bottom: 30px;"></p>
+
+            <p class="bold" style="font-size: 22px;">Dear Coach or Consultant,</p>
+            
+            <p>If you want to turn YouTube into a consistent source of qualified sales calls without becoming a full-time content creator this is going to be the most important report you will ever read.</p>
+            
+            <p>Here is why:</p>
+            
+            <p>This is not like any YouTube guide you have seen. There is no fluff, no "post consistently and hope for the best" advice just battle-tested strategies that are working right now for coaches charging $3,000 to $20,000 or more for their services.</p>
+            
+            <p>We have used these strategies to help coaches book sales calls from videos with as few as 400 views. Not because the videos went viral but because they attracted BUYERS, not browsers.</p>
+
+            <p>Here is the uncomfortable truth most YouTube experts will not tell you and it is the reason most coaches waste months creating content that goes nowhere:</p>
+
+            <div class="highlight-box">
+                <p>The videos that get the most views almost NEVER generate the most clients.</p>
+            </div>
+
+            <p>I have seen coaches with 100,000 subscribers struggling to pay rent. And I have seen coaches with 500 subscribers closing $15,000 clients. The difference is not their editing or their camera. <strong>It is their TOPICS.</strong></p>
+
+            <p>One group makes content for "browsers" people looking for free advice who will never buy. The other group makes content for "buyers" people actively researching solutions and ready to invest.</p>
+
+            <p>This report shows you exactly how to create buyer content.</p>
+
+            <p>It is easy to read, wastes no time, and gives you a framework you can use IMMEDIATELY to plan your next 12 months of high-converting video ideas.</p>
+
+            <p>Just enter your details below, hit the download button, and these strategies will be sent straight to your inbox.</p>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <button class="cta-btn open-modal-btn">
+                    <span class="cta-main-text">SEND ME MY FREE REPORT NOW</span>
+                    <span class="cta-sub-text">(Get for free what has cost us years to perfect)</span>
+                </button>
+                <span class="secure-text">🔒 100% Privacy. No Spam.</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="diagonal-section bullets-section">
+        <div class="container text-center">
+            <h2>HERE IS JUST A FRACTION OF WHAT YOU WILL DISCOVER INSIDE THIS FREE REPORT...</h2>
+            
+            <ul class="bullet-list">
+                <li><strong>The "Browser vs. Buyer" framework</strong> and how to tell which type of content you have been creating. Most coaches are shocked when they realize they have been making browser content for years.</li>
+                <li><strong>Why a coach with 7 subscribers closed more clients</strong> than a coach with 27,000 and the single decision that made the difference.</li>
+                <li><strong>The "Influencer Trap" destroying your business</strong> why copying what works for big YouTubers is the number one reason you are getting views but zero sales calls.</li>
+                <li><strong>The B.E.N.S. Test (Viral Validator):</strong> 4 simple questions to ask BEFORE you ever hit record to guarantee your topic attracts buyers.</li>
+                <li><strong>3 foolproof methods to generate 12 months</strong> of high-converting video ideas in less than an hour including "Competitor Mapping" and "The Niche Tree".</li>
+                <li><strong>Why "going viral" is actually DANGEROUS</strong> for high-ticket coaches and what to optimize for instead.</li>
+                <li>And much, much more!</li>
+            </ul>
+
+            <button class="cta-btn open-modal-btn">
+                <span class="cta-main-text">SEND ME MY FREE REPORT NOW</span>
+                <span class="cta-sub-text">(Get for free what has cost us years to perfect)</span>
+            </button>
+            <span class="secure-text">🔒 100% Privacy. No Spam.</span>
+        </div>
+    </section>
+
+    <section class="proof-section">
+        <div class="container text-center">
+            <h2>PROOF!</h2>
+            <p class="proof-subtitle">(just a little bit of it anyway...)</p>
+
+            <div class="proof-item" style="margin-bottom: 50px;">
+                <img src="https://finestclients.com/asset/images/arun.png" alt="Arun Sharma YouTube Analytics" class="proof-img" style="margin-bottom: 20px;">
+                <div class="client-result" style="margin: 0 auto;">
+                    <div class="quote">📞 "200 to 300 sales calls per month from YouTube after 18 months of consistent publishing"</div>
+                    <div class="author">Arun Sharma, CAT Career Coaching</div>
+                </div>
+            </div>
+
+            <div class="proof-item" style="margin-bottom: 50px;">
+                <img src="https://finestclients.com/asset/images/authority.png" alt="Authority IO YouTube Analytics" class="proof-img" style="margin-bottom: 20px;">
+                <div class="client-result" style="margin: 0 auto;">
+                    <div class="quote">💰 "Went from $200K to $429K in one month during a product launch supported by 4 YouTube videos"</div>
+                    <div class="author">Authority IO, Online Business Coaching</div>
+                </div>
+            </div>
+
+            <div class="proof-item" style="margin-bottom: 70px;">
+                <img src="https://finestclients.com/asset/images/ryan.png" alt="Ryan Jackson YouTube Analytics" class="proof-img" style="margin-bottom: 20px;">
+                <div class="client-result" style="margin: 0 auto;">
+                    <div class="quote">🎯 "$15,000 client from a video with under 1,000 views"</div>
+                    <div class="author">Ryan Jackson, B2B Service Operations Coach (7 subscribers)</div>
+                </div>
+            </div>
+
+            <p class="bold" style="font-size: 24px; max-width: 600px; margin: 0 auto 10px; color: #FFFFFF;">The difference was not their subscriber count.<br>It was their TOPIC STRATEGY.</p>
+            <p style="font-size: 18px; max-width: 600px; margin: 0 auto; color: #CCCCCC;">This report gives you the exact framework they used.</p>
+        </div>
+    </section>
+
+    <section class="diagonal-section authority-section">
+        <div class="container">
+            <h2>WHO IS FINEST CLIENTS TO MAKE SUCH PROMISES?</h2>
+            
+            <div class="authority-badges">
+                <div class="badge">
+                    <div class="badge-number">300+</div>
+                    <div class="badge-text">Qualified<br>Calls Booked</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-number">100%</div>
+                    <div class="badge-text">Buyer-Intent<br>Focus</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-number">4</div>
+                    <div class="badge-text">Hours a Month<br>(That is all you record)</div>
+                </div>
+            </div>
+
+            <div class="social-proof-images" style="max-width: 700px; margin: 0 auto 50px; text-align: left; background: #111111; padding: 40px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); border: 1px solid #333333;">
+                <div style="margin-bottom: 40px;">
+                    <img src="https://finestclients.com/instagram.png" alt="Finest Edit Instagram Followers" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 24px; color: #ffffff; text-transform: none; letter-spacing: 0; margin-bottom: 10px;">90.7K Instagram followers</h3>
+                    <p style="font-size: 16px; color: #cccccc; margin-bottom: 0;">We grew to 90.7K followers by applying the same content and distribution system we install for clients.</p>
+                </div>
+                <div>
+                    <img src="https://finestclients.com/youtube.png" alt="Finest Edit Academy YouTube Subscribers" style="width: 100%; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 24px; color: #ffffff; text-transform: none; letter-spacing: 0; margin-bottom: 10px;">46.7K YouTube subscribers</h3>
+                    <p style="font-size: 16px; color: #cccccc; margin-bottom: 0;">Finest Edit Academy crossed 46.7K subscribers with about 30 videos using our social media playbook.</p>
+                </div>
+            </div>
+
+            <div class="authority-content">
+                <p>We are not another YouTube agency promising 'viral videos.' Honestly, we think viral is overrated for high-ticket coaches.</p>
+                <p>We exist because we saw too many coaches wasting time on content that gets views but zero clients. So we built a system focused on one metric: qualified sales calls.</p>
+                <p>Our approach is different:</p>
+                <ul class="bullet-list" style="max-width: 500px; margin-bottom: 30px;">
+                    <li style="padding-left: 30px;">We optimize for BUYER-INTENT, not views.</li>
+                    <li style="padding-left: 30px;">We guarantee 10 qualified calls in 90 days.</li>
+                    <li style="padding-left: 30px;">We only take one client per niche.</li>
+                </ul>
+                <style>
+                    .authority-content .bullet-list li::before { content: '→'; background: none; color: var(--theme-color); font-size: 24px; box-shadow: none; left: -10px; top: -5px;}
+                </style>
+                <p>We have spent years testing what actually converts viewers into clients. This free report gives you the foundation of our topic selection strategy the same framework we use with our private clients.</p>
+                <p>Even if we never work together, this will fundamentally change how you think about YouTube content.</p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <button class="cta-btn open-modal-btn">
+                    <span class="cta-main-text">SEND ME MY FREE REPORT NOW</span>
+                    <span class="cta-sub-text">(Get for free what has cost us years to perfect)</span>
+                </button>
+                <span class="secure-text">🔒 100% Privacy. No Spam.</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta text-center">
+        <div class="container">
+            <h2 style="font-size: 50px;">DOWNLOAD YOUR FREE REPORT NOW</h2>
+            
+            <p class="bold" style="font-size: 20px; color: #AAAAAA; max-width: 600px; margin: 0 auto;">Even if we never work together, this report will fundamentally change how you think about YouTube content.</p>
+            
+            <div class="ebook-wrapper" style="max-width: 320px; margin-top: 40px;">
+                <img src="https://finestclients.com/bookcover.jpeg" alt="Click to Clients Free Report" class="ebook-img" style="animation: none; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));">
+            </div>
+
+            <button class="cta-btn open-modal-btn">
+                <span class="cta-main-text">SEND ME MY FREE REPORT NOW</span>
+                <span class="cta-sub-text">(Get for free what has cost us years to perfect)</span>
+            </button>
+            <span class="secure-text">🔒 100% Secure. We Never Share Your Email.</span>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Finest Clients. All rights reserved.</p>
+            <p>
+                <a class="legal-link" data-type="privacy">Privacy Policy</a> | 
+                <a class="legal-link" data-type="terms">Terms of Service</a> | 
+                <a class="legal-link" data-type="disclaimer">Disclaimer</a>
+            </p>
+            <p style="font-size: 11px; margin-top: 25px; color: #888888; line-height: 1.6; max-width: 650px; margin-left: auto; margin-right: auto;">
+                This site is not a part of the Facebook website or Meta Platforms, Inc., nor is it part of the Google, YouTube, or any other major network. Additionally, this site is NOT endorsed by Meta, Google, or YouTube in any way. FACEBOOK is a trademark of META PLATFORMS, Inc. YOUTUBE and GOOGLE are trademarks of GOOGLE, LLC.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Main Opt-In Modal -->
+    <div class="modal-overlay" id="optInModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            
+            <div class="progress-container">
+                <div class="progress-fill"></div>
+            </div>
+
+            <h3>DOWNLOAD YOUR FREE REPORT NOW BEFORE THIS PAGE COMES DOWN</h3>
+            <p>This <strong>FREE Report</strong> reveals the most <strong>powerful YouTube topics</strong> for growing traffic, leads and sales. Get for free what others have paid $1000's to receive.</p>
+            
+            <!-- UPDATE THIS ACTION URL TO YOUR ACTUAL PABBLY WEBHOOK URL -->
+            <form id="leadForm" method="post" action="https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZmMDYzNTA0MzA1MjZlNTUzNDUxMzMi_pc">
+                <div class="form-group">
+                    <input type="text" id="ck_first_name" name="first_name" class="form-control" placeholder="First Name*" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="ck_email" name="email" class="form-control" placeholder="Email*" required>
+                </div>
+                <button type="submit" class="cta-btn modal-submit-btn" id="submitBtn">
+                    <span class="cta-main-text" style="font-size: 30px;">GET MY FREE TOPICS</span>
+                </button>
+                <div id="formMessage" class="form-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Legal Modals (Privacy, Terms, Disclaimer) -->
+    <div class="modal-overlay" id="legalModal">
+        <div class="modal-content legal-modal-content">
+            <span class="close-modal" id="closeLegalModal">&times;</span>
+            <h3 id="legalModalTitle">Document Title</h3>
+            <div id="legalModalBody">
+                <!-- Dynamic Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <div class="social-proof" id="socialProof">
+        <div class="sp-icon">✓</div>
+        <div class="sp-text-wrapper">
+            <div class="sp-name" id="spName">Loading...</div>
+            <div class="sp-action">Downloaded Click to Clients Report</div>
+            <div class="sp-time" id="spTime">... <span class="sp-verify-icon">✔</span><span class="sp-verify-text">verified by Proof</span></div>
+        </div>
+    </div>
+
+<script>
+    const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+    const d = new Date();
+    d.setDate(d.getDate() - 2);
+    document.getElementById('dynamic-date').textContent = "Updated: " + d.toLocaleDateString('en-US', dateOptions);
+
+    // Optin Modal Logic
+    const modal = document.getElementById('optInModal');
+    const openBtns = document.querySelectorAll('.open-modal-btn');
+    const closeBtn = document.getElementById('closeModal');
+    const leadForm = document.getElementById('leadForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('formMessage');
+    const originalSubmitBtnHtml = submitBtn.innerHTML;
+    let exitModalShown = false;
+
+    openBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        if (e.clientY < 10 && !exitModalShown && !modal.classList.contains('active')) {
+            modal.classList.add('active');
+            exitModalShown = true;
+        }
+    });
+
+    // Legal Modals Logic
+    const legalModal = document.getElementById('legalModal');
+    const closeLegalBtn = document.getElementById('closeLegalModal');
+    const legalLinks = document.querySelectorAll('.legal-link');
+    const legalModalTitle = document.getElementById('legalModalTitle');
+    const legalModalBody = document.getElementById('legalModalBody');
+
+    const legalContent = {
+        'privacy': {
+            title: 'Privacy Policy',
+            body: `
+                <p><strong>Effective Date:</strong> ${new Date().toLocaleDateString('en-US', dateOptions)}</p>
+                <p>We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website (regardless of where you visit it from, including the United States and the EU) and tell you about your privacy rights.</p>
+                <h4>1. Information We Collect</h4>
+                <p>When you opt-in to receive our free report or communications, we may collect the following data: First Name, Email Address, IP Address, and standard browser analytics. By providing this information, you consent to its use in accordance with this policy.</p>
+                <h4>2. International Data Transfers (US & Global Targeting)</h4>
+                <p>We are a business operating from India. By submitting your information, you acknowledge that your data will be transferred to, processed, and stored in servers located globally, including India and the United States, utilizing secure third-party marketing and CRM platforms.</p>
+                <h4>3. US State Privacy Rights (CCPA / CPRA)</h4>
+                <p>If you are a resident of California or another US state with comprehensive privacy laws, you may have specific rights regarding your personal information. These include the right to request access to the personal data we hold about you, request the deletion of your personal data, and the right to opt-out of the "sale" or "sharing" of your personal information. <strong>We do not sell your personal data to third parties.</strong></p>
+                <h4>4. How We Use Your Data</h4>
+                <p>We use your data to deliver the requested content, send you marketing communications related to our services, and analyze website usage to improve our offerings. You may unsubscribe from our emails at any time by clicking the "unsubscribe" link at the bottom of our emails.</p>
+                <h4>5. Data Security</h4>
+                <p>We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used, or accessed in an unauthorized way.</p>
+            `
+        },
+        'terms': {
+            title: 'Terms of Service',
+            body: `
+                <p>By accessing or using our website and opting in for our free reports, you agree to be bound by these Terms of Service.</p>
+                <h4>1. Use of Website and Content</h4>
+                <p>All content provided in our free reports, videos, and on this website is for informational and educational purposes only. It is the intellectual property of Finest Clients. You may view and download the content for your personal, non-commercial use only. You may not reproduce, distribute, or create derivative works without explicit written permission.</p>
+                <h4>2. User Communications</h4>
+                <p>By opting in, you agree to receive communications from us via email. You can opt-out at any time. We are not responsible for any technical issues that prevent you from receiving our emails or accessing the report.</p>
+                <h4>3. Age Restrictions</h4>
+                <p>Our services and products are not intended for individuals under the age of 18. By using this site, you represent that you are at least 18 years of age.</p>
+                <h4>4. Limitation of Liability</h4>
+                <p>In no event shall Finest Clients, its owners, or employees be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with your use of the site or the materials provided.</p>
+                <h4>5. Governing Law</h4>
+                <p>These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions. Any dispute arising under these terms shall be subject to the exclusive jurisdiction of the courts located in India.</p>
+            `
+        },
+        'disclaimer': {
+            title: 'Disclaimer',
+            body: `
+                <p><strong>Earnings and Results Disclaimer:</strong></p>
+                <p>The sales figures, calls booked, and client results stated on this landing page and within the free report are our personal results or the results of our past or current clients. Please understand that these results are not typical, and we are not implying that you will duplicate them (or do anything for that matter).</p>
+                <p>The average person who follows any "how-to" information gets little to no results. We are using these references for example purposes only. Your results will vary and depend on many factors including but not limited to your background, experience, niche, offer, and work ethic.</p>
+                <p>All business entails risk as well as massive and consistent effort and action. If you're not willing to accept that, please do not download this report or opt-in to our materials.</p>
+                <h4>Not Associated with Major Platforms</h4>
+                <p>This site is not a part of the Facebook website or Meta Platforms, Inc., nor is it part of the Google, YouTube, or any other major network. Additionally, this site is NOT endorsed by Meta, Google, or YouTube in any way. FACEBOOK is a trademark of META PLATFORMS, Inc. YOUTUBE and GOOGLE are trademarks of GOOGLE, LLC.</p>
+            `
+        }
+    };
+
+    legalLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const type = link.getAttribute('data-type');
+            if(legalContent[type]) {
+                legalModalTitle.innerHTML = legalContent[type].title;
+                legalModalBody.innerHTML = legalContent[type].body;
+                legalModal.classList.add('active');
+            }
+        });
+    });
+
+    closeLegalBtn.addEventListener('click', () => {
+        legalModal.classList.remove('active');
+    });
+
+    legalModal.addEventListener('click', (e) => {
+        if (e.target === legalModal) {
+            legalModal.classList.remove('active');
+        }
+    });
+
+    function showFormMessage(message, type) {
+        formMessage.className = 'form-message ' + type;
+        formMessage.textContent = message;
+    }
+
+    function resetSubmitButton() {
+        submitBtn.innerHTML = originalSubmitBtnHtml;
+        submitBtn.disabled = false;
+    }
+
+    leadForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        formMessage.className = 'form-message';
+        formMessage.textContent = '';
+
+        submitBtn.innerHTML = '<span class="cta-main-text" style="font-size: 30px;">PROCESSING...</span>';
+        submitBtn.disabled = true;
+
+        try {
+            const formData = new FormData(leadForm);
+            const urlParams = new URLSearchParams(window.location.search);
+            const paramsToKeep = ['utm_source', 'utm_medium', 'utm_content', 'utm_campaign', 'fbclid', 'gclid'];
+
+            // Append all UTM parameters to the payload going to Pabbly
+            paramsToKeep.forEach(param => {
+                if (urlParams.has(param)) {
+                    formData.append(param, urlParams.get(param));
+                }
+            });
+
+            formData.append('page_url', window.location.href);
+
+            // Post the data to Pabbly webhook directly
+            const response = await fetch(leadForm.action, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                // Instantly redirect to apply page with UTM parameters included in the URL
+                const currentSearch = window.location.search;
+                window.location.href = 'https://finestclients.com/apply.html' + currentSearch;
+            } else {
+                showFormMessage('Something went wrong. Please try again.', 'error');
+                resetSubmitButton();
+            }
+        } catch (error) {
+            showFormMessage('Something went wrong. Please check your connection and try again.', 'error');
+            resetSubmitButton();
+        }
+    });
+
+    let blinkInterval;
+    const originalTitle = document.title;
+    const blinkMessage = "(1) New Message";
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            let isOriginal = false;
+            blinkInterval = setInterval(() => {
+                document.title = isOriginal ? originalTitle : blinkMessage;
+                isOriginal = !isOriginal;
+            }, 1000);
+        } else {
+            clearInterval(blinkInterval);
+            document.title = originalTitle;
+        }
+    });
+
+    const spNames = [
+        "Michael T., Austin, TX",
+        "Sarah L., Denver, CO",
+        "James B., New York, NY",
+        "David W., Chicago, IL",
+        "Emma S., Miami, FL",
+        "Chris P., Seattle, WA",
+        "Jessica M., Dallas, TX",
+        "Robert K., Atlanta, GA",
+        "Ashley R., Phoenix, AZ",
+        "Daniel C., San Diego, CA",
+        "Amanda F., Charlotte, NC",
+        "Matthew H., Nashville, TN"
+    ];
+
+    const spPopup = document.getElementById('socialProof');
+    const spNameEl = document.getElementById('spName');
+    const spTimeEl = document.getElementById('spTime');
+
+    function showSocialProof() {
+        const randomPerson = spNames[Math.floor(Math.random() * spNames.length)];
+        const randomTime = Math.floor(Math.random() * 58) + 2;
+
+        spNameEl.textContent = randomPerson;
+        spTimeEl.innerHTML = `${randomTime} minutes ago <span class="sp-verify-icon">✔</span><span class="sp-verify-text">verified by Proof</span>`;
+
+        spPopup.classList.add('show');
+
+        setTimeout(() => {
+            spPopup.classList.remove('show');
+        }, 8000);
+    }
+
+    setTimeout(() => {
+        showSocialProof();
+        setInterval(showSocialProof, 11000);
+    }, 3000);
+</script>
+ 
+</body>
+</html>

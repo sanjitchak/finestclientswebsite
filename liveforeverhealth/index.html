@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiveForeverHealth × Finest Clients - Animated Proposal</title>
+    <title>LiveForeverLab × Finest Clients - Animated Proposal</title>
+    <link rel="icon" type="image/png" href="https://finestclients.com/finestclientslogo.png">
     <style>
         :root {
             --gold: #D4AF37;
@@ -76,6 +77,46 @@
             100% { transform: translateY(0px); }
         }
 
+        /* --- NEW CRAZY ANIMATIONS --- */
+        @keyframes gradient-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes text-shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: -200% center; }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; opacity: 0; }
+            10% { opacity: 0.6; }
+            20% { left: 200%; opacity: 0; }
+            100% { left: 200%; opacity: 0; }
+        }
+
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.85) translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .zoom-in.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .shimmer-text {
+            background: linear-gradient(to right, var(--text-main) 20%, var(--gold) 40%, var(--gold) 60%, var(--text-main) 80%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: text-shimmer 4s linear infinite;
+        }
+        /* ---------------------------- */
+
         .float-anim {
             animation: float 3s ease-in-out infinite;
         }
@@ -109,7 +150,9 @@
         
         /* Cover Page */
         .cover {
-            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
+            background: linear-gradient(-45deg, var(--white), var(--gold-light), #f0e6ce, var(--white));
+            background-size: 400% 400%;
+            animation: gradient-bg 15s ease infinite;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -141,8 +184,16 @@
             color: var(--text-main);
         }
         
+        @keyframes spin-cross {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.4); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
         .cover h1 span {
             color: var(--gold);
+            display: inline-block;
+            animation: spin-cross 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
         }
         
         .cover .subtitle {
@@ -366,6 +417,18 @@
             border-width: 2px;
             background: linear-gradient(180deg, var(--gold-light) 0%, var(--white) 30%);
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            overflow: hidden;
+        }
+
+        .pricing-card.featured::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            animation: shine 5s infinite;
+            pointer-events: none;
         }
         
         .pricing-card.featured::before {
@@ -749,17 +812,17 @@
     <section class="section cover fade-up">
         <img src="https://finestclients.com/liveforeverhealth/stickman.png" alt="Mascot" class="mascot mascot-cover float-anim">
         <div class="cover-badge">Partnership Proposal</div>
-        <h1>LiveForeverHealth <span>×</span> Finest Clients</h1>
+        <h1 class="shimmer-text">LiveForeverLab <span>×</span> Finest Clients</h1>
         <p class="subtitle">Content Marketing Partnership for Patient Acquisition</p>
         
         <div class="cover-meta fade-up stagger-1">
             <div>
                 <strong>Prepared For</strong>
-                LiveForeverHealth Team
+                LiveForeverLab Team
             </div>
             <div>
                 <strong>Prepared By</strong>
-                Sanjit Chakrabarti
+                Mousam Chatterjee
             </div>
             <div>
                 <strong>Date</strong>
@@ -776,7 +839,7 @@
         </div>
         
         <h3>The Opportunity</h3>
-        <p>LiveForeverHealth is positioned in one of the fastest-growing markets: <strong>men's health optimization, TRT, and longevity medicine</strong>. Your services ($300-$1,000 per patient) have strong unit economics, and your telemedicine model allows for nationwide scale.</p>
+        <p>LiveForeverLab is positioned in one of the fastest-growing markets: <strong>men's health optimization, TRT, and longevity medicine</strong>. Your services ($300-$1,000 per patient) have strong unit economics, and your telemedicine model allows for nationwide scale.</p>
         
         <div class="highlight-box warning fade-up stagger-1">
             <strong>The Gap</strong>
@@ -913,15 +976,15 @@
         
         <div class="stats-grid fade-up stagger-1">
             <div class="stat-card">
-                <div class="number">$500</div>
+                <div class="number count-up" data-target="500" data-prefix="$">0</div>
                 <div class="label">Avg. Patient Value</div>
             </div>
             <div class="stat-card">
-                <div class="number">$6K</div>
+                <div class="number count-up" data-target="6" data-prefix="$" data-suffix="K">0</div>
                 <div class="label">12-Month LTV</div>
             </div>
             <div class="stat-card">
-                <div class="number">3</div>
+                <div class="number count-up" data-target="3">0</div>
                 <div class="label">Patients to Break Even</div>
             </div>
         </div>
@@ -968,7 +1031,7 @@
         
         <div class="roi-highlight fade-up stagger-2">
             <img src="https://finestclients.com/liveforeverhealth/stickman.png" alt="Mascot" class="mascot mascot-inline float-anim">
-            <div class="big-number">2-5x ROI</div>
+            <div class="big-number count-up" data-target="5" data-prefix="2-" data-suffix="x ROI">0</div>
             <p>At $1,500/month investment, 3-6 new patients covers the cost. Everything else is profit.</p>
         </div>
         
@@ -1021,10 +1084,10 @@
         </div>
         
         <div class="pricing-grid">
-            <div class="pricing-card fade-up stagger-1">
+            <div class="pricing-card zoom-in stagger-1">
                 <h4>Option A</h4>
                 <p class="tagline">Instagram Only</p>
-                <div class="price">$1,500<span>/mo</span></div>
+                <div class="price count-up" data-start="10000" data-target="1500" data-prefix="$" data-suffix="<span>/mo</span>">$10,000<span>/mo</span></div>
                 <ul>
                     <li>20 Reels per month</li>
                     <li>12 Carousel posts</li>
@@ -1037,10 +1100,10 @@
                 <p style="font-size: 10pt; color: var(--text-light); margin-top: 15px;"><strong>Best for:</strong> Fast proof of concept</p>
             </div>
             
-            <div class="pricing-card featured fade-up stagger-2">
+            <div class="pricing-card featured zoom-in stagger-2">
                 <h4>Option B</h4>
                 <p class="tagline">Instagram + YouTube</p>
-                <div class="price">$3,500<span>/mo</span></div>
+                <div class="price count-up" data-start="10000" data-target="3500" data-prefix="$" data-suffix="<span>/mo</span>">$10,000<span>/mo</span></div>
                 <ul>
                     <li>Everything in Option A</li>
                     <li>4 long-form YouTube videos</li>
@@ -1054,10 +1117,10 @@
                 <p style="font-size: 10pt; color: var(--text-light); margin-top: 15px;"><strong>Best for:</strong> Full funnel, speed + scale</p>
             </div>
             
-            <div class="pricing-card fade-up stagger-3">
+            <div class="pricing-card zoom-in stagger-3">
                 <h4>Option C</h4>
                 <p class="tagline">YouTube Only</p>
-                <div class="price">$2,500<span>/mo</span></div>
+                <div class="price count-up" data-start="10000" data-target="2500" data-prefix="$" data-suffix="<span>/mo</span>">$10,000<span>/mo</span></div>
                 <ul>
                     <li>4 long-form videos/month</li>
                     <li>8 YouTube Shorts</li>
@@ -1136,15 +1199,15 @@
         
         <div class="stats-grid fade-up stagger-2">
             <div class="stat-card">
-                <div class="number">4hrs</div>
+                <div class="number count-up" data-target="4" data-suffix="hrs">0</div>
                 <div class="label">Monthly Recording</div>
             </div>
             <div class="stat-card">
-                <div class="number">30m</div>
+                <div class="number count-up" data-target="30" data-suffix="m">0</div>
                 <div class="label">Weekly Approvals</div>
             </div>
             <div class="stat-card">
-                <div class="number">0</div>
+                <div class="number count-up" data-target="0">0</div>
                 <div class="label">Daily Involvement</div>
             </div>
         </div>
@@ -1202,7 +1265,7 @@
             </div>
         </div>
         
-        <h3 class="fade-up">Why This Works for LiveForeverHealth</h3>
+        <h3 class="fade-up">Why This Works for LiveForeverLab</h3>
         
         <div class="two-col fade-up stagger-1">
             <div class="highlight-box">
@@ -1240,9 +1303,9 @@
         <div class="contact-box fade-up stagger-2">
             <img src="https://finestclients.com/liveforeverhealth/stickman.png" alt="Mascot" class="mascot mascot-corner float-anim">
             <h4 style="margin: 0 0 15px 0; font-size: 18pt; color: var(--gold);">Questions?</h4>
-            <p style="margin: 0; font-size: 13pt;"><strong>Email:</strong> sanjitc@getfinestclients.com</p>
-            <p style="margin: 15px 0 0 0; color: var(--text-light);">Looking forward to helping LiveForeverHealth dominate social.</p>
-            <p style="margin: 20px 0 0 0; font-weight: 700; font-size: 12pt; color: var(--text-main);">— Sanjit Chakrabarti, Finest Clients</p>
+            <p style="margin: 0; font-size: 13pt;"><strong>Email:</strong> mousam@finestclients.com</p>
+            <p style="margin: 15px 0 0 0; color: var(--text-light);">Looking forward to helping LiveForeverLab dominate social.</p>
+            <p style="margin: 20px 0 0 0; font-weight: 700; font-size: 12pt; color: var(--text-main);">— Mousam Chatterjee, Finest Clients</p>
         </div>
     </section>
 
@@ -1257,18 +1320,64 @@
             threshold: 0.15
         };
 
+        // Number Counter Animation Function
+        const animateValue = (obj, start, end, duration, prefix, suffix) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                
+                // Ease out Expo effect for snappy start and slow finish
+                const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                const currentVal = Math.floor(easeProgress * (end - start) + start);
+                
+                // Handle inner HTML format (e.g., $1,500<span>/mo</span>)
+                obj.innerHTML = `${prefix}${currentVal.toLocaleString()}${suffix}`;
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerHTML = `${prefix}${end.toLocaleString()}${suffix}`; // Snap to exact end
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    // Trigger entrance animations
                     entry.target.classList.add('visible');
-                    // Optional: Unobserve after animating once
-                    // observer.unobserve(entry.target); 
+                    
+                    // Check if element contains numbers to count up
+                    const counters = entry.target.classList.contains('count-up') 
+                        ? [entry.target] 
+                        : entry.target.querySelectorAll('.count-up');
+                        
+                    counters.forEach(counter => {
+                        if (!counter.classList.contains('counted')) {
+                            counter.classList.add('counted');
+                            const target = parseInt(counter.getAttribute('data-target'));
+                            const startValue = parseInt(counter.getAttribute('data-start')) || 0;
+                            const prefix = counter.getAttribute('data-prefix') || '';
+                            const suffix = counter.getAttribute('data-suffix') || '';
+                            
+                            // Stagger the counting slightly based on the container's stagger class
+                            let delay = 0;
+                            if (entry.target.classList.contains('stagger-2')) delay = 200;
+                            if (entry.target.classList.contains('stagger-3')) delay = 400;
+                            
+                            setTimeout(() => {
+                                animateValue(counter, startValue, target, 2500, prefix, suffix);
+                            }, delay);
+                        }
+                    });
                 }
             });
         }, observerOptions);
 
-        // Select all elements with fade-up class
-        document.querySelectorAll('.fade-up').forEach(el => {
+        // Select all elements with animation classes
+        document.querySelectorAll('.fade-up, .zoom-in').forEach(el => {
             observer.observe(el);
         });
     });

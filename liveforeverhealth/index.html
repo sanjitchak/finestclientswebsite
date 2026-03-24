@@ -802,6 +802,61 @@
             right: 10px;
             bottom: 0;
         }
+
+        /* --- MOBILE RESPONSIVENESS FIXES --- */
+        @media (max-width: 768px) {
+            .cover h1 {
+                font-size: 28pt; /* Prevent huge title from breaking out */
+                line-height: 1.2;
+            }
+            .cover .subtitle {
+                font-size: 14pt;
+            }
+            .cover-meta {
+                flex-direction: column; /* Stack the Author/Date items */
+                gap: 15px;
+                padding: 20px;
+                width: 100%;
+            }
+            .section-header h2 {
+                font-size: 18pt;
+                word-break: break-word;
+            }
+            table {
+                display: block; /* Allows table to scroll horizontally instead of bursting out */
+                overflow-x: auto;
+                white-space: nowrap; 
+            }
+            .roi-highlight .big-number {
+                font-size: 32pt;
+            }
+            .roi-highlight .mascot-inline {
+                height: 80px;
+                opacity: 0.2; /* Fade to background so it doesn't block text */
+            }
+            .guarantee-box {
+                flex-direction: column; /* Stack icon and text */
+                text-align: center;
+                padding: 25px 20px;
+            }
+            .cta-step {
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+            }
+            .cta-step span {
+                text-align: center;
+            }
+            .contact-box {
+                padding: 25px 15px;
+            }
+            .contact-box .mascot-corner {
+                opacity: 0.15; /* Prevent overlapping on email text */
+            }
+            .stat-card .number, .pricing-card .price {
+                font-size: 26pt;
+            }
+        }
     </style>
 </head>
 <body>

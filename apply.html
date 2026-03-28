@@ -72,11 +72,12 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // 1. Extract email from URL parameters if present
+    // 1. Extract email and fbclid from URL parameters if present
     var pixelParams = new URLSearchParams(window.location.search);
     var pixelEmail = pixelParams.get('email');
+    var pixelFbclid = pixelParams.get('fbclid');
 
-    // 2. Initialize Pixel (Uses Advanced Matching if email is found)
+    // 2. Initialize Pixel (Uses Advanced Matching if valid email is found)
     if (pixelEmail) {
         fbq('init', '688903840218578', { em: pixelEmail });
     } else {
@@ -85,9 +86,13 @@
     
     fbq('track', 'PageView');
     
-    // 3. Fire Lead Event (Attaches email data to the event if found)
-    if (pixelEmail) {
-        fbq('track', 'Lead', { email: pixelEmail }); 
+    // 3. Fire Lead Event (Attaches joined email+fbclid data to the event if found)
+    var joinedData = [];
+    if (pixelEmail) joinedData.push(pixelEmail);
+    if (pixelFbclid) joinedData.push(pixelFbclid);
+    
+    if (joinedData.length > 0) {
+        fbq('track', 'Lead', { email: joinedData.join('+') }); 
     } else {
         fbq('track', 'Lead'); 
     }

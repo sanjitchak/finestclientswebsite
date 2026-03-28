@@ -91,7 +91,7 @@
     if (pixelEmail) joinedData.push(pixelEmail);
     if (pixelFbclid) joinedData.push(pixelFbclid);
     
-    var combinedString = joinedData.length > 0 ? joinedData.join('+') : null;
+    var combinedString = joinedData.length > 0 ? joinedData.join('') : null;
     
     if (combinedString) {
         // syntax: fbq('track', 'EventName', {customData}, {eventID: 'your_id_here'});

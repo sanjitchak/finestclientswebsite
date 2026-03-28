@@ -790,8 +790,8 @@
 
         @media(max-width:767px) {
             .proof-section {
-                --card-height: 72vh;
-                --card-margin: 2vw;
+                --card-height: auto;
+                --card-margin: 24px;
                 --card-top-offset: 1.2em;
             }
         }
@@ -843,7 +843,11 @@
             margin-right: auto;
         }
         @media(max-width:767px) {
-            .proof-stack { width: 95%; }
+            .proof-stack { 
+                width: 95%; 
+                grid-template-rows: auto;
+                padding-bottom: 32px;
+            }
         }
 
         .proof-card-wrap {
@@ -868,6 +872,7 @@
             position: relative;
             transform-origin: 50% 0%;
             height: calc(85vh - calc(var(--index) * var(--card-top-offset)));
+            display: block;
         }
         .proof-card:hover {
             box-shadow: 0 0.2em 1em rgba(0,0,0,0.15), 0 1em 2.5em rgba(0,0,0,0.25), 0 0 40px rgba(212,175,55,0.08);
@@ -875,7 +880,10 @@
 
         @media(max-width:767px) {
             .proof-card {
-                height: calc(72vh - calc(var(--index) * var(--card-top-offset)));
+                display: flex;
+                flex-direction: column;
+                height: auto;
+                min-height: 72vh;
             }
         }
 
@@ -886,6 +894,15 @@
             overflow: hidden;
             line-height: 0;
             background: #0a0a0a;
+        }
+        
+        @media(max-width:767px) {
+            .proof-card-img-wrap {
+                position: relative;
+                flex: 1;
+                min-height: 250px;
+                height: 50%;
+            }
         }
 
         .proof-card-img-wrap img {
@@ -898,9 +915,7 @@
         }
         @media(max-width:767px) {
             .proof-card-img-wrap img {
-                object-fit: contain;
-                object-position: center center;
-                background: #0a0a0a;
+                object-position: top center;
             }
         }
         .proof-card:hover .proof-card-img-wrap img {
@@ -912,64 +927,71 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 80px 32px 32px;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, transparent 100%);
+            padding: 100px 32px 32px;
+            background: linear-gradient(to top, #0a0a0a 0%, #0a0a0a 75%, transparent 100%);
             display: flex;
-            align-items: flex-end;
-            gap: 14px;
+            align-items: stretch;
+            gap: 16px;
             z-index: 2;
         }
         @media(max-width:767px) {
-            .proof-card-body { padding: 60px 20px 24px; }
+            .proof-card-body { 
+                position: relative;
+                padding: 24px 20px;
+                background: #000;
+                flex-shrink: 0;
+                gap: 12px;
+            }
         }
 
         .proof-card-accent {
             width: 4px;
-            min-height: 100%;
             background: var(--gold);
             border-radius: 4px;
             flex-shrink: 0;
-            align-self: stretch;
         }
 
         .proof-card-text {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
         }
-        
-        .badge-green { background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); }
-        .badge-blue { background: rgba(59, 130, 246, 0.2); color: #3B82F6; border: 1px solid rgba(59, 130, 246, 0.3); }
-        .proof-card-badge { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 12px; }
 
         .proof-card-text .quote {
-            font-weight: 700;
-            font-size: 18px;
+            font-weight: 800;
+            font-size: 24px;
             color: #fff;
-            margin-bottom: 8px;
-            line-height: 1.45;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            margin-bottom: 12px;
+            line-height: 1.3;
+            text-shadow: none;
         }
-        @media(min-width:768px) {
-            .proof-card-text .quote { font-size: 24px; }
+        @media(max-width:767px) {
+            .proof-card-text .quote { font-size: 20px; }
         }
 
         .proof-card-text .author {
-            font-size: 15px;
-            color: var(--gray-300);
-            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            font-size: 16px;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: none;
         }
         .proof-card-text .time-indicator {
             display: block;
-            font-size: 13px;
-            color: var(--gray-500);
+            font-size: 14px;
+            color: var(--gray-400);
+            font-weight: 400;
             margin-top: 4px;
+            margin-bottom: 16px;
         }
 
         .verify-link { 
-            font-size: 14px; 
+            font-size: 15px; 
             color: var(--gold); 
-            margin-top: 12px; 
+            margin-top: auto; 
             display: inline-block; 
-            font-weight: 600; 
+            font-weight: 700; 
             transition: all 0.3s; 
             text-decoration: none;
             position: relative;
@@ -1062,6 +1084,16 @@
             text-align: left;
             max-width: 900px;
             margin: 0 auto;
+            border-left: 3px solid #3B82F6;
+            padding-left: 24px;
+        }
+        .founder-section-label {
+            color: var(--gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            margin-bottom: 8px;
         }
         .founder-title-name {
             font-size: 32px;
@@ -1078,22 +1110,22 @@
             margin-bottom: 32px;
         }
         .founder-profile-card {
-            background: #050505;
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            border-radius: 16px;
-            padding: 32px;
+            padding: 0;
             margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
         }
         .founder-header {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 32px;
+            gap: 24px;
         }
         @media (min-width: 768px) {
             .founder-header {
                 flex-direction: row;
-                align-items: center;
+                align-items: stretch;
+                gap: 32px;
             }
         }
         .founder-left-col {
@@ -1102,11 +1134,16 @@
             align-items: center;
             gap: 16px;
             flex-shrink: 0;
-            width: 140px;
+            width: 100%;
+        }
+        @media (min-width: 768px) {
+            .founder-left-col {
+                width: 140px;
+            }
         }
         .founder-avatar {
-            width: 96px;
-            height: 96px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             border: 2px solid #3B82F6;
             object-fit: cover;
@@ -1116,16 +1153,16 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: rgba(59, 130, 246, 0.1);
+            background: #0b1528;
             border: 1px solid rgba(59, 130, 246, 0.3);
             color: #60A5FA;
-            padding: 8px 12px;
+            padding: 10px 20px;
             border-radius: 9999px;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
             transition: all .3s;
             text-decoration: none;
-            width: 100%;
+            width: auto;
         }
         .founder-connect-btn:hover {
             background: #3B82F6;
@@ -1148,13 +1185,16 @@
         .founder-stat-box {
             background: #fff;
             border-radius: 12px;
-            padding: 24px 16px;
+            padding: 32px 16px;
             text-align: center;
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .founder-stat-num { font-size: 28px; font-weight: 800; color: #3B82F6; line-height: 1.2; }
-        .founder-stat-label { font-size: 11px; color: #64748B; font-weight: 700; text-transform: uppercase; margin-top: 8px; letter-spacing: 0.5px;}
+        .founder-stat-num { font-size: 32px; font-weight: 800; color: #3B82F6; line-height: 1.2; }
+        .founder-stat-label { font-size: 12px; color: #64748B; font-weight: 700; text-transform: uppercase; margin-top: 8px; letter-spacing: 0.5px;}
 
         .founder-bio {
             color: var(--gray-300);
@@ -2032,165 +2072,6 @@
         .optin-error.show {
             display: block
         }
-
-        /* ROI Calculator (gold theme) */
-        :root{
-            --roi-accent: var(--gold);
-            --roi-accent-2: rgba(212,175,55,0.85);
-            --roi-panel: rgba(255,255,255,0.06);
-            --roi-border: rgba(255,255,255,0.08);
-            --roi-track: rgba(255,255,255,0.70);
-        }
-
-        .roi-card{
-            background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-            border: 1px solid var(--roi-border);
-            border-radius: 24px;
-            padding: 56px 64px;
-        }
-
-        @media (max-width: 768px){
-            .roi-card{ padding: 28px 18px; }
-        }
-
-        .roi-grid{
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 56px;
-            align-items: start;
-        }
-
-        @media (max-width: 900px){
-            .roi-grid{ grid-template-columns: 1fr; gap: 28px; }
-        }
-
-        .roi-left{
-            display: flex;
-            flex-direction: column;
-            gap: 36px;
-        }
-
-        .roi-field{ width: 100%; }
-
-        .roi-label{
-            font-size: 14px;
-            font-weight: 500;
-            color: rgba(255,255,255,0.55);
-            margin-bottom: 10px;
-        }
-
-        .roi-value{
-            font-size: 22px;
-            font-weight: 500;
-            color: rgba(255,255,255,0.95);
-            margin-bottom: 16px;
-        }
-
-        .roi-range{
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 4px;
-            border-radius: 9999px;
-            background: var(--roi-track);
-            outline: none;
-        }
-
-        .roi-range::-webkit-slider-runnable-track{
-            height: 4px;
-            border-radius: 9999px;
-            background: var(--roi-track);
-        }
-
-        .roi-range::-webkit-slider-thumb{
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--roi-accent);
-            border: 0;
-            margin-top: -7px;
-            box-shadow: 0 0 0 6px rgba(212,175,55,0.14);
-        }
-
-        .roi-range::-moz-range-track{
-            height: 4px;
-            border-radius: 9999px;
-            background: var(--roi-track);
-        }
-
-        .roi-range::-moz-range-thumb{
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--roi-accent);
-            border: 0;
-            box-shadow: 0 0 0 6px rgba(212,175,55,0.14);
-        }
-
-        .roi-right{
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-            justify-content: flex-start;
-        }
-
-        .roi-right-top{ padding-top: 6px; }
-
-        .roi-output-label{
-            font-size: 14px;
-            font-weight: 500;
-            color: rgba(255,255,255,0.55);
-            margin-bottom: 12px;
-        }
-
-        .roi-output{
-            font-size: 48px;
-            font-weight: 800;
-            color: var(--roi-accent);
-            letter-spacing: -0.02em;
-        }
-
-        @media (max-width: 768px){
-            .roi-output{ font-size: 42px; }
-        }
-
-        .roi-cta{
-            display: inline-flex;
-            align-items: center;
-            width: 100%;
-            max-width: 420px;
-            height: 56px;
-            border-radius: 12px;
-            border: 1px solid rgba(212,175,55,0.85);
-            background: transparent;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .roi-cta-icon{
-            width: 64px;
-            height: 100%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(180deg, rgba(212,175,55,1), rgba(212,175,55,0.78));
-            color: #000;
-        }
-
-        .roi-cta-text{
-            padding: 0 18px;
-            color: rgba(255,255,255,0.95);
-            font-weight: 500;
-            font-size: 16px;
-        }
-
-        .roi-cta:hover{
-            transform: translateY(-1px);
-            box-shadow: 0 10px 30px rgba(212,175,55,0.18);
-            border-color: rgba(212,175,55,1);
-        }
     </style>
 </head>
 
@@ -2263,15 +2144,6 @@
                     <button onclick="scrollToSection('proof')" class="nav-link">PROOF</button>
                     <button onclick="scrollToSection('process')" class="nav-link">PROCESS</button>
                     <button onclick="scrollToSection('faq')" class="nav-link">FAQ</button>
-                    <button onclick="scrollToSection('roi')" class="nav-link nav-link-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-                            <line x1="8" y1="6" x2="16" y2="6"></line>
-                            <line x1="8" y1="10" x2="16" y2="10"></line>
-                            <line x1="8" y1="14" x2="12" y2="14"></line>
-                        </svg>ROI Calculator
-                    </button>
                     <button onclick="openOptinModal()" class="nav-cta">Get Started</button>
                 </div>
                 <button id="menuBtn" class="menu-btn" onclick="toggleMobileMenu()">
@@ -2295,7 +2167,6 @@
                 <button onclick="scrollToSection('proof'); toggleMobileMenu();" class="mobile-menu-link">Proof</button>
                 <button onclick="scrollToSection('process'); toggleMobileMenu();" class="mobile-menu-link">Process</button>
                 <button onclick="scrollToSection('faq'); toggleMobileMenu();" class="mobile-menu-link">FAQ</button>
-                <button onclick="scrollToSection('roi'); toggleMobileMenu();" class="mobile-menu-link gold">ROI Calculator</button>
                 <button onclick="openOptinModal(); toggleMobileMenu();" class="mobile-menu-cta">Get Started</button>
             </div>
         </nav>
@@ -2321,7 +2192,7 @@
                     <p class="hero-desc">We build the system. We write the scripts. We edit the videos. We post everything. You record 4 hours/month. The calls compound from there.</p>
                     
                     <div class="hero-guarantee-box">
-                        10+ qualified calls in 90 days - guaranteed, or we work free.
+                        10+ qualified calls in 90 days: guaranteed, or we work free.
                     </div>
                     <div class="hero-subtext">That's the floor. Not the ceiling.</div>
 
@@ -2383,7 +2254,7 @@
             <ul class="proof-stack">
                 <!-- Card 1 -->
                 <li class="proof-card-wrap">
-                    <div class="proof-card">
+                    <a href="https://www.youtube.com/@Arunmsharma" target="_blank" rel="noopener noreferrer" class="proof-card">
                         <span class="proof-card-num">1</span>
                         <div class="proof-card-body">
                             <div class="proof-card-accent"></div>
@@ -2391,18 +2262,18 @@
                                 <div class="proof-card-badge badge-blue">200-300 Calls/Month</div>
                                 <div class="quote">"200 to 300 sales calls per month from YouTube"</div>
                                 <div class="author">Arun Sharma, CAT Career Coaching<span class="time-indicator">After 18 months of consistent publishing</span></div>
-                                <a href="https://www.youtube.com/@Arunmsharma" target="_blank" rel="noopener noreferrer" class="verify-link">Click to verify &rarr;</a>
+                                <span class="verify-link">Click to verify &rarr;</span>
                             </div>
                         </div>
                         <div class="proof-card-img-wrap">
                             <img src="https://finestclients.com/asset/arun.jpg" alt="Arun Sharma YouTube Analytics">
                         </div>
-                    </div>
+                    </a>
                 </li>
 
                 <!-- Card 2 -->
                 <li class="proof-card-wrap">
-                    <div class="proof-card">
+                    <a href="https://www.youtube.com/@authority-io" target="_blank" rel="noopener noreferrer" class="proof-card">
                         <span class="proof-card-num">2</span>
                         <div class="proof-card-body">
                             <div class="proof-card-accent"></div>
@@ -2410,18 +2281,18 @@
                                 <div class="proof-card-badge badge-green">+$229K in 1 Month</div>
                                 <div class="quote">"Went from $200K to $429K in one month"</div>
                                 <div class="author">Authority IO, Online Business Coaching<span class="time-indicator">During a product launch supported by 4 YouTube videos</span></div>
-                                <a href="https://www.youtube.com/@authority-io" target="_blank" rel="noopener noreferrer" class="verify-link">Click to verify &rarr;</a>
+                                <span class="verify-link">Click to verify &rarr;</span>
                             </div>
                         </div>
                         <div class="proof-card-img-wrap">
                             <img src="https://finestclients.com/asset/authority.jpg" alt="Authority IO YouTube Analytics">
                         </div>
-                    </div>
+                    </a>
                 </li>
 
                 <!-- Card 3 -->
                 <li class="proof-card-wrap">
-                    <div class="proof-card">
+                    <a href="https://www.youtube.com/@breakoutfoundersacademy" target="_blank" rel="noopener noreferrer" class="proof-card">
                         <span class="proof-card-num">3</span>
                         <div class="proof-card-body">
                             <div class="proof-card-accent"></div>
@@ -2429,13 +2300,13 @@
                                 <div class="proof-card-badge badge-green">$15K Client | 7 Subscribers</div>
                                 <div class="quote">"$15,000 client from a video with under 1,000 views"</div>
                                 <div class="author">Ryan Jackson, B2B Service Operations Coach<span class="time-indicator">Proof that views don't matter: buyers do</span></div>
-                                <a href="https://www.youtube.com/@breakoutfoundersacademy" target="_blank" rel="noopener noreferrer" class="verify-link">Click to verify &rarr;</a>
+                                <span class="verify-link">Click to verify &rarr;</span>
                             </div>
                         </div>
                         <div class="proof-card-img-wrap">
                             <img src="https://finestclients.com/asset/ryan.jpg" alt="Ryan Jackson YouTube Analytics">
                         </div>
-                    </div>
+                    </a>
                 </li>
             </ul>
         </section>
@@ -2537,7 +2408,7 @@
                                 </div>
                                 <div class="timeline-icon">🎥</div>
                                 <h4 class="timeline-title">You Record</h4>
-                                <p class="timeline-desc">4 hours per month. Batch it in one session. No studio needed - just your phone and our scripts.</p>
+                                <p class="timeline-desc">4 hours per month. Batch it in one session. No studio needed: just your phone and our scripts.</p>
                             </div>
                         </div>
 
@@ -2585,7 +2456,7 @@
                     <div class="bts-card">
                         <div class="bts-img-placeholder">✂️</div>
                         <div class="bts-content">
-                            <h4 class="bts-title">4-6 Hours Per Video</h4>
+                            <h4 class="bts-title">4 to 6 Hours Per Video</h4>
                             <p class="bts-desc">Every video goes through rigorous professional editing to maximize retention without losing your authentic voice.</p>
                         </div>
                     </div>
@@ -2632,7 +2503,7 @@
         <section class="section" style="background:#000">
             <div class="container">
                 <div class="fade-in founder-section-wrapper">
-                    <p class="section-label" style="text-align: left; margin-bottom: 8px;">BUILT BY SOMEONE WHO'S DONE IT</p>
+                    <p class="founder-section-label">BUILT BY SOMEONE WHO'S DONE IT</p>
                     <h3 class="founder-title-name">Mousam Chatterjee</h3>
                     <p class="founder-title-role">FOUNDER, FINEST CLIENTS</p>
 
@@ -2801,63 +2672,6 @@
             </div>
         </section>
 
-        <section id="roi" class="section section-dark section-border-t">
-            <div class="container">
-                <div class="fade-in">
-                    <div class="section-header">
-                        <div class="badge">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-                                <line x1="8" y1="6" x2="16" y2="6"></line>
-                                <line x1="8" y1="10" x2="16" y2="10"></line>
-                                <line x1="8" y1="14" x2="12" y2="14"></line>
-                            </svg>
-                            <span>Growth Projection</span>
-                        </div>
-                        <h2 class="section-title">ROI Calculator</h2>
-                        <p class="section-desc">See how much money our YouTube system can make for you.</p>
-                    </div>
-                </div>
-                <div class="roi-card">
-                    <div class="roi-grid">
-                        <div class="roi-left">
-                            <div class="roi-field">
-                                <div class="roi-label">Good Calls Per Month</div>
-                                <div id="roiAppointmentsVal" class="roi-value">5</div>
-                                <input type="range" id="roiAppointments" class="roi-range" min="5" max="50" step="1" value="5" oninput="updateCalculator()" />
-                            </div>
-                            <div class="roi-field">
-                                <div class="roi-label">Close Rate %</div>
-                                <div id="roiCloseRateVal" class="roi-value">1</div>
-                                <input type="range" id="roiCloseRate" class="roi-range" min="1" max="50" step="1" value="1" oninput="updateCalculator()" aria-label="Close ratio after appointment" />
-                            </div>
-                            <div class="roi-field">
-                                <div class="roi-label">Money Per Client ($)</div>
-                                <div id="roiAcvVal" class="roi-value">25000</div>
-                                <input type="range" id="roiAcv" class="roi-range" min="25000" max="200000" step="1000" value="25000" oninput="updateCalculator()" />
-                            </div>
-                        </div>
-                        <div class="roi-right">
-                            <div class="roi-right-top">
-                                <div class="roi-output-label">Your Sales Per Year</div>
-                                <div id="roiAnnualSales" class="roi-output">$15,000</div>
-                            </div>
-                            <button class="roi-cta" onclick="openOptinModal()" type="button" aria-label="Discuss pricing">
-                                <span class="roi-cta-icon" aria-hidden="true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M5 12h12"></path>
-                                        <path d="M13 6l6 6-6 6"></path>
-                                    </svg>
-                                </span>
-                                <span class="roi-cta-text">Book Your Call</span>
-                            </button>
-                            <p style="color: var(--gray-400); font-size: 13px; text-align: center; margin-top: 16px; max-width: 420px;">This calculator shows potential. Our guarantee shows commitment.<br>10+ qualified calls in 90 days, or we work free.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="faq" class="section" style="background:#000">
             <div class="container" style="max-width:768px">
                 <h2 class="section-title" style="text-align:center;margin-bottom:48px">Frequently Asked Questions</h2>
@@ -3004,7 +2818,6 @@
                             <li><button onclick="scrollToSection('home')">Home</button></li>
                             <li><button onclick="scrollToSection('proof')">Proof</button></li>
                             <li><button onclick="scrollToSection('process')">Process</button></li>
-                            <li><button onclick="scrollToSection('roi')">ROI Calculator</button></li>
                         </ul>
                     </div>
                     <div class="footer-nav">
@@ -3275,22 +3088,6 @@
             }
         });
 
-        function updateCalculator(){
-            const appts = parseInt(document.getElementById('roiAppointments').value, 10);
-            const close = parseFloat(document.getElementById('roiCloseRate').value);
-            const acv = parseInt(document.getElementById('roiAcv').value, 10);
-
-            const annual = appts * 12 * (close / 100) * acv;
-
-            document.getElementById('roiAppointmentsVal').textContent = String(appts);
-            document.getElementById('roiCloseRateVal').textContent = String(close);
-            document.getElementById('roiAcvVal').textContent = String(acv);
-
-            document.getElementById('roiAnnualSales').textContent = formatCurrency(Math.round(annual));
-        }        
-        
-        function formatCurrency(val) { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val) }
-        
         let openFaqIndex = null;
         function toggleFaq(index) { 
             const items = document.querySelectorAll('.faq-item'); 
@@ -3342,7 +3139,6 @@
         
         window.addEventListener('scroll', handleProcessScroll); 
         handleProcessScroll(); 
-        updateCalculator();
 
         // ============================================
         // LIQUID ETHER FLUID SIMULATION BACKGROUND

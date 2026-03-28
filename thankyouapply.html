@@ -56,6 +56,36 @@
             background: radial-gradient(circle at center, #222222 0%, #000000 100%);
         }
     </style>
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+        // Extract email from URL parameters
+        var urlParams = new URLSearchParams(window.location.search);
+        var userEmail = urlParams.get('invitee_email');
+        var normalizedEmail = userEmail ? userEmail.trim().toLowerCase() : '';
+
+        // Initialize Pixel with Advanced Matching if email is available
+        var advancedMatching = normalizedEmail ? { em: normalizedEmail } : {};
+        fbq('init', '688903840218578', advancedMatching);
+        fbq('track', 'PageView');
+
+        // Track SubmitApplication event and push email as Event ID for deduplication
+        var eventOptions = normalizedEmail ? { eventID: normalizedEmail } : {};
+        fbq('track', 'SubmitApplication', {}, eventOptions);
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=688903840218578&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 <body class="bg-black text-gray-100 selection:bg-brand-gold selection:text-black">
 

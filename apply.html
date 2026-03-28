@@ -86,13 +86,16 @@
     
     fbq('track', 'PageView');
     
-    // 3. Fire Lead Event (Attaches joined email+fbclid data to the event if found)
+    // 3. Fire Lead Event with official eventID for Deduplication
     var joinedData = [];
     if (pixelEmail) joinedData.push(pixelEmail);
     if (pixelFbclid) joinedData.push(pixelFbclid);
     
-    if (joinedData.length > 0) {
-        fbq('track', 'Lead', { email: joinedData.join('+') }); 
+    var combinedString = joinedData.length > 0 ? joinedData.join('+') : null;
+    
+    if (combinedString) {
+        // syntax: fbq('track', 'EventName', {customData}, {eventID: 'your_id_here'});
+        fbq('track', 'Lead', { email: combinedString }, { eventID: combinedString }); 
     } else {
         fbq('track', 'Lead'); 
     }

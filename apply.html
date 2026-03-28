@@ -59,32 +59,11 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-
-        /* Flowchart Custom CSS ported to work with Tailwind */
-        .red-scribble {
-            position: absolute;
-            top: -30px;
-            left: -10px;
-            color: #ef4444; /* red-500 */
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            font-size: 1.2rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transform: rotate(-10deg);
-            pointer-events: none;
-            z-index: 10;
-        }
-        .red-scribble svg { width: 30px; height: 30px; fill: none; stroke: #ef4444; stroke-width: 2; }
-        @media (max-width: 767px) {
-            .red-scribble { left: 0px; top: -20px; }
-        }
     </style>
 </head>
 <body class="bg-black text-white selection:bg-brand-gold selection:text-black">
 
-    <!-- Section 1: Success Message + Video Hook -->
+    <!-- Section 1: Success Message + Video Hook (FIRST FOLD PRESERVED) -->
     <div class="bg-green-600 text-white text-center py-3 px-4 text-sm md:text-base font-bold tracking-wide shadow-md relative z-10">
         <i class="fa-solid fa-check-circle mr-2 text-xl align-middle"></i> 
         <span class="align-middle">SUCCESS! Your "Click to Clients" PDF is on its way to your inbox.</span><br class="block sm:hidden">
@@ -116,7 +95,7 @@
     <section class="bg-white py-10 w-full relative z-10 shadow-xl">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <p class="text-zinc-400 text-xs font-black uppercase tracking-widest mb-6 text-center">As Featured In</p>
-            <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-6 md:gap-14">
+            <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-6 md:gap-14">
                 <img src="http://finestclients.com/asset/fox-removebg-preview.png" alt="Fox" class="h-7 md:h-9 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                 <img src="http://finestclients.com/asset/abc-removebg-preview.png" alt="ABC" class="h-9 md:h-12 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                 <img src="http://finestclients.com/asset/cbs-removebg-preview.png" alt="CBS" class="h-7 md:h-9 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
@@ -126,24 +105,46 @@
         </div>
     </section>
 
-    <!-- Section 2: Headline + Subhead -->
+    <!-- Section 2: Headline + Subhead (UPDATED WITH DOCX COPY) -->
     <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center border-b border-zinc-800">
-        <p class="text-brand-gold font-black tracking-widest uppercase text-sm md:text-base mb-4 border-b border-zinc-800 inline-block pb-1">For Coaches & Consultants Having Proven Offer And Want To Scale Up</p>
+        <!-- TAGLINE -->
+        <div class="text-xs md:text-sm font-bold uppercase tracking-widest text-brand-gold mb-6 inline-block bg-brand-gold/10 border border-brand-gold/20 px-4 py-2 rounded-full shadow-sm">
+            We Don't Promise Followers. We Promise Sales Calls.
+        </div>
         
         <h1 class="text-4xl md:text-6xl font-black leading-tight mb-6 tracking-tight text-white">
-            Most YouTube Agencies Promise "Views."<br>
-            <span class="text-brand-gold underline decoration-brand-gold/30">We Guarantee Calls.</span>
+            Done-For-You YouTube That Books<br>
+            <span class="text-brand-gold underline decoration-brand-gold/30 underline-offset-8">Qualified Sales Calls</span>
         </h1>
         
-        <div class="text-xl md:text-2xl text-zinc-300 font-bold mb-8 leading-snug">
-            10 Qualified Sales Calls in 90 Days.<br>
-            If You Don't Get Them, We Work Free Until You Do.<br>
-            Completely Done-For-You.<br>
-            <span class="text-base font-normal text-zinc-500 italic block mt-2">(No other agency offers this. Ask them.)</span>
+        <div class="text-xl md:text-2xl text-zinc-300 font-bold mb-4 leading-snug">
+            4 videos/month. Compounding growth. 10+ qualified calls in 90 days — guaranteed.
+        </div>
+        
+        <p class="text-lg text-zinc-400 mb-10 font-medium">
+            You record. We do literally everything else.<br>Watch the short video above to see exactly how it works.
+        </p>
+
+        <!-- Founder Stats prominently displayed -->
+        <div class="flex flex-wrap justify-center items-center gap-4 md:gap-10 mt-10 mb-10 bg-zinc-900 border border-zinc-800 rounded-xl p-6 shadow-sm mx-auto max-w-4xl">
+            <div class="flex flex-col items-center">
+                <div class="text-3xl font-black text-white mb-1 flex items-center gap-2"><i class="fa-solid fa-eye text-brand-gold text-2xl"></i> 100M+</div>
+                <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Views Driven</div>
+            </div>
+            <div class="w-px h-12 bg-zinc-800 hidden md:block"></div>
+            <div class="flex flex-col items-center">
+                <div class="text-3xl font-black text-white mb-1 flex items-center gap-2"><i class="fa-solid fa-users text-brand-gold text-2xl"></i> 90.7K</div>
+                <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Subscribers</div>
+            </div>
+            <div class="w-px h-12 bg-zinc-800 hidden md:block"></div>
+            <div class="flex flex-col items-center">
+                <div class="text-3xl font-black text-white mb-1 flex items-center gap-2"><i class="fa-solid fa-calendar-check text-brand-gold text-2xl"></i> 46.7K</div>
+                <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Leads Generated</div>
+            </div>
         </div>
         
         <a href="https://calendly.com/mousam-finestclients/discovery" target="_blank" class="inline-flex items-center justify-center w-full max-w-md bg-brand-gold hover:bg-brand-dark text-black font-black py-5 px-6 rounded-lg text-xl shadow-[0_4px_0_#B5952F] hover:shadow-[0_2px_0_#B5952F] hover:translate-y-[2px] transition-all uppercase">
-            CHECK IF YOUR NICHE IS AVAILABLE &rarr;
+            BOOK YOUR CALL NOW &rarr;
         </a>
         <p class="text-sm text-zinc-400 mt-3 font-bold">Limited to 1 client per niche. Spots fill fast.</p>
     </section>
@@ -162,7 +163,10 @@
                     <div class="flex items-center gap-3 mb-4">
                         <img src="https://finestclients.com/asset/aviarya.jpg" alt="Avi Arya" class="w-12 h-12 rounded-full border-2 border-brand-gold object-cover shadow-sm">
                         <div>
-                            <div class="font-black text-white text-lg leading-tight">Avi Arya</div>
+                            <div class="font-black text-white text-lg leading-tight flex items-center gap-2">
+                                Avi Arya
+                                <span class="bg-green-600 text-white px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide">Agency Scaled</span>
+                            </div>
                             <div class="text-brand-gold font-bold text-sm uppercase tracking-wide">Agency Owner</div>
                         </div>
                     </div>
@@ -182,7 +186,10 @@
                     <div class="flex items-center gap-3 mb-4">
                         <img src="https://finestclients.com/asset/paul.jpg" alt="Paul Gabrail" class="w-12 h-12 rounded-full border-2 border-brand-gold object-cover shadow-sm">
                         <div>
-                            <div class="font-black text-white text-lg leading-tight">Paul Gabrail</div>
+                            <div class="font-black text-white text-lg leading-tight flex items-center gap-2">
+                                Paul Gabrail
+                                <span class="bg-brand-gold text-black px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide">High-Intent Buyers</span>
+                            </div>
                             <div class="text-brand-gold font-bold text-sm uppercase tracking-wide">Real Estate</div>
                         </div>
                     </div>
@@ -202,7 +209,10 @@
                     <div class="flex items-center gap-3 mb-4">
                         <img src="https://finestclients.com/asset/david.jpg" alt="David Ellis" class="w-12 h-12 rounded-full border-2 border-brand-gold object-cover shadow-sm">
                         <div>
-                            <div class="font-black text-white text-lg leading-tight">David Ellis</div>
+                            <div class="font-black text-white text-lg leading-tight flex items-center gap-2">
+                                David Ellis
+                                <span class="bg-green-600 text-white px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide">Immediate ROI</span>
+                            </div>
                             <div class="text-brand-gold font-bold text-sm uppercase tracking-wide">Growth Consulting</div>
                         </div>
                     </div>
@@ -222,7 +232,10 @@
                     <div class="flex items-center gap-3 mb-4">
                         <img src="https://finestclients.com/asset/arun.jpg" alt="Arun Sharma" class="w-12 h-12 rounded-full border-2 border-brand-gold object-cover shadow-sm">
                         <div>
-                            <div class="font-black text-white text-lg leading-tight">Arun Sharma</div>
+                            <div class="font-black text-white text-lg leading-tight flex items-center gap-2">
+                                Arun Sharma
+                                <span class="bg-brand-gold text-black px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide">Faster Closes</span>
+                            </div>
                             <div class="text-brand-gold font-bold text-sm uppercase tracking-wide">Business Owner</div>
                         </div>
                     </div>
@@ -236,6 +249,11 @@
                         <p class="text-zinc-300 font-medium italic text-lg leading-relaxed">"YouTube compounded everything. Ads convert better. Sales calls close faster because they already trust you."</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- Dollars text added here -->
+            <div class="text-center mt-8 mb-8 text-xl md:text-3xl font-black text-white">
+                These aren't followers. <span class="text-green-500">These are dollars.</span> That's the difference.
             </div>
 
             <div class="text-center mt-6">
@@ -268,7 +286,7 @@
                         <i class="fa-solid fa-xmark text-2xl"></i> You Hired An Editor
                     </div>
                     <p class="text-zinc-500 font-bold text-sm uppercase mb-4 tracking-wide">(Not a Strategist)</p>
-                    <p class="text-zinc-300 leading-relaxed mb-4">Editors make flashy cuts. They don't understand your high-ticket offer. They can sell it.</p>
+                    <p class="text-zinc-300 leading-relaxed mb-4">Editors make flashy cuts. They don't understand your high-ticket offer. They can't sell it.</p>
                     <p class="text-white font-black">Strategy creates revenue.<br>Edits don't.</p>
                 </div>
                 <!-- Box 2 -->
@@ -307,44 +325,67 @@
         </div>
     </section>
 
-    <!-- Section 5: The Guarantee -->
-    <section class="py-20 bg-black text-white px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-10">
-                <h2 class="text-4xl md:text-5xl font-black mb-4">The Guarantee That Makes This Risk-Free</h2>
-            </div>
+    <!-- Section 4b: Who This Is For -->
+    <section class="py-20 bg-black px-4 sm:px-6 lg:px-8 border-b border-zinc-800">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-black mb-12 text-white text-center">Who This Is Actually For</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Who it's NOT for -->
+                <div class="bg-zinc-900 border border-zinc-800 p-8 md:p-10 rounded-2xl shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-red-500"></div>
+                    <h3 class="text-2xl font-black text-red-500 mb-8 flex items-center gap-3"><i class="fa-solid fa-xmark text-3xl"></i> Who It's NOT For</h3>
+                    <ul class="space-y-6 text-zinc-300 font-medium text-lg">
+                        <li class="flex items-start"><i class="fa-solid fa-xmark text-red-500 mt-1 mr-4 text-xl"></i> Beginners without a proven offer</li>
+                        <li class="flex items-start"><i class="fa-solid fa-xmark text-red-500 mt-1 mr-4 text-xl"></i> People who want "fame" and millions of subscribers</li>
+                        <li class="flex items-start"><i class="fa-solid fa-xmark text-red-500 mt-1 mr-4 text-xl"></i> Entertainment or viral trend vlog channels</li>
+                        <li class="flex items-start"><i class="fa-solid fa-xmark text-red-500 mt-1 mr-4 text-xl"></i> Those who can't dedicate 4 hours a month to record</li>
+                    </ul>
+                </div>
 
-            <!-- Guarantee Visual Box -->
-            <div class="border-4 border-brand-gold bg-zinc-900 p-8 md:p-12 rounded-2xl shadow-2xl relative mb-12">
-                <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-brand-gold text-black px-6 py-2 rounded-full font-black tracking-widest uppercase text-sm shadow-lg">
+                <!-- Who it IS for -->
+                <div class="bg-black border-2 border-brand-gold p-8 md:p-10 rounded-2xl shadow-xl shadow-brand-gold/10 relative overflow-hidden transform md:-translate-y-2 mt-8 md:mt-0">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-brand-gold"></div>
+                    <h3 class="text-2xl font-black text-brand-gold mb-8 flex items-center gap-3"><i class="fa-solid fa-check text-3xl"></i> Who It IS For</h3>
+                    <ul class="space-y-6 text-white font-bold text-lg">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand-gold mt-1 mr-4 text-xl"></i> Coaches, Consultants & Agency Owners</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand-gold mt-1 mr-4 text-xl"></i> Founders selling high-ticket B2B or B2C offers</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand-gold mt-1 mr-4 text-xl"></i> Businesses wanting a compounding asset, not just a campaign</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand-gold mt-1 mr-4 text-xl"></i> Operators who want qualified calls, not vanity metrics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: The Guarantee -->
+    <section class="py-20 bg-black text-white px-4 sm:px-6 lg:px-8 border-b border-zinc-800 relative">
+        <div class="max-w-4xl mx-auto relative z-10">
+            
+            <div class="border-4 border-brand-gold bg-zinc-900 p-8 md:p-12 lg:p-16 rounded-3xl shadow-2xl relative mb-12">
+                <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-brand-gold text-black px-8 py-3 rounded-full font-black tracking-widest uppercase text-sm shadow-xl whitespace-nowrap">
                     Ironclad Guarantee
                 </div>
                 
-                <h3 class="text-3xl md:text-4xl font-black text-center mb-2 text-white uppercase tracking-wide leading-tight">10 Qualified Calls In 90 Days</h3>
-                <h4 class="text-xl md:text-2xl font-bold text-center mb-10 text-brand-gold uppercase">Or We Work Free Until You Get Them</h4>
+                <h3 class="text-3xl md:text-5xl font-black text-center mb-6 text-white leading-tight mt-4 uppercase">
+                    10+ Qualified Calls in <br class="hidden md:block">
+                    <span class="text-brand-gold underline decoration-brand-gold/40 underline-offset-4">90 Days.</span> Guaranteed.
+                </h3>
+                <h4 class="text-xl md:text-2xl font-bold text-center mb-10 text-zinc-400">
+                    That's the minimum — the proof the engine works.
+                </h4>
                 
-                <div class="max-w-lg mx-auto bg-black p-6 rounded-xl border border-zinc-800">
-                    <ul class="space-y-4 text-lg font-bold text-zinc-200">
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-gold mr-4 text-xl"></i> They found you on YouTube</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-gold mr-4 text-xl"></i> They're the decision maker</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-gold mr-4 text-xl"></i> They have a real need</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-gold mr-4 text-xl"></i> They fit your budget</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-gold mr-4 text-xl"></i> They showed up</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-gold mr-4 text-xl"></i> They stayed 15+ minutes</li>
-                    </ul>
-                </div>
-                
-                <div class="text-center mt-8 font-black text-xl md:text-2xl border-t border-zinc-800 pt-8 text-white">
-                    All 6 criteria - all must be met = <span class="text-brand-gold underline">Qualified Call</span>
-                </div>
-            </div>
+                <div class="max-w-3xl mx-auto text-lg md:text-xl text-zinc-300 font-medium leading-relaxed space-y-6 border-t border-zinc-800 pt-10">
+                    <p>Here's what happens after that:</p>
+                    <p>We keep publishing. The videos keep ranking. <strong class="text-white font-black">The calls keep compounding.</strong></p>
+                    <p>Month 4 is better than Month 1. Month 12 is better than Month 4.</p>
+                    <p>The guarantee protects you. The system scales you.</p>
 
-            <div class="text-lg md:text-xl text-zinc-300 text-center font-medium leading-relaxed max-w-3xl mx-auto mb-12 space-y-6">
-                <p>We don't count tire-kickers. We don't count no-shows. <br class="hidden md:block">We count real conversations with real buyers.</p>
-                <p>If you don't get 10 of those in 90 days, we keep working - for free - until you do.<br><strong class="text-white font-black">We take the risk. You get the clients.</strong></p>
-                <div class="bg-zinc-900 p-6 rounded-lg border border-zinc-800 mt-8 text-left md:text-center">
-                    <p class="mb-4">Ask any other YouTube agency if they'll guarantee calls. <strong class="text-brand-gold">They won't.</strong></p>
-                    <p>They'll promise "views" or "growth" or "engagement." None of that pays your bills.<br>We guarantee the only thing that matters: <strong class="text-white">People on your calendar, ready to buy.</strong></p>
+                    <!-- Highlight Box -->
+                    <div class="bg-zinc-800 border-l-4 border-brand-gold p-6 md:p-8 rounded-r-xl shadow-sm mt-10">
+                        <p class="font-black text-white text-xl md:text-2xl mb-3 leading-tight">A video you post today will book calls 3 years from now.</p>
+                        <p class="text-zinc-300 text-lg font-medium">We're not building a campaign. <span class="text-brand-gold font-black">We're building an asset.</span></p>
+                    </div>
                 </div>
             </div>
 
@@ -405,63 +446,83 @@
     </section>
 
     <!-- Section 7: The Timeline -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto bg-zinc-950 border-b border-zinc-800">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-black text-white mb-4">Your 90-Day Timeline</h2>
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-zinc-950 border-b border-zinc-800">
+        <div class="text-center mb-16 max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-4">Your Visual Process Timeline</h2>
             <p class="text-xl md:text-2xl font-bold text-zinc-400">(4 Hours a Month. That's All.)</p>
             <p class="text-lg text-brand-gold font-black uppercase mt-4">First video live in 21 days. Calls start rolling in.</p>
         </div>
 
-        <!-- Linear Flowchart -->
-        <div class="flex flex-col lg:flex-row items-center justify-between gap-4 max-w-5xl mx-auto mb-16 relative">
+        <!-- Linear Flowchart with Images/Icons -->
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-4 max-w-6xl mx-auto mb-16 relative">
             
-            <div class="w-full lg:w-1/5 bg-zinc-900 border-2 border-zinc-800 py-6 px-4 rounded-xl text-center shadow-sm relative z-10">
+            <div class="w-full lg:w-1/5 bg-zinc-900 border-2 border-zinc-800 py-8 px-4 rounded-xl text-center shadow-sm relative z-10 flex flex-col items-center">
+                <div class="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center text-zinc-500 mb-4 text-xl">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
                 <div class="text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">Day 1-3</div>
-                <div class="font-black text-white leading-tight">Onboarding<br>& Strategy</div>
+                <div class="font-black text-white text-lg leading-tight">Onboarding<br>& Strategy</div>
             </div>
             
-            <svg class="w-8 h-8 text-zinc-700 transform rotate-90 lg:rotate-0 flex-shrink-0 hidden lg:block" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-            <div class="h-8 w-1 bg-zinc-700 lg:hidden"></div>
+            <svg class="w-8 h-8 text-zinc-700 transform rotate-90 lg:rotate-0 flex-shrink-0 hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            <i class="fa-solid fa-chevron-down text-zinc-700 my-2 lg:hidden text-xl"></i>
             
-            <div class="w-full lg:w-1/5 bg-zinc-900 border-2 border-zinc-800 py-6 px-4 rounded-xl text-center shadow-sm relative z-10">
+            <div class="w-full lg:w-1/5 bg-zinc-900 border-2 border-zinc-800 py-8 px-4 rounded-xl text-center shadow-sm relative z-10 flex flex-col items-center">
+                <div class="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center text-zinc-500 mb-4 text-xl">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                </div>
                 <div class="text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">Day 4-7</div>
-                <div class="font-black text-white leading-tight">Research &<br>Topic Bank</div>
+                <div class="font-black text-white text-lg leading-tight">Research &<br>Topic Bank</div>
             </div>
             
-            <svg class="w-8 h-8 text-zinc-700 transform rotate-90 lg:rotate-0 flex-shrink-0 hidden lg:block" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-            <div class="h-8 w-1 bg-zinc-700 lg:hidden"></div>
+            <svg class="w-8 h-8 text-zinc-700 transform rotate-90 lg:rotate-0 flex-shrink-0 hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            <i class="fa-solid fa-chevron-down text-zinc-700 my-2 lg:hidden text-xl"></i>
 
-            <div class="w-full lg:w-1/5 bg-zinc-900 border-2 border-zinc-800 py-6 px-4 rounded-xl text-center shadow-sm relative z-10">
+            <div class="w-full lg:w-1/5 bg-zinc-900 border-2 border-zinc-800 py-8 px-4 rounded-xl text-center shadow-sm relative z-10 flex flex-col items-center">
+                <div class="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center text-zinc-500 mb-4 text-xl">
+                    <i class="fa-solid fa-file-pen"></i>
+                </div>
                 <div class="text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">Day 8-14</div>
-                <div class="font-black text-white leading-tight">Scripts<br>Delivered</div>
+                <div class="font-black text-white text-lg leading-tight">Scripts<br>Delivered</div>
             </div>
             
-            <svg class="w-8 h-8 text-brand-gold transform rotate-90 lg:rotate-0 flex-shrink-0 hidden lg:block" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-            <div class="h-8 w-1 bg-brand-gold lg:hidden"></div>
+            <svg class="w-8 h-8 text-brand-gold transform rotate-90 lg:rotate-0 flex-shrink-0 hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            <i class="fa-solid fa-chevron-down text-brand-gold my-2 lg:hidden text-xl"></i>
 
-            <div class="w-full lg:w-1/5 bg-black border-4 border-brand-gold py-6 px-4 rounded-xl text-center shadow-lg relative z-10 transform lg:-translate-y-2">
-                <div class="red-scribble -top-6 -left-4">
-                    Your Job
-                    <svg viewBox="0 0 100 50"><path d="M10 25 Q 40 10 90 25 L 80 15 M 90 25 L 80 35" /></svg>
+            <div class="w-full lg:w-1/5 bg-black border-4 border-brand-gold py-8 px-4 rounded-xl text-center shadow-xl relative z-10 transform lg:-translate-y-2 flex flex-col items-center">
+                <div class="absolute -top-6 left-2 md:-top-8 md:left-6 text-red-500 font-bold flex items-center gap-1 z-20 pointer-events-none" style="font-family: 'Comic Sans MS', cursive, sans-serif; transform: rotate(-8deg);">
+                    <span class="text-base md:text-lg whitespace-nowrap">Your Job</span>
+                    <svg class="w-8 h-5" viewBox="0 0 40 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 2,10 Q 20,5 35,10" />
+                        <path d="M 25,4 L 35,10 L 25,16" />
+                    </svg>
+                </div>
+                <div class="w-14 h-14 bg-zinc-900 rounded-full flex items-center justify-center text-brand-gold mb-4 text-2xl shadow-sm border border-zinc-800">
+                    <i class="fa-solid fa-video"></i>
                 </div>
                 <div class="text-xs font-black text-brand-gold uppercase tracking-widest mb-2">Day 15-21</div>
-                <div class="font-black text-white leading-tight">You Record<br><span class="text-sm font-bold">(4 Hours)</span></div>
+                <div class="font-black text-white text-xl leading-tight">You Record<br><span class="text-sm font-bold text-brand-gold mt-1 block">(4 Hours)</span></div>
             </div>
             
-            <svg class="w-8 h-8 text-brand-gold transform rotate-90 lg:rotate-0 flex-shrink-0 hidden lg:block" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-            <div class="h-8 w-1 bg-brand-gold lg:hidden"></div>
+            <svg class="w-8 h-8 text-brand-gold transform rotate-90 lg:rotate-0 flex-shrink-0 hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            <i class="fa-solid fa-chevron-down text-brand-gold my-2 lg:hidden text-xl"></i>
 
-            <div class="w-full lg:w-1/5 bg-black text-white border-4 border-zinc-800 py-6 px-4 rounded-xl text-center shadow-xl relative z-10">
+            <div class="w-full lg:w-1/5 bg-black text-white border-4 border-zinc-800 py-8 px-4 rounded-xl text-center shadow-2xl relative z-10 flex flex-col items-center mt-2 lg:mt-0">
+                <div class="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center text-white mb-4 text-xl shadow-inner border border-zinc-800">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
                 <div class="text-xs font-black text-zinc-500 uppercase tracking-widest mb-2">Day 22-90</div>
-                <div class="font-black leading-tight text-brand-gold">Videos Live.<br>Calls Start.</div>
-                <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-[10px] font-black uppercase px-3 py-1 rounded whitespace-nowrap">Guarantee Clock Starts</div>
+                <div class="font-black text-xl leading-tight text-brand-gold">Videos Live.<br>Calls Start.</div>
+                <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-[10px] font-black uppercase px-4 py-1.5 rounded shadow-md whitespace-nowrap">Guarantee Clock Starts</div>
             </div>
         </div>
 
         <div class="max-w-3xl mx-auto text-center font-medium text-lg md:text-xl text-zinc-300 space-y-4">
-            <p><strong>4 hours of recording.</strong> That's your total time investment per month.</p>
+            <p><strong class="text-white">4 hours of recording.</strong> That's your total time investment per month.</p>
             <p>You batch all 4 videos in one afternoon. We handle everything before and after.</p>
-            <p class="font-black text-2xl text-white pt-4">By Day 90, you'll have 12 videos working for you.<br><span class="text-brand-gold">Booking calls while you sleep.</span></p>
+            <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-xl shadow-sm mt-8">
+                <p class="font-black text-2xl text-white">By Day 90, you'll have 12 videos working for you.<br><span class="text-brand-gold mt-2 block">Booking calls while you sleep.</span></p>
+            </div>
         </div>
     </section>
 
@@ -475,7 +536,7 @@
             <div class="flex flex-col md:flex-row gap-8 max-w-5xl mx-auto">
                 <!-- Left Col (Without YT) -->
                 <div class="flex-1 bg-zinc-900 p-8 md:p-10 rounded-2xl border border-zinc-800 shadow-sm">
-                    <h3 class="text-2xl font-black text-center mb-8 text-white uppercase">Leads <span class="text-red-500 underline decoration-red-500/30">WITHOUT</span> YouTube</h3>
+                    <h3 class="text-2xl font-black text-center mb-10 text-white uppercase tracking-wide">Leads <span class="text-red-500 underline decoration-red-500/50">WITHOUT</span> YouTube</h3>
                     <ul class="space-y-6">
                         <li class="flex items-start text-zinc-300 text-lg font-medium">
                             <i class="fa-solid fa-xmark text-red-500 mt-1 mr-4 text-xl"></i>
@@ -505,8 +566,8 @@
                 </div>
                 
                 <!-- Right Col (With YT) -->
-                <div class="flex-1 bg-black p-8 md:p-10 rounded-2xl border-2 border-brand-gold shadow-2xl transform md:-translate-y-4">
-                    <h3 class="text-2xl font-black text-center mb-8 text-white uppercase">Leads <span class="text-brand-gold underline decoration-brand-gold/50">WITH</span> YouTube</h3>
+                <div class="flex-1 bg-black p-8 md:p-10 rounded-2xl border-2 border-brand-gold shadow-2xl transform md:-translate-y-4 relative mt-8 md:mt-0">
+                    <h3 class="text-2xl font-black text-center mb-10 text-white uppercase tracking-wide mt-2">Leads <span class="text-brand-gold underline decoration-brand-gold/50">WITH</span> YouTube</h3>
                     <ul class="space-y-6">
                         <li class="flex items-start text-zinc-100 font-bold text-lg">
                             <i class="fa-solid fa-check text-brand-gold mt-1 mr-4 text-xl"></i>
@@ -568,168 +629,227 @@
 
     <!-- Section 10: FAQ -->
     <section class="py-20 bg-black px-4 sm:px-6 lg:px-8 border-b border-zinc-800">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 items-start">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-start">
             <div class="w-full md:w-1/3 md:sticky md:top-10">
-                <h2 class="text-4xl md:text-5xl font-black leading-tight text-white">Questions You're Probably Asking</h2>
+                <h2 class="text-4xl md:text-5xl font-black leading-tight text-white mb-4">Questions You're Probably Asking</h2>
+                <p class="text-zinc-400 font-medium text-lg">Everything you need to know about how the system works.</p>
             </div>
             
             <div class="w-full md:w-2/3 bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden shadow-sm">
-                <!-- FAQ Item 1 -->
+                
+                <!-- FAQ 1 -->
                 <div class="faq-item border-b border-zinc-800 group">
-                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 md:p-8 font-black text-lg md:text-xl flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
+                        What is a qualified call?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold flex-shrink-0 transform transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 md:px-8 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <div class="pb-8 text-zinc-300 font-medium text-lg space-y-4">
+                            <p>A qualified call meets all 6 criteria:</p>
+                            <ol class="list-decimal pl-5 space-y-2 text-white font-semibold">
+                                <li>They found you on YouTube (not a referral or cold outreach)</li>
+                                <li>They're the decision maker (can say yes without asking anyone)</li>
+                                <li>They have a real need right now (not "just researching")</li>
+                                <li>They have the budget for your offer</li>
+                                <li>They show up to the call</li>
+                                <li>They stay for at least 15 minutes</li>
+                            </ol>
+                            <p>If a call doesn't meet ALL 6, it doesn't count toward your guarantee.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item border-b border-zinc-800 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 md:p-8 font-black text-lg md:text-xl flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
+                        Do you do this for marketing agencies?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold flex-shrink-0 transform transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 md:px-8 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-8 text-zinc-300 font-medium text-lg">Yes. As long as you have a proven high-ticket offer and a history of getting results for your clients, this system works exceptionally well for marketing agencies looking to acquire more inbound leads.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item border-b border-zinc-800 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 md:p-8 font-black text-lg md:text-xl flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
+                        Do I have to edit the videos?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold flex-shrink-0 transform transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 md:px-8 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <div class="pb-8 text-zinc-300 font-medium text-lg space-y-4">
+                            <p>No. We handle everything:</p>
+                            <ul class="space-y-2 list-disc pl-5">
+                                <li><strong>Scripts</strong> (you just read and talk)</li>
+                                <li><strong>Editing</strong> (professional cuts, graphics, captions)</li>
+                                <li><strong>Thumbnails</strong> (2 custom designs per video)</li>
+                                <li><strong>SEO</strong> (titles, descriptions, tags)</li>
+                                <li><strong>Posting</strong> (on schedule, every week)</li>
+                            </ul>
+                            <p class="font-bold text-white">You just record — about 4 hours per month total, batchable in one session.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item border-b border-zinc-800 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 md:p-8 font-black text-lg md:text-xl flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
+                        What if I do not get 10 calls?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold flex-shrink-0 transform transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 md:px-8 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <div class="pb-8 text-zinc-300 font-medium text-lg space-y-4">
+                            <p>If you don't hit 10 qualified calls in 90 days, we keep working for free until you do. No additional fees. No excuses.</p>
+                            <p>That said, <strong>10 is the floor — not the goal</strong>. Most clients hit 10 before day 90, then the calls keep compounding as more videos rank.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item border-b border-zinc-800 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 md:p-8 font-black text-lg md:text-xl flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
+                        How long until I see results?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold flex-shrink-0 transform transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 md:px-8 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <div class="pb-8 text-zinc-300 font-medium text-lg space-y-4">
+                            <ul class="space-y-3">
+                                <li><strong>Month 1</strong> is setup — your first videos go live and the algorithm starts learning.</li>
+                                <li><strong>Month 2</strong>, search traffic kicks in and calls start booking.</li>
+                                <li><strong>Month 3</strong>, you typically hit the 10-call minimum.</li>
+                                <li><strong>Month 4+</strong>, the library grows and calls compound.</li>
+                            </ul>
+                            <p>YouTube is not instant like paid ads. But unlike ads, the videos keep working forever. A video you post today will book calls 3 years from now.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="faq-item border-b border-zinc-800 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 md:p-8 font-black text-lg md:text-xl flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
+                        Why did YouTube fail for me before?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold flex-shrink-0 transform transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 md:px-8 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <div class="pb-8 text-zinc-300 font-medium text-lg space-y-4">
+                            <p>Most people fail at YouTube because they focus on views instead of buyers.</p>
+                            <p>They make "value content" that educates but doesn't convert. Or they copy viral creators who are entertainers, not business owners.</p>
+                            <p>We engineer content specifically for high-ticket sales:</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Topics your buyers are searching for</li>
+                                <li>Hooks that filter for qualified prospects</li>
+                                <li>CTAs that book calls, not just subscribers</li>
+                            </ul>
+                            <p class="font-bold text-white">Different strategy. Different results.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 7 -->
+                <div class="faq-item border-b border-zinc-800 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 md:p-8 font-black text-lg md:text-xl flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
+                        Will you work with my competitors?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold flex-shrink-0 transform transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </button>
+                    <div class="faq-content px-6 md:px-8 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <div class="pb-8 text-zinc-300 font-medium text-lg space-y-4">
+                            <p><strong>No. We offer strict niche exclusivity.</strong></p>
+                            <p>Once you sign with us, we reject your direct competitors. You own the space.</p>
+                            <p>This protects your investment and ensures we're fully aligned with your success.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Existing Good FAQ 8 -->
+                <div class="faq-item border-b border-zinc-800 group">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 md:p-8 font-black text-lg md:text-xl flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
                         What exactly do you help with?
-                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                        <svg class="faq-icon w-6 h-6 text-brand-gold flex-shrink-0 transform transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
-                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-zinc-300 font-medium">We handle the entire YouTube growth strategy for you - from scripting and editing to SEO, thumbnails, and posting.<br><br>You just show up to record once a week. Everything else is done-for-you with a focus on getting you more qualified inbound leads.</p>
+                    <div class="faq-content px-6 md:px-8 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-8 text-zinc-300 font-medium text-lg">We handle the entire YouTube growth strategy for you - from scripting and editing to SEO, thumbnails, and posting.<br><br>You just show up to record. Everything else is done-for-you with a focus on getting you more qualified inbound leads.</p>
                     </div>
                 </div>
-                <!-- FAQ Item 2 -->
+
+                <!-- Existing Good FAQ 9 -->
                 <div class="faq-item border-b border-zinc-800 group">
-                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 md:p-8 font-black text-lg md:text-xl flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
                         Why YouTube?
-                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                        <svg class="faq-icon w-6 h-6 text-brand-gold flex-shrink-0 transform transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
-                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-zinc-300 font-medium">YouTube is where buyers go when they’re actively searching for a solution.<br><br>It’s high-intent, evergreen, and compounds over time - unlike short-form, ads, or cold outreach. One good video can drive leads for months (or years) without spending a penny on traffic.</p>
+                    <div class="faq-content px-6 md:px-8 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-8 text-zinc-300 font-medium text-lg">YouTube is where buyers go when they’re actively searching for a solution.<br><br>It’s high-intent, evergreen, and compounds over time - unlike short-form, ads, or cold outreach. One good video can drive leads for months (or years) without spending a penny on traffic.</p>
                     </div>
                 </div>
-                <!-- FAQ Item 3 -->
+
+                <!-- Existing Good FAQ 10 -->
                 <div class="faq-item border-b border-zinc-800 group">
-                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 md:p-8 font-black text-lg md:text-xl flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
                         I’m already seeing good results from other methods. Why do I need this?
-                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                        <svg class="faq-icon w-6 h-6 text-brand-gold flex-shrink-0 transform transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
-                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-zinc-300 font-medium">YouTube is unique in the sense that it's not just a linear acquisition channel.<br><br>Meaning, the value of one video doesn’t stop after it’s published.<br><br>It keeps working. It builds trust while you sleep. It pre-sells for you while you’re on calls. It warms up leads that found you from cold ads, referrals, SEO, or outbound.<br><br>It becomes the backbone of your brand - amplifying everything else you're doing, without demanding your full attention every day.</p>
+                    <div class="faq-content px-6 md:px-8 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-8 text-zinc-300 font-medium text-lg">YouTube is unique in the sense that it's not just a linear acquisition channel.<br><br>Meaning, the value of one video doesn’t stop after it’s published. It keeps working. It builds trust while you sleep. It pre-sells for you while you’re on calls. It warms up leads that found you from cold ads, referrals, SEO, or outbound.<br><br>It becomes the backbone of your brand - amplifying everything else you're doing, without demanding your full attention every day.</p>
                     </div>
                 </div>
-                <!-- FAQ Item 4 -->
-                <div class="faq-item border-b border-zinc-800 group">
-                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
-                        How much time will this take me?
-                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                    </button>
-                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-zinc-300 font-medium">Most clients spend just 60-90 minutes a week filming. Or they batch record for a few hours once per month. We handle everything else, scripting, editing, posting, optimization, so you can focus on what you do best.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 5 -->
-                <div class="faq-item border-b border-zinc-800 group">
-                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
-                        How do I know this will actually work for me?
-                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                    </button>
-                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-zinc-300 font-medium">This system isn’t built for influencers. It’s built for operators. Founders. Coaches. Agency owners. People who know how to close, they just need more warm, ready-to-buy prospects.<br><br>If you’ve got a solid offer, you’re good on camera (or at least willing to try), and you can commit to one video per week… we’ll handle the rest.<br><br>And if you’re still unsure - that’s exactly why we start every relationship with a call. So we can make sure it’s a fit before we build anything.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 6 -->
-                <div class="faq-item border-b border-zinc-800 group">
-                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
-                        Do I need to come up with the content ideas myself?
-                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                    </button>
-                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-zinc-300 font-medium">No. We ideate the topics, research the angles, and write the entire script. You just show up and record with a strategy that’s already working.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 7 -->
-                <div class="faq-item border-b border-zinc-800 group">
-                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
-                        What kind of results can I expect?
-                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                    </button>
-                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-zinc-300 font-medium">While results do differ depending on 101 different factors... You can typically expect your first inbound sales calls after 1 month of consistent posting.<br><br>After that, the number compounds exponentially.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 8 -->
-                <div class="faq-item border-b border-zinc-800 group">
-                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
-                        How is this different from hiring a video editor?
-                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                    </button>
-                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-zinc-300 font-medium">We bring strategy. From ideation to scripting to thumbnail to SEO - we build your channel like a high-converting funnel, not a “content machine.”</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 9 -->
-                <div class="faq-item border-b border-zinc-800 group">
-                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
-                        Do I need a big audience for this to work?
-                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                    </button>
-                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-zinc-300 font-medium">Not at all. Some of our best-performing clients had under 300 subscribers when they started. YouTube is search-based - which means you show up in front of buyers, not followers.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 10 -->
-                <div class="faq-item border-b border-zinc-800 group">
-                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
-                        How quickly can we get started?
-                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                    </button>
-                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-zinc-300 font-medium">Once you’re onboarded, we typically deliver your first batch of video scripts within 3–5 business days - and you’ll be recording within the first week.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 11 -->
+
+                <!-- Existing Good FAQ 11 -->
                 <div class="faq-item group">
-                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 font-black text-lg flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
-                        What if I’ve tried YouTube before and it didn’t work?
-                        <svg class="faq-icon w-6 h-6 text-brand-gold transform transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    <button class="faq-btn w-full text-left bg-transparent border-none text-white p-6 md:p-8 font-black text-lg md:text-xl flex justify-between items-center focus:outline-none hover:bg-zinc-800 transition-colors">
+                        How do I know this will actually work for me?
+                        <svg class="faq-icon w-6 h-6 text-brand-gold flex-shrink-0 transform transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
                     </button>
-                    <div class="faq-content px-6 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                        <p class="pb-6 text-zinc-300 font-medium">That’s exactly why we exist. Most people fail because they post without strategy, poor editing, no optimization, and zero consistency. We fix all of that.</p>
+                    <div class="faq-content px-6 md:px-8 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <p class="pb-8 text-zinc-300 font-medium text-lg">This system isn’t built for influencers. It’s built for operators. Founders. Coaches. Agency owners. People who know how to close, they just need more warm, ready-to-buy prospects.<br><br>If you’ve got a solid offer, you’re good on camera (or at least willing to try), and you can commit to one video per week… we’ll handle the rest.<br><br>And if you’re still unsure - that’s exactly why we start every relationship with a call. So we can make sure it’s a fit before we build anything.</p>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
     <!-- Section 11: Final CTA -->
     <section class="py-24 bg-zinc-950 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-4xl md:text-6xl font-black text-center text-white mb-16">You Have Two Options Right Now</h2>
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-black text-center text-white mb-16 tracking-tight">You Have Two Options Right Now</h2>
             
-            <div class="flex flex-col md:flex-row gap-8 mb-16">
+            <div class="flex flex-col md:flex-row gap-8 lg:gap-12 mb-16">
                 <!-- Option 1 -->
                 <div class="flex-1 bg-zinc-900 p-8 md:p-10 rounded-2xl border border-zinc-800 shadow-sm relative">
                     <div class="absolute top-0 left-0 w-full h-2 bg-zinc-700 rounded-t-2xl"></div>
-                    <h3 class="text-2xl font-black text-zinc-400 mb-6 uppercase tracking-wide">Option 1</h3>
-                    <h4 class="text-xl font-bold text-white mb-6">Keep doing what you're doing.</h4>
-                    <ul class="space-y-4 text-zinc-300 font-medium text-lg">
-                        <li class="flex items-start"><i class="fa-solid fa-arrow-right text-zinc-500 mt-1 mr-3"></i> Keep relying on referrals.</li>
-                        <li class="flex items-start"><i class="fa-solid fa-arrow-right text-zinc-500 mt-1 mr-3"></i> Keep hoping your last client sends you the next one.</li>
-                        <li class="flex items-start"><i class="fa-solid fa-arrow-right text-zinc-500 mt-1 mr-3"></i> Keep watching competitors build audiences while you stay invisible.</li>
-                        <li class="flex items-start"><i class="fa-solid fa-arrow-right text-zinc-500 mt-1 mr-3"></i> Keep paying for ads that burn cash and attract leads who don't trust you yet.</li>
+                    <h3 class="text-xl font-black text-zinc-400 mb-6 uppercase tracking-widest">Option 1</h3>
+                    <h4 class="text-2xl font-black text-white mb-8">Keep doing what you're doing.</h4>
+                    <ul class="space-y-5 text-zinc-300 font-medium text-lg">
+                        <li class="flex items-start"><i class="fa-solid fa-arrow-right text-zinc-500 mt-1 mr-4"></i> Keep relying on referrals.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-arrow-right text-zinc-500 mt-1 mr-4"></i> Keep hoping your last client sends you the next one.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-arrow-right text-zinc-500 mt-1 mr-4"></i> Keep watching competitors build audiences while you stay invisible.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-arrow-right text-zinc-500 mt-1 mr-4"></i> Keep paying for ads that burn cash and attract leads who don't trust you yet.</li>
                     </ul>
                 </div>
                 
                 <!-- Option 2 -->
-                <div class="flex-1 bg-black p-8 md:p-10 rounded-2xl border-4 border-brand-gold shadow-2xl relative transform md:-translate-y-4">
-                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-brand-gold text-black font-black px-6 py-2 rounded-full uppercase tracking-widest text-sm shadow-lg">The Smart Play</div>
-                    <h3 class="text-2xl font-black text-brand-gold mb-6 uppercase tracking-wide mt-2">Option 2</h3>
-                    <h4 class="text-2xl font-bold text-white mb-6">Let us build your YouTube machine.</h4>
-                    <ul class="space-y-4 text-zinc-200 font-medium text-lg">
-                        <li class="flex items-start"><i class="fa-solid fa-check text-brand-gold mt-1 mr-3 text-xl"></i> 4 videos a month. 4 hours of your time.</li>
-                        <li class="flex items-start"><i class="fa-solid fa-check text-brand-gold mt-1 mr-3 text-xl"></i> 10 qualified calls in 90 days - guaranteed. Or we work free until you get them.</li>
+                <div class="flex-1 bg-black p-8 md:p-10 rounded-2xl border-4 border-brand-gold shadow-2xl relative transform md:-translate-y-4 mt-8 md:mt-0">
+                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-brand-gold text-black font-black px-6 py-2 rounded-full uppercase tracking-widest text-sm shadow-lg whitespace-nowrap">The Smart Play</div>
+                    <h3 class="text-xl font-black text-brand-gold mb-6 uppercase tracking-widest mt-2">Option 2</h3>
+                    <h4 class="text-3xl font-black text-white mb-8 leading-tight">Let us build your YouTube machine.</h4>
+                    <ul class="space-y-5 text-zinc-200 font-bold text-lg">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand-gold mt-1 mr-4 text-2xl"></i> 4 videos a month. 4 hours of your time.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-brand-gold mt-1 mr-4 text-2xl"></i> 10 qualified calls in 90 days - guaranteed. Or we work free until you get them.</li>
                     </ul>
-                    <div class="mt-8 pt-8 border-t border-zinc-800">
-                        <p class="text-white font-bold text-lg mb-4">12 months from now, you'll have 48 videos working for you around the clock.</p>
-                        <ul class="space-y-2 text-zinc-400 text-sm">
-                            <li>&bull; Booking calls while you sleep.</li>
-                            <li>&bull; Warming leads before they ever talk to you.</li>
-                            <li>&bull; Converting better than any ad you've ever run.</li>
+                    <div class="mt-10 pt-8 border-t border-zinc-800">
+                        <p class="text-white font-black text-xl mb-4">12 months from now, you'll have 48 videos working for you around the clock.</p>
+                        <ul class="space-y-3 text-zinc-400 font-medium">
+                            <li class="flex items-center"><i class="fa-solid fa-circle-play text-brand-gold text-xs mr-3"></i> Booking calls while you sleep.</li>
+                            <li class="flex items-center"><i class="fa-solid fa-circle-play text-brand-gold text-xs mr-3"></i> Warming leads before they ever talk to you.</li>
+                            <li class="flex items-center"><i class="fa-solid fa-circle-play text-brand-gold text-xs mr-3"></i> Converting better than any ad you've ever run.</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <div class="text-center max-w-2xl mx-auto">
-                <p class="text-3xl font-black text-white mb-8">The only question: <br><span class="text-brand-gold">Is your niche still available?</span></p>
-                <a href="https://calendly.com/mousam-finestclients/discovery" target="_blank" id="book" class="inline-flex items-center justify-center w-full bg-brand-gold hover:bg-brand-dark text-black font-black py-6 px-8 rounded-xl text-2xl md:text-3xl shadow-[0_6px_0_#B5952F] hover:shadow-[0_3px_0_#B5952F] hover:translate-y-[3px] transition-all uppercase mb-4">
+            <div class="text-center max-w-2xl mx-auto bg-zinc-900 p-8 md:p-10 rounded-2xl border border-zinc-800 shadow-sm">
+                <p class="text-3xl md:text-4xl font-black text-white mb-8">The only question: <br><span class="text-brand-gold mt-2 block">Is your niche still available?</span></p>
+                <a href="https://calendly.com/mousam-finestclients/discovery" target="_blank" id="book" class="inline-flex items-center justify-center w-full bg-brand-gold hover:bg-brand-dark text-black font-black py-6 px-8 rounded-xl text-xl md:text-2xl shadow-[0_6px_0_#B5952F] hover:shadow-[0_3px_0_#B5952F] hover:translate-y-[3px] transition-all uppercase mb-4">
                     BOOK YOUR STRATEGY CALL NOW &rarr;
                 </a>
                 <p class="text-zinc-500 font-bold">30 minutes. No pitch until we confirm you're a fit.</p>
@@ -763,12 +883,12 @@
             </div>
 
             <!-- Headlines -->
-            <h2 class="text-5xl md:text-6xl text-brand-gold leading-none mb-4 tracking-tighter" style="font-family: Impact, 'Arial Black', sans-serif;">HOLD ON THERE!<br><span class="text-white">NOT SO FAST...</span></h2>
+            <h2 class="text-4xl md:text-6xl text-brand-gold leading-none mb-4 tracking-tighter" style="font-family: Impact, 'Arial Black', sans-serif;">HOLD ON THERE!<br><span class="text-white">NOT SO FAST...</span></h2>
             <p class="text-zinc-300 font-medium text-sm md:text-base mb-8 max-w-xl mx-auto">
                 Don't miss your chance. By watching this brand new training, you will get our 7-figure cheat sheet + a customised $1,000 digital marketing blueprint - absolutely free.
             </p>
 
-            <!-- Image (Updated to actual graphic) -->
+            <!-- Image -->
             <div class="mb-8 relative w-full flex justify-center">
                  <img src="https://finestclients.com/videoscreenshot.png" alt="Free Training and Blueprint" class="rounded shadow-xl max-w-full h-auto border border-zinc-800">
             </div>

@@ -71,9 +71,26 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '688903840218578');
+    
+    // 1. Extract email from URL parameters if present
+    var pixelParams = new URLSearchParams(window.location.search);
+    var pixelEmail = pixelParams.get('email');
+
+    // 2. Initialize Pixel (Uses Advanced Matching if email is found)
+    if (pixelEmail) {
+        fbq('init', '688903840218578', { em: pixelEmail });
+    } else {
+        fbq('init', '688903840218578');
+    }
+    
     fbq('track', 'PageView');
-    fbq('track', 'Lead'); /* Added Lead action as requested */
+    
+    // 3. Fire Lead Event (Attaches email data to the event if found)
+    if (pixelEmail) {
+        fbq('track', 'Lead', { email: pixelEmail }); 
+    } else {
+        fbq('track', 'Lead'); 
+    }
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=688903840218578&ev=PageView&noscript=1"

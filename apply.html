@@ -926,6 +926,39 @@
 
     <!-- Logic Scripts -->
     <script>
+        // --- NEW: UTM Forwarding Logic ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const queryString = window.location.search;
+            
+            // If there are parameters in the current URL
+            if (queryString) {
+                const urlParams = new URLSearchParams(queryString);
+                
+                // Select all anchor tags on the page
+                const links = document.querySelectorAll('a[href]');
+                
+                links.forEach(link => {
+                    // Only apply to Calendly links (you can change this to specific IDs if you prefer)
+                    if (link.href.includes('calendly.com')) {
+                        try {
+                            const targetUrl = new URL(link.href);
+                            
+                            // Append each parameter from the current URL to the Calendly link
+                            urlParams.forEach((value, key) => {
+                                targetUrl.searchParams.set(key, value);
+                            });
+                            
+                            // Update the button's href attribute
+                            link.href = targetUrl.toString();
+                        } catch (err) {
+                            console.error("Error parsing URL:", err);
+                        }
+                    }
+                });
+            }
+        });
+        // --- End UTM Forwarding Logic ---
+
         // FAQ Accordion Logic
         document.querySelectorAll('.faq-btn').forEach(button => {
             button.addEventListener('click', () => {

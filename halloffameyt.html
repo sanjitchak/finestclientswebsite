@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finest Clients — Hall of Fame</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --gold:#D4A853;
+  --gold-light:#E8C97A;
+  --gold-dim:rgba(212,168,83,.15);
+  --black:#0A0A0A;
+  --black-card:#111111;
+  --black-elevated:#161616;
+  --white:#F5F0E8;
+  --white-dim:rgba(245,240,232,.6);
+  --white-muted:rgba(245,240,232,.35);
+  --green:#34D399;
+  --red:#F87171;
+  --blue:#60A5FA;
+  --radius:16px;
+  --radius-sm:10px;
+}
+
+html{scroll-behavior:smooth;background:var(--black)}
+body{font-family:'DM Sans',sans-serif;color:var(--white);background:var(--black);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── NOISE OVERLAY ── */
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:60px 24px;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(212,168,83,.12) 0%,transparent 65%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border:1px solid rgba(212,168,83,.3);border-radius:100px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:40px;backdrop-filter:blur(10px);animation:fadeUp .8s ease both}
+.hero-badge .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,120px);font-weight:900;line-height:.95;letter-spacing:-2px;color:var(--white);animation:fadeUp .8s ease .1s both}
+.hero h1 span{display:block;background:linear-gradient(135deg,var(--gold),var(--gold-light),#fff,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(16px,2vw,22px);color:var(--white-dim);max-width:600px;margin:28px auto 0;line-height:1.6;font-weight:300;animation:fadeUp .8s ease .2s both}
+.hero-stats{display:flex;gap:48px;margin-top:56px;animation:fadeUp .8s ease .3s both}
+.hero-stat{text-align:center}
+.hero-stat .num{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:800;color:var(--gold)}
+.hero-stat .label{font-size:13px;color:var(--white-muted);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.scroll-cue{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--white-muted);font-size:12px;letter-spacing:2px;text-transform:uppercase;animation:fadeUp .8s ease .5s both}
+.scroll-cue .arrow{width:20px;height:20px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(6px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── NAV FILTERS ── */
+.nav-wrap{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,168,83,.1)}
+.nav-outer{max-width:1400px;margin:0 auto;position:relative;padding:0 52px}
+.nav-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border:1px solid rgba(245,240,232,.12);border-radius:50%;background:rgba(10,10,10,.9);color:var(--white-dim);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;transition:all .3s;font-size:18px;backdrop-filter:blur(8px)}
+.nav-arrow:hover{border-color:var(--gold);color:var(--gold);background:rgba(212,168,83,.1)}
+.nav-arrow.hidden{opacity:0;pointer-events:none}
+.nav-arrow.left{left:4px}
+.nav-arrow.right{right:4px}
+.nav-scroll-area{position:relative;overflow:hidden}
+.nav-scroll-area::before,.nav-scroll-area::after{content:'';position:absolute;top:0;bottom:0;width:40px;z-index:3;pointer-events:none;transition:opacity .3s}
+.nav-scroll-area::before{left:0;background:linear-gradient(90deg,rgba(10,10,10,.95),transparent)}
+.nav-scroll-area::after{right:0;background:linear-gradient(-90deg,rgba(10,10,10,.95),transparent)}
+.nav-scroll-area.at-start::before{opacity:0}
+.nav-scroll-area.at-end::after{opacity:0}
+.nav-inner{display:flex;gap:6px;padding:14px 12px;overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-btn{white-space:nowrap;padding:10px 22px;border:1px solid rgba(245,240,232,.1);border-radius:100px;background:transparent;color:var(--white-dim);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .3s ease;letter-spacing:.3px;flex-shrink:0}
+.nav-btn:hover{border-color:rgba(212,168,83,.4);color:var(--white)}
+.nav-btn.active{background:var(--gold);color:var(--black);border-color:var(--gold);font-weight:600}
+@media(max-width:640px){.nav-outer{padding:0 8px}.nav-arrow{display:none}}
+
+/* ── CATEGORY SECTIONS ── */
+.category-section{padding:80px 24px 40px;max-width:1400px;margin:0 auto;opacity:1;transition:opacity .4s}
+.category-section.hidden{display:none}
+.cat-header{margin-bottom:48px}
+.cat-number{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:2px;margin-bottom:12px}
+.cat-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:800;line-height:1.1;margin-bottom:16px}
+.cat-use-when{font-size:15px;color:var(--white-dim);max-width:700px;line-height:1.7;font-weight:300}
+.cat-use-when strong{color:var(--gold);font-weight:600}
+
+/* ── CASE STUDY CARDS ── */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:28px}
+
+.case-card{background:var(--black-card);border:1px solid rgba(245,240,232,.06);border-radius:var(--radius);overflow:hidden;transition:all .4s cubic-bezier(.16,1,.3,1);cursor:pointer;position:relative}
+.case-card:hover{transform:translateY(-4px);border-color:rgba(212,168,83,.25);box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 0 1px rgba(212,168,83,.1)}
+.case-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));opacity:0;transition:opacity .4s}
+.case-card:hover::after{opacity:1}
+
+/* Screenshot area */
+.card-screenshot{position:relative;width:100%;height:200px;background:var(--black-elevated);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.card-screenshot img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.case-card:hover .card-screenshot img{transform:scale(1.03)}
+.card-screenshot .placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--white-muted);font-size:13px}
+.card-screenshot .placeholder svg{opacity:.3}
+.card-screenshot .yt-link{position:absolute;bottom:12px;right:12px;padding:6px 14px;background:rgba(10,10,10,.8);backdrop-filter:blur(8px);border:1px solid rgba(245,240,232,.1);border-radius:100px;color:var(--white-dim);font-size:11px;letter-spacing:.5px;text-decoration:none;transition:all .3s;display:flex;align-items:center;gap:6px;z-index:2}
+.card-screenshot .yt-link:hover{background:rgba(212,168,83,.15);border-color:var(--gold);color:var(--gold)}
+.card-screenshot .yt-link svg{width:14px;height:14px}
+
+.card-body{padding:28px 28px 24px}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px}
+.card-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;line-height:1.2}
+.card-niche{font-size:13px;color:var(--gold);font-weight:500;margin-top:4px}
+.card-offer{padding:5px 14px;background:var(--gold-dim);border-radius:100px;font-size:13px;font-weight:600;color:var(--gold);white-space:nowrap;flex-shrink:0}
+
+/* Before/After */
+.card-ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.ba-block{padding:14px;border-radius:var(--radius-sm);background:rgba(245,240,232,.03)}
+.ba-block.before{border-left:3px solid var(--red)}
+.ba-block.after{border-left:3px solid var(--green)}
+.ba-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;font-weight:600}
+.ba-block.before .ba-label{color:var(--red)}
+.ba-block.after .ba-label{color:var(--green)}
+.ba-text{font-size:13.5px;line-height:1.5;color:var(--white-dim)}
+.ba-block.after .ba-text{color:var(--white);font-weight:500}
+
+/* Metrics row */
+.card-metrics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.metric-pill{padding:5px 12px;background:rgba(245,240,232,.04);border:1px solid rgba(245,240,232,.06);border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--white-dim)}
+
+/* Insight */
+.card-insight{padding:16px;background:linear-gradient(135deg,rgba(212,168,83,.06),rgba(212,168,83,.02));border:1px solid rgba(212,168,83,.12);border-radius:var(--radius-sm);font-size:13.5px;line-height:1.6;color:var(--white-dim);font-style:italic;position:relative}
+.card-insight::before{content:'"';position:absolute;top:-4px;left:12px;font-family:'Playfair Display',serif;font-size:48px;color:var(--gold);opacity:.3;line-height:1}
+
+/* Timeline */
+.card-timeline{margin-top:16px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--white-muted)}
+.card-timeline svg{flex-shrink:0;color:var(--gold)}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:80px 24px 60px;border-top:1px solid rgba(245,240,232,.06)}
+.footer-brand{font-family:'Playfair Display',serif;font-size:28px;font-weight:800;margin-bottom:8px}
+.footer-brand span{color:var(--gold)}
+.footer-sub{color:var(--white-muted);font-size:14px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .hero-stats{flex-direction:column;gap:24px}
+  .card-ba{grid-template-columns:1fr}
+  .cards-grid{grid-template-columns:1fr}
+  .card-body{padding:20px}
+  .hero{min-height:auto;padding:100px 24px 80px}
+}
+
+/* ── APPEAR ANIMATION ── */
+.case-card{opacity:0;transform:translateY(24px);animation:cardIn .6s ease forwards}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+.cards-grid .case-card:nth-child(1){animation-delay:.05s}
+.cards-grid .case-card:nth-child(2){animation-delay:.12s}
+.cards-grid .case-card:nth-child(3){animation-delay:.19s}
+.cards-grid .case-card:nth-child(4){animation-delay:.26s}
+</style>
+</head>
+<body>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> Finest Clients</div>
+  <h1>Hall of<br><span>Fame</span></h1>
+  <p class="hero-sub">Real coaches and consultants who turned YouTube into their #1 client acquisition machine. Zero fluff. Just results.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">14+</div><div class="label">Case Studies</div></div>
+    <div class="hero-stat"><div class="num">$1M+</div><div class="label">Revenue Generated</div></div>
+    <div class="hero-stat"><div class="num">500+</div><div class="label">Calls / Month</div></div>
+  </div>
+  <div class="scroll-cue">Explore<div class="arrow"></div></div>
+</section>
+
+<!-- ═══════ STICKY NAV ═══════ -->
+<div class="nav-wrap">
+  <div class="nav-outer">
+    <button class="nav-arrow left hidden" id="navLeft">&#8249;</button>
+    <div class="nav-scroll-area at-start" id="navScrollArea">
+      <div class="nav-inner" id="navInner">
+        <button class="nav-btn active" data-cat="all">All Case Studies</button>
+        <button class="nav-btn" data-cat="small-channel">Small Channel, Big Results</button>
+        <button class="nav-btn" data-cat="high-volume">High Volume Call Machines</button>
+        <button class="nav-btn" data-cat="revenue">Revenue Multipliers</button>
+        <button class="nav-btn" data-cat="saturated">Saturated Niche Winners</button>
+        <button class="nav-btn" data-cat="minimum">Minimum Viable YouTube</button>
+        <button class="nav-btn" data-cat="ad-fatigue">Ad Fatigue Escapes</button>
+        <button class="nav-btn" data-cat="referral">Referral Escape Artists</button>
+      </div>
+    </div>
+    <button class="nav-arrow right" id="navRight">&#8250;</button>
+  </div>
+</div>
+
+<!-- ═══════ CATEGORY 1: SMALL CHANNEL ═══════ -->
+<div class="category-section" data-section="small-channel">
+  <div class="cat-header">
+    <div class="cat-number">CATEGORY 01</div>
+    <div class="cat-title">Small Channel, Big Results</div>
+    <div class="cat-use-when"><strong>Use when:</strong> Prospect says "I don't have an audience" or "Will this work without subscribers?"</div>
+  </div>
+  <div class="cards-grid">
+
+    <!-- Ryan Jackson -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/ryan-jackson.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Ryan Jackson YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/ryan-jackson.png
+        </div>
+        <a href="https://www.youtube.com/@breakoutfoundersacademy" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Ryan Jackson</div><div class="card-niche">B2B Service Operations Coach</div></div>
+          <div class="card-offer">$5K-$7K/mo</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">7 subscribers, brand new channel, zero leads from YouTube</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">Closed a $15,000 deal from YouTube within 60 days</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">4 videos</span>
+          <span class="metric-pill">&lt;1K views</span>
+          <span class="metric-pill">1 high-ticket close</span>
+        </div>
+        <div class="card-insight">Views don't matter. The RIGHT viewer does. One decision-maker watching is worth more than 10,000 browsers.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          First client closed within 60 days
+        </div>
+      </div>
+    </div>
+
+    <!-- David Ellis -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/david-ellis.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="David Ellis YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/david-ellis.png
+        </div>
+        <a href="https://www.youtube.com/@davidellisgrowth" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">David Ellis</div><div class="card-niche">B2B Lead Gen & Sales Coach</div></div>
+          <div class="card-offer">$8K package</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">123 subscribers, posting inconsistently, no strategy</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">8 qualified calls/month, 3 clients closed in first quarter</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">12 videos</span>
+          <span class="metric-pill">4,200 views</span>
+          <span class="metric-pill">$24K revenue</span>
+        </div>
+        <div class="card-insight">Small channels with buyer-intent content outperform large channels with entertainment content.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          First qualified call at Day 35, first close at Day 52
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ CATEGORY 2: HIGH VOLUME ═══════ -->
+<div class="category-section" data-section="high-volume">
+  <div class="cat-header">
+    <div class="cat-number">CATEGORY 02</div>
+    <div class="cat-title">High Volume Call Machines</div>
+    <div class="cat-use-when"><strong>Use when:</strong> Prospect wants to scale to 50-100+ calls/month or has ambitious growth goals</div>
+  </div>
+  <div class="cards-grid">
+
+    <!-- Arun Sharma -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/arun-sharma.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Arun Sharma YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/arun-sharma.png
+        </div>
+        <a href="https://www.youtube.com/channel/UC39ykzRlxyYexaOxqIyVPRQ" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Arun Sharma</div><div class="card-niche">CAT Career Coaching</div></div>
+          <div class="card-offer">$3K program</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">7,000 subscribers, minimal leads, inconsistent posting</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">118,000 subscribers, 200-300 sales calls/month</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">200-300 calls/mo</span>
+          <span class="metric-pill">30%+ close rate</span>
+          <span class="metric-pill">$180K+/mo</span>
+        </div>
+        <div class="card-insight">He now OWNS his niche in search. When someone types "CAT Prep," his videos dominate page 1.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          Scaled over 18 months with 4 videos/month
+        </div>
+      </div>
+    </div>
+
+    <!-- MadChem Classes -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/madchem-classes.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="MadChem Classes YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/madchem-classes.png
+        </div>
+        <a href="https://www.youtube.com/@MadChemClasses" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">MadChem Classes</div><div class="card-niche">IIT Chemistry Coaching</div></div>
+          <div class="card-offer">$1K program</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">15,000 subscribers, minimal leads, inconsistent posting</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">138,000 subscribers, 200-300 sales calls/month</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">200-300 calls/mo</span>
+          <span class="metric-pill">30%+ close rate</span>
+          <span class="metric-pill">$50K+/mo</span>
+        </div>
+        <div class="card-insight">He now OWNS his niche in search. When someone types "Chemistry for IIT," his videos dominate page 1.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          Scaled over 18 months with 4 videos/month
+        </div>
+      </div>
+    </div>
+
+    <!-- Avi Arya -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/avi-arya.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Avi Arya YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/avi-arya.png
+        </div>
+        <a href="https://www.youtube.com/aviarya" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Avi Arya</div><div class="card-niche">Business Coaching</div></div>
+          <div class="card-offer">$2.5K + $7K upsell</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">12,000 subscribers, 15-20 calls/month, mostly from Ads</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">47,000 subscribers, 80-100 calls/month, 60% from YouTube</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">80-100 calls/mo</span>
+          <span class="metric-pill">Ad spend down 70%</span>
+          <span class="metric-pill">$50K+/mo organic</span>
+        </div>
+        <div class="card-insight">YouTube replaced paid ads as the primary acquisition channel. Cost per acquisition dropped from $450 to ~$80.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          Doubled call volume within 6 months
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ CATEGORY 3: REVENUE MULTIPLIERS ═══════ -->
+<div class="category-section" data-section="revenue">
+  <div class="cat-header">
+    <div class="cat-number">CATEGORY 03</div>
+    <div class="cat-title">Revenue Multipliers</div>
+    <div class="cat-use-when"><strong>Use when:</strong> Prospect is focused on revenue impact, not just calls. Wants to see ROI proof.</div>
+  </div>
+  <div class="cards-grid">
+
+    <!-- Authority IO -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/authority-io.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Authority IO YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/authority-io.png
+        </div>
+        <a href="http://youtube.com/@authority-io" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Authority IO</div><div class="card-niche">Online Business Coaching</div></div>
+          <div class="card-offer">$500 + $3K upsell</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">$200,000/month revenue, relying on paid ads</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">$429,000/month revenue the following month</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">1 viral video format</span>
+          <span class="metric-pill">150K views</span>
+          <span class="metric-pill">Revenue 2x+</span>
+        </div>
+        <div class="card-insight">We found a video format working in adjacent niches and adapted it. One strategic video changed everything.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          Revenue jump within 30 days of posting
+        </div>
+      </div>
+    </div>
+
+    <!-- Everything Money Real Estate -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/everything-money.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Everything Money Real Estate YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/everything-money.png
+        </div>
+        <a href="https://www.youtube.com/@EverythingMoneyRealEstate" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Everything Money RE</div><div class="card-niche">Real Estate Investing Education</div></div>
+          <div class="card-offer">$5K + $15K mentorship</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">$85,000/month, YouTube bringing only 5 calls/month</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">$210,000/month, YouTube bringing 35 calls/month</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">7x YouTube calls</span>
+          <span class="metric-pill">2.5x revenue</span>
+          <span class="metric-pill">Same ad spend</span>
+        </div>
+        <div class="card-insight">The key was scripting videos to attract BUYERS (people ready to invest), not BROWSERS (people looking for free tips).</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          Results compounded over 4 months
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ CATEGORY 4: SATURATED NICHE ═══════ -->
+<div class="category-section" data-section="saturated">
+  <div class="cat-header">
+    <div class="cat-number">CATEGORY 04</div>
+    <div class="cat-title">Saturated Niche Winners</div>
+    <div class="cat-use-when"><strong>Use when:</strong> Prospect says "My niche is too competitive" or "Everyone's already doing YouTube in my space"</div>
+  </div>
+  <div class="cards-grid">
+
+    <!-- Finest Edit Academy -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/finest-edit.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Finest Edit Academy YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/finest-edit.png
+        </div>
+        <a href="https://www.youtube.com/@Finesteditacademy" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Finest Edit Academy</div><div class="card-niche">Editing Agencies Coaching</div></div>
+          <div class="card-offer">$2K / 3-month</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">Competing with thousands of Editing/Agency coaches, zero differentiation</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">Positioned as "Helping Video Editors get High Ticket Clients" - owns a micro-niche</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">30 videos</span>
+          <span class="metric-pill">45K subs</span>
+          <span class="metric-pill">100+ calls/mo</span>
+        </div>
+        <div class="card-insight">In saturated markets, specificity wins. We didn't compete with "Agency coaching" - we created "Agency coaching for Editors and Animators."</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          Niche positioning by Month 2, calls ramped Month 3-4
+        </div>
+      </div>
+    </div>
+
+    <!-- Seven Figure Agency -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/seven-figure-agency.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Seven Figure Agency YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/seven-figure-agency.png
+        </div>
+        <a href="https://www.youtube.com/@sevenfigureagency" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Seven Figure Agency</div><div class="card-niche">Marketing Agency</div></div>
+          <div class="card-offer">$3.5K/mo retainer</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">Generic "marketing tips" content, lost in sea of competitors</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">Positioned as "YouTube ads for info product launches" - niche expert</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">8 videos</span>
+          <span class="metric-pill">3,200 subs</span>
+          <span class="metric-pill">12 retainer clients</span>
+        </div>
+        <div class="card-insight">Narrow positioning + search-optimized content = owning a micro-niche even in crowded markets.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          First client at Day 45, consistent flow by Month 4
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ CATEGORY 5: MINIMUM VIABLE ═══════ -->
+<div class="category-section" data-section="minimum">
+  <div class="cat-header">
+    <div class="cat-number">CATEGORY 05</div>
+    <div class="cat-title">Minimum Viable YouTube</div>
+    <div class="cat-use-when"><strong>Use when:</strong> Prospect worried about time commitment or says "I can't make lots of videos"</div>
+  </div>
+  <div class="cards-grid">
+
+    <!-- Finest Edit Academy (repeat - faceless) -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/finest-edit-faceless.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Finest Edit Academy Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/finest-edit-faceless.png
+        </div>
+        <a href="https://www.youtube.com/@Finesteditacademy" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Finest Edit Academy</div><div class="card-niche">Creative Agencies Coach</div></div>
+          <div class="card-offer">$6K plan</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">No YouTube presence, all clients from Ads</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">30 videos generating 120 calls/month, 10-12 clients/month</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">30 videos</span>
+          <span class="metric-pill">1M views</span>
+          <span class="metric-pill">120 calls/mo</span>
+        </div>
+        <div class="card-insight">You don't need 100 videos. You need 20-30 videos targeting exactly what your ideal clients are searching for.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          Consistent call flow established by video 6
+        </div>
+      </div>
+    </div>
+
+    <!-- Easy Business -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/easy-business.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Easy Business YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/easy-business.png
+        </div>
+        <a href="https://www.youtube.com/@easy_business" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Easy Business</div><div class="card-niche">Industrial Import/Export Consultant</div></div>
+          <div class="card-offer">$12K audit</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">Zero YouTube, 100% referral dependent</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">60 videos, 12M views, pipeline no longer referral dependent</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">60 videos</span>
+          <span class="metric-pill">12M views</span>
+          <span class="metric-pill">$144K+ pipeline</span>
+        </div>
+        <div class="card-insight">B2B works on YouTube when you target decision-maker problems, not generic industry content.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          First call at video 3, consistent by video 8
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ CATEGORY 6: AD FATIGUE ═══════ -->
+<div class="category-section" data-section="ad-fatigue">
+  <div class="cat-header">
+    <div class="cat-number">CATEGORY 06</div>
+    <div class="cat-title">Ad Fatigue Escapes</div>
+    <div class="cat-use-when"><strong>Use when:</strong> Prospect is spending heavily on ads, seeing rising costs, or wants to reduce ad dependency</div>
+  </div>
+  <div class="cards-grid">
+
+    <!-- Skills PTE -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/skills-pte.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Skills PTE YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/skills-pte.png
+        </div>
+        <a href="https://www.youtube.com/@skillspteacademic" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Skills PTE</div><div class="card-niche">PTE Coaching</div></div>
+          <div class="card-offer">$4.5K accelerator</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">$5,000/month on ads, CPL rising, lead quality dropping</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">Cut ad spend to $1,000/month, YouTube fills the gap with warmer leads</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">Ad spend -67%</span>
+          <span class="metric-pill">Close rate 18% → 32%</span>
+          <span class="metric-pill">Warmer leads</span>
+        </div>
+        <div class="card-insight">YouTube leads are pre-sold. They've watched 15 minutes of you teaching. The sales call is easier.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          YouTube leads Month 2, ad reduction Month 4
+        </div>
+      </div>
+    </div>
+
+    <!-- Arun Sharma (Ad Fatigue version) -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/arun-sharma.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Arun Sharma YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/arun-sharma.png
+        </div>
+        <a href="https://www.youtube.com/channel/UC39ykzRlxyYexaOxqIyVPRQ" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Arun Sharma</div><div class="card-niche">CAT Career Coaching</div></div>
+          <div class="card-offer">$3K program</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">$4,000/month on Google ads, diminishing returns</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">YouTube as primary channel, ads now only for retargeting</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">0 → 15 organic calls/mo</span>
+          <span class="metric-pill">ROI improved 4x</span>
+        </div>
+        <div class="card-insight">For high-ticket B2B, organic content builds trust that ads can't buy. YouTube became the trust-builder, ads became the amplifier.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          Full transition over 6 months
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ CATEGORY 7: REFERRAL ESCAPE ═══════ -->
+<div class="category-section" data-section="referral">
+  <div class="cat-header">
+    <div class="cat-number">CATEGORY 07</div>
+    <div class="cat-title">Referral Escape Artists</div>
+    <div class="cat-use-when"><strong>Use when:</strong> Prospect is 100% referral dependent and experiencing feast/famine cycles</div>
+  </div>
+  <div class="cards-grid">
+
+    <!-- Debbie Shadid -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/debbie-shadid.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Debbie Shadid YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/debbie-shadid.png
+        </div>
+        <a href="https://www.youtube.com/@debbieshadid" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Debbie Shadid</div><div class="card-niche">Business Strategy Consulting</div></div>
+          <div class="card-offer">$15K engagement</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">100% referral dependent, feast/famine cycle, no predictability</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">50% of clients now from YouTube, predictable pipeline</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">Referral: 100% → 50%</span>
+          <span class="metric-pill">8-12 consistent calls/mo</span>
+        </div>
+        <div class="card-insight">Referrals are great but unpredictable. YouTube creates a baseline of leads you can count on every month.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          Pipeline stabilized by Month 5
+        </div>
+      </div>
+    </div>
+
+    <!-- Heyyy HR -->
+    <div class="case-card">
+      <div class="card-screenshot">
+        <img src="screenshots/heyyy-hr.png" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Heyyy HR YouTube Channel">
+        <div class="placeholder" style="display:none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,10 10,12"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          Add: screenshots/heyyy-hr.png
+        </div>
+        <a href="https://www.youtube.com/@HeyyyHR" target="_blank" class="yt-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.9 31.9 0 000 12a31.9 31.9 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.9 31.9 0 0024 12a31.9 31.9 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Visit Channel
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><div class="card-name">Heyyy HR</div><div class="card-niche">Leadership Development</div></div>
+          <div class="card-offer">$5.5K program</div>
+        </div>
+        <div class="card-ba">
+          <div class="ba-block before"><div class="ba-label">Before</div><div class="ba-text">Referrals only, 2-5 clients/month (variable), pipeline stress</div></div>
+          <div class="ba-block after"><div class="ba-label">After</div><div class="ba-text">YouTube adds 8-10 calls/month on top of referrals</div></div>
+        </div>
+        <div class="card-metrics">
+          <span class="metric-pill">+8-10 calls/mo</span>
+          <span class="metric-pill">Revenue variance reduced</span>
+          <span class="metric-pill">Referrals = bonus</span>
+        </div>
+        <div class="card-insight">YouTube didn't replace referrals - it created a floor. Referrals are now upside, not survival.</div>
+        <div class="card-timeline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          Consistent YouTube calls by Month 4
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<div class="footer">
+  <div class="footer-brand">Finest <span>Clients</span></div>
+  <div class="footer-sub">YouTube-powered client acquisition for high-ticket coaches & consultants</div>
+</div>
+
+<script>
+// ── NAV SCROLL ARROWS ──
+const navInner = document.getElementById('navInner');
+const navScrollArea = document.getElementById('navScrollArea');
+const navLeft = document.getElementById('navLeft');
+const navRight = document.getElementById('navRight');
+
+function updateNavArrows() {
+  const { scrollLeft, scrollWidth, clientWidth } = navInner;
+  const atStart = scrollLeft <= 4;
+  const atEnd = scrollLeft + clientWidth >= scrollWidth - 4;
+  navLeft.classList.toggle('hidden', atStart);
+  navRight.classList.toggle('hidden', atEnd);
+  navScrollArea.classList.toggle('at-start', atStart);
+  navScrollArea.classList.toggle('at-end', atEnd);
+}
+
+navLeft.addEventListener('click', () => { navInner.scrollBy({ left: -200, behavior: 'smooth' }); });
+navRight.addEventListener('click', () => { navInner.scrollBy({ left: 200, behavior: 'smooth' }); });
+navInner.addEventListener('scroll', updateNavArrows);
+window.addEventListener('resize', updateNavArrows);
+setTimeout(updateNavArrows, 100);
+
+// ── CATEGORY FILTERING ──
+const navBtns = document.querySelectorAll('.nav-btn');
+const sections = document.querySelectorAll('.category-section');
+
+navBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    navBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Scroll the active button into view in the nav
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+    const cat = btn.dataset.cat;
+
+    sections.forEach(sec => {
+      if (cat === 'all' || sec.dataset.section === cat) {
+        sec.classList.remove('hidden');
+        sec.querySelectorAll('.case-card').forEach((card, i) => {
+          card.style.animation = 'none';
+          card.offsetHeight;
+          card.style.animation = `cardIn .6s ease ${i * .07}s forwards`;
+        });
+      } else {
+        sec.classList.add('hidden');
+      }
+    });
+
+    if (cat !== 'all') {
+      const target = document.querySelector(`[data-section="${cat}"]`);
+      if (target) {
+        setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>

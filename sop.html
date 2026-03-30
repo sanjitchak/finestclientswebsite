@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finest Clients — Master YouTube SOP System</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dim: #8B6B2A;
+  --black: #0A0A0A;
+  --dark: #111111;
+  --dark2: #1A1A1A;
+  --dark3: #222222;
+  --dark4: #2A2A2A;
+  --white: #F5F0E8;
+  --white-dim: #C8C0B0;
+  --green: #4CAF7D;
+  --red: #E85555;
+  --blue: #5590E8;
+  --purple: #9B6BE8;
+  --orange: #E8943A;
+  --border: rgba(201,168,76,0.2);
+  --border-bright: rgba(201,168,76,0.5);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* TOP HEADER */
+.top-header {
+  background: linear-gradient(135deg, #0A0A0A 0%, #1A1408 50%, #0A0A0A 100%);
+  border-bottom: 1px solid var(--border-bright);
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+}
+
+.logo span { color: var(--gold); }
+
+.header-badge {
+  background: rgba(201,168,76,0.12);
+  border: 1px solid var(--border-bright);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+/* NAV TABS */
+.nav-wrapper {
+  background: var(--dark);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-wrapper::-webkit-scrollbar { display: none; }
+
+.nav-tabs {
+  display: flex;
+  padding: 0 24px;
+  min-width: max-content;
+}
+
+.nav-tab {
+  padding: 14px 20px;
+  cursor: pointer;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.nav-tab:hover { color: var(--white); }
+
+.nav-tab.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+.tab-num {
+  background: rgba(201,168,76,0.15);
+  color: var(--gold);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-weight: 700;
+}
+
+.nav-tab.active .tab-num {
+  background: rgba(201,168,76,0.3);
+}
+
+/* MAIN CONTENT */
+.main {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* PHASE HEADER */
+.phase-header {
+  margin-bottom: 32px;
+}
+
+.phase-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.phase-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.phase-desc {
+  color: var(--white-dim);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 700px;
+  border-left: 3px solid var(--gold);
+  padding-left: 16px;
+}
+
+/* CARDS */
+.card {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.card:hover { border-color: var(--border-bright); }
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.step-badge {
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+  color: var(--black);
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.card-sub {
+  color: var(--white-dim);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* GRID */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media(max-width:768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* CHECKLIST */
+.checklist { list-style: none; }
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--white-dim);
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--gold-dim);
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  cursor: pointer;
+}
+.checklist li.checked { color: var(--white-dim); text-decoration: none; }
+.checklist li.checked::before {
+  background: var(--gold);
+  border-color: var(--gold);
+  content: '✓';
+  color: var(--black);
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* PROMPT BOXES */
+.prompt-box {
+  background: rgba(85,144,232,0.06);
+  border: 1px solid rgba(85,144,232,0.3);
+  border-radius: 4px;
+  padding: 16px 20px;
+  margin: 12px 0;
+}
+
+.prompt-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+
+.prompt-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #C8D8F0;
+  white-space: pre-wrap;
+}
+
+.copy-btn {
+  background: rgba(85,144,232,0.15);
+  border: 1px solid rgba(85,144,232,0.4);
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-top: 10px;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+}
+.copy-btn:hover { background: rgba(85,144,232,0.25); }
+
+/* AI TOOL TAGS */
+.ai-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+  margin: 3px;
+}
+.ai-tag.chatgpt { background: rgba(76,175,125,0.12); color: var(--green); border: 1px solid rgba(76,175,125,0.3); }
+.ai-tag.vidiq { background: rgba(232,148,58,0.12); color: var(--orange); border: 1px solid rgba(232,148,58,0.3); }
+.ai-tag.claude { background: rgba(201,168,76,0.12); color: var(--gold-light); border: 1px solid var(--border-bright); }
+.ai-tag.canva { background: rgba(155,107,232,0.12); color: var(--purple); border: 1px solid rgba(155,107,232,0.3); }
+.ai-tag.youtube { background: rgba(232,85,85,0.12); color: var(--red); border: 1px solid rgba(232,85,85,0.3); }
+.ai-tag.sheets { background: rgba(76,175,125,0.12); color: #7ED4A4; border: 1px solid rgba(76,175,125,0.2); }
+
+/* ALERT BOXES */
+.alert {
+  padding: 14px 18px;
+  border-radius: 3px;
+  margin: 12px 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.alert.warning { background: rgba(232,148,58,0.08); border: 1px solid rgba(232,148,58,0.3); color: #F0C888; }
+.alert.success { background: rgba(76,175,125,0.08); border: 1px solid rgba(76,175,125,0.3); color: #A0D4B8; }
+.alert.info { background: rgba(85,144,232,0.08); border: 1px solid rgba(85,144,232,0.3); color: #B0C8F0; }
+.alert.danger { background: rgba(232,85,85,0.08); border: 1px solid rgba(232,85,85,0.3); color: #F0A8A8; }
+
+/* TABLE */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th {
+  background: rgba(201,168,76,0.1);
+  color: var(--gold-light);
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-bright);
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--white-dim);
+  line-height: 1.5;
+}
+tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* FUNNEL VISUAL */
+.funnel-step {
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  padding: 16px 20px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  border-radius: 0 4px 4px 0;
+  transition: all 0.2s;
+}
+.funnel-step:hover { border-left-color: var(--gold-light); background: var(--dark4); }
+.funnel-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--gold);
+  opacity: 0.5;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.funnel-step-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+.funnel-step-desc { font-size: 13px; color: var(--white-dim); line-height: 1.5; }
+
+/* METRIC CARDS */
+.metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+@media(max-width:768px) { .metric-grid { grid-template-columns: 1fr 1fr; } }
+.metric-card {
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+  text-align: center;
+}
+.metric-val { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: var(--gold); }
+.metric-label { font-size: 11px; color: var(--white-dim); margin-top: 4px; letter-spacing: 0.05em; }
+.metric-note { font-size: 11px; color: var(--gold-dim); margin-top: 6px; }
+
+/* ACCORDION */
+.accordion { margin-bottom: 8px; }
+.acc-header {
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  padding: 14px 18px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 3px;
+  transition: all 0.2s;
+  user-select: none;
+}
+.acc-header:hover { border-color: var(--border-bright); }
+.acc-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; }
+.acc-arrow { color: var(--gold); transition: transform 0.2s; font-size: 12px; }
+.accordion.open .acc-arrow { transform: rotate(180deg); }
+.acc-body {
+  display: none;
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-top: none;
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--white-dim);
+  border-radius: 0 0 3px 3px;
+}
+.accordion.open .acc-body { display: block; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+.timeline-item { position: relative; margin-bottom: 24px; }
+.timeline-dot {
+  position: absolute;
+  left: -28px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--black);
+  box-shadow: 0 0 0 2px var(--gold-dim);
+}
+.timeline-week {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.timeline-content {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 14px 18px;
+  font-size: 13.5px;
+  color: var(--white-dim);
+  line-height: 1.6;
+}
+
+/* TAG ROW */
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.tag {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+.tag-gold { background: rgba(201,168,76,0.12); color: var(--gold-light); border: 1px solid var(--border); }
+.tag-red { background: rgba(232,85,85,0.1); color: #F08888; border: 1px solid rgba(232,85,85,0.25); }
+.tag-green { background: rgba(76,175,125,0.1); color: #8ED4B0; border: 1px solid rgba(76,175,125,0.25); }
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+/* SMALL LABEL */
+.label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* INLINE CODE */
+code {
+  background: rgba(201,168,76,0.1);
+  color: var(--gold-light);
+  font-family: monospace;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+}
+
+/* PROGRESS BAR */
+.progress-bar { background: var(--dark3); border-radius: 2px; height: 6px; margin: 8px 0; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); border-radius: 2px; }
+
+/* SECTION DIVIDER */
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  margin: 24px 0 16px;
+}
+
+/* FLOW ARROW */
+.flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+.flow-item {
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white);
+}
+.flow-arrow { color: var(--gold); font-size: 14px; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--dark4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+
+/* OVERVIEW MAP */
+.phase-map { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin: 20px 0; }
+@media(max-width:900px) { .phase-map { grid-template-columns: 1fr 1fr; } }
+.phase-box {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 3px;
+}
+.phase-box:hover { border-color: var(--gold); background: var(--dark3); }
+.phase-box-num { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: rgba(201,168,76,0.2); line-height: 1; }
+.phase-box-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin: 8px 0 4px; }
+.phase-box-desc { font-size: 11px; color: var(--white-dim); line-height: 1.5; }
+.phase-box-days { font-size: 10px; color: var(--gold); font-weight: 600; letter-spacing: 0.1em; margin-top: 8px; }
+
+/* GUARANTEE BOX */
+.guarantee-box {
+  background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+  border: 1px solid var(--border-bright);
+  border-radius: 4px;
+  padding: 24px;
+  text-align: center;
+  margin: 20px 0;
+}
+.guarantee-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+.guarantee-text { font-size: 14px; color: var(--white-dim); margin-top: 8px; }
+
+/* WORKSHEET INPUT */
+.ws-field {
+  width: 100%;
+  background: var(--dark3);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 3px;
+  margin-top: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.ws-field:focus { border-color: var(--gold); }
+.ws-field::placeholder { color: rgba(255,255,255,0.2); }
+
+textarea.ws-field { min-height: 80px; resize: vertical; }
+
+.ws-row { margin-bottom: 16px; }
+.ws-label { font-size: 12px; font-weight: 500; color: var(--white-dim); }
+
+.save-btn {
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+  color: var(--black);
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.save-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* DIAGNOSIS TABLE */
+.diag-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; }
+.diag-cell {
+  background: var(--dark2);
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.diag-cell.header {
+  background: rgba(201,168,76,0.1);
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+}
+.diag-cell.problem { color: var(--red); }
+.diag-cell.cause { color: var(--white-dim); }
+.diag-cell.fix { color: var(--green); }
+</style>
+</head>
+<body>
+
+<div class="top-header">
+  <div class="logo">FINEST <span>CLIENTS</span></div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="header-badge">Master YouTube SOP</div>
+    <div class="header-badge" id="clientName" style="cursor:pointer;" onclick="setClient()">Click to Set Client Name</div>
+  </div>
+</div>
+
+<div class="nav-wrapper">
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showTab('overview')"><span class="tab-num">00</span> Overview</div>
+    <div class="nav-tab" onclick="showTab('phase1')"><span class="tab-num">01</span> Research & Foundation</div>
+    <div class="nav-tab" onclick="showTab('phase2')"><span class="tab-num">02</span> Channel Setup</div>
+    <div class="nav-tab" onclick="showTab('phase3')"><span class="tab-num">03</span> Keyword Research</div>
+    <div class="nav-tab" onclick="showTab('phase4')"><span class="tab-num">04</span> Playlist Funnel Builder</div>
+    <div class="nav-tab" onclick="showTab('phase5')"><span class="tab-num">05</span> Video Game Plan</div>
+    <div class="nav-tab" onclick="showTab('phase6')"><span class="tab-num">06</span> Title & Thumbnail</div>
+    <div class="nav-tab" onclick="showTab('phase7')"><span class="tab-num">07</span> Film & Edit</div>
+    <div class="nav-tab" onclick="showTab('phase8')"><span class="tab-num">08</span> Upload & Optimise</div>
+    <div class="nav-tab" onclick="showTab('phase9')"><span class="tab-num">09</span> Analytics & Critique</div>
+    <div class="nav-tab" onclick="showTab('phase10')"><span class="tab-num">10</span> Competitor Research</div>
+    <div class="nav-tab" onclick="showTab('phase11')"><span class="tab-num">11</span> Prompts Library</div>
+    <div class="nav-tab" onclick="showTab('phase12')"><span class="tab-num">12</span> Client Worksheet</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ============================================================ TAB 00: OVERVIEW ============================================================ -->
+<div class="tab-content active" id="tab-overview">
+  <div class="phase-header">
+    <div class="phase-label">Master System</div>
+    <div class="phase-title">0 to 10 Qualified Calls — YouTube Only</div>
+    <div class="phase-desc">This is the complete operational system for delivering the Finest Clients guarantee. Follow every tab in order. Any employee, at any level, can execute this system and get the client to their result.</div>
+  </div>
+
+  <div class="guarantee-box">
+    <div class="guarantee-num">10</div>
+    <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--gold-light);margin-top:4px;">Qualified Sales Calls in 90 Days</div>
+    <div class="guarantee-text">YouTube organic only · No paid ads · No Instagram required · High-ticket coaching ($3K+)</div>
+  </div>
+
+  <div class="alert warning">
+    <div class="alert-icon">⚠️</div>
+    <div><strong>Before you start:</strong> This guarantee only works if ALL 5 levers are active: (1) Right buyer topic architecture, (2) Content-to-Call Bridge on every video, (3) Client records consistently, (4) Niche has YouTube search demand, (5) Booking page link is live and working. If any lever is missing, flag it immediately — do not proceed silently.</div>
+  </div>
+
+  <div class="section-title">The Complete System Map</div>
+  <div class="phase-map">
+    <div class="phase-box" onclick="showTab('phase1')">
+      <div class="phase-box-num">01</div>
+      <div class="phase-box-title">Research & Foundation</div>
+      <div class="phase-box-desc">ICP, niche qualification, Ready-to-Buy Viewer, seed words, Channel Promise</div>
+      <div class="phase-box-days">Days 1–7 · Internal</div>
+    </div>
+    <div class="phase-box" onclick="showTab('phase2')">
+      <div class="phase-box-num">02</div>
+      <div class="phase-box-title">Channel Setup</div>
+      <div class="phase-box-desc">Channel keywords, upload defaults, banner, About section, watermark</div>
+      <div class="phase-box-days">Days 8–14 · With Client</div>
+    </div>
+    <div class="phase-box" onclick="showTab('phase3')">
+      <div class="phase-box-num">03</div>
+      <div class="phase-box-title">Keyword Research</div>
+      <div class="phase-box-desc">VidIQ harvest, cleanse, categorize, Channel/Series/Video keywords</div>
+      <div class="phase-box-days">Days 8–14 · Internal</div>
+    </div>
+    <div class="phase-box" onclick="showTab('phase4')">
+      <div class="phase-box-num">04</div>
+      <div class="phase-box-title">Playlist Funnel</div>
+      <div class="phase-box-desc">5-video funnel map, Awareness → Education → Reframe → Insights → CTA</div>
+      <div class="phase-box-days">Days 12–14 · Deliver</div>
+    </div>
+    <div class="phase-box" onclick="showTab('phase5')">
+      <div class="phase-box-num">05</div>
+      <div class="phase-box-title">Video Game Plan</div>
+      <div class="phase-box-desc">Hook, script structure, story outline, visuals, CTA architecture</div>
+      <div class="phase-box-days">Days 15–20 · Per Video</div>
+    </div>
+    <div class="phase-box" onclick="showTab('phase6')">
+      <div class="phase-box-num">06</div>
+      <div class="phase-box-title">Title & Thumbnail</div>
+      <div class="phase-box-desc">4-part title formula, thumbnail research, alignment rules, A/B testing</div>
+      <div class="phase-box-days">Days 15–20 · Per Video</div>
+    </div>
+    <div class="phase-box" onclick="showTab('phase7')">
+      <div class="phase-box-num">07</div>
+      <div class="phase-box-title">Film & Edit</div>
+      <div class="phase-box-desc">Filming sequence, B-roll, editing standards, CTA placement</div>
+      <div class="phase-box-days">Days 20–40 · Client Films</div>
+    </div>
+    <div class="phase-box" onclick="showTab('phase8')">
+      <div class="phase-box-num">08</div>
+      <div class="phase-box-title">Upload & Optimise</div>
+      <div class="phase-box-desc">7-step upload checklist, description formula, end screens, UTM tracking</div>
+      <div class="phase-box-days">Days 25–60 · Rolling</div>
+    </div>
+    <div class="phase-box" onclick="showTab('phase9')">
+      <div class="phase-box-num">09</div>
+      <div class="phase-box-title">Analytics & Critique</div>
+      <div class="phase-box-desc">5 metrics, weekly review, diagnosis, A/B testing rules, optimization</div>
+      <div class="phase-box-days">Weekly · Ongoing</div>
+    </div>
+    <div class="phase-box" onclick="showTab('phase10')">
+      <div class="phase-box-num">10</div>
+      <div class="phase-box-title">Competitor Research</div>
+      <div class="phase-box-desc">Niche neighbor analysis, title patterns, thumbnail gaps, content gaps</div>
+      <div class="phase-box-days">Days 1–7 · Recurring</div>
+    </div>
+  </div>
+
+  <div class="section-title">The 6-Point Qualified Call Definition</div>
+  <div class="alert success">
+    <div class="alert-icon">✅</div>
+    <div>A call only counts toward the guarantee if ALL 6 conditions are met: <strong>(1)</strong> Found via YouTube content · <strong>(2)</strong> Decision maker who can authorise purchase · <strong>(3)</strong> Real problem to solve in 90 days · <strong>(4)</strong> Budget fit — can afford the client's offer · <strong>(5)</strong> Shows up (no-shows don't count) · <strong>(6)</strong> Minimum 15 minutes</div>
+  </div>
+
+  <div class="section-title">The Math Behind the Guarantee</div>
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="metric-val">1K</div>
+      <div class="metric-label">Impressions/video/month</div>
+      <div class="metric-note">Conservative new channel</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">5%</div>
+      <div class="metric-label">Target CTR</div>
+      <div class="metric-note">= 50 views per video</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val">10+</div>
+      <div class="metric-label">Calls in 90 Days</div>
+      <div class="metric-note">4 videos × 2% book rate</div>
+    </div>
+  </div>
+
+  <div class="section-title">90-Day Timeline at a Glance</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Week 1–2 · Foundation</div>
+      <div class="timeline-content">Internal research: niche qualification, Ready-to-Buy Viewer, seed words, Niche Neighbor Analysis, keyword harvest. Client onboarding call: Channel Promise, ICP alignment, tone. Channel setup complete. First playlist funnel mapped. Month 1 content calendar delivered.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Week 3–4 · First Videos Live</div>
+      <div class="timeline-content">Video Game Plans written for all 5 funnel videos. Client films Video 1 and 2. Edit, optimise, upload. UTM tracking live. First analytics data starts coming in. Booking page link live in every description.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Week 5–8 · Funnel Complete + Optimise</div>
+      <div class="timeline-content">Videos 3, 4, 5 live. Full playlist funnel active. Weekly analytics review starts. A/B testing on underperforming titles/thumbnails. First calls may start coming in from early videos. Pattern recognition begins.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-week">Week 9–12 · Compound + Report</div>
+      <div class="timeline-content">Second playlist cluster begins (Firework Strategy). Double down on winning content patterns. 90-day report delivered: calls attributed by video, CTR trends, retention data, Month 4–6 roadmap showing compound growth.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ TAB 01: RESEARCH & FOUNDATION ============================================================ -->
+<div class="tab-content" id="tab-phase1">
+  <div class="phase-header">
+    <div class="phase-label">Phase 01 · Days 1–7 · Internal Work Only</div>
+    <div class="phase-title">Research & Foundation</div>
+    <div class="phase-desc">Do this before touching the channel or talking to the client. The quality of this phase determines whether the guarantee is achievable. Do not rush it.</div>
+  </div>
+
+  <div class="alert danger">
+    <div class="alert-icon">🚫</div>
+    <div><strong>Client is NOT involved yet.</strong> This entire phase is internal research. Presenting unverified strategy to the client erodes trust. Come to the onboarding call with a finalized point of view.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 1</div>
+      <div>
+        <div class="card-title">Qualify the Niche for YouTube Demand</div>
+        <div class="card-sub">If no search demand exists, the guarantee is not achievable. Verify first.</div>
+      </div>
+    </div>
+    <div class="tag-row"><span class="ai-tag vidiq">🔍 VidIQ</span><span class="ai-tag youtube">▶ YouTube Studio</span></div>
+    <div class="alert info"><div class="alert-icon">ℹ️</div><div>Use a <strong>fresh browser / incognito window</strong> with no watch history. This shows you exactly how YouTube classifies the niche without your personal algorithm polluting the results.</div></div>
+    <ul class="checklist">
+      <li>Open VidIQ in incognito browser</li>
+      <li>Search 5-8 of the client's core topic phrases</li>
+      <li>Verify: at minimum 5-10 existing videos with more views than the channel has subscribers</li>
+      <li>Check if ready-to-buy audience (not beginners) is actively searching</li>
+      <li>If no search demand found → flag immediately and discuss alternative strategy with Sanjit</li>
+    </ul>
+    <div class="alert warning" style="margin-top:12px;"><div class="alert-icon">⚠️</div><div><strong>Red flags to watch for:</strong> All results are beginner-level content · All top channels have 100K+ subscribers (too competitive to break in fast) · Zero engagement on existing videos (audience doesn't watch YouTube in this niche)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 2</div>
+      <div>
+        <div class="card-title">Define the Ready-to-Buy Viewer</div>
+        <div class="card-sub">This single decision determines every video topic, hook, and CTA for the next 90 days.</div>
+      </div>
+    </div>
+    <div class="tag-row"><span class="ai-tag chatgpt">✦ ChatGPT</span></div>
+    <p style="font-size:14px;color:var(--white-dim);margin-bottom:12px;">The buyer journey spectrum: <strong>Beginner Better → Progress Polly → Scaling Sally → On Her Way Opal → Expert Ester</strong></p>
+    <div class="alert success"><div class="alert-icon">🎯</div><div><strong>Target: Scaling Sally to On Her Way Opal.</strong> They already have a proven offer and clients. They've tried acquisition methods that aren't working predictably. They're frustrated with inconsistency. They're ready to invest in a system that works.</div></div>
+    <div class="section-title">Answer These 3 Questions for the Client's Niche</div>
+    <table>
+      <tr><th>Question</th><th>What to Research</th><th>Where to Find It</th></tr>
+      <tr><td><strong>1. What problem are they actively trying to solve?</strong></td><td>Specific, urgent problem — not a vague goal</td><td>YouTube comments on niche videos, Reddit, Facebook groups</td></tr>
+      <tr><td><strong>2. What solutions have they already tried and failed with?</strong></td><td>Previous failed attempts — creates empathy and authority</td><td>"I tried X but..." comments, competitor video comments</td></tr>
+      <tr><td><strong>3. What's stopping them from getting results right now?</strong></td><td>The real blocker — usually mindset, wrong strategy, or wrong audience</td><td>Client's own sales call notes, DMs from their audience</td></tr>
+    </table>
+    <div class="prompt-box">
+      <div class="prompt-label">✦ ChatGPT Prompt — Audience Deep Dive</div>
+      <div class="prompt-text">I want to better understand my target audience so I can create YouTube content that resonates deeply. My client is a [TYPE] coach targeting [AUDIENCE DESCRIPTION].
+
+Help me identify:
+1. PAIN POINTS: What are the biggest frustrations, challenges, or obstacles this audience faces right now?
+2. DESIRES: What are their top goals and what would success look like?
+3. LEVEL OF PROBLEM AWARENESS: Are they aware of the root problem or just symptoms? Do they know solutions exist? Are they aware of [CLIENT NAME]'s approach?
+
+Also tell me: What exact phrases and words would this person type into YouTube when actively searching for a solution? Give me 20 specific search phrases — not generic ones.
+
+Create a detailed profile that captures these points so I can create content that speaks directly to this person.</div>
+      <button class="copy-btn" onclick="copyText(this)">Copy Prompt</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 3</div>
+      <div>
+        <div class="card-title">Niche Neighbor Analysis</div>
+        <div class="card-sub">Find 3-5 channels that serve the same ready-to-buy audience but don't compete directly.</div>
+      </div>
+    </div>
+    <div class="tag-row"><span class="ai-tag youtube">▶ YouTube</span><span class="ai-tag vidiq">🔍 VidIQ</span><span class="ai-tag chatgpt">✦ ChatGPT</span></div>
+    <div class="alert info"><div class="alert-icon">ℹ️</div><div><strong>Why this matters:</strong> YouTube cross-recommends videos from similar-topic channels. If your topics align with a niche neighbor's best-performing content, YouTube will test recommending your client's content to their audience. This is free exposure to an already-qualified audience.</div></div>
+    <ul class="checklist">
+      <li>Identify where the ready-to-buy viewer already gets content on YouTube</li>
+      <li>Find 3-5 complementary channels (NOT direct competitors — no channel with identical offer)</li>
+      <li>For each channel: extract top 10 performing AND 5 most recent videos</li>
+      <li>Record: title patterns, thumbnail styles, video length, comment themes</li>
+      <li>Identify the gap — what topics are they NOT covering that your client can own?</li>
+      <li>Note: which videos have more views than the channel's subscriber count (proven marketing package)</li>
+    </ul>
+    <div class="section-title">Niche Neighbor Scoring Criteria</div>
+    <table>
+      <tr><th>Good Niche Neighbor</th><th>Bad Niche Neighbor</th></tr>
+      <tr><td class="tag-green">✓ Serves same audience, different topic</td><td class="tag-red">✗ Direct competitor with identical offer</td></tr>
+      <tr><td class="tag-green">✓ Complementary content (their video leads to needing your client)</td><td class="tag-red">✗ Random big-name creator with no audience overlap</td></tr>
+      <tr><td class="tag-green">✓ Active channel (uploads within last 30 days)</td><td class="tag-red">✗ Dead channel or inconsistent uploader</td></tr>
+      <tr><td class="tag-green">✓ Engaged comment section (buyers asking questions)</td><td class="tag-red">✗ Copying their content instead of differentiating</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 4</div>
+      <div>
+        <div class="card-title">Generate 20–25 Seed Words</div>
+        <div class="card-sub">Seed words are the starting point for keyword research — broad but niche-focused.</div>
+      </div>
+    </div>
+    <div class="tag-row"><span class="ai-tag chatgpt">✦ ChatGPT</span><span class="ai-tag vidiq">🔍 VidIQ</span></div>
+    <div class="grid-2">
+      <div>
+        <div class="label">Good Seed Word Examples</div>
+        <ul class="checklist">
+          <li>"high ticket sales calls" (not "sales")</li>
+          <li>"coaching client acquisition" (not "get clients")</li>
+          <li>"qualified leads coaching" (not "leads")</li>
+          <li>"YouTube for coaches" (not "YouTube")</li>
+          <li>"booking calls organically" (not "organic marketing")</li>
+        </ul>
+      </div>
+      <div>
+        <div class="label">Seed Word Rules</div>
+        <ul class="checklist">
+          <li>Not too specific — they must generate long-tail keywords</li>
+          <li>Not too broad — "coaching" or "marketing" is useless</li>
+          <li>Based on the Ready-to-Buy Viewer's actual language</li>
+          <li>Would Scaling Sally type this exact phrase into YouTube?</li>
+          <li>Generate 20-25 — more gives you more keyword data</li>
+        </ul>
+      </div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">✦ ChatGPT Prompt — Seed Word Generation</div>
+      <div class="prompt-text">I'm doing YouTube keyword research for a [TYPE] coach. Their ideal client is [AUDIENCE DESCRIPTION] — someone who already has a proven offer, has paying clients, but struggles with [MAIN PROBLEM].
+
+Generate 25 seed keywords I can use for YouTube research. These should be:
+- Broad enough to generate many long-tail variations in VidIQ
+- Specific enough to attract a ready-to-buy buyer (NOT beginners)
+- Exact phrases this person would type into YouTube search
+- Mix of problem-focused phrases, solution-focused phrases, and outcome-focused phrases
+
+Do NOT give me generic words like "coaching" or "marketing". Each seed keyword should be 2-4 words and feel like something a frustrated, experienced [AUDIENCE] would type when actively looking for a fix.</div>
+      <button class="copy-btn" onclick="copyText(this)">Copy Prompt</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 5</div>
+      <div>
+        <div class="card-title">Draft 3 Channel Promise Versions</div>
+        <div class="card-sub">Formula: "I help [SPECIFIC AUDIENCE] achieve [SPECIFIC RESULT] through [YOUR METHOD]"</div>
+      </div>
+    </div>
+    <div class="tag-row"><span class="ai-tag claude">◆ Claude</span></div>
+    <div class="grid-2">
+      <div>
+        <div class="label">Strong Example</div>
+        <div style="background:rgba(76,175,125,0.08);border:1px solid rgba(76,175,125,0.25);padding:14px;border-radius:3px;font-size:13px;color:#A0D4B8;line-height:1.6;">"Helping coaches get 10+ qualified sales calls/month through done-for-you YouTube content systems that work on autopilot"</div>
+      </div>
+      <div>
+        <div class="label">Weak Example (Avoid)</div>
+        <div style="background:rgba(232,85,85,0.08);border:1px solid rgba(232,85,85,0.25);padding:14px;border-radius:3px;font-size:13px;color:#F0A8A8;line-height:1.6;">"Helping coaches grow online" — too vague, tells YouTube nothing about who to recommend this channel to</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;">
+      <div class="label">Draft 3 Versions — Present All to Client in Onboarding Call</div>
+      <div style="background:var(--dark3);border:1px solid var(--border);padding:16px;border-radius:3px;font-size:13px;color:var(--white-dim);line-height:1.9;">
+        <strong>Version A</strong> (lead with audience): "I help [audience] who [situation] achieve [result] through [mechanism]"<br>
+        <strong>Version B</strong> (lead with result): "[Result] for [audience] — through [unique mechanism] without [common objection/pain]"<br>
+        <strong>Version C</strong> (lead with mechanism): "The [mechanism] system that helps [audience] get [specific result] in [timeframe]"
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Client Onboarding Call Agenda (20-30 min)</div>
+  <div class="card">
+    <ul class="checklist">
+      <li><strong>Present 3 Channel Promise drafts</strong> — explain why each was chosen, get client input, finalize one together</li>
+      <li><strong>Gather niche specifics</strong> — exact ICP details, offer price point, current client results and case studies</li>
+      <li><strong>Collect client's language</strong> — how do THEIR clients describe the problem they came with? (Use client's exact words in content)</li>
+      <li><strong>Align on tone and personality</strong> — direct/analytical or warm/empathetic? Data-driven or story-led?</li>
+      <li><strong>Set camera presence expectations</strong> — "You are the product. A talking head with clear audio and a strong hook outperforms cinematic production with a weak message. Minimum: phone on tripod, ring light, lapel mic."</li>
+      <li><strong>Confirm booking page is live</strong> — get the URL, test it on mobile, verify it loads fast</li>
+      <li><strong>Agree on content review process</strong> — how will the client record, how will they send files, turnaround expectations</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ TAB 02: CHANNEL SETUP ============================================================ -->
+<div class="tab-content" id="tab-phase2">
+  <div class="phase-header">
+    <div class="phase-label">Phase 02 · Days 8–14</div>
+    <div class="phase-title">Channel Setup</div>
+    <div class="phase-desc">The channel must be set up correctly BEFORE the first video goes live. YouTube uses early signals to classify what kind of channel this is. Wrong setup = wrong audience for months.</div>
+  </div>
+
+  <div class="alert warning"><div class="alert-icon">⚠️</div><div><strong>Order matters.</strong> Complete keyword research (Tab 03) before writing the About Section. The About Section must contain channel keywords to help YouTube classify the channel correctly.</div></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 1</div>
+      <div><div class="card-title">Add 20 Channel Keywords</div><div class="card-sub">YouTube Studio → Settings → Channel → Basic Info</div></div>
+    </div>
+    <div class="tag-row"><span class="ai-tag youtube">▶ YouTube Studio</span></div>
+    <div class="flow">
+      <div class="flow-item">YouTube Studio</div><div class="flow-arrow">→</div>
+      <div class="flow-item">Settings</div><div class="flow-arrow">→</div>
+      <div class="flow-item">Channel</div><div class="flow-arrow">→</div>
+      <div class="flow-item">Basic Info</div><div class="flow-arrow">→</div>
+      <div class="flow-item">Channel Keywords</div>
+    </div>
+    <ul class="checklist">
+      <li>Add exactly 20 channel keywords from the categorized keyword research</li>
+      <li>These must represent the ENTIRE channel focus — not one video topic</li>
+      <li>Mix of broad niche terms and specific buyer-intent terms</li>
+      <li>These tell YouTube which category to put the channel in — get this right</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 2</div>
+      <div><div class="card-title">Configure Upload Defaults</div><div class="card-sub">YouTube Studio → Settings → Upload Defaults — applied automatically to every video</div></div>
+    </div>
+    <div class="tag-row"><span class="ai-tag youtube">▶ YouTube Studio</span></div>
+    <div class="flow">
+      <div class="flow-item">YouTube Studio</div><div class="flow-arrow">→</div>
+      <div class="flow-item">Settings</div><div class="flow-arrow">→</div>
+      <div class="flow-item">Upload Defaults</div>
+    </div>
+    <ul class="checklist">
+      <li><strong>Tags:</strong> 4-6 condensed channel keywords (applied to every video automatically)</li>
+      <li><strong>Description template:</strong> Short keyword-rich bio + offer link + "next video to watch" placeholder</li>
+      <li><strong>Resources:</strong> Booking page link, any lead magnet links</li>
+      <li><strong>Affiliate disclaimer:</strong> If applicable</li>
+      <li><strong>Visibility: ALWAYS set to PRIVATE</strong> — never accidentally publish unoptimized video</li>
+    </ul>
+    <div class="alert success"><div class="alert-icon">✅</div><div><strong>PRIVATE default is non-negotiable.</strong> Every video uploads as Private. You optimize everything, THEN switch to Public. Wait 10-15 minutes after going Public to let YouTube process highest video quality.</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 3</div>
+      <div><div class="card-title">Channel Banner</div><div class="card-sub">The first impression. Must communicate who this is for and what they get.</div></div>
+    </div>
+    <div class="tag-row"><span class="ai-tag canva">◆ Canva</span></div>
+    <div class="grid-2">
+      <div>
+        <div class="label">Banner Rules</div>
+        <ul class="checklist">
+          <li>Words must be LARGE — readable at thumbnail size</li>
+          <li>5-6 word sentence — what the viewer gets from this channel</li>
+          <li>Sell the dream, not the process</li>
+          <li>Large photo of the coach — face visible</li>
+          <li>Brand colors consistent with thumbnail style</li>
+        </ul>
+      </div>
+      <div>
+        <div class="label">Banner Formula</div>
+        <div style="background:var(--dark3);border:1px solid var(--border);padding:16px;border-radius:3px;font-size:13px;color:var(--white-dim);line-height:1.8;">
+          <strong>What they get</strong> (result/dream) in 5-6 bold words<br>
+          Example: "10 Qualified Calls Every Month. YouTube."<br><br>
+          <strong>NOT:</strong> "Content strategy for coaches" — describes what YOU do, not what THEY get
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 4</div>
+      <div><div class="card-title">Write the About Section</div><div class="card-sub">Under 1,000 characters. First line is critical — it shows before truncation.</div></div>
+    </div>
+    <div class="tag-row"><span class="ai-tag claude">◆ Claude</span><span class="ai-tag chatgpt">✦ ChatGPT</span></div>
+    <div class="section-title">About Section Formula</div>
+    <table>
+      <tr><th>Section</th><th>What to Write</th><th>Why</th></tr>
+      <tr><td><strong>Line 1 (CRITICAL)</strong></td><td>Value proposition — WHO you help, WHAT they get, HOW. All before truncation.</td><td>Shows in search results before clicking. Must hook immediately.</td></tr>
+      <tr><td><strong>Paragraph 2</strong></td><td>What content they can expect. Topics, frequency, format.</td><td>Sets expectations, signals to algorithm what the channel covers</td></tr>
+      <tr><td><strong>Paragraph 3</strong></td><td>2-3 sentences personal story. Zero-to-hero moment. Credibility.</td><td>Builds human connection. Gives viewer a reason to trust.</td></tr>
+      <tr><td><strong>Final Line</strong></td><td>One strong CTA — subscribe OR link to main booking page/freebie</td><td>Tell them exactly what to do next</td></tr>
+    </table>
+    <div class="prompt-box">
+      <div class="prompt-label">✦ Claude/ChatGPT Prompt — About Section</div>
+      <div class="prompt-text">Write a YouTube About Section for [CLIENT NAME], a [TYPE] coach.
+
+Channel Promise: [INSERT FINALIZED CHANNEL PROMISE]
+ICP: [DESCRIBE READY-TO-BUY VIEWER]
+Main Offer: [DESCRIBE OFFER — e.g. "done-for-you YouTube content system, $X/month"]
+Key Result/Case Study: [INSERT BEST RESULT — e.g. "helped coaches book 200+ calls/month"]
+Personal story: [INSERT 2-3 SENTENCE STORY]
+Booking page URL: [INSERT URL]
+
+Requirements:
+- Under 1,000 characters total
+- First line must be the full value proposition before truncation (approx 100 characters)
+- Include channel keywords naturally: [LIST 5-6 CHANNEL KEYWORDS]
+- Tone: [direct/warm/authoritative]
+- End with CTA to booking page</div>
+      <button class="copy-btn" onclick="copyText(this)">Copy Prompt</button>
+    </div>
+    <ul class="checklist" style="margin-top:12px;">
+      <li>Add 2-3 links: booking page (first), lead magnet (second), website (third if needed)</li>
+      <li>Set video watermark (channel logo or subscribe button)</li>
+      <li>Test on both mobile and desktop — truncation happens at different points</li>
+    </ul>
+  </div>
+
+  <div class="section-title">Channel Setup Complete Checklist</div>
+  <div class="card">
+    <ul class="checklist">
+      <li>20 Channel Keywords added to YouTube Studio → Settings → Channel → Basic Info</li>
+      <li>Upload Defaults configured (keywords + description template + links + PRIVATE visibility)</li>
+      <li>Channel Banner uploaded (5-6 words, large text, coach photo, dream-focused)</li>
+      <li>About Section written and published (value prop first, content preview, story, CTA)</li>
+      <li>2-3 channel links added (booking page FIRST)</li>
+      <li>Video Watermark set</li>
+      <li>Channel tested on mobile and desktop</li>
+      <li>Booking page link tested — loads fast, works on mobile</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ TAB 03: KEYWORD RESEARCH ============================================================ -->
+<div class="tab-content" id="tab-phase3">
+  <div class="phase-header">
+    <div class="phase-label">Phase 03 · Days 8–14 · Internal</div>
+    <div class="phase-title">Keyword Research</div>
+    <div class="phase-desc">The 5-step Profitable Keyword Framework. This is the foundation of all content decisions. Do this once per client, then repeat quarterly as the channel grows.</div>
+  </div>
+
+  <div class="flow" style="margin-bottom:24px;">
+    <div class="flow-item">1. Identify Seed Words</div><div class="flow-arrow">→</div>
+    <div class="flow-item">2. Harvest in VidIQ</div><div class="flow-arrow">→</div>
+    <div class="flow-item">3. Cleanse</div><div class="flow-arrow">→</div>
+    <div class="flow-item">4. Categorize</div><div class="flow-arrow">→</div>
+    <div class="flow-item">5. Implement</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 1</div>
+      <div><div class="card-title">Harvest Seed Words in VidIQ</div><div class="card-sub">Goal: 500-1,000 keyword variations from your 20-25 seed words</div></div>
+    </div>
+    <div class="tag-row"><span class="ai-tag vidiq">🔍 VidIQ</span><span class="ai-tag sheets">📊 Google Sheets</span></div>
+    <ul class="checklist">
+      <li>Go to VidIQ → Keyword Research Tool</li>
+      <li>Enter ONE seed word at a time — do not batch</li>
+      <li>Copy or export ALL related keywords for each seed word</li>
+      <li>Paste into Google Sheets — repeat for all 20-25 seed words</li>
+      <li>Target: 500-1,000+ keywords total before cleaning</li>
+    </ul>
+    <div class="section-title">Google Sheets Column Structure</div>
+    <table>
+      <tr><th>Column A</th><th>Column B</th><th>Column C</th><th>Column D</th><th>Column E</th><th>Column F</th></tr>
+      <tr><td>Keyword</td><td>Search Volume</td><td>Competition Score</td><td>Overall Score</td><td>Category/Playlist</td><td>Type (Channel/Series/Video)</td></tr>
+    </table>
+    <div class="alert info" style="margin-top:12px;"><div class="alert-icon">ℹ️</div><div>Columns A-D come from VidIQ export. Columns E-F are filled manually in Step 4 (Categorize).</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 2</div>
+      <div><div class="card-title">Cleanse the Keyword List</div><div class="card-sub">Remove everything that won't attract a ready-to-buy viewer</div></div>
+    </div>
+    <div class="tag-row"><span class="ai-tag sheets">📊 Google Sheets</span><span class="ai-tag chatgpt">✦ ChatGPT</span></div>
+    <div class="grid-2">
+      <div>
+        <div class="label">DELETE These</div>
+        <ul class="checklist">
+          <li>Zero search volume keywords (exception: ultra-niche if perfect ICP match)</li>
+          <li>Exact duplicates (sort A-Z and remove)</li>
+          <li>Beginner-focused keywords (attracts freebie seekers)</li>
+          <li>Branded keywords (competitor names)</li>
+          <li>Irrelevant tangents that crept in from broad seeds</li>
+        </ul>
+      </div>
+      <div>
+        <div class="label">KEEP These</div>
+        <ul class="checklist">
+          <li>Keywords with search volume (any volume above zero)</li>
+          <li>Problem-aware buyer phrases ("why isn't my X working")</li>
+          <li>Solution-searching phrases ("how to fix X")</li>
+          <li>Result-oriented phrases ("get more X clients")</li>
+          <li>Ultra-niche terms even with low volume (if perfect ICP match)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-label">✦ ChatGPT Prompt — Beginner Content Filter</div>
+      <div class="prompt-text">I don't want to attract beginners. My goal is to attract ready-to-buy [TYPE] coaches who already have clients and an offer but struggle with [MAIN PROBLEM].
+
+Review this keyword list and tell me which keywords might be too beginner-focused and should be removed:
+
+[PASTE YOUR KEYWORD LIST HERE]
+
+For each keyword you flag as beginner-focused, explain why and suggest a more buyer-intent alternative if possible.</div>
+      <button class="copy-btn" onclick="copyText(this)">Copy Prompt</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 3</div>
+      <div><div class="card-title">Categorize Every Keyword</div><div class="card-sub">This step turns raw keywords into your YouTube Playlist Funnel</div></div>
+    </div>
+    <div class="tag-row"><span class="ai-tag chatgpt">✦ ChatGPT</span><span class="ai-tag sheets">📊 Google Sheets</span></div>
+    <div class="section-title">The 3 Keyword Types</div>
+    <table>
+      <tr><th>Type</th><th>Definition</th><th>Where It Goes</th><th>Example</th></tr>
+      <tr><td><strong>Channel Keyword</strong></td><td>Describes your entire channel — the overarching niche</td><td>YouTube Studio → Channel Keywords (20 total)</td><td>"YouTube for coaches", "high ticket lead generation"</td></tr>
+      <tr><td><strong>Series Keyword</strong></td><td>Broad enough to have 4-8+ videos on the topic</td><td>Becomes a Playlist (content bucket)</td><td>"Qualified sales calls", "Content-to-call strategy"</td></tr>
+      <tr><td><strong>Video Keyword</strong></td><td>Specific to one video — one topic, one problem</td><td>Video title, description, tags</td><td>"Why your discovery calls aren't converting"</td></tr>
+    </table>
+    <div class="section-title">Decision Framework — Which Type is It?</div>
+    <div class="grid-3">
+      <div style="background:var(--dark3);border:1px solid var(--border);padding:16px;border-radius:3px;">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--gold);margin-bottom:8px;">Channel Keyword?</div>
+        <div style="font-size:13px;color:var(--white-dim);line-height:1.6;">Does it describe the entire channel's focus? Would EVERY video on the channel relate to this topic? → YES = Channel Keyword</div>
+      </div>
+      <div style="background:var(--dark3);border:1px solid var(--border);padding:16px;border-radius:3px;">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--gold);margin-bottom:8px;">Series Keyword?</div>
+        <div style="font-size:13px;color:var(--white-dim);line-height:1.6;">Can this be an ongoing playlist with 4-8+ videos? Would a viewer binge multiple videos on this? → YES = Series Keyword</div>
+      </div>
+      <div style="background:var(--dark3);border:1px solid var(--border);padding:16px;border-radius:3px;">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--gold);margin-bottom:8px;">Video Keyword?</div>
+        <div style="font-size:13px;color:var(--white-dim);line-height:1.6;">Is this just one specific video topic? Does it have a clear, single answer? → YES = Video Keyword</div>
+      </div>
+    </div>
+    <div class="prompt-box" style="margin-top:16px;">
+      <div class="prompt-label">✦ ChatGPT Prompt — Categorization Shortcut</div>
+      <div class="prompt-text">I have a list of YouTube keywords for a [TYPE] coach targeting [AUDIENCE]. I need you to:
+
+1. Identify what the categories/themes are across these keywords
+2. For each keyword, tell me if it's a Channel Keyword, Series Keyword, or Video Keyword
+
+Channel Keyword = describes the entire channel focus
+Series Keyword = broad enough for an ongoing playlist (4-8+ videos)
+Video Keyword = specific enough for just one video
+
+Here is my keyword list:
+[PASTE KEYWORDS]
+
+Format your response as a table with: Keyword | Category/Theme | Type</div>
+      <button class="copy-btn" onclick="copyText(this)">Copy Prompt</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="step-badge">STEP 4</div>
+      <div><div class="card-title">Select Final 20 Channel Keywords</div><div class="card-sub">These go into YouTube Studio and permanently define the channel's category</div></div>
+    </div>
+    <div class="tag-row"><span class="ai-tag chatgpt">✦ ChatGPT</span></div>
+    <ul class="checklist">
+      <li>Sort your Channel Keywords by relevance to the Channel Promise</li>
+      <li>Select the best 20 — mix of broad niche + specific buyer-intent terms</li>
+      <li>Use the ChatGPT shortcut: "Pull out the top 20 keywords that would describe my channel as a whole"</li>
+      <li>Add to YouTube Studio immediately (Tab 02, Step 1)</li>
+    </ul>
+    <div class="alert success" style="margin-top:12px;"><div class="alert-icon">✅</div><div><strong>End result of keyword research:</strong> 3-5 Series Keyword categories (these become your playlists), 20-50 Video Keywords per series (these become individual video topics for months), 20 Channel Keywords (already added to studio)</div></div>
+  </div>
+</div>
+
+<!-- ============================================================ TAB 04: PLAYLIST FUNNEL BUILDER ============================================================ -->
+<div class="tab-content" id="tab-phase4">
+  <div class="phase-header">
+    <div class="phase-label">Phase 04 · Days 12–14</div>
+    <div class="phase-title">Playlist Funnel Builder</div>
+    <div class="phase-desc">The 5-video funnel is the core conversion machine. Each video is a domino that knocks over the next. This is what makes YouTube a sales system — not just a content platform.</div>
+  </div>
+
+  <div class="alert info"><div class="alert-icon">ℹ️</div><div><strong>Critical Distinction:</strong> Trena's course is designed for course creators selling $97-$497 products. Our clients sell <strong>high-ticket coaching ($3K-$20K+)</strong>. The funnel structure is the same — but the CTA goes to a <strong>calendar booking page</strong>, not a purchase page. Trust-building is more critical. Video 5 sets up a call — not a checkout.</div></div>
+
+  <div class="section-title">The 5-Video Funnel Structure</div>
+  <div class="funnel-step">
+    <div class="funnel-num">1</div>
+    <div>
+      <div class="funnel-step-title">Awareness — The "Why" Video</div>
+      <div class="funnel-step-desc"><strong>Goal:</strong> Make them aware of the core problem your client's offer solves. Attract the right viewer. Make them think "this person understands exactly what I'm going through." Open a loop that makes them need Video 2.<br><strong>Keyword type:</strong> Problem-focused (Awareness keywords)<br><strong>CTA:</strong> Drive to Video 2 — tell them exactly which video and why they need it<br><strong>Example:</strong> "Why Your Discovery Calls Aren't Converting to Clients (And It's Not Your Close)"</div>
+    </div>
+  </div>
+  <div class="funnel-step">
+    <div class="funnel-num">2</div>
+    <div>
+      <div class="funnel-step-title">Education — The Quick Win</div>
+      <div class="funnel-step-desc"><strong>Goal:</strong> One actionable tip that delivers a quick win and builds trust. Prove competence. Make them think "I can actually do this."<br><strong>Keyword type:</strong> Solution-focused (Consideration keywords)<br><strong>CTA:</strong> Soft CTA to offer woven naturally + drive to Video 3<br><strong>Example:</strong> "The 3-Question Framework That Pre-Qualifies Prospects Before the Call"</div>
+    </div>
+  </div>
+  <div class="funnel-step">
+    <div class="funnel-num">3</div>
+    <div>
+      <div class="funnel-step-title">Reframe — The Myth Buster</div>
+      <div class="funnel-step-desc"><strong>Goal:</strong> Challenge the limiting belief that's preventing them from taking action. Remove the objection they've been using as an excuse.<br><strong>Keyword type:</strong> Misconception-focused (Consideration keywords)<br><strong>CTA:</strong> Soft CTA + drive to Video 4<br><strong>Example:</strong> "The Myth That More Leads = More Clients (What Actually Fixes Your Pipeline)"</div>
+    </div>
+  </div>
+  <div class="funnel-step">
+    <div class="funnel-num">4</div>
+    <div>
+      <div class="funnel-step-title">Insights — The Advanced Strategy</div>
+      <div class="funnel-step-desc"><strong>Goal:</strong> Deeper specificity. Position the client as the go-to expert. This is where credibility compounds. The viewer starts thinking about working with the coach.<br><strong>Keyword type:</strong> Advanced/strategy-focused (Consideration keywords)<br><strong>CTA:</strong> Soft CTA + drive to Video 5 with explicit reason why they need it<br><strong>Example:</strong> "How My Clients Book 10+ Qualified Calls/Month Without Paid Ads"</div>
+    </div>
+  </div>
+  <div class="funnel-step" style="border-left-color:var(--green);">
+    <div class="funnel-num" style="color:var(--green);">5</div>
+    <div>
+      <div class="funnel-step-title">CTA — The Offer Video</div>
+      <div class="funnel-step-desc"><strong>Goal:</strong> Introduce the offer as the next logical step. 60-90 second hard pitch. Specific results, guarantee mention, clear next step = book a call.<br><strong>Keyword type:</strong> Decision/offer-focused (Decision keywords)<br><strong>CTA: HARD CTA ONLY HERE.</strong> Full offer introduction with benefits, results, guarantee, booking link<br><strong>Example:</strong> "Want a Predictable Flow of Qualified Sales Calls? Here's How We Build It"</div>
+    </div>
+  </div>
+
+  <div class="section-title">CTA Architecture Rules (High-Ticket Version)</div>
+  <div class="grid-2">
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title" style="font-size:15px;margin-bottom:12px;">Soft CTA (Videos 1-4)</div>
+      <div style="background:rgba(76,175,125,0.06);border:1px solid rgba(76,175,125,0.2);padding:14px;border-radius:3px;font-size:13px;color:#A0D4B8;line-height:1.7;font-style:italic;">"By the way, if you want to skip the DIY phase entirely and have this built for you — there's a link in the description below."</div>
+      <div style="font-size:12px;color:var(--white-dim);margin-top:10px;">Weave in organically. Never feel salesy. One per video maximum.</div>
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title" style="font-size:15px;margin-bottom:12px;">Hard CTA (Video 5 ONLY)</div>
+      <div style="background:rgba(232,148,58,0.06);border:1px solid rgba(232,148,58,0.2);padding:14px;border-radius:3px;font-size:13px;color:#F0C888;line-height:1.7;font-style:italic;">"If you want a system that brings you [specific result], I have [X] spots open this month — book a free strategy call at the link in the description."</div>
+      <div style="font-size:12px;color:var(--white-dim);margin-top:10px;">60-90 seconds. Include results, guarantee, urgency, exact next step.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Banned CTA Phrases — Never Use These</div>
+  <div class="alert danger"><div class="alert-icon">🚫</div><div>Never end a video with: <strong>"In summary..."</strong> / <strong>"To recap..."</strong> / <strong>"To wrap up..."</strong> / <strong>"Just to recap what we covered..."</strong> — These signal the video is over. The viewer should feel like the video ended abruptly and WANT to keep watching. Drive them to the next video instead.</div></div>
+
+  <div class="section-title">Forward-Momentum CTA Templates (Videos 1-4)</div>
+  <div class="card">
+    <div style="font-size:13px;color:var(--white-dim);line-height:2;">
+      <strong>"Now if you [belief/realization from this video], you're going to really want to watch the next video where I show you [specific thing they'll learn]. I'll see you there."</strong><br><br>
+      Example: "Now if you believe your pipeline problem is a lead quality issue and not a volume issue, you're going to really want to watch the next video where I show you the exact 3-question pre-qualification framework. I'll see you there."
+    </div>
+  </div>
+
+  <div class="section-title">Playlist Funnel Generator Prompt</div>
+  <div class="prompt-box">
+    <div class="prompt-label">✦ ChatGPT Prompt — Full Playlist Funnel</div>
+    <div class="prompt-text">I'm creating a YouTube Playlist Funnel for [CLIENT NAME], a [TYPE] coach. Their offer is [DESCRIBE OFFER]. Their ideal client is [DESCRIBE ICP]. The playlist theme/series keyword is: [INSERT SERIES KEYWORD].
+
+Build a 5-video YouTube Playlist Funnel following this EXACT structure:
+- Video 1 (Awareness/Why): Hook them with the core problem. Attracts ready-to-buy viewer. Not beginner content.
+- Video 2 (Education/Quick Win): One actionable tip that builds trust and delivers a quick win
+- Video 3 (Reframe/Myth Bust): Challenge the #1 limiting belief that stops them from taking action
+- Video 4 (Insights/Advanced): Deeper strategy that positions the coach as the go-to expert
+- Video 5 (CTA/Offer): Introduces the offer as the next logical step — CTA is to book a discovery call (NOT buy a course)
+
+For each video provide:
+1. 3 title variations (under 55 characters, curiosity-driven, buyer-intent)
+2. The core message/hook statement
+3. Forward-momentum CTA to the next video (except Video 5 which drives to booking page)
+
+The viewer is NOT a beginner. They have an existing coaching business with clients. They're frustrated that their lead flow is unpredictable and they've already tried [THINGS THEY'VE TRIED].</div>
+    <button class="copy-btn" onclick="copyText(this)">Copy Prompt</button>
+  </div>
+</div>
+
+<!-- ============================================================ TAB 05: VIDEO GAME PLAN ============================================================ -->
+<div class="tab-content" id="tab-phase5">
+  <div class="phase-header">
+    <div class="phase-label">Phase 05 · Days 15–20 · Per Video</div>
+    <div class="phase-title">Video Game Plan</div>
+    <div class="phase-desc">The Video Game Plan is completed BEFORE filming. It is not a word-for-word script. It is a structured planning document that gives the client everything they need to film confidently without memorizing lines.</div>
+  </div>
+
+  <div class="alert warning"><div class="alert-icon">⚠️</div><div><strong>Do not let the client film until the Video Game Plan is approved.</strong> A video filmed without a Game Plan will have a weak hook, unclear structure, and no effective CTA. It will waste the client's time and yours.</div></div>
+
+  <div class="section-title">Video Game Plan Template — Fill This For Every Video</div>
+
+  <div class="card">
+    <div class="section-title" style="margin-top:0;">Section 1: Pre-Production</div>
+    <div class="grid-2">
+      <div class="ws-row">
+        <div class="ws-label">Publish Date Target</div>
+        <input type="text" class="ws-field" placeholder="e.g. 2 weeks from today">
+      </div>

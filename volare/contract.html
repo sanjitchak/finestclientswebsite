@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volare AI x Carrie LaDue | Confirmation Document</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP for Smooth Reveals -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        /* Premium Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+        
+        :root {
+            --brand-gold: #D4AF37;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF; /* Forced White Background */
+            color: #111827; /* Dark Gray/Black text for readability */
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1rem;
+        }
+
+        .heading-serif {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: -0.01em;
+        }
+
+        /* --- Clean Document Style --- */
+        .white-document {
+            background: #FFFFFF;
+            border: 1px solid #F3F4F6;
+            border-top: 6px solid var(--brand-gold);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Text Gradients & Effects --- */
+        .gold-text {
+            color: var(--brand-gold);
+        }
+
+        /* --- Scroll Reveal Animations --- */
+        .reveal { opacity: 0; transform: translateY(20px); }
+        
+        /* --- Signature Input Styling --- */
+        .signature-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.75rem;
+            color: #111827;
+            padding: 0 0 5px 0;
+        }
+        .signature-input::placeholder {
+            color: #D1D5DB;
+            font-style: italic;
+            font-size: 1.25rem;
+        }
+
+        /* --- Print Specific Styles --- */
+        @media print {
+            body {
+                padding: 0;
+                background-color: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .white-document {
+                box-shadow: none;
+                border: none;
+                border-top: 6px solid var(--brand-gold);
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+            /* Ensure animations don't hide content during print */
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            /* Remove placeholder text when printing if empty */
+            .signature-input::-webkit-input-placeholder { color: transparent; }
+            .signature-input:-moz-placeholder { color: transparent; }
+            .signature-input::-moz-placeholder { color: transparent; }
+            .signature-input:-ms-input-placeholder { color: transparent; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1-Page Document Container -->
+    <main class="w-full max-w-4xl white-document rounded-2xl p-8 md:p-16 relative">
+
+        <!-- Header -->
+        <header class="mb-14 border-b border-gray-200 pb-8 reveal relative z-10">
+            <h1 class="heading-serif text-4xl md:text-5xl mb-3 text-gray-900">Partnership Agreement</h1>
+            <div class="inline-flex items-center gap-3 px-4 py-1.5 border border-[#D4AF37]/30 rounded-full bg-[#D4AF37]/5 text-[10px] tracking-[0.2em] text-[#D4AF37] uppercase font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></span>
+                Prepared exclusively for Carrie LaDue by Volare AI
+            </div>
+        </header>
+
+        <!-- 1. Problem Statement -->
+        <section class="mb-10 reveal relative z-10">
+            <h2 class="heading-serif text-2xl text-[#D4AF37] mb-3 flex items-baseline gap-2">
+                <span class="text-gray-300 text-xl">1.</span> The Problem
+            </h2>
+            <p class="text-gray-700 text-lg leading-relaxed font-light">
+                Carrie, your offer converts at a staggering 50% and your closing process is proven, but right now, you are battling a recognition problem in the market. Relying purely on manual outreach creates a rollercoaster pipeline. To stabilize and scale, you must generate highly targeted views to build brand authority before prospects ever book a call.
+            </p>
+        </section>
+
+        <!-- 2. Solution -->
+        <section class="mb-10 reveal relative z-10">
+            <h2 class="heading-serif text-2xl text-[#D4AF37] mb-3 flex items-baseline gap-2">
+                <span class="text-gray-300 text-xl">2.</span> The Solution
+            </h2>
+            <p class="text-gray-700 text-lg leading-relaxed font-light">
+                We will deploy a dual-platform approach on YouTube and Instagram to solve the visibility gap, coupled with funnel integration logic to drive viewers directly into your VSL booking funnel. We will fully manage the creation of 4 Strategic Long Videos and 8-10 Targeted Shorts/Reels. This includes Expert Outlines (No AI Slop), Premium "Hormozi" Editing, and A/B Thumbnail Testing.
+            </p>
+        </section>
+
+        <!-- 3. Outcomes -->
+        <section class="mb-10 reveal relative z-10">
+            <h2 class="heading-serif text-2xl text-[#D4AF37] mb-4 flex items-baseline gap-2">
+                <span class="text-gray-300 text-xl">3.</span> Outcomes
+            </h2>
+            <ul class="space-y-3">
+                <li class="flex items-start gap-4">
+                    <span class="text-[#D4AF37] mt-1 text-sm">✦</span>
+                    <p class="text-gray-700 text-lg font-light"><strong class="text-gray-900 font-medium">Targeted Reach:</strong> 3,000 to 10,000 targeted views, achieving omnipresent reach in the $1M-$5M founder niche.</p>
+                </li>
+                <li class="flex items-start gap-4">
+                    <span class="text-[#D4AF37] mt-1 text-sm">✦</span>
+                    <p class="text-gray-700 text-lg font-light"><strong class="text-gray-900 font-medium">Conversion:</strong> A 0.5% - 1% conversion rate nurtured through structured long-form content.</p>
+                </li>
+                <li class="flex items-start gap-4">
+                    <span class="text-[#D4AF37] mt-1 text-sm">✦</span>
+                    <p class="text-gray-700 text-lg font-light"><strong class="text-gray-900 font-medium">Yield:</strong> 30 to 100 inbound appointments. <em class="text-gray-500 opacity-90">(The Soft Guarantee: If we don't hit 10 qualified appointments in the first 90 days, we work for free until we do.)</em></p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 4. Investment & Timeline -->
+        <section class="mb-10 reveal relative z-10">
+            <h2 class="heading-serif text-2xl text-[#D4AF37] mb-3 flex items-baseline gap-2">
+                <span class="text-gray-300 text-xl">4.</span> Investment & Timeline
+            </h2>
+            <div class="bg-gray-50 border border-gray-100 rounded-xl p-6">
+                <p class="text-gray-800 text-lg leading-relaxed font-light m-0">
+                    The investment is <strong class="text-[#D4AF37] font-semibold text-xl tracking-wide">$3,500/mo</strong> for a 90-day execution blueprint to build the compounding, high-authority acquisition machine.
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. Next Steps -->
+        <section class="mb-12 reveal relative z-10">
+            <h2 class="heading-serif text-2xl text-[#D4AF37] mb-3 flex items-baseline gap-2">
+                <span class="text-gray-300 text-xl">5.</span> Next Steps
+            </h2>
+            <p class="text-gray-700 text-lg leading-relaxed font-light">
+                Sign below to activate the strategy. We will immediately schedule your onboarding and begin outline creation to generate your inbound floor.
+            </p>
+        </section>
+
+        <!-- Signature Block -->
+        <section class="reveal relative z-10 mt-14">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+                <!-- Client Signature -->
+                <div class="relative">
+                    <input type="text" class="signature-input" placeholder="Type signature here...">
+                    <div class="border-b-2 border-gray-400 mb-3"></div>
+                    <div class="flex justify-between items-center">
+                        <div class="text-[11px] text-gray-800 uppercase tracking-widest font-bold">DR. CARRIE LADUE, VOLARE AI</div>
+                        <div class="text-[11px] text-gray-500 uppercase tracking-widest">Date: <span class="auto-date font-semibold text-gray-800"></span></div>
+                    </div>
+                </div>
+                <!-- Agency Signature -->
+                <div class="relative">
+                    <input type="text" class="signature-input" placeholder="Type signature here...">
+                    <div class="border-b-2 border-gray-400 mb-3"></div>
+                    <div class="flex justify-between items-center">
+                        <div class="text-[11px] text-gray-800 uppercase tracking-widest font-bold">Mousam Chatterjee, Finest Enterprises</div>
+                        <div class="text-[11px] text-gray-500 uppercase tracking-widest">Date: <span class="auto-date font-semibold text-gray-800"></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Print Button (Hidden on Print) -->
+    <button onclick="window.print()" class="no-print mt-10 px-8 py-3 bg-[#D4AF37] hover:bg-[#b8952d] text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2 reveal">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+        </svg>
+        Print Document
+    </button>
+
+    <!-- JS for Animation & Date -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Inject Today's Date
+        const today = new Date();
+        const options = { day: '2-digit', month: 'long', year: 'numeric' };
+        const formattedDate = today.toLocaleDateString('en-GB', options); // Format: 02 April 2026
+        document.querySelectorAll('.auto-date').forEach(el => {
+            el.textContent = formattedDate;
+        });
+
+        // Staggered reveal for document sections on load
+        gsap.fromTo(".reveal", 
+            { opacity: 0, y: 20 },
+            {
+                opacity: 1, 
+                y: 0, 
+                duration: 0.6, 
+                stagger: 0.1,
+                ease: "power2.out",
+                delay: 0.1
+            }
+        );
+    </script>
+</body>
+</html>

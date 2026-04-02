@@ -10,8 +10,6 @@
     <!-- GSAP & ScrollTrigger for Premium Popping Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-        <link rel="icon" type="image/png" href="https://finestclients.com/finestclientslogo.png">
-
     <style>
         /* Premium Typography */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
@@ -151,32 +149,6 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
-        /* --- Magnetic CTA Button --- */
-        .btn-primary {
-            background: linear-gradient(90deg, var(--brand-gold) 0%, #B8860B 100%);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            padding: 1.25rem 2.5rem; 
-            border-radius: 1rem;
-            /* Snappy interaction */
-            transition: transform 0.1s cubic-bezier(0.33, 1, 0.68, 1), box-shadow 0.15s ease-out;
-        }
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(90deg, #F1D592 0%, var(--brand-gold) 100%);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.15s ease-out;
-        }
-        .btn-primary:hover::before { opacity: 1; }
-        .btn-primary:hover {
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.3);
-        }
-        .btn-primary:active { transform: scale(0.98) !important; }
-
         /* --- Ambient Background Glows --- */
         .ambient-orb {
             position: absolute;
@@ -270,18 +242,6 @@
             <p class="reveal delay-200 text-lg md:text-xl text-[var(--text-muted)] mb-14 max-w-2xl mx-auto leading-relaxed font-light">
                 Solving the visibility gap and building a compounding, high-authority acquisition machine for Volare AI.
             </p>
-            
-            <div class="reveal delay-300 flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <a href="#pricing" class="btn-primary text-black font-bold text-lg w-full sm:w-auto shadow-[0_10px_20px_rgba(0,0,0,0.3)] flex items-center justify-center gap-3 group js-magnetic">
-                    <span>View The Investment</span>
-                    <div class="bg-black/10 rounded-full p-1.5 transition-transform duration-150 ease-out group-hover:translate-x-1">
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </a>
-                <a href="#strategy" class="px-8 py-4 rounded-xl border border-white/10 text-white hover:bg-white/5 hover:border-white/30 transition-all duration-150 ease-out font-medium w-full sm:w-auto text-center backdrop-blur-sm">
-                    Explore The System
-                </a>
-            </div>
         </div>
     </section>
 
@@ -573,35 +533,21 @@
                     
                     <div class="grid sm:grid-cols-2 gap-8 text-left mb-16 px-2 md:px-10 relative z-10">
                         <div class="space-y-6 text-gray-300 text-sm md:text-base">
-                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-check text-[#D4AF37] text-xs"></i></div> 4 Strategic Long Videos</div>
-                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-check text-[#D4AF37] text-xs"></i></div> 8-10 Targeted Shorts/Reels</div>
-                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-check text-[#D4AF37] text-xs"></i></div> Expert Outlines <span class="text-gray-500 text-xs italic">(No AI Slop)</span></div>
-                        </div>
-                        <div class="space-y-6 text-gray-300 text-sm md:text-base">
-                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-video text-[#D4AF37] text-xs"></i></div> Premium "Hormozi" Editing</div>
-                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-image text-[#D4AF37] text-xs"></i></div> A/B Thumbnail Testing</div>
-                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-funnel-dollar text-[#D4AF37] text-xs"></i></div> Funnel Integration Logic</div>
-                        </div>
+                        <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-video text-[#D4AF37] text-xs"></i></div> Premium "Hormozi" Editing</div>
+                        <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-image text-[#D4AF37] text-xs"></i></div> A/B Thumbnail Testing</div>
+                        <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-funnel-dollar text-[#D4AF37] text-xs"></i></div> Funnel Integration Logic</div>
                     </div>
+                </div>
 
-                    <!-- Risk Reversal -->
-                    <div class="bg-gradient-to-r from-[#D4AF37]/10 to-transparent border-l-4 border-[#D4AF37] p-8 rounded-2xl mb-14 text-left flex flex-col sm:flex-row gap-6 items-center sm:items-start relative z-10 shadow-lg">
-                        <div class="w-16 h-16 rounded-full bg-[#D4AF37]/20 flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-                            <i class="fas fa-shield-check text-[#D4AF37] text-2xl"></i>
-                        </div>
-                        <div class="text-center sm:text-left">
-                            <h4 class="font-black text-white uppercase text-xs tracking-widest mb-3">The Soft Guarantee</h4>
-                            <p class="text-gray-300 text-base leading-relaxed font-light italic">"If we don't hit <strong class="text-white font-bold">10 qualified appointments</strong> in the first 90 days, we work for free until we do. We win when Volare AI wins."</p>
-                        </div>
+                <!-- Risk Reversal -->
+                <div class="bg-white/[0.02] border border-white/5 p-8 rounded-2xl mb-4 text-left flex flex-col sm:flex-row gap-6 items-center sm:items-start relative z-10">
+                    <div class="w-12 h-12 rounded-full bg-[#D4AF37]/10 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-shield-check text-[#D4AF37] text-xl"></i>
                     </div>
-
-                    <!-- CTA -->
-                    <button class="btn-primary w-full rounded-2xl text-black font-black text-xl flex items-center justify-center gap-4 group js-magnetic py-6">
-                        Activate Strategy
-                        <div class="bg-black/10 rounded-full p-2 transition-transform duration-150 ease-out group-hover:translate-x-2">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </button>
+                    <div class="text-center sm:text-left">
+                        <h4 class="font-semibold text-white uppercase text-xs tracking-widest mb-2">The Soft Guarantee</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">"If we don't hit <strong class="text-white font-medium">10 qualified appointments</strong> in the first 90 days, we work for free until we do. We win when Volare AI wins."</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -695,22 +641,6 @@
                 });
             });
         }
-
-        // 5. Fast Magnetic Buttons
-        const magneticBtns = document.querySelectorAll('.js-magnetic');
-        magneticBtns.forEach(btn => {
-            btn.addEventListener('mousemove', function(e) {
-                const position = btn.getBoundingClientRect();
-                const x = e.pageX - position.left - position.width / 2;
-                const y = e.pageY - position.top - position.height / 2;
-                
-                btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-            });
-
-            btn.addEventListener('mouseout', function(e) {
-                btn.style.transform = `translate(0px, 0px)`;
-            });
-        });
     </script>
 </body>
 </html>

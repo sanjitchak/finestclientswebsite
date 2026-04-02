@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volare AI x Finest Clients | Partnership Proposal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- GSAP & ScrollTrigger for Premium Popping Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        /* Premium Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+        
+        :root {
+            --brand-gold: #D4AF37;
+            --brand-gold-light: #F1D592;
+            --brand-dark: #0A0A0C; 
+            --brand-gray: #16161A;
+            --text-muted: #A0A0AB;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--brand-dark);
+            color: #E5E5E5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--brand-dark); }
+        ::-webkit-scrollbar-thumb { background: #2A2A35; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--brand-gold); }
+
+        /* --- Scroll Progress Bar --- */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #D4AF37, #FFF);
+            z-index: 100;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            transition: width 0.1s ease-out;
+        }
+
+        /* --- Premium Noise Overlay --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.03"/%3E%3C/svg%3E');
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .heading-serif {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: -0.02em;
+        }
+
+        /* --- Advanced Animations (Smoother & Faster) --- */
+        @keyframes textGradient {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
+            50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.25); transform: scale(1.01); }
+            100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); transform: scale(1); }
+        }
+        
+        /* New Smooth Floating Animations for Premium Pop */
+        @keyframes float-smooth {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+        @keyframes float-smooth-reverse {
+            0%, 100% { transform: translateY(0) rotate(2deg); }
+            50% { transform: translateY(-15px) rotate(-2deg); }
+        }
+
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0) rotate(1deg); }
+            50% { transform: translateY(-10px) rotate(-1deg); }
+        }
+
+        /* --- NEW: Geometric Background Animations --- */
+        @keyframes spin-slow-smooth {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes spin-reverse-smooth {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+        @keyframes pulse-subtle-geo {
+            0%, 100% { opacity: 0.1; transform: scale(0.95); }
+            50% { opacity: 0.3; transform: scale(1.05); }
+        }
+
+        .animate-float-smooth { animation: float-smooth 6s ease-in-out infinite; }
+        .animate-float-reverse { animation: float-smooth-reverse 7s ease-in-out infinite; }
+        .animate-float-slow { animation: float-slow 9s ease-in-out infinite; }
+        
+        .animate-spin-slow { animation: spin-slow-smooth 25s linear infinite; }
+        .animate-spin-reverse { animation: spin-reverse-smooth 30s linear infinite; }
+        .animate-pulse-geo { animation: pulse-subtle-geo 8s ease-in-out infinite; }
+
+        .gold-gradient-animated {
+            background: linear-gradient(90deg, #D4AF37, #F1D592, #FFF, #F1D592, #D4AF37);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradient 6s linear infinite;
+        }
+
+        /* --- Scroll Reveal Animations --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 75ms; }
+        .delay-200 { transition-delay: 150ms; }
+        .delay-300 { transition-delay: 225ms; }
+
+        /* --- True Glassmorphism (Fast & Smooth Hover) --- */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            /* Faster, snappier transition */
+            transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border-radius: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- Magnetic CTA Button --- */
+        .btn-primary {
+            background: linear-gradient(90deg, var(--brand-gold) 0%, #B8860B 100%);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            padding: 1.25rem 2.5rem; 
+            border-radius: 1rem;
+            /* Snappy interaction */
+            transition: transform 0.1s cubic-bezier(0.33, 1, 0.68, 1), box-shadow 0.15s ease-out;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, #F1D592 0%, var(--brand-gold) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.15s ease-out;
+        }
+        .btn-primary:hover::before { opacity: 1; }
+        .btn-primary:hover {
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.3);
+        }
+        .btn-primary:active { transform: scale(0.98) !important; }
+
+        /* --- Ambient Background Glows --- */
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress"></div>
+
+    <!-- Background Orbs -->
+    <div class="ambient-orb bg-yellow-600/10 w-[600px] h-[600px] top-[-10%] left-[-10%]"></div>
+    <div class="ambient-orb bg-indigo-900/10 w-[500px] h-[500px] bottom-[20%] right-[-10%]"></div>
+    <div class="ambient-orb bg-yellow-900/10 w-[400px] h-[400px] top-[40%] right-[10%]"></div>
+
+    <!-- Hero Section (Interactive & Premium) -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative px-6 py-20 overflow-hidden">
+        
+        <!-- NEW: Deep Background Geometric Elements -->
+        <div class="absolute top-[20%] right-[30%] z-0 opacity-20 blur-[2px] animate-spin-slow pointer-events-none js-parallax" data-speed="0.02">
+            <!-- 4-Point Sparkle -->
+            <svg class="w-12 h-12 text-[#D4AF37]" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 0 C50 40 60 50 100 50 C60 50 50 60 50 100 C50 60 40 50 0 50 C40 50 50 40 50 0 Z" />
+            </svg>
+        </div>
+        <div class="absolute bottom-[25%] left-[10%] z-0 opacity-10 blur-[4px] animate-pulse-geo pointer-events-none js-parallax" data-speed="-0.03">
+            <!-- Hollow Ring -->
+            <svg class="w-32 h-32 text-white" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="50" cy="50" r="48" />
+            </svg>
+        </div>
+        <div class="absolute top-[40%] left-[25%] z-0 opacity-10 blur-[1px] animate-spin-reverse pointer-events-none js-parallax" data-speed="0.04">
+            <!-- Minimalist Cross -->
+            <svg class="w-8 h-8 text-white" viewBox="0 0 100 100" fill="currentColor">
+                <rect x="49" y="10" width="2" height="80" rx="1" />
+                <rect x="10" y="49" width="80" height="2" rx="1" />
+            </svg>
+        </div>
+
+        <!-- Premium Floating 3D-Style Glass Logos (Pushed to back with Depth of Field) -->
+        
+        <!-- Mid-Foreground (Sharper, faster) -->
+        <div class="absolute top-[15%] md:top-[20%] left-[0%] md:left-[10%] z-0 opacity-70 blur-[3px] animate-float-smooth pointer-events-none js-parallax" data-speed="0.05">
+            <div class="relative bg-white/5 backdrop-blur-xl border border-white/10 border-t-white/20 rounded-[2rem] p-6 shadow-2xl overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-br from-red-500/20 to-transparent opacity-60"></div>
+                <div class="absolute top-0 left-1/4 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+                <i class="fab fa-youtube text-6xl text-red-500 drop-shadow-[0_0_15px_rgba(255,0,0,0.6)] relative z-10"></i>
+            </div>
+        </div>
+
+        <div class="absolute bottom-[15%] md:bottom-[20%] right-[0%] md:right-[10%] z-0 opacity-70 blur-[3px] animate-float-reverse pointer-events-none js-parallax" data-speed="-0.04">
+            <div class="relative bg-white/5 backdrop-blur-xl border border-white/10 border-t-white/20 rounded-full p-5 shadow-2xl overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-purple-500/20 opacity-60"></div>
+                <div class="absolute top-0 left-1/4 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+                <i class="fab fa-instagram text-5xl text-transparent bg-clip-text bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 drop-shadow-[0_0_15px_rgba(225,48,108,0.4)] relative z-10"></i>
+            </div>
+        </div>
+
+        <!-- Deep Background (Smaller, very blurry, slower parallax) -->
+        <div class="absolute top-[10%] md:top-[15%] right-[5%] md:right-[15%] z-0 opacity-30 blur-[6px] scale-75 animate-float-slow pointer-events-none js-parallax" data-speed="0.015">
+            <div class="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-[1.5rem] p-5 shadow-xl overflow-hidden">
+                <i class="fab fa-youtube text-5xl text-red-500 drop-shadow-[0_0_10px_rgba(255,0,0,0.4)] relative z-10"></i>
+            </div>
+        </div>
+
+        <div class="absolute bottom-[25%] md:bottom-[35%] left-[5%] md:left-[15%] z-0 opacity-40 blur-[5px] scale-90 animate-float-smooth pointer-events-none js-parallax" data-speed="-0.02">
+            <div class="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-full p-4 shadow-xl overflow-hidden">
+                <i class="fab fa-instagram text-4xl text-transparent bg-clip-text bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 drop-shadow-[0_0_10px_rgba(225,48,108,0.3)] relative z-10"></i>
+            </div>
+        </div>
+
+        <!-- Main Content (Brought to front) -->
+        <div class="max-w-5xl w-full text-center z-20 relative">
+
+            <!-- Personalized Tag -->
+            <div class="reveal inline-flex items-center gap-3 px-6 py-2.5 mb-10 border border-[#D4AF37]/30 rounded-full bg-[#D4AF37]/5 text-xs tracking-[0.2em] text-[#D4AF37] uppercase font-bold shadow-[0_0_30px_rgba(212,175,55,0.1)] backdrop-blur-md" style="animation: pulseGlow 4s infinite;">
+                <span class="w-2 h-2 rounded-full bg-[#D4AF37] shadow-[0_0_10px_#D4AF37]"></span>
+                Prepared exclusively for Carrie LaDue
+            </div>
+            
+            <h1 class="reveal delay-100 heading-serif text-6xl md:text-8xl lg:text-[7.5rem] mb-8 leading-[1.05] drop-shadow-2xl">
+                Scale <span class="gold-gradient-animated">Enterprise Value</span> <br> Through Content
+            </h1>
+            
+            <p class="reveal delay-200 text-lg md:text-xl text-[var(--text-muted)] mb-14 max-w-2xl mx-auto leading-relaxed font-light">
+                Solving the visibility gap and building a compounding, high-authority acquisition machine for Volare AI.
+            </p>
+            
+            <div class="reveal delay-300 flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <a href="#pricing" class="btn-primary text-black font-bold text-lg w-full sm:w-auto shadow-[0_10px_20px_rgba(0,0,0,0.3)] flex items-center justify-center gap-3 group js-magnetic">
+                    <span>View The Investment</span>
+                    <div class="bg-black/10 rounded-full p-1.5 transition-transform duration-150 ease-out group-hover:translate-x-1">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+                <a href="#strategy" class="px-8 py-4 rounded-xl border border-white/10 text-white hover:bg-white/5 hover:border-white/30 transition-all duration-150 ease-out font-medium w-full sm:w-auto text-center backdrop-blur-sm">
+                    Explore The System
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem & Stats Section -->
+    <section class="py-32 px-6 relative z-10 bg-[#0A0A0C]/80 border-t border-white/5 overflow-hidden">
+        
+        <!-- Geometric Elements -->
+        <div class="absolute top-[15%] right-[15%] z-0 opacity-10 blur-[3px] animate-spin-slow pointer-events-none js-parallax" data-speed="0.03">
+            <svg class="w-24 h-24 text-[#D4AF37]" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+                <circle cx="50" cy="50" r="48" stroke-dasharray="4 8" />
+            </svg>
+        </div>
+        <div class="absolute bottom-[15%] left-[5%] z-0 opacity-[0.07] blur-[5px] animate-spin-reverse pointer-events-none js-parallax" data-speed="-0.02">
+            <svg class="w-40 h-40 text-white" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 5 L60 20 L77 15 L80 32 L95 40 L85 55 L95 70 L78 75 L75 92 L60 85 L50 100 L40 85 L25 92 L22 75 L5 70 L15 55 L5 40 L20 32 L23 15 L40 20 Z" />
+            </svg>
+        </div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="reveal">
+                    <h2 class="heading-serif text-4xl md:text-5xl mb-6">The <span class="gold-gradient-animated">Visibility</span> Gap</h2>
+                    <p class="text-[var(--text-muted)] mb-6 text-lg leading-relaxed font-light">
+                        Carrie, your offer converts at a staggering <strong class="text-white font-medium">50%</strong>. Your closing process is proven. But right now, you are battling a recognition problem in the market.
+                    </p>
+                    <p class="text-[var(--text-muted)] mb-6 text-lg leading-relaxed font-light">
+                        Relying purely on manual outreach creates a rollercoaster pipeline. To stabilize and scale, we must generate highly targeted views to build brand authority *before* they ever book a call.
+                    </p>
+                    
+                    <div class="space-y-5 mt-10">
+                        <div class="flex items-center gap-5 p-6 rounded-2xl glass-card transition-all duration-150 ease-out hover:border-white/20 group">
+                            <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-150 ease-out">
+                                <i class="fas fa-eye-slash text-white/50"></i>
+                            </div>
+                            <span class="text-gray-300 font-medium text-lg">Current State: Great offer, lack of market recognition.</span>
+                        </div>
+                        <div class="flex items-center gap-5 p-6 rounded-2xl glass-card transition-all duration-150 ease-out hover:border-[#D4AF37]/30 group">
+                            <div class="w-12 h-12 rounded-full bg-[#D4AF37]/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-150 ease-out">
+                                <i class="fas fa-broadcast-tower text-[#D4AF37] drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]"></i>
+                            </div>
+                            <span class="text-gray-300 font-medium text-lg">The Goal: Omnipresent reach in the $1M-$5M founder niche.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 reveal delay-100" id="stats-container">
+                    <div class="glass-card p-10 text-center flex flex-col justify-center">
+                        <div class="text-5xl font-black text-white mb-2 tracking-tighter"><span class="counter" data-target="50">0</span>%</div>
+                        <div class="text-[11px] text-[#D4AF37] uppercase tracking-widest font-bold">Close Rate</div>
+                    </div>
+                    <div class="glass-card p-10 text-center flex flex-col justify-center">
+                        <div class="text-5xl font-black text-white mb-2 tracking-tighter">$<span class="counter" data-target="36">0</span>K</div>
+                        <div class="text-[11px] text-[#D4AF37] uppercase tracking-widest font-bold">Min Offer</div>
+                    </div>
+                    <div class="glass-card p-10 text-center flex flex-col justify-center">
+                        <div class="text-5xl font-black text-white mb-2 tracking-tighter"><span class="counter" data-target="10">0</span>+</div>
+                        <div class="text-[11px] text-[#D4AF37] uppercase tracking-widest font-bold">Appt Target</div>
+                    </div>
+                    <div class="glass-card p-10 text-center flex flex-col justify-center">
+                        <div class="text-5xl font-black text-white mb-2 tracking-tighter"><span class="counter" data-target="0">0</span></div>
+                        <div class="text-[11px] text-[#D4AF37] uppercase tracking-widest font-bold">Inbound Floor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy Section (Visual Funnel Math) -->
+    <section id="strategy" class="py-32 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjwvc3ZnPg==')] opacity-50 z-0"></div>
+        
+        <!-- Geometric Deep Background Elements -->
+        <div class="absolute top-[10%] left-[45%] z-0 opacity-20 blur-[2px] animate-spin-slow pointer-events-none js-parallax" data-speed="-0.03">
+            <svg class="w-10 h-10 text-[#D4AF37]" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 0 C50 40 60 50 100 50 C60 50 50 60 50 100 C50 60 40 50 0 50 C40 50 50 40 50 0 Z" />
+            </svg>
+        </div>
+        <div class="absolute bottom-[10%] right-[25%] z-0 opacity-10 blur-[3px] animate-pulse-geo pointer-events-none js-parallax" data-speed="0.04">
+            <svg class="w-16 h-16 text-white" viewBox="0 0 100 100" fill="currentColor">
+                <rect x="48" y="10" width="4" height="80" rx="2" />
+                <rect x="10" y="48" width="80" height="4" rx="2" />
+            </svg>
+        </div>
+
+        <!-- Depth of field floating elements for Strategy -->
+        <div class="absolute top-[20%] right-[10%] z-0 opacity-60 blur-[2px] scale-110 animate-float-reverse pointer-events-none js-parallax" data-speed="0.06">
+            <div class="relative bg-white/5 backdrop-blur-xl border border-white/10 border-t-white/20 rounded-full p-6 shadow-2xl">
+                <i class="fas fa-play text-4xl text-[#D4AF37] drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] relative z-10"></i>
+            </div>
+        </div>
+
+        <div class="absolute bottom-[20%] left-[5%] z-0 opacity-30 blur-[5px] scale-75 animate-float-slow pointer-events-none js-parallax" data-speed="-0.02">
+            <div class="relative bg-white/5 backdrop-blur-md border border-white/10 border-t-white/20 rounded-[1.5rem] p-5 shadow-xl">
+                <i class="fas fa-video text-3xl text-white/80 drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] relative z-10"></i>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-24 reveal">
+                <span class="text-[#D4AF37] text-xs font-bold tracking-[0.3em] uppercase mb-4 block">The Methodology & Math</span>
+                <h2 class="heading-serif text-5xl md:text-6xl mb-6">The Acquisition <span class="gold-gradient-animated">Funnel</span></h2>
+                <p class="text-[var(--text-muted)] text-lg max-w-2xl mx-auto font-light">To hit your goals, we must generate views *first*. Here is the exact mathematical blueprint we will execute over the next 90 days to scale your appointments.</p>
+            </div>
+
+            <!-- Visual Funnel Flow -->
+            <div class="relative flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-4">
+                
+                <!-- Connector Lines (Desktop) -->
+                <div class="hidden lg:block absolute top-1/2 left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent -translate-y-1/2 z-0">
+                    <!-- Animated flowing particle -->
+                    <div class="absolute top-[-2px] left-0 w-16 h-[6px] bg-[#D4AF37] rounded-full blur-[2px] animate-[shimmer_3s_infinite]"></div>
+                </div>
+
+                <!-- Step 1: Reach -->
+                <div class="reveal glass-card p-10 w-full lg:w-1/3 relative z-10 hover:border-white/20">
+                    <div class="mb-6 flex items-center justify-between">
+                        <span class="px-3 py-1 bg-white/10 rounded-md text-[10px] uppercase tracking-widest font-bold text-white">Top of Funnel</span>
+                        <div class="flex gap-2">
+                            <i class="fab fa-youtube text-red-500 text-xl"></i>
+                            <i class="fab fa-instagram text-pink-500 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2 tracking-tighter">3k-10k</div>
+                    <h3 class="text-xl font-bold mb-4 text-[#D4AF37]">Targeted Views</h3>
+                    <p class="text-[var(--text-muted)] leading-relaxed font-light text-sm">
+                        It takes effort to capture attention. We deploy a dual-platform approach (YouTube + Instagram) to accelerate reach and hit this view velocity in the first 3 months.
+                    </p>
+                </div>
+
+                <!-- Arrow (Mobile) -->
+                <div class="lg:hidden text-[#D4AF37]/50 text-2xl reveal delay-100">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+
+                <!-- Step 2: Conversion -->
+                <div class="reveal delay-100 glass-card p-10 w-full lg:w-1/3 relative z-10 border-[#D4AF37]/30 bg-gradient-to-b from-[#D4AF37]/[0.05] to-transparent transform lg:-translate-y-6">
+                    <div class="mb-6 flex items-center justify-between">
+                        <span class="px-3 py-1 bg-[#D4AF37]/20 rounded-md text-[10px] uppercase tracking-widest font-bold text-[#D4AF37]">Middle of Funnel</span>
+                        <i class="fas fa-filter text-[#D4AF37] text-xl"></i>
+                    </div>
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2 tracking-tighter">0.5 - 1%</div>
+                    <h3 class="text-xl font-bold mb-4 text-[#D4AF37]">Conversion Rate</h3>
+                    <p class="text-[var(--text-muted)] leading-relaxed font-light text-sm">
+                        Once we have the attention, our structured long-form content nurtures these viewers, shifting their beliefs and driving them directly into your VSL booking funnel.
+                    </p>
+                </div>
+
+                <!-- Arrow (Mobile) -->
+                <div class="lg:hidden text-[#D4AF37]/50 text-2xl reveal delay-200">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+
+                <!-- Step 3: Yield -->
+                <div class="reveal delay-200 glass-card p-10 w-full lg:w-1/3 relative z-10 border-[#D4AF37]/50 bg-[#D4AF37]/5 shadow-[0_0_40px_rgba(212,175,55,0.15)]">
+                    <div class="mb-6 flex items-center justify-between">
+                        <span class="px-3 py-1 bg-[#D4AF37] rounded-md text-[10px] uppercase tracking-widest font-black text-black">Bottom of Funnel</span>
+                        <i class="fas fa-calendar-check text-[#D4AF37] text-xl"></i>
+                    </div>
+                    <div class="text-4xl md:text-5xl font-black text-white mb-2 tracking-tighter gold-gradient-animated">30-100</div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Appointments</h3>
+                    <p class="text-gray-300 leading-relaxed font-light text-sm">
+                        This math reliably yields 30-100 calls. Many clients hit this in Month 1. We officially guarantee 10 just to completely remove your risk while we build the engine.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="py-32 px-6 bg-[#0A0A0C]/90 border-y border-white/5 relative overflow-hidden">
+        <!-- Subtle Glow accent -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[300px] bg-[#D4AF37]/5 blur-[150px] pointer-events-none"></div>
+
+        <!-- Geometric Backgrounds -->
+        <div class="absolute top-[30%] left-[8%] z-0 opacity-10 blur-[4px] animate-spin-reverse pointer-events-none js-parallax" data-speed="-0.02">
+            <svg class="w-20 h-20 text-white" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="50,10 90,90 10,90" />
+            </svg>
+        </div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-20 reveal flex flex-col items-center">
+                <!-- Exact 12-point golden starburst from screenshot, spinning smoothly -->
+                <div class="mb-6 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] animate-spin-slow">
+                    <svg class="w-8 h-8 text-[#D4AF37]" viewBox="0 0 100 100" fill="currentColor">
+                        <path d="M50 5 L60 20 L77 15 L80 32 L95 40 L85 55 L95 70 L78 75 L75 92 L60 85 L50 100 L40 85 L25 92 L22 75 L5 70 L15 55 L5 40 L20 32 L23 15 L40 20 Z" />
+                    </svg>
+                </div>
+                <h2 class="heading-serif text-4xl md:text-5xl mb-4">Proven Results</h2>
+                <p class="text-[var(--text-muted)] font-light text-lg">B2B Coaching & Consulting Success.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Case Study 1 (Fast & Smooth Clickable) -->
+                <a href="https://www.youtube.com/@breakoutfoundersacademy" target="_blank" class="reveal glass-card border-t border-l border-white/10 hover:border-[#D4AF37]/50 p-1 group cursor-pointer block no-underline transition-all duration-150 ease-out">
+                    <div class="bg-[#121215]/80 p-10 h-full rounded-[1.9rem] flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-10">
+                                <div>
+                                    <h4 class="text-2xl font-bold text-white mb-1 transition-colors duration-150 ease-out group-hover:text-[#D4AF37]">Ryan Jackson</h4>
+                                    <p class="text-sm text-[#D4AF37]">B2B Operations Coach</p>
+                                </div>
+                                <span class="px-4 py-1.5 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] text-[10px] font-black uppercase tracking-widest shadow-[0_0_15px_rgba(212,175,55,0.1)] flex items-center gap-2 transition-colors duration-150 ease-out group-hover:bg-[#D4AF37]/20">
+                                    Watch <i class="fas fa-play text-xs opacity-60 group-hover:opacity-100 transition-opacity duration-150 ease-out"></i>
+                                </span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-6 mb-10">
+                                <div class="border-l-2 border-[#D4AF37]/50 pl-5">
+                                    <span class="text-gray-500 uppercase text-[10px] font-bold tracking-widest block mb-2">Outcome</span>
+                                    <span class="text-white font-bold text-xl">$15,000 Deal</span>
+                                </div>
+                                <div class="border-l-2 border-white/10 pl-5">
+                                    <span class="text-gray-500 uppercase text-[10px] font-bold tracking-widest block mb-2">Timeline</span>
+                                    <span class="text-white font-medium text-xl">60 Days</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-r from-white/[0.03] to-transparent p-6 rounded-2xl border-l-2 border-[#D4AF37] group-hover:bg-white/[0.06] transition-colors duration-150 ease-out">
+                            <p class="text-gray-300 italic text-sm leading-relaxed">"Views don't matter. The RIGHT viewer does. One decision-maker watching is worth more than 10,000 browsers."</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Case Study 2 (Fast & Smooth Clickable) -->
+                <a href="https://www.youtube.com/@HeyyyHR" target="_blank" class="reveal delay-100 glass-card border-t border-l border-white/10 hover:border-blue-500/50 p-1 group cursor-pointer block no-underline transition-all duration-150 ease-out">
+                    <div class="bg-[#121215]/80 p-10 h-full rounded-[1.9rem] flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-10">
+                                <div>
+                                    <h4 class="text-2xl font-bold text-white mb-1 transition-colors duration-150 ease-out group-hover:text-blue-400">Heyyy HR</h4>
+                                    <p class="text-sm text-blue-400">Leadership Development</p>
+                                </div>
+                                <span class="px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-[10px] font-black uppercase tracking-widest shadow-[0_0_15px_rgba(59,130,246,0.1)] flex items-center gap-2 transition-colors duration-150 ease-out group-hover:bg-blue-500/20">
+                                    Watch <i class="fas fa-play text-xs opacity-60 group-hover:opacity-100 transition-opacity duration-150 ease-out"></i>
+                                </span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-6 mb-10">
+                                <div class="border-l-2 border-blue-500/50 pl-5">
+                                    <span class="text-gray-500 uppercase text-[10px] font-bold tracking-widest block mb-2">Outcome</span>
+                                    <span class="text-white font-bold text-xl">+8-10 Calls /mo</span>
+                                </div>
+                                <div class="border-l-2 border-white/10 pl-5">
+                                    <span class="text-gray-500 uppercase text-[10px] font-bold tracking-widest block mb-2">Stability</span>
+                                    <span class="text-white font-medium text-xl">Predictable Floor</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-r from-white/[0.03] to-transparent p-6 rounded-2xl border-l-2 border-blue-500 group-hover:bg-white/[0.06] transition-colors duration-150 ease-out">
+                            <p class="text-gray-300 italic text-sm leading-relaxed">"YouTube created a floor. Referrals are now 'upside,' not a survival lifeline."</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-32 px-6 relative overflow-hidden">
+        
+        <!-- Geometric Elements -->
+        <div class="absolute top-[15%] right-[20%] z-0 opacity-20 blur-[1px] animate-spin-slow pointer-events-none js-parallax" data-speed="0.05">
+            <svg class="w-14 h-14 text-[#D4AF37]" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 0 C50 40 60 50 100 50 C60 50 50 60 50 100 C50 60 40 50 0 50 C40 50 50 40 50 0 Z" />
+            </svg>
+        </div>
+        <div class="absolute bottom-[20%] left-[15%] z-0 opacity-[0.08] blur-[6px] animate-float-slow pointer-events-none js-parallax" data-speed="-0.04">
+            <svg class="w-48 h-48 text-white" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+                <circle cx="50" cy="50" r="48" />
+                <circle cx="50" cy="50" r="38" stroke-dasharray="2 4" />
+            </svg>
+        </div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="reveal relative p-[1px] rounded-[3rem] bg-gradient-to-b from-[#D4AF37]/50 via-white/5 to-white/5 shadow-[0_0_60px_rgba(212,175,55,0.1)] group">
+                
+                <div class="bg-[#0F0F13] p-10 md:p-20 rounded-[3rem] relative overflow-hidden text-center backdrop-blur-3xl">
+                    
+                    <!-- Gentle Glow inside card -->
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.06)_0%,transparent_60%)] pointer-events-none"></div>
+                    
+                    <h2 class="heading-serif text-3xl md:text-4xl mb-2 text-white relative z-10">Partnership Terms</h2>
+                    
+                    <div class="text-[5rem] md:text-[7rem] font-black mb-2 tracking-tighter gold-gradient-animated pb-2 relative z-10 drop-shadow-2xl">
+                        $3,500<span class="text-3xl text-gray-500 font-medium tracking-normal">/mo</span>
+                    </div>
+                    
+                    <p class="text-[#D4AF37] uppercase tracking-[0.3em] font-bold text-xs mb-16 relative z-10">YouTube + Instagram Management</p>
+                    
+                    <div class="grid sm:grid-cols-2 gap-8 text-left mb-16 px-2 md:px-10 relative z-10">
+                        <div class="space-y-6 text-gray-300 text-sm md:text-base">
+                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-check text-[#D4AF37] text-xs"></i></div> 4 Strategic Long Videos</div>
+                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-check text-[#D4AF37] text-xs"></i></div> 8-10 Targeted Shorts/Reels</div>
+                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-check text-[#D4AF37] text-xs"></i></div> Expert Outlines <span class="text-gray-500 text-xs italic">(No AI Slop)</span></div>
+                        </div>
+                        <div class="space-y-6 text-gray-300 text-sm md:text-base">
+                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-video text-[#D4AF37] text-xs"></i></div> Premium "Hormozi" Editing</div>
+                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-image text-[#D4AF37] text-xs"></i></div> A/B Thumbnail Testing</div>
+                            <div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 shadow-inner"><i class="fas fa-funnel-dollar text-[#D4AF37] text-xs"></i></div> Funnel Integration Logic</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk Reversal -->
+                    <div class="bg-gradient-to-r from-[#D4AF37]/10 to-transparent border-l-4 border-[#D4AF37] p-8 rounded-2xl mb-14 text-left flex flex-col sm:flex-row gap-6 items-center sm:items-start relative z-10 shadow-lg">
+                        <div class="w-16 h-16 rounded-full bg-[#D4AF37]/20 flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                            <i class="fas fa-shield-check text-[#D4AF37] text-2xl"></i>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <h4 class="font-black text-white uppercase text-xs tracking-widest mb-3">The Soft Guarantee</h4>
+                            <p class="text-gray-300 text-base leading-relaxed font-light italic">"If we don't hit <strong class="text-white font-bold">10 qualified appointments</strong> in the first 90 days, we work for free until we do. We win when Volare AI wins."</p>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <button class="btn-primary w-full rounded-2xl text-black font-black text-xl flex items-center justify-center gap-4 group js-magnetic py-6">
+                        Activate Strategy
+                        <div class="bg-black/10 rounded-full p-2 transition-transform duration-150 ease-out group-hover:translate-x-2">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 border-t border-white/5 text-center relative overflow-hidden bg-[#050507]">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent"></div>
+        <p class="mb-4 text-sm text-gray-500 font-light">&copy; 2024 Finest Clients x Volare AI</p>
+        <p class="text-[10px] uppercase tracking-[0.4em] text-[#D4AF37]/50 font-bold">Excellence is the standard</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. GSAP Scroll Reveal Logic (Smooth, fast, and elegant slide-in)
+        const revealElements = document.querySelectorAll('.reveal');
+        revealElements.forEach((el, i) => {
+            let delayTime = 0;
+            if (el.classList.contains('delay-100')) delayTime = 0.1;
+            if (el.classList.contains('delay-200')) delayTime = 0.2;
+
+            gsap.fromTo(el, 
+                { opacity: 0, y: 40 },
+                {
+                    scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" },
+                    opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: delayTime
+                }
+            );
+        });
+
+        // 2. Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        });
+
+        // 3. Number Counter Animation
+        const statsSection = document.getElementById('stats-container');
+        let animated = false;
+        const animateNumbers = () => {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const speed = 60; 
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !animated) {
+                animated = true;
+                animateNumbers();
+            }
+        }, { threshold: 0.3 });
+        if(statsSection) { statsObserver.observe(statsSection); }
+
+        // 4. Fast Mouse Parallax
+        const hero = document.getElementById('hero');
+        const parallaxEls = document.querySelectorAll('.js-parallax');
+        
+        if (hero && parallaxEls.length > 0) {
+            hero.addEventListener('mousemove', (e) => {
+                const x = (window.innerWidth - e.pageX * 2) / 100;
+                const y = (window.innerHeight - e.pageY * 2) / 100;
+
+                parallaxEls.forEach(el => {
+                    const speed = el.getAttribute('data-speed');
+                    const xOffset = x * speed * 100;
+                    const yOffset = y * speed * 100;
+                    el.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+                });
+            });
+            hero.addEventListener('mouseleave', () => {
+                parallaxEls.forEach(el => {
+                    el.style.transform = `translate(0px, 0px)`;
+                });
+            });
+        }
+
+        // 5. Fast Magnetic Buttons
+        const magneticBtns = document.querySelectorAll('.js-magnetic');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const position = btn.getBoundingClientRect();
+                const x = e.pageX - position.left - position.width / 2;
+                const y = e.pageY - position.top - position.height / 2;
+                
+                btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+            });
+
+            btn.addEventListener('mouseout', function(e) {
+                btn.style.transform = `translate(0px, 0px)`;
+            });
+        });
+    </script>
+</body>
+</html>

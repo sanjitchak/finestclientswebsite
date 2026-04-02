@@ -9,6 +9,8 @@
     <!-- GSAP for Smooth Reveals -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- html2pdf for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         /* Premium Typography */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
@@ -70,6 +72,11 @@
             color: #D1D5DB;
             font-style: italic;
             font-size: 1.25rem;
+        }
+
+        /* Hides placeholder in the exported PDF if left blank */
+        .pdf-mode::placeholder {
+            color: transparent !important;
         }
 
         /* --- Print Specific Styles --- */
@@ -174,33 +181,58 @@
 
         <!-- 5. Next Steps -->
         <section class="mb-12 reveal relative z-10">
-            <h2 class="heading-serif text-2xl text-[#D4AF37] mb-3 flex items-baseline gap-2">
+            <h2 class="heading-serif text-2xl text-[#D4AF37] mb-6 flex items-baseline gap-2">
                 <span class="text-gray-300 text-xl">5.</span> Next Steps
             </h2>
-            <p class="text-gray-700 text-lg leading-relaxed font-light">
-                Sign below to activate the strategy. We will immediately schedule your onboarding and begin outline creation to generate your inbound floor.
-            </p>
+            
+            <div class="flex flex-col md:flex-row gap-5">
+                <!-- Step 1 -->
+                <div class="flex-1 bg-white border border-gray-100 shadow-[0_8px_30px_-4px_rgba(0,0,0,0.04)] rounded-2xl p-6 flex items-center gap-5 transition-all duration-300 hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08)] hover:-translate-y-1 border-t-4 border-t-[#D4AF37]">
+                    <div class="w-12 h-12 rounded-full bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-gray-900 font-semibold text-lg tracking-tight">1. Let's sign this</h3>
+                        <p class="text-gray-500 font-light text-sm mt-1">Type your signature in the designated field below.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex-1 bg-white border border-gray-100 shadow-[0_8px_30px_-4px_rgba(0,0,0,0.04)] rounded-2xl p-6 flex items-center gap-5 transition-all duration-300 hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08)] hover:-translate-y-1 border-t-4 border-t-[#0070ba]">
+                    <div class="w-12 h-12 rounded-full bg-[#0070ba]/10 flex items-center justify-center text-[#0070ba] flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-gray-900 font-semibold text-lg tracking-tight">2. Download & Pay</h3>
+                        <p class="text-gray-500 font-light text-sm mt-1">Click the button at the bottom to secure your copy and process payment.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Signature Block -->
         <section class="reveal relative z-10 mt-14">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
                 <!-- Client Signature -->
-                <div class="relative">
+                <div class="relative flex flex-col justify-end h-32">
                     <input type="text" class="signature-input" placeholder="Type signature here...">
-                    <div class="border-b-2 border-gray-400 mb-3"></div>
-                    <div class="flex justify-between items-center">
+                    <div class="border-b-[1.5px] border-gray-400 mb-3 mt-2"></div>
+                    <div class="flex justify-between items-start gap-4">
                         <div class="text-[11px] text-gray-800 uppercase tracking-widest font-bold">DR. CARRIE LADUE, VOLARE AI</div>
-                        <div class="text-[11px] text-gray-500 uppercase tracking-widest">Date: <span class="auto-date font-semibold text-gray-800"></span></div>
+                        <div class="text-[11px] text-gray-500 uppercase tracking-widest whitespace-nowrap">Date: <span class="auto-date font-semibold text-gray-800"></span></div>
                     </div>
                 </div>
                 <!-- Agency Signature -->
-                <div class="relative">
-                    <input type="text" class="signature-input" placeholder="Type signature here...">
-                    <div class="border-b-2 border-gray-400 mb-3"></div>
-                    <div class="flex justify-between items-center">
-                        <div class="text-[11px] text-gray-800 uppercase tracking-widest font-bold">Mousam Chatterjee, Finest Enterprises</div>
-                        <div class="text-[11px] text-gray-500 uppercase tracking-widest">Date: <span class="auto-date font-semibold text-gray-800"></span></div>
+                <div class="relative flex flex-col justify-end h-32">
+                    <img src="https://finestclients.com/asset/mousamsign.png" alt="Mousam Chatterjee Signature" class="h-[70px] w-auto object-contain object-left mix-blend-darken mb-1">
+                    <div class="border-b-[1.5px] border-gray-400 mb-3 mt-2"></div>
+                    <div class="flex justify-between items-start gap-4">
+                        <div class="text-[11px] text-gray-800 uppercase tracking-widest font-bold leading-tight">MOUSAM CHATTERJEE, FINEST<br/>ENTERPRISES</div>
+                        <div class="text-[11px] text-gray-500 uppercase tracking-widest whitespace-nowrap">Date: <span class="font-semibold text-gray-800">3 April 2026</span></div>
                     </div>
                 </div>
             </div>
@@ -208,12 +240,12 @@
 
     </main>
 
-    <!-- Print Button (Hidden on Print) -->
-    <button onclick="window.print()" class="no-print mt-10 px-8 py-3 bg-[#D4AF37] hover:bg-[#b8952d] text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2 reveal">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+    <!-- Download PDF & Pay Button -->
+    <button id="proceedBtn" onclick="handleProceed()" class="no-print mt-10 px-8 py-4 bg-[#0070ba] hover:bg-[#005ea6] text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3 reveal w-full max-w-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
-        Print Document
+        Download Contract & Pay
     </button>
 
     <!-- JS for Animation & Date -->
@@ -240,6 +272,48 @@
                 delay: 0.1
             }
         );
+
+        // PDF Generation and Redirect Logic
+        function handleProceed() {
+            const btn = document.getElementById('proceedBtn');
+            const originalText = btn.innerHTML;
+            
+            // Visual feedback
+            btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Generating PDF...`;
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+            
+            // Prevent placeholder from showing on PDF if empty
+            const sigInput = document.querySelector('.signature-input');
+            if(!sigInput.value) {
+                sigInput.classList.add('pdf-mode');
+            }
+
+            const element = document.querySelector('.white-document');
+            
+            // PDF configuration
+            const opt = {
+                margin:       0.3,
+                filename:     'Volare_AI_Partnership_Agreement.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, windowWidth: 1000 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            // Generate, download, then redirect
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerHTML = 'Redirecting to PayPal...';
+                
+                // 1-second delay to ensure the download initializes before navigating away
+                setTimeout(() => {
+                    window.location.href = 'https://www.paypal.com/ncp/payment/ZMZGF74T3V9JS';
+                }, 1000);
+            }).catch(err => {
+                console.error("PDF Generation Error: ", err);
+                btn.innerHTML = originalText;
+                btn.classList.remove('opacity-80', 'cursor-not-allowed');
+                alert("Something went wrong generating the PDF. Please try again.");
+            });
+        }
     </script>
 </body>
 </html>

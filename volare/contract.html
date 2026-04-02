@@ -207,8 +207,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-gray-900 font-semibold text-lg tracking-tight">2. Download & Pay</h3>
-                        <p class="text-gray-500 font-light text-sm mt-1">Click the button at the bottom to secure your copy and process payment.</p>
+                        <h3 class="text-gray-900 font-semibold text-lg tracking-tight">2. Download & Complete Payment</h3>
+                        <p class="text-gray-500 font-light text-sm mt-1">Use the buttons below to save your signed contract and securely process your payment.</p>
                     </div>
                 </div>
             </div>
@@ -240,13 +240,24 @@
 
     </main>
 
-    <!-- Download PDF & Pay Button -->
-    <button id="proceedBtn" onclick="handleProceed()" class="no-print mt-10 px-8 py-4 bg-[#0070ba] hover:bg-[#005ea6] text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3 reveal w-full max-w-md">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        Download Contract & Pay
-    </button>
+    <!-- Action Buttons -->
+    <div class="no-print mt-10 flex flex-col sm:flex-row gap-4 w-full max-w-2xl reveal justify-center">
+        <!-- Download PDF Button -->
+        <button id="downloadBtn" onclick="downloadPDF()" class="flex-1 px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Download Contract
+        </button>
+
+        <!-- PayPal Button -->
+        <a href="https://www.paypal.com/ncp/payment/ZMZGF74T3V9JS" target="_blank" class="flex-1 px-8 py-4 bg-[#0070ba] hover:bg-[#005ea6] text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+            </svg>
+            Pay with PayPal
+        </a>
+    </div>
 
     <!-- JS for Animation & Date -->
     <script>
@@ -273,9 +284,9 @@
             }
         );
 
-        // PDF Generation and Redirect Logic
-        function handleProceed() {
-            const btn = document.getElementById('proceedBtn');
+        // PDF Generation Logic
+        function downloadPDF() {
+            const btn = document.getElementById('downloadBtn');
             const originalText = btn.innerHTML;
             
             // Visual feedback
@@ -292,21 +303,34 @@
             
             // PDF configuration
             const opt = {
-                margin:       0.3,
+                margin:       [0.5, 0.5, 0.5, 0.5],
                 filename:     'Volare_AI_Partnership_Agreement.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, windowWidth: 1000 },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    windowWidth: 1024,
+                    scrollY: 0,
+                    scrollX: 0, // Prevents horizontal offset
+                    onclone: function(clonedDoc) {
+                        // Fixes the html2canvas flexbox left-crop bug by flattening the layout during capture
+                        clonedDoc.body.style.display = 'block';
+                        clonedDoc.body.style.padding = '0';
+                        const clonedEl = clonedDoc.querySelector('.white-document');
+                        if(clonedEl) {
+                            clonedEl.style.margin = '0';
+                            clonedEl.style.boxShadow = 'none'; // Removes shadow so it doesn't bleed into margins
+                        }
+                    }
+                },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+                pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] } // <--- THIS PREVENTS SLICED TEXT
             };
 
-            // Generate, download, then redirect
+            // Generate and download
             html2pdf().set(opt).from(element).save().then(() => {
-                btn.innerHTML = 'Redirecting to PayPal...';
-                
-                // 1-second delay to ensure the download initializes before navigating away
-                setTimeout(() => {
-                    window.location.href = 'https://www.paypal.com/ncp/payment/ZMZGF74T3V9JS';
-                }, 1000);
+                btn.innerHTML = originalText;
+                btn.classList.remove('opacity-80', 'cursor-not-allowed');
             }).catch(err => {
                 console.error("PDF Generation Error: ", err);
                 btn.innerHTML = originalText;

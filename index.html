@@ -1228,6 +1228,22 @@
         .founder-stat-num { font-size: 32px; font-weight: 800; color: #3B82F6; line-height: 1.2; }
         .founder-stat-label { font-size: 12px; color: #64748B; font-weight: 700; text-transform: uppercase; margin-top: 8px; letter-spacing: 0.5px;}
 
+        .stat-box-yt {
+            background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+            border: none;
+        }
+        .stat-box-yt .founder-stat-num { color: #fff; }
+        .stat-box-yt .founder-stat-label { color: rgba(255,255,255,0.9); }
+
+        .stat-box-ig {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            box-shadow: 0 4px 15px rgba(220, 39, 67, 0.2);
+            border: none;
+        }
+        .stat-box-ig .founder-stat-num { color: #fff; }
+        .stat-box-ig .founder-stat-label { color: rgba(255,255,255,0.9); }
+
         .founder-bio {
             color: var(--gray-300);
             font-size: 16px;
@@ -2223,22 +2239,7 @@
                        Not views. Not followers. Qualified buyers who found you on YouTube, watched your content, and booked a call already trusting you.
                     </div>
 
-                    <div class="hero-buttons mobile-only-btn" style="margin-top: 24px;">
-                        <button onclick="openOptinModal()" class="btn-primary">Book Your Strategy Call</button>
-                    </div>
-                </div>
-
-                <div class="fade-in" style="transition-delay:150ms; width: 100%;">
-                    <div class="hero-video-container">
-                        <script src="https://fast.wistia.com/player.js" async></script>
-                        <script src="https://fast.wistia.com/embed/vccv2je7m2.js" async type="module"></script>
-                        <style>wistia-player[media-id='vccv2je7m2']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/vccv2je7m2/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
-                        <wistia-player media-id="vccv2je7m2" aspect="1.7777777777777777"></wistia-player>
-                    </div>
-                </div>
-                
-                <div class="fade-in desktop-only-btn" style="transition-delay:200ms">
-                    <div class="hero-buttons">
+                    <div class="hero-buttons" style="margin-top: 32px; justify-content: center;">
                         <button onclick="openOptinModal()" class="btn-primary">Book Your Strategy Call</button>
                         <button onclick="scrollToSection('process')" class="btn-secondary">See How It Works</button>
                     </div>
@@ -2366,7 +2367,7 @@
                             <li><span class="filter-icon">✅</span> You want qualified buyers booking calls from YouTube</li>
                             <li><span class="filter-icon">✅</span> You want a system that compounds, not a campaign that dies</li>
                             <li><span class="filter-icon">✅</span> You're willing to invest 4 hours/month for long-term ROI</li>
-                            <li><span class="filter-icon">✅</span> You're tired of referral roulette and want predictable lead flow</li>
+                            <li><span class="filter-icon">✅</span> You are tired of depending on paid ads or referrals and want predictable lead flow</li>
                         </ul>
                     </div>
                 </div>
@@ -2518,13 +2519,19 @@
                                     <div class="founder-stat-num">100M+</div>
                                     <div class="founder-stat-label">VIEWS GENERATED</div>
                                 </div>
-                                <div class="founder-stat-box">
-                                    <div class="founder-stat-num">46.7K</div>
-                                    <div class="founder-stat-label">YOUTUBE SUBS</div>
+                                <div class="founder-stat-box stat-box-yt">
+                                    <div class="founder-stat-num">50K</div>
+                                    <div class="founder-stat-label">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" style="vertical-align: text-bottom; margin-right: 4px;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                        YOUTUBE SUBS
+                                    </div>
                                 </div>
-                                <div class="founder-stat-box">
-                                    <div class="founder-stat-num">90.7K</div>
-                                    <div class="founder-stat-label">INSTA FOLLOWERS</div>
+                                <div class="founder-stat-box stat-box-ig">
+                                    <div class="founder-stat-num">100K</div>
+                                    <div class="founder-stat-label">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" style="vertical-align: text-bottom; margin-right: 4px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                        INSTA FOLLOWERS
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2786,7 +2793,7 @@
 
         <section class="section section-border-t cta-section" style="background:#000">
             <div class="fade-in container" style="max-width:896px">
-                <h2>Stop Relying on Referrals. Start Compounding Calls.</h2>
+                <h2>Stop Relying on Paid Ads, Referrals, or Cold DMs. Start Compounding Calls.</h2>
                 <p>Book a strategy call. We'll review your offer, your niche, and tell you exactly how many calls YouTube can generate for your business.</p>
                 <button onclick="openOptinModal()" class="cta-btn" style="margin-bottom: 24px;">Book Your Strategy Call</button>
                 <p style="font-size: 14px; font-style: italic; margin-bottom: 0;">No pressure. No obligation. Just clarity on whether this is right for you.</p>

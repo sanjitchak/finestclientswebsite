@@ -1,413 +1,3649 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automated Workshop Schedule</title>
-    <!-- Tailwind CSS for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Finest Clients - Predictable Sales Meetings</title>
+    <link rel="icon" type="image/png" href="https://finestclients.com/finestclientslogo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Suppress benign errors often caused by embedded video players and third-party scripts -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
+        // Suppress empty object console errors commonly thrown by third-party iframe embeds
+        const originalConsoleError = console.error;
+        console.error = function(...args) {
+            if (args.length === 1 && typeof args[0] === 'object' && args[0] !== null && !(args[0] instanceof Error) && Object.keys(args[0]).length === 0) {
+                return; // Ignore empty object errors
+            }
+            originalConsoleError.apply(console, args);
+        };
+
+        window.addEventListener('error', function(e) {
+            if (e.message && typeof e.message === 'string' && e.message.includes('ResizeObserver')) {
+                e.stopImmediatePropagation();
+                e.preventDefault();
+            }
+        });
+        
+        const originalOnError = window.onerror;
+        window.onerror = function(message, source, lineno, colno, error) {
+            if (typeof message === 'string' && message.includes('ResizeObserver')) {
+                return true; // Suppress the error
+            }
+            if (originalOnError) return originalOnError(message, source, lineno, colno, error);
+            return false;
+        };
+        
+        window.addEventListener('unhandledrejection', function(e) {
+            if (e.reason && typeof e.reason === 'object' && !(e.reason instanceof Error) && Object.keys(e.reason).length === 0) {
+                e.preventDefault();
+            }
+        });
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GFMCSHSLCE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-GFMCSHSLCE');
+    </script>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000;
+            color: #f3f4f6;
+            line-height: 1.6;
+            min-height: 100vh
+        }
+
+        ::selection {
+            background: #D4AF37;
+            color: #000
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none
+        }
+
+        ul {
+            list-style: none
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --card: #111;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --white-5: rgba(255, 255, 255, 0.05);
+            --white-10: rgba(255, 255, 255, 0.1);
+            --white-20: rgba(255, 255, 255, 0.2);
+            --gold-10: rgba(212, 175, 55, 0.1);
+            --gold-20: rgba(212, 175, 55, 0.2);
+            --gold-30: rgba(212, 175, 55, 0.3)
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold)
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-50%)
+            }
+        }
+
+        @keyframes ping {
+            75%,
+            100% {
+                transform: scale(2);
+                opacity: 0
+            }
+        }
+
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(-25%) translateX(-50%)
+            }
+            50% {
+                transform: translateY(0) translateX(-50%)
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg)
+            }
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+
+        .animate-scroll {
+            animation: scroll 40s linear infinite
+        }
+
+        .animate-ping {
+            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite
+        }
+
+        .animate-bounce {
+            animation: bounce 1s infinite
+        }
+
+        .mobile-only-btn {
+            display: flex;
+            width: 100%;
+            margin-bottom: 32px;
+        }
+        @media (min-width: 768px) {
+            .mobile-only-btn {
+                display: none !important;
+            }
+        }
+        
+        .desktop-only-btn {
+            display: none !important;
+        }
+        @media (min-width: 768px) {
+            .desktop-only-btn {
+                display: flex !important;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(48px);
+            transition: opacity 1s, transform 1s
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .hidden {
+            display: none !important
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px
+        }
+
+        @media(min-width:768px) {
+            .container {
+                padding: 0 24px
+            }
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            z-index: 50;
+            transition: all .3s;
+            border-bottom: 1px solid transparent;
+            padding: 16px 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+        }
+
+        @media(min-width:768px) {
+            .navbar {
+                padding: 24px 0
+            }
+        }
+
+        .navbar.scrolled {
+            background: #000;
+            border-bottom-color: var(--white-10);
+            padding: 16px 0
+        }
+
+        .navbar-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 50
+        }
+
+        @media(min-width:768px) {
+            .navbar-inner {
+                padding: 0 24px
+            }
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: #fff;
+            cursor: pointer
+        }
+
+        @media(min-width:768px) {
+            .logo {
+                font-size: 24px
+            }
+        }
+
+        .logo-accent {
+            color: var(--gold)
+        }
+
+        .nav-links {
+            display: none;
+            align-items: center;
+            gap: 32px
+        }
+
+        @media(min-width:768px) {
+            .nav-links {
+                display: flex
+            }
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--gray-300);
+            transition: color .3s
+        }
+
+        .nav-link:hover {
+            color: var(--gold)
+        }
+
+        .nav-link-icon {
+            display: flex;
+            align-items: center;
+            color: #fff
+        }
+
+        .nav-link-icon svg {
+            margin-right: 4px
+        }
+
+        .nav-cta {
+            background: #fff;
+            color: #000;
+            padding: 10px 24px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all .3s
+        }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            transform: scale(1.05)
+        }
+
+        .menu-btn {
+            display: block;
+            padding: 8px;
+            color: #fff;
+            z-index: 50;
+            position: relative
+        }
+
+        @media(min-width:768px) {
+            .menu-btn {
+                display: none
+            }
+        }
+
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            padding: 96px 24px 0;
+            height: 100vh;
+            width: 100%;
+            overflow-y: auto
+        }
+
+        .mobile-menu-link {
+            text-align: left;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--white-5);
+            width: 100%;
+            transition: color .3s
+        }
+
+        .mobile-menu-link:hover {
+            color: var(--gold)
+        }
+
+        .mobile-menu-link.gold {
+            color: var(--gold)
+        }
+
+        .mobile-menu-cta {
+            display: block;
+            width: 100%;
+            background: var(--gold);
+            color: #000;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 20px;
+            text-align: center;
+            margin: 32px 0 48px
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: #000;
+            overflow: hidden;
+            padding: 120px 0 80px;
+            cursor: pointer;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+        }
+
+        #liquid-ether-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            touch-action: none;
+            opacity: 0.7;
+            overflow: hidden;
+        }
+        #liquid-ether-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
+        }
+
+        .hero-glow, .hero-glow-2 {
+            position: absolute;
+            background: var(--gold);
+            border-radius: 50%;
+            filter: blur(150px);
+            pointer-events: none;
+        }
+        .hero-glow { top: -10%; right: -5%; width: 500px; height: 500px; opacity: 0.15; }
+        .hero-glow-2 { bottom: -10%; left: -5%; width: 400px; height: 400px; opacity: 0.1; }
+
+        .hero-content {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 16px;
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .hero-content > * {
+            pointer-events: auto;
+            cursor: default;
+        }
+
+        @media(min-width:768px) {
+            .hero-content {
+                padding: 0 24px
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            background: #fff;
+            margin-bottom: 32px
+        }
+
+        .hero-badge-dot {
+            position: relative;
+            display: inline-flex;
+            width: 8px;
+            height: 8px;
+            flex: 0 0 8px;
+            vertical-align: middle;
+        }
+
+        .hero-badge-dot-ping {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.75;
+            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .hero-badge-dot-solid {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .hero-badge-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 0.1em
+        }
+
+        .hero-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media(min-width:640px) {
+            .hero-title {
+                font-size: 40px;
+                line-height: 1.1;
+            }
+        }
+
+        @media(min-width:768px) {
+            .hero-title {
+                font-size: 50px;
+            }
+        }
+
+        .hero-title-gold {
+            color: var(--gold)
+        }
+
+        .hero-desc {
+            color: var(--gray-300);
+            font-size: 18px;
+            max-width: 768px;
+            margin: 0 auto 32px;
+            line-height: 1.6;
+            font-weight: 400;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        @media(min-width:768px) {
+            .hero-desc {
+                font-size: 22px;
+            }
+        }
+
+        .hero-guarantee-box {
+            margin: 0 auto 12px;
+            padding: 16px 24px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            display: inline-block;
+            backdrop-filter: blur(8px);
+            font-weight: 600;
+            color: #fff;
+            font-size: 16px;
+            line-height: 1.6;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
+            max-width: 700px;
+            white-space: normal;
+        }
+
+        @media(min-width:768px) {
+            .hero-guarantee-box {
+                font-size: 18px;
+            }
+        }
+
+        .hero-subtext {
+            font-size: 15px;
+            font-style: italic;
+            color: var(--gray-500);
+            margin-bottom: 36px;
+        }
+
+        .hero-video-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--white-10);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            background: #050505;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+            padding: 0 16px;
+            width: 100%
+        }
+
+        @media(min-width:640px) {
+            .hero-buttons {
+                flex-direction: row;
+                width: auto
+            }
+        }
+
+        .btn-primary {
+            background: #3B82F6;
+            color: #fff;
+            padding: 16px 32px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all .3s;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            cursor: pointer;
+            border: none;
+        }
+
+        @media(min-width:640px) {
+            .btn-primary {
+                width: auto
+            }
+        }
+
+        @media(min-width:768px) {
+            .btn-primary {
+                padding: 20px 40px
+            }
+        }
+
+        .btn-primary:hover {
+            background: #2563EB;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 2px solid #3B82F6;
+            color: #3B82F6;
+            padding: 16px 32px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: all .3s;
+            width: 100%;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        @media(min-width:640px) {
+            .btn-secondary {
+                width: auto
+            }
+        }
+
+        @media(min-width:768px) {
+            .btn-secondary {
+                padding: 20px 40px
+            }
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #fff;
+            border-color: #fff;
+        }
+        
+        /* As Featured In Section */
+        .featured-section {
+            background-color: #ffffff;
+            padding: 48px 16px;
+            text-align: center;
+        }
+
+        .featured-title {
+            color: #9ca3af;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 36px;
+        }
+
+        .featured-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .featured-logo-link {
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .featured-logo-link img {
+            height: 40px;
+            width: auto;
+            filter: grayscale(100%) opacity(60%);
+            transition: all 0.3s ease;
+        }
+
+        .featured-logo-link:hover img {
+            filter: grayscale(0%) opacity(100%);
+            transform: scale(1.05);
+        }
+
+        .featured-logo-dj img { height: 26px; }
+        .featured-logo-fox img { height: 38px; }
+        .featured-logo-cbs img { height: 42px; }
+        .featured-logo-abc img { height: 46px; }
+        .featured-logo-nbc img { height: 50px; }
+
+        @media(min-width: 768px) {
+            .featured-section { padding: 64px 24px; }
+            .featured-logos { gap: 64px; }
+            .featured-logo-dj img { height: 32px; }
+            .featured-logo-fox img { height: 44px; }
+            .featured-logo-cbs img { height: 50px; }
+            .featured-logo-abc img { height: 54px; }
+            .featured-logo-nbc img { height: 58px; }
+        }
+
+        .section {
+            padding: 64px 0
+        }
+
+        @media(min-width:768px) {
+            .section {
+                padding: 96px 0
+            }
+        }
+
+        .section-dark {
+            background: #050505
+        }
+
+        .section-border-t {
+            border-top: 1px solid var(--white-5)
+        }
+
+        .section-border-b {
+            border-bottom: 1px solid var(--white-5)
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px
+        }
+
+        .section-label {
+            color: var(--gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 14px;
+            margin-bottom: 16px
+        }
+
+        .section-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        @media(min-width:768px) {
+            .section-title {
+                font-size: 44px
+            }
+        }
+
+        .section-desc {
+            color: var(--gray-400);
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+
+        /* Proof Section Stacking Cards */
+        .proof-section {
+            padding: 0;
+            background-color: #000;
+            position: relative;
+            z-index: 2;
+            --card-height: 85vh;
+            --card-margin: 1.5vw;
+            --card-top-offset: 1.5em;
+            --numcards: 3;
+        }
+
+        @media(max-width:767px) {
+            .proof-section {
+                --card-height: auto;
+                --card-margin: 24px;
+                --card-top-offset: 1.2em;
+            }
+        }
+
+        .proof-header {
+            padding: 64px 0 32px;
+            text-align: center;
+        }
+        .proof-header p.section-label {
+            margin-bottom: 12px;
+        }
+
+        .proof-section h2 {
+            font-size: 40px;
+            margin-bottom: 0px;
+            letter-spacing: -0.02em;
+            text-align: center;
+            color: #fff;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        @media(min-width:768px) {
+            .proof-section h2 {
+                font-size: 56px;
+            }
+        }
+
+        .proof-subtitle {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--gray-400);
+            margin-bottom: 0;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .proof-stack {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(var(--numcards), var(--card-height));
+            gap: var(--card-margin);
+            padding-bottom: calc(var(--numcards) * var(--card-top-offset));
+            margin-bottom: var(--card-margin);
+            width: 92%;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media(max-width:767px) {
+            .proof-stack { 
+                width: 95%; 
+                grid-template-rows: auto;
+                padding-bottom: 32px;
+            }
+        }
+
+        .proof-card-wrap {
+            position: sticky;
+            top: 0;
+        }
+        .proof-card-wrap:nth-child(1) { --index: 1; }
+        .proof-card-wrap:nth-child(2) { --index: 2; }
+        .proof-card-wrap:nth-child(3) { --index: 3; }
+
+        .proof-card-wrap {
+            padding-top: calc(var(--index) * var(--card-top-offset));
+        }
+
+        .proof-card {
+            background: #0a0a0a;
+            border: 1px solid var(--white-10);
+            border-radius: 1.2rem;
+            overflow: hidden;
+            box-shadow: 0 0.2em 1em rgba(0,0,0,0.15), 0 1em 2.5em rgba(0,0,0,0.25);
+            transition: box-shadow 0.3s;
+            position: relative;
+            transform-origin: 50% 0%;
+            height: calc(85vh - calc(var(--index) * var(--card-top-offset)));
+            display: block;
+        }
+        .proof-card:hover {
+            box-shadow: 0 0.2em 1em rgba(0,0,0,0.15), 0 1em 2.5em rgba(0,0,0,0.25), 0 0 40px rgba(212,175,55,0.08);
+        }
+
+        @media(max-width:767px) {
+            .proof-card {
+                display: flex;
+                flex-direction: column;
+                height: auto;
+                min-height: 72vh;
+            }
+        }
+
+        .proof-card-img-wrap {
+            display: block;
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            line-height: 0;
+            background: #000;
+        }
+        
+        .proof-img-title {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid var(--gold-30);
+            padding: 10px 18px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            z-index: 5;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            line-height: 1.3;
+        }
+        
+        @media(max-width:767px) {
+            .proof-card-img-wrap {
+                position: relative;
+                flex: 1;
+                min-height: 250px;
+                height: 50%;
+            }
+            .proof-img-title {
+                top: auto;
+                bottom: 20px;
+                right: 16px;
+                font-size: 13px;
+                padding: 8px 14px;
+            }
+        }
+
+        .proof-card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            object-position: center top;
+            transition: transform 0.4s;
+        }
+        .proof-card:hover .proof-card-img-wrap img {
+            transform: scale(1.02);
+        }
+
+        .proof-card-body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 100px 32px 32px;
+            background: linear-gradient(to top, #0a0a0a 0%, #0a0a0a 75%, transparent 100%);
+            display: flex;
+            align-items: stretch;
+            gap: 16px;
+            z-index: 2;
+        }
+        @media(max-width:767px) {
+            .proof-card-body { 
+                position: relative;
+                padding: 24px 20px;
+                background: #000;
+                flex-shrink: 0;
+                gap: 12px;
+            }
+        }
+
+        .proof-card-accent {
+            width: 4px;
+            background: var(--gold);
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .proof-card-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+
+        .proof-card-text .quote {
+            font-weight: 800;
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            text-shadow: none;
+        }
+        @media(max-width:767px) {
+            .proof-card-text .quote { font-size: 20px; }
+        }
+
+        .proof-card-text .author {
+            font-size: 16px;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: none;
+        }
+        .proof-card-text .time-indicator {
+            display: block;
+            font-size: 14px;
+            color: var(--gray-400);
+            font-weight: 400;
+            margin-top: 4px;
+            margin-bottom: 16px;
+        }
+
+        .verify-link { 
+            font-size: 15px; 
+            color: var(--gold); 
+            margin-top: auto; 
+            display: inline-block; 
+            font-weight: 700; 
+            transition: all 0.3s; 
+            text-decoration: none;
+            position: relative;
+            z-index: 10;
+        }
+        .verify-link:hover { color: #fff; transform: translateX(4px); }
+
+        .proof-card-num {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--white-20);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gold);
+            z-index: 6;
+        }
+
+        @supports (animation-timeline: scroll()) {
+            .proof-card-wrap {
+                --index0: calc(var(--index) - 1);
+                --reverse-index: calc(var(--numcards) - var(--index0));
+                --reverse-index0: calc(var(--reverse-index) - 1);
+            }
+            .proof-card {
+                will-change: transform;
+                --duration: calc(var(--reverse-index0) * 1s);
+                --delay: calc(var(--index0) * 1s);
+                animation: proofScale var(--duration) linear var(--delay) forwards;
+                animation-timeline: scroll(root);
+                animation-range: normal;
+            }
+            @keyframes proofScale {
+                to {
+                    transform: scale(calc(1.1 - calc(0.1 * var(--reverse-index))));
                 }
             }
         }
-    </script>
-    <style>
-        /* Custom scrollbar for elegance */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-            opacity: 0;
-            transform: translateY(10px);
+
+        /* Filter Grid (Who This Is For) */
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: left;
         }
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
+        @media(min-width: 768px) {
+            .filter-grid { grid-template-columns: 1fr 1fr; gap: 48px; }
+        }
+        .filter-column {
+            background: var(--card);
+            padding: 32px 24px;
+            border-radius: 20px;
+            border: 1px solid var(--white-10);
+            transition: transform 0.3s;
+        }
+        .filter-column:hover { transform: translateY(-5px); }
+        .filter-column h4 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--white-10);
+        }
+        .filter-list { list-style: none; padding: 0; }
+        .filter-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            color: var(--gray-300);
+            line-height: 1.5;
+        }
+        .filter-icon { flex-shrink: 0; font-size: 18px; margin-top: 2px; }
+
+        /* NEW FOUNDER SECTION UI */
+        .founder-section-wrapper {
+            text-align: left;
+            max-width: 900px;
+            margin: 0 auto;
+            border-left: 3px solid #3B82F6;
+            padding-left: 24px;
+        }
+        .founder-section-label {
+            color: var(--gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .founder-title-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .founder-title-role {
+            color: #64748B;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 32px;
+        }
+        .founder-profile-card {
+            padding: 0;
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+        .founder-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .founder-header {
+                flex-direction: row;
+                align-items: stretch;
+                gap: 32px;
+            }
+        }
+        .founder-left-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
+            width: 100%;
+        }
+        @media (min-width: 768px) {
+            .founder-left-col {
+                width: 140px;
+            }
+        }
+        .founder-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #3B82F6;
+            object-fit: cover;
+        }
+        .founder-connect-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #0b1528;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60A5FA;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all .3s;
+            text-decoration: none;
+            width: auto;
+        }
+        .founder-connect-btn:hover {
+            background: #3B82F6;
+            color: #fff;
+            border-color: #3B82F6;
+        }
+        
+        .founder-stats-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+        @media(min-width: 640px) {
+            .founder-stats-grid {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+        .founder-stat-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 32px 16px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .founder-stat-num { font-size: 32px; font-weight: 800; color: #3B82F6; line-height: 1.2; }
+        .founder-stat-label { font-size: 12px; color: #64748B; font-weight: 700; text-transform: uppercase; margin-top: 8px; letter-spacing: 0.5px;}
+
+        .founder-bio {
+            color: var(--gray-300);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .founder-bio p { margin-bottom: 16px; }
+
+        /* Social Link Pills */
+        .social-pill-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .social-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .social-pill svg {
+            width: 20px;
+            height: 20px;
+        }
+        .social-pill-ig {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
+        }
+        .social-pill-ig:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(220, 39, 67, 0.4);
+        }
+        .social-pill-yt {
+            background: #FF0000;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+        .social-pill-yt:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+        }
+
+        /* You Record Grid */
+        .you-record-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            text-align: left;
+            margin-top: 48px;
+        }
+        @media(min-width: 768px) {
+            .you-record-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .you-record-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: var(--card);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--white-5);
+            transition: border-color 0.3s;
+        }
+        .you-record-item:hover { border-color: var(--gold-30); }
+        .you-record-icon { font-size: 28px; flex-shrink: 0; }
+        .you-record-text h5 { color: #fff; font-size: 18px; margin-bottom: 6px; font-weight: 700; }
+        .you-record-text p { color: var(--gray-400); font-size: 15px; line-height: 1.5; }
+
+        /* Guarantee Timeline */
+        .timeline-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 40px auto;
+            text-align: left;
+            max-width: 600px;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 20px;
+            background: var(--card);
+            border-radius: 12px;
+            border-left: 4px solid var(--gold);
+            border-top: 1px solid var(--white-5);
+            border-right: 1px solid var(--white-5);
+            border-bottom: 1px solid var(--white-5);
+        }
+        .timeline-month { font-weight: 800; color: var(--gold); width: 80px; flex-shrink: 0; font-size: 16px; }
+        .timeline-desc { color: var(--gray-300); font-size: 16px; }
+
+        details.guarantee-accordion {
+            background: var(--card);
+            border: 1px solid var(--white-10);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 32px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        details.guarantee-accordion summary {
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        details.guarantee-accordion summary::-webkit-details-marker { display: none; }
+        details.guarantee-accordion summary:after {
+            content: '+';
+            color: var(--gold);
+            font-size: 24px;
+            line-height: 1;
+        }
+        details.guarantee-accordion[open] summary:after { content: '-'; }
+        details.guarantee-accordion .guarantee-list {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--white-10);
+        }
+
+        /* NEW PROCESS TIMELINE UI */
+        .process-timeline-container { 
+            position: relative; 
+            padding-bottom: 32px; 
+            max-width: 700px; 
+            margin: 0 auto; 
+        }
+        .timeline-line-bg { 
+            position: absolute; 
+            left: 24px; 
+            top: 0; 
+            bottom: 0; 
+            width: 2px; 
+            background: var(--white-10); 
+            transform: translateX(-50%);
+        }
+        .timeline-line-fg { 
+            position: absolute; 
+            left: 24px; 
+            top: 0; 
+            width: 2px; 
+            background: var(--gold); 
+            box-shadow: 0 0 10px var(--gold); 
+            transition: height 0.1s linear; 
+            z-index: 1; 
+            transform: translateX(-50%);
+        }
+        .timeline-dot-main { 
+            position: absolute; 
+            left: 24px; 
+            width: 20px; 
+            height: 20px; 
+            border-radius: 50%; 
+            background: var(--gold); 
+            box-shadow: 0 0 15px var(--gold); 
+            z-index: 3; 
+            transform: translate(-50%, -50%); 
+            transition: top 0.1s linear; 
+        }
+        .timeline-steps { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 48px; 
+        }
+        .timeline-step { 
+            position: relative; 
+            padding-left: 64px; 
+            display: flex; 
+            transition: all 0.7s; 
+        }
+        @media (min-width: 640px) {
+            .timeline-step { padding-left: 72px; }
+        }
+        .timeline-step.inactive { 
+            opacity: 0.3; 
+            transform: translateY(20px); 
+        }
+        .timeline-dot { 
+            position: absolute; 
+            left: 24px; 
+            top: 32px; 
+            width: 16px; 
+            height: 16px; 
+            border-radius: 50%; 
+            background: #000; 
+            border: 2px solid var(--white-20); 
+            transform: translate(-50%, -50%); 
+            z-index: 2; 
+            transition: all 0.5s; 
+        }
+        .timeline-step:not(.inactive) .timeline-dot { 
+            background: var(--gold); 
+            border-color: var(--gold); 
+            box-shadow: 0 0 15px var(--gold); 
+        }
+        .timeline-card { 
+            background: transparent; 
+            border: 1px solid var(--white-10); 
+            border-radius: 16px; 
+            padding: 24px; 
+            width: 100%; 
+            text-align: left; 
+            transition: border-color 0.3s; 
+            display: flex;
+            flex-direction: column;
+        }
+        @media (min-width: 640px) {
+            .timeline-card { padding: 32px; }
+        }
+        .timeline-card:hover { 
+            border-color: var(--white-20); 
+        }
+        .timeline-meta { 
+            color: #fff; 
+            font-size: 15px; 
+            font-weight: 500; 
+            margin-bottom: 16px; 
+            line-height: 1.4; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 4px; 
+        }
+        .timeline-num { 
+            font-size: 16px; 
+        }
+        .timeline-time { 
+            font-size: 16px; 
+        }
+        .timeline-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .timeline-title { 
+            font-size: 20px; 
+            font-weight: 700; 
+            color: #fff; 
+            margin-bottom: 12px; 
+        }
+        @media (min-width: 640px) {
+            .timeline-title { font-size: 24px; }
+        }
+        .timeline-desc { 
+            color: var(--gray-400); 
+            font-size: 15px; 
+            line-height: 1.6; 
+            margin: 0; 
+        }
+        @media (min-width: 640px) {
+            .timeline-desc { font-size: 16px; }
+        }
+
+        /* Behind The Scenes Section */
+        .bts-grid {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: 1fr;
+            margin-top: 48px;
+        }
+        @media(min-width: 640px) {
+            .bts-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media(min-width: 1024px) {
+            .bts-grid { grid-template-columns: 1fr 1fr 1fr; }
+        }
+        .bts-card {
+            background: var(--card);
+            border: 1px solid var(--white-10);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .bts-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-30);
+        }
+        .bts-img-placeholder {
+            height: 180px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            border-bottom: 1px solid var(--white-10);
+            color: var(--gray-600);
+        }
+        .bts-content {
+            padding: 24px;
+        }
+        .bts-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .bts-desc {
+            font-size: 14px;
+            color: var(--gray-400);
+            line-height: 1.5;
+        }
+
+        /* FAQ */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px
+        }
+
+        .faq-item {
+            border: 1px solid var(--white-10);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all .3s;
+            background: #000
+        }
+
+        .faq-item.open {
+            background: var(--white-5);
+            border-color: var(--gold-30)
+        }
+
+        .faq-btn {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            text-align: left
+        }
+
+        .faq-btn span {
+            font-weight: 700;
+            font-size: 16px;
+            padding-right: 16px;
+            color: var(--gray-300);
+            transition: color .3s
+        }
+
+        @media(min-width:768px) {
+            .faq-btn span {
+                font-size: 18px
+            }
+        }
+
+        .faq-icon {
+            flex-shrink: 0;
+            color: var(--gray-500);
+            transition: color .3s
+        }
+
+        .faq-item.open .faq-icon {
+            color: var(--gold)
+        }
+
+        .faq-content {
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: all .3s
+        }
+
+        .faq-item.open .faq-content {
+            max-height: 400px;
+            opacity: 1
+        }
+
+        .faq-content p, .faq-content ul {
+            padding: 0 24px 24px;
+            color: var(--gray-400);
+            font-size: 14px;
+            line-height: 1.6
+        }
+        .faq-content ul {
+            padding-left: 44px;
+            padding-top: 0;
+            margin-top: -16px;
+            list-style-type: disc;
+        }
+        .faq-content li {
+            margin-bottom: 4px;
+        }
+
+        .cta-section {
+            text-align: center
+        }
+
+        .cta-section h2 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 24px
+        }
+
+        @media(min-width:768px) {
+            .cta-section h2 {
+                font-size: 36px
+            }
+        }
+
+        .cta-section p {
+            color: var(--gray-400);
+            margin-bottom: 48px;
+            font-size: 18px
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: #3B82F6;
+            color: #fff;
+            padding: 20px 48px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 20px;
+            transition: all .3s;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        @media(min-width:768px) {
+            .cta-btn {
+                width: auto
+            }
+        }
+
+        .cta-btn:hover {
+            background: #2563EB;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background: #000;
+            color: #fff;
+            padding-top: 64px;
+            padding-bottom: 48px;
+            border-top: 1px solid var(--white-5)
+        }
+
+        @media(min-width:768px) {
+            .footer {
+                padding-top: 96px
+            }
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 48px;
+            margin-bottom: 64px
+        }
+
+        @media(min-width:768px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr
+            }
+        }
+
+        .footer-brand {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            margin-bottom: 16px
+        }
+
+        .footer-brand-accent {
+            color: var(--gold)
+        }
+
+        .footer-desc {
+            color: var(--gray-500);
+            max-width: 384px
+        }
+
+        .footer-nav h5 {
+            font-weight: 700;
+            margin-bottom: 16px
+        }
+
+        .footer-nav ul {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .footer-nav button {
+            color: var(--gray-500);
+            font-size: 14px;
+            text-align: left;
+            transition: color .3s
+        }
+
+        .footer-nav button:hover {
+            color: #fff
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--white-5);
+            padding-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray-600);
+            font-size: 12px
+        }
+
+        @media(min-width:768px) {
+            .footer-bottom {
+                flex-direction: row;
+                gap: 0
+            }
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s, visibility .3s
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible
+        }
+
+        .modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 896px
+        }
+
+        .modal video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            cursor: default;
+            border: 1px solid var(--white-10)
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -48px;
+            right: 0;
+            color: #fff;
+            padding: 8px;
+            transition: color .3s
+        }
+
+        .modal-close:hover {
+            color: var(--gold)
+        }
+
+        .legal-page {
+            min-height: 100vh;
+            background: #000;
+            color: var(--gray-300);
+            padding: 128px 24px 96px;
+            max-width: 896px;
+            margin: 0 auto
+        }
+
+        @media(min-width:768px) {
+            .legal-page {
+                padding: 128px 48px 96px
+            }
+        }
+
+        .legal-back {
+            display: flex;
+            align-items: center;
+            color: var(--gold);
+            margin-bottom: 32px;
+            transition: color .3s
+        }
+
+        .legal-back:hover {
+            color: #fff
+        }
+
+        .legal-back svg {
+            margin-right: 8px
+        }
+
+        .legal-page h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 32px
+        }
+
+        .legal-page h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 32px;
+            margin-bottom: 16px
+        }
+
+        .legal-page h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 24px;
+            margin-bottom: 8px
+        }
+
+        .legal-content {
+            font-size: 14px;
+            line-height: 1.8
+        }
+
+        .legal-content>*+* {
+            margin-top: 16px
+        }
+
+        .legal-content ul {
+            list-style: disc;
+            padding-left: 20px
+        }
+
+        .legal-content ul li {
+            margin-top: 8px
+        }
+
+        .legal-content a {
+            color: var(--gold)
+        }
+
+        .legal-content a:hover {
+            text-decoration: underline
+        }
+
+        .refund-highlight {
+            background: var(--card);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--white-10)
+        }
+
+        .refund-highlight h2 {
+            color: var(--gold);
+            margin-top: 0
+        }
+
+        .refund-highlight p:first-of-type {
+            font-size: 18px;
+            color: #fff
+        }
+
+        .refund-quote {
+            padding: 24px;
+            border-left: 4px solid var(--gold);
+            background: var(--white-5);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            font-size: 18px;
+            color: #fff
+        }
+
+        .hide-mobile {
+            display: none
+        }
+
+        @media(min-width:768px) {
+            .hide-mobile {
+                display: block
+            }
+        }
+
+        /* Email Optin Modal Styles */
+        .optin-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s, visibility .3s
+        }
+
+        .optin-modal.active {
+            opacity: 1;
+            visibility: visible
+        }
+
+        .optin-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            background: linear-gradient(135deg, #111 0%, #000 100%);
+            border: 1px solid var(--gold-30);
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 0 80px rgba(212, 175, 55, 0.15);
+            cursor: default
+        }
+
+        .optin-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            color: var(--gray-500);
+            padding: 8px;
+            transition: color .3s;
+            background: none;
+            border: none;
+            cursor: pointer
+        }
+
+        .optin-modal-close:hover {
+            color: #fff
+        }
+
+        .optin-modal-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px
+        }
+
+        .optin-modal-icon svg {
+            color: #3B82F6
+        }
+
+        .optin-modal-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 8px
+        }
+
+        .optin-modal-subtitle {
+            color: var(--gray-400);
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 16px
+        }
+
+        .optin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px
+        }
+
+        .optin-input-wrapper {
+            position: relative
+        }
+
+        .optin-input {
+            width: 100%;
+            padding: 16px 20px;
+            padding-left: 48px;
+            background: #1a1a1a;
+            border: 1px solid var(--white-20);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            transition: all .3s;
+            outline: none
+        }
+
+        .optin-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-20)
+        }
+
+        .optin-input::placeholder {
+            color: var(--gray-500)
+        }
+
+        .optin-input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500)
+        }
+
+        .optin-submit {
+            width: 100%;
+            padding: 16px 32px;
+            background: var(--gold);
+            color: #000;
+            font-weight: 700;
+            font-size: 18px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px
+        }
+
+        .optin-submit:hover {
+            background: #fff;
+            transform: translateY(-2px)
+        }
+
+        .optin-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none
+        }
+
+        .optin-submit .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite
+        }
+
+        .optin-privacy {
+            text-align: center;
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 8px
+        }
+
+        .optin-privacy svg {
+            display: inline;
+            vertical-align: middle;
+            margin-right: 4px
+        }
+
+        .optin-error {
+            color: #ef4444;
+            font-size: 14px;
+            text-align: center;
+            display: none
+        }
+
+        .optin-error.show {
+            display: block
         }
     </style>
 </head>
-<body class="bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-50 via-slate-50 to-blue-50 text-slate-800 font-sans antialiased min-h-screen flex items-center justify-center p-4 sm:p-8">
 
-    <div class="max-w-4xl w-full bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl border border-white/50 overflow-hidden fade-in">
-        
-        <!-- Header -->
-        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 sm:p-10 text-center relative overflow-hidden">
-            <!-- Decorative background elements -->
-            <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
-            <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
-            
-            <div class="relative z-10 flex flex-col items-center">
-                <div class="bg-white/20 text-white p-3 rounded-2xl mb-4 backdrop-blur-sm shadow-sm border border-white/20">
-                    <i data-lucide="calendar-clock" class="w-8 h-8"></i>
-                </div>
-                <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">Upcoming Workshop Schedule</h1>
-                
-                <!-- Dynamic Date Range -->
-                <div class="inline-flex items-center space-x-2 bg-black/20 text-blue-50 px-4 py-1.5 rounded-full font-medium text-sm mt-3 border border-white/10 shadow-inner">
-                    <i data-lucide="calendar-range" class="w-4 h-4"></i>
-                    <span id="date-range">Calculating dates...</span>
-                </div>
+<body>
+    <!-- Email Optin Modal -->
+    <div id="optinModal" class="optin-modal">
+        <div class="optin-modal-content" onclick="event.stopPropagation()">
+            <button onclick="closeOptinModal()" class="optin-modal-close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="optin-modal-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
             </div>
-        </div>
+            <h3 class="optin-modal-title">Book Your Strategy Call</h3>
+            <p class="optin-modal-subtitle">Enter your details to secure your spot</p>
 
-        <!-- Content -->
-        <div class="p-6 sm:p-10">
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-6 space-y-4 sm:space-y-0">
-                <div>
-                    <h2 class="text-xl font-bold text-slate-800">Facebook Ad Scheduling Guide</h2>
-                    <p class="text-sm text-slate-500 mt-1">Exact start/end times to enter into your Pacific Time ad account for your Indian audience.</p>
+            <form id="optinForm" class="optin-form" onsubmit="handleOptinSubmit(event)">
+                <div class="optin-input-wrapper">
+                    <svg class="optin-input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <input type="text" id="optinName" class="optin-input" placeholder="Enter your name" required>
                 </div>
-                <!-- Copy Button -->
-                <button id="copy-btn" class="hidden sm:flex items-center space-x-2 text-sm font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-lg transition-colors border border-indigo-100 shrink-0">
-                    <i data-lucide="copy" class="w-4 h-4"></i>
-                    <span>Copy Ad Schedule</span>
+                <div class="optin-input-wrapper">
+                    <svg class="optin-input-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <input type="email" id="optinEmail" class="optin-input" placeholder="Enter your email address"
+                        required>
+                </div>
+                <p id="optinError" class="optin-error">Please enter valid information</p>
+                <button type="submit" id="optinSubmit" class="optin-submit">
+                    <span id="submitText">Continue to Book Call</span>
+                    <div id="submitSpinner" class="spinner" style="display:none"></div>
+                </button>
+            </form>
+            <p class="optin-privacy">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                Your information is secure and will never be shared
+            </p>
+        </div>
+    </div>
+
+    <div id="landingPage">
+        <nav id="navbar" class="navbar">
+            <div class="navbar-inner">
+                <div class="logo" onclick="scrollToSection('home')">FINEST<span class="logo-accent">CLIENTS</span></div>
+                <div class="nav-links">
+                    <button onclick="scrollToSection('home')" class="nav-link">HOME</button>
+                    <button onclick="scrollToSection('proof')" class="nav-link">PROOF</button>
+                    <button onclick="scrollToSection('process')" class="nav-link">PROCESS</button>
+                    <button onclick="scrollToSection('faq')" class="nav-link">FAQ</button>
+                    <button onclick="openOptinModal()" class="nav-cta">Get Started</button>
+                </div>
+                <button id="menuBtn" class="menu-btn" onclick="toggleMobileMenu()">
+                    <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <svg id="closeIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
                 </button>
             </div>
+            <div id="mobileMenu" class="mobile-menu hidden">
+                <button onclick="scrollToSection('home'); toggleMobileMenu();" class="mobile-menu-link">Home</button>
+                <button onclick="scrollToSection('proof'); toggleMobileMenu();" class="mobile-menu-link">Proof</button>
+                <button onclick="scrollToSection('process'); toggleMobileMenu();" class="mobile-menu-link">Process</button>
+                <button onclick="scrollToSection('faq'); toggleMobileMenu();" class="mobile-menu-link">FAQ</button>
+                <button onclick="openOptinModal(); toggleMobileMenu();" class="mobile-menu-cta">Get Started</button>
+            </div>
+        </nav>
 
-            <!-- Schedule Container -->
-            <div id="schedule-container" class="space-y-4">
-                <!-- Cards will be injected here via JavaScript -->
+        <!-- 1. HERO SECTION -->
+        <section id="home" class="hero">
+            <div class="hero-bg" id="hero-bg-container">
+                <!-- Liquid Ether Fluid Simulation Background -->
+                <div id="liquid-ether-container"></div>
+                <div class="hero-glow"></div>
+                <div class="hero-glow-2"></div>
+            </div>
+            <div class="hero-content">
+                <div class="fade-in">
+                    <div class="hero-badge"><span class="hero-badge-dot"><span class="hero-badge-dot-ping"></span><span
+                                class="hero-badge-dot-solid"></span></span><span class="hero-badge-text">Done-For-You <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: inline-block; height: 1.5em; width: auto; vertical-align: -0.35em; margin-right: 4px;"><path fill="#FF0000" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#FFFFFF" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> YouTube For Coaches, Consultants, & Agency Owners</span></div>
+                </div>
+                
+                <div class="fade-in" style="transition-delay:50ms">
+                    <h1 class="hero-title">
+                        We build the YouTube system that makes high-ticket clients find you, trust you, and book calls - without you chasing anyone
+                    </h1>
+                    <p class="hero-desc">We build the system. We write the scripts. We edit the videos. We post everything. You record 4 hours/month. The calls compound from there.</p>
+                    
+                    <div class="hero-guarantee-box">
+                       Not views. Not followers. Qualified buyers who found you on YouTube, watched your content, and booked a call already trusting you.
+                    </div>
+
+                    <div class="hero-buttons mobile-only-btn" style="margin-top: 24px;">
+                        <button onclick="openOptinModal()" class="btn-primary">Book Your Strategy Call</button>
+                    </div>
+                </div>
+
+                <div class="fade-in" style="transition-delay:150ms; width: 100%;">
+                    <div class="hero-video-container">
+                        <script src="https://fast.wistia.com/player.js" async></script>
+                        <script src="https://fast.wistia.com/embed/vccv2je7m2.js" async type="module"></script>
+                        <style>wistia-player[media-id='vccv2je7m2']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/vccv2je7m2/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style> 
+                        <wistia-player media-id="vccv2je7m2" aspect="1.7777777777777777"></wistia-player>
+                    </div>
+                </div>
+                
+                <div class="fade-in desktop-only-btn" style="transition-delay:200ms">
+                    <div class="hero-buttons">
+                        <button onclick="openOptinModal()" class="btn-primary">Book Your Strategy Call</button>
+                        <button onclick="scrollToSection('process')" class="btn-secondary">See How It Works</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. AS FEATURED IN SECTION -->
+        <section class="featured-section">
+            <div class="container fade-in">
+                <h3 class="featured-title">As Featured In</h3>
+                <div class="featured-logos">
+                    <div class="featured-logo-link featured-logo-fox">
+                        <img src="http://finestclients.com/asset/fox-removebg-preview.png" alt="Fox">
+                    </div>
+                    <div class="featured-logo-link featured-logo-abc">
+                        <img src="http://finestclients.com/asset/abc-removebg-preview.png" alt="ABC">
+                    </div>
+                    <div class="featured-logo-link featured-logo-cbs">
+                        <img src="http://finestclients.com/asset/cbs-removebg-preview.png" alt="CBS">
+                    </div>
+                    <div class="featured-logo-link featured-logo-nbc">
+                        <img src="http://finestclients.com/asset/nbc-removebg-preview.png" alt="NBC">
+                    </div>
+                    <div class="featured-logo-link featured-logo-dj">
+                        <img src="http://finestclients.com/asset/digitaljournal.webp" alt="Digital Journal">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. PROOF SECTION STACKING CARDS -->
+        <section id="proof" class="proof-section section-border-b">
+            <div class="proof-header fade-in">
+                <p class="section-label">PROOF</p>
+                <h2>Real Results. Real Revenue. Real Clients.</h2>
+                <p class="proof-subtitle">We don't promise followers. Here's what our clients actually got:</p>
             </div>
 
-            <!-- Quick Conversion Section -->
-            <div class="mt-8 pt-6 border-t border-slate-200 fade-in" style="animation-delay: 300ms">
-                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Quick Reference (Real-Time)</h3>
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-gradient-to-r from-slate-50 to-blue-50 p-4 rounded-xl border border-blue-100 shadow-sm gap-4 sm:gap-0">
-                    <div class="flex items-center space-x-4">
-                        <div class="bg-white p-2.5 rounded-lg shadow-sm text-blue-600 shrink-0 border border-blue-50">
-                            <i data-lucide="clock-3" class="w-6 h-6"></i>
+            <ul class="proof-stack">
+                <!-- Card 1 -->
+                <li class="proof-card-wrap">
+                    <a href="https://www.youtube.com/@Arunmsharma" target="_blank" rel="noopener noreferrer" class="proof-card">
+                        <span class="proof-card-num">1</span>
+                        <div class="proof-card-body">
+                            <div class="proof-card-accent"></div>
+                            <div class="proof-card-text">
+                                <div class="proof-card-badge badge-blue">200-300 Calls/Month</div>
+                                <div class="quote">"200 to 300 sales calls per month from YouTube"</div>
+                                <div class="author">Arun Sharma, CAT Career Coaching<span class="time-indicator">After 18 months of consistent publishing</span></div>
+                                <span class="verify-link">Click to verify &rarr;</span>
+                            </div>
                         </div>
-                        <div>
-                            <div class="text-[11px] sm:text-xs text-slate-500 font-medium uppercase tracking-wide">Pacific Time (Current Rule)</div>
-                            <div class="text-lg font-bold text-slate-800" id="pt-midnight-label">12:00 AM PT</div>
+                        <div class="proof-card-img-wrap">
+                            <div class="proof-img-title">Arun Sharma, CAT Career Coaching</div>
+                            <img src="https://finestclients.com/asset/arun.jpg" alt="Arun Sharma YouTube Analytics">
                         </div>
+                    </a>
+                </li>
+
+                <!-- Card 2 -->
+                <li class="proof-card-wrap">
+                    <a href="https://www.youtube.com/@authority-io" target="_blank" rel="noopener noreferrer" class="proof-card">
+                        <span class="proof-card-num">2</span>
+                        <div class="proof-card-body">
+                            <div class="proof-card-accent"></div>
+                            <div class="proof-card-text">
+                                <div class="proof-card-badge badge-green">+$229K in 1 Month</div>
+                                <div class="quote">"Went from $200K to $429K in one month"</div>
+                                <div class="author">Authority IO, Online Business Coaching<span class="time-indicator">During a product launch supported by 4 YouTube videos</span></div>
+                                <span class="verify-link">Click to verify &rarr;</span>
+                            </div>
+                        </div>
+                        <div class="proof-card-img-wrap">
+                            <div class="proof-img-title">Authority IO, Online Business Coaching</div>
+                            <img src="https://finestclients.com/asset/authority.jpg" alt="Authority IO YouTube Analytics">
+                        </div>
+                    </a>
+                </li>
+
+                <!-- Card 3 -->
+                <li class="proof-card-wrap">
+                    <a href="https://www.youtube.com/@breakoutfoundersacademy" target="_blank" rel="noopener noreferrer" class="proof-card">
+                        <span class="proof-card-num">3</span>
+                        <div class="proof-card-body">
+                            <div class="proof-card-accent"></div>
+                            <div class="proof-card-text">
+                                <div class="proof-card-badge badge-green">$15K Client | 7 Subscribers</div>
+                                <div class="quote">"$15,000 client from a video with under 1,000 views"</div>
+                                <div class="author">Ryan Jackson, B2B Service Operations Coach<span class="time-indicator">Proof that views don't matter: buyers do</span></div>
+                                <span class="verify-link">Click to verify &rarr;</span>
+                            </div>
+                        </div>
+                        <div class="proof-card-img-wrap">
+                            <div class="proof-img-title">Ryan Jackson, B2B Service Operations Coach</div>
+                            <img src="https://finestclients.com/asset/ryan.jpg" alt="Ryan Jackson YouTube Analytics">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <!-- WHO IS THIS FOR -->
+        <section class="section section-dark section-border-t">
+            <div class="container" style="text-align:center">
+                <div class="fade-in">
+                    <p class="section-label">WHO THIS IS FOR</p>
+                    <h3 class="section-title" style="margin-bottom:48px">This Is NOT For Everyone</h3>
+                </div>
+                <div class="filter-grid fade-in">
+                    <div class="filter-column" style="border-top: 4px solid #EF4444;">
+                        <h4>NOT FOR YOU IF:</h4>
+                        <ul class="filter-list">
+                            <li><span class="filter-icon">❌</span> You want followers and views (hire an influencer agency)</li>
+                            <li><span class="filter-icon">❌</span> You want to go viral for clout (we don't do entertainment)</li>
+                            <li><span class="filter-icon">❌</span> You're not selling a high-ticket offer ($3K+)</li>
+                            <li><span class="filter-icon">❌</span> You need instant results tomorrow (YouTube compounds over time)</li>
+                            <li><span class="filter-icon">❌</span> You can't commit to 4 hours/month of recording</li>
+                        </ul>
                     </div>
+                    <div class="filter-column" style="border-top: 4px solid #10B981;">
+                        <h4>THIS IS FOR YOU IF:</h4>
+                        <ul class="filter-list">
+                            <li><span class="filter-icon">✅</span> You sell coaching, consulting, or services at $3K+</li>
+                            <li><span class="filter-icon">✅</span> You want qualified buyers booking calls from YouTube</li>
+                            <li><span class="filter-icon">✅</span> You want a system that compounds, not a campaign that dies</li>
+                            <li><span class="filter-icon">✅</span> You're willing to invest 4 hours/month for long-term ROI</li>
+                            <li><span class="filter-icon">✅</span> You're tired of referral roulette and want predictable lead flow</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PROCESS SECTION (VISUAL TIMELINE) -->
+        <section id="process" class="section section-dark section-border-t">
+            <div class="container" style="max-width:1024px">
+                <div class="section-header" style="margin-bottom:80px">
+                    <h2 class="section-title">The Three Phases</h2>
+                    <p class="section-desc">Your roadmap to getting more clients from YouTube.</p>
+                </div>
+                <div id="processContainer" class="process-timeline-container">
+                    <div class="timeline-line-bg"></div>
+                    <div id="processLine" class="timeline-line-fg" style="height:0%"></div>
+                    <div id="processDot" class="timeline-dot-main" style="top:0%"></div>
                     
-                    <div class="hidden sm:flex text-slate-300">
-                        <i data-lucide="arrow-right" class="w-6 h-6"></i>
-                    </div>
-                    <div class="sm:hidden flex text-slate-300 justify-center">
-                        <i data-lucide="arrow-down" class="w-5 h-5"></i>
-                    </div>
-                    
-                    <div class="text-left sm:text-right flex items-center sm:block space-x-4 sm:space-x-0">
-                        <div class="sm:hidden bg-indigo-100 p-2.5 rounded-lg text-indigo-600 shrink-0">
-                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    <div class="timeline-steps">
+                        <!-- Step 1 -->
+                        <div class="timeline-step inactive" data-step="0">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-meta">
+                                    <span class="timeline-num">Phase 1</span>
+                                    <span class="timeline-time">Month 1</span>
+                                </div>
+                                <div class="timeline-icon">🏗️</div>
+                                <h4 class="timeline-title">Foundation</h4>
+                                <p class="timeline-desc">Channel strategy, keyword research, Channel Promise finalised, channel set up correctly, first playlist funnel mapped, first two videos live.</p>
+                                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--white-10);">
+                                    <strong style="color: var(--gold);">Deliverable you see:</strong> <span style="color: #fff;">Your channel looks professional, and the first videos are attracting the right viewers.</span>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="text-[11px] sm:text-xs text-slate-500 font-medium uppercase tracking-wide">Indian Standard Time</div>
-                            <div class="text-lg font-bold text-indigo-600" id="ist-conversion-result">Calculating...</div>
+                        
+                        <!-- Step 2 -->
+                        <div class="timeline-step inactive" data-step="1">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-meta">
+                                    <span class="timeline-num">Phase 2</span>
+                                    <span class="timeline-time">Months 2-3</span>
+                                </div>
+                                <div class="timeline-icon">🚀</div>
+                                <h4 class="timeline-title">Activation</h4>
+                                <p class="timeline-desc">Full five-video playlist funnel live, Content-to-Call Bridge built into every video, UTM tracking showing which videos produce calls, first qualified calls starting to arrive.</p>
+                                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--white-10);">
+                                    <strong style="color: var(--gold);">Deliverable you see:</strong> <span style="color: #fff;">The funnel is complete and working.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="timeline-step inactive" data-step="2">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-meta">
+                                    <span class="timeline-num">Phase 3</span>
+                                    <span class="timeline-time">Month 4 onwards</span>
+                                </div>
+                                <div class="timeline-icon">📈</div>
+                                <h4 class="timeline-title">Compounding</h4>
+                                <p class="timeline-desc">New playlist clusters are added monthly, best-performing topics are identified and doubled down on, second funnel is built targeting a different awareness stage.</p>
+                                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--white-10);">
+                                    <strong style="color: var(--gold);">Deliverable you see:</strong> <span style="color: #fff;">Calls are coming consistently, and the library is growing.</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Mobile Copy Button -->
-            <button id="mobile-copy-btn" class="w-full sm:hidden flex justify-center items-center space-x-2 text-sm font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 mt-6 px-4 py-3 rounded-xl transition-colors border border-indigo-100 shadow-sm">
-                <i data-lucide="copy" class="w-4 h-4"></i>
-                <span>Copy Ad Schedule</span>
-            </button>
+        <!-- BEHIND THE SCENES SECTION -->
+        <section class="section section-dark section-border-t">
+            <div class="container" style="text-align:center">
+                <div class="fade-in">
+                    <p class="section-label">BEHIND THE SCENES</p>
+                    <h3 class="section-title" style="margin-bottom:16px">How We Build Your Asset</h3>
+                    <p class="section-desc">A peek at the infrastructure that turns views into high-ticket sales calls.</p>
+                </div>
+                <div class="bts-grid fade-in">
+                    <div class="bts-card">
+                        <div class="bts-img-placeholder">✂️</div>
+                        <div class="bts-content">
+                            <h4 class="bts-title">4 to 6 Hours Per Video</h4>
+                            <p class="bts-desc">Every video goes through rigorous professional editing to maximize retention without losing your authentic voice.</p>
+                        </div>
+                    </div>
+                    <div class="bts-card">
+                        <div class="bts-img-placeholder">📝</div>
+                        <div class="bts-content">
+                            <h4 class="bts-title">Conversion Copywriting</h4>
+                            <p class="bts-desc">Scripts written by specialists trained in high-ticket conversion, not just general entertainment writers.</p>
+                        </div>
+                    </div>
+                    <div class="bts-card">
+                        <div class="bts-img-placeholder">🖼️</div>
+                        <div class="bts-content">
+                            <h4 class="bts-title">A/B Tested Designs</h4>
+                            <p class="bts-desc">We design 2 separate thumbnail variants for every single video to guarantee maximum click-through rates.</p>
+                        </div>
+                    </div>
+                    <div class="bts-card">
+                        <div class="bts-img-placeholder">📊</div>
+                        <div class="bts-content">
+                            <h4 class="bts-title">Data-Driven Growth</h4>
+                            <p class="bts-desc">Deep analytics tracking to see exactly which topics pull the highest quality viewers and the most booked calls.</p>
+                        </div>
+                    </div>
+                    <div class="bts-card">
+                        <div class="bts-img-placeholder">🤝</div>
+                        <div class="bts-content">
+                            <h4 class="bts-title">Dedicated PM</h4>
+                            <p class="bts-desc">Your own dedicated project manager ensuring smooth communication, tight deadlines, and zero stress on your end.</p>
+                        </div>
+                    </div>
+                    <div class="bts-card">
+                        <div class="bts-img-placeholder">🚀</div>
+                        <div class="bts-content">
+                            <h4 class="bts-title">Expert Team</h4>
+                            <p class="bts-desc">A full squad of researchers, writers, editors, and strategists working in the background to build your channel.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHO WE ARE / FOUNDER -->
+        <section class="section" style="background:#000">
+            <div class="container">
+                <div class="fade-in founder-section-wrapper">
+                    <p class="founder-section-label">BUILT BY SOMEONE WHO'S DONE IT</p>
+                    <h3 class="founder-title-name">Mousam Chatterjee</h3>
+                    <p class="founder-title-role">FOUNDER, FINEST CLIENTS</p>
+
+                    <div class="founder-profile-card">
+                        <div class="founder-header">
+                            <div class="founder-left-col">
+                                <img src="https://finestclients.com/asset/mousam.jpeg" alt="Mousam Chatterjee" class="founder-avatar">
+                                <a href="https://www.linkedin.com/in/mousamch/" target="_blank" rel="noopener noreferrer" class="founder-connect-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    Connect on LinkedIn
+                                </a>
+                            </div>
+                            <div class="founder-right-col founder-stats-grid">
+                                <div class="founder-stat-box">
+                                    <div class="founder-stat-num">100M+</div>
+                                    <div class="founder-stat-label">VIEWS GENERATED</div>
+                                </div>
+                                <div class="founder-stat-box">
+                                    <div class="founder-stat-num">46.7K</div>
+                                    <div class="founder-stat-label">YOUTUBE SUBS</div>
+                                </div>
+                                <div class="founder-stat-box">
+                                    <div class="founder-stat-num">90.7K</div>
+                                    <div class="founder-stat-label">INSTA FOLLOWERS</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="founder-bio">
+                        <p>I built my coaching brand, Finest Edit, to 50K subscribers & 100k followers using one playbook: make content for buyers, not browsers.</p>
+                        <p>Every video is optimised for calls, not views.</p>
+                        <p style="color: var(--gold); font-weight: 700; margin-top: 16px;">Now I install that same system for high-ticket coaches.</p>
+                        
+                        <div class="social-pill-container">
+                            <a href="https://www.instagram.com/finestedit_/?hl=en" target="_blank" rel="noopener noreferrer" class="social-pill social-pill-ig">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="https://www.youtube.com/@Finesteditacademy/featured" target="_blank" rel="noopener noreferrer" class="social-pill social-pill-yt">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                                <span>YouTube</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- YOU JUST RECORD & GUARANTEE -->
+        <section class="section" style="background:#000;text-align:center">
+            <div class="container" style="max-width:960px">
+                <div class="fade-in">
+                    <h3 class="section-title" style="margin-bottom:16px">You Just Record</h3>
+                    <p class="section-desc" style="margin-bottom:16px; font-weight: 600; color: #fff;">4 hours per month. Batch it in one session or spread it out.</p>
+                    <p class="section-desc" style="color: var(--gold);">No studio. No travel. Just you, your phone, and our scripts.</p>
+                </div>
+
+                <div class="you-record-grid fade-in">
+                    <div class="you-record-item">
+                        <div class="you-record-icon">📝</div>
+                        <div class="you-record-text">
+                            <h5>Scripts</h5>
+                            <p>We write every word you'll say.</p>
+                        </div>
+                    </div>
+                    <div class="you-record-item">
+                        <div class="you-record-icon">🎬</div>
+                        <div class="you-record-text">
+                            <h5>Editing</h5>
+                            <p>Professional cuts, graphics, captions.</p>
+                        </div>
+                    </div>
+                    <div class="you-record-item">
+                        <div class="you-record-icon">🖼️</div>
+                        <div class="you-record-text">
+                            <h5>Thumbnails</h5>
+                            <p>2 custom designs per video, A/B tested.</p>
+                        </div>
+                    </div>
+                    <div class="you-record-item">
+                        <div class="you-record-icon">🔍</div>
+                        <div class="you-record-text">
+                            <h5>SEO</h5>
+                            <p>Titles, descriptions, tags optimized for search.</p>
+                        </div>
+                    </div>
+                    <div class="you-record-item">
+                        <div class="you-record-icon">📅</div>
+                        <div class="you-record-text">
+                            <h5>Posting</h5>
+                            <p>Uploaded on schedule, every week.</p>
+                        </div>
+                    </div>
+                    <div class="you-record-item">
+                        <div class="you-record-icon">📊</div>
+                        <div class="you-record-text">
+                            <h5>Tracking</h5>
+                            <p>UTM links so you know which video = which client.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in guarantee-box" style="margin-top: 96px;">
+                    <p class="section-label">THE OUTCOME</p>
+                    <h4 style="font-size: 32px; margin-bottom: 8px;">Consistent, Predictable Qualified Calls</h4>
+                    <p style="font-size: 18px; color: var(--gray-400); font-weight: 500;">That's what a predictable system delivers.</p>
+
+                    <div style="background: rgba(212, 175, 55, 0.05); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 24px; margin: 40px auto; max-width: 600px; text-align: left; border-top: 1px solid var(--white-5); border-right: 1px solid var(--white-5); border-bottom: 1px solid var(--white-5);">
+                        <h4 style="color: var(--gold); font-size: 18px; margin-bottom: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">Our 90-Day Guarantee</h4>
+                        <p style="color: #fff; font-weight: 600; margin: 0; font-size: 18px; line-height: 1.5;">We guarantee to make your YouTube Funnels Videos live, optimised, and tracking within 90 days - or we will work for free until it is.</p>
+                    </div>
+
+                    <div class="timeline-wrapper">
+                        <div class="timeline-item">
+                            <div class="timeline-month">Month 1</div>
+                            <div class="timeline-desc">Your first videos go live. The algorithm starts learning.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-month">Month 2</div>
+                            <div class="timeline-desc">Search traffic kicks in. Calls start booking.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-month">Month 3</div>
+                            <div class="timeline-desc">Your predictable lead flow is established. The engine is proven.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-month">Month 4+</div>
+                            <div class="timeline-desc">We keep publishing. The library grows. Calls compound.</div>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3B82F6; padding: 20px; border-radius: 0 8px 8px 0; margin-bottom: 24px;">
+                        <p style="color: #fff; font-weight: 600; margin: 0; font-size: 18px;">A video you post today will book calls 3 years from now. That's the real asset.</p>
+                    </div>
+
+                    <p style="color: var(--gray-300);"><strong>What counts as qualified:</strong> YouTube source, decision maker, real need, budget fit, shows up, 15+ min conversation.</p>
+
+                    <details class="guarantee-accordion">
+                        <summary>Full qualification criteria (click to expand)</summary>
+                        <div class="guarantee-list">
+                            <div class="guarantee-list-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>1. They found you on YouTube.</span>
+                            </div>
+                            <div class="guarantee-list-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>2. They are the decision maker.</span>
+                            </div>
+                            <div class="guarantee-list-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>3. They have a real problem right now.</span>
+                            </div>
+                            <div class="guarantee-list-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>4. They have the budget to pay your price.</span>
+                            </div>
+                            <div class="guarantee-list-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>5. They show up to the call on time.</span>
+                            </div>
+                            <div class="guarantee-list-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>6. They talk with you for at least 15 minutes.</span>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section" style="background:#000">
+            <div class="container" style="max-width:768px">
+                <h2 class="section-title" style="text-align:center;margin-bottom:48px">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <div class="faq-item" data-faq="0">
+                        <button onclick="toggleFaq(0)" class="faq-btn">
+                            <span>What is a qualified call?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                        <div class="faq-content">
+                            <p>A qualified call meets all 6 criteria:</p>
+                            <ul>
+                                <li>They found you on YouTube (not a referral or cold outreach)</li>
+                                <li>They're the decision maker (can say yes without asking anyone)</li>
+                                <li>They have a real need right now (not "just researching")</li>
+                                <li>They have the budget for your offer</li>
+                                <li>They show up to the call</li>
+                                <li>They stay for at least 15 minutes</li>
+                            </ul>
+                            <p>If a call doesn't meet ALL 6, it doesn't count toward your guarantee.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" data-faq="1">
+                        <button onclick="toggleFaq(1)" class="faq-btn">
+                            <span>Do I have to edit the videos?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                        <div class="faq-content">
+                            <p>No. We handle everything:</p>
+                            <ul>
+                                <li>Scripts (you just read and talk)</li>
+                                <li>Editing (professional cuts, graphics, captions)</li>
+                                <li>Thumbnails (2 custom designs per video)</li>
+                                <li>SEO (titles, descriptions, tags)</li>
+                                <li>Posting (on schedule, every week)</li>
+                            </ul>
+                            <p>You just record: about 4 hours per month total, batchable in one session.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" data-faq="2">
+                        <button onclick="toggleFaq(2)" class="faq-btn">
+                            <span>What if my initial videos don't perform?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                        <div class="faq-content">
+                            <p>Our process is data-driven. If a video doesn't immediately generate traction, we analyze the analytics—click-through rates, retention graphs, and search rankings—to refine the next batch.</p>
+                            <p>Our goal is to build a compounding engine. We iterate and optimize until the system is dialed in, and your channel consistently produces qualified calls.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" data-faq="3">
+                        <button onclick="toggleFaq(3)" class="faq-btn">
+                            <span>How long until I see results?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                        <div class="faq-content">
+                            <p>Month 1 is setup: your first videos go live and the algorithm starts learning.</p>
+                            <p>Month 2, search traffic kicks in and calls start booking.</p>
+                            <p>Month 3, your consistent lead flow is established.</p>
+                            <p>Month 4+, the library grows and calls compound.</p>
+                            <p>YouTube is not instant like paid ads. But unlike ads, the videos keep working forever. A video you post today will book calls 3 years from now.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" data-faq="4">
+                        <button onclick="toggleFaq(4)" class="faq-btn">
+                            <span>Why did YouTube fail for me before?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                        <div class="faq-content">
+                            <p>Most people fail at YouTube because they focus on views instead of buyers.</p>
+                            <p>They make "value content" that educates but doesn't convert. Or they copy viral creators who are entertainers, not business owners.</p>
+                            <p>We engineer content specifically for high-ticket sales:</p>
+                            <ul>
+                                <li>Topics your buyers are searching for</li>
+                                <li>Hooks that filter for qualified prospects</li>
+                                <li>CTAs that book calls, not just subscribers</li>
+                            </ul>
+                            <p>Different strategy. Different results.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" data-faq="5">
+                        <button onclick="toggleFaq(5)" class="faq-btn">
+                            <span>Will you work with my competitors?</span>
+                            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                        <div class="faq-content">
+                            <p>No. We offer strict niche exclusivity.</p>
+                            <p>Once you sign with us, we reject your direct competitors. You own the space.</p>
+                            <p>This protects your investment and ensures we're fully aligned with your success.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-border-t cta-section" style="background:#000">
+            <div class="fade-in container" style="max-width:896px">
+                <h2>Stop Relying on Referrals. Start Compounding Calls.</h2>
+                <p>Book a strategy call. We'll review your offer, your niche, and tell you exactly how many calls YouTube can generate for your business.</p>
+                <button onclick="openOptinModal()" class="cta-btn" style="margin-bottom: 24px;">Book Your Strategy Call</button>
+                <p style="font-size: 14px; font-style: italic; margin-bottom: 0;">No pressure. No obligation. Just clarity on whether this is right for you.</p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div>
+                        <div class="footer-brand">FINEST<span class="footer-brand-accent">CLIENTS</span></div>
+                        <p class="footer-desc">We build YouTube systems that make money for coaches and consultants.</p>
+                    </div>
+                    <div class="footer-nav">
+                        <h5>Menu</h5>
+                        <ul>
+                            <li><button onclick="scrollToSection('home')">Home</button></li>
+                            <li><button onclick="scrollToSection('proof')">Proof</button></li>
+                            <li><button onclick="scrollToSection('process')">Process</button></li>
+                        </ul>
+                    </div>
+                    <div class="footer-nav">
+                        <h5>Legal</h5>
+                        <ul>
+                            <li><button onclick="showPage('privacy')">Privacy Policy</button></li>
+                            <li><button onclick="showPage('terms')">Terms of Service</button></li>
+                            <li><button onclick="showPage('refund')">Refund Policy</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© <span id="currentYear"></span> Finest Enterprises. All rights reserved.</p>
+                    <p>Designed for Excellence</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Legal Pages -->
+    <div id="privacyPage" class="legal-page hidden">
+        <button onclick="showPage('landing')" class="legal-back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>Back to Home
+        </button>
+        <h1>Privacy Policy</h1>
+        <div class="legal-content">
+            <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
+            <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.</p>
+            <h2>Interpretation and Definitions</h2>
+            <h3>Interpretation</h3>
+            <p>The words of which the initial letter is capitalized have meanings defined under the following conditions.</p>
+            <h3>Definitions</h3>
+            <p>For the purposes of this Privacy Policy:</p>
+            <ul>
+                <li><strong>Account</strong> means a unique account created for You to access our Service.</li>
+                <li><strong>Company</strong> refers to <strong>Finest Enterprises</strong>.</li>
+                <li><strong>Country</strong> refers to: <strong>USA</strong></li>
+                <li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a href="https://finestclients.com/">https://finestclients.com/</a></li>
+                <li><strong>You</strong> means the individual accessing or using the Service.</li>
+            </ul>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, You can contact us:</p>
+            <ul>
+                <li>By email: <a href="/cdn-cgi/l/email-protection#036e6c7670626e43656a6d667077606f6a666d77702d606c6e"><span class="__cf_email__" data-cfemail="acc1c3d9dfcdc1eccac5c2c9dfd8cfc0c5c9c2d8df82cfc3c1">[email&#160;protected]</span></a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="termsPage" class="legal-page hidden">
+        <button onclick="showPage('landing')" class="legal-back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>Back to Home
+        </button>
+        <h1>Terms and Conditions</h1>
+        <div class="legal-content">
+            <h2>Interpretation and Definitions</h2>
+            <h3>Interpretation</h3>
+            <p>The words of which the initial letter is capitalized have meanings defined under the following conditions.</p>
+            <h3>Definitions</h3>
+            <p>For the purposes of these Terms and Conditions:</p>
+            <ul>
+                <li><strong>Company</strong> refers to <strong>Finest Enterprises</strong>.</li>
+                <li><strong>Country</strong> refers to: <strong>USA</strong></li>
+                <li><strong>Service</strong> refers to the Website.</li>
+                <li><strong>Website</strong> refers to <strong>Finest Clients</strong>, accessible from <a href="https://finestclients.com/">https://finestclients.com/</a></li>
+                <li><strong>You</strong> means the individual accessing or using the Service.</li>
+            </ul>
+            <h2>Acknowledgment</h2>
+            <p>These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company.</p>
+            <p>By accessing or using the Service You agree to be bound by these Terms and Conditions.</p>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
+            <ul>
+                <li>By email: <a href="/cdn-cgi/l/email-protection#f39e9c8680929eb3959a9d968087909f9a969d8780dd909c9e"><span class="__cf_email__" data-cfemail="335e5c4640525e73555a5d564047505f5a565d47401d505c5e">[email&#160;protected]</span></a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="refundPage" class="legal-page hidden">
+        <button onclick="showPage('landing')" class="legal-back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>Back to Home
+        </button>
+        <h1>Refund Policy</h1>
+        <div class="legal-content">
+            <div class="refund-highlight">
+                <h2>Our Commitment to Fairness</h2>
+                <p>At Finest Enterprises, our relationships are built on trust, transparency, and mutual success. We believe in clear expectations and accountable partnerships.</p>
+                <p style="color:var(--gray-400);font-size:18px">Therefore, our refund policy is strictly governed by the terms of our service agreements.</p>
+            </div>
+            <h3>Service Terms</h3>
+            <p>Unlike standard services with blanket guarantees, our refunds are governed specifically by the <strong>Service Agreement</strong> signed at the start of our work.</p>
+            <p class="refund-quote">"All refund eligibility and conditions are explicitly defined and agreed upon in your Service Agreement before we begin."</p>
+            <h3>Governing Terms</h3>
+            <ul>
+                <li><strong>Performance Based Security:</strong> Your investment is tied to results. If the specific goals or meeting quotas outlined in your contract are not met within the set time, you are eligible for a refund as detailed in your specific agreement.</li>
+                <li><strong>Execution of Refunds:</strong> Refund requests are processed in strict accordance with the rules agreed upon in your Agreement.</li>
+                <li><strong>Processing Time:</strong> Once a refund condition is verified and approved as per the contract, the funds will be returned within the time specified in your agreement (typically 7 to 14 business days).</li>
+            </ul>
+            <h3>Contact Us</h3>
+            <p>For any questions regarding your contract or to start a discussion about results, please contact us at:</p>
+            <p><a href="/cdn-cgi/l/email-protection#630e0c1610020e23050a0d061017000f0a060d17104d000c0e"><strong><span class="__cf_email__" data-cfemail="64090b1117050924020d0a01171007080d010a10174a070b09">[email&#160;protected]</span></strong></a></p>
         </div>
     </div>
 
-    <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-full shadow-lg font-medium text-sm transition-all duration-300 opacity-0 pointer-events-none translate-y-4 z-50 flex items-center space-x-2">
-        <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
-        <span>Schedule copied to clipboard!</span>
-    </div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Set dynamic year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-    <script>
-        // --- Utility Functions ---
-        
-        // Add ordinal suffix to numbers (1st, 2nd, 3rd)
-        function getOrdinalNum(n) {
-            return n + (n > 0 ? ['th', 'st', 'nd', 'rd'][(n > 3 && n < 21) || n % 10 > 3 ? 0 : n % 10] : '');
+        // ============================================
+        // CONFIGURATION - UPDATE THIS URL
+        // ============================================
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwW-pjnzUijLDIdjhb2PMzNHikyu6gEXoe6bgk4_DVLSs-CmpoxHUryh2fiKHt6n6LoOQ/exec';
+        const CALENDLY_URL = 'https://calendly.com/mousam-finestclients/discovery';
+        // ============================================
+
+        let mobileMenuOpen = false;
+        function toggleMobileMenu() { 
+            mobileMenuOpen = !mobileMenuOpen; 
+            const m = document.getElementById('mobileMenu'), 
+                  mi = document.getElementById('menuIcon'), 
+                  ci = document.getElementById('closeIcon'); 
+            if (mobileMenuOpen) { 
+                m.classList.remove('hidden'); 
+                mi.classList.add('hidden'); 
+                ci.classList.remove('hidden'); 
+                document.body.style.overflow = 'hidden';
+            } else { 
+                m.classList.add('hidden'); 
+                mi.classList.remove('hidden'); 
+                ci.classList.add('hidden'); 
+                document.body.style.overflow = 'unset';
+            } 
         }
 
-        // Format Date to a specific TimeZone and extract parts
-        function formatDateForZone(dateObj, timeZone) {
-            const formatter = new Intl.DateTimeFormat('en-US', {
-                timeZone: timeZone,
-                weekday: 'long',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false,
-                hourCycle: 'h23',
-                timeZoneName: 'short'
-            });
-
-            const parts = formatter.formatToParts(dateObj);
-            let weekday='', month='', day='', hour='', minute='', dayPeriod='', tzName='';
-            
-            parts.forEach(p => {
-                if(p.type==='weekday') weekday = p.value;
-                if(p.type==='month') month = p.value;
-                if(p.type==='day') day = p.value;
-                if(p.type==='hour') hour = p.value;
-                if(p.type==='minute') minute = p.value;
-                if(p.type==='dayPeriod') dayPeriod = p.value;
-                if(p.type==='timeZoneName') tzName = p.value;
-            });
-
-            const rawDayNum = parseInt(day);
-            const ordinalDay = getOrdinalNum(rawDayNum);
-            
-            return {
-                rawWeekday: weekday,
-                ordinalDay: ordinalDay,
-                dayStr: `${weekday}, ${month} ${ordinalDay}`,
-                timeStr: `${hour}:${minute} ${dayPeriod}`.trim(),
-                tzStr: tzName
-            };
-        }
-
-        // --- Core Date Logic ---
-
-        function getNextWorkshopDates() {
-            const now = new Date();
-
-            // Simulate IST to find the correct boundaries regardless of user's local timezone.
-            // IST is UTC + 5:30.
-            const istOffset = 5.5 * 60 * 60 * 1000;
-            const currentIST = new Date(now.getTime() + istOffset);
-
-            let dayOfWeek = currentIST.getUTCDay(); // 0=Sun, 1=Mon...
-            let hours = currentIST.getUTCHours();
-
-            let daysToAdd = 0;
-
-            if (dayOfWeek === 1) { // Today is Monday in IST
-                if (hours >= 11) {
-                    daysToAdd = 7; // It's past 11 AM, go to next week
-                } else {
-                    daysToAdd = 0; // It's before 11 AM, workshop is today
-                }
-            } else {
-                // Math to find the upcoming Monday
-                daysToAdd = (1 - dayOfWeek + 7) % 7;
-            }
-
-            // Shift target to the "next to next" workshop by adding exactly 1 week
-            daysToAdd += 7;
-
-            // Construct the Target Monday in fake IST time
-            const targetMondayIST = new Date(currentIST);
-            targetMondayIST.setUTCDate(currentIST.getUTCDate() + daysToAdd);
-            targetMondayIST.setUTCHours(11, 0, 0, 0); // 11:00 AM IST
-
-            // Convert back to real absolute UTC time
-            const targetMondayUTC = new Date(targetMondayIST.getTime() - istOffset);
-
-            // Function to get the preceding days at exactly 12:00 AM IST
-            const getPrepDayUTC = (daysBefore) => {
-                const prepIST = new Date(targetMondayIST);
-                prepIST.setUTCDate(targetMondayIST.getUTCDate() - daysBefore);
-                prepIST.setUTCHours(0, 0, 0, 0); // Midnight start of day in IST
-                return new Date(prepIST.getTime() - istOffset);
-            };
-
-            return [
-                { label: "Three days ago", isMain: false, startDateUTC: getPrepDayUTC(3), endDateUTC: getPrepDayUTC(2) }, // Friday to Saturday
-                { label: "Two days ago", isMain: false, startDateUTC: getPrepDayUTC(2), endDateUTC: getPrepDayUTC(1) }, // Saturday to Sunday
-                { label: "24 hours ago", isMain: false, startDateUTC: getPrepDayUTC(1), endDateUTC: targetMondayUTC } // Sunday to Monday 11:00 AM IST
-            ];
-        }
-
-        // --- Real-time Conversion Logic (12 AM PT to IST) ---
-        function getRealtimeMidnightConversion() {
-            const now = new Date();
-            
-            // Get the CURRENT timezone abbreviation for Pacific Time (PDT or PST)
-            const ptTzName = new Intl.DateTimeFormat('en-US', { 
-                timeZone: 'America/Los_Angeles', 
-                timeZoneName: 'short' 
-            }).formatToParts(now).find(p => p.type === 'timeZoneName').value;
-            
-            // Determine if Pacific Time is currently in Daylight Saving Time
-            // PDT = UTC-7, PST = UTC-8. IST is always UTC+5:30.
-            // PDT to IST difference: +12 hours 30 mins
-            // PST to IST difference: +13 hours 30 mins
-            const isDST = ptTzName.includes('D') || ptTzName.includes('Daylight');
-            
-            const ptTimeStr = isDST ? '12:00 AM PDT' : '12:00 AM PST';
-            const istTimeStr = isDST ? '12:30 PM IST' : '1:30 PM IST';
-            
-            return { ptTimeStr, istTimeStr };
-        }
-
-        // --- Render UI ---
-
-        let plainTextFormatToCopy = "";
-
-        function renderSchedule() {
-            const container = document.getElementById('schedule-container');
-            const dates = getNextWorkshopDates();
-
-            // 1. Update Header Date Range
-            const startDateIST = formatDateForZone(dates[0].startDateUTC, 'Asia/Kolkata').dayStr;
-            const endDateIST = formatDateForZone(dates[dates.length - 1].endDateUTC, 'Asia/Kolkata').dayStr;
-            document.getElementById('date-range').innerText = `Cycle: ${startDateIST} — ${endDateIST}`;
-
-            container.innerHTML = '';
-            
-            // Start of Copy Text
-            plainTextFormatToCopy = "📅 FACEBOOK AD SCHEDULING (PACIFIC TIME)\n-------------------------------------------------\n";
-
-            // 2. Build Cards & Text Format
-            dates.forEach((item, index) => {
-                const istStart = formatDateForZone(item.startDateUTC, 'Asia/Kolkata');
-                const istEnd = formatDateForZone(item.endDateUTC, 'Asia/Kolkata');
-                const pdtStart = formatDateForZone(item.startDateUTC, 'America/Los_Angeles');
-                const pdtEnd = formatDateForZone(item.endDateUTC, 'America/Los_Angeles');
-
-                // Build copy text tailored for Ad Setup
-                plainTextFormatToCopy += `[${item.label.toUpperCase()}]\n`;
-                plainTextFormatToCopy += `Set Ad Account (Pacific) to:\n`;
-                plainTextFormatToCopy += `Start: ${pdtStart.dayStr}, ${pdtStart.timeStr} ${pdtStart.tzStr}\n`;
-                plainTextFormatToCopy += `End:   ${pdtEnd.dayStr}, ${pdtEnd.timeStr} ${pdtEnd.tzStr}\n`;
-                plainTextFormatToCopy += `(This delivers in India from ${istStart.rawWeekday} ${istStart.timeStr} to ${istEnd.rawWeekday} ${istEnd.timeStr})\n`;
-                if(index < dates.length - 1) plainTextFormatToCopy += "\n";
-
-                // Animation delay for cascading effect
-                const animDelay = `animation-delay: ${index * 100}ms`;
-
-                const card = document.createElement('div');
-                
-                if (item.isMain) {
-                    card.className = `flex flex-col md:flex-row md:items-center justify-between p-5 sm:p-6 rounded-2xl border-2 border-indigo-500 shadow-md bg-indigo-50/50 relative overflow-hidden fade-in hover:shadow-lg transition-all duration-300`;
-                } else {
-                    card.className = `flex flex-col md:flex-row md:items-center justify-between p-5 rounded-2xl border border-slate-200 shadow-sm bg-white hover:border-blue-200 hover:shadow-md transition-all duration-300 fade-in group`;
-                }
-                card.style = animDelay;
-
-                const ribbon = item.isMain 
-                    ? `<div class="absolute top-0 right-0 bg-indigo-500 text-white text-[10px] sm:text-xs font-bold px-4 py-1.5 rounded-bl-xl shadow-sm tracking-wide uppercase">Live Workshop</div>` 
-                    : '';
-
-                card.innerHTML = `
-                    ${ribbon}
-                    
-                    <!-- Left Column (IST) -->
-                    <div class="flex-1 w-full relative z-10 opacity-70 group-hover:opacity-100 transition-opacity">
-                        <div class="text-xs font-bold uppercase tracking-wider ${item.isMain ? 'text-indigo-600' : 'text-slate-400 group-hover:text-blue-500'} mb-3 md:mb-2">Audience Experience (IST)</div>
-                        
-                        <div class="flex items-start space-x-3 sm:space-x-4 mb-4 md:mb-0">
-                            <div class="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl mt-1 ${item.isMain ? 'bg-indigo-200 text-indigo-700' : 'bg-slate-100 text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-400 transition-colors'}">
-                                <i data-lucide="users" class="w-5 h-5"></i>
-                            </div>
-                            <div class="flex flex-col w-full">
-                                <div class="flex items-center space-x-2">
-                                    <span class="text-[10px] font-bold text-slate-400 w-8">START</span>
-                                    <div class="text-sm font-semibold text-slate-700">${istStart.dayStr} <span class="text-slate-500 font-normal ml-1">${istStart.timeStr}</span></div>
-                                </div>
-                                <div class="flex items-center space-x-2 mt-1.5">
-                                    <span class="text-[10px] font-bold text-slate-400 w-8">END</span>
-                                    <div class="text-sm font-semibold text-slate-700">${istEnd.dayStr} <span class="text-slate-500 font-normal ml-1">${istEnd.timeStr}</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Divider Graphic -->
-                    <div class="hidden md:flex flex-col items-center justify-center px-4 shrink-0">
-                        <div class="bg-white border ${item.isMain ? 'border-indigo-200 text-indigo-400' : 'border-slate-200 text-slate-300'} rounded-full p-2 my-1 z-10 shadow-sm">
-                            <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
-                        </div>
-                    </div>
-
-                    <!-- Mobile Divider -->
-                    <div class="md:hidden w-full flex items-center justify-center my-4">
-                        <div class="flex-1 border-t border-slate-200"></div>
-                        <div class="px-3 bg-white border border-slate-200 rounded-full p-1 mx-2">
-                            <i data-lucide="arrow-up-down" class="w-4 h-4 text-slate-400"></i>
-                        </div>
-                        <div class="flex-1 border-t border-slate-200"></div>
-                    </div>
-
-                    <!-- Right Column (PDT) - HIGH EMPHASIS FOR AD SETUP -->
-                    <div class="flex-1 w-full flex md:justify-end relative z-10">
-                        <div class="text-left md:text-right w-full sm:w-auto flex flex-col items-start md:items-end bg-amber-50/50 p-3 rounded-xl border border-amber-100/50">
-                            <div class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-3 md:mb-2 w-full md:text-right">${item.label} (Set in FB)</div>
-                            
-                            <div class="flex items-center md:flex-row-reverse space-x-2 md:space-x-0 md:space-x-reverse">
-                                <span class="text-[10px] font-bold text-amber-600 w-8 md:text-right bg-amber-100 px-1 py-0.5 rounded ml-2">START</span>
-                                <div class="text-sm sm:text-base font-bold text-slate-900">${pdtStart.dayStr} <span class="text-amber-700 font-semibold ml-1 md:mr-1">${pdtStart.timeStr}</span></div>
-                            </div>
-                            <div class="flex items-center md:flex-row-reverse space-x-2 md:space-x-0 md:space-x-reverse mt-2">
-                                <span class="text-[10px] font-bold text-amber-600 w-8 md:text-right bg-amber-100 px-1 py-0.5 rounded ml-2">END</span>
-                                <div class="text-sm sm:text-base font-bold text-slate-900">${pdtEnd.dayStr} <span class="text-amber-700 font-semibold ml-1 md:mr-1">${pdtEnd.timeStr}</span></div>
-                            </div>
-                            <div class="mt-3 inline-block">
-                                <span class="text-[10px] font-bold bg-amber-500 text-white shadow-sm px-2 py-1 rounded">FB Ad Account Time (${pdtStart.tzStr})</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-            
-            // 3. Render Quick Conversion Section
-            const conversionData = getRealtimeMidnightConversion();
-            document.getElementById('pt-midnight-label').innerText = conversionData.ptTimeStr;
-            document.getElementById('ist-conversion-result').innerText = conversionData.istTimeStr;
-            
-            // Append the quick conversion info to the copy text
-            plainTextFormatToCopy += `\n📌 QUICK REFERENCE:\n${conversionData.ptTimeStr} = ${conversionData.istTimeStr}\n`;
-            
-            // Re-initialize icons for newly added DOM elements
-            lucide.createIcons();
-        }
-
-        // --- Copy to Clipboard functionality ---
-        function copyToClipboard() {
-            // Using execCommand as a safe fallback per constraints
-            const textArea = document.createElement("textarea");
-            textArea.value = plainTextFormatToCopy;
-            document.body.appendChild(textArea);
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                showToast();
-            } catch (err) {
-                console.error('Unable to copy', err);
-            }
-            document.body.removeChild(textArea);
-        }
-
-        function showToast() {
-            const toast = document.getElementById('toast');
-            toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-            }, 3000);
-        }
-
-        // Initialize App
-        document.addEventListener('DOMContentLoaded', () => {
-            renderSchedule();
-
-            // Setup listeners
-            document.getElementById('copy-btn').addEventListener('click', copyToClipboard);
-            document.getElementById('mobile-copy-btn').addEventListener('click', copyToClipboard);
-            
-            // Automatically refresh dates every hour if the window stays open
-            setInterval(renderSchedule, 60 * 60 * 1000); 
+        window.addEventListener('scroll', () => { 
+            const n = document.getElementById('navbar'); 
+            if (window.scrollY > 20 || mobileMenuOpen) { 
+                n.classList.add('scrolled') 
+            } else { 
+                n.classList.remove('scrolled') 
+            } 
         });
+
+        function scrollToSection(id) { 
+            const cp = getCurrentPage(); 
+            if (cp !== 'landing') { 
+                showPage('landing'); 
+                setTimeout(() => { 
+                    if (id === 'home') { window.scrollTo({ top: 0, behavior: 'smooth' }) } 
+                    else { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }) } 
+                }, 100) 
+            } else { 
+                if (id === 'home') { window.scrollTo({ top: 0, behavior: 'smooth' }) } 
+                else { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }) } 
+            } 
+        }
+
+        function getCurrentPage() { 
+            if (!document.getElementById('landingPage').classList.contains('hidden')) return 'landing'; 
+            if (!document.getElementById('privacyPage').classList.contains('hidden')) return 'privacy'; 
+            if (!document.getElementById('termsPage').classList.contains('hidden')) return 'terms'; 
+            if (!document.getElementById('refundPage').classList.contains('hidden')) return 'refund'; 
+            return 'landing' 
+        }
+
+        function showPage(page) { 
+            document.getElementById('landingPage').classList.add('hidden'); 
+            document.getElementById('privacyPage').classList.add('hidden'); 
+            document.getElementById('termsPage').classList.add('hidden'); 
+            document.getElementById('refundPage').classList.add('hidden'); 
+            
+            if (page === 'landing') { document.getElementById('landingPage').classList.remove('hidden') } 
+            else if (page === 'privacy') { document.getElementById('privacyPage').classList.remove('hidden') } 
+            else if (page === 'terms') { document.getElementById('termsPage').classList.remove('hidden') } 
+            else if (page === 'refund') { document.getElementById('refundPage').classList.remove('hidden') } 
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' }) 
+        }
+
+        // Email Optin Modal Functions
+        function openOptinModal() {
+            const modal = document.getElementById('optinModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                document.getElementById('optinName').focus();
+            }, 100);
+        }
+
+        function closeOptinModal() {
+            const modal = document.getElementById('optinModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'unset';
+            document.getElementById('optinForm').reset();
+            document.getElementById('optinError').classList.remove('show');
+        }
+
+        document.getElementById('optinModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('optinModal')) {
+                closeOptinModal();
+            }
+        });
+
+        async function handleOptinSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('optinName').value.trim();
+            const email = document.getElementById('optinEmail').value.trim();
+            const submitBtn = document.getElementById('optinSubmit');
+            const submitText = document.getElementById('submitText');
+            const spinner = document.getElementById('submitSpinner');
+            const errorEl = document.getElementById('optinError');
+
+            if (!name || name.length < 2) {
+                errorEl.textContent = 'Please enter your name';
+                errorEl.classList.add('show');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorEl.textContent = 'Please enter a valid email address';
+                errorEl.classList.add('show');
+                return;
+            }
+
+            errorEl.classList.remove('show');
+            submitBtn.disabled = true;
+            submitText.textContent = 'Processing...';
+            spinner.style.display = 'block';
+
+            try {
+                if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            source: 'Finest Clients Landing Page'
+                        })
+                    });
+                }
+                const calendlyWithParams = CALENDLY_URL + '?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
+                window.location.href = calendlyWithParams;
+
+            } catch (error) {
+                console.error('Error:', error);
+                const calendlyWithParams = CALENDLY_URL + '?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
+                window.location.href = calendlyWithParams;
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeOptinModal();
+            }
+        });
+
+        let openFaqIndex = null;
+        function toggleFaq(index) { 
+            const items = document.querySelectorAll('.faq-item'); 
+            items.forEach((item, i) => { 
+                const icon = item.querySelector('.faq-icon'); 
+                if (i === index && openFaqIndex !== index) { 
+                    item.classList.add('open'); 
+                    icon.innerHTML = '<line x1="5" y1="12" x2="19" y2="12"></line>'; 
+                    openFaqIndex = index 
+                } else { 
+                    item.classList.remove('open'); 
+                    icon.innerHTML = '<line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>' 
+                } 
+            }); 
+            if (openFaqIndex === index && !document.querySelector('.faq-item.open')) { 
+                openFaqIndex = null 
+            } 
+        }
+
+        const fadeObserver = new IntersectionObserver((entries) => { 
+            entries.forEach(entry => { 
+                if (entry.isIntersecting) { 
+                    entry.target.classList.add('visible'); 
+                    fadeObserver.unobserve(entry.target) 
+                } 
+            }) 
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.fade-in').forEach(el => { fadeObserver.observe(el) });
+        
+        function handleProcessScroll() { 
+            const c = document.getElementById('processContainer'); 
+            if (!c) return; 
+            const r = c.getBoundingClientRect(), wh = window.innerHeight, eh = r.height, so = wh * 0.5, ry = so - r.top; 
+            let p = ry / eh; p = Math.max(0, Math.min(1, p)); 
+            const lp = p * 100; 
+            document.getElementById('processLine').style.height = lp + '%'; 
+            document.getElementById('processDot').style.top = lp + '%'; 
+            const steps = document.querySelectorAll('.timeline-step'); 
+            steps.forEach((step) => { 
+                const stepTop = step.offsetTop + 32; 
+                if ((p * eh) > stepTop - 50) { 
+                    step.classList.remove('inactive'); 
+                } else { 
+                    step.classList.add('inactive'); 
+                } 
+            }) 
+        }
+        
+        window.addEventListener('scroll', handleProcessScroll); 
+        handleProcessScroll(); 
+
+        // ============================================
+        // LIQUID ETHER FLUID SIMULATION BACKGROUND
+        // ============================================
+        const initLiquidEther = async () => {
+            const container = document.getElementById('liquid-ether-container');
+            if (!container) return;
+
+            try {
+                // Load Three.js from CDN
+                const THREE = await new Promise((resolve, reject) => {
+                    if (window.THREE) { resolve(window.THREE); return; }
+                    const script = document.createElement('script');
+                    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+                    script.onload = () => resolve(window.THREE);
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+
+                // === Configuration ===
+                const CONFIG = {
+                    mouseForce: 25,
+                    cursorSize: 120,
+                    isViscous: false,
+                    viscous: 30,
+                    iterationsViscous: 32,
+                    iterationsPoisson: 32,
+                    dt: 0.014,
+                    BFECC: true,
+                    resolution: 0.5,
+                    isBounce: false,
+                    colors: ['#D4AF37', '#fef08a', '#4b5563'],
+                    autoDemo: true,
+                    autoSpeed: 0.6,
+                    autoIntensity: 2.5,
+                    takeoverDuration: 0.25,
+                    autoResumeDelay: 1000,
+                    autoRampDuration: 0.6
+                };
+
+                // === Palette Texture ===
+                function makePaletteTexture(stops) {
+                    let arr = (Array.isArray(stops) && stops.length > 0) 
+                        ? (stops.length === 1 ? [stops[0], stops[0]] : stops) 
+                        : ['#ffffff', '#ffffff'];
+                    const w = arr.length;
+                    const data = new Uint8Array(w * 4);
+                    for (let i = 0; i < w; i++) {
+                        const c = new THREE.Color(arr[i]);
+                        data[i*4] = Math.round(c.r*255);
+                        data[i*4+1] = Math.round(c.g*255);
+                        data[i*4+2] = Math.round(c.b*255);
+                        data[i*4+3] = 255;
+                    }
+                    const tex = new THREE.DataTexture(data, w, 1, THREE.RGBAFormat);
+                    tex.magFilter = THREE.LinearFilter;
+                    tex.minFilter = THREE.LinearFilter;
+                    tex.wrapS = THREE.ClampToEdgeWrapping;
+                    tex.wrapT = THREE.ClampToEdgeWrapping;
+                    tex.generateMipmaps = false;
+                    tex.needsUpdate = true;
+                    return tex;
+                }
+
+                const paletteTex = makePaletteTexture(CONFIG.colors);
+                const bgVec4 = new THREE.Vector4(0, 0, 0, 0);
+
+                // === Common ===
+                const Common = {
+                    width: 0, height: 0, aspect: 1, pixelRatio: 1,
+                    time: 0, delta: 0, container: null, renderer: null, clock: null,
+                    init(el) {
+                        this.container = el;
+                        this.pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+                        this.resize();
+                        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                        this.renderer.autoClear = false;
+                        this.renderer.setClearColor(new THREE.Color(0x000000), 0);
+                        this.renderer.setPixelRatio(this.pixelRatio);
+                        this.renderer.setSize(this.width, this.height);
+                        const cv = this.renderer.domElement;
+                        cv.style.width = '100%'; cv.style.height = '100%'; cv.style.display = 'block';
+                        this.clock = new THREE.Clock(); this.clock.start();
+                    },
+                    resize() {
+                        if (!this.container) return;
+                        const r = this.container.getBoundingClientRect();
+                        this.width = Math.max(1, Math.floor(r.width));
+                        this.height = Math.max(1, Math.floor(r.height));
+                        this.aspect = this.width / this.height;
+                        if (this.renderer) this.renderer.setSize(this.width, this.height, false);
+                    },
+                    update() {
+                        if (!this.clock) return;
+                        this.delta = this.clock.getDelta();
+                        this.time += this.delta;
+                    }
+                };
+
+                // === Mouse ===
+                const Mouse = {
+                    mouseMoved: false, coords: new THREE.Vector2(), coords_old: new THREE.Vector2(),
+                    diff: new THREE.Vector2(), timer: null, container: null,
+                    isHoverInside: false, hasUserControl: false, isAutoActive: false,
+                    autoIntensity: CONFIG.autoIntensity,
+                    takeoverActive: false, takeoverStartTime: 0, takeoverDuration: CONFIG.takeoverDuration,
+                    takeoverFrom: new THREE.Vector2(), takeoverTo: new THREE.Vector2(),
+                    onInteract: null, _listeners: [],
+                    init(el) {
+                        this.container = el;
+                        const w = window;
+                        const mm = (e) => this._onMouseMove(e);
+                        const ts = (e) => this._onTouchStart(e);
+                        const tmv = (e) => this._onTouchMove(e);
+                        const te = () => { this.isHoverInside = false; };
+                        const ml = () => { this.isHoverInside = false; };
+                        w.addEventListener('mousemove', mm);
+                        w.addEventListener('touchstart', ts, { passive: true });
+                        w.addEventListener('touchmove', tmv, { passive: true });
+                        w.addEventListener('touchend', te);
+                        document.addEventListener('mouseleave', ml);
+                        this._listeners = [
+                            ['mousemove', mm, w], ['touchstart', ts, w], ['touchmove', tmv, w],
+                            ['touchend', te, w], ['mouseleave', ml, document]
+                        ];
+                    },
+                    dispose() {
+                        this._listeners.forEach(([evt, fn, tgt]) => tgt.removeEventListener(evt, fn));
+                        this._listeners = [];
+                    },
+                    _isInside(x, y) {
+                        if (!this.container) return false;
+                        const r = this.container.getBoundingClientRect();
+                        return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+                    },
+                    _setCoords(x, y) {
+                        if (!this.container) return;
+                        if (this.timer) clearTimeout(this.timer);
+                        const r = this.container.getBoundingClientRect();
+                        if (r.width === 0 || r.height === 0) return;
+                        this.coords.set(((x - r.left)/r.width)*2-1, -(((y - r.top)/r.height)*2-1));
+                        this.mouseMoved = true;
+                        this.timer = setTimeout(() => { this.mouseMoved = false; }, 100);
+                    },
+                    _onMouseMove(e) {
+                        this.isHoverInside = this._isInside(e.clientX, e.clientY);
+                        if (!this.isHoverInside) return;
+                        if (this.onInteract) this.onInteract();
+                        if (this.isAutoActive && !this.hasUserControl && !this.takeoverActive) {
+                            if (!this.container) return;
+                            const r = this.container.getBoundingClientRect();
+                            const nx = (e.clientX - r.left)/r.width, ny = (e.clientY - r.top)/r.height;
+                            this.takeoverFrom.copy(this.coords);
+                            this.takeoverTo.set(nx*2-1, -(ny*2-1));
+                            this.takeoverStartTime = performance.now();
+                            this.takeoverActive = true;
+                            this.hasUserControl = true;
+                            this.isAutoActive = false;
+                            return;
+                        }
+                        this._setCoords(e.clientX, e.clientY);
+                        this.hasUserControl = true;
+                    },
+                    _onTouchStart(e) {
+                        if (e.touches.length !== 1) return;
+                        const t = e.touches[0];
+                        this.isHoverInside = this._isInside(t.clientX, t.clientY);
+                        if (!this.isHoverInside) return;
+                        if (this.onInteract) this.onInteract();
+                        this._setCoords(t.clientX, t.clientY);
+                        this.hasUserControl = true;
+                    },
+                    _onTouchMove(e) {
+                        if (e.touches.length !== 1) return;
+                        const t = e.touches[0];
+                        this.isHoverInside = this._isInside(t.clientX, t.clientY);
+                        if (!this.isHoverInside) return;
+                        if (this.onInteract) this.onInteract();
+                        this._setCoords(t.clientX, t.clientY);
+                    },
+                    update() {
+                        if (this.takeoverActive) {
+                            const t = (performance.now() - this.takeoverStartTime)/(this.takeoverDuration*1000);
+                            if (t >= 1) {
+                                this.takeoverActive = false;
+                                this.coords.copy(this.takeoverTo);
+                                this.coords_old.copy(this.coords);
+                                this.diff.set(0,0);
+                            } else {
+                                const k = t*t*(3-2*t);
+                                this.coords.copy(this.takeoverFrom).lerp(this.takeoverTo, k);
+                            }
+                        }
+                        this.diff.subVectors(this.coords, this.coords_old);
+                        this.coords_old.copy(this.coords);
+                        if (this.coords_old.x === 0 && this.coords_old.y === 0) this.diff.set(0,0);
+                        if (this.isAutoActive && !this.takeoverActive) this.diff.multiplyScalar(this.autoIntensity);
+                    }
+                };
+
+                // === Shaders ===
+                const face_vert = `
+                    attribute vec3 position; uniform vec2 px; uniform vec2 boundarySpace; varying vec2 uv; precision highp float;
+                    void main(){ vec3 pos=position; vec2 scale=1.0-boundarySpace*2.0; pos.xy=pos.xy*scale; uv=vec2(0.5)+(pos.xy)*0.5; gl_Position=vec4(pos,1.0); }`;
+                const line_vert = `
+                    attribute vec3 position; uniform vec2 px; precision highp float; varying vec2 uv;
+                    void main(){ vec3 pos=position; uv=0.5+pos.xy*0.5; vec2 n=sign(pos.xy); pos.xy=abs(pos.xy)-px*1.0; pos.xy*=n; gl_Position=vec4(pos,1.0); }`;
+                const mouse_vert = `
+                    precision highp float; attribute vec3 position; attribute vec2 uv; uniform vec2 center; uniform vec2 scale; uniform vec2 px; varying vec2 vUv;
+                    void main(){ vec2 pos=position.xy*scale*2.0*px+center; vUv=uv; gl_Position=vec4(pos,0.0,1.0); }`;
+                const advection_frag = `
+                    precision highp float; uniform sampler2D velocity; uniform float dt; uniform bool isBFECC; uniform vec2 fboSize; uniform vec2 px; varying vec2 uv;
+                    void main(){ vec2 ratio=max(fboSize.x,fboSize.y)/fboSize;
+                    if(!isBFECC){ vec2 vel=texture2D(velocity,uv).xy; vec2 uv2=uv-vel*dt*ratio; gl_FragColor=vec4(texture2D(velocity,uv2).xy,0.0,0.0); }
+                    else{ vec2 sn=uv; vec2 vo=texture2D(velocity,uv).xy; vec2 so=sn-vo*dt*ratio; vec2 vn1=texture2D(velocity,so).xy; vec2 sn2=so+vn1*dt*ratio;
+                    vec2 err=sn2-sn; vec2 sn3=sn-err/2.0; vec2 v2=texture2D(velocity,sn3).xy; vec2 so2=sn3-v2*dt*ratio; gl_FragColor=vec4(texture2D(velocity,so2).xy,0.0,0.0); } }`;
+                const color_frag = `
+                    precision highp float; uniform sampler2D velocity; uniform sampler2D palette; uniform vec4 bgColor; varying vec2 uv;
+                    void main(){ vec2 vel=texture2D(velocity,uv).xy; float lenv=clamp(length(vel),0.0,1.0); vec3 c=texture2D(palette,vec2(lenv,0.5)).rgb;
+                    vec3 outRGB=mix(bgColor.rgb,c,lenv); float outA=mix(bgColor.a,1.0,lenv); gl_FragColor=vec4(outRGB,outA); }`;
+                const divergence_frag = `
+                    precision highp float; uniform sampler2D velocity; uniform float dt; uniform vec2 px; varying vec2 uv;
+                    void main(){ float x0=texture2D(velocity,uv-vec2(px.x,0.0)).x; float x1=texture2D(velocity,uv+vec2(px.x,0.0)).x;
+                    float y0=texture2D(velocity,uv-vec2(0.0,px.y)).y; float y1=texture2D(velocity,uv+vec2(0.0,px.y)).y; gl_FragColor=vec4((x1-x0+y1-y0)/2.0/dt); }`;
+                const externalForce_frag = `
+                    precision highp float; uniform vec2 force; uniform vec2 center; uniform vec2 scale; uniform vec2 px; varying vec2 vUv;
+                    void main(){ vec2 circle=(vUv-0.5)*2.0; float d=1.0-min(length(circle),1.0); d*=d; gl_FragColor=vec4(force*d,0.0,1.0); }`;
+                const poisson_frag = `
+                    precision highp float; uniform sampler2D pressure; uniform sampler2D divergence; uniform vec2 px; varying vec2 uv;
+                    void main(){ float p0=texture2D(pressure,uv+vec2(px.x*2.0,0.0)).r; float p1=texture2D(pressure,uv-vec2(px.x*2.0,0.0)).r;
+                    float p2=texture2D(pressure,uv+vec2(0.0,px.y*2.0)).r; float p3=texture2D(pressure,uv-vec2(0.0,px.y*2.0)).r;
+                    float div=texture2D(divergence,uv).r; gl_FragColor=vec4((p0+p1+p2+p3)/4.0-div); }`;
+                const pressure_frag = `
+                    precision highp float; uniform sampler2D pressure; uniform sampler2D velocity; uniform vec2 px; uniform float dt; varying vec2 uv;
+                    void main(){ float p0=texture2D(pressure,uv+vec2(px.x,0.0)).r; float p1=texture2D(pressure,uv-vec2(px.x,0.0)).r;
+                    float p2=texture2D(pressure,uv+vec2(0.0,px.y)).r; float p3=texture2D(pressure,uv-vec2(0.0,px.y)).r;
+                    vec2 v=texture2D(velocity,uv).xy; vec2 gradP=vec2(p0-p1,p2-p3)*0.5; v=v-gradP*dt; gl_FragColor=vec4(v,0.0,1.0); }`;
+                const viscous_frag = `
+                    precision highp float; uniform sampler2D velocity; uniform sampler2D velocity_new; uniform float v; uniform vec2 px; uniform float dt; varying vec2 uv;
+                    void main(){ vec2 old=texture2D(velocity,uv).xy; vec2 n0=texture2D(velocity_new,uv+vec2(px.x*2.0,0.0)).xy; vec2 n1=texture2D(velocity_new,uv-vec2(px.x*2.0,0.0)).xy;
+                    vec2 n2=texture2D(velocity_new,uv+vec2(0.0,px.y*2.0)).xy; vec2 n3=texture2D(velocity_new,uv-vec2(0.0,px.y*2.0)).xy;
+                    vec2 nv=4.0*old+v*dt*(n0+n1+n2+n3); nv/=4.0*(1.0+v*dt); gl_FragColor=vec4(nv,0.0,0.0); }`;
+
+                // === ShaderPass ===
+                class ShaderPass {
+                    constructor(props) {
+                        this.props = props||{}; this.uniforms = (this.props.material||{}).uniforms;
+                        this.scene = null; this.camera = null; this.material = null; this.geometry = null; this.plane = null;
+                    }
+                    init() {
+                        this.scene = new THREE.Scene(); this.camera = new THREE.Camera();
+                        if (this.uniforms) {
+                            this.material = new THREE.RawShaderMaterial(this.props.material);
+                            this.geometry = new THREE.PlaneGeometry(2,2);
+                            this.plane = new THREE.Mesh(this.geometry, this.material);
+                            this.scene.add(this.plane);
+                        }
+                    }
+                    update() {
+                        if (!Common.renderer||!this.scene||!this.camera) return;
+                        Common.renderer.setRenderTarget(this.props.output||null);
+                        Common.renderer.render(this.scene, this.camera);
+                        Common.renderer.setRenderTarget(null);
+                    }
+                }
+
+                // === Advection ===
+                class Advection extends ShaderPass {
+                    constructor(sp) {
+                        super({ material:{ vertexShader:face_vert, fragmentShader:advection_frag,
+                            uniforms:{ boundarySpace:{value:sp.cellScale}, px:{value:sp.cellScale}, fboSize:{value:sp.fboSize},
+                            velocity:{value:sp.src.texture}, dt:{value:sp.dt}, isBFECC:{value:true} }}, output:sp.dst });
+                        this.init();
+                        // boundary
+                        const bg = new THREE.BufferGeometry();
+                        bg.setAttribute('position', new THREE.BufferAttribute(new Float32Array([-1,-1,0,-1,1,0,-1,1,0,1,1,0,1,1,0,1,-1,0,1,-1,0,-1,-1,0]),3));
+                        this.line = new THREE.LineSegments(bg, new THREE.RawShaderMaterial({ vertexShader:line_vert, fragmentShader:advection_frag, uniforms:this.uniforms }));
+                        this.scene.add(this.line);
+                    }
+                    update(a) {
+                        if (!this.uniforms) return;
+                        this.uniforms.dt.value = a.dt; this.line.visible = a.isBounce; this.uniforms.isBFECC.value = a.BFECC;
+                        super.update();
+                    }
+                }
+
+                // === ExternalForce ===
+                class ExternalForce extends ShaderPass {
+                    constructor(sp) {
+                        super({ output:sp.dst });
+                        this.init();
+                        const mg = new THREE.PlaneGeometry(1,1);
+                        const mm = new THREE.RawShaderMaterial({ vertexShader:mouse_vert, fragmentShader:externalForce_frag,
+                            blending:THREE.AdditiveBlending, depthWrite:false,
+                            uniforms:{ px:{value:sp.cellScale}, force:{value:new THREE.Vector2(0,0)}, center:{value:new THREE.Vector2(0,0)}, scale:{value:new THREE.Vector2(sp.cursor_size,sp.cursor_size)} }});
+                        this.mouse = new THREE.Mesh(mg, mm);
+                        this.scene.add(this.mouse);
+                    }
+                    update(a) {
+                        const u = this.mouse.material.uniforms;
+                        u.force.value.set((Mouse.diff.x/2)*a.mouse_force, (Mouse.diff.y/2)*a.mouse_force);
+                        u.center.value.set(Mouse.coords.x, Mouse.coords.y);
+                        u.scale.value.set(a.cursor_size, a.cursor_size);
+                        super.update();
+                    }
+                }
+
+                // === Viscous ===
+                class Viscous extends ShaderPass {
+                    constructor(sp) {
+                        super({ material:{ vertexShader:face_vert, fragmentShader:viscous_frag,
+                            uniforms:{ boundarySpace:{value:sp.boundarySpace}, velocity:{value:sp.src.texture}, velocity_new:{value:sp.dst_.texture},
+                            v:{value:sp.viscous}, px:{value:sp.cellScale}, dt:{value:sp.dt} }},
+                            output:sp.dst, output0:sp.dst_, output1:sp.dst });
+                        this.init();
+                    }
+                    update(a) {
+                        for (let i=0; i<a.iterations; i++) {
+                            const fi=i%2===0?this.props.output0:this.props.output1;
+                            const fo=i%2===0?this.props.output1:this.props.output0;
+                            this.uniforms.velocity_new.value=fi.texture; this.props.output=fo; this.uniforms.dt.value=a.dt; super.update();
+                        }
+                        return a.iterations%2===0?this.props.output0:this.props.output1;
+                    }
+                }
+
+                // === Divergence ===
+                class Divergence extends ShaderPass {
+                    constructor(sp) {
+                        super({ material:{ vertexShader:face_vert, fragmentShader:divergence_frag,
+                            uniforms:{ boundarySpace:{value:sp.boundarySpace}, velocity:{value:sp.src.texture}, px:{value:sp.cellScale}, dt:{value:sp.dt} }}, output:sp.dst });
+                        this.init();
+                    }
+                    update(a) { if (this.uniforms) this.uniforms.velocity.value=a.vel.texture; super.update(); }
+                }
+
+                // === Poisson ===
+                class Poisson extends ShaderPass {
+                    constructor(sp) {
+                        super({ material:{ vertexShader:face_vert, fragmentShader:poisson_frag,
+                            uniforms:{ boundarySpace:{value:sp.boundarySpace}, pressure:{value:sp.dst_.texture}, divergence:{value:sp.src.texture}, px:{value:sp.cellScale} }},
+                            output:sp.dst, output0:sp.dst_, output1:sp.dst });
+                        this.init();
+                    }
+                    update(a) {
+                        for (let i=0; i<a.iterations; i++) {
+                            const pi=i%2===0?this.props.output0:this.props.output1;
+                            const po=i%2===0?this.props.output1:this.props.output0;
+                            this.uniforms.pressure.value=pi.texture; this.props.output=po; super.update();
+                        }
+                        return a.iterations%2===0?this.props.output0:this.props.output1;
+                    }
+                }
+
+                // === Pressure ===
+                class Pressure extends ShaderPass {
+                    constructor(sp) {
+                        super({ material:{ vertexShader:face_vert, fragmentShader:pressure_frag,
+                            uniforms:{ boundarySpace:{value:sp.boundarySpace}, pressure:{value:sp.src_p.texture}, velocity:{value:sp.src_v.texture}, px:{value:sp.cellScale}, dt:{value:sp.dt} }}, output:sp.dst });
+                        this.init();
+                    }
+                    update(a) { this.uniforms.velocity.value=a.vel.texture; this.uniforms.pressure.value=a.pressure.texture; super.update(); }
+                }
+
+                // === Simulation ===
+                class Simulation {
+                    constructor() {
+                        this.options = {
+                            iterations_poisson: CONFIG.iterationsPoisson, iterations_viscous: CONFIG.iterationsViscous,
+                            mouse_force: CONFIG.mouseForce, resolution: CONFIG.resolution, cursor_size: CONFIG.cursorSize,
+                            viscous: CONFIG.viscous, isBounce: CONFIG.isBounce, dt: CONFIG.dt, isViscous: CONFIG.isViscous, BFECC: CONFIG.BFECC
+                        };
+                        this.fbos = {}; this.fboSize = new THREE.Vector2(); this.cellScale = new THREE.Vector2(); this.boundarySpace = new THREE.Vector2();
+                        this.calcSize(); this.createFBOs(); this.createPasses();
+                    }
+                    getFloatType() { return /(iPad|iPhone|iPod)/i.test(navigator.userAgent) ? THREE.HalfFloatType : THREE.FloatType; }
+                    calcSize() {
+                        const w = Math.max(1, Math.round(this.options.resolution * Common.width));
+                        const h = Math.max(1, Math.round(this.options.resolution * Common.height));
+                        this.cellScale.set(1/w, 1/h); this.fboSize.set(w, h);
+                    }
+                    createFBOs() {
+                        const type = this.getFloatType();
+                        const opts = { type, depthBuffer:false, stencilBuffer:false, minFilter:THREE.LinearFilter, magFilter:THREE.LinearFilter, wrapS:THREE.ClampToEdgeWrapping, wrapT:THREE.ClampToEdgeWrapping };
+                        ['vel_0','vel_1','vel_viscous0','vel_viscous1','div','pressure_0','pressure_1'].forEach(k => {
+                            this.fbos[k] = new THREE.WebGLRenderTarget(this.fboSize.x, this.fboSize.y, opts);
+                        });
+                    }
+                    createPasses() {
+                        const o = this.options, f = this.fbos, cs = this.cellScale, bs = this.boundarySpace, fs = this.fboSize;
+                        this.advection = new Advection({ cellScale:cs, fboSize:fs, dt:o.dt, src:f.vel_0, dst:f.vel_1 });
+                        this.externalForce = new ExternalForce({ cellScale:cs, cursor_size:o.cursor_size, dst:f.vel_1 });
+                        this.viscous = new Viscous({ cellScale:cs, boundarySpace:bs, viscous:o.viscous, src:f.vel_1, dst:f.vel_viscous1, dst_:f.vel_viscous0, dt:o.dt });
+                        this.divergence = new Divergence({ cellScale:cs, boundarySpace:bs, src:f.vel_viscous0, dst:f.div, dt:o.dt });
+                        this.poisson = new Poisson({ cellScale:cs, boundarySpace:bs, src:f.div, dst:f.pressure_1, dst_:f.pressure_0 });
+                        this.pressure = new Pressure({ cellScale:cs, boundarySpace:bs, src_p:f.pressure_0, src_v:f.vel_viscous0, dst:f.vel_0, dt:o.dt });
+                    }
+                    resize() { this.calcSize(); Object.values(this.fbos).forEach(f => f.setSize(this.fboSize.x, this.fboSize.y)); }
+                    update() {
+                        const o = this.options;
+                        this.boundarySpace.copy(o.isBounce ? new THREE.Vector2(0,0) : this.cellScale);
+                        this.advection.update({ dt:o.dt, isBounce:o.isBounce, BFECC:o.BFECC });
+                        this.externalForce.update({ cursor_size:o.cursor_size, mouse_force:o.mouse_force, cellScale:this.cellScale });
+                        let vel = this.fbos.vel_1;
+                        if (o.isViscous) vel = this.viscous.update({ iterations:o.iterations_viscous, dt:o.dt });
+                        this.divergence.update({ vel });
+                        const pressure = this.poisson.update({ iterations:o.iterations_poisson });
+                        this.pressure.update({ vel, pressure });
+                    }
+                }
+
+                // === Output ===
+                class Output {
+                    constructor() {
+                        this.simulation = new Simulation();
+                        this.scene = new THREE.Scene(); this.camera = new THREE.Camera();
+                        this.output = new THREE.Mesh(new THREE.PlaneGeometry(2,2), new THREE.RawShaderMaterial({
+                            vertexShader:face_vert, fragmentShader:color_frag, transparent:true, depthWrite:false,
+                            uniforms:{ velocity:{value:this.simulation.fbos.vel_0.texture}, boundarySpace:{value:new THREE.Vector2()}, palette:{value:paletteTex}, bgColor:{value:bgVec4} }
+                        }));
+                        this.scene.add(this.output);
+                    }
+                    resize() { this.simulation.resize(); }
+                    render() { if (Common.renderer) { Common.renderer.setRenderTarget(null); Common.renderer.render(this.scene, this.camera); } }
+                    update() { this.simulation.update(); this.render(); }
+                }
+
+                // === AutoDriver ===
+                class AutoDriver {
+                    constructor(mouse, manager, opts) {
+                        this.mouse = mouse; this.manager = manager;
+                        this.enabled = opts.enabled; this.speed = opts.speed;
+                        this.resumeDelay = opts.resumeDelay || 3000;
+                        this.rampDurationMs = (opts.rampDuration || 0) * 1000;
+                        this.active = false; this.current = new THREE.Vector2(0,0);
+                        this.target = new THREE.Vector2(); this.lastTime = performance.now();
+                        this.activationTime = 0; this.margin = 0.2; this._tmpDir = new THREE.Vector2();
+                        this.pickNewTarget();
+                    }
+                    pickNewTarget() { this.target.set((Math.random()*2-1)*(1-this.margin), (Math.random()*2-1)*(1-this.margin)); }
+                    forceStop() { this.active = false; this.mouse.isAutoActive = false; }
+                    update() {
+                        if (!this.enabled) return;
+                        const now = performance.now();
+                        const idle = now - this.manager.lastUserInteraction;
+                        if (idle < this.resumeDelay || this.mouse.isHoverInside) { if (this.active) this.forceStop(); return; }
+                        if (!this.active) { this.active = true; this.current.copy(this.mouse.coords); this.lastTime = now; this.activationTime = now; }
+                        this.mouse.isAutoActive = true;
+                        let dtSec = (now - this.lastTime)/1000; this.lastTime = now;
+                        if (dtSec > 0.2) dtSec = 0.016;
+                        const dir = this._tmpDir.subVectors(this.target, this.current);
+                        const dist = dir.length();
+                        if (dist < 0.01) { this.pickNewTarget(); return; }
+                        dir.normalize();
+                        let ramp = 1;
+                        if (this.rampDurationMs > 0) { const t = Math.min(1, (now-this.activationTime)/this.rampDurationMs); ramp = t*t*(3-2*t); }
+                        const move = Math.min(this.speed * dtSec * ramp, dist);
+                        this.current.addScaledVector(dir, move);
+                        this.mouse.coords.set(this.current.x, this.current.y);
+                        this.mouse.mouseMoved = true;
+                    }
+                }
+
+                // === Manager ===
+                Common.init(container);
+                Mouse.init(container);
+                container.prepend(Common.renderer.domElement);
+
+                const output = new Output();
+                let lastUserInteraction = performance.now();
+                const manager = { lastUserInteraction };
+
+                Mouse.onInteract = () => {
+                    manager.lastUserInteraction = performance.now();
+                    if (autoDriver) autoDriver.forceStop();
+                };
+
+                const autoDriver = new AutoDriver(Mouse, manager, {
+                    enabled: CONFIG.autoDemo, speed: CONFIG.autoSpeed,
+                    resumeDelay: CONFIG.autoResumeDelay, rampDuration: CONFIG.autoRampDuration
+                });
+
+                let running = false, rafId = null;
+                function loop() {
+                    if (!running) return;
+                    autoDriver.update(); Mouse.update(); Common.update(); output.update();
+                    rafId = requestAnimationFrame(loop);
+                }
+                function start() { if (!running) { running = true; loop(); } }
+                function pause() { running = false; if (rafId) cancelAnimationFrame(rafId); rafId = null; }
+
+                start();
+
+                // Visibility
+                const visObs = new IntersectionObserver(entries => {
+                    const vis = entries[0].isIntersecting;
+                    vis && !document.hidden ? start() : pause();
+                }, { threshold: 0.1 });
+                visObs.observe(container);
+
+                document.addEventListener('visibilitychange', () => {
+                    document.hidden ? pause() : start();
+                });
+
+                // Resize
+                let resizeRaf = null;
+                const resObs = new ResizeObserver(() => {
+                    if (resizeRaf) cancelAnimationFrame(resizeRaf);
+                    resizeRaf = requestAnimationFrame(() => { Common.resize(); output.resize(); });
+                });
+                resObs.observe(container);
+
+            } catch (err) {
+                console.warn('LiquidEther init failed:', err);
+            }
+        };
+        initLiquidEther();
     </script>
 </body>
 </html>

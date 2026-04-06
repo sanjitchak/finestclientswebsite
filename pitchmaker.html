@@ -4,23 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Finest Clients — Live Pitch Maker</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --bg:#07070F; --panel:#0E0E1C; --card:#141426; --border:rgba(212,168,75,.14);
-    --gold:#D4A84B; --gold2:#F0C96A; --gold3:rgba(212,168,75,.08);
-    --w:#EEEAE0; --muted:#52527A; --muted2:#9898B8;
-    --red:#C0392B; --rdim:rgba(192,57,43,.12);
-    --green:#1FAD5A; --gdim:rgba(31,173,90,.12);
-    --blue:#1A5FA0; --bdim:rgba(26,95,160,.12);
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #8B6B2A;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --dark2: #1A1A1A;
+    --dark3: #222222;
+    --white: #F5F0E8;
+    --white-dim: #C8C0B0;
+    --border: rgba(201,168,76,0.2);
+    --blue: #5590E8;
+    --green: #4CAF7D;
+    --red: #E85555;
   }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--w);
+    background: var(--black);
+    color: var(--white);
     height: 100vh;
+    margin: 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -28,7 +37,7 @@
 
   /* Header */
   .header {
-    background: var(--panel);
+    background: linear-gradient(135deg, #0A0A0A 0%, #1A1408 50%, #0A0A0A 100%);
     border-bottom: 1px solid var(--border);
     padding: 16px 32px;
     display: flex;
@@ -38,33 +47,27 @@
     z-index: 10;
   }
 
-  .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 20px; letter-spacing: 0.05em; color: var(--w); }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.05em; }
   .logo span { color: var(--gold); }
-  
-  .controls { display: flex; gap: 16px; align-items: center; }
-  .ph-btn {
-    background: var(--gold); color: #000; border: none; padding: 10px 20px;
-    font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
-    text-transform: uppercase; letter-spacing: 0.05em; border-radius: 4px; cursor: pointer;
-    transition: all 0.2s;
+  .badge {
+    background: rgba(201,168,76,0.12);
+    border: 1px solid var(--border);
+    color: var(--gold-light);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    padding: 4px 12px; border-radius: 2px; text-transform: uppercase;
   }
-  .ph-btn:hover { background: var(--gold2); transform: translateY(-1px); }
-  .ph-btn.copy-done { background: var(--green); color: #fff; }
-  .ph-btn-outline {
-    background: transparent; color: var(--gold); border: 1px solid var(--gold);
-    padding: 10px 20px; font-family: 'DM Mono', monospace; font-size: 12px;
-    text-transform: uppercase; letter-spacing: 0.05em; border-radius: 4px; cursor: pointer;
-    transition: all 0.2s;
-  }
-  .ph-btn-outline:hover { background: var(--gold3); }
 
   /* Layout */
-  .layout { display: flex; flex: 1; overflow: hidden; }
+  .layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
 
   /* Left Panel - Inputs */
   .panel-left {
-    width: 420px;
-    background: var(--panel);
+    width: 400px;
+    background: var(--dark);
     border-right: 1px solid var(--border);
     padding: 24px;
     overflow-y: auto;
@@ -72,245 +75,312 @@
   }
   .panel-left::-webkit-scrollbar { width: 6px; }
   .panel-left::-webkit-scrollbar-track { background: transparent; }
-  .panel-left::-webkit-scrollbar-thumb { background: var(--card); border-radius: 3px; }
+  .panel-left::-webkit-scrollbar-thumb { background: var(--dark3); border-radius: 3px; }
 
   /* Right Panel - Output */
   .panel-right {
     flex: 1;
-    background: var(--bg);
-    padding: 32px 48px;
+    background: var(--black);
+    padding: 24px 48px;
     overflow-y: auto;
     scroll-behavior: smooth;
   }
   .panel-right::-webkit-scrollbar { width: 8px; }
-  .panel-right::-webkit-scrollbar-track { background: var(--bg); }
-  .panel-right::-webkit-scrollbar-thumb { background: var(--card); border-radius: 4px; }
+  .panel-right::-webkit-scrollbar-track { background: var(--black); }
+  .panel-right::-webkit-scrollbar-thumb { background: var(--dark3); border-radius: 4px; }
 
   /* Right Panel Tabs */
   .pr-header {
     display: flex; gap: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 0;
   }
   .pr-tab {
-    font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--muted2);
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white-dim);
     text-transform: uppercase; letter-spacing: 0.1em; padding-bottom: 12px; cursor: pointer;
     border-bottom: 2px solid transparent; transition: all 0.2s;
   }
-  .pr-tab:hover { color: var(--w); }
+  .pr-tab:hover { color: var(--white); }
   .pr-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
   .pr-content { display: none; }
   .pr-content.active { display: block; }
 
   /* Form Elements */
   .section-title {
-    font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
-    margin: 24px 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    margin: 24px 0 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px;
     display: flex; justify-content: space-between; align-items: center;
   }
   .section-title:first-child { margin-top: 0; }
 
   .form-group { margin-bottom: 16px; }
-  .label { display: block; font-size: 12px; font-weight: 600; color: var(--muted2); margin-bottom: 6px; }
-  .input {
-    width: 100%; background: var(--bg); border: 1px solid rgba(255,255,255,0.1);
-    color: var(--w); font-family: 'DM Sans', sans-serif; font-size: 14px;
-    padding: 10px 12px; border-radius: 4px; outline: none; transition: all 0.2s;
+  .label {
+    display: block; font-size: 11px; font-weight: 600; color: var(--white-dim);
+    margin-bottom: 6px; letter-spacing: 0.05em; text-transform: uppercase;
   }
-  .input:focus { border-color: var(--gold); background: var(--card); }
+  .input {
+    width: 100%; background: var(--dark2); border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px;
+    padding: 12px; border-radius: 3px; outline: none; transition: border-color 0.2s;
+  }
+  .input:focus { border-color: var(--gold); background: var(--dark3); }
+  .input::placeholder { color: rgba(255,255,255,0.2); }
   select.input { appearance: none; cursor: pointer; }
-  textarea.input { resize: vertical; min-height: 70px; }
+  textarea.input { resize: vertical; min-height: 100px; }
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-  .comp-box { background: var(--card); border: 1px solid var(--border); padding: 16px; border-radius: 6px; margin-bottom: 16px; }
-  .comp-box-title { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px; color: var(--gold2); }
-  .comp-box.optional .comp-box-title { color: var(--muted2); }
+  /* Competitor Boxes */
+  .comp-box {
+    background: var(--dark2); border: 1px solid var(--border);
+    padding: 16px; border-radius: 4px; margin-bottom: 12px;
+  }
+  .comp-box-title {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 12px; color: var(--gold);
+  }
   .comp-input { margin-bottom: 8px; }
 
-  /* AI Tools */
-  .ai-box { background: var(--bdim); border: 1px solid rgba(26,95,160,0.3); border-radius: 6px; padding: 16px; margin-bottom: 24px; }
-  .ai-header { color: #60A5FA; font-weight: 600; font-size: 13px; margin-bottom: 8px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; }
-  .ai-btn { width: 100%; background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.4); color: #60A5FA; padding: 10px; border-radius: 4px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'DM Mono', monospace; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; }
-  .ai-btn:hover { background: rgba(96,165,250,0.25); }
+  /* AI Transcript Section */
+  .ai-box {
+    background: linear-gradient(135deg, rgba(85,144,232,0.1), rgba(85,144,232,0.02));
+    border: 1px solid rgba(85,144,232,0.3);
+    border-radius: 4px; padding: 16px; margin-bottom: 24px;
+  }
+  .ai-header { display: flex; align-items: center; gap: 8px; color: var(--blue); font-weight: 700; font-size: 13px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .ai-btn {
+    width: 100%; background: rgba(85,144,232,0.15); border: 1px solid rgba(85,144,232,0.4);
+    color: var(--blue); padding: 10px; border-radius: 3px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; font-family: 'Syne', sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .ai-btn:hover { background: rgba(85,144,232,0.3); }
   .ai-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  .research-box { background: var(--gdim); border: 1px solid rgba(31,173,90,0.3); border-radius: 6px; padding: 16px; margin-bottom: 16px; }
-  .research-header { color: #34D399; font-weight: 600; font-size: 13px; margin-bottom: 8px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; }
-  .research-btn { width: 100%; background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.4); color: #34D399; padding: 10px; border-radius: 4px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'DM Mono', monospace; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; }
-  .research-btn:hover { background: rgba(52,211,153,0.25); }
+  /* Deep Research Box */
+  .research-box {
+    background: linear-gradient(135deg, rgba(76,175,125,0.08), rgba(76,175,125,0.02));
+    border: 1px solid rgba(76,175,125,0.3);
+    border-radius: 4px; padding: 16px; margin-bottom: 16px;
+  }
+  .research-btn {
+    width: 100%; background: rgba(76,175,125,0.15); border: 1px solid rgba(76,175,125,0.4);
+    color: var(--green); padding: 10px; border-radius: 3px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; font-family: 'Syne', sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .research-btn:hover { background: rgba(76,175,125,0.3); }
   .research-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
   /* Script Output Styling */
-  .script-container { max-width: 760px; margin: 0 auto; padding-bottom: 60px; }
+  .script-container { max-width: 800px; margin: 0 auto; padding-bottom: 100px; }
   
-  .phase-block { margin-bottom: 32px; }
-  .phase-header { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-  .phase-body { background: var(--panel); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 24px; font-size: 15px; line-height: 1.7; color: var(--w); }
+  .phase-block {
+    margin-bottom: 32px;
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .phase-header {
+    background: rgba(201,168,76,0.05);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .phase-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--gold); }
+  .phase-time { font-size: 11px; color: var(--gold-dim); font-weight: 600; letter-spacing: 0.05em; }
 
-  .direction { font-size: 13.5px; color: var(--muted2); font-style: italic; background: var(--bg); padding: 10px 14px; border-left: 2px solid var(--muted); margin-bottom: 16px; border-radius: 0 4px 4px 0; }
-  .direction.deck { border-left-color: var(--blue); color: #93C5FD; }
+  .phase-content { padding: 24px; font-size: 15px; line-height: 1.7; }
+
+  .direction {
+    font-size: 13px; color: var(--white-dim); font-style: italic;
+    background: var(--dark3); padding: 10px 14px; border-left: 2px solid var(--white-dim);
+    margin-bottom: 16px; border-radius: 0 3px 3px 0;
+  }
   
-  .script-text { margin-bottom: 16px; }
-  .script-text:last-child { margin-bottom: 0; }
-  .script-text strong { color: var(--gold2); font-weight: 600; }
+  .script-text { color: var(--white); margin-bottom: 16px; }
+  .script-text strong { color: var(--gold-light); font-weight: 600; }
   
-  .var { background: var(--gold3); color: var(--gold2); padding: 0 4px; border-radius: 2px; font-weight: 600; }
-  .math-box { background: var(--bdim); border: 1px solid rgba(26,95,160,0.3); padding: 16px; border-radius: 4px; margin: 16px 0; font-family: 'DM Mono', monospace; font-size: 13px; color: #93C5FD; }
-  .math-box span { color: var(--w); font-weight: bold; }
+  .dynamic-var {
+    background: rgba(201,168,76,0.15); color: var(--gold);
+    padding: 0 4px; border-radius: 2px; font-weight: 600;
+  }
+
+  .math-box {
+    background: rgba(85,144,232,0.08); border: 1px solid rgba(85,144,232,0.3);
+    padding: 16px; border-radius: 3px; margin: 16px 0; font-family: monospace;
+    font-size: 14px; color: #B0C8F0;
+  }
+  .math-box span { color: var(--white); font-weight: bold; }
+
+  .epiphany-block { border-left: 2px solid var(--blue); padding-left: 16px; margin: 16px 0; }
+  .epiphany-label { font-size: 11px; color: var(--blue); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  
+  .casestudy-block { border-left: 2px solid var(--green); padding-left: 16px; margin: 16px 0; }
+  .casestudy-label { font-size: 11px; color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+
+  .pricing-tier {
+    border: 1px solid var(--border); border-radius: 4px; padding: 16px; margin-bottom: 12px;
+    background: linear-gradient(to right, rgba(201,168,76,0.05), transparent);
+  }
+  .tier-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+  .tier-desc { font-size: 13.5px; color: var(--white-dim); }
 
   /* Interactive Objections Styling */
-  .obj-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--w); margin: 24px 0 16px; text-align: center; }
-  .obj-subtitle { text-align: center; font-size: 14px; color: var(--muted2); margin-bottom: 32px; }
-
-  .obj-tab { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 12px; overflow: hidden; transition: all 0.2s; }
-  .obj-tab:hover { border-color: rgba(212,168,75,0.4); }
-  .obj-head { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; color: #F87171; user-select: none; background: rgba(248,113,113,0.05); }
-  .obj-head .icon { font-size: 12px; color: #F87171; transition: transform 0.3s; }
+  .obj-accordion {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 4px; margin-bottom: 12px; overflow: hidden;
+    transition: all 0.2s;
+  }
+  .obj-accordion:hover { border-color: rgba(201,168,76,0.5); }
+  .obj-header {
+    padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between;
+    align-items: center; font-family: 'DM Sans', sans-serif; font-size: 14px;
+    font-weight: 700; color: #F08888;
+    background: rgba(232,85,85,0.05); user-select: none;
+  }
+  .obj-accordion.open .obj-header {
+    background: rgba(201,168,76,0.1); color: var(--gold); border-bottom: 1px solid var(--border);
+  }
+  .obj-icon { font-size: 12px; transition: transform 0.2s; }
+  .obj-accordion.open .obj-icon { transform: rotate(180deg); }
   
-  .obj-tab.open { border-color: var(--gold); background: var(--card); }
-  .obj-tab.open .obj-head { border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--gold2); background: transparent; }
-  .obj-tab.open .icon { transform: rotate(180deg); color: var(--gold); }
-  
-  .obj-body { padding: 24px; display: none; font-size: 14.5px; line-height: 1.7; color: var(--w); }
-  .obj-tab.open .obj-body { display: block; }
-  
-  .cs-label { display: inline-block; background: var(--gdim); color: var(--green); font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(31,173,90,0.3); }
+  .obj-body {
+    padding: 20px; display: none; background: var(--dark3); font-size: 14px; line-height: 1.6; color: var(--white);
+  }
+  .obj-accordion.open .obj-body { display: block; }
 
   /* Checklist Styling */
-  .cl-group { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 24px; padding: 24px; }
-  .cl-group-title { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--gold); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;}
+  .checklist-container { max-width: 800px; margin: 0 auto; padding-bottom: 100px; }
+  .cl-group { background: var(--dark2); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 24px; padding: 24px; }
+  .cl-group-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;}
   .cl-item { margin-bottom: 20px; }
   .cl-item:last-child { margin-bottom: 0; }
-  .cl-label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 14.5px; color: var(--w); line-height: 1.5; font-weight: 600; }
+  .cl-label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 14.5px; color: var(--white); line-height: 1.5; font-weight: 600; }
   .cl-label input[type="checkbox"] { margin-top: 5px; width: 16px; height: 16px; accent-color: var(--gold); cursor: pointer; flex-shrink: 0;}
-  .cl-label.checked { color: var(--muted2); text-decoration: line-through; }
-  .cl-subtext { font-size: 13px; color: var(--muted2); margin-left: 28px; margin-top: 4px; }
+  .cl-label.checked { color: var(--white-dim); text-decoration: line-through; }
+  .cl-subtext { font-size: 12.5px; color: var(--white-dim); margin-left: 28px; margin-top: 4px; }
   
   .cl-link-row { display: flex; gap: 8px; margin-left: 28px; margin-top: 8px; align-items: center; }
-  .cl-link-input { flex: 1; background: var(--bg); border: 1px solid rgba(255,255,255,0.1); color: var(--gold2); padding: 8px 12px; border-radius: 3px; font-size: 13px; outline: none; }
-  .cl-link-input:focus { border-color: var(--gold); background: var(--card); }
-  .btn-small { background: rgba(212,168,75,0.15); border: 1px solid rgba(212,168,75,0.4); color: var(--gold); padding: 8px 14px; border-radius: 3px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-size: 11px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;}
-  .btn-small:hover { background: rgba(212,168,75,0.3); }
+  .cl-link-input { flex: 1; background: var(--dark3); border: 1px solid rgba(255,255,255,0.1); color: var(--gold-light); padding: 8px 12px; border-radius: 3px; font-size: 13px; outline: none; }
+  .cl-link-input:focus { border-color: var(--gold); }
+  .btn-small { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold); padding: 8px 14px; border-radius: 3px; font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;}
+  .btn-small:hover { background: rgba(201,168,76,0.3); }
 
-  .sync-status { position: fixed; bottom: 20px; left: 32px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--green); display: flex; align-items: center; gap: 6px; z-index: 100;}
-  .sync-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; box-shadow: 0 0 8px var(--green); }
-
+  /* Tools */
+  .copy-btn {
+    position: fixed; bottom: 32px; right: 48px;
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    color: var(--black); border: none; padding: 14px 28px;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; border-radius: 4px; cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: all 0.2s;
+    z-index: 100;
+  }
+  .copy-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,168,76,0.2); }
 </style>
 </head>
 <body>
 
 <div class="header">
   <div class="logo">FINEST <span>CLIENTS</span></div>
-  <div class="controls">
-    <!-- Launches the visual deck in a new window/tab -->
-    <button class="ph-btn-outline" onclick="launchVisualDeck()">Launch Visual Deck ↗</button>
-    <button class="ph-btn" id="main_copy_btn" onclick="copyScript()">📋 Copy Script Text</button>
-  </div>
+  <div class="badge">Live Sales Pitch Maker (35-Min Version)</div>
 </div>
 
 <div class="layout">
   <!-- LEFT PANEL: DATA INPUT -->
   <div class="panel-left">
     
-    <!-- AI Transcript Ingester -->
+    <!-- AI TRANSCRIPT INGESTER -->
     <div class="ai-box">
       <div class="ai-header">🪄 Smart Transcript Import</div>
-      <div style="font-size:12px; color:var(--muted2); margin-bottom:12px;">Paste Fathom/Zoom transcript. AI extracts math, problem, and selects the ideal Case Study.</div>
-      <textarea id="in_transcript" class="input" style="background:var(--bg); border-color:rgba(96,165,250,0.3); margin-bottom:12px; min-height:60px;" placeholder="Paste raw transcript..."></textarea>
+      <div style="font-size:12px; color:var(--white-dim); margin-bottom:12px; line-height:1.5;">Paste your Fathom/Zoom call transcript here. AI will extract the math, problem, and automatically select the best Case Study to match.</div>
+      <textarea id="in_transcript" class="input" style="background:rgba(0,0,0,0.3); border-color:rgba(85,144,232,0.3); margin-bottom:12px; min-height:60px;" placeholder="Paste raw transcript text here..."></textarea>
       <button class="ai-btn" id="ai_btn" onclick="processTranscript()">Analyze & Auto-Fill</button>
     </div>
 
-    <div class="section-title">Prospect Profile</div>
-    <div class="grid-2">
-      <div class="form-group">
-        <label class="label">Name</label>
-        <input type="text" id="in_name" class="input" value="Sarah" oninput="updateAll()">
-      </div>
-      <div class="form-group">
-        <label class="label">Niche</label>
-        <input type="text" id="in_niche" class="input" value="leadership coaching" oninput="updateAll()">
-      </div>
-    </div>
+    <div class="section-title">Prospect Details</div>
     <div class="form-group">
-      <label class="label">Main Problem (Their Exact Words)</label>
-      <input type="text" id="in_problem" class="input" value="relying purely on unpredictable referrals" oninput="updateAll()">
+      <label class="label">Prospect Name</label>
+      <input type="text" id="in_name" class="input" value="Sarah" oninput="generateScript()">
+    </div>
+    
+    <div class="form-group">
+      <label class="label">Niche / Industry</label>
+      <input type="text" id="in_niche" class="input" value="leadership coaching" oninput="generateScript()">
     </div>
 
-    <!-- Case Study Selector -->
-    <div class="section-title" style="color:var(--green); border-bottom-color:var(--gdim);">Case Study Injection</div>
     <div class="form-group">
-      <label class="label">Best Matching Case Study</label>
-      <select id="in_casestudy" class="input" style="border-color:rgba(31,173,90,0.5);" onchange="updateAll()">
-        <option value="ryan">Ryan Jackson (No Audience/Beginner)</option>
-        <option value="arun" selected>Finest Edit (Compounding/Volume)</option>
-        <option value="authority">Authority IO (Ad Fatigue/Revenue)</option>
-        <option value="heyyyhr">Heyyy HR (Relying on Referrals)</option>
+      <label class="label">Main Problem / Situation</label>
+      <input type="text" id="in_problem" class="input" value="relying purely on unpredictable referrals" oninput="generateScript()">
+    </div>
+
+    <!-- CASE STUDY SELECTOR -->
+    <div class="section-title" style="color:var(--green); border-bottom-color:rgba(76,175,125,0.3);">Case Study Injection</div>
+    <div class="form-group">
+      <label class="label">Best Matching Case Study to Present</label>
+      <select id="in_casestudy" class="input" style="border-color:var(--green);" onchange="generateScript()">
+        <option value="ryan">Ryan Jackson (Small Channel / No Audience)</option>
+        <option value="arun" selected>Finest Edit / Arun (High Volume / Compounding)</option>
+        <option value="authority">Authority IO (Revenue Multiplier / Ad Fatigue)</option>
+        <option value="heyyyhr">Heyyy HR (Unpredictable Referrals)</option>
       </select>
     </div>
 
-    <!-- Niche Research -->
-    <div class="section-title">Pre-Call Niche Proof</div>
+    <!-- DYNAMIC NICHE RESEARCH SECTION -->
+    <div class="section-title">Pre-Call Niche Research</div>
     
+    <!-- DEEP RESEARCH AI TOOL -->
     <div class="research-box">
-      <div class="research-header">🤖 Deep Research</div>
-      <div style="font-size:11px; color:var(--muted2); margin-bottom:12px;">Auto-search the web for 3 real competitors to populate your proof points.</div>
+      <div class="ai-header" style="color: var(--green);">🤖 Deep Research</div>
+      <div style="font-size:11px; color:var(--white-dim); margin-bottom:12px; line-height:1.5;">Auto-search the web for 3 real competitors in this niche and extract their stats (Views vs Subs, CTAs, or Compounding growth).</div>
       <button class="research-btn" id="research_btn" onclick="runDeepResearch()">Find Competitors</button>
     </div>
 
+    <div style="font-size:11px; color:var(--white-dim); margin-bottom:16px; line-height:1.5;">These inputs automatically populate the Live Call Checklist tab URLs, the Script, and your Objection Handling tabs.</div>
+    
+    <!-- Competitor 1 (Intent & Pattern) -->
     <div class="comp-box required">
-      <div class="comp-box-title">Competitor 1 (Outlier & Intent)</div>
-      <input type="text" id="in_comp1" class="input comp-input" value="John Doe Coaching" placeholder="Channel Name" oninput="updateAll()">
-      <input type="text" id="in_comp1_stat" class="input comp-input" value="800 subs but 34,000 views on one video" placeholder="Stat (e.g. 800 subs but 34k views)" oninput="updateAll()">
-      <input type="text" id="in_c1_topic" class="input comp-input" value="handling leadership conflicts" placeholder="Topic they ranked for" oninput="updateAll()">
+      <div class="comp-box-title">Competitor 1 (Outlier & Topic Pattern)</div>
+      <input type="text" id="in_comp1" class="input comp-input" value="John Doe Coaching" placeholder="Channel Name" oninput="generateScript()">
+      <input type="text" id="in_comp1_stat" class="input comp-input" value="800 subs but 34,000 views on one video" placeholder="Stat (e.g. 800 subs but 34k views)" oninput="generateScript()">
     </div>
 
-    <div class="comp-box optional">
-      <div class="comp-box-title">Competitor 2 (The Bridge) - Optional</div>
-      <input type="text" id="in_comp2" class="input comp-input" value="Jane Smith Leadership" placeholder="Channel Name" oninput="updateAll()">
-      <input type="text" id="in_comp2_stat" class="input comp-input" value="Booking link right above the fold" placeholder="Stat (e.g. Booking link above the fold)" oninput="updateAll()">
-      <input type="text" id="in_c2_topic" class="input comp-input" value="imposter syndrome for managers" placeholder="Topic they ranked for" oninput="updateAll()">
+    <!-- Competitor 2 (The Bridge) -->
+    <div class="comp-box required">
+      <div class="comp-box-title">Competitor 2 (The Bridge CTA)</div>
+      <input type="text" id="in_comp2" class="input comp-input" value="Jane Smith Leadership" placeholder="Channel Name" oninput="generateScript()">
+      <input type="text" id="in_comp2_stat" class="input comp-input" value="Booking link right above the fold" placeholder="Stat (e.g. Booking link above the fold)" oninput="generateScript()">
     </div>
 
-    <div class="comp-box optional">
-      <div class="comp-box-title">Competitor 3 (Compounding) - Optional</div>
-      <input type="text" id="in_comp3" class="input comp-input" value="Elite Coach Media" placeholder="Channel Name" oninput="updateAll()">
-      <input type="text" id="in_comp3_stat" class="input comp-input" value="Videos from 18 months ago still getting views" placeholder="Stat (e.g. 18 mo old video still getting views)" oninput="updateAll()">
-      <input type="text" id="in_c3_topic" class="input comp-input" value="delegation frameworks" placeholder="Topic they ranked for" oninput="updateAll()">
+    <!-- Competitor 3 (Compounding) -->
+    <div class="comp-box required">
+      <div class="comp-box-title">Competitor 3 (Compounding / Consistency)</div>
+      <input type="text" id="in_comp3" class="input comp-input" value="Elite Coach Media" placeholder="Channel Name" oninput="generateScript()">
+      <input type="text" id="in_comp3_stat" class="input comp-input" value="Videos from 18 months ago still getting 5,000 views/mo" placeholder="Stat (e.g. 18 mo old video still getting views)" oninput="generateScript()">
     </div>
 
-    <div class="form-group">
-      <label class="label" style="color:var(--gold2);">The Content Gap</label>
-      <input type="text" id="in_gap_covered" class="input" style="margin-bottom:8px;" value="Generic management theory" placeholder="What competitors are covering..." oninput="updateAll()">
-      <input type="text" id="in_gap_missing" class="input" style="border-color:var(--gold);" value="Handling high-ticket sales objections" placeholder="What NOBODY is covering..." oninput="updateAll()">
-    </div>
-
-    <!-- ROI & Settings -->
-    <div class="section-title">Economics & Pitch Settings</div>
+    <div class="section-title">Economics & ROI Math</div>
     <div class="grid-2">
       <div class="form-group">
         <label class="label">Offer Price ($)</label>
-        <input type="number" id="in_price" class="input" value="5000" oninput="updateAll()">
+        <input type="number" id="in_price" class="input" value="5000" oninput="generateScript()">
       </div>
       <div class="form-group">
         <label class="label">Close Rate (%)</label>
-        <input type="number" id="in_close" class="input" value="20" oninput="updateAll()">
+        <input type="number" id="in_close" class="input" value="20" oninput="generateScript()">
       </div>
     </div>
 
-    <div class="form-group" style="margin-bottom: 40px;">
-      <label class="label">Recommended Tier</label>
-      <select id="in_tier" class="input" onchange="updateAll()">
-        <option value="CORE">Core ($2,500/mo)</option>
-        <option value="ACCELERATED" selected>Accelerated ($3,500/mo)</option>
-        <option value="AUTHORITY">Authority ($5,000/mo)</option>
+    <div class="section-title">Pitch Settings</div>
+    <div class="form-group">
+      <label class="label">Recommended Tier to Pitch</label>
+      <select id="in_tier" class="input" onchange="generateScript()">
+        <option value="Core ($2,500/mo)">Core ($2,500/mo)</option>
+        <option value="Accelerated ($3,500/mo)" selected>Accelerated ($3,500/mo)</option>
+        <option value="Authority ($5,000/mo)">Authority ($5,000/mo)</option>
       </select>
     </div>
-
-    <!-- LAUNCH DECK BUTTON -->
-    <button class="launch-btn" onclick="launchVisualDeck()">Launch Visual Deck ↗</button>
-    <div style="text-align:center; font-size:10px; color:var(--white-dim); margin-top:8px; margin-bottom: 40px;">Opens presentation in a new tab. Changes here sync instantly.</div>
-    
-    <div class="sync-status"><div class="sync-dot"></div> Live Sync Active</div>
   </div>
 
   <!-- RIGHT PANEL: OUPUT TABS -->
@@ -323,14 +393,14 @@
 
     <!-- TAB 1: SCRIPT -->
     <div id="content_script" class="pr-content active">
-      <div class="script-container" id="pitch_body">
-        <!-- Script injected via JS -->
+      <div id="script_output">
+        <!-- Generated via JS -->
       </div>
     </div>
 
     <!-- TAB 2: OBJECTIONS -->
     <div id="content_objections" class="pr-content">
-      <div class="script-container" id="objections_output">
+      <div id="objections_output">
         <!-- Generated via JS -->
       </div>
     </div>
@@ -356,8 +426,8 @@
         </div>
 
         <div class="cl-group">
-          <div class="cl-group-title">2. Niche Proof & Links (Screen Share)</div>
-          <div style="font-size:12px; color:var(--muted2); margin-bottom:16px;">Paste your competitor links here during prep. During the call, screen-share and click "Open ↗" to show them live proof.</div>
+          <div class="cl-group-title">2. Niche Proof & Epiphanies (Screen Share)</div>
+          <div style="font-size:12px; color:var(--white-dim); margin-bottom:16px;">Paste your competitor links here during prep. During the call, screen-share and click "Open ↗" to show them live proof.</div>
           
           <div class="cl-item">
             <label class="cl-label" onclick="toggleCheck(this)">
@@ -407,7 +477,7 @@
           <div class="cl-item">
             <label class="cl-label" onclick="toggleCheck(this)">
               <input type="checkbox" onclick="event.stopPropagation()">
-              <span><strong>Phase 4: Funnel Math</strong> (100k views -> 0.1% -> 100 appts -> 70 qualified -> X clients)</span>
+              <span><strong>Phase 4: Funnel Math</strong> (100k views -> 0.1% -> 100 appts -> 30 qualified -> X clients)</span>
             </label>
           </div>
         </div>
@@ -429,20 +499,19 @@
           <div class="cl-item">
             <label class="cl-label" onclick="toggleCheck(this)">
               <input type="checkbox" onclick="event.stopPropagation()">
-<button class="copy-btn" id="main_copy_btn" onclick="copyScript()">📋 Copy Full Script</button>
+              <span><strong>Phase 6: The Close</strong> ("Where does this land for you?" -> Silence)</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="copy-btn" id="main_copy_btn" onclick="copyScript(this)">📋 Copy Full Script</button>
 
 <script>
-// --- VISUAL DECK LAUNCHER ---
-function launchVisualDeck() {
-  // Check if running inside the AI preview/cloud sandbox
-  if (window.location.hostname.includes('google') || window.location.hostname.includes('artifacts') || window.location.protocol === 'data:' || window.location.protocol === 'blob:') {
-    alert("⚠️ PREVIEW ENVIRONMENT DETECTED\n\nTo use the Dual-Monitor Visual Deck, you must:\n1. Download BOTH 'finest_pitch_maker.html' and 'finest_pitch_visual.html' to your computer.\n2. Save them in the EXACT SAME folder.\n3. Open the Pitch Maker directly from your computer folder.\n\nThe live AI preview cannot link two separate local files together.");
-  } else {
-    // Runs normally when saved on your local computer
-    window.open('finest_pitch_visual.html', '_blank');
-  }
-}
-
 // --- TAB NAVIGATION ---
 function switchRightTab(tabId, el) {
   document.querySelectorAll('.pr-tab').forEach(t => t.classList.remove('active'));
@@ -486,7 +555,6 @@ function openLink(inputId) {
 // --- GEMINI API SETUP ---
 const apiKey = ""; 
 
-// AI Transcript Processing
 async function processTranscript() {
   const transcript = document.getElementById('in_transcript').value.trim();
   if (!transcript) return alert("Please paste a transcript first.");
@@ -497,38 +565,57 @@ async function processTranscript() {
 
   const payload = {
     contents: [{ parts: [{ text: transcript }] }],
-    systemInstruction: { parts: [{ text: "You are an expert high-ticket sales assistant. Analyze the provided sales discovery call transcript. Extract the prospect's details and output them EXACTLY matching the provided JSON schema. Default price to 5000 and closeRate to 20 if not found." }] },
+    systemInstruction: { parts: [{ text: "You are an expert high-ticket sales assistant. Analyze the provided sales discovery call transcript. Extract the prospect's details and output them EXACTLY matching the provided JSON schema. Do not include markdown formatting or conversational text. If a value isn't explicitly stated, use context to infer it or provide a reasonable default (e.g. 5000 for price, 20 for close rate)." }] },
     generationConfig: {
       responseMimeType: "application/json",
       responseSchema: {
         type: "OBJECT",
         properties: {
-          name: { type: "STRING" },
-          niche: { type: "STRING" },
-          problem: { type: "STRING" },
-          price: { type: "NUMBER" },
-          closeRate: { type: "NUMBER" },
-          tier: { type: "STRING", description: "'CORE', 'ACCELERATED', or 'AUTHORITY'" },
-          caseStudy: { type: "STRING", description: "'ryan', 'arun', 'authority', or 'heyyyhr'" }
+          name: { type: "STRING", description: "Prospect's first name" },
+          niche: { type: "STRING", description: "Their coaching niche or business type" },
+          problem: { type: "STRING", description: "Their biggest business problem or pain point mentioned in the call (use their exact wording if possible)" },
+          price: { type: "NUMBER", description: "Their high-ticket offer price in dollars. Default to 5000 if not found." },
+          closeRate: { type: "NUMBER", description: "Their sales call close rate percentage as a whole number (1-100). Default to 20 if not found." },
+          tier: { type: "STRING", description: "The best Finest Clients package for them based on their revenue and needs. MUST BE EXACTLY ONE OF: 'Core ($2,500/mo)', 'Accelerated ($3,500/mo)', 'Authority ($5,000/mo)'" },
+          caseStudy: { type: "STRING", description: "The best case study to pitch based on their problem. MUST BE EXACTLY ONE OF: 'ryan' (for small audience/starting out), 'arun' (for wanting high volume scaling), 'authority' (for revenue multiplier/ads fatigue), 'heyyyhr' (for unpredictable referrals). Default to 'arun'." }
         },
         required: ["name", "niche", "problem", "price", "closeRate", "tier", "caseStudy"]
       }
     }
   };
 
-  try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
-    });
-    if (!response.ok) throw new Error("HTTP error");
-    const result = await response.json();
-    const data = JSON.parse(result.candidates[0].content.parts[0].text);
+  let result = null;
+  let delays = [1000, 2000, 4000, 8000];
+  for (let i = 0; i <= delays.length; i++) {
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      result = await response.json();
+      break;
+    } catch (e) {
+      if (i === delays.length) {
+        btn.innerText = "Analyze & Auto-Fill";
+        btn.disabled = false;
+        alert("Could not process transcript via AI. Please fill the fields manually.");
+        return;
+      }
+      await new Promise(r => setTimeout(r, delays[i]));
+    }
+  }
 
-    if(data.name) document.getElementById('in_name').value = data.name;
-    if(data.niche) document.getElementById('in_niche').value = data.niche;
-    if(data.problem) document.getElementById('in_problem').value = data.problem;
-    if(data.price) document.getElementById('in_price').value = data.price;
-    if(data.closeRate) document.getElementById('in_close').value = data.closeRate;
+  try {
+    const text = result.candidates[0].content.parts[0].text;
+    const data = JSON.parse(text);
+
+    document.getElementById('in_name').value = data.name || '';
+    document.getElementById('in_niche').value = data.niche || '';
+    document.getElementById('in_problem').value = data.problem || '';
+    document.getElementById('in_price').value = data.price || 5000;
+    document.getElementById('in_close').value = data.closeRate || 20;
     
     const tierSelect = document.getElementById('in_tier');
     Array.from(tierSelect.options).forEach(opt => {
@@ -543,269 +630,418 @@ async function processTranscript() {
     document.getElementById('in_transcript').value = '';
     btn.innerText = "✓ Pitch Updated!";
     setTimeout(() => { btn.innerText = "Analyze & Auto-Fill"; }, 3000);
-    updateAll();
+    
+    generateScript();
+
   } catch(e) {
-    alert("AI Analysis failed. Try manual entry.");
+    alert("Error parsing AI response.");
     btn.innerText = "Analyze & Auto-Fill";
   }
+  
   btn.disabled = false;
 }
 
-// Deep Research 
+// --- DEEP RESEARCH LOGIC ---
 async function runDeepResearch() {
   const niche = document.getElementById('in_niche').value.trim();
-  if (!niche) return alert("Please enter a Niche/Industry first.");
+  if (!niche || niche === '[Niche]') return alert("Please enter a Niche/Industry first to search competitors.");
 
   const btn = document.getElementById('research_btn');
   btn.innerText = "Researching Web...";
   btn.disabled = true;
 
-  const promptText = `Search the web/YouTube to find 3 real YouTube channels in the "${niche}" niche. Output specific proof point stats (e.g., Views vs Subs outlier, Booking CTA in description, Compounding old videos).`;
+  const promptText = `Search the web and YouTube to find 3 real, specific YouTube channels in the "${niche}" coaching/business niche. They should be successful 'Niche Neighbors' but not necessarily massive mainstream celebrities.
+  For each channel, find a specific proof point that we can use in a sales pitch. 
+  Proof points must be one of the following:
+  - Outlier: A video with high views compared to low subscribers.
+  - Bridge: They have a booking link or sales funnel CTA in their video descriptions.
+  - Compounding: Older videos that are still relevant or highly viewed.
+  Be factual based on search results.`;
 
   const payload = {
     contents: [{ parts: [{ text: promptText }] }],
     tools: [{ google_search: {} }],
-    systemInstruction: { parts: [{ text: "Output strictly valid JSON." }] },
+    systemInstruction: { parts: [{ text: "You are a high-ticket YouTube sales researcher. Output strictly valid JSON." }] },
     generationConfig: {
       responseMimeType: "application/json",
       responseSchema: {
         type: "OBJECT",
         properties: {
-          comp1_name: { type: "STRING" }, comp1_stat: { type: "STRING" }, comp1_topic: { type: "STRING" },
-          comp2_name: { type: "STRING" }, comp2_stat: { type: "STRING" }, comp2_topic: { type: "STRING" },
-          comp3_name: { type: "STRING" }, comp3_stat: { type: "STRING" }, comp3_topic: { type: "STRING" }
+          comp1_name: { type: "STRING", description: "Channel name of competitor 1" },
+          comp1_stat: { type: "STRING", description: "Specific proof point stat for competitor 1 (keep under 15 words)" },
+          comp2_name: { type: "STRING", description: "Channel name of competitor 2" },
+          comp2_stat: { type: "STRING", description: "Specific proof point stat for competitor 2 (keep under 15 words)" },
+          comp3_name: { type: "STRING", description: "Channel name of competitor 3" },
+          comp3_stat: { type: "STRING", description: "Specific proof point stat for competitor 3 (keep under 15 words)" }
         },
-        required: ["comp1_name", "comp1_stat", "comp1_topic", "comp2_name", "comp2_stat", "comp2_topic", "comp3_name", "comp3_stat", "comp3_topic"]
+        required: ["comp1_name", "comp1_stat", "comp2_name", "comp2_stat", "comp3_name", "comp3_stat"]
       }
     }
   };
 
+  let result = null;
+  let delays = [1000, 2000, 4000, 8000];
+  for (let i = 0; i <= delays.length; i++) {
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      result = await response.json();
+      break;
+    } catch (e) {
+      if (i === delays.length) {
+        btn.innerText = "Find Competitors";
+        btn.disabled = false;
+        alert("Deep research failed to retrieve competitor data. Please try again.");
+        return;
+      }
+      await new Promise(r => setTimeout(r, delays[i]));
+    }
+  }
+
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
-    });
-    const result = await response.json();
-    const data = JSON.parse(result.candidates[0].content.parts[0].text);
+    const text = result.candidates[0].content.parts[0].text;
+    const data = JSON.parse(text);
 
     document.getElementById('in_comp1').value = data.comp1_name || '';
     document.getElementById('in_comp1_stat').value = data.comp1_stat || '';
-    document.getElementById('in_c1_topic').value = data.comp1_topic || '';
     document.getElementById('in_comp2').value = data.comp2_name || '';
     document.getElementById('in_comp2_stat').value = data.comp2_stat || '';
-    document.getElementById('in_c2_topic').value = data.comp2_topic || '';
     document.getElementById('in_comp3').value = data.comp3_name || '';
     document.getElementById('in_comp3_stat').value = data.comp3_stat || '';
-    document.getElementById('in_c3_topic').value = data.comp3_topic || '';
 
     btn.innerText = "✓ Found!";
     setTimeout(() => { btn.innerText = "Find Competitors"; }, 3000);
-    updateAll();
+    
+    generateScript();
+
   } catch(e) {
-    alert("Research failed.");
+    console.error(e);
+    alert("Error parsing competitor research data.");
     btn.innerText = "Find Competitors";
   }
+  
   btn.disabled = false;
 }
 
-// --- SCRIPT GENERATION & SYNC ---
+// --- PITCH GENERATOR LOGIC ---
 function formatCurrency(num) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
 }
 
-function updateAll() {
-  const data = getInputs();
-  saveToStorage(data);
-  generateScript(data);
-}
+function generateScript() {
+  // Get Values
+  const name = document.getElementById('in_name').value.trim() || '[Name]';
+  const niche = document.getElementById('in_niche').value.trim() || '[Niche]';
+  const problem = document.getElementById('in_problem').value.trim() || '[Main Problem]';
+  
+  const selectedCaseStudy = document.getElementById('in_casestudy').value;
 
-function getInputs() {
-  return {
-    name: document.getElementById('in_name')?.value.trim() || '[Name]',
-    niche: document.getElementById('in_niche')?.value.trim() || 'Coaching Strategy',
-    problem: document.getElementById('in_problem')?.value.trim() || '[Problem]',
-    comp1: document.getElementById('in_comp1')?.value.trim() || '[Comp 1]',
-    comp1_stat: document.getElementById('in_comp1_stat')?.value.trim() || '0 subs • 0 views',
-    comp1_topic: document.getElementById('in_c1_topic')?.value.trim() || 'General topic',
-    comp2: document.getElementById('in_comp2')?.value.trim() || '[Comp 2]',
-    comp2_stat: document.getElementById('in_comp2_stat')?.value.trim() || '0 subs • 0 views',
-    comp2_topic: document.getElementById('in_c2_topic')?.value.trim() || 'General topic',
-    comp3: document.getElementById('in_comp3')?.value.trim() || '[Comp 3]',
-    comp3_stat: document.getElementById('in_comp3_stat')?.value.trim() || '0 subs • 0 views',
-    comp3_topic: document.getElementById('in_c3_topic')?.value.trim() || 'General topic',
-    gap_covered: document.getElementById('in_gap_covered')?.value.trim() || 'Generic content',
-    gap_missing: document.getElementById('in_gap_missing')?.value.trim() || 'High-intent problems',
-    price: parseFloat(document.getElementById('in_price')?.value) || 5000,
-    close: parseFloat(document.getElementById('in_close')?.value) || 20,
-    tier: document.getElementById('in_tier')?.value || 'ACCELERATED',
-    caseStudy: document.getElementById('in_casestudy')?.value || 'arun'
-  };
-}
+  const comp1 = document.getElementById('in_comp1').value.trim() || '[Competitor 1]';
+  const stat1 = document.getElementById('in_comp1_stat').value.trim() || '[Stat 1]';
+  const comp2 = document.getElementById('in_comp2').value.trim() || '[Competitor 2]';
+  const stat2 = document.getElementById('in_comp2_stat').value.trim() || '[Stat 2]';
+  const comp3 = document.getElementById('in_comp3').value.trim() || '[Competitor 3]';
+  const stat3 = document.getElementById('in_comp3_stat').value.trim() || '[Stat 3]';
 
-function saveToStorage(data) {
-  // Syncs to the Visual Pitch Deck
-  localStorage.setItem('finest_pitch_data', JSON.stringify(data));
-}
+  const price = parseFloat(document.getElementById('in_price').value) || 0;
+  const closeRate = parseFloat(document.getElementById('in_close').value) || 0;
+  const recTier = document.getElementById('in_tier').value;
 
-function scriptBlock(title, text) {
-  return `
-    <div class="phase-block">
-      <div class="phase-header">${title}</div>
-      <div class="phase-body">${text}</div>
-    </div>
-  `;
-}
+  // Calculate Math
+  const newClients = Math.round(30 * (closeRate / 100)); // Based on 30 qualified appts
+  const newRevenue = newClients * price;
 
-function objTab(title, text, caseStudyLabel = '') {
-  let labelHtml = caseStudyLabel ? `<div class="cs-label">${caseStudyLabel}</div>` : '';
-  return `
-    <div class="obj-tab">
-      <div class="obj-head" onclick="this.parentElement.classList.toggle('open')">
-        <span>${title}</span>
-        <span class="icon">▼</span>
-      </div>
-      <div class="obj-body">
-        ${labelHtml}
-        <div class="script-text">${text}</div>
-      </div>
-    </div>
-  `;
-}
-
-function generateScript(S) {
-  const newClients = Math.round(70 * (S.close / 100));
-  const newRevenue = newClients * S.price;
-
+  // Case Study Injection Text for Phase 4
   let caseStudyText = "";
-  if (S.caseStudy === "ryan") caseStudyText = "To give you an idea, we did this for Ryan Jackson, a B2B Operations Coach. He had 7 subscribers and a brand new channel. Within 60 days of launching this exact system, with less than 1,000 total views, he closed a $15,000 deal. Views don't matter. The right audience does.";
-  else if (S.caseStudy === "arun") caseStudyText = "Look at my own brand, Finest Edit, and Arun Sharma. By applying this exact compounding system, we scaled to 200 to 300 qualified sales calls per month from YouTube alone after 18 months. No paid ads. No cold outreach.";
-  else if (S.caseStudy === "authority") caseStudyText = "For example, Authority IO. By plugging this conversion bridge into their channel, they scaled from $200k to $429k in a single month. It's about capturing high-intent search, not just getting views.";
-  else if (S.caseStudy === "heyyyhr") caseStudyText = "For example, Heyyy HR. They were relying purely on referrals, getting 2-5 clients a month. By month 4 of this system, YouTube was adding 8-10 high-ticket calls a month on top of referrals. It created a predictable floor.";
+  if (selectedCaseStudy === "ryan") {
+    caseStudyText = "To give you an idea, we did this for Ryan Jackson, a B2B Operations Coach. He had 7 subscribers and a brand new channel. Within 60 days of launching this exact system, with less than 1,000 total views, he closed a $15,000 deal. Views don't matter. The right audience does.";
+  } else if (selectedCaseStudy === "arun") {
+    caseStudyText = "To give you an idea, look at my own brand, Finest Edit, and Arun Sharma. By applying this exact compounding system, we scaled to 200 to 300 qualified sales calls per month from YouTube alone after 18 months. No paid ads. No cold outreach.";
+  } else if (selectedCaseStudy === "authority") {
+    caseStudyText = "To give you an idea, look at Authority IO. By plugging this exact conversion bridge into their channel, they scaled from $200k to $429k in a single month. It's about capturing high-intent search, not just getting views.";
+  } else if (selectedCaseStudy === "heyyyhr") {
+    caseStudyText = "To give you an idea, look at Heyyy HR, a leadership development coach. They were relying purely on referrals and getting 2-5 clients a month. By month 4 of this system, YouTube was adding 8-10 high-ticket calls a month on top of their referrals. It didn't replace referrals—it created a predictable floor.";
+  }
 
-  let html = ``;
+  // -------------------------
+  // GENERATE PITCH OUTPUT
+  // -------------------------
+  let html = `<div class="script-container">`;
 
-  // --- MAIN PITCH SCRIPT ---
-  html += scriptBlock('Phase 1: The Open & Diagnosis', `
-    <div class="script-text">"Great to speak properly, <span class="var">${S.name}</span>. I'll skip the basics and go straight to your situation."</div>
-    <div class="direction deck">Push NEXT to Slide 4 (The Diagnosis) in Visual Deck</div>
-    <div class="script-text">"Here is what I am seeing. Your offer is proven. You have clients. But you are <span class="var">${S.problem}</span>.<br><br>The real issue is not your expertise. It is not your niche. It is that you do not have a reliable system that turns attention into qualified booked calls on autopilot.<br><br><strong>Am I right — or am I missing something?</strong>"</div>
-    <div class="direction">Wait for them to agree. Do not pitch until they confirm.</div>
-  `);
+  // PHASE 1
+  html += `
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-title">Phase 1: The Open</div>
+        <div class="phase-time">1 MIN</div>
+      </div>
+      <div class="phase-content">
+        <div class="script-text">"Great to speak properly, <span class="dynamic-var">${name}</span>. Before we dive in — did you have a chance to look at anything about us before the call, or are you coming in fairly fresh?"</div>
+        <div class="direction">If warm: "Perfect — I will skip the basics and go straight to your situation."<br>If cold: "No problem — I will cover what you need as we go."</div>
+      </div>
+    </div>`;
 
-  html += scriptBlock('Phase 2: Niche Proof & The Gap', `
-    <div class="direction deck">Push NEXT to Slide 2 (Competitors) in Visual Deck</div>
-    <div class="script-text">"Before I show you what I put together, I want you to see this working for real channels in your space. These three channels are converting viewers to clients right now.<br><br>Why? Because they aren't making generic beginner tutorials. They are targeting buyer-intent topics like <span class="var">${S.comp1_topic}</span>. And crucially, they have the Content-to-Call bridge built into their videos. Without this bridge, you build YouTube's algorithm but get none of the revenue."</div>
-    <div class="direction deck">Push NEXT to Slide 3 (The Content Gap) in Visual Deck</div>
-    <div class="script-text">"But here is the opportunity. Most of your competitors are covering generic theory. Nobody is making strong, buyer-intent videos about <span class="var">${S.gap_missing}</span>. There is real search demand here and no strong content serving it. These are the first videos we build for you."</div>
-  `);
+  // PHASE 2
+  html += `
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-title">Phase 2: Diagnosis Summary</div>
+        <div class="phase-time">2 MIN</div>
+      </div>
+      <div class="phase-content">
+        <div class="direction">Summarise what you heard on Call 1. Echo their words.</div>
+        <div class="script-text">"Okay. Here is what I am seeing.<br><br>Your offer is proven. You have clients, you get results. That is not the problem.<br><br>What I am seeing is <span class="dynamic-var">${problem}</span>.<br><br>The real issue is not your expertise, not your niche, not your camera. It is that you do not have a reliable system that turns attention into qualified booked calls on autopilot.<br><br><strong>Am I right — or am I missing something?</strong>"</div>
+        <div class="direction">Wait for them to agree. Do not pitch until they confirm your diagnosis.</div>
+      </div>
+    </div>`;
 
-  html += scriptBlock('Phase 3: Mechanism & Math', `
-    <div class="direction deck">Push NEXT to Slide 5 (The Funnel) in Visual Deck</div>
-    <div class="script-text">"So what does a system look like that actually captures this?<br><br><strong>REACH:</strong> We reverse-engineer exact buyer search phrases.<br><strong>CONVERT:</strong> The bridge—the CTA, the booking link, the tracking.<br><strong>COMPOUND:</strong> Month 3 feeds month 6. Month 6 feeds month 12."</div>
-    <div class="math-box">
-      So from REACH you get <strong>100k views</strong>.<br>
-      We CONVERT those views with a realistic 0.1% conversion, which is <strong>100 appointments</strong>.<br>
-      Let’s say 30% no-show or aren't qualified. You still have <strong>70 qualified appointments</strong>.<br>
-      At your <span class="var" style="color:var(--w); background:transparent; padding:0;">${S.close}%</span> close rate, that's <span class="var" style="color:var(--w); background:transparent; padding:0;">${newClients}</span> new high-ticket clients.<br>
-      ${newClients} clients × ${formatCurrency(S.price)} = <span style="color:#93C5FD;">${formatCurrency(newRevenue)} in Revenue</span>
-    </div>
-    <div class="script-text">"And remember — COMPOUND will not only increase the volume but the qualification, increasing your closing ratio over time."</div>
-    <div class="script-text" style="margin-top:16px; border-left:2px solid var(--green); padding-left:12px;">${caseStudyText}</div>
-    <div class="direction">Pause three full seconds.</div>
-    <div class="script-text">"Does this make sense so far?"</div>
-  `);
+  // PHASE 3 (DYNAMIC VISUAL EPIPHANY WITH COMPETITOR RESEARCH)
+  html += `
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-title">Phase 3: Niche Proof & The Epiphany</div>
+        <div class="phase-time">5 MIN</div>
+      </div>
+      <div class="phase-content">
+        <div class="direction">Open YouTube in your browser. Screen share. Show them real channels. Use the links from your Live Checklist.</div>
+        <div class="script-text">"Before I show you what I put together — I want to show you something I found in your niche. Because I want you to see this working for real channels before I tell you anything about what we do."</div>
+        
+        <div class="epiphany-block">
+          <div class="epiphany-label">Visible Epiphany 1: Buyer Intent & Outliers</div>
+          <div class="script-text">"This is <span class="dynamic-var">${comp1}</span>. Look at this video — <span class="dynamic-var">${stat1}</span>.<br><br>Why did this blow up? Because they aren't making beginner tutorials. They are answering the exact question your buyer types into YouTube when they are frustrated. That is buyer-intent content. That is what makes YouTube work."</div>
+        </div>
+        
+        <div class="epiphany-block">
+          <div class="epiphany-label">Visible Epiphany 2: The Bridge</div>
+          <div class="script-text">"Now look at <span class="dynamic-var">${comp2}</span>. In their description, <span class="dynamic-var">${stat2}</span>. The end screen drives to a call. Without this Content-to-Call bridge, you build YouTube's algorithm but get none of the revenue."</div>
+        </div>
+        
+        <div class="epiphany-block" style="border-left-color: var(--gold);">
+          <div class="epiphany-label" style="color: var(--gold);">Visible Epiphany 3: Compounding</div>
+          <div class="script-text">"And look at <span class="dynamic-var">${comp3}</span>. <span class="dynamic-var">${stat3}</span>. These early videos are still ranking and getting views. Still booking calls. That is what compounding looks like in your niche specifically."</div>
+        </div>
+        
+        <div class="script-text" style="margin-top: 24px;">"So the question is — what does a system look like that actually builds this? Let me show you exactly what we do."</div>
+      </div>
+    </div>`;
 
-  html += scriptBlock('Phase 4: The Pitch & Guarantee', `
-    <div class="direction deck">Push NEXT to Slide 6 (Packages) in Visual Deck</div>
-    <div class="script-text">"This is a done-for-you service. We map the strategy, write the Game Plans, edit, and optimize. You just record 4 hours a month."</div>
-    <div class="script-text">"Based on your situation—<span class="var">${S.problem}</span>—most coaches start with the <span class="var">${S.tier}</span> tier. It solves the immediate need while building the asset."</div>
-    <div class="direction deck">Push NEXT to Slide 7 (Guarantee) in Visual Deck</div>
-    <div class="script-text">"And here is the guarantee: If your 5-video playlist funnel is not fully live and optimized within 90 days, we keep working at no additional charge until it is. We guarantee the build. The calls follow the build."</div>
-    <div class="script-text" style="margin-top:24px; font-weight:bold; color:var(--gold2);">"Based on everything we have covered — where does this land for you?"</div>
-    <div class="direction">Stop. Silence. Do not fill the space.</div>
-  `);
+  // PHASE 4
+  html += `
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-title">Phase 4: The Mechanism & Funnel Math</div>
+        <div class="phase-time">5 MIN</div>
+      </div>
+      <div class="phase-content">
+        <div class="direction">Draw a vertical funnel shape on Miro with three layers (Reach -> Convert -> Compound).</div>
+        <div class="script-text">"<strong>REACH</strong> is Buyer Topic Architecture. We reverse-engineer what your ideal clients are already typing into YouTube right now.<br><br><strong>CONVERT</strong> is the Content-to-Call Bridge. Reach gets you watched. Convert gets you booked. The end-screen CTA, the booking link above the fold, the UTM tracking system.<br><br><strong>COMPOUND</strong> is the outcome. Month 3 feeds month 6. Month 6 feeds month 12."</div>
+        <div class="direction">Draw the exact math inside the funnel:</div>
+        
+        <div class="math-box">
+          So from REACH you get <strong>100k views</strong>.<br>
+          We CONVERT those views with a realistic 0.1% conversion, which is <strong>100 appointments</strong>.<br>
+          Let’s say 70% no-show or aren't qualified. You still have <strong>30 qualified appointments</strong>.<br>
+          At your <span class="dynamic-var">${closeRate}%</span> close rate, that's <span class="dynamic-var">${newClients}</span> new high-ticket clients.<br>
+          ${newClients} clients × ${formatCurrency(price)} = <span style="color:var(--gold-light);">${formatCurrency(newRevenue)} in Revenue</span>
+        </div>
 
-  document.getElementById('pitch_body').innerHTML = html;
+        <div class="script-text">"And remember — COMPOUND will not only increase the volume but the qualification, increasing your closing ratio over time."</div>
+        
+        <div class="casestudy-block">
+          <div class="casestudy-label">Case Study Proof</div>
+          <div class="script-text">"${caseStudyText}"</div>
+        </div>
 
-  // --- OBJECTION PLAYBOOK ---
-  let objHtml = `
-    <div class="obj-title">The Objection Playbook</div>
-    <div class="obj-subtitle">Click the objection the prospect raises to reveal the case study pivot.</div>
-  `;
+        <div class="direction">Pause three full seconds.</div>
+        <div class="script-text">"Does this make sense so far?"</div>
+        <div class="direction">Wait for yes.</div>
+      </div>
+    </div>`;
 
-  objHtml += objTab(
-    `"I don't have an audience yet / My channel is too small"`, 
-    `"Views don't matter. The right audience does. Let me show you what I mean...<br><br>We worked with Ryan Jackson, a B2B Operations Coach. He had 7 subscribers, a brand new channel, and zero leads from YouTube. Within 60 days, with less than 1,000 total views across 4 videos, he closed a $15,000 deal. When you target buyer-intent search, you don't need a big audience."`,
-    `Case Study: Ryan Jackson (Small Channel, Big Results)`
-  );
+  // PHASE 5
+  html += `
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-title">Phase 5: The Pitch & Tiers</div>
+        <div class="phase-time">5 MIN</div>
+      </div>
+      <div class="phase-content">
+        <div class="script-text">"Let me tell you exactly what you are getting."</div>
+        <div class="script-text">
+          <strong>Month 1 is Foundation:</strong> We map the strategy, write the Game Plans, and launch the first videos.<br>
+          <strong>Months 2-3 is Activation:</strong> The 5-video funnel goes live and the tracking bridge is tested.<br>
+          <strong>Month 4 onwards is Compounding:</strong> We double down on winners to grow the library.
+        </div>
+        <div class="script-text">"What is included each month: Four fully produced YouTube videos — research, scripting, editing, thumbnails, upload optimisation, UTM tracking. <strong>Everything done for you. You record 4 hours a month. We handle the rest.</strong>"</div>
+        
+        <div class="section-title" style="margin-top:32px;">The Three Tiers</div>
+        
+        <div class="pricing-tier">
+          <div class="tier-name">Core — $2,500/month</div>
+          <div class="tier-desc">"Four YouTube videos per month. Full production, channel management, monthly analytics. This is your foundation — the compound asset being built from month one."</div>
+        </div>
+        <div class="pricing-tier">
+          <div class="tier-name">Accelerated — $3,500/month</div>
+          <div class="tier-desc">"Everything in Core, plus 8 Instagram Reels repurposed from your YT content, plus strategic boosting of your 2 best-performing Reels. IG fills your calendar this month. YT builds your pipeline for the next 12."</div>
+        </div>
+        <div class="pricing-tier">
+          <div class="tier-name">Authority — $5,000/month</div>
+          <div class="tier-desc">"Everything in Accelerated, plus a monthly 60-min strategy call with me directly, a dedicated project manager, and a quarterly content strategy refresh. Full partnership."</div>
+        </div>
 
-  objHtml += objTab(
-    `"I rely on referrals / lead flow is unpredictable"`, 
-    `"Referrals are great, but they are unpredictable upside, not a survival strategy. Let me show you what I mean...<br><br>We worked with Heyyy HR, a leadership development coach. They were relying purely on referrals, getting 2-5 clients a month and stressing about the pipeline. By Month 4 of this YouTube system, we were adding 8-10 consistent qualified calls a month on top of their referrals. YouTube didn't replace referrals — it created a predictable floor."`,
-    `Case Study: Heyyy HR (Referral Escape Artists)`
-  );
+        <div class="direction">Based on the inputs, recommend the specific tier:</div>
+        <div class="script-text">"Brief pause. Most people in your situation — <span class="dynamic-var">${problem}</span> — tend to go with <strong>${recTier}</strong> because it solves the immediate need while building the asset. But let me show you what each includes and you can tell me what feels right."</div>
+        
+        <div class="section-title" style="margin-top:24px; font-size:11px;">The Risk Reversal & Exclusivity</div>
+        <div class="script-text">"<strong>THE GUARANTEE:</strong> If your first five-video playlist funnel is not fully live, optimised, and tracking within 90 days — we keep working free until it is. We guarantee the build. The calls follow the build.<br><br>
+        <strong>EXCLUSIVITY:</strong> We only take one client per niche. If we work with you in <span class="dynamic-var">${niche}</span>, we never build this system for your direct competitor while we are building yours.<br><br>
+        <strong>THE ANCHOR:</strong> This is our founding client rate. Our full rate moves to $6,500 once we close this current offer. In exchange for the founding rate we ask for a detailed video testimonial after 90 days."</div>
+        <div class="direction">State the tier price. Then stop. Silence. Do not fill it.</div>
+      </div>
+    </div>`;
 
-  objHtml += objTab(
-    `"My niche is too competitive / I want to scale volume"`, 
-    `"When your niche is competitive, the only way to win is by compounding an evergreen asset. Look at my own brand, Finest Edit, and Arun Sharma.<br><br>We are in one of the most saturated marketing niches possible. By applying this exact compounding system, we scaled to 200 to 300 qualified sales calls per month from YouTube alone after 18 months. No paid ads. No cold outreach. Just an evergreen asset that competitors can't replicate overnight."`,
-    `Case Study: Arun Sharma / Finest Edit (Saturated Niche Winners)`
-  );
+  // PHASE 6
+  html += `
+    <div class="phase-block">
+      <div class="phase-header">
+        <div class="phase-title">Phase 6: The Close</div>
+        <div class="phase-time">5 MIN</div>
+      </div>
+      <div class="phase-content">
+        <div class="script-text">"Based on everything we have covered — where does this land for you?"</div>
+        <div class="direction">Open ended. Whatever they say next is the real gate. If positive, use the How vs Should frame:</div>
+        <div class="script-text">"Just to be clear — it sounds like you are not in a 'should I do this' place, going back and forth on whether this is the right direction. It sounds more like you are in a 'how do I make this work' place — where the direction is clear, it is just logistics. Is that right?"</div>
+        <div class="direction">If yes — they have verbally committed. Consistency bias now works for you.</div>
+        <div class="script-text">"Here is what the next 48 hours look like. I will send the agreement today. Once that is signed, we do a 20-minute kick-off call where we map your first four YouTube topics. First content hits your channel within two weeks. Does that timeline work?"</div>
+        
+        <div class="direction" style="margin-top: 24px; border-left-color: var(--blue);">[If they raise an objection, click the <strong>Objection Playbook</strong> tab above.]</div>
+      </div>
+    </div>`;
 
-  objHtml += objTab(
-    `"My ad costs keep rising / I need real revenue impact"`, 
-    `"Ads are a tax you pay for not having an organic asset. Let me show you what I mean...<br><br>We worked with Authority IO. They were looking for a true revenue multiplier to escape ad fatigue. By plugging this exact conversion bridge into their channel and capturing high-intent search traffic, they scaled from $200k to $429k in a single month. You own this traffic; you don't rent it from Facebook."`,
-    `Case Study: Authority IO (Revenue Multipliers)`
-  );
+  html += `</div>`;
+  document.getElementById('script_output').innerHTML = html;
 
-  objHtml += objTab(
-    `"I tried YouTube before and it didn't work"`, 
-    `"What kind of content were you making? Because if you look at <span class="var">${S.comp1}</span>, they aren't just making generic videos. They are answering the exact questions your buyers have right before they purchase.<br><br>That is the mismatch — creating content without the Content-to-Call bridge. It's a system problem, not a YouTube problem. What we build fixes both."`,
-    `Niche Proof Pivot`
-  );
+  // -------------------------
+  // GENERATE OBJECTIONS OUTPUT
+  // -------------------------
+  let objHtml = `<div class="script-container">`;
+  objHtml += `<div class="section-title">Live Objection Playbook</div>`;
+  objHtml += `<div class="direction" style="margin-bottom: 16px;">Click the objection the prospect raises to reveal the personalized response & case study proof.</div>`;
 
-  objHtml += objTab(
-    `"The price is a lot / Too expensive"`, 
-    `"At your <span class="var">${S.close}%</span> close rate, just ONE new client at <span class="var">${formatCurrency(S.price)}</span> covers the investment in month one. And if the funnel is not live within 90 days, we keep working free. The financial risk is entirely ours."`,
-    `ROI Math Pivot`
-  );
+  objHtml += `
+    <div class="obj-accordion" onclick="this.classList.toggle('open')">
+      <div class="obj-header">"I don't have an audience yet / My channel is too small" <span class="obj-icon">▼</span></div>
+      <div class="obj-body">
+        <div class="direction">Use the Ryan Jackson Case Study (Small Channel, Big Results)</div>
+        <div class="script-text">"Views don't matter. The right audience does. Let me show you what I mean...<br><br>We worked with Ryan Jackson, a B2B Operations Coach. He had exactly 7 subscribers and a brand new channel, getting zero leads from YouTube. Within 60 days, with less than 1,000 total views across 4 videos, he closed a $15,000 deal. When you target buyer-intent search, you don't need a big audience."</div>
+      </div>
+    </div>`;
 
-  objHtml += objTab(
-    `"I'm not good on camera"`, 
-    `"Are you good on sales calls? Because you have been clear and confident for the last 40 minutes discussing <span class="var">${S.problem}</span>.<br><br>A YouTube video is just a sales call with the camera. We give you the exact game plan and hook. You just show up and talk about what you know."`,
-    `Reframing Pivot`
-  );
+  objHtml += `
+    <div class="obj-accordion" onclick="this.classList.toggle('open')">
+      <div class="obj-header">"I rely on referrals / Lead flow is unpredictable" <span class="obj-icon">▼</span></div>
+      <div class="obj-body">
+        <div class="direction">Use the Heyyy HR Case Study (Referral Escape Artists)</div>
+        <div class="script-text">"Referrals are great, but they are unpredictable upside, not a survival strategy. Let me show you what I mean...<br><br>We worked with Heyyy HR, a leadership development coach. They were relying purely on referrals, getting 2-5 clients a month and stressing about the pipeline. By Month 4 of this YouTube system, we were adding 8-10 consistent qualified calls a month on top of their referrals. YouTube didn't replace referrals — it created a predictable floor."</div>
+      </div>
+    </div>`;
 
+  objHtml += `
+    <div class="obj-accordion" onclick="this.classList.toggle('open')">
+      <div class="obj-header">"My niche is too competitive / I want to scale volume" <span class="obj-icon">▼</span></div>
+      <div class="obj-body">
+        <div class="direction">Use the Arun Sharma / Finest Edit Case Study (High Volume / Saturated Niche)</div>
+        <div class="script-text">"When your niche is competitive, the only way to win is by compounding an evergreen asset. Let me show you what I mean...<br><br>Look at my own brand, Finest Edit, and Arun Sharma. We are in one of the most saturated marketing niches possible. By applying this exact compounding system, we scaled to 200 to 300 qualified sales calls per month from YouTube alone after 18 months. No paid ads. No cold outreach. Just an evergreen asset that competitors can't replicate overnight."</div>
+      </div>
+    </div>`;
+
+  objHtml += `
+    <div class="obj-accordion" onclick="this.classList.toggle('open')">
+      <div class="obj-header">"My ad costs keep rising / I need real revenue impact" <span class="obj-icon">▼</span></div>
+      <div class="obj-body">
+        <div class="direction">Use the Authority IO Case Study (Revenue Multipliers)</div>
+        <div class="script-text">"Ads are a tax you pay for not having an organic asset. Let me show you what I mean...<br><br>We worked with Authority IO. They were looking for a true revenue multiplier to escape ad fatigue. By plugging this exact conversion bridge into their channel and capturing high-intent search traffic, they scaled from $200k to $429k in a single month. You own this traffic; you don't rent it from Facebook."</div>
+      </div>
+    </div>`;
+
+  objHtml += `
+    <div class="obj-accordion" onclick="this.classList.toggle('open')">
+      <div class="obj-header">"The price is a lot / Too expensive" <span class="obj-icon">▼</span></div>
+      <div class="obj-body">
+        <div class="script-text" style="margin-top:16px;">"At your <span class="dynamic-var">${closeRate}%</span> close rate, just ONE new <span class="dynamic-var">${niche}</span> client at <span class="dynamic-var">${formatCurrency(price)}</span> covers the investment in month one. And if the funnel is not live within 90 days, we keep working free. The financial risk is entirely ours."</div>
+      </div>
+    </div>`;
+
+  objHtml += `
+    <div class="obj-accordion" onclick="this.classList.toggle('open')">
+      <div class="obj-header">"I tried YouTube before and it didn't work" <span class="obj-icon">▼</span></div>
+      <div class="obj-body">
+        <div class="script-text" style="margin-top:16px;">"What kind of content were you making? Because if you look at <span class="dynamic-var">${comp1}</span>, they aren't just making generic videos. They are answering the exact questions your buyers have right before they purchase.<br><br>That is the mismatch — creating content without the Content-to-Call bridge. It's a system problem, not a YouTube problem. What we build fixes both."</div>
+      </div>
+    </div>`;
+
+  objHtml += `
+    <div class="obj-accordion" onclick="this.classList.toggle('open')">
+      <div class="obj-header">"I have been burned by agencies before" <span class="obj-icon">▼</span></div>
+      <div class="obj-body">
+        <div class="script-text" style="margin-top:16px;">"Every agency that burned you was selling something they could not guarantee. We put the build guarantee right in the contract. And remember <span class="dynamic-var">${comp1}</span>? They didn't get those results by accident, they have a system."</div>
+      </div>
+    </div>`;
+
+  objHtml += `
+    <div class="obj-accordion" onclick="this.classList.toggle('open')">
+      <div class="obj-header">"I need to think about it / Talk to my partner" <span class="obj-icon">▼</span></div>
+      <div class="obj-body">
+        <div class="script-text" style="margin-top:16px;">"Totally respect that. When you sit down with them, what is the question they are most likely to ask?<br><br>The biggest question is usually ROI. Just remind them: to hit your goals, you only need ONE new client at <span class="dynamic-var">${formatCurrency(price)}</span> to pay for the system. Let me make sure you walk away with everything you need to answer their questions."</div>
+      </div>
+    </div>`;
+
+  objHtml += `
+    <div class="obj-accordion" onclick="this.classList.toggle('open')">
+      <div class="obj-header">"I'm not good on camera" <span class="obj-icon">▼</span></div>
+      <div class="obj-body">
+        <div class="script-text" style="margin-top:16px;">"Are you good on sales calls? Because you have been clear and confident for the last 40 minutes discussing <span class="dynamic-var">${problem}</span>.<br><br>A YouTube video is just a sales call with the camera. We give you the exact game plan and hook. You just show up and talk about what you know."</div>
+      </div>
+    </div>`;
+
+  objHtml += `
+    <div class="section-title" style="margin-top:32px;">Retainer Upsell (Month 6+)</div>
+    <div style="background: rgba(155,107,232,0.1); border: 1px solid rgba(155,107,232,0.3); padding:16px; border-radius:4px;">
+      <strong style="color:#C0A8F0; font-size:14px;">The Compound Maintenance Plan — $1,500/month</strong><br>
+      <span style="font-size:13px; color:var(--white-dim);">For clients whose funnel is established and simply need consistent content to keep the library growing. Lighter touch — 2 videos per month, no strategy work, just production. They already have the system. They just need the fuel.</span>
+    </div>`;
+
+  objHtml += `</div>`;
   document.getElementById('objections_output').innerHTML = objHtml;
 }
 
-// --- COPY SCRIPT TEXT ---
-function copyPitch() {
-  // Use the active tab to figure out what to copy (Script or Objections)
+function copyScript(btn) {
   const activeContent = document.querySelector('.pr-content.active');
   if(!activeContent) return;
   
-  const text = activeContent.innerText.replace(/\n{3,}/g, '\n\n');
-  
   const textarea = document.createElement('textarea');
-  textarea.value = text;
+  textarea.value = activeContent.innerText;
   document.body.appendChild(textarea);
   textarea.select();
   
   try {
     document.execCommand('copy');
-    const btn = document.getElementById('main_copy_btn');
-    btn.textContent = '✓ Copied';
-    btn.classList.add('copy-done');
-    setTimeout(() => { btn.textContent = '📋 Copy Script Text'; btn.classList.remove('copy-done'); }, 2000);
+    btn.innerHTML = '✓ Copied to Clipboard';
+    setTimeout(() => { btn.innerHTML = '📋 Copy Full Script'; }, 2000);
   } catch (err) {
-    alert('Failed to copy.');
+    console.error('Copy failed', err);
+    alert('Failed to copy. Please select the text and copy manually.');
   }
+  
   document.body.removeChild(textarea);
 }
 
 // Init
-window.onload = function() {
-  updateAll();
-};
+generateScript();
 </script>
 </body>
 </html>

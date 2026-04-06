@@ -6,541 +6,806 @@
 <title>Finest Clients — Live Pitch Maker</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#07070F;--panel:#0E0E1C;--card:#141426;--border:rgba(212,168,75,.14);
-  --gold:#D4A84B;--gold2:#F0C96A;--gold3:rgba(212,168,75,.08);
-  --w:#EEEAE0;--muted:#52527A;--muted2:#9898B8;
-  --red:#C0392B;--rdim:rgba(192,57,43,.12);
-  --green:#1FAD5A;--gdim:rgba(31,173,90,.12);
-  --blue:#1A5FA0;--bdim:rgba(26,95,160,.12);
-  --orange:#D4730A;--odim:rgba(212,115,10,.12);
-  --serif:'Playfair Display',Georgia,serif;
-  --sans:'DM Sans',system-ui,sans-serif;
-  --mono:'DM Mono',monospace;
-  --radius:10px;
-}
-html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--w);font-family:var(--sans)}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#07070F; --panel:#0E0E1C; --card:#141426; --border:rgba(212,168,75,.14);
+    --gold:#D4A84B; --gold2:#F0C96A; --gold3:rgba(212,168,75,.08);
+    --w:#EEEAE0; --muted:#52527A; --muted2:#9898B8;
+    --red:#C0392B; --rdim:rgba(192,57,43,.12);
+    --green:#1FAD5A; --gdim:rgba(31,173,90,.12);
+    --blue:#1A5FA0; --bdim:rgba(26,95,160,.12);
+  }
 
-/* LAYOUT */
-.app{display:grid;grid-template-columns:380px 1fr;height:100vh;overflow:hidden}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--w);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
 
-/* LEFT PANEL — FORM */
-.form-panel{background:var(--panel);border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
-.form-panel::-webkit-scrollbar{width:3px}.form-panel::-webkit-scrollbar-thumb{background:rgba(212,168,75,.2);border-radius:2px}
+  /* Header */
+  .header {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    z-index: 10;
+  }
 
-.form-header{padding:18px 20px 14px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--panel);z-index:10}
-.form-logo{font-family:var(--mono);font-size:8px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:5px}
-.form-title{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--w)}
-.form-subtitle{font-size:11px;color:var(--muted2);margin-top:3px}
+  .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 20px; letter-spacing: 0.05em; color: var(--w); }
+  .logo span { color: var(--gold); }
+  
+  .controls { display: flex; gap: 16px; align-items: center; }
+  .ph-btn {
+    background: var(--gold); color: #000; border: none; padding: 10px 20px;
+    font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.05em; border-radius: 4px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .ph-btn:hover { background: var(--gold2); transform: translateY(-1px); }
+  .ph-btn.copy-done { background: var(--green); color: #fff; }
+  .ph-btn-outline {
+    background: transparent; color: var(--gold); border: 1px solid var(--gold);
+    padding: 10px 20px; font-family: 'DM Mono', monospace; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.05em; border-radius: 4px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .ph-btn-outline:hover { background: var(--gold3); }
 
-.form-body{padding:16px 20px 32px;display:flex;flex-direction:column;gap:0}
+  /* Layout */
+  .layout { display: flex; flex: 1; overflow: hidden; }
 
-.fsection{margin-bottom:20px}
-.fsection-label{font-family:var(--mono);font-size:8px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px}
-.fsection-num{width:17px;height:17px;border-radius:50%;background:var(--gold3);border:1px solid var(--border);color:var(--gold);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  /* Left Panel - Inputs */
+  .panel-left {
+    width: 420px;
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    padding: 24px;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .panel-left::-webkit-scrollbar { width: 6px; }
+  .panel-left::-webkit-scrollbar-track { background: transparent; }
+  .panel-left::-webkit-scrollbar-thumb { background: var(--card); border-radius: 3px; }
 
-.frow{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
-.frow:last-child{margin-bottom:0}
-.frow label{font-size:11px;color:var(--muted2);font-weight:500}
-.frow input,.frow textarea,.frow select{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:9px 12px;color:var(--w);font-family:var(--sans);font-size:13px;outline:none;width:100%;transition:border-color .2s,background .2s;resize:none}
-.frow input:focus,.frow textarea:focus{border-color:rgba(212,168,75,.35);background:rgba(212,168,75,.03)}
-.frow input::placeholder,.frow textarea::placeholder{color:var(--muted)}
-.frow textarea{height:52px;line-height:1.45}
+  /* Right Panel - Output */
+  .panel-right {
+    flex: 1;
+    background: var(--bg);
+    padding: 32px 48px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+  .panel-right::-webkit-scrollbar { width: 8px; }
+  .panel-right::-webkit-scrollbar-track { background: var(--bg); }
+  .panel-right::-webkit-scrollbar-thumb { background: var(--card); border-radius: 4px; }
 
-/* RADIO GROUPS */
-.rgroup{display:flex;flex-direction:column;gap:5px}
-.rrow{display:flex;gap:6px;flex-wrap:wrap}
-.rbtn{padding:6px 11px;border-radius:20px;border:1px solid rgba(255,255,255,.07);background:var(--card);color:var(--muted2);font-size:11.5px;cursor:pointer;transition:all .18s;white-space:nowrap;font-family:var(--sans)}
-.rbtn:hover{border-color:rgba(212,168,75,.25);color:var(--w)}
-.rbtn.sel{border-color:var(--gold);background:var(--gold3);color:var(--gold2);font-weight:600}
-.rbtn.sel-red{border-color:var(--red);background:var(--rdim);color:#EE8080}
-.rbtn.sel-green{border-color:var(--green);background:var(--gdim);color:#6EE088}
-.rbtn.sel-blue{border-color:var(--blue);background:var(--bdim);color:#88B8F8}
-.rbtn.sel-orange{border-color:var(--orange);background:var(--odim);color:#F8B870}
+  /* Right Panel Tabs */
+  .pr-header {
+    display: flex; gap: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 0;
+  }
+  .pr-tab {
+    font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--muted2);
+    text-transform: uppercase; letter-spacing: 0.1em; padding-bottom: 12px; cursor: pointer;
+    border-bottom: 2px solid transparent; transition: all 0.2s;
+  }
+  .pr-tab:hover { color: var(--w); }
+  .pr-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .pr-content { display: none; }
+  .pr-content.active { display: block; }
 
-/* DIAGNOSIS VISUAL INDICATOR */
-.diag-indicator{border-radius:var(--radius);padding:10px 13px;font-size:12px;line-height:1.45;margin-top:6px;display:none;border-left:3px solid}
-.diag-indicator.show{display:block}
-.di-trust{background:var(--bdim);border-color:var(--blue);color:#88B8F8}
-.di-funnel{background:var(--odim);border-color:var(--orange);color:#F8B870}
-.di-quality{background:var(--rdim);border-color:var(--red);color:#EE8080}
-.di-sales{background:var(--gdim);border-color:var(--green);color:#6EE088}
-.di-mix{background:var(--gold3);border-color:var(--gold);color:var(--gold2)}
+  /* Form Elements */
+  .section-title {
+    font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
+    margin: 24px 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .section-title:first-child { margin-top: 0; }
 
-/* RIGHT PANEL — PITCH OUTPUT */
-.pitch-panel{overflow-y:auto;display:flex;flex-direction:column}
-.pitch-panel::-webkit-scrollbar{width:3px}.pitch-panel::-webkit-scrollbar-thumb{background:rgba(212,168,75,.2);border-radius:2px}
+  .form-group { margin-bottom: 16px; }
+  .label { display: block; font-size: 12px; font-weight: 600; color: var(--muted2); margin-bottom: 6px; }
+  .input {
+    width: 100%; background: var(--bg); border: 1px solid rgba(255,255,255,0.1);
+    color: var(--w); font-family: 'DM Sans', sans-serif; font-size: 14px;
+    padding: 10px 12px; border-radius: 4px; outline: none; transition: all 0.2s;
+  }
+  .input:focus { border-color: var(--gold); background: var(--card); }
+  select.input { appearance: none; cursor: pointer; }
+  textarea.input { resize: vertical; min-height: 70px; }
 
-.pitch-header{padding:18px 28px 14px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:10;display:flex;align-items:center;justify-content:space-between}
-.ph-left{display:flex;flex-direction:column;gap:3px}
-.ph-title{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--w)}
-.ph-meta{font-size:11px;color:var(--muted2);font-family:var(--mono)}
-.ph-actions{display:flex;gap:8px}
-.ph-btn{padding:7px 14px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--muted2);font-size:11px;cursor:pointer;font-family:var(--mono);letter-spacing:.5px;transition:all .2s}
-.ph-btn:hover{border-color:var(--gold);color:var(--gold)}
-.ph-btn.copy-done{border-color:var(--green);color:var(--green)}
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-.pitch-body{padding:20px 28px 48px;display:flex;flex-direction:column;gap:22px}
+  .comp-box { background: var(--card); border: 1px solid var(--border); padding: 16px; border-radius: 6px; margin-bottom: 16px; }
+  .comp-box-title { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px; color: var(--gold2); }
+  .comp-box.optional .comp-box-title { color: var(--muted2); }
+  .comp-input { margin-bottom: 8px; }
 
-/* PITCH SECTIONS */
-.psec{display:flex;flex-direction:column;gap:12px}
-.psec-header{display:flex;align-items:center;gap:10px}
-.psec-phase{font-family:var(--mono);font-size:8px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
-.psec-title{font-size:13px;font-weight:600;color:var(--muted2)}
-.psec-badge{padding:2px 9px;border-radius:12px;font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:1px}
-.b-auto{background:var(--gold3);color:var(--gold);border:1px solid rgba(212,168,75,.2)}
-.b-std{background:rgba(255,255,255,.04);color:var(--muted);border:1px solid rgba(255,255,255,.07)}
+  /* AI Tools */
+  .ai-box { background: var(--bdim); border: 1px solid rgba(26,95,160,0.3); border-radius: 6px; padding: 16px; margin-bottom: 24px; }
+  .ai-header { color: #60A5FA; font-weight: 600; font-size: 13px; margin-bottom: 8px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; }
+  .ai-btn { width: 100%; background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.4); color: #60A5FA; padding: 10px; border-radius: 4px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'DM Mono', monospace; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; }
+  .ai-btn:hover { background: rgba(96,165,250,0.25); }
+  .ai-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* SCRIPT BLOCKS */
-.script-block{background:#0B0B18;border:1px solid rgba(212,168,75,.18);border-left:3px solid var(--gold);border-radius:var(--radius);padding:14px 16px;font-size:13.5px;color:var(--gold2);line-height:1.7;position:relative}
-.script-block .sb-tag{font-family:var(--mono);font-size:7.5px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:7px;opacity:.7}
-.script-block em{color:var(--w);font-style:normal;font-weight:600}
-.script-block .fill{background:rgba(212,168,75,.15);border-radius:4px;padding:1px 5px;color:var(--gold3);font-weight:600}
-.script-block .fill.empty{background:var(--rdim);color:#EE8080;border-radius:4px;padding:1px 5px}
+  .research-box { background: var(--gdim); border: 1px solid rgba(31,173,90,0.3); border-radius: 6px; padding: 16px; margin-bottom: 16px; }
+  .research-header { color: #34D399; font-weight: 600; font-size: 13px; margin-bottom: 8px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; }
+  .research-btn { width: 100%; background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.4); color: #34D399; padding: 10px; border-radius: 4px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'DM Mono', monospace; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; }
+  .research-btn:hover { background: rgba(52,211,153,0.25); }
+  .research-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* ACTION BLOCKS */
-.action-block{background:rgba(31,173,90,.06);border:1px solid rgba(31,173,90,.2);border-left:3px solid var(--green);border-radius:var(--radius);padding:11px 15px;font-size:12.5px;color:#6EE088;line-height:1.55}
-.action-block .ab-tag{font-family:var(--mono);font-size:7.5px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:5px;opacity:.7}
+  /* Script Output Styling */
+  .script-container { max-width: 760px; margin: 0 auto; padding-bottom: 60px; }
+  
+  .phase-block { margin-bottom: 32px; }
+  .phase-header { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  .phase-body { background: var(--panel); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 24px; font-size: 15px; line-height: 1.7; color: var(--w); }
 
-/* PSYCH BLOCKS */
-.psych-block{background:rgba(26,95,160,.07);border:1px solid rgba(26,95,160,.18);border-left:3px solid var(--blue);border-radius:var(--radius);padding:11px 15px;font-size:12px;color:#88B8F8;line-height:1.6}
-.psych-block .pb-tag{font-family:var(--mono);font-size:7.5px;letter-spacing:2px;color:#6090D0;text-transform:uppercase;margin-bottom:5px;opacity:.8}
+  .direction { font-size: 13.5px; color: var(--muted2); font-style: italic; background: var(--bg); padding: 10px 14px; border-left: 2px solid var(--muted); margin-bottom: 16px; border-radius: 0 4px 4px 0; }
+  .direction.deck { border-left-color: var(--blue); color: #93C5FD; }
+  
+  .script-text { margin-bottom: 16px; }
+  .script-text:last-child { margin-bottom: 0; }
+  .script-text strong { color: var(--gold2); font-weight: 600; }
+  
+  .var { background: var(--gold3); color: var(--gold2); padding: 0 4px; border-radius: 2px; font-weight: 600; }
+  .math-box { background: var(--bdim); border: 1px solid rgba(26,95,160,0.3); padding: 16px; border-radius: 4px; margin: 16px 0; font-family: 'DM Mono', monospace; font-size: 13px; color: #93C5FD; }
+  .math-box span { color: var(--w); font-weight: bold; }
 
-/* ROI CARDS */
-.roi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.roi-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px}
-.rc-label{font-family:var(--mono);font-size:8px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
-.rc-val{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--gold);line-height:1}
-.rc-val.big{font-size:28px;color:var(--gold2)}
-.rc-val.grn{color:var(--green)}
+  /* Interactive Objections Styling */
+  .obj-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--w); margin: 24px 0 16px; text-align: center; }
+  .obj-subtitle { text-align: center; font-size: 14px; color: var(--muted2); margin-bottom: 32px; }
 
-/* EMPTY STATE */
-.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:14px;opacity:.3}
-.es-icon{font-size:40px}
-.es-text{font-size:13px;color:var(--muted2);text-align:center;line-height:1.6;max-width:280px}
+  .obj-tab { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 12px; overflow: hidden; transition: all 0.2s; }
+  .obj-tab:hover { border-color: rgba(212,168,75,0.4); }
+  .obj-head { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; color: #F87171; user-select: none; background: rgba(248,113,113,0.05); }
+  .obj-head .icon { font-size: 12px; color: #F87171; transition: transform 0.3s; }
+  
+  .obj-tab.open { border-color: var(--gold); background: var(--card); }
+  .obj-tab.open .obj-head { border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--gold2); background: transparent; }
+  .obj-tab.open .icon { transform: rotate(180deg); color: var(--gold); }
+  
+  .obj-body { padding: 24px; display: none; font-size: 14.5px; line-height: 1.7; color: var(--w); }
+  .obj-tab.open .obj-body { display: block; }
+  
+  .cs-label { display: inline-block; background: var(--gdim); color: var(--green); font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 16px; border: 1px solid rgba(31,173,90,0.3); }
 
-/* SECTION DIVIDER */
-.sdiv{height:1px;background:var(--border);margin:4px 0}
+  /* Checklist Styling */
+  .cl-group { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 24px; padding: 24px; }
+  .cl-group-title { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--gold); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;}
+  .cl-item { margin-bottom: 20px; }
+  .cl-item:last-child { margin-bottom: 0; }
+  .cl-label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 14.5px; color: var(--w); line-height: 1.5; font-weight: 600; }
+  .cl-label input[type="checkbox"] { margin-top: 5px; width: 16px; height: 16px; accent-color: var(--gold); cursor: pointer; flex-shrink: 0;}
+  .cl-label.checked { color: var(--muted2); text-decoration: line-through; }
+  .cl-subtext { font-size: 13px; color: var(--muted2); margin-left: 28px; margin-top: 4px; }
+  
+  .cl-link-row { display: flex; gap: 8px; margin-left: 28px; margin-top: 8px; align-items: center; }
+  .cl-link-input { flex: 1; background: var(--bg); border: 1px solid rgba(255,255,255,0.1); color: var(--gold2); padding: 8px 12px; border-radius: 3px; font-size: 13px; outline: none; }
+  .cl-link-input:focus { border-color: var(--gold); background: var(--card); }
+  .btn-small { background: rgba(212,168,75,0.15); border: 1px solid rgba(212,168,75,0.4); color: var(--gold); padding: 8px 14px; border-radius: 3px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-size: 11px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;}
+  .btn-small:hover { background: rgba(212,168,75,0.3); }
 
-/* COMPLETENESS BAR */
-.cbar-wrap{padding:10px 20px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--panel)}
-.cbar-label{font-family:var(--mono);font-size:8px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:5px;display:flex;justify-content:space-between}
-.cbar-track{height:3px;background:rgba(255,255,255,.06);border-radius:2px}
-.cbar-fill{height:100%;border-radius:2px;background:var(--gold);transition:width .4s ease}
+  .sync-status { position: fixed; bottom: 20px; left: 32px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--green); display: flex; align-items: center; gap: 6px; z-index: 100;}
+  .sync-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; box-shadow: 0 0 8px var(--green); }
 
-/* SKIP NOTICE */
-.skip-notice{font-size:11.5px;color:var(--muted);font-style:italic;padding:6px 0}
-
-/* UTIL */
-.tag{display:inline-block;padding:2px 8px;border-radius:12px;font-family:var(--mono);font-size:9px;letter-spacing:1px;font-weight:700;text-transform:uppercase}
-.tag-gold{background:var(--gold3);color:var(--gold);border:1px solid rgba(212,168,75,.25)}
-.tag-red{background:var(--rdim);color:#EE8080;border:1px solid rgba(192,57,43,.25)}
-.tag-green{background:var(--gdim);color:#6EE088;border:1px solid rgba(31,173,90,.25)}
 </style>
 </head>
 <body>
-<div class="app">
 
-<!-- ═══ LEFT: FORM PANEL ═══ -->
-<div class="form-panel">
-  <div class="form-header">
-    <div class="form-logo">Finest Clients</div>
-    <div class="form-title">Live Pitch Maker</div>
-    <div class="form-subtitle">Fill as you listen → pitch generates instantly</div>
-  </div>
-
-  <div class="form-body">
-
-    <!-- A: PROSPECT BASICS -->
-    <div class="fsection">
-      <div class="fsection-label"><span class="fsection-num">A</span>Prospect Basics</div>
-      <div class="frow"><label>First name</label><input id="f_name" type="text" placeholder="e.g. Sarah" oninput="gen()"></div>
-      <div class="frow"><label>What they sell (offer)</label><input id="f_offer" type="text" placeholder="e.g. 1-on-1 sales coaching program" oninput="gen()"></div>
-      <div class="frow"><label>Offer price ($)</label><input id="f_price" type="number" placeholder="5000" min="0" step="500" oninput="gen()"></div>
-      <div class="frow"><label>Their ideal client (ICP)</label><input id="f_icp" type="text" placeholder="e.g. B2B consultants doing $10K+/month" oninput="gen()"></div>
-    </div>
-
-    <!-- B: ACQUISITION -->
-    <div class="fsection">
-      <div class="fsection-label"><span class="fsection-num">B</span>Current Acquisition</div>
-      <div class="frow">
-        <label>How they get clients now</label>
-        <div class="rrow" id="acq_group">
-          <button class="rbtn" data-g="acq" data-v="referrals" onclick="pick(this,'acq','sel')">Referrals</button>
-          <button class="rbtn" data-g="acq" data-v="ads" onclick="pick(this,'acq','sel')">Paid Ads</button>
-          <button class="rbtn" data-g="acq" data-v="cold" onclick="pick(this,'acq','sel')">Cold Outreach</button>
-          <button class="rbtn" data-g="acq" data-v="mix" onclick="pick(this,'acq','sel')">Mix</button>
-        </div>
-      </div>
-      <div class="frow"><label>Monthly calls booking (approx)</label><input id="f_calls" type="number" placeholder="e.g. 8" min="0" oninput="gen()"></div>
-      <div class="frow"><label>Close rate (%)</label><input id="f_closerate" type="number" placeholder="e.g. 20" min="0" max="100" oninput="gen()"></div>
-    </div>
-
-    <!-- C: YOUTUBE STATUS -->
-    <div class="fsection">
-      <div class="fsection-label"><span class="fsection-num">C</span>YouTube History</div>
-      <div class="frow">
-        <label>Their YouTube situation</label>
-        <div class="rgroup">
-          <div class="rrow" id="yt_group">
-            <button class="rbtn" data-g="yt" data-v="none" onclick="pick(this,'yt','sel-red')">Never tried</button>
-            <button class="rbtn" data-g="yt" data-v="no_views" onclick="pick(this,'yt','sel-orange')">Tried, no views</button>
-          </div>
-          <div class="rrow">
-            <button class="rbtn" data-g="yt" data-v="views_no_clients" onclick="pick(this,'yt','sel-orange')">Views, no clients</button>
-            <button class="rbtn" data-g="yt" data-v="quit" onclick="pick(this,'yt','sel-red')">Tried and quit</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- D: DIAGNOSIS -->
-    <div class="fsection">
-      <div class="fsection-label"><span class="fsection-num">D</span>Your Diagnosis <span style="font-family:var(--sans);font-size:9px;color:var(--muted);letter-spacing:0;text-transform:none;margin-left:4px">— pick after listening</span></div>
-      <div class="frow">
-        <label>Root cause problem</label>
-        <div class="rgroup">
-          <div class="rrow" id="diag_group">
-            <button class="rbtn" data-g="diag" data-v="trust" onclick="pick(this,'diag','sel-blue')">Trust</button>
-            <button class="rbtn" data-g="diag" data-v="funnel" onclick="pick(this,'diag','sel-orange')">Funnel</button>
-            <button class="rbtn" data-g="diag" data-v="quality" onclick="pick(this,'diag','sel-red')">Lead Quality</button>
-          </div>
-          <div class="rrow">
-            <button class="rbtn" data-g="diag" data-v="sales" onclick="pick(this,'diag','sel-green')">Sales/Conversion</button>
-            <button class="rbtn" data-g="diag" data-v="mix" onclick="pick(this,'diag','sel')">All of the above</button>
-          </div>
-        </div>
-        <div id="diag_hint" class="diag-indicator"></div>
-      </div>
-    </div>
-
-    <!-- E: GOALS -->
-    <div class="fsection">
-      <div class="fsection-label"><span class="fsection-num">E</span>Their Goals <span style="font-family:var(--sans);font-size:9px;color:var(--muted);letter-spacing:0;text-transform:none;margin-left:4px">— fill during goals section</span></div>
-      <div class="frow"><label>Their 90-day milestone (in their words)</label><textarea id="f_90day" placeholder="e.g. 10 qualified calls per month consistently" oninput="gen()"></textarea></div>
-      <div class="frow"><label>12-month revenue goal ($)</label><input id="f_revgoal" type="number" placeholder="e.g. 30000" min="0" step="1000" oninput="gen()"></div>
-      <div class="frow"><label>Why that number matters to them</label><input id="f_why" type="text" placeholder="e.g. replace job income, take family to Japan" oninput="gen()"></div>
-    </div>
-
-  </div>
-
-  <!-- COMPLETENESS BAR -->
-  <div class="cbar-wrap">
-    <div class="cbar-label"><span>Pitch completeness</span><span id="cbar_pct">0%</span></div>
-    <div class="cbar-track"><div class="cbar-fill" id="cbar_fill" style="width:0%"></div></div>
+<div class="header">
+  <div class="logo">FINEST <span>CLIENTS</span></div>
+  <div class="controls">
+    <!-- Launches the visual deck in a new window/tab -->
+    <button class="ph-btn-outline" onclick="launchVisualDeck()">Launch Visual Deck ↗</button>
+    <button class="ph-btn" id="main_copy_btn" onclick="copyScript()">📋 Copy Script Text</button>
   </div>
 </div>
 
-<!-- ═══ RIGHT: PITCH OUTPUT ═══ -->
-<div class="pitch-panel">
-  <div class="pitch-header">
-    <div class="ph-left">
-      <div class="ph-title" id="ph_title">Your personalized pitch</div>
-      <div class="ph-meta" id="ph_meta">Fill the form → pitch generates in real time</div>
+<div class="layout">
+  <!-- LEFT PANEL: DATA INPUT -->
+  <div class="panel-left">
+    
+    <!-- AI Transcript Ingester -->
+    <div class="ai-box">
+      <div class="ai-header">🪄 Smart Transcript Import</div>
+      <div style="font-size:12px; color:var(--muted2); margin-bottom:12px;">Paste Fathom/Zoom transcript. AI extracts math, problem, and selects the ideal Case Study.</div>
+      <textarea id="in_transcript" class="input" style="background:var(--bg); border-color:rgba(96,165,250,0.3); margin-bottom:12px; min-height:60px;" placeholder="Paste raw transcript..."></textarea>
+      <button class="ai-btn" id="ai_btn" onclick="processTranscript()">Analyze & Auto-Fill</button>
     </div>
-    <div class="ph-actions">
-      <button class="ph-btn" onclick="copyPitch()">Copy pitch text</button>
-      <button class="ph-btn" onclick="window.print()">Print / PDF</button>
+
+    <div class="section-title">Prospect Profile</div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label class="label">Name</label>
+        <input type="text" id="in_name" class="input" value="Sarah" oninput="updateAll()">
+      </div>
+      <div class="form-group">
+        <label class="label">Niche</label>
+        <input type="text" id="in_niche" class="input" value="leadership coaching" oninput="updateAll()">
+      </div>
     </div>
+    <div class="form-group">
+      <label class="label">Main Problem (Their Exact Words)</label>
+      <input type="text" id="in_problem" class="input" value="relying purely on unpredictable referrals" oninput="updateAll()">
+    </div>
+
+    <!-- Case Study Selector -->
+    <div class="section-title" style="color:var(--green); border-bottom-color:var(--gdim);">Case Study Injection</div>
+    <div class="form-group">
+      <label class="label">Best Matching Case Study</label>
+      <select id="in_casestudy" class="input" style="border-color:rgba(31,173,90,0.5);" onchange="updateAll()">
+        <option value="ryan">Ryan Jackson (No Audience/Beginner)</option>
+        <option value="arun" selected>Finest Edit (Compounding/Volume)</option>
+        <option value="authority">Authority IO (Ad Fatigue/Revenue)</option>
+        <option value="heyyyhr">Heyyy HR (Relying on Referrals)</option>
+      </select>
+    </div>
+
+    <!-- Niche Research -->
+    <div class="section-title">Pre-Call Niche Proof</div>
+    
+    <div class="research-box">
+      <div class="research-header">🤖 Deep Research</div>
+      <div style="font-size:11px; color:var(--muted2); margin-bottom:12px;">Auto-search the web for 3 real competitors to populate your proof points.</div>
+      <button class="research-btn" id="research_btn" onclick="runDeepResearch()">Find Competitors</button>
+    </div>
+
+    <div class="comp-box required">
+      <div class="comp-box-title">Competitor 1 (Outlier & Intent)</div>
+      <input type="text" id="in_comp1" class="input comp-input" value="John Doe Coaching" placeholder="Channel Name" oninput="updateAll()">
+      <input type="text" id="in_comp1_stat" class="input comp-input" value="800 subs but 34,000 views on one video" placeholder="Stat (e.g. 800 subs but 34k views)" oninput="updateAll()">
+      <input type="text" id="in_c1_topic" class="input comp-input" value="handling leadership conflicts" placeholder="Topic they ranked for" oninput="updateAll()">
+    </div>
+
+    <div class="comp-box optional">
+      <div class="comp-box-title">Competitor 2 (The Bridge) - Optional</div>
+      <input type="text" id="in_comp2" class="input comp-input" value="Jane Smith Leadership" placeholder="Channel Name" oninput="updateAll()">
+      <input type="text" id="in_comp2_stat" class="input comp-input" value="Booking link right above the fold" placeholder="Stat (e.g. Booking link above the fold)" oninput="updateAll()">
+      <input type="text" id="in_c2_topic" class="input comp-input" value="imposter syndrome for managers" placeholder="Topic they ranked for" oninput="updateAll()">
+    </div>
+
+    <div class="comp-box optional">
+      <div class="comp-box-title">Competitor 3 (Compounding) - Optional</div>
+      <input type="text" id="in_comp3" class="input comp-input" value="Elite Coach Media" placeholder="Channel Name" oninput="updateAll()">
+      <input type="text" id="in_comp3_stat" class="input comp-input" value="Videos from 18 months ago still getting views" placeholder="Stat (e.g. 18 mo old video still getting views)" oninput="updateAll()">
+      <input type="text" id="in_c3_topic" class="input comp-input" value="delegation frameworks" placeholder="Topic they ranked for" oninput="updateAll()">
+    </div>
+
+    <div class="form-group">
+      <label class="label" style="color:var(--gold2);">The Content Gap</label>
+      <input type="text" id="in_gap_covered" class="input" style="margin-bottom:8px;" value="Generic management theory" placeholder="What competitors are covering..." oninput="updateAll()">
+      <input type="text" id="in_gap_missing" class="input" style="border-color:var(--gold);" value="Handling high-ticket sales objections" placeholder="What NOBODY is covering..." oninput="updateAll()">
+    </div>
+
+    <!-- ROI & Settings -->
+    <div class="section-title">Economics & Pitch Settings</div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label class="label">Offer Price ($)</label>
+        <input type="number" id="in_price" class="input" value="5000" oninput="updateAll()">
+      </div>
+      <div class="form-group">
+        <label class="label">Close Rate (%)</label>
+        <input type="number" id="in_close" class="input" value="20" oninput="updateAll()">
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 40px;">
+      <label class="label">Recommended Tier</label>
+      <select id="in_tier" class="input" onchange="updateAll()">
+        <option value="CORE">Core ($2,500/mo)</option>
+        <option value="ACCELERATED" selected>Accelerated ($3,500/mo)</option>
+        <option value="AUTHORITY">Authority ($5,000/mo)</option>
+      </select>
+    </div>
+
+    <!-- LAUNCH DECK BUTTON -->
+    <button class="launch-btn" onclick="launchVisualDeck()">Launch Visual Deck ↗</button>
+    <div style="text-align:center; font-size:10px; color:var(--white-dim); margin-top:8px; margin-bottom: 40px;">Opens presentation in a new tab. Changes here sync instantly.</div>
+    
+    <div class="sync-status"><div class="sync-dot"></div> Live Sync Active</div>
   </div>
 
-  <div class="pitch-body" id="pitch_body">
-    <div class="empty-state">
-      <div class="es-icon">←</div>
-      <div class="es-text">Start filling in the form on the left.<br>Your personalized pitch will appear here in real time.</div>
+  <!-- RIGHT PANEL: OUPUT TABS -->
+  <div class="panel-right">
+    <div class="pr-header">
+      <div class="pr-tab active" onclick="switchRightTab('script', this)">Full Pitch Script</div>
+      <div class="pr-tab" onclick="switchRightTab('objections', this)">Objection Playbook</div>
+      <div class="pr-tab" onclick="switchRightTab('checklist', this)">Live Call Checklist</div>
     </div>
-  </div>
-</div>
 
-</div><!-- /app -->
+    <!-- TAB 1: SCRIPT -->
+    <div id="content_script" class="pr-content active">
+      <div class="script-container" id="pitch_body">
+        <!-- Script injected via JS -->
+      </div>
+    </div>
+
+    <!-- TAB 2: OBJECTIONS -->
+    <div id="content_objections" class="pr-content">
+      <div class="script-container" id="objections_output">
+        <!-- Generated via JS -->
+      </div>
+    </div>
+
+    <!-- TAB 3: LIVE CHECKLIST -->
+    <div id="content_checklist" class="pr-content">
+      <div class="checklist-container">
+        
+        <div class="cl-group">
+          <div class="cl-group-title">1. Discovery & Diagnosis</div>
+          <div class="cl-item">
+            <label class="cl-label" onclick="toggleCheck(this)">
+              <input type="checkbox" onclick="event.stopPropagation()">
+              <span><strong>Phase 1: The Open</strong> (Skip the basics, go straight to their situation)</span>
+            </label>
+          </div>
+          <div class="cl-item">
+            <label class="cl-label" onclick="toggleCheck(this)">
+              <input type="checkbox" onclick="event.stopPropagation()">
+              <span><strong>Phase 2: Diagnosis Summary</strong> (Echo their problem back. Wait for them to say "Yes, exactly.")</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="cl-group">
+          <div class="cl-group-title">2. Niche Proof & Links (Screen Share)</div>
+          <div style="font-size:12px; color:var(--muted2); margin-bottom:16px;">Paste your competitor links here during prep. During the call, screen-share and click "Open ↗" to show them live proof.</div>
+          
+          <div class="cl-item">
+            <label class="cl-label" onclick="toggleCheck(this)">
+              <input type="checkbox" onclick="event.stopPropagation()">
+              <span><strong>1. Show Outlier Videos (Views > Subs) & Topic Pattern</strong></span>
+            </label>
+            <div class="cl-subtext">Proves YouTube pushes content to buyers, not just subscribers. Point out how they target specific pain points.</div>
+            <div class="cl-link-row">
+              <input type="text" class="cl-link-input" id="link_proof1" placeholder="Paste YouTube URL...">
+              <button class="btn-small" onclick="openLink('link_proof1')">Open ↗</button>
+            </div>
+          </div>
+
+          <div class="cl-item">
+            <label class="cl-label" onclick="toggleCheck(this)">
+              <input type="checkbox" onclick="event.stopPropagation()">
+              <span><strong>2. Show The Bridge (Booking CTA working)</strong></span>
+            </label>
+            <div class="cl-subtext">Open a video description. Show the booking link above the fold / sales funnel.</div>
+            <div class="cl-link-row">
+              <input type="text" class="cl-link-input" id="link_proof2" placeholder="Paste YouTube URL...">
+              <button class="btn-small" onclick="openLink('link_proof2')">Open ↗</button>
+            </div>
+          </div>
+
+          <div class="cl-item">
+            <label class="cl-label" onclick="toggleCheck(this)">
+              <input type="checkbox" onclick="event.stopPropagation()">
+              <span><strong>3. Show Compounding & Consistency</strong></span>
+            </label>
+            <div class="cl-subtext">Show their monthly views via VidIQ, or show an older video still ranking today.</div>
+            <div class="cl-link-row">
+              <input type="text" class="cl-link-input" id="link_proof3" placeholder="Paste YouTube URL...">
+              <button class="btn-small" onclick="openLink('link_proof3')">Open ↗</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cl-group">
+          <div class="cl-group-title">3. The Mechanism & Math</div>
+          <div class="cl-item">
+            <label class="cl-label" onclick="toggleCheck(this)">
+              <input type="checkbox" onclick="event.stopPropagation()">
+              <span><strong>Phase 4: The Mechanism & Case Study</strong> (Draw Reach -> Convert -> Compound on Miro)</span>
+            </label>
+          </div>
+          <div class="cl-item">
+            <label class="cl-label" onclick="toggleCheck(this)">
+              <input type="checkbox" onclick="event.stopPropagation()">
+              <span><strong>Phase 4: Funnel Math</strong> (100k views -> 0.1% -> 100 appts -> 70 qualified -> X clients)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="cl-group">
+          <div class="cl-group-title">4. Pitch & Close</div>
+          <div class="cl-item">
+            <label class="cl-label" onclick="toggleCheck(this)">
+              <input type="checkbox" onclick="event.stopPropagation()">
+              <span><strong>Phase 5: The Pitch</strong> (1 sentence per delivery phase + Present 3 Tiers)</span>
+            </label>
+          </div>
+          <div class="cl-item">
+            <label class="cl-label" onclick="toggleCheck(this)">
+              <input type="checkbox" onclick="event.stopPropagation()">
+              <span><strong>Phase 5: Risk Reversal & Exclusivity</strong> (State Guarantee + One client per niche)</span>
+            </label>
+          </div>
+          <div class="cl-item">
+            <label class="cl-label" onclick="toggleCheck(this)">
+              <input type="checkbox" onclick="event.stopPropagation()">
+<button class="copy-btn" id="main_copy_btn" onclick="copyScript()">📋 Copy Full Script</button>
 
 <script>
-// ─── STATE ─────────────────────────────────────────────────────────────────
-const S = {
-  name:'', offer:'', price:'', icp:'',
-  acq:'', calls:'', closerate:'',
-  yt:'', diag:'',
-  day90:'', revgoal:'', why:''
-};
-
-// ─── RADIO PICKER ──────────────────────────────────────────────────────────
-function pick(btn, group, selClass) {
-  document.querySelectorAll(`[data-g="${group}"]`).forEach(b => {
-    b.className = 'rbtn';
-  });
-  btn.classList.add(selClass);
-  S[group] = btn.dataset.v;
-  updateDiagHint();
-  gen();
+// --- VISUAL DECK LAUNCHER ---
+function launchVisualDeck() {
+  // Check if running inside the AI preview/cloud sandbox
+  if (window.location.hostname.includes('google') || window.location.hostname.includes('artifacts') || window.location.protocol === 'data:' || window.location.protocol === 'blob:') {
+    alert("⚠️ PREVIEW ENVIRONMENT DETECTED\n\nTo use the Dual-Monitor Visual Deck, you must:\n1. Download BOTH 'finest_pitch_maker.html' and 'finest_pitch_visual.html' to your computer.\n2. Save them in the EXACT SAME folder.\n3. Open the Pitch Maker directly from your computer folder.\n\nThe live AI preview cannot link two separate local files together.");
+  } else {
+    // Runs normally when saved on your local computer
+    window.open('finest_pitch_visual.html', '_blank');
+  }
 }
 
-// ─── COMPLETENESS ──────────────────────────────────────────────────────────
-function completeness() {
-  const fields = [S.name, S.offer, S.price, S.icp, S.acq, S.calls, S.closerate, S.yt, S.diag, S.day90];
-  const filled = fields.filter(v => v && v.toString().trim()).length;
-  const pct = Math.round((filled / fields.length) * 100);
-  document.getElementById('cbar_fill').style.width = pct + '%';
-  document.getElementById('cbar_pct').textContent = pct + '%';
+// --- TAB NAVIGATION ---
+function switchRightTab(tabId, el) {
+  document.querySelectorAll('.pr-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.pr-content').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('content_' + tabId).classList.add('active');
+
+  // Hide copy button if on checklist tab
+  if(tabId === 'checklist') {
+    document.getElementById('main_copy_btn').style.display = 'none';
+  } else {
+    document.getElementById('main_copy_btn').style.display = 'block';
+  }
 }
 
-// ─── DIAGNOSIS HINT ────────────────────────────────────────────────────────
-const DIAG_HINTS = {
-  trust: {cls:'di-trust', text:'People show up cold. They don\'t trust you yet. YouTube warms them BEFORE the call.'},
-  funnel: {cls:'di-funnel', text:'Attention isn\'t turning into action. No clear path from content to calendar.'},
-  quality: {cls:'di-quality', text:'Wrong people are booking. Content is attracting browsers, not buyers.'},
-  sales: {cls:'di-sales', text:'Calls are happening but close rate is low. People arrive too cold to convert.'},
-  mix: {cls:'di-mix', text:'Trust + funnel + quality together. YouTube can solve all three as a system.'}
-};
-function updateDiagHint() {
-  const el = document.getElementById('diag_hint');
-  const h = DIAG_HINTS[S.diag];
-  if (!h) { el.className = 'diag-indicator'; return; }
-  el.className = `diag-indicator show ${h.cls}`;
-  el.textContent = h.text;
+// --- CHECKLIST LOGIC ---
+function toggleCheck(labelEl) {
+  const checkbox = labelEl.querySelector('input[type="checkbox"]');
+  setTimeout(() => {
+    if(checkbox.checked) {
+      labelEl.classList.add('checked');
+    } else {
+      labelEl.classList.remove('checked');
+    }
+  }, 10);
 }
 
-// ─── READ INPUTS ───────────────────────────────────────────────────────────
-function readInputs() {
-  S.name = document.getElementById('f_name').value.trim();
-  S.offer = document.getElementById('f_offer').value.trim();
-  S.price = document.getElementById('f_price').value.trim();
-  S.icp = document.getElementById('f_icp').value.trim();
-  S.calls = document.getElementById('f_calls').value.trim();
-  S.closerate = document.getElementById('f_closerate').value.trim();
-  S.day90 = document.getElementById('f_90day').value.trim();
-  S.revgoal = document.getElementById('f_revgoal').value.trim();
-  S.why = document.getElementById('f_why').value.trim();
+function openLink(inputId) {
+  const url = document.getElementById(inputId).value.trim();
+  if (url) {
+    let finalUrl = url;
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      finalUrl = 'https://' + url;
+    }
+    window.open(finalUrl, '_blank');
+  } else {
+    alert('Please paste a YouTube link in the input field first.');
+  }
 }
 
-// ─── HELPERS ───────────────────────────────────────────────────────────────
-const f = v => v ? `<em>${v}</em>` : `<span class="fill empty">[fill in]</span>`;
-const fm = v => v ? `<em>${v}</em>` : `<span class="fill empty">[fill in]</span>`;
-const fopt = (v, fallback) => v || fallback;
-const currency = n => n >= 1000 ? '$' + Math.round(n).toLocaleString() : '$' + Math.round(n);
+// --- GEMINI API SETUP ---
+const apiKey = ""; 
 
-function scriptBlock(tag, html) {
-  return `<div class="script-block"><div class="sb-tag">${tag}</div>${html}</div>`;
-}
-function actionBlock(text) {
-  return `<div class="action-block"><div class="ab-tag">▶ Do this</div>${text}</div>`;
-}
-function psychBlock(text) {
-  return `<div class="psych-block"><div class="pb-tag">🧠 Why this works</div>${text}</div>`;
-}
-function sectionOpen(phase, title, badgeType, badgeLabel) {
-  return `<div class="psec"><div class="psec-header"><span class="psec-phase">${phase}</span><span class="psec-title">${title}</span><span class="psec-badge ${badgeType}">${badgeLabel}</span></div>`;
-}
-function sectionClose() { return `</div>`; }
+// AI Transcript Processing
+async function processTranscript() {
+  const transcript = document.getElementById('in_transcript').value.trim();
+  if (!transcript) return alert("Please paste a transcript first.");
 
-// ─── ROI CALC ──────────────────────────────────────────────────────────────
-function calcROI(price, closerate, gcalls, monthlyCost) {
-  const p = parseFloat(price)||0, cr = parseFloat(closerate)||0;
-  const calls = parseFloat(gcalls)||10, mc = parseFloat(monthlyCost)||2500;
-  const clients = calls * (cr/100);
-  const rev = clients * p;
-  const inv = mc * 3;
-  const roi = inv > 0 ? (rev/inv) : 0;
-  const be = p > 0 ? Math.ceil(inv/p) : 0;
-  return { clients: clients.toFixed(1), rev: currency(rev), inv: currency(inv), roi: roi.toFixed(1)+'×', be };
-}
+  const btn = document.getElementById('ai_btn');
+  btn.innerText = "Analyzing Transcript...";
+  btn.disabled = true;
 
-// ─── ACQUISITION TEXT ─────────────────────────────────────────────────────
-function acqText() {
-  const map = {
-    referrals: 'referrals',
-    ads: 'paid ads',
-    cold: 'cold outreach',
-    mix: 'a mix of referrals, ads, and outreach'
-  };
-  return S.acq ? map[S.acq] || S.acq : '[acquisition method]';
-}
-
-// ─── DIAGNOSIS BRIDGE SCRIPTS ─────────────────────────────────────────────
-function getDiagBridge() {
-  const nm = f(S.name), off = f(S.offer), acq = acqText(), icp = f(S.icp);
-  const cr = S.closerate ? S.closerate+'%' : '[X]%';
-
-  const bridges = {
-    trust: `Okay. So based on what you've told me, here's what I'm seeing. ${nm}'s offer is proven — ${off} is working, ${icp} are getting results. But the way new clients arrive is unpredictable, and you're relying on ${acq}. The real problem isn't your offer. It isn't your expertise. <em>It's a trust problem.</em> People are showing up cold. They don't know you. So even when they book, the call feels like selling to a stranger. And that's exactly where YouTube helps — because it warms people up before they ever get on a call with you. By the time ${icp} finds you and books, they've already watched 15 minutes of you solving their exact problem. The call is half-done before it starts.`,
-    
-    funnel: `Okay. So based on what you've told me, here's what I'm seeing. ${nm}'s offer is proven — ${off} is working. But here's what's happening: attention is not being turned into action. People are seeing your content, maybe even enjoying it, but nothing is pulling them toward the next step. <em>That's a funnel problem.</em> There's no system converting attention into booked calls. That's exactly what YouTube — built as a system — fixes. We build a top, middle, and bottom-of-funnel path directly inside the channel. Every piece of content has a clear path to your calendar. The attention you're already generating starts doing a job.`,
-    
-    quality: `Okay. So based on what you've told me, here's what I'm seeing. ${nm}'s closing skills are solid — a ${cr} close rate when you do get the right person is real. The problem isn't how you sell. <em>It's a lead quality problem.</em> The wrong people are getting into the pipeline — browsers, not buyers. And that's exactly where YouTube's buyer-intent topic strategy changes everything. We target the topics that only someone ready to invest would actually search for. By the time they book, they've already self-selected. They're not kicking tyres. They've been watching you solve their problem for 20 minutes.`,
-    
-    sales: `Okay. So based on what you've told me, here's what I'm seeing. ${nm}'s offer is solid and the calls are happening. But ${cr} close rate tells me something important: people are arriving to those calls without enough trust built yet. <em>That's a conversion problem, and it comes from a trust gap before the call.</em> This isn't about more calls — it's about better-prepared calls. YouTube fixes the pre-call warmth problem. Prospects who've watched 2–3 of your videos convert at significantly higher rates because they've already decided you're the person before they show up.`,
-    
-    mix: `Okay. So based on what you've told me, here's what I'm seeing. ${nm}'s offer is proven. But what you have here isn't one problem — it's three layered together. You're relying on ${acq}, which is unpredictable. The content you do have isn't functioning as an acquisition system. And the leads you're getting aren't arriving warm enough to convert consistently. <em>Trust, funnel, and lead quality — all three at once.</em> That's exactly why YouTube makes the most sense here — because when it's built as a system, not just a content channel, it solves all three simultaneously.`
+  const payload = {
+    contents: [{ parts: [{ text: transcript }] }],
+    systemInstruction: { parts: [{ text: "You are an expert high-ticket sales assistant. Analyze the provided sales discovery call transcript. Extract the prospect's details and output them EXACTLY matching the provided JSON schema. Default price to 5000 and closeRate to 20 if not found." }] },
+    generationConfig: {
+      responseMimeType: "application/json",
+      responseSchema: {
+        type: "OBJECT",
+        properties: {
+          name: { type: "STRING" },
+          niche: { type: "STRING" },
+          problem: { type: "STRING" },
+          price: { type: "NUMBER" },
+          closeRate: { type: "NUMBER" },
+          tier: { type: "STRING", description: "'CORE', 'ACCELERATED', or 'AUTHORITY'" },
+          caseStudy: { type: "STRING", description: "'ryan', 'arun', 'authority', or 'heyyyhr'" }
+        },
+        required: ["name", "niche", "problem", "price", "closeRate", "tier", "caseStudy"]
+      }
+    }
   };
 
-  return bridges[S.diag] || null;
+  try {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+    });
+    if (!response.ok) throw new Error("HTTP error");
+    const result = await response.json();
+    const data = JSON.parse(result.candidates[0].content.parts[0].text);
+
+    if(data.name) document.getElementById('in_name').value = data.name;
+    if(data.niche) document.getElementById('in_niche').value = data.niche;
+    if(data.problem) document.getElementById('in_problem').value = data.problem;
+    if(data.price) document.getElementById('in_price').value = data.price;
+    if(data.closeRate) document.getElementById('in_close').value = data.closeRate;
+    
+    const tierSelect = document.getElementById('in_tier');
+    Array.from(tierSelect.options).forEach(opt => {
+      if(opt.value === data.tier) opt.selected = true;
+    });
+
+    const caseSelect = document.getElementById('in_casestudy');
+    Array.from(caseSelect.options).forEach(opt => {
+      if(opt.value === data.caseStudy) opt.selected = true;
+    });
+
+    document.getElementById('in_transcript').value = '';
+    btn.innerText = "✓ Pitch Updated!";
+    setTimeout(() => { btn.innerText = "Analyze & Auto-Fill"; }, 3000);
+    updateAll();
+  } catch(e) {
+    alert("AI Analysis failed. Try manual entry.");
+    btn.innerText = "Analyze & Auto-Fill";
+  }
+  btn.disabled = false;
 }
 
-// ─── EPIPHANY SCRIPTS ─────────────────────────────────────────────────────
-function getEpiphanies() {
-  const epiphanies = [];
+// Deep Research 
+async function runDeepResearch() {
+  const niche = document.getElementById('in_niche').value.trim();
+  if (!niche) return alert("Please enter a Niche/Industry first.");
 
-  // E1 — for none, no_views, quit
-  if (['none','no_views','quit'].includes(S.yt)) {
-    epiphanies.push({
-      num:'01', title:'The Funnel Stage Mismatch',
-      scripts:[
-        `Here's what I see happen with almost every coach who's tried YouTube. They make what I call MOFU content — Middle of Funnel. Deep tutorials, expert breakdowns, detailed methodology. Genuinely valuable. And then they post it and the algorithm just ignores it. Do you know why?`,
-        `Because that content is built for people who already know they have a problem and are evaluating solutions. But YouTube's traffic is TOFU — Top of Funnel. These are people just waking up to a problem. They're typing things like 'why am I not getting more clients' or 'how to grow my ${fopt(S.offer,'coaching business')}' — not 'best methodology for ${fopt(S.icp,'my niche')}.' When you make MOFU content, you're giving a graduate lecture to people who just started college. The content is excellent. The audience doesn't match.`
-      ]
+  const btn = document.getElementById('research_btn');
+  btn.innerText = "Researching Web...";
+  btn.disabled = true;
+
+  const promptText = `Search the web/YouTube to find 3 real YouTube channels in the "${niche}" niche. Output specific proof point stats (e.g., Views vs Subs outlier, Booking CTA in description, Compounding old videos).`;
+
+  const payload = {
+    contents: [{ parts: [{ text: promptText }] }],
+    tools: [{ google_search: {} }],
+    systemInstruction: { parts: [{ text: "Output strictly valid JSON." }] },
+    generationConfig: {
+      responseMimeType: "application/json",
+      responseSchema: {
+        type: "OBJECT",
+        properties: {
+          comp1_name: { type: "STRING" }, comp1_stat: { type: "STRING" }, comp1_topic: { type: "STRING" },
+          comp2_name: { type: "STRING" }, comp2_stat: { type: "STRING" }, comp2_topic: { type: "STRING" },
+          comp3_name: { type: "STRING" }, comp3_stat: { type: "STRING" }, comp3_topic: { type: "STRING" }
+        },
+        required: ["comp1_name", "comp1_stat", "comp1_topic", "comp2_name", "comp2_stat", "comp2_topic", "comp3_name", "comp3_stat", "comp3_topic"]
+      }
+    }
+  };
+
+  try {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
     });
+    const result = await response.json();
+    const data = JSON.parse(result.candidates[0].content.parts[0].text);
+
+    document.getElementById('in_comp1').value = data.comp1_name || '';
+    document.getElementById('in_comp1_stat').value = data.comp1_stat || '';
+    document.getElementById('in_c1_topic').value = data.comp1_topic || '';
+    document.getElementById('in_comp2').value = data.comp2_name || '';
+    document.getElementById('in_comp2_stat').value = data.comp2_stat || '';
+    document.getElementById('in_c2_topic').value = data.comp2_topic || '';
+    document.getElementById('in_comp3').value = data.comp3_name || '';
+    document.getElementById('in_comp3_stat').value = data.comp3_stat || '';
+    document.getElementById('in_c3_topic').value = data.comp3_topic || '';
+
+    btn.innerText = "✓ Found!";
+    setTimeout(() => { btn.innerText = "Find Competitors"; }, 3000);
+    updateAll();
+  } catch(e) {
+    alert("Research failed.");
+    btn.innerText = "Find Competitors";
   }
-
-  // E2 — for views_no_clients
-  if (S.yt === 'views_no_clients') {
-    epiphanies.push({
-      num:'02', title:'The Content-to-Call Bridge Gap',
-      scripts:[
-        `Here's the one that surprises people who actually do have YouTube traction. They're getting views. Real views. But the clients aren't coming. So they assume it's a content problem — and they go deeper, add more value, improve the production. Views go up. Calls don't. Why?`,
-        `Because YouTube's job is to get you watched. YouTube's job is not to get you booked. There is no mechanism inside the YouTube platform that converts a viewer to a call on your calendar. That bridge has to be built by you — the CTA architecture at the end of each video, the booking link in the description, the lead capture. Without the bridge, you're building someone else's algorithm. The video ends. The viewer watches the next one. That's it.`
-      ]
-    });
-  }
-
-  // E3 — ALWAYS
-  epiphanies.push({
-    num:'03', title:'The Invisible Revenue Problem',
-    scripts:[
-      `And there's a third thing — and almost nobody has this, which is what makes everything else eventually compound. Tracking. When you post content without attribution, you know clients are coming in — but you have no idea which video got them there. Which topic. Which CTA. So you keep posting and hoping something sticks. But you can't double down on what's working because you don't know what's working. It's like running a vending machine with no labels. Money's going in somewhere — you just can't tell which slot is producing.`
-    ]
-  });
-
-  return epiphanies;
+  btn.disabled = false;
 }
 
-// ─── MAIN GENERATOR ────────────────────────────────────────────────────────
-function gen() {
-  readInputs();
-  completeness();
+// --- SCRIPT GENERATION & SYNC ---
+function formatCurrency(num) {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
+}
 
-  const name = S.name || 'your prospect';
-  const hasBasics = S.name || S.offer || S.price || S.acq;
+function updateAll() {
+  const data = getInputs();
+  saveToStorage(data);
+  generateScript(data);
+}
 
-  if (!hasBasics) {
-    document.getElementById('pitch_body').innerHTML = `<div class="empty-state"><div class="es-icon">←</div><div class="es-text">Start filling in the form on the left.<br>Your personalized pitch will appear here in real time.</div></div>`;
-    document.getElementById('ph_title').textContent = 'Your personalized pitch';
-    document.getElementById('ph_meta').textContent = 'Fill the form → pitch generates in real time';
-    return;
-  }
+function getInputs() {
+  return {
+    name: document.getElementById('in_name')?.value.trim() || '[Name]',
+    niche: document.getElementById('in_niche')?.value.trim() || 'Coaching Strategy',
+    problem: document.getElementById('in_problem')?.value.trim() || '[Problem]',
+    comp1: document.getElementById('in_comp1')?.value.trim() || '[Comp 1]',
+    comp1_stat: document.getElementById('in_comp1_stat')?.value.trim() || '0 subs • 0 views',
+    comp1_topic: document.getElementById('in_c1_topic')?.value.trim() || 'General topic',
+    comp2: document.getElementById('in_comp2')?.value.trim() || '[Comp 2]',
+    comp2_stat: document.getElementById('in_comp2_stat')?.value.trim() || '0 subs • 0 views',
+    comp2_topic: document.getElementById('in_c2_topic')?.value.trim() || 'General topic',
+    comp3: document.getElementById('in_comp3')?.value.trim() || '[Comp 3]',
+    comp3_stat: document.getElementById('in_comp3_stat')?.value.trim() || '0 subs • 0 views',
+    comp3_topic: document.getElementById('in_c3_topic')?.value.trim() || 'General topic',
+    gap_covered: document.getElementById('in_gap_covered')?.value.trim() || 'Generic content',
+    gap_missing: document.getElementById('in_gap_missing')?.value.trim() || 'High-intent problems',
+    price: parseFloat(document.getElementById('in_price')?.value) || 5000,
+    close: parseFloat(document.getElementById('in_close')?.value) || 20,
+    tier: document.getElementById('in_tier')?.value || 'ACCELERATED',
+    caseStudy: document.getElementById('in_casestudy')?.value || 'arun'
+  };
+}
 
-  // Update header
-  document.getElementById('ph_title').textContent = `Pitch for ${name}${S.offer ? ' — ' + S.offer : ''}`;
-  document.getElementById('ph_meta').textContent = `Generated live · ${new Date().toLocaleTimeString()}`;
+function saveToStorage(data) {
+  // Syncs to the Visual Pitch Deck
+  localStorage.setItem('finest_pitch_data', JSON.stringify(data));
+}
 
-  let html = '';
+function scriptBlock(title, text) {
+  return `
+    <div class="phase-block">
+      <div class="phase-header">${title}</div>
+      <div class="phase-body">${text}</div>
+    </div>
+  `;
+}
 
-  // ── SECTION 1: SUMMARY BRIDGE ──────────────────────────────────────────
-  const diagBridge = getDiagBridge();
-  if (diagBridge) {
-    html += sectionOpen('Summary Bridge', 'Say before the pitch', 'b-auto', '✦ Personalized');
-    html += scriptBlock('Say this — then ask "Am I right, or am I missing something?"', diagBridge);
-    html += psychBlock(`This mirrors their exact situation back to them in a diagnosis framing. It removes personal failure from the equation and positions YouTube as the systemic solution for <em>their specific root cause</em> — not a generic content pitch. Only pitch after they say yes.`);
-    html += sectionClose();
-    html += '<div class="sdiv"></div>';
-  } else {
-    html += sectionOpen('Summary Bridge', 'Say before the pitch', 'b-std', '← Choose diagnosis');
-    html += `<p class="skip-notice">Select the root cause diagnosis in Section D to generate your personalized bridge here.</p>`;
-    html += sectionClose();
-    html += '<div class="sdiv"></div>';
-  }
+function objTab(title, text, caseStudyLabel = '') {
+  let labelHtml = caseStudyLabel ? `<div class="cs-label">${caseStudyLabel}</div>` : '';
+  return `
+    <div class="obj-tab">
+      <div class="obj-head" onclick="this.parentElement.classList.toggle('open')">
+        <span>${title}</span>
+        <span class="icon">▼</span>
+      </div>
+      <div class="obj-body">
+        ${labelHtml}
+        <div class="script-text">${text}</div>
+      </div>
+    </div>
+  `;
+}
 
-  // ── SECTION 2: EPIPHANIES ─────────────────────────────────────────────
-  const epiphanies = getEpiphanies();
-  const eLabel = S.yt ? '✦ Auto-selected for YouTube history' : '← Choose YouTube history';
-  html += sectionOpen('Epiphanies', 'Belief shifts — explain why past attempts failed', S.yt ? 'b-auto' : 'b-std', eLabel);
-  if (S.yt) {
-    epiphanies.forEach(ep => {
-      html += `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="tag tag-gold">${ep.num}</span><span style="font-size:13px;font-weight:600;color:var(--muted2)">${ep.title}</span></div>`;
-      ep.scripts.forEach(s => html += scriptBlock('Script', s));
-    });
-  } else {
-    html += `<p class="skip-notice">Select their YouTube history in Section C to see the right epiphanies for this prospect.</p>`;
-  }
-  html += sectionClose();
-  html += '<div class="sdiv"></div>';
+function generateScript(S) {
+  const newClients = Math.round(70 * (S.close / 100));
+  const newRevenue = newClients * S.price;
 
-  // ── SECTION 3: MECHANISM ──────────────────────────────────────────────
-  const icp2 = S.icp || 'your ideal clients';
-  html += sectionOpen('The Mechanism', 'Draw the 10 Calls Away System in Miro', 'b-std', 'Standard');
-  html += actionBlock(`Open Miro. Blank canvas. Tell ${name}: <em>"I'm going to draw you the system — grab a pen and draw along with me."</em>`);
-  html += scriptBlock('Script — while drawing REACH', `REACH is the Buyer Topic Architecture. Everything we do to get your videos and Reels in front of <em>${icp2}</em> who are actively searching for what you do. Not hoping. Not posting and waiting. Reverse-engineering what ${icp2} are actually typing right now.`);
-  html += scriptBlock('Script — while drawing CONVERT', `CONVERT is the Content-to-Call Bridge. REACH gets you watched. CONVERT gets you booked. The end-screen CTA structure, the booking link in every description, the DM automation on Instagram. This is the layer that turns a viewer into a booked call — and it's the exact layer that's been missing.`);
-  html += scriptBlock('Script — while drawing 10 inside the triangle', `That 10 in the centre — that's the floor. 10 qualified calls in 90 days. But here's what makes this different from every other agency: every video we post in Week 1 is still running in Month 12. Every Reel is a permanent asset. The system doesn't plateau. It compounds. Month 3 feeds Month 6. Month 6 feeds Month 12. 10 is not the ceiling. It is where the engine proves it works.`);
-  html += scriptBlock('Script — Instagram dual channel', `Now — here's something I want to specifically address. YouTube is the long-term compound play. But I know results in 3 months doesn't pay next month's bills. So we've built a second track: Instagram. Instagram is the speed play. This starts converting in the first 30 days. Not 90. Not 12 months. 30 days. So what you get is: <em>Instagram fills your calendar this month. YouTube builds your empire over the next 12.</em> Two channels. Two timelines. One system.`);
-  html += actionBlock(`Ask: <em>"Does this make sense so far?"</em> — then pause 3 full seconds. Their "yes" is a micro-commitment.`);
-  html += sectionClose();
-  html += '<div class="sdiv"></div>';
+  let caseStudyText = "";
+  if (S.caseStudy === "ryan") caseStudyText = "To give you an idea, we did this for Ryan Jackson, a B2B Operations Coach. He had 7 subscribers and a brand new channel. Within 60 days of launching this exact system, with less than 1,000 total views, he closed a $15,000 deal. Views don't matter. The right audience does.";
+  else if (S.caseStudy === "arun") caseStudyText = "Look at my own brand, Finest Edit, and Arun Sharma. By applying this exact compounding system, we scaled to 200 to 300 qualified sales calls per month from YouTube alone after 18 months. No paid ads. No cold outreach.";
+  else if (S.caseStudy === "authority") caseStudyText = "For example, Authority IO. By plugging this conversion bridge into their channel, they scaled from $200k to $429k in a single month. It's about capturing high-intent search, not just getting views.";
+  else if (S.caseStudy === "heyyyhr") caseStudyText = "For example, Heyyy HR. They were relying purely on referrals, getting 2-5 clients a month. By month 4 of this system, YouTube was adding 8-10 high-ticket calls a month on top of referrals. It created a predictable floor.";
 
-  // ── SECTION 4: ROI MATH ───────────────────────────────────────────────
-  const roi = calcROI(S.price, S.closerate, 10, 2500);
-  html += sectionOpen('ROI Math', 'Use their actual numbers — make them do the calculation', 'b-std', 'Live Numbers');
-  html += actionBlock(`Switch to revenue calculator. Say: <em>"Can I show you something with your numbers? Not example numbers. Yours."</em>`);
-  html += scriptBlock('Script — plug in their numbers', `Your offer is <em>${S.price ? currency(S.price) : '[their offer price]'}</em>. You mentioned you close about <em>${S.closerate ? S.closerate+'%' : '[X]%'}</em> of qualified calls. So here's what 10 qualified calls in 90 days looks like at your numbers.`);
-  if (S.price && S.closerate) {
-    html += `<div class="roi-grid">
-      <div class="roi-card"><div class="rc-label">Est. Revenue</div><div class="rc-val big">${roi.rev}</div></div>
-      <div class="roi-card"><div class="rc-label">90-day investment</div><div class="rc-val">${roi.inv}</div></div>
-      <div class="roi-card"><div class="rc-label">ROI</div><div class="rc-val big">${roi.roi}</div></div>
-      <div class="roi-card"><div class="rc-label">Break even</div><div class="rc-val grn">${roi.be} client${roi.be!==1?'s':''}</div></div>
-    </div>`;
-  }
-  html += scriptBlock('Script — the question that does the work', `At your current offer price, how many clients do you need to close from this system in the next 90 days for it to have paid for itself? — <em>[shut up — wait for them to answer]</em>`);
-  html += scriptBlock('Script — after they answer', `Exactly. One client. And the Instagram Reels we make in Month 1 are still booking you calls in Month 6. The YouTube videos we post this quarter are still ranking and converting in 18 months. The investment you make in the next 90 days is paying dividends 2 years from now. No other acquisition channel does that.`);
-  html += psychBlock(`When THEY calculate "one client covers it" — not you — the ROI case belongs to them. Their brain cannot argue with its own math. Watch for the energy shift. This is the moment.`);
-  html += sectionClose();
-  html += '<div class="sdiv"></div>';
+  let html = ``;
 
-  // ── SECTION 5: THE PITCH ──────────────────────────────────────────────
-  const off2 = S.offer || 'your offer';
-  html += sectionOpen('The Pitch', 'Present the four blocks — then guarantee — then price', 'b-std', 'Standard');
-  html += scriptBlock('Script — opener', `Let me tell you exactly what you're getting. I want to be specific.`);
-  html += scriptBlock('Block 1 — Buyer Topic Architecture', `Every month, my team researches the exact topics <em>${icp2}</em> are actively searching on YouTube, and the content formats that stop them mid-scroll on Instagram. Not trends. Not guesses. Hard data from what your specific buyers are actually typing right now.`);
-  html += scriptBlock('Block 2 — Full Production', `We write every script, edit every video, design every thumbnail, write every caption — and post everything. You record. That's your only job. We handle everything else.`);
-  html += scriptBlock('Block 3 — Content-to-Call Bridge', `We build the CTA architecture on every piece of content, the booking link structure, the DM response templates. Every video and Reel has a clear path to your calendar. The bridge your channel is probably missing right now.`);
-  html += scriptBlock('Block 4 — Attribution Tracking', `We set up full attribution tracking so you know exactly which video or Reel produced which call. You open your dashboard and see: "This video got me 3 calls this month." No guessing. The vending machine finally has labels.`);
-  html += scriptBlock('The Guarantee', `The guarantee: 10 qualified calls in 90 days — or we keep working for free until you hit that number. Not best efforts. Not market conditions. We either produce the result, or we don't charge you until we do.`);
-  html += scriptBlock('Exclusivity', `One more thing: we only take one client per niche. We will never build this system for your direct competitor while we're building yours.`);
-  html += scriptBlock('The Price — then STOP TALKING', `The investment is $2,500 a month. That's our founding client rate — in exchange for a video testimonial after 90 days. Our full rate is $6,500 a month. One client from this system covers the investment. The math works at your numbers.`);
-  html += actionBlock(`State the price. Then silence. Do NOT explain it further. Do NOT ask "does that sound reasonable?" The silence IS the price working. Fill it and you kill the effect.`);
-  html += sectionClose();
-  html += '<div class="sdiv"></div>';
+  // --- MAIN PITCH SCRIPT ---
+  html += scriptBlock('Phase 1: The Open & Diagnosis', `
+    <div class="script-text">"Great to speak properly, <span class="var">${S.name}</span>. I'll skip the basics and go straight to your situation."</div>
+    <div class="direction deck">Push NEXT to Slide 4 (The Diagnosis) in Visual Deck</div>
+    <div class="script-text">"Here is what I am seeing. Your offer is proven. You have clients. But you are <span class="var">${S.problem}</span>.<br><br>The real issue is not your expertise. It is not your niche. It is that you do not have a reliable system that turns attention into qualified booked calls on autopilot.<br><br><strong>Am I right — or am I missing something?</strong>"</div>
+    <div class="direction">Wait for them to agree. Do not pitch until they confirm.</div>
+  `);
 
-  // ── SECTION 6: THE CLOSE ─────────────────────────────────────────────
-  const goal90 = S.day90 || '10 qualified calls per month';
-  html += sectionOpen('The Close', 'Temperature check — then handle what comes up', 'b-std', 'Standard');
-  html += scriptBlock('Temperature check', `Based on everything we've covered — where does this land for you?`);
-  html += scriptBlock('If they seem positive — How vs Should frame', `Just to be totally clear — it sounds like you're not in a "SHOULD I do this" place. It sounds more like you're in a "HOW do I make this work" place — where you're certain this is the right direction, it's just a matter of logistics. Is that right?`);
-  html += scriptBlock('If "I need to think about it"', `Of course — I want you to make the right call, not a rushed one. When you say you want to think about it, which part specifically is giving you pause? Is it the investment, the approach, the timing — or something else?`);
-  html += scriptBlock('If "I need to talk to my partner"', `Totally respect that. When you sit down with them — what's the question they're most likely to ask that you'd want to be able to answer? I can make sure you walk away from this call with everything you need.`);
-  if (S.day90) {
-    html += scriptBlock('Close anchor — using their 90-day goal', `You said earlier that in 90 days, what would make you say this is working is <em>"${goal90}"</em>. That's exactly what our guarantee is built around. So the question isn't whether this solves your problem — it's just whether now is the right time to start building it.`);
-  }
-  html += scriptBlock('If yes — onboarding preview', `Here's what the next 48 hours look like: I'll send the agreement today. Once that's signed, we do a 20-minute onboarding kick-off and map your first topics. First content hits your channel within 2 weeks. Does that timeline work?`);
-  html += sectionClose();
+  html += scriptBlock('Phase 2: Niche Proof & The Gap', `
+    <div class="direction deck">Push NEXT to Slide 2 (Competitors) in Visual Deck</div>
+    <div class="script-text">"Before I show you what I put together, I want you to see this working for real channels in your space. These three channels are converting viewers to clients right now.<br><br>Why? Because they aren't making generic beginner tutorials. They are targeting buyer-intent topics like <span class="var">${S.comp1_topic}</span>. And crucially, they have the Content-to-Call bridge built into their videos. Without this bridge, you build YouTube's algorithm but get none of the revenue."</div>
+    <div class="direction deck">Push NEXT to Slide 3 (The Content Gap) in Visual Deck</div>
+    <div class="script-text">"But here is the opportunity. Most of your competitors are covering generic theory. Nobody is making strong, buyer-intent videos about <span class="var">${S.gap_missing}</span>. There is real search demand here and no strong content serving it. These are the first videos we build for you."</div>
+  `);
+
+  html += scriptBlock('Phase 3: Mechanism & Math', `
+    <div class="direction deck">Push NEXT to Slide 5 (The Funnel) in Visual Deck</div>
+    <div class="script-text">"So what does a system look like that actually captures this?<br><br><strong>REACH:</strong> We reverse-engineer exact buyer search phrases.<br><strong>CONVERT:</strong> The bridge—the CTA, the booking link, the tracking.<br><strong>COMPOUND:</strong> Month 3 feeds month 6. Month 6 feeds month 12."</div>
+    <div class="math-box">
+      So from REACH you get <strong>100k views</strong>.<br>
+      We CONVERT those views with a realistic 0.1% conversion, which is <strong>100 appointments</strong>.<br>
+      Let’s say 30% no-show or aren't qualified. You still have <strong>70 qualified appointments</strong>.<br>
+      At your <span class="var" style="color:var(--w); background:transparent; padding:0;">${S.close}%</span> close rate, that's <span class="var" style="color:var(--w); background:transparent; padding:0;">${newClients}</span> new high-ticket clients.<br>
+      ${newClients} clients × ${formatCurrency(S.price)} = <span style="color:#93C5FD;">${formatCurrency(newRevenue)} in Revenue</span>
+    </div>
+    <div class="script-text">"And remember — COMPOUND will not only increase the volume but the qualification, increasing your closing ratio over time."</div>
+    <div class="script-text" style="margin-top:16px; border-left:2px solid var(--green); padding-left:12px;">${caseStudyText}</div>
+    <div class="direction">Pause three full seconds.</div>
+    <div class="script-text">"Does this make sense so far?"</div>
+  `);
+
+  html += scriptBlock('Phase 4: The Pitch & Guarantee', `
+    <div class="direction deck">Push NEXT to Slide 6 (Packages) in Visual Deck</div>
+    <div class="script-text">"This is a done-for-you service. We map the strategy, write the Game Plans, edit, and optimize. You just record 4 hours a month."</div>
+    <div class="script-text">"Based on your situation—<span class="var">${S.problem}</span>—most coaches start with the <span class="var">${S.tier}</span> tier. It solves the immediate need while building the asset."</div>
+    <div class="direction deck">Push NEXT to Slide 7 (Guarantee) in Visual Deck</div>
+    <div class="script-text">"And here is the guarantee: If your 5-video playlist funnel is not fully live and optimized within 90 days, we keep working at no additional charge until it is. We guarantee the build. The calls follow the build."</div>
+    <div class="script-text" style="margin-top:24px; font-weight:bold; color:var(--gold2);">"Based on everything we have covered — where does this land for you?"</div>
+    <div class="direction">Stop. Silence. Do not fill the space.</div>
+  `);
 
   document.getElementById('pitch_body').innerHTML = html;
+
+  // --- OBJECTION PLAYBOOK ---
+  let objHtml = `
+    <div class="obj-title">The Objection Playbook</div>
+    <div class="obj-subtitle">Click the objection the prospect raises to reveal the case study pivot.</div>
+  `;
+
+  objHtml += objTab(
+    `"I don't have an audience yet / My channel is too small"`, 
+    `"Views don't matter. The right audience does. Let me show you what I mean...<br><br>We worked with Ryan Jackson, a B2B Operations Coach. He had 7 subscribers, a brand new channel, and zero leads from YouTube. Within 60 days, with less than 1,000 total views across 4 videos, he closed a $15,000 deal. When you target buyer-intent search, you don't need a big audience."`,
+    `Case Study: Ryan Jackson (Small Channel, Big Results)`
+  );
+
+  objHtml += objTab(
+    `"I rely on referrals / lead flow is unpredictable"`, 
+    `"Referrals are great, but they are unpredictable upside, not a survival strategy. Let me show you what I mean...<br><br>We worked with Heyyy HR, a leadership development coach. They were relying purely on referrals, getting 2-5 clients a month and stressing about the pipeline. By Month 4 of this YouTube system, we were adding 8-10 consistent qualified calls a month on top of their referrals. YouTube didn't replace referrals — it created a predictable floor."`,
+    `Case Study: Heyyy HR (Referral Escape Artists)`
+  );
+
+  objHtml += objTab(
+    `"My niche is too competitive / I want to scale volume"`, 
+    `"When your niche is competitive, the only way to win is by compounding an evergreen asset. Look at my own brand, Finest Edit, and Arun Sharma.<br><br>We are in one of the most saturated marketing niches possible. By applying this exact compounding system, we scaled to 200 to 300 qualified sales calls per month from YouTube alone after 18 months. No paid ads. No cold outreach. Just an evergreen asset that competitors can't replicate overnight."`,
+    `Case Study: Arun Sharma / Finest Edit (Saturated Niche Winners)`
+  );
+
+  objHtml += objTab(
+    `"My ad costs keep rising / I need real revenue impact"`, 
+    `"Ads are a tax you pay for not having an organic asset. Let me show you what I mean...<br><br>We worked with Authority IO. They were looking for a true revenue multiplier to escape ad fatigue. By plugging this exact conversion bridge into their channel and capturing high-intent search traffic, they scaled from $200k to $429k in a single month. You own this traffic; you don't rent it from Facebook."`,
+    `Case Study: Authority IO (Revenue Multipliers)`
+  );
+
+  objHtml += objTab(
+    `"I tried YouTube before and it didn't work"`, 
+    `"What kind of content were you making? Because if you look at <span class="var">${S.comp1}</span>, they aren't just making generic videos. They are answering the exact questions your buyers have right before they purchase.<br><br>That is the mismatch — creating content without the Content-to-Call bridge. It's a system problem, not a YouTube problem. What we build fixes both."`,
+    `Niche Proof Pivot`
+  );
+
+  objHtml += objTab(
+    `"The price is a lot / Too expensive"`, 
+    `"At your <span class="var">${S.close}%</span> close rate, just ONE new client at <span class="var">${formatCurrency(S.price)}</span> covers the investment in month one. And if the funnel is not live within 90 days, we keep working free. The financial risk is entirely ours."`,
+    `ROI Math Pivot`
+  );
+
+  objHtml += objTab(
+    `"I'm not good on camera"`, 
+    `"Are you good on sales calls? Because you have been clear and confident for the last 40 minutes discussing <span class="var">${S.problem}</span>.<br><br>A YouTube video is just a sales call with the camera. We give you the exact game plan and hook. You just show up and talk about what you know."`,
+    `Reframing Pivot`
+  );
+
+  document.getElementById('objections_output').innerHTML = objHtml;
 }
 
-// ─── COPY PITCH ────────────────────────────────────────────────────────────
+// --- COPY SCRIPT TEXT ---
 function copyPitch() {
-  const el = document.getElementById('pitch_body');
-  // Extract just the text content
-  const text = el.innerText.replace(/\n{3,}/g, '\n\n');
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector('.ph-btn');
+  // Use the active tab to figure out what to copy (Script or Objections)
+  const activeContent = document.querySelector('.pr-content.active');
+  if(!activeContent) return;
+  
+  const text = activeContent.innerText.replace(/\n{3,}/g, '\n\n');
+  
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  
+  try {
+    document.execCommand('copy');
+    const btn = document.getElementById('main_copy_btn');
     btn.textContent = '✓ Copied';
     btn.classList.add('copy-done');
-    setTimeout(() => { btn.textContent = 'Copy pitch text'; btn.classList.remove('copy-done'); }, 2000);
-  });
+    setTimeout(() => { btn.textContent = '📋 Copy Script Text'; btn.classList.remove('copy-done'); }, 2000);
+  } catch (err) {
+    alert('Failed to copy.');
+  }
+  document.body.removeChild(textarea);
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────
-gen();
+// Init
+window.onload = function() {
+  updateAll();
+};
 </script>
 </body>
 </html>

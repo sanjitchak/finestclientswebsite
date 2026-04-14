@@ -1278,9 +1278,9 @@
             });
 
             if (response.ok) {
-                // Instantly redirect to apply page with UTM parameters included in the URL
+                // Instantly redirect to the new thank you page with UTM parameters included in the URL
                 const currentSearch = window.location.search;
-                window.location.href = 'https://finestclients.com/apply.html' + currentSearch;
+                window.location.href = 'http://finestclients.com/thankyouoptin.html' + currentSearch;
             } else {
                 showFormMessage('Something went wrong. Please try again.', 'error');
                 resetSubmitButton();

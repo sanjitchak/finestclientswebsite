@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success | Download Your Free Report</title>
+    
+    <link rel="icon" type="image/png" href="https://finestclients.com/finestclientslogo.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@700&family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Theme Colors from Optin Page */
+            --theme-color: #D4AF37;      /* Primary Gold */
+            --theme-dark: #A88721;       /* Darker Gold for button shadows/hover */
+            --theme-light: #E8CA6A;      /* Lighter Gold */
+            
+            /* Base Colors for Dark Theme */
+            --text-dark: #FFFFFF;        /* Headings and primary text */
+            --text-body: #E0E0E0;        /* Body text */
+            --bg-white: #000000;         /* Pure black base */
+            --bg-offwhite: #0A0A0A;      /* Slightly off-black for alternating sections */
+            --kk-dark: #050505;          /* Very dark hero background */
+            --success-color: #2ea82e;
+            --error-color: #e23e31;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            color: var(--text-body);
+            background-color: var(--kk-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Anton', sans-serif;
+            font-weight: 400;
+            line-height: 1.1;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 22px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .text-center { text-align: center; }
+        .theme-text { color: var(--theme-color); }
+        .bold { font-weight: 800; }
+
+        .top-bar {
+            background-color: var(--success-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 10px rgba(46, 168, 46, 0.3);
+        }
+
+        .hero {
+            padding: 60px 0 80px;
+            background-color: var(--kk-dark);
+            color: #ffffff;
+            text-align: center;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-kicker {
+            background-color: rgba(46, 168, 46, 0.15);
+            color: #4ade80;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            border: 1px solid rgba(46, 168, 46, 0.4);
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.05;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero p.subheadline {
+            font-size: 22px;
+            font-weight: 400;
+            color: #cccccc;
+            margin-bottom: 40px;
+            font-family: 'Open Sans', sans-serif;
+            text-transform: none;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        @keyframes bookGlow {
+            0% { filter: drop-shadow(0 0 0px rgba(212, 175, 55, 0)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.6)); transform: scale(1.02); }
+            100% { filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8)); transform: scale(1); }
+        }
+
+        .ebook-wrapper {
+            margin: 0 auto 40px;
+            max-width: 350px;
+            position: relative;
+        }
+
+        .ebook-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            animation: bookGlow 3s ease-in-out infinite alternate;
+            border-radius: 4px;
+        }
+
+        .cta-btn {
+            display: block;
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: var(--theme-color);
+            color: #000000;
+            text-decoration: none;
+            padding: 22px 15px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 0 var(--theme-dark), 0 15px 25px rgba(0,0,0,0.5);
+            transition: all 0.1s ease;
+            text-align: center;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 6px 0 var(--theme-dark), 0 10px 15px rgba(0,0,0,0.5);
+            background-color: #E6C24A;
+        }
+
+        .cta-btn:active {
+            transform: translateY(8px);
+            box-shadow: 0 0px 0 var(--theme-dark);
+        }
+
+        .cta-main-text {
+            font-family: 'Anton', sans-serif;
+            font-size: 38px;
+            display: block;
+            letter-spacing: 1px;
+            line-height: 1;
+            color: #000000;
+        }
+
+        .cta-sub-text {
+            font-size: 16px;
+            font-weight: 700;
+            display: block;
+            margin-top: 8px;
+            font-family: 'Open Sans', sans-serif;
+            color: #222222;
+        }
+
+        .secondary-btn {
+            background-color: #1A1A1A;
+            box-shadow: 0 8px 0 #000000, 0 15px 25px rgba(0,0,0,0.5);
+            border: 1px solid #333333;
+            max-width: 500px;
+        }
+
+        .secondary-btn .cta-main-text {
+            color: #FFFFFF;
+            font-size: 28px;
+        }
+
+        .secondary-btn .cta-sub-text {
+            color: #AAAAAA;
+        }
+
+        .secondary-btn:hover {
+            background-color: #222222;
+            box-shadow: 0 6px 0 #000000, 0 10px 15px rgba(0,0,0,0.5);
+        }
+
+        .next-steps-section {
+            padding: 60px 0 80px;
+            background-color: var(--bg-white);
+            border-top: 1px solid #222;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer {
+            background-color: #050505;
+            color: #888888;
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 13px;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid #222;
+        }
+
+        .footer a {
+            color: #AAAAAA;
+            text-decoration: none;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        
+        .footer a:hover { color: #FFFFFF; }
+
+        .footer p { margin-bottom: 15px; font-size: 13px; }
+
+        /* Legal Modals Styling (Re-used for consistency) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10000;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content {
+            background: #111111; color: #E0E0E0;
+            padding: 40px; border-radius: 8px; width: 90%; max-width: 600px;
+            max-height: 80vh; overflow-y: auto; text-align: left;
+            border: 1px solid #333333; position: relative;
+            transform: translateY(-30px); transition: transform 0.3s ease;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-content h3 {
+            color: #FFFFFF; font-size: 32px; margin-bottom: 20px;
+            border-bottom: 2px solid #333333; padding-bottom: 10px;
+        }
+        .modal-content p, .modal-content ul { font-size: 15px; color: #CCCCCC; margin-bottom: 15px; }
+        .modal-content h4 {
+            color: var(--theme-color); font-size: 20px; margin-top: 25px;
+            margin-bottom: 10px; font-family: 'Open Sans', sans-serif; font-weight: 700; text-transform: none;
+        }
+        .close-modal {
+            position: absolute; top: 15px; right: 25px; font-size: 36px;
+            font-weight: 300; color: #888; cursor: pointer; line-height: 1;
+        }
+        .close-modal:hover { color: #fff; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 40px; }
+            .hero p.subheadline { font-size: 18px; padding: 0 10px; }
+            .cta-main-text { font-size: 24px; }
+            .cta-sub-text { font-size: 12px; }
+            .ebook-wrapper { max-width: 250px; }
+            .secondary-btn .cta-main-text { font-size: 20px; }
+        }
+    </style>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '688903840218578');
+    fbq('track', 'PageView');
+    fbq('track', 'Lead'); /* Added Lead tracking for the success page */
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=688903840218578&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+<body>
+    </noscript>
+    <!-- End Meta Pixel Code -->
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-kicker">STEP 1 COMPLETE</div>
+            
+            <h1>YOUR FREE REPORT IS<br>READY TO DOWNLOAD</h1>
+            
+            <p class="subheadline">Click the gold button below to access your PDF instantly. (We've also sent a backup copy directly to your inbox so you don't lose it).</p>
+            
+            <div class="ebook-wrapper">
+                <img src="https://finestclients.com/bookcover.jpeg" alt="Click to Clients Free Report" class="ebook-img">
+            </div>
+
+            <a href="https://finestclients.com/asset/click-to-clients.pdf" target="_blank" class="cta-btn" id="downloadBtn">
+                <span class="cta-main-text">DOWNLOAD PDF NOW</span>
+                <span class="cta-sub-text">(Opens securely in a new tab)</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Optional Next Steps Section (Great for funnel flow) -->
+    <section class="next-steps-section text-center">
+        <div class="container">
+            <h2 style="font-size: 38px; margin-bottom: 15px;">WANT US TO IMPLEMENT THIS FOR YOU?</h2>
+            <p style="color: #AAAAAA; max-width: 650px; margin: 0 auto 40px;">If you're a coach or consultant already making $10k+/mo and want to build an automated, high-ticket YouTube funnel, let's chat.</p>
+            
+            <a href="https://finestclients.com/apply.html" class="cta-btn secondary-btn" id="applyBtn">
+                <span class="cta-main-text">BOOK A STRATEGY CALL</span>
+                <span class="cta-sub-text">(100% Free. No pressure.)</span>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Finest Clients. All rights reserved.</p>
+            <p>
+                <a class="legal-link" data-type="privacy">Privacy Policy</a> | 
+                <a class="legal-link" data-type="terms">Terms of Service</a> | 
+                <a class="legal-link" data-type="disclaimer">Disclaimer</a>
+            </p>
+            <p style="font-size: 11px; margin-top: 25px; color: #555; line-height: 1.6; max-width: 650px; margin-left: auto; margin-right: auto;">
+                This site is not a part of the Facebook website or Meta Platforms, Inc., nor is it part of the Google, YouTube, or any other major network. Additionally, this site is NOT endorsed by Meta, Google, or YouTube in any way. FACEBOOK is a trademark of META PLATFORMS, Inc. YOUTUBE and GOOGLE are trademarks of GOOGLE, LLC.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Legal Modals -->
+    <div class="modal-overlay" id="legalModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeLegalModal">&times;</span>
+            <h3 id="legalModalTitle">Document Title</h3>
+            <div id="legalModalBody">
+                <!-- Dynamic Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+<script>
+    // Set dynamic date for legal docs if needed
+    const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+    
+    // Legal Modals Logic
+    const legalModal = document.getElementById('legalModal');
+    const closeLegalBtn = document.getElementById('closeLegalModal');
+    const legalLinks = document.querySelectorAll('.legal-link');
+    const legalModalTitle = document.getElementById('legalModalTitle');
+    const legalModalBody = document.getElementById('legalModalBody');
+
+    const legalContent = {
+        'privacy': {
+            title: 'Privacy Policy',
+            body: `
+                <p><strong>Effective Date:</strong> ${new Date().toLocaleDateString('en-US', dateOptions)}</p>
+                <p>We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website...</p>
+                <!-- Add full privacy text here if needed, kept brief for example -->
+                <p>We use your data to deliver the requested content, send you marketing communications related to our services, and analyze website usage to improve our offerings.</p>
+            `
+        },
+        'terms': {
+            title: 'Terms of Service',
+            body: `
+                <p>By accessing or using our website and opting in for our free reports, you agree to be bound by these Terms of Service.</p>
+                <h4>1. Use of Website and Content</h4>
+                <p>All content provided in our free reports, videos, and on this website is for informational and educational purposes only.</p>
+            `
+        },
+        'disclaimer': {
+            title: 'Disclaimer',
+            body: `
+                <p><strong>Earnings and Results Disclaimer:</strong></p>
+                <p>The sales figures, calls booked, and client results stated on this landing page and within the free report are our personal results or the results of our past or current clients.</p>
+            `
+        }
+    };
+
+    legalLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const type = link.getAttribute('data-type');
+            if(legalContent[type]) {
+                legalModalTitle.innerHTML = legalContent[type].title;
+                legalModalBody.innerHTML = legalContent[type].body;
+                legalModal.classList.add('active');
+            }
+        });
+    });
+
+    closeLegalBtn.addEventListener('click', () => {
+        legalModal.classList.remove('active');
+    });
+
+    legalModal.addEventListener('click', (e) => {
+        if (e.target === legalModal) {
+            legalModal.classList.remove('active');
+        }
+    });
+
+    // Pass UTM tracking parameters to the apply button
+    document.addEventListener("DOMContentLoaded", function() {
+        const applyBtn = document.getElementById('applyBtn');
+        if (applyBtn && window.location.search) {
+            applyBtn.href = applyBtn.href + window.location.search;
+        }
+    });
+</script>
+ 
+</body>
+</html>

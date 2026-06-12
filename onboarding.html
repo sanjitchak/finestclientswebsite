@@ -259,6 +259,61 @@
       font-weight: 800;
     }
 
+    .lms-course-highlight {
+      margin-top: 16px;
+      padding: 15px;
+      border-radius: 14px;
+      border: 1px solid rgba(230,203,134,0.28);
+      background:
+        linear-gradient(135deg, rgba(230,203,134,0.16), rgba(199,162,78,0.05));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lms-course-highlight::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 0%, rgba(230,203,134,0.16) 45%, transparent 72%);
+      transform: translateX(-120%);
+      animation: courseSweep 4.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .lms-course-highlight span {
+      display: block;
+      color: var(--gold-bright);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin-bottom: 5px;
+      position: relative;
+    }
+
+    .lms-course-highlight strong {
+      display: block;
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 1.18rem;
+      line-height: 1.12;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .lms-course-highlight small {
+      display: block;
+      color: var(--muted);
+      margin-top: 7px;
+      position: relative;
+    }
+
+    @keyframes courseSweep {
+      0%, 52% { transform: translateX(-120%); }
+      78%, 100% { transform: translateX(120%); }
+    }
+
     .divider {
       height: 1px;
       background: var(--hairline);
@@ -1237,6 +1292,10 @@
         opacity: 1 !important;
         transform: scale(1) !important;
       }
+
+      .lms-course-highlight::before {
+        animation: none !important;
+      }
     }
 
     @media print {
@@ -1378,35 +1437,29 @@
             Paste the sales call transcript, auto-fill the setup, customize the roadmap, then launch a premium onboarding deck that feels made for one client.
           </p>
 
-          <section class="panel" aria-label="Sales call transcript extraction">
-            <h2>Extract from sales call</h2>
-            <p>This saves typing. You still review, edit, and approve everything before the deck is created.</p>
+          <section class="panel ai-panel" aria-label="AI setup assistant">
+            <h2>AI Setup Assistant</h2>
+            <p>Paste the sales call transcript, generate the ChatGPT analysis prompt, then paste the JSON result below. This keeps the tool simple, safe, and offline.</p>
 
             <div class="field full">
               <label for="salesTranscript">Paste the sales call transcript</label>
               <textarea id="salesTranscript" placeholder="Paste the full sales call transcript here."></textarea>
-            </div>
-
-            <div class="api-row">
-              <div class="field">
-                <label for="apiKey">Your OpenAI API key</label>
-                <input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" />
-                <div class="note-text">
-                  Stored only in this browser. Never written into the file, shown in the deck, or put in any client link.
-                </div>
-              </div>
-
-              <button id="extractBtn" class="gold-button" type="button">Extract and fill</button>
+              <div class="note-text">The transcript stays on this screen. It is never stored in the client link and never appears in the deck.</div>
             </div>
 
             <div class="extract-actions">
-              <button id="fallbackToggleBtn" class="text-link" type="button">No key? Extract with ChatGPT instead</button>
+              <button id="extractBtn" class="gold-button" type="button">Prepare ChatGPT prompt</button>
+              <span class="note-text">Use ChatGPT once, paste the JSON back, then launch the deck.</span>
             </div>
 
             <div id="fallbackPanel" class="fallback-panel hidden">
               <div class="field full">
-                <label for="copyPrompt">Ready-to-copy extraction prompt</label>
+                <label for="copyPrompt">Copy this prompt into ChatGPT</label>
                 <textarea id="copyPrompt" class="prompt-box" readonly></textarea>
+              </div>
+
+              <div class="extract-actions">
+                <button id="copyPromptBtn" class="secondary-button" type="button">Copy prompt</button>
               </div>
 
               <div class="field full" style="margin-top: 14px;">
@@ -1414,11 +1467,11 @@
                 <textarea id="manualJson" placeholder='{"client_first_name":"","business_name":"","niche":"","start_date_mentioned":"","current_situation":"","desired_situation":"","extra_promises":[]}'></textarea>
               </div>
 
-              <button id="useManualJsonBtn" class="secondary-button" type="button" style="margin-top: 14px;">Use this</button>
+              <button id="useManualJsonBtn" class="secondary-button" type="button" style="margin-top: 14px;">Use analysis</button>
             </div>
 
             <div id="extractStatus" class="extract-status" aria-live="polite"></div>
-            <div class="review-reminder">Review and verify before sending. The AI can misread promises.</div>
+            <div class="review-reminder">Review and verify before sending. AI can misread names, dates, and promises.</div>
           </section>
 
           <form id="setupForm" autocomplete="on">
@@ -1455,6 +1508,12 @@
                 <div class="field full">
                   <label for="managerName">Account manager name</label>
                   <input id="managerName" name="managerName" type="text" required placeholder="Example: Mousam" />
+                </div>
+
+                <div class="field full">
+                  <label for="firstLmsCourse">First LMS course to watch <span class="optional">client-facing</span></label>
+                  <input id="firstLmsCourse" name="firstLmsCourse" type="text" placeholder="Example: Offer Engineering Sprint" />
+                  <div class="note-text">This appears in the LMS access section so the client knows exactly where to start after you give access live.</div>
                 </div>
               </div>
             </section>
@@ -1578,7 +1637,8 @@
 
     <section id="deckScreen" class="deck-screen hidden" aria-label="Personalized onboarding deck">
       <div id="toolbar" class="floating-toolbar">
-        <button id="downloadPdfBtn" class="toolbar-button gold" type="button">Download PDF</button>
+        <button id="downloadDocBtn" class="toolbar-button gold" type="button">Download editable doc</button>
+        <button id="copyGoogleDocsBtn" class="toolbar-button" type="button">Copy Google Docs version</button>
         <button id="copyLinkBtn" class="toolbar-button" type="button">Copy client link</button>
         <button id="backBtn" class="toolbar-button" type="button">Back to setup</button>
       </div>
@@ -1595,16 +1655,11 @@
       They are used inside every personalized client deck.
       Leave LMS_LOGIN_LINK blank if LMS access is given live during the onboarding call.
     */
-    const ONBOARDING_FORM_LINK = "https://forms.gle/PASTE-YOUR-ONBOARDING-FORM-LINK";
+    const ONBOARDING_FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSfm7puVncm5I7L4h6CI39vaohBEStDPZE8y1YvWF8LsO8V6jw/viewform";
     const OFFER_ENGINEERING_BOOKING_LINK = "https://calendly.com/PASTE-YOUR-OFFER-CALL-LINK";
     const WHATSAPP_MASTERMIND_GROUP_LINK = "https://chat.whatsapp.com/PASTE-YOUR-GROUP-LINK";
     const LMS_LOGIN_LINK = "";
 
-    /*
-      Do not hardcode any OpenAI API key here.
-      The key is entered in the tool and stored only in this browser through localStorage.
-    */
-    const OPENAI_API_KEY_STORAGE_KEY = "finestClientsOpenAIKey";
 
     const setupScreen = document.getElementById("setupScreen");
     const deckScreen = document.getElementById("deckScreen");
@@ -1613,17 +1668,17 @@
     const setupForm = document.getElementById("setupForm");
     const startDateInput = document.getElementById("startDate");
     const day180Preview = document.getElementById("day180Preview");
-    const downloadPdfBtn = document.getElementById("downloadPdfBtn");
+    const downloadDocBtn = document.getElementById("downloadDocBtn");
+    const copyGoogleDocsBtn = document.getElementById("copyGoogleDocsBtn");
     const copyLinkBtn = document.getElementById("copyLinkBtn");
     const backBtn = document.getElementById("backBtn");
     const toast = document.getElementById("toast");
 
     const salesTranscriptInput = document.getElementById("salesTranscript");
-    const apiKeyInput = document.getElementById("apiKey");
     const extractBtn = document.getElementById("extractBtn");
-    const fallbackToggleBtn = document.getElementById("fallbackToggleBtn");
     const fallbackPanel = document.getElementById("fallbackPanel");
     const copyPromptInput = document.getElementById("copyPrompt");
+    const copyPromptBtn = document.getElementById("copyPromptBtn");
     const manualJsonInput = document.getElementById("manualJson");
     const useManualJsonBtn = document.getElementById("useManualJsonBtn");
     const extractStatus = document.getElementById("extractStatus");
@@ -1811,6 +1866,7 @@ Return only valid JSON.`;
         industry: getField("industry"),
         startDate: getField("startDate"),
         managerName: getField("managerName"),
+        firstLmsCourse: getField("firstLmsCourse"),
         currentSituation: getField("currentSituation"),
         desiredSituation: getField("desiredSituation"),
         personalNote: getField("personalNote"),
@@ -1826,6 +1882,7 @@ Return only valid JSON.`;
         industry: cleanText(safe.industry),
         startDate: cleanText(safe.startDate),
         managerName: cleanText(safe.managerName) || "your account manager",
+        firstLmsCourse: cleanText(safe.firstLmsCourse),
         currentSituation: cleanText(safe.currentSituation),
         desiredSituation: cleanText(safe.desiredSituation),
         personalNote: cleanText(safe.personalNote),
@@ -1871,240 +1928,55 @@ Return only valid JSON.`;
 
     function setExtractLoading(isLoading) {
       extractBtn.disabled = isLoading;
-      extractBtn.textContent = isLoading ? "Extracting..." : "Extract and fill";
-    }
-
-    function saveApiKey() {
-      const key = cleanText(apiKeyInput.value);
-      if (key) {
-        localStorage.setItem(OPENAI_API_KEY_STORAGE_KEY, key);
-      }
-    }
-
-    function loadApiKey() {
-      const savedKey = localStorage.getItem(OPENAI_API_KEY_STORAGE_KEY) || "";
-      apiKeyInput.value = savedKey;
+      extractBtn.textContent = isLoading ? "Preparing..." : "Prepare ChatGPT prompt";
     }
 
     function makeFallbackPrompt() {
-      return EXTRACTION_INSTRUCTION + "\n\nSales call transcript:\n\n[PASTE TRANSCRIPT HERE]";
+      const transcript = cleanText(salesTranscriptInput.value) || "[PASTE TRANSCRIPT HERE]";
+      return EXTRACTION_INSTRUCTION + "\n\nSales call transcript:\n\n" + transcript;
     }
 
-    function safeParseJson(raw) {
-      const text = cleanText(raw);
-
-      if (!text) {
-        throw new Error("No JSON found.");
-      }
-
+    async function copyTextToClipboard(value) {
       try {
-        return JSON.parse(text);
-      } catch (firstError) {
-        const withoutFence = text
-          .replace(/^```json\s*/i, "")
-          .replace(/^```\s*/i, "")
-          .replace(/```$/i, "")
-          .trim();
-
-        try {
-          return JSON.parse(withoutFence);
-        } catch (secondError) {
-          const firstBrace = withoutFence.indexOf("{");
-          const lastBrace = withoutFence.lastIndexOf("}");
-
-          if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-            const extracted = withoutFence.slice(firstBrace, lastBrace + 1);
-            return JSON.parse(extracted);
-          }
-
-          throw new Error("The response was not valid JSON.");
-        }
-      }
-    }
-
-    function normalizeExtraction(json) {
-      const safe = json || {};
-      const promises = Array.isArray(safe.extra_promises)
-        ? safe.extra_promises.map(cleanText).filter(Boolean)
-        : [];
-
-      return {
-        client_first_name: cleanText(safe.client_first_name),
-        business_name: cleanText(safe.business_name),
-        niche: cleanText(safe.niche),
-        start_date_mentioned: cleanText(safe.start_date_mentioned),
-        current_situation: cleanText(safe.current_situation),
-        desired_situation: cleanText(safe.desired_situation),
-        extra_promises: promises
-      };
-    }
-
-    function parseMentionedDate(value) {
-      const raw = cleanText(value);
-      if (!raw) return "";
-
-      const isoMatch = raw.match(/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/);
-      if (isoMatch) {
-        const date = new Date(Number(isoMatch[1]), Number(isoMatch[2]) - 1, Number(isoMatch[3]));
-        return toDateInputValue(date);
-      }
-
-      const slashMatch = raw.match(/\b(\d{1,2})[\/.](\d{1,2})[\/.](\d{2,4})\b/);
-      if (slashMatch) {
-        const day = Number(slashMatch[1]);
-        const month = Number(slashMatch[2]);
-        let year = Number(slashMatch[3]);
-        if (year < 100) year += 2000;
-
-        const date = new Date(year, month - 1, day);
-        if (!isNaN(date)) return toDateInputValue(date);
-      }
-
-      const dashMatch = raw.match(/\b(\d{1,2})-(\d{1,2})-(\d{2,4})\b/);
-      if (dashMatch) {
-        const day = Number(dashMatch[1]);
-        const month = Number(dashMatch[2]);
-        let year = Number(dashMatch[3]);
-        if (year < 100) year += 2000;
-
-        const date = new Date(year, month - 1, day);
-        if (!isNaN(date)) return toDateInputValue(date);
-      }
-
-      const parsed = new Date(raw);
-      if (!isNaN(parsed)) {
-        return toDateInputValue(parsed);
-      }
-
-      return "";
-    }
-
-    function buildInternalNotes(extraction) {
-      const promises = extraction.extra_promises && extraction.extra_promises.length
-        ? extraction.extra_promises.map(function (item, index) {
-            return (index + 1) + ". " + item;
-          }).join("\n")
-        : "None clearly found.";
-
-      return [
-        "Current situation:",
-        extraction.current_situation || "Not clearly stated.",
-        "",
-        "Desired situation:",
-        extraction.desired_situation || "Not clearly stated.",
-        "",
-        "Extra promises, bonuses, discounts, or special commitments:",
-        promises
-      ].join("\n");
-    }
-
-    function fillSetupFromExtraction(rawJson, sourceLabel) {
-      const extraction = normalizeExtraction(rawJson);
-
-      if (extraction.client_first_name) setField("clientName", extraction.client_first_name);
-      if (extraction.business_name) setField("businessName", extraction.business_name);
-      if (extraction.niche) setField("industry", extraction.niche);
-      if (extraction.current_situation) setField("currentSituation", extraction.current_situation);
-      if (extraction.desired_situation) setField("desiredSituation", extraction.desired_situation);
-
-      if (extraction.start_date_mentioned) {
-        const parsedDate = parseMentionedDate(extraction.start_date_mentioned);
-        if (parsedDate) {
-          setField("startDate", parsedDate);
-          updateDay180Preview();
-        }
-      }
-
-      setField("internalNotes", buildInternalNotes(extraction));
-
-      /*
-        Guardrail:
-        This field is client-facing, so extraction never fills it.
-        Founder must manually decide what is safe to show.
-      */
-      setField("personalNote", "");
-
-      setExtractStatus("Filled from " + sourceLabel + ". Review and edit before launching.", "success");
-    }
-
-    async function extractWithOpenAI() {
-      const transcript = cleanText(salesTranscriptInput.value);
-      const apiKey = cleanText(apiKeyInput.value);
-
-      if (!transcript) {
-        setExtractStatus("Paste the sales call transcript first.", "error");
-        return;
-      }
-
-      if (!apiKey) {
-        setExtractStatus("Enter your OpenAI API key, or use the no-key ChatGPT fallback.", "error");
-        return;
-      }
-
-      saveApiKey();
-      setExtractLoading(true);
-      setExtractStatus("Sending transcript for extraction. Nothing is added to the client link.", "");
-
-      try {
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + apiKey
-          },
-          body: JSON.stringify({
-            model: "gpt-4o-mini",
-            temperature: 0,
-            response_format: { type: "json_object" },
-            messages: [
-              {
-                role: "system",
-                content: "You extract structured onboarding setup data from sales call transcripts. Return only valid JSON."
-              },
-              {
-                role: "user",
-                content: EXTRACTION_INSTRUCTION + "\n\nSales call transcript:\n\n" + transcript
-              }
-            ]
-          })
-        });
-
-        const result = await response.json().catch(function () {
-          throw new Error("The API returned an unreadable response.");
-        });
-
-        if (!response.ok) {
-          const apiMessage = result && result.error && result.error.message
-            ? result.error.message
-            : "OpenAI API request failed.";
-          throw new Error(apiMessage);
-        }
-
-        const content = result &&
-          result.choices &&
-          result.choices[0] &&
-          result.choices[0].message &&
-          result.choices[0].message.content;
-
-        if (!content) {
-          throw new Error("The API response did not include extraction JSON.");
-        }
-
-        const json = safeParseJson(content);
-        fillSetupFromExtraction(json, "OpenAI");
+        await navigator.clipboard.writeText(value);
+        return true;
       } catch (error) {
-        setExtractStatus("Extraction failed: " + error.message + " You can still fill the fields manually or use the ChatGPT fallback.", "error");
-      } finally {
-        setExtractLoading(false);
+        const helper = document.createElement("textarea");
+        helper.value = value;
+        helper.setAttribute("readonly", "");
+        helper.style.position = "fixed";
+        helper.style.opacity = "0";
+        document.body.appendChild(helper);
+        helper.select();
+        let copied = false;
+        try {
+          copied = document.execCommand("copy");
+        } catch (fallbackError) {
+          copied = false;
+        }
+        document.body.removeChild(helper);
+        return copied;
       }
     }
 
-    function toggleFallbackPanel() {
-      const isHidden = fallbackPanel.classList.contains("hidden");
-      fallbackPanel.classList.toggle("hidden", !isHidden);
-      fallbackToggleBtn.textContent = isHidden
-        ? "Hide ChatGPT fallback"
-        : "No key? Extract with ChatGPT instead";
+    async function prepareExtractionPrompt() {
+      setExtractLoading(true);
+      setExtractStatus("Preparing the ChatGPT extraction prompt...", "");
+
+      window.setTimeout(async function () {
+        const prompt = makeFallbackPrompt();
+        copyPromptInput.value = prompt;
+        fallbackPanel.classList.remove("hidden");
+
+        const copied = await copyTextToClipboard(prompt);
+        setExtractStatus(
+          copied
+            ? "Prompt copied. Paste it into ChatGPT, then paste the JSON result below and click Use analysis."
+            : "Prompt prepared. Copy it, paste it into ChatGPT, then paste the JSON result below.",
+          "success"
+        );
+        setExtractLoading(false);
+      }, 260);
     }
 
     function useManualJson() {
@@ -2191,6 +2063,10 @@ Return only valid JSON.`;
       const industry = escapeHTML(d.industry);
       const day180 = escapeHTML(getDay180Date(d.startDate) || "your Day 180 date");
       const note = escapeHTML(d.personalNote);
+      const firstLmsCourse = escapeHTML(d.firstLmsCourse);
+      const lmsCourseHTML = d.firstLmsCourse
+        ? `<div class="lms-course-highlight"><span>First LMS course to watch</span><strong>${firstLmsCourse}</strong><small>Start here after LMS access is given live on the onboarding call.</small></div>`
+        : "";
 
       const businessLine = d.businessName ? " for " + businessName : "";
       const industryLine = d.industry ? " in " + industry : "";
@@ -2264,6 +2140,7 @@ Return only valid JSON.`;
                 <div class="step-number">03</div>
                 <h3>Get your LMS access live</h3>
                 <p>We will walk you through the LMS, course library, templates, and implementation assets during the onboarding call.</p>
+                ${lmsCourseHTML}
               </div>
               <div class="step-footer">
                 ${lmsActionHTML()}
@@ -2377,7 +2254,7 @@ Return only valid JSON.`;
             <article class="card deliverable-card">
               <div class="deliverable-icon">6</div>
               <h3>LMS and full course library</h3>
-              <p>Your training, templates, recordings, and implementation assets will live inside the LMS.</p>
+              <p>Your training, templates, recordings, and implementation assets will live inside the LMS.${d.firstLmsCourse ? " Your first course to watch is <strong>" + firstLmsCourse + "</strong>." : ""}</p>
             </article>
           </div>
         </section>
@@ -2537,6 +2414,140 @@ Return only valid JSON.`;
       }, 420);
     }
 
+
+    function deckPlainText(data) {
+      const d = normalizeDeckData(data);
+      const roadmap = normalizeRoadmap(d.roadmap);
+      const business = clientBusinessLabel(d);
+      const day180 = getDay180Date(d.startDate) || "your Day 180 date";
+      const firstCourse = cleanText(d.firstLmsCourse) || "To be shared live during the onboarding call";
+      const current = d.currentSituation || "We will map the current bottleneck during onboarding.";
+      const desired = d.desiredSituation || "Build a repeatable client acquisition system that moves toward 20 paying clients in 180 days.";
+      const note = d.personalNote ? "\nClient-facing milestone: " + d.personalNote + "\n" : "";
+
+      return [
+        "WELCOME ABOARD, " + d.clientName,
+        business + " × Finest Clients",
+        "",
+        "The next 180 days will change how " + business + " gets clients.",
+        "You did not buy a course. You bought a system, a team, and a guarantee.",
+        "Our commitment: 20 paying clients in 180 days, or your money back.",
+        "",
+        "WHERE YOU ARE STARTING FROM",
+        current,
+        "",
+        "WHERE WE ARE TAKING YOU",
+        desired,
+        "",
+        "YOUR NEXT 48 HOURS",
+        "1. Complete your onboarding form: " + ONBOARDING_FORM_LINK,
+        "2. Book your Offer Engineering Call: " + OFFER_ENGINEERING_BOOKING_LINK,
+        "3. Get LMS access live during the onboarding call.",
+        "   First LMS course to watch: " + firstCourse,
+        "4. Join the WhatsApp Mastermind Group: " + WHATSAPP_MASTERMIND_GROUP_LINK,
+        "",
+        "YOUR CUSTOM 180-DAY ROADMAP",
+        "Phase 1, " + roadmap.phase1Window + ": " + roadmap.phase1Title,
+        roadmap.phase1Desc,
+        "",
+        "Phase 2, " + roadmap.phase2Window + ": " + roadmap.phase2Title,
+        roadmap.phase2Desc,
+        "",
+        "Phase 3, " + roadmap.phase3Window + ": " + roadmap.phase3Title,
+        roadmap.phase3Desc,
+        "",
+        "Milestone goal: 20 paying clients delivered by " + day180 + ".",
+        note,
+        "WHAT YOU HAVE ACCESS TO",
+        "Offer Engineering Call",
+        "Done-for-you VSL funnel",
+        "AI qualification and creative engine",
+        "Weekly sales call reviews",
+        "WhatsApp Mastermind Group",
+        "LMS and full course library",
+        "First LMS course to watch: " + firstCourse,
+        "",
+        "HOW THE GUARANTEE WORKS",
+        "If you do your four things and we still miss 20 paying clients by " + day180 + ", you get a full refund. This is also covered in your written agreement.",
+        "",
+        "WHAT TO EXPECT",
+        d.managerName + " is your account manager and your first point of contact.",
+        "Expect a weekly review call plus weekday WhatsApp support.",
+        "Budget about ₹30,000 per month for ad spend plus around ₹8,000 for tools, paid to the platforms, not to us.",
+        "",
+        "Welcome to Finest Clients.",
+        "See you on the inside.",
+        "The Finest Clients Team"
+      ].filter(Boolean).join("\n");
+    }
+
+    function deckDocHtml(data) {
+      const plain = deckPlainText(data);
+      const paragraphs = plain.split("\n").map(function (line) {
+        if (!line) return "<p>&nbsp;</p>";
+        const isHeading = line === line.toUpperCase() && line.length > 4;
+        if (isHeading) return "<h2>" + escapeHTML(line) + "</h2>";
+        return "<p>" + escapeHTML(line) + "</p>";
+      }).join("\n");
+
+      return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Finest Clients Onboarding</title>
+  <style>
+    body { font-family: Arial, sans-serif; color: #17130F; line-height: 1.55; max-width: 760px; margin: 40px auto; }
+    h1, h2 { font-family: Georgia, serif; color: #17130F; }
+    h2 { margin-top: 28px; border-top: 1px solid #D8C694; padding-top: 18px; }
+    p { margin: 7px 0; }
+  </style>
+</head>
+<body>
+  <h1>Finest Clients Onboarding</h1>
+  ${paragraphs}
+</body>
+</html>`;
+    }
+
+    function downloadEditableDoc() {
+      if (!currentDeckData) return;
+      const business = clientBusinessLabel(currentDeckData).replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").toLowerCase() || "client";
+      const html = deckDocHtml(currentDeckData);
+      const blob = new Blob([html], { type: "application/msword;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "finest-clients-onboarding-" + business + ".doc";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      showToast("Editable document downloaded.");
+    }
+
+    async function copyGoogleDocsVersion() {
+      if (!currentDeckData) return;
+      const html = deckDocHtml(currentDeckData);
+      const plain = deckPlainText(currentDeckData);
+
+      try {
+        if (navigator.clipboard && window.ClipboardItem) {
+          await navigator.clipboard.write([
+            new ClipboardItem({
+              "text/html": new Blob([html], { type: "text/html" }),
+              "text/plain": new Blob([plain], { type: "text/plain" })
+            })
+          ]);
+        } else {
+          await copyTextToClipboard(plain);
+        }
+        showToast("Google Docs version copied.");
+      } catch (error) {
+        const copied = await copyTextToClipboard(plain);
+        showToast(copied ? "Plain text version copied." : "Copy failed. Try the editable doc download.");
+      }
+    }
+
     async function copyClientLink() {
       if (!currentDeckData) return;
 
@@ -2585,11 +2596,11 @@ Return only valid JSON.`;
 
     startDateInput.addEventListener("input", updateDay180Preview);
 
-    apiKeyInput.addEventListener("change", saveApiKey);
-    apiKeyInput.addEventListener("blur", saveApiKey);
-
-    extractBtn.addEventListener("click", extractWithOpenAI);
-    fallbackToggleBtn.addEventListener("click", toggleFallbackPanel);
+    extractBtn.addEventListener("click", prepareExtractionPrompt);
+    copyPromptBtn.addEventListener("click", async function () {
+      const copied = await copyTextToClipboard(copyPromptInput.value || makeFallbackPrompt());
+      showToast(copied ? "Prompt copied." : "Copy failed. Select and copy manually.");
+    });
     useManualJsonBtn.addEventListener("click", useManualJson);
 
     roadmapPreset.addEventListener("change", function () {
@@ -2602,9 +2613,8 @@ Return only valid JSON.`;
       showToast("Default roadmap restored.");
     });
 
-    downloadPdfBtn.addEventListener("click", function () {
-      window.print();
-    });
+    downloadDocBtn.addEventListener("click", downloadEditableDoc);
+    copyGoogleDocsBtn.addEventListener("click", copyGoogleDocsVersion);
 
     copyLinkBtn.addEventListener("click", copyClientLink);
 
@@ -2619,7 +2629,6 @@ Return only valid JSON.`;
 
     (function init() {
       updateDay180Preview();
-      loadApiKey();
       copyPromptInput.value = makeFallbackPrompt();
       applyRoadmapPreset("default");
 

@@ -1,0 +1,2633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finest Clients Premium Onboarding Deck</title>
+
+  <style>
+    :root {
+      --bg: #0E0C0A;
+      --surface: #1A1714;
+      --surface-2: #211D18;
+      --text: #EFE9DE;
+      --muted: #A89E8E;
+      --faint: #6F665A;
+      --gold: #C7A24E;
+      --gold-bright: #E6CB86;
+      --hairline: rgba(231, 210, 160, 0.14);
+      --gold-soft: rgba(199, 162, 78, 0.18);
+      --gold-glow: rgba(230, 203, 134, 0.22);
+      --danger: #F0A6A6;
+      --success: #CFE6B1;
+      --shadow: 0 24px 90px rgba(0, 0, 0, 0.42);
+      --radius: 14px;
+      --radius-lg: 22px;
+      --serif: Georgia, "Times New Roman", Times, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(199, 162, 78, 0.16), transparent 34rem),
+        radial-gradient(circle at 12% 34%, rgba(230, 203, 134, 0.065), transparent 24rem),
+        linear-gradient(180deg, #0E0C0A 0%, #11100E 42%, #0E0C0A 100%);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.55;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 75%);
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+    }
+
+    .setup-screen {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 48px 18px;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+    }
+
+    .setup-screen.is-leaving {
+      opacity: 0;
+      transform: translateY(-14px);
+      pointer-events: none;
+    }
+
+    .setup-card {
+      width: min(940px, 100%);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)),
+        var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: clamp(24px, 5vw, 54px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .setup-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(230, 203, 134, 0.18), transparent 24rem),
+        radial-gradient(circle at 90% 20%, rgba(199, 162, 78, 0.10), transparent 18rem);
+      pointer-events: none;
+    }
+
+    .setup-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      font-weight: 800;
+      margin: 0 0 16px;
+    }
+
+    .setup-title {
+      font-family: var(--serif);
+      font-size: clamp(2.35rem, 6vw, 4.7rem);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+      margin: 0;
+      max-width: 760px;
+      font-weight: 500;
+    }
+
+    .setup-subtitle {
+      color: var(--muted);
+      margin: 18px 0 34px;
+      max-width: 690px;
+      font-size: 1rem;
+    }
+
+    .panel {
+      margin: 0 0 28px;
+      padding: 22px;
+      border: 1px solid rgba(231, 210, 160, 0.16);
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.038), rgba(255,255,255,0.014)),
+        rgba(14, 12, 10, 0.52);
+    }
+
+    .panel h2 {
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      font-size: clamp(1.55rem, 3vw, 2.2rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+      font-weight: 500;
+    }
+
+    .panel p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .api-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: end;
+      margin-top: 16px;
+    }
+
+    .note-text {
+      color: var(--faint);
+      font-size: 0.82rem;
+      margin-top: 7px;
+    }
+
+    .extract-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .text-link {
+      border: 0;
+      background: transparent;
+      color: var(--gold-bright);
+      padding: 0;
+      cursor: pointer;
+      font-weight: 850;
+      font-size: 0.9rem;
+      text-decoration: underline;
+      text-decoration-color: rgba(230, 203, 134, 0.38);
+      text-underline-offset: 4px;
+    }
+
+    .text-link:hover {
+      color: var(--text);
+    }
+
+    .fallback-panel {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(231, 210, 160, 0.14);
+      background: rgba(255,255,255,0.028);
+    }
+
+    .fallback-panel .prompt-box {
+      min-height: 230px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .extract-status {
+      margin-top: 12px;
+      min-height: 22px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .extract-status.error {
+      color: var(--danger);
+    }
+
+    .extract-status.success {
+      color: var(--success);
+    }
+
+    .review-reminder {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 13px;
+      border: 1px solid rgba(230,203,134,0.22);
+      background: rgba(231, 210, 160, 0.055);
+      color: var(--gold-bright);
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--hairline);
+      margin: 30px 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .phase-form-card {
+      padding: 18px;
+      border: 1px solid rgba(231, 210, 160, 0.12);
+      background: rgba(255,255,255,0.025);
+      border-radius: 14px;
+    }
+
+    .phase-form-card.full {
+      grid-column: 1 / -1;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: var(--text);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .optional {
+      color: var(--faint);
+      font-weight: 700;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--hairline);
+      background: rgba(14, 12, 10, 0.64);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 14px 14px;
+      outline: none;
+      transition: border-color 240ms ease, box-shadow 240ms ease, background 240ms ease;
+    }
+
+    select {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--gold-bright) 50%),
+        linear-gradient(135deg, var(--gold-bright) 50%, transparent 50%);
+      background-position:
+        calc(100% - 20px) calc(1em + 7px),
+        calc(100% - 14px) calc(1em + 7px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+    }
+
+    textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+
+    #salesTranscript {
+      min-height: 185px;
+    }
+
+    #internalNotes {
+      min-height: 150px;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(230, 203, 134, 0.46);
+      box-shadow: 0 0 0 4px rgba(199, 162, 78, 0.12);
+      background-color: rgba(14, 12, 10, 0.82);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(168, 158, 142, 0.58);
+    }
+
+    .date-preview {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1px solid var(--hairline);
+      border-radius: 14px;
+      padding: 16px;
+      background: rgba(231, 210, 160, 0.045);
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .date-preview strong {
+      color: var(--gold-bright);
+      font-family: var(--serif);
+      font-size: 1.12rem;
+      font-weight: 500;
+    }
+
+    .primary-button,
+    .gold-button,
+    .toolbar-button,
+    .secondary-button {
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 220ms ease, box-shadow 220ms ease, opacity 220ms ease, background 220ms ease;
+      white-space: nowrap;
+    }
+
+    .primary-button,
+    .gold-button {
+      color: #1A1308;
+      font-weight: 900;
+      letter-spacing: 0.015em;
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold), #B78A2C);
+      box-shadow:
+        0 14px 34px rgba(199, 162, 78, 0.22),
+        inset 0 1px 0 rgba(255,255,255,0.42);
+    }
+
+    .primary-button {
+      width: 100%;
+      margin-top: 26px;
+      padding: 16px 24px;
+      font-size: 0.98rem;
+    }
+
+    .gold-button {
+      padding: 13px 18px;
+      font-size: 0.9rem;
+    }
+
+    .secondary-button {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid rgba(231, 210, 160, 0.14);
+      padding: 13px 17px;
+      font-size: 0.9rem;
+      font-weight: 850;
+    }
+
+    .primary-button:hover,
+    .gold-button:hover,
+    .secondary-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .primary-button:hover,
+    .gold-button:hover {
+      box-shadow:
+        0 18px 42px rgba(199, 162, 78, 0.29),
+        inset 0 1px 0 rgba(255,255,255,0.42);
+    }
+
+    .secondary-button:hover {
+      background: rgba(231, 210, 160, 0.10);
+    }
+
+    .primary-button:active,
+    .gold-button:active,
+    .toolbar-button:active,
+    .secondary-button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.62;
+      transform: none !important;
+    }
+
+    .deck-screen {
+      min-height: 100vh;
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 620ms var(--ease), transform 620ms var(--ease);
+    }
+
+    .deck-screen.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .deck-wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 42px 0 96px;
+    }
+
+    .floating-toolbar {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 20;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      padding: 8px;
+      background: rgba(14, 12, 10, 0.72);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--hairline);
+      border-radius: 999px;
+      box-shadow: 0 16px 54px rgba(0,0,0,0.28);
+    }
+
+    .toolbar-button {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid rgba(231, 210, 160, 0.14);
+      padding: 10px 13px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .toolbar-button:hover {
+      background: rgba(231, 210, 160, 0.10);
+      transform: translateY(-1px);
+    }
+
+    .toolbar-button.gold {
+      color: #1A1308;
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+      border-color: transparent;
+    }
+
+    .section {
+      padding: clamp(58px, 9vw, 110px) 0;
+      border-bottom: 1px solid var(--hairline);
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 620ms var(--ease), transform 620ms var(--ease);
+    }
+
+    .section.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section:last-child {
+      border-bottom: 0;
+    }
+
+    .hero {
+      min-height: 86vh;
+      display: grid;
+      align-items: center;
+      position: relative;
+      border-bottom: 1px solid var(--hairline);
+      padding-top: 90px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 2%;
+      left: 50%;
+      width: 760px;
+      height: 760px;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(circle, rgba(230,203,134,0.22) 0%, rgba(199,162,78,0.10) 32%, transparent 66%);
+      filter: blur(8px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-content {
+      width: min(1030px, 100%);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .brand-lockup {
+      font-family: var(--serif);
+      font-size: clamp(1.65rem, 4vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      margin: 0 auto 22px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .brand-lockup span {
+      color: var(--gold-bright);
+      font-style: italic;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.25rem, 8.4vw, 7.8rem);
+      line-height: 0.88;
+      letter-spacing: -0.075em;
+      margin: 0 auto 26px;
+      max-width: 1080px;
+      font-weight: 500;
+    }
+
+    .gold-italic {
+      color: var(--gold-bright);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .hero-subline {
+      color: var(--muted);
+      font-size: clamp(1.04rem, 2.4vw, 1.36rem);
+      max-width: 780px;
+      margin: 0 auto 28px;
+    }
+
+    .commitment-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid rgba(230, 203, 134, 0.28);
+      background: rgba(231, 210, 160, 0.055);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 12px 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .commitment-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold-bright);
+      box-shadow: 0 0 18px rgba(230, 203, 134, 0.8);
+      flex: 0 0 auto;
+    }
+
+    .section-narrow {
+      width: min(850px, 100%);
+      margin: 0 auto;
+    }
+
+    .section h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.35rem, 5.4vw, 5.1rem);
+      line-height: 0.96;
+      letter-spacing: -0.058em;
+      margin: 0 0 22px;
+      font-weight: 500;
+    }
+
+    .large-copy {
+      font-family: var(--serif);
+      color: var(--text);
+      font-size: clamp(1.55rem, 3.2vw, 2.55rem);
+      line-height: 1.16;
+      letter-spacing: -0.035em;
+      margin: 0;
+    }
+
+    .muted-copy {
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 760px;
+      margin: 0;
+    }
+
+    .card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.012)),
+        var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.20);
+    }
+
+    .context-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .context-card {
+      padding: 28px;
+      min-height: 210px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .context-card::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -80px;
+      bottom: -90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(230,203,134,0.12), transparent 66%);
+    }
+
+    .context-card h3 {
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 0 0 14px;
+      font-weight: 500;
+    }
+
+    .context-card p {
+      color: var(--muted);
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .step-card {
+      padding: 22px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 0%, rgba(230,203,134,0.10), transparent 14rem);
+      opacity: 0;
+      transition: opacity 280ms ease;
+    }
+
+    .step-card:hover::before {
+      opacity: 1;
+    }
+
+    .step-number {
+      color: var(--gold-bright);
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      line-height: 1;
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .step-card h3,
+    .deliverable-card h3,
+    .phase-content h3,
+    .expect-card h3,
+    .column-card h3 {
+      margin: 0;
+      font-family: var(--serif);
+      color: var(--text);
+      font-size: 1.35rem;
+      line-height: 1.1;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+
+    .step-card p,
+    .deliverable-card p,
+    .phase-content p,
+    .expect-card p,
+    .column-card li {
+      color: var(--muted);
+      margin: 10px 0 0;
+      font-size: 0.94rem;
+      position: relative;
+    }
+
+    .mini-label {
+      display: inline-flex;
+      width: fit-content;
+      color: var(--gold-bright);
+      border: 1px solid rgba(230, 203, 134, 0.24);
+      background: rgba(231, 210, 160, 0.055);
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin: 14px 0;
+      position: relative;
+    }
+
+    .step-footer {
+      position: relative;
+      margin-top: 24px;
+    }
+
+    .timeline-shell {
+      margin-top: 46px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.72fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 34px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 10px;
+      width: 1px;
+      height: 0%;
+      background: linear-gradient(to bottom, transparent, var(--gold-bright), var(--gold), transparent);
+      box-shadow: 0 0 22px rgba(230,203,134,0.42);
+      transition: height 900ms var(--ease);
+    }
+
+    .section.revealed .timeline::before {
+      height: calc(100% - 20px);
+    }
+
+    .phase {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      position: relative;
+      padding: 0 0 34px;
+    }
+
+    .phase:last-child {
+      padding-bottom: 0;
+    }
+
+    .phase-dot {
+      position: absolute;
+      left: -34px;
+      top: 8px;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: var(--gold-bright);
+      border: 4px solid var(--bg);
+      box-shadow: 0 0 24px rgba(230,203,134,0.72);
+      opacity: 0;
+      transform: scale(0.6);
+      transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+    }
+
+    .section.revealed .phase-dot {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .phase:nth-child(2) .phase-dot {
+      transition-delay: 130ms;
+    }
+
+    .phase:nth-child(3) .phase-dot {
+      transition-delay: 260ms;
+    }
+
+    .phase-kicker {
+      color: var(--gold-bright);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .phase-content {
+      padding: 26px;
+    }
+
+    .milestones-card {
+      padding: 28px;
+      position: sticky;
+      top: 92px;
+    }
+
+    .milestones-card h3 {
+      margin: 0 0 18px;
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+    }
+
+    .milestone-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 13px;
+    }
+
+    .milestone-list li {
+      display: grid;
+      grid-template-columns: 12px 1fr;
+      gap: 10px;
+      color: var(--muted);
+      align-items: start;
+      font-size: 0.95rem;
+    }
+
+    .milestone-list li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(230,203,134,0.55);
+      margin-top: 8px;
+    }
+
+    .milestone-list strong {
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .milestone-goal {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 13px;
+      background:
+        linear-gradient(135deg, rgba(230,203,134,0.18), rgba(199,162,78,0.07));
+      border: 1px solid rgba(230,203,134,0.26);
+      color: var(--text);
+      font-weight: 900;
+    }
+
+    .custom-note {
+      margin-top: 16px;
+      padding: 17px;
+      border-radius: 13px;
+      border: 1px solid rgba(230,203,134,0.22);
+      background: rgba(231, 210, 160, 0.06);
+      color: var(--muted);
+    }
+
+    .custom-note strong {
+      color: var(--gold-bright);
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+    }
+
+    .deliverables-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .deliverable-card {
+      padding: 25px;
+      min-height: 198px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .deliverable-card::after {
+      content: "";
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(230,203,134,0.18);
+      background: radial-gradient(circle, rgba(230,203,134,0.13), transparent 70%);
+    }
+
+    .deliverable-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(230,203,134,0.25);
+      background: rgba(231, 210, 160, 0.06);
+      display: grid;
+      place-items: center;
+      color: var(--gold-bright);
+      margin-bottom: 22px;
+      font-family: var(--serif);
+      font-size: 1.2rem;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .column-card {
+      padding: 30px;
+    }
+
+    .column-card ul {
+      padding: 0;
+      margin: 20px 0 0;
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .column-card li {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 10px;
+    }
+
+    .column-card li::before {
+      content: "✓";
+      color: var(--gold-bright);
+      font-weight: 900;
+      line-height: 1.4;
+    }
+
+    .guarantee-note {
+      margin-top: 18px;
+      padding: 24px;
+      border-radius: 16px;
+      background:
+        linear-gradient(135deg, rgba(230,203,134,0.16), rgba(199,162,78,0.05));
+      border: 1px solid rgba(230,203,134,0.25);
+      color: var(--text);
+      font-size: 1.05rem;
+      font-weight: 750;
+    }
+
+    .expect-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .expect-card {
+      padding: 26px;
+      min-height: 175px;
+    }
+
+    .honest-note {
+      margin-top: 18px;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(231, 210, 160, 0.18);
+      background: rgba(255,255,255,0.035);
+      color: var(--muted);
+    }
+
+    .honest-note strong {
+      color: var(--gold-bright);
+    }
+
+    .close-section {
+      text-align: center;
+      min-height: 74vh;
+      display: grid;
+      place-items: center;
+      border-bottom: 0;
+    }
+
+    .close-box {
+      width: min(820px, 100%);
+      margin: 0 auto;
+    }
+
+    .close-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .signature {
+      margin-top: 32px;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 1.22rem;
+    }
+
+    .personal-context {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 28px 0 0;
+    }
+
+    .context-pill {
+      border: 1px solid var(--hairline);
+      background: rgba(255,255,255,0.035);
+      color: var(--muted);
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+    }
+
+    .context-pill strong {
+      color: var(--text);
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(18px);
+      opacity: 0;
+      pointer-events: none;
+      background: rgba(14, 12, 10, 0.86);
+      border: 1px solid rgba(230,203,134,0.22);
+      color: var(--text);
+      padding: 12px 16px;
+      border-radius: 999px;
+      box-shadow: 0 16px 50px rgba(0,0,0,0.35);
+      z-index: 40;
+      transition: opacity 260ms ease, transform 260ms ease;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .steps-grid,
+      .deliverables-grid,
+      .expect-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .timeline-shell,
+      .api-row {
+        grid-template-columns: 1fr;
+      }
+
+      .milestones-card {
+        position: relative;
+        top: auto;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .setup-screen {
+        padding: 24px 14px;
+      }
+
+      .setup-card {
+        padding: 28px 18px;
+      }
+
+      .form-grid,
+      .roadmap-grid,
+      .columns,
+      .steps-grid,
+      .deliverables-grid,
+      .expect-grid,
+      .context-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .date-preview {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .deck-wrap {
+        width: min(100% - 28px, 1120px);
+        padding-top: 18px;
+      }
+
+      .floating-toolbar {
+        top: auto;
+        right: 10px;
+        left: 10px;
+        bottom: 10px;
+        border-radius: 18px;
+        justify-content: center;
+      }
+
+      .toolbar-button {
+        flex: 1 1 auto;
+      }
+
+      .hero {
+        min-height: 78vh;
+        padding-top: 48px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.1rem, 16vw, 5.4rem);
+      }
+
+      .commitment-pill {
+        border-radius: 18px;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .section {
+        padding: 58px 0;
+      }
+
+      .step-card {
+        min-height: 230px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+      }
+
+      .section,
+      .deck-screen,
+      .setup-screen {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .timeline::before {
+        height: calc(100% - 20px) !important;
+      }
+
+      .phase-dot {
+        opacity: 1 !important;
+        transform: scale(1) !important;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 16mm;
+      }
+
+      html,
+      body {
+        background: #ffffff !important;
+        color: #1b1712 !important;
+      }
+
+      body::before,
+      .setup-screen,
+      .floating-toolbar,
+      .toast {
+        display: none !important;
+      }
+
+      .deck-screen {
+        display: block !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .deck-wrap {
+        width: 100% !important;
+        padding: 0 !important;
+      }
+
+      .hero,
+      .section {
+        min-height: auto !important;
+        padding: 20mm 0 !important;
+        border-bottom: 1px solid rgba(30, 24, 18, 0.14) !important;
+        opacity: 1 !important;
+        transform: none !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .hero::before,
+      .step-card::before,
+      .deliverable-card::after,
+      .context-card::after {
+        display: none !important;
+      }
+
+      .hero h1,
+      .brand-lockup,
+      .section h2,
+      .large-copy,
+      .phase-content h3,
+      .step-card h3,
+      .deliverable-card h3,
+      .expect-card h3,
+      .column-card h3,
+      .milestones-card h3,
+      .context-card h3 {
+        color: #1b1712 !important;
+      }
+
+      .gold-italic,
+      .brand-lockup span,
+      .eyebrow,
+      .phase-kicker,
+      .step-number,
+      .custom-note strong,
+      .honest-note strong {
+        color: #9b7324 !important;
+      }
+
+      .hero-subline,
+      .muted-copy,
+      .step-card p,
+      .deliverable-card p,
+      .phase-content p,
+      .expect-card p,
+      .column-card li,
+      .milestone-list li,
+      .custom-note,
+      .honest-note,
+      .signature,
+      .context-pill,
+      .context-card p {
+        color: #5d5449 !important;
+      }
+
+      .card,
+      .commitment-pill,
+      .guarantee-note,
+      .honest-note,
+      .context-pill,
+      .milestone-goal,
+      .custom-note {
+        background: #ffffff !important;
+        border: 1px solid rgba(30, 24, 18, 0.14) !important;
+        box-shadow: none !important;
+      }
+
+      .gold-button {
+        color: #1b1712 !important;
+        background: #e2c273 !important;
+        box-shadow: none !important;
+        border: 1px solid rgba(30, 24, 18, 0.18) !important;
+      }
+
+      .timeline::before {
+        background: #9b7324 !important;
+        box-shadow: none !important;
+        height: calc(100% - 20px) !important;
+      }
+
+      .phase-dot {
+        background: #9b7324 !important;
+        border-color: #ffffff !important;
+        box-shadow: none !important;
+        opacity: 1 !important;
+        transform: scale(1) !important;
+      }
+
+      a[href]::after {
+        content: "";
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-shell">
+    <main id="setupScreen" class="setup-screen" aria-label="Founder setup screen">
+      <section class="setup-card">
+        <div class="setup-inner">
+          <p class="eyebrow">Finest Clients private onboarding</p>
+          <h1 class="setup-title">Build a client-specific welcome deck.</h1>
+          <p class="setup-subtitle">
+            Paste the sales call transcript, auto-fill the setup, customize the roadmap, then launch a premium onboarding deck that feels made for one client.
+          </p>
+
+          <section class="panel" aria-label="Sales call transcript extraction">
+            <h2>Extract from sales call</h2>
+            <p>This saves typing. You still review, edit, and approve everything before the deck is created.</p>
+
+            <div class="field full">
+              <label for="salesTranscript">Paste the sales call transcript</label>
+              <textarea id="salesTranscript" placeholder="Paste the full sales call transcript here."></textarea>
+            </div>
+
+            <div class="api-row">
+              <div class="field">
+                <label for="apiKey">Your OpenAI API key</label>
+                <input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" />
+                <div class="note-text">
+                  Stored only in this browser. Never written into the file, shown in the deck, or put in any client link.
+                </div>
+              </div>
+
+              <button id="extractBtn" class="gold-button" type="button">Extract and fill</button>
+            </div>
+
+            <div class="extract-actions">
+              <button id="fallbackToggleBtn" class="text-link" type="button">No key? Extract with ChatGPT instead</button>
+            </div>
+
+            <div id="fallbackPanel" class="fallback-panel hidden">
+              <div class="field full">
+                <label for="copyPrompt">Ready-to-copy extraction prompt</label>
+                <textarea id="copyPrompt" class="prompt-box" readonly></textarea>
+              </div>
+
+              <div class="field full" style="margin-top: 14px;">
+                <label for="manualJson">Paste the JSON from ChatGPT here</label>
+                <textarea id="manualJson" placeholder='{"client_first_name":"","business_name":"","niche":"","start_date_mentioned":"","current_situation":"","desired_situation":"","extra_promises":[]}'></textarea>
+              </div>
+
+              <button id="useManualJsonBtn" class="secondary-button" type="button" style="margin-top: 14px;">Use this</button>
+            </div>
+
+            <div id="extractStatus" class="extract-status" aria-live="polite"></div>
+            <div class="review-reminder">Review and verify before sending. The AI can misread promises.</div>
+          </section>
+
+          <form id="setupForm" autocomplete="on">
+            <section class="panel" aria-label="Basic client details">
+              <h2>Client details</h2>
+              <p>These fields control the client-facing personalization in the deck and the share link.</p>
+
+              <div class="form-grid">
+                <div class="field">
+                  <label for="clientName">Client first name</label>
+                  <input id="clientName" name="clientName" type="text" required placeholder="Example: Rahul" />
+                </div>
+
+                <div class="field">
+                  <label for="businessName">Company or business name</label>
+                  <input id="businessName" name="businessName" type="text" placeholder="Example: GrowthLabs" />
+                </div>
+
+                <div class="field">
+                  <label for="industry">Niche or industry</label>
+                  <input id="industry" name="industry" type="text" placeholder="Example: B2B SaaS consulting" />
+                </div>
+
+                <div class="field">
+                  <label for="startDate">Start date</label>
+                  <input id="startDate" name="startDate" type="date" required />
+                </div>
+
+                <div class="date-preview" aria-live="polite">
+                  <span>Auto-calculated Day 180 date</span>
+                  <strong id="day180Preview">Select a start date</strong>
+                </div>
+
+                <div class="field full">
+                  <label for="managerName">Account manager name</label>
+                  <input id="managerName" name="managerName" type="text" required placeholder="Example: Mousam" />
+                </div>
+              </div>
+            </section>
+
+            <section class="panel" aria-label="Client context">
+              <h2>Client context</h2>
+              <p>This is what makes the deck feel built for their business, not like a template.</p>
+
+              <div class="form-grid">
+                <div class="field">
+                  <label for="currentSituation">Current situation</label>
+                  <textarea id="currentSituation" placeholder="Example: GrowthLabs is relying on referrals and has no predictable appointment flow."></textarea>
+                </div>
+
+                <div class="field">
+                  <label for="desiredSituation">Desired 180-day outcome</label>
+                  <textarea id="desiredSituation" placeholder="Example: Build a repeatable system that books qualified calls and closes 20 paying clients."></textarea>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel" aria-label="Roadmap customization">
+              <h2>Client-facing roadmap</h2>
+              <p>Use a preset or edit the phases manually. This section appears directly in the onboarding deck.</p>
+
+              <div class="form-grid">
+                <div class="field">
+                  <label for="roadmapPreset">Roadmap starting point</label>
+                  <select id="roadmapPreset">
+                    <option value="default">Start with offer engineering</option>
+                    <option value="vsl">Start with VSL launch</option>
+                    <option value="sales">Start with sales process improvement</option>
+                    <option value="custom">Custom roadmap</option>
+                  </select>
+                </div>
+
+                <div class="field" style="align-self: end;">
+                  <button id="useDefaultRoadmapBtn" class="secondary-button" type="button">Use default roadmap</button>
+                </div>
+              </div>
+
+              <div class="roadmap-grid">
+                <div class="phase-form-card full">
+                  <div class="form-grid">
+                    <div class="field">
+                      <label for="phase1Title">Phase 1 title</label>
+                      <input id="phase1Title" type="text" />
+                    </div>
+                    <div class="field">
+                      <label for="phase1Window">Phase 1 timeline</label>
+                      <input id="phase1Window" type="text" />
+                    </div>
+                    <div class="field full">
+                      <label for="phase1Desc">Phase 1 description</label>
+                      <textarea id="phase1Desc"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="phase-form-card full">
+                  <div class="form-grid">
+                    <div class="field">
+                      <label for="phase2Title">Phase 2 title</label>
+                      <input id="phase2Title" type="text" />
+                    </div>
+                    <div class="field">
+                      <label for="phase2Window">Phase 2 timeline</label>
+                      <input id="phase2Window" type="text" />
+                    </div>
+                    <div class="field full">
+                      <label for="phase2Desc">Phase 2 description</label>
+                      <textarea id="phase2Desc"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="phase-form-card full">
+                  <div class="form-grid">
+                    <div class="field">
+                      <label for="phase3Title">Phase 3 title</label>
+                      <input id="phase3Title" type="text" />
+                    </div>
+                    <div class="field">
+                      <label for="phase3Window">Phase 3 timeline</label>
+                      <input id="phase3Window" type="text" />
+                    </div>
+                    <div class="field full">
+                      <label for="phase3Desc">Phase 3 description</label>
+                      <textarea id="phase3Desc"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel" aria-label="Founder notes and client note">
+              <h2>Notes</h2>
+              <p>Founder-only notes stay private. Client-facing notes appear in the roadmap card only if you choose to add them.</p>
+
+              <div class="form-grid">
+                <div class="field full">
+                  <label for="internalNotes">Internal handoff notes <span class="optional">not shown to client</span></label>
+                  <textarea id="internalNotes" name="internalNotes" placeholder="This is for your master sheet or account manager. It never appears in the client deck and never goes into the client link."></textarea>
+                  <div class="note-text">
+                    These notes are founder-only. They are not shown in the deck, not printed in the PDF, and not encoded into the shared client link.
+                  </div>
+                </div>
+
+                <div class="field full">
+                  <label for="personalNote">Personal note or safe custom milestone <span class="optional">client-facing</span></label>
+                  <textarea id="personalNote" name="personalNote" placeholder="Example: Prioritize closing 3 retainers from existing warm leads before scaling ads."></textarea>
+                </div>
+              </div>
+            </section>
+
+            <button class="primary-button" type="submit">Launch welcome deck</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <section id="deckScreen" class="deck-screen hidden" aria-label="Personalized onboarding deck">
+      <div id="toolbar" class="floating-toolbar">
+        <button id="downloadPdfBtn" class="toolbar-button gold" type="button">Download PDF</button>
+        <button id="copyLinkBtn" class="toolbar-button" type="button">Copy client link</button>
+        <button id="backBtn" class="toolbar-button" type="button">Back to setup</button>
+      </div>
+
+      <div id="deckWrap" class="deck-wrap"></div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /*
+      EDIT THESE LINKS ONCE.
+      They are used inside every personalized client deck.
+      Leave LMS_LOGIN_LINK blank if LMS access is given live during the onboarding call.
+    */
+    const ONBOARDING_FORM_LINK = "https://forms.gle/PASTE-YOUR-ONBOARDING-FORM-LINK";
+    const OFFER_ENGINEERING_BOOKING_LINK = "https://calendly.com/PASTE-YOUR-OFFER-CALL-LINK";
+    const WHATSAPP_MASTERMIND_GROUP_LINK = "https://chat.whatsapp.com/PASTE-YOUR-GROUP-LINK";
+    const LMS_LOGIN_LINK = "";
+
+    /*
+      Do not hardcode any OpenAI API key here.
+      The key is entered in the tool and stored only in this browser through localStorage.
+    */
+    const OPENAI_API_KEY_STORAGE_KEY = "finestClientsOpenAIKey";
+
+    const setupScreen = document.getElementById("setupScreen");
+    const deckScreen = document.getElementById("deckScreen");
+    const deckWrap = document.getElementById("deckWrap");
+    const toolbar = document.getElementById("toolbar");
+    const setupForm = document.getElementById("setupForm");
+    const startDateInput = document.getElementById("startDate");
+    const day180Preview = document.getElementById("day180Preview");
+    const downloadPdfBtn = document.getElementById("downloadPdfBtn");
+    const copyLinkBtn = document.getElementById("copyLinkBtn");
+    const backBtn = document.getElementById("backBtn");
+    const toast = document.getElementById("toast");
+
+    const salesTranscriptInput = document.getElementById("salesTranscript");
+    const apiKeyInput = document.getElementById("apiKey");
+    const extractBtn = document.getElementById("extractBtn");
+    const fallbackToggleBtn = document.getElementById("fallbackToggleBtn");
+    const fallbackPanel = document.getElementById("fallbackPanel");
+    const copyPromptInput = document.getElementById("copyPrompt");
+    const manualJsonInput = document.getElementById("manualJson");
+    const useManualJsonBtn = document.getElementById("useManualJsonBtn");
+    const extractStatus = document.getElementById("extractStatus");
+    const roadmapPreset = document.getElementById("roadmapPreset");
+    const useDefaultRoadmapBtn = document.getElementById("useDefaultRoadmapBtn");
+
+    let currentDeckData = null;
+    let revealObserver = null;
+
+    const ROADMAP_PRESETS = {
+      default: {
+        phase1Title: "Offer Engineering and Positioning Lock",
+        phase1Window: "Week 1 to 2",
+        phase1Desc: "We clarify who you serve, what pain you solve, why your offer is hard to compare, and what message should lead the market.",
+        phase2Title: "VSL Funnel Build and India-First Launch",
+        phase2Window: "Week 2 to 4",
+        phase2Desc: "We build the conversion path, structure the video sales letter, prepare the campaign assets, and launch with a market-tested India-first angle.",
+        phase3Title: "AI Qualification, Creative Engine and Sales Training",
+        phase3Window: "Week 4 onward",
+        phase3Desc: "We improve lead quality, build a sharper creative engine, review calls weekly, and keep tightening the sales process until the system compounds."
+      },
+      vsl: {
+        phase1Title: "VSL Launch Preparation",
+        phase1Window: "Week 1 to 2",
+        phase1Desc: "We use the existing offer direction, sharpen the sales argument, prepare the VSL structure, and get the first launch assets ready fast.",
+        phase2Title: "Campaign Launch and Lead Flow",
+        phase2Window: "Week 2 to 4",
+        phase2Desc: "We launch the funnel, start generating appointments, review early signals, and fix the message based on real market response.",
+        phase3Title: "Sales Reviews, Creative Testing and Scale",
+        phase3Window: "Week 4 onward",
+        phase3Desc: "We review calls, improve conversion, test creative angles, improve lead quality, and scale what starts producing qualified conversations."
+      },
+      sales: {
+        phase1Title: "Sales Process Diagnosis",
+        phase1Window: "Week 1 to 2",
+        phase1Desc: "We review the sales calls, objections, follow-up process, and offer presentation to find where qualified prospects are leaking.",
+        phase2Title: "Close Rate Improvement Sprint",
+        phase2Window: "Week 2 to 4",
+        phase2Desc: "We rebuild the sales flow, sharpen the offer framing, improve objection handling, and tighten the call review rhythm.",
+        phase3Title: "Lead Flow, Creative Engine and Scale",
+        phase3Window: "Week 4 onward",
+        phase3Desc: "We feed the improved sales process with better-qualified calls, new creative angles, AI qualification, and weekly optimization."
+      },
+      custom: {
+        phase1Title: "Custom Phase 1",
+        phase1Window: "Week 1 to 2",
+        phase1Desc: "Write the first client-specific execution phase here.",
+        phase2Title: "Custom Phase 2",
+        phase2Window: "Week 2 to 4",
+        phase2Desc: "Write the second client-specific execution phase here.",
+        phase3Title: "Custom Phase 3",
+        phase3Window: "Week 4 onward",
+        phase3Desc: "Write the third client-specific execution phase here."
+      }
+    };
+
+    const EXTRACTION_INSTRUCTION = `Read the sales call transcript and return ONLY valid JSON, no other text, in exactly this shape:
+
+{
+  "client_first_name": "",
+  "business_name": "",
+  "niche": "",
+  "start_date_mentioned": "",
+  "current_situation": "",
+  "desired_situation": "",
+  "extra_promises": []
+}
+
+Rules:
+client_first_name, business_name, and niche are what the buyer said about themselves.
+current_situation is one short line on where their business is stuck now.
+desired_situation is one short line on the result they want in 180 days.
+start_date_mentioned is any start date discussed, else empty. If a clear date is available, return it in YYYY-MM-DD format.
+extra_promises is a list of any specific commitments, bonuses, discounts, or anything promised beyond the standard offer to close the deal.
+If none, return an empty list.
+Do not invent anything.
+If something was not clearly said, leave it blank or empty.
+Return only valid JSON.`;
+
+    function escapeHTML(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function cleanText(value) {
+      return String(value || "").trim();
+    }
+
+    function parseLocalDate(dateString) {
+      if (!dateString) return null;
+      const parts = dateString.split("-").map(Number);
+      if (parts.length !== 3) return null;
+      return new Date(parts[0], parts[1] - 1, parts[2]);
+    }
+
+    function toDateInputValue(date) {
+      if (!(date instanceof Date) || isNaN(date)) return "";
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return year + "-" + month + "-" + day;
+    }
+
+    function addDays(date, days) {
+      const result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+
+    function formatDate(date) {
+      if (!(date instanceof Date) || isNaN(date)) return "";
+      return date.toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    function getDay180Date(startDateString) {
+      const start = parseLocalDate(startDateString);
+      if (!start) return "";
+      return formatDate(addDays(start, 180));
+    }
+
+    function updateDay180Preview() {
+      const date = getDay180Date(startDateInput.value);
+      day180Preview.textContent = date || "Select a start date";
+    }
+
+    function setField(id, value) {
+      const field = document.getElementById(id);
+      if (field) field.value = value || "";
+    }
+
+    function getField(id) {
+      const field = document.getElementById(id);
+      return cleanText(field ? field.value : "");
+    }
+
+    function applyRoadmapPreset(presetName) {
+      const preset = ROADMAP_PRESETS[presetName] || ROADMAP_PRESETS.default;
+      Object.keys(preset).forEach(function (key) {
+        setField(key, preset[key]);
+      });
+    }
+
+    function getRoadmapFromForm() {
+      return {
+        phase1Title: getField("phase1Title"),
+        phase1Window: getField("phase1Window"),
+        phase1Desc: getField("phase1Desc"),
+        phase2Title: getField("phase2Title"),
+        phase2Window: getField("phase2Window"),
+        phase2Desc: getField("phase2Desc"),
+        phase3Title: getField("phase3Title"),
+        phase3Window: getField("phase3Window"),
+        phase3Desc: getField("phase3Desc")
+      };
+    }
+
+    function normalizeRoadmap(roadmap) {
+      const base = ROADMAP_PRESETS.default;
+      const safe = roadmap || {};
+      return {
+        phase1Title: cleanText(safe.phase1Title) || base.phase1Title,
+        phase1Window: cleanText(safe.phase1Window) || base.phase1Window,
+        phase1Desc: cleanText(safe.phase1Desc) || base.phase1Desc,
+        phase2Title: cleanText(safe.phase2Title) || base.phase2Title,
+        phase2Window: cleanText(safe.phase2Window) || base.phase2Window,
+        phase2Desc: cleanText(safe.phase2Desc) || base.phase2Desc,
+        phase3Title: cleanText(safe.phase3Title) || base.phase3Title,
+        phase3Window: cleanText(safe.phase3Window) || base.phase3Window,
+        phase3Desc: cleanText(safe.phase3Desc) || base.phase3Desc
+      };
+    }
+
+    function getFormData() {
+      return {
+        clientName: getField("clientName"),
+        businessName: getField("businessName"),
+        industry: getField("industry"),
+        startDate: getField("startDate"),
+        managerName: getField("managerName"),
+        currentSituation: getField("currentSituation"),
+        desiredSituation: getField("desiredSituation"),
+        personalNote: getField("personalNote"),
+        roadmap: getRoadmapFromForm()
+      };
+    }
+
+    function normalizeDeckData(data) {
+      const safe = data || {};
+      return {
+        clientName: cleanText(safe.clientName) || "there",
+        businessName: cleanText(safe.businessName),
+        industry: cleanText(safe.industry),
+        startDate: cleanText(safe.startDate),
+        managerName: cleanText(safe.managerName) || "your account manager",
+        currentSituation: cleanText(safe.currentSituation),
+        desiredSituation: cleanText(safe.desiredSituation),
+        personalNote: cleanText(safe.personalNote),
+        roadmap: normalizeRoadmap(safe.roadmap)
+      };
+    }
+
+    function makeClientHash(data) {
+      const normalized = normalizeDeckData(data);
+      return "#client=" + encodeURIComponent(JSON.stringify(normalized));
+    }
+
+    function readClientHash() {
+      const hash = window.location.hash || "";
+      if (!hash.startsWith("#client=")) return null;
+
+      try {
+        const raw = decodeURIComponent(hash.replace("#client=", ""));
+        return normalizeDeckData(JSON.parse(raw));
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(function () {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+    function setExtractStatus(message, type) {
+      extractStatus.textContent = message || "";
+      extractStatus.classList.remove("error", "success");
+
+      if (type) {
+        extractStatus.classList.add(type);
+      }
+    }
+
+    function setExtractLoading(isLoading) {
+      extractBtn.disabled = isLoading;
+      extractBtn.textContent = isLoading ? "Extracting..." : "Extract and fill";
+    }
+
+    function saveApiKey() {
+      const key = cleanText(apiKeyInput.value);
+      if (key) {
+        localStorage.setItem(OPENAI_API_KEY_STORAGE_KEY, key);
+      }
+    }
+
+    function loadApiKey() {
+      const savedKey = localStorage.getItem(OPENAI_API_KEY_STORAGE_KEY) || "";
+      apiKeyInput.value = savedKey;
+    }
+
+    function makeFallbackPrompt() {
+      return EXTRACTION_INSTRUCTION + "\n\nSales call transcript:\n\n[PASTE TRANSCRIPT HERE]";
+    }
+
+    function safeParseJson(raw) {
+      const text = cleanText(raw);
+
+      if (!text) {
+        throw new Error("No JSON found.");
+      }
+
+      try {
+        return JSON.parse(text);
+      } catch (firstError) {
+        const withoutFence = text
+          .replace(/^```json\s*/i, "")
+          .replace(/^```\s*/i, "")
+          .replace(/```$/i, "")
+          .trim();
+
+        try {
+          return JSON.parse(withoutFence);
+        } catch (secondError) {
+          const firstBrace = withoutFence.indexOf("{");
+          const lastBrace = withoutFence.lastIndexOf("}");
+
+          if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+            const extracted = withoutFence.slice(firstBrace, lastBrace + 1);
+            return JSON.parse(extracted);
+          }
+
+          throw new Error("The response was not valid JSON.");
+        }
+      }
+    }
+
+    function normalizeExtraction(json) {
+      const safe = json || {};
+      const promises = Array.isArray(safe.extra_promises)
+        ? safe.extra_promises.map(cleanText).filter(Boolean)
+        : [];
+
+      return {
+        client_first_name: cleanText(safe.client_first_name),
+        business_name: cleanText(safe.business_name),
+        niche: cleanText(safe.niche),
+        start_date_mentioned: cleanText(safe.start_date_mentioned),
+        current_situation: cleanText(safe.current_situation),
+        desired_situation: cleanText(safe.desired_situation),
+        extra_promises: promises
+      };
+    }
+
+    function parseMentionedDate(value) {
+      const raw = cleanText(value);
+      if (!raw) return "";
+
+      const isoMatch = raw.match(/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/);
+      if (isoMatch) {
+        const date = new Date(Number(isoMatch[1]), Number(isoMatch[2]) - 1, Number(isoMatch[3]));
+        return toDateInputValue(date);
+      }
+
+      const slashMatch = raw.match(/\b(\d{1,2})[\/.](\d{1,2})[\/.](\d{2,4})\b/);
+      if (slashMatch) {
+        const day = Number(slashMatch[1]);
+        const month = Number(slashMatch[2]);
+        let year = Number(slashMatch[3]);
+        if (year < 100) year += 2000;
+
+        const date = new Date(year, month - 1, day);
+        if (!isNaN(date)) return toDateInputValue(date);
+      }
+
+      const dashMatch = raw.match(/\b(\d{1,2})-(\d{1,2})-(\d{2,4})\b/);
+      if (dashMatch) {
+        const day = Number(dashMatch[1]);
+        const month = Number(dashMatch[2]);
+        let year = Number(dashMatch[3]);
+        if (year < 100) year += 2000;
+
+        const date = new Date(year, month - 1, day);
+        if (!isNaN(date)) return toDateInputValue(date);
+      }
+
+      const parsed = new Date(raw);
+      if (!isNaN(parsed)) {
+        return toDateInputValue(parsed);
+      }
+
+      return "";
+    }
+
+    function buildInternalNotes(extraction) {
+      const promises = extraction.extra_promises && extraction.extra_promises.length
+        ? extraction.extra_promises.map(function (item, index) {
+            return (index + 1) + ". " + item;
+          }).join("\n")
+        : "None clearly found.";
+
+      return [
+        "Current situation:",
+        extraction.current_situation || "Not clearly stated.",
+        "",
+        "Desired situation:",
+        extraction.desired_situation || "Not clearly stated.",
+        "",
+        "Extra promises, bonuses, discounts, or special commitments:",
+        promises
+      ].join("\n");
+    }
+
+    function fillSetupFromExtraction(rawJson, sourceLabel) {
+      const extraction = normalizeExtraction(rawJson);
+
+      if (extraction.client_first_name) setField("clientName", extraction.client_first_name);
+      if (extraction.business_name) setField("businessName", extraction.business_name);
+      if (extraction.niche) setField("industry", extraction.niche);
+      if (extraction.current_situation) setField("currentSituation", extraction.current_situation);
+      if (extraction.desired_situation) setField("desiredSituation", extraction.desired_situation);
+
+      if (extraction.start_date_mentioned) {
+        const parsedDate = parseMentionedDate(extraction.start_date_mentioned);
+        if (parsedDate) {
+          setField("startDate", parsedDate);
+          updateDay180Preview();
+        }
+      }
+
+      setField("internalNotes", buildInternalNotes(extraction));
+
+      /*
+        Guardrail:
+        This field is client-facing, so extraction never fills it.
+        Founder must manually decide what is safe to show.
+      */
+      setField("personalNote", "");
+
+      setExtractStatus("Filled from " + sourceLabel + ". Review and edit before launching.", "success");
+    }
+
+    async function extractWithOpenAI() {
+      const transcript = cleanText(salesTranscriptInput.value);
+      const apiKey = cleanText(apiKeyInput.value);
+
+      if (!transcript) {
+        setExtractStatus("Paste the sales call transcript first.", "error");
+        return;
+      }
+
+      if (!apiKey) {
+        setExtractStatus("Enter your OpenAI API key, or use the no-key ChatGPT fallback.", "error");
+        return;
+      }
+
+      saveApiKey();
+      setExtractLoading(true);
+      setExtractStatus("Sending transcript for extraction. Nothing is added to the client link.", "");
+
+      try {
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + apiKey
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            temperature: 0,
+            response_format: { type: "json_object" },
+            messages: [
+              {
+                role: "system",
+                content: "You extract structured onboarding setup data from sales call transcripts. Return only valid JSON."
+              },
+              {
+                role: "user",
+                content: EXTRACTION_INSTRUCTION + "\n\nSales call transcript:\n\n" + transcript
+              }
+            ]
+          })
+        });
+
+        const result = await response.json().catch(function () {
+          throw new Error("The API returned an unreadable response.");
+        });
+
+        if (!response.ok) {
+          const apiMessage = result && result.error && result.error.message
+            ? result.error.message
+            : "OpenAI API request failed.";
+          throw new Error(apiMessage);
+        }
+
+        const content = result &&
+          result.choices &&
+          result.choices[0] &&
+          result.choices[0].message &&
+          result.choices[0].message.content;
+
+        if (!content) {
+          throw new Error("The API response did not include extraction JSON.");
+        }
+
+        const json = safeParseJson(content);
+        fillSetupFromExtraction(json, "OpenAI");
+      } catch (error) {
+        setExtractStatus("Extraction failed: " + error.message + " You can still fill the fields manually or use the ChatGPT fallback.", "error");
+      } finally {
+        setExtractLoading(false);
+      }
+    }
+
+    function toggleFallbackPanel() {
+      const isHidden = fallbackPanel.classList.contains("hidden");
+      fallbackPanel.classList.toggle("hidden", !isHidden);
+      fallbackToggleBtn.textContent = isHidden
+        ? "Hide ChatGPT fallback"
+        : "No key? Extract with ChatGPT instead";
+    }
+
+    function useManualJson() {
+      try {
+        const json = safeParseJson(manualJsonInput.value);
+        fillSetupFromExtraction(json, "pasted JSON");
+      } catch (error) {
+        setExtractStatus("That JSON could not be used: " + error.message, "error");
+      }
+    }
+
+    function businessContextHTML(data) {
+      const items = [];
+
+      if (data.businessName) {
+        items.push("<span class='context-pill'><strong>Business:</strong> " + escapeHTML(data.businessName) + "</span>");
+      }
+
+      if (data.industry) {
+        items.push("<span class='context-pill'><strong>Niche:</strong> " + escapeHTML(data.industry) + "</span>");
+      }
+
+      if (data.startDate) {
+        const start = parseLocalDate(data.startDate);
+        if (start) {
+          items.push("<span class='context-pill'><strong>Start date:</strong> " + escapeHTML(formatDate(start)) + "</span>");
+        }
+      }
+
+      if (!items.length) return "";
+      return "<div class='personal-context'>" + items.join("") + "</div>";
+    }
+
+    function clientBusinessLabel(data) {
+      if (data.businessName) return data.businessName;
+      if (data.clientName && data.clientName !== "there") return data.clientName;
+      return "your business";
+    }
+
+    function renderContextSection(data) {
+      const business = escapeHTML(clientBusinessLabel(data));
+      const current = data.currentSituation
+        ? escapeHTML(data.currentSituation)
+        : "We will use the onboarding form and first call to map the current bottleneck clearly before launch.";
+      const desired = data.desiredSituation
+        ? escapeHTML(data.desiredSituation)
+        : "The goal is to build a repeatable client acquisition system that moves toward 20 paying clients in 180 days.";
+
+      return `
+        <section class="section">
+          <p class="eyebrow">Client-specific context</p>
+          <h2>Where ${business} starts, and where we are taking it.</h2>
+          <div class="context-grid">
+            <article class="card context-card">
+              <p class="eyebrow">Current situation</p>
+              <h3>Starting point</h3>
+              <p>${current}</p>
+            </article>
+            <article class="card context-card">
+              <p class="eyebrow">Desired outcome</p>
+              <h3>Day 180 direction</h3>
+              <p>${desired}</p>
+            </article>
+          </div>
+        </section>
+      `;
+    }
+
+    function lmsActionHTML() {
+      if (cleanText(LMS_LOGIN_LINK)) {
+        return `<a class="gold-button" href="${LMS_LOGIN_LINK}" target="_blank" rel="noopener">Open LMS</a>`;
+      }
+
+      return `<span class="mini-label">Access given live on call</span>`;
+    }
+
+    function renderDeck(data) {
+      const d = normalizeDeckData(data);
+      const roadmap = normalizeRoadmap(d.roadmap);
+      const client = escapeHTML(d.clientName);
+      const manager = escapeHTML(d.managerName);
+      const business = escapeHTML(clientBusinessLabel(d));
+      const businessName = escapeHTML(d.businessName);
+      const industry = escapeHTML(d.industry);
+      const day180 = escapeHTML(getDay180Date(d.startDate) || "your Day 180 date");
+      const note = escapeHTML(d.personalNote);
+
+      const businessLine = d.businessName ? " for " + businessName : "";
+      const industryLine = d.industry ? " in " + industry : "";
+      const nicheLine = d.industry ? " for your " + industry + " market" : "";
+
+      const noteHTML = d.personalNote
+        ? "<div class='custom-note'><strong>Client-facing milestone</strong>" + note + "</div>"
+        : "";
+
+      deckWrap.innerHTML = `
+        <section class="hero section revealed">
+          <div class="hero-content">
+            <p class="eyebrow">Welcome aboard, ${client}</p>
+            <div class="brand-lockup">${business} <span>× Finest Clients</span></div>
+            <h1>The next 180 days will change how ${business} <span class="gold-italic">gets clients.</span></h1>
+            <p class="hero-subline">
+              You did not buy a course. You bought a system, a team, and a guarantee built to install predictable client acquisition${businessLine}${industryLine}.
+            </p>
+            <div class="commitment-pill">Our commitment: 20 paying clients in 180 days, or your money back.</div>
+            ${businessContextHTML(d)}
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-narrow">
+            <p class="eyebrow">The decision</p>
+            <p class="large-copy">
+              You made a rare, smart move. Instead of chasing referrals, hoping content works, or rebuilding your funnel every month, you chose to install a client acquisition system${nicheLine}.
+            </p>
+            <p class="muted-copy" style="margin-top: 22px;">
+              That is the difference between staying dependent on luck and building a business that can be managed, measured, and scaled. You made the right call.
+            </p>
+          </div>
+        </section>
+
+        ${renderContextSection(d)}
+
+        <section class="section">
+          <p class="eyebrow">Start here</p>
+          <h2>Your next <span class="gold-italic">48 hours.</span></h2>
+          <p class="muted-copy">
+            These four actions unlock the full onboarding process. Do them in order so the team can move fast without chasing missing inputs.
+          </p>
+
+          <div class="steps-grid">
+            <article class="card step-card">
+              <div>
+                <div class="step-number">01</div>
+                <h3>Complete your onboarding form</h3>
+                <span class="mini-label">Do this first</span>
+                <p>This gives the team the raw material to understand your offer, niche, numbers, and current bottlenecks.</p>
+              </div>
+              <div class="step-footer">
+                <a class="gold-button" href="${ONBOARDING_FORM_LINK}" target="_blank" rel="noopener">Open form</a>
+              </div>
+            </article>
+
+            <article class="card step-card">
+              <div>
+                <div class="step-number">02</div>
+                <h3>Book your Offer Engineering Call</h3>
+                <p>This is where we lock the execution direction, positioning angle, and first launch path for ${business}.</p>
+              </div>
+              <div class="step-footer">
+                <a class="gold-button" href="${OFFER_ENGINEERING_BOOKING_LINK}" target="_blank" rel="noopener">Book call</a>
+              </div>
+            </article>
+
+            <article class="card step-card">
+              <div>
+                <div class="step-number">03</div>
+                <h3>Get your LMS access live</h3>
+                <p>We will walk you through the LMS, course library, templates, and implementation assets during the onboarding call.</p>
+              </div>
+              <div class="step-footer">
+                ${lmsActionHTML()}
+              </div>
+            </article>
+
+            <article class="card step-card">
+              <div>
+                <div class="step-number">04</div>
+                <h3>Join the WhatsApp Mastermind Group</h3>
+                <p>This is where mastermind members communicate, ask questions, share updates, and stay connected.</p>
+              </div>
+              <div class="step-footer">
+                <a class="gold-button" href="${WHATSAPP_MASTERMIND_GROUP_LINK}" target="_blank" rel="noopener">Join group</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <p class="eyebrow">The operating plan</p>
+          <h2>Your custom 180-day <span class="gold-italic">roadmap.</span></h2>
+          <p class="muted-copy">
+            This roadmap is based on the starting point we choose for ${business}. The plan can begin with offer engineering, VSL launch, sales improvement, or a custom execution path.
+          </p>
+
+          <div class="timeline-shell">
+            <div class="timeline">
+              <article class="phase">
+                <span class="phase-dot"></span>
+                <div class="card phase-content">
+                  <div class="phase-kicker">Phase 1 · ${escapeHTML(roadmap.phase1Window)}</div>
+                  <h3>${escapeHTML(roadmap.phase1Title)}</h3>
+                  <p>${escapeHTML(roadmap.phase1Desc)}</p>
+                </div>
+              </article>
+
+              <article class="phase">
+                <span class="phase-dot"></span>
+                <div class="card phase-content">
+                  <div class="phase-kicker">Phase 2 · ${escapeHTML(roadmap.phase2Window)}</div>
+                  <h3>${escapeHTML(roadmap.phase2Title)}</h3>
+                  <p>${escapeHTML(roadmap.phase2Desc)}</p>
+                </div>
+              </article>
+
+              <article class="phase">
+                <span class="phase-dot"></span>
+                <div class="card phase-content">
+                  <div class="phase-kicker">Phase 3 · ${escapeHTML(roadmap.phase3Window)}</div>
+                  <h3>${escapeHTML(roadmap.phase3Title)}</h3>
+                  <p>${escapeHTML(roadmap.phase3Desc)}</p>
+                </div>
+              </article>
+            </div>
+
+            <aside class="card milestones-card">
+              <h3>Milestones to watch</h3>
+              <ul class="milestone-list">
+                <li><span><strong>Execution direction:</strong> locked after onboarding inputs and first strategic review</span></li>
+                <li><span><strong>First launch assets:</strong> Week 2 to 4 depending on readiness</span></li>
+                <li><span><strong>First appointments:</strong> once the funnel and campaign are live</span></li>
+                <li><span><strong>Review rhythm:</strong> weekly sales and system improvement</span></li>
+              </ul>
+              <div class="milestone-goal">
+                20 paying clients delivered by ${day180}.
+              </div>
+              ${noteHTML}
+            </aside>
+          </div>
+        </section>
+
+        <section class="section">
+          <p class="eyebrow">The assets</p>
+          <h2>What you have <span class="gold-italic">access to.</span></h2>
+          <p class="muted-copy">
+            This is the working stack we use to turn positioning, funnel, follow-up, community, and sales execution into one system.
+          </p>
+
+          <div class="deliverables-grid">
+            <article class="card deliverable-card">
+              <div class="deliverable-icon">1</div>
+              <h3>Offer Engineering Call</h3>
+              <p>A strategic call to sharpen the promise, ICP, pain angle, proof direction, and sales narrative.</p>
+            </article>
+
+            <article class="card deliverable-card">
+              <div class="deliverable-icon">2</div>
+              <h3>Done-for-you VSL funnel</h3>
+              <p>A premium funnel path built to educate, qualify, and move serious prospects toward the call.</p>
+            </article>
+
+            <article class="card deliverable-card">
+              <div class="deliverable-icon">3</div>
+              <h3>AI qualification and creative engine</h3>
+              <p>Systems to qualify leads, improve follow-up, and keep new creative angles moving.</p>
+            </article>
+
+            <article class="card deliverable-card">
+              <div class="deliverable-icon">4</div>
+              <h3>Weekly sales call reviews</h3>
+              <p>Review calls, fix objections, improve close rate, and make the offer easier to buy.</p>
+            </article>
+
+            <article class="card deliverable-card">
+              <div class="deliverable-icon">5</div>
+              <h3>WhatsApp Mastermind Group</h3>
+              <p>A focused member group for communication, questions, updates, and community momentum.</p>
+            </article>
+
+            <article class="card deliverable-card">
+              <div class="deliverable-icon">6</div>
+              <h3>LMS and full course library</h3>
+              <p>Your training, templates, recordings, and implementation assets will live inside the LMS.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <p class="eyebrow">The partnership</p>
+          <h2>How the guarantee <span class="gold-italic">works.</span></h2>
+          <p class="muted-copy">
+            A strong guarantee only works when both sides do the work. Here is the simple operating agreement.
+          </p>
+
+          <div class="columns">
+            <article class="card column-card">
+              <h3>What we commit to</h3>
+              <ul>
+                <li>Build and launch the system across the agreed execution roadmap.</li>
+                <li>Review sales calls weekly and help improve conversion.</li>
+                <li>Support communication through WhatsApp during weekdays.</li>
+                <li>Deliver 20 clients in 180 days or refund your money.</li>
+              </ul>
+            </article>
+
+            <article class="card column-card">
+              <h3>What we need from you</h3>
+              <ul>
+                <li>Film the videos and assets we ask for.</li>
+                <li>Take the calls we book.</li>
+                <li>Attend the weekly reviews.</li>
+                <li>Implement the offer, funnel, and sales changes.</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="guarantee-note">
+            Plain terms: if you do your four things and we still miss 20 paying clients by ${day180}, you get a full refund. This is also covered in your written agreement.
+          </div>
+        </section>
+
+        <section class="section">
+          <p class="eyebrow">The rhythm</p>
+          <h2>What to <span class="gold-italic">expect.</span></h2>
+          <p class="muted-copy">
+            Premium execution feels calm because the roles are clear. You will know who to speak to, what to do, and what matters each week.
+          </p>
+
+          <div class="expect-grid">
+            <article class="card expect-card">
+              <h3>Your point of contact</h3>
+              <p>${manager} is your account manager and your first point of contact during onboarding and execution.</p>
+            </article>
+
+            <article class="card expect-card">
+              <h3>Weekly review rhythm</h3>
+              <p>Expect a weekly review call plus weekday WhatsApp support for priority execution questions.</p>
+            </article>
+
+            <article class="card expect-card">
+              <h3>Your time requirement</h3>
+              <p>Plan for about one hour to film in Week 2, then roughly one hour a week for reviews and implementation.</p>
+            </article>
+          </div>
+
+          <div class="honest-note">
+            <strong>Honest heads-up:</strong> budget about ₹30,000 per month for ad spend plus around ₹8,000 for tools. This is paid to the platforms, not to us. The first 30 days are mostly setup, launch, and signal gathering before results begin to compound.
+          </div>
+        </section>
+
+        <section class="section close-section">
+          <div class="close-box">
+            <p class="eyebrow">Your first move</p>
+            <h2>Welcome to <span class="gold-italic">Finest Clients.</span></h2>
+            <p class="hero-subline">
+              Complete your onboarding form first so the team can start building the system around ${business}, your market, and your goals.
+            </p>
+            <a class="gold-button" href="${ONBOARDING_FORM_LINK}" target="_blank" rel="noopener">Complete onboarding form</a>
+            <div class="signature">See you on the inside.<br />The Finest Clients Team</div>
+          </div>
+        </section>
+      `;
+
+      setupRevealAnimations();
+    }
+
+    function setupRevealAnimations() {
+      const sections = deckWrap.querySelectorAll(".section");
+
+      if (revealObserver) {
+        revealObserver.disconnect();
+      }
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        sections.forEach(function (section) {
+          section.classList.add("revealed");
+        });
+        return;
+      }
+
+      revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.14,
+        rootMargin: "0px 0px -8% 0px"
+      });
+
+      sections.forEach(function (section) {
+        if (!section.classList.contains("hero")) {
+          revealObserver.observe(section);
+        }
+      });
+    }
+
+    function showDeck(data, options) {
+      currentDeckData = normalizeDeckData(data);
+      renderDeck(currentDeckData);
+
+      setupScreen.classList.add("hidden");
+      deckScreen.classList.remove("hidden");
+
+      if (options && options.hideToolbar) {
+        toolbar.classList.add("hidden");
+      } else {
+        toolbar.classList.remove("hidden");
+      }
+
+      requestAnimationFrame(function () {
+        deckScreen.classList.add("is-visible");
+        window.scrollTo({ top: 0, behavior: "instant" });
+      });
+    }
+
+    function launchFromSetup(data) {
+      currentDeckData = normalizeDeckData(data);
+      renderDeck(currentDeckData);
+      deckScreen.classList.remove("hidden");
+      toolbar.classList.remove("hidden");
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (reduceMotion) {
+        setupScreen.classList.add("hidden");
+        deckScreen.classList.add("is-visible");
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      setupScreen.classList.add("is-leaving");
+
+      window.setTimeout(function () {
+        setupScreen.classList.add("hidden");
+        deckScreen.classList.add("is-visible");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 420);
+    }
+
+    async function copyClientLink() {
+      if (!currentDeckData) return;
+
+      const cleanUrl = window.location.href.split("#")[0];
+      const clientUrl = cleanUrl + makeClientHash(currentDeckData);
+
+      try {
+        await navigator.clipboard.writeText(clientUrl);
+        showToast("Client link copied.");
+      } catch (error) {
+        const helper = document.createElement("textarea");
+        helper.value = clientUrl;
+        helper.setAttribute("readonly", "");
+        helper.style.position = "fixed";
+        helper.style.opacity = "0";
+        document.body.appendChild(helper);
+        helper.select();
+
+        try {
+          document.execCommand("copy");
+          showToast("Client link copied.");
+        } catch (fallbackError) {
+          showToast("Copy failed. Select the URL manually.");
+        }
+
+        document.body.removeChild(helper);
+      }
+    }
+
+    function backToSetup() {
+      window.location.hash = "";
+      deckScreen.classList.remove("is-visible");
+      deckScreen.classList.add("hidden");
+      toolbar.classList.remove("hidden");
+      setupScreen.classList.remove("hidden", "is-leaving");
+      window.scrollTo(0, 0);
+    }
+
+    setupForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      if (!setupForm.reportValidity()) return;
+
+      launchFromSetup(getFormData());
+    });
+
+    startDateInput.addEventListener("input", updateDay180Preview);
+
+    apiKeyInput.addEventListener("change", saveApiKey);
+    apiKeyInput.addEventListener("blur", saveApiKey);
+
+    extractBtn.addEventListener("click", extractWithOpenAI);
+    fallbackToggleBtn.addEventListener("click", toggleFallbackPanel);
+    useManualJsonBtn.addEventListener("click", useManualJson);
+
+    roadmapPreset.addEventListener("change", function () {
+      applyRoadmapPreset(roadmapPreset.value);
+    });
+
+    useDefaultRoadmapBtn.addEventListener("click", function () {
+      roadmapPreset.value = "default";
+      applyRoadmapPreset("default");
+      showToast("Default roadmap restored.");
+    });
+
+    downloadPdfBtn.addEventListener("click", function () {
+      window.print();
+    });
+
+    copyLinkBtn.addEventListener("click", copyClientLink);
+
+    backBtn.addEventListener("click", backToSetup);
+
+    window.addEventListener("hashchange", function () {
+      const data = readClientHash();
+      if (data) {
+        showDeck(data, { hideToolbar: true });
+      }
+    });
+
+    (function init() {
+      updateDay180Preview();
+      loadApiKey();
+      copyPromptInput.value = makeFallbackPrompt();
+      applyRoadmapPreset("default");
+
+      const sharedData = readClientHash();
+      if (sharedData) {
+        showDeck(sharedData, { hideToolbar: true });
+      }
+    })();
+  </script>
+</body>
+</html>

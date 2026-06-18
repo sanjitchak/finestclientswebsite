@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Master Deck Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0..100,0..1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0E1014;
+      --paper: #FBFAF7;
+      --accent: #1E3A5F;
+      --rule: #D8D4CB;
+      --muted: #6B6863;
+      --highlight: #C8553D;
+      --complete: #2F7D4F;
+      --field: #FFFFFF;
+      --soft: #F2EFE8;
+      --blackout: #07080A;
+      --space-1: 6px;
+      --space-2: 10px;
+      --space-3: 16px;
+      --space-4: 24px;
+      --space-5: 36px;
+      --space-6: 56px;
+      --space-7: 80px;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    button, input, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.42;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .serif {
+      font-family: 'Fraunces', Georgia, serif;
+    }
+
+    .view {
+      min-height: 100vh;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Edit mode */
+    .edit-view {
+      background:
+        linear-gradient(90deg, rgba(216, 212, 203, 0.28) 1px, transparent 1px) 0 0 / 80px 80px,
+        var(--paper);
+      padding-bottom: 112px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: var(--space-4);
+      padding: 22px clamp(18px, 4vw, 52px);
+      border-bottom: 1px solid var(--rule);
+      background: rgba(251, 250, 247, 0.92);
+      backdrop-filter: blur(16px);
+    }
+
+    .brand-title {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(30px, 4vw, 52px);
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .saved-indicator {
+      min-width: 76px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-align: right;
+      opacity: 0.78;
+      transition: color 160ms ease, opacity 160ms ease;
+    }
+
+    .saved-indicator.active {
+      color: var(--complete);
+      opacity: 1;
+    }
+
+    .text-button,
+    .primary-button,
+    .danger-button {
+      border: 1px solid var(--rule);
+      background: rgba(251, 250, 247, 0.88);
+      color: var(--ink);
+      padding: 11px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 0;
+      transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+    }
+
+    .text-button:hover,
+    .primary-button:hover {
+      border-color: var(--accent);
+      background: #fff;
+    }
+
+    .danger-button:hover {
+      border-color: var(--highlight);
+      color: var(--highlight);
+      background: #fff;
+    }
+
+    .primary-button {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .primary-button:hover {
+      background: var(--accent);
+      color: var(--paper);
+      border-color: var(--accent);
+    }
+
+    .primary-button:disabled:hover {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    .edit-shell {
+      width: min(1180px, calc(100% - 36px));
+      margin: var(--space-6) auto 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-6);
+    }
+
+    .intro-panel {
+      display: grid;
+      grid-template-columns: 1fr minmax(260px, 380px);
+      gap: var(--space-5);
+      align-items: end;
+      padding-bottom: var(--space-5);
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .intro-kicker {
+      margin: 0 0 var(--space-2);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .intro-headline {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(40px, 6vw, 86px);
+      line-height: 0.92;
+      letter-spacing: -0.055em;
+      max-width: 780px;
+      font-weight: 500;
+    }
+
+    .intro-copy {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .form-section {
+      border-top: 1px solid var(--rule);
+      padding-top: var(--space-5);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: var(--space-3);
+      align-items: baseline;
+      margin-bottom: var(--space-4);
+    }
+
+    .section-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(26px, 3vw, 42px);
+      line-height: 1;
+      letter-spacing: -0.035em;
+      font-weight: 500;
+    }
+
+    .section-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-status::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      border: 1px solid var(--rule);
+      display: inline-block;
+      background: transparent;
+    }
+
+    .form-section.complete .section-status {
+      color: var(--complete);
+    }
+
+    .form-section.complete .section-status::before {
+      content: '✓';
+      color: var(--paper);
+      display: inline-grid;
+      place-items: center;
+      font-size: 9px;
+      line-height: 1;
+      border-color: var(--complete);
+      background: var(--complete);
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-3);
+    }
+
+    .field-grid.cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .field-grid.cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .field-grid.single {
+      grid-template-columns: 1fr;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .field.span-2 {
+      grid-column: span 2;
+    }
+
+    .field.span-3 {
+      grid-column: span 3;
+    }
+
+    .field label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 1px solid var(--rule);
+      background: var(--field);
+      color: var(--ink);
+      padding: 13px 14px;
+      outline: none;
+      border-radius: 0;
+      transition: border-color 160ms ease, background 160ms ease;
+    }
+
+    .field textarea {
+      min-height: 112px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: rgba(107, 104, 99, 0.58);
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--accent);
+      background: #fff;
+    }
+
+    .nested-title {
+      grid-column: 1 / -1;
+      margin: var(--space-3) 0 0;
+      border-top: 1px solid var(--rule);
+      padding-top: var(--space-4);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .edit-bottom {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 30;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: var(--space-4);
+      padding: 15px clamp(18px, 4vw, 52px);
+      border-top: 1px solid var(--rule);
+      background: rgba(251, 250, 247, 0.94);
+      backdrop-filter: blur(16px);
+    }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      min-width: 0;
+    }
+
+    .progress-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .progress-dots {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .progress-dot {
+      width: 10px;
+      height: 10px;
+      border: 1px solid var(--rule);
+      background: transparent;
+    }
+
+    .progress-dot.complete {
+      background: var(--complete);
+      border-color: var(--complete);
+    }
+
+    .launch-wrap {
+      display: grid;
+      gap: 6px;
+      justify-items: end;
+    }
+
+    .launch-helper {
+      max-width: 420px;
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--highlight);
+      text-align: right;
+    }
+
+    .backup-row {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    /* Present mode */
+    .present-view {
+      background: var(--blackout);
+      min-height: 100vh;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 600ms var(--ease);
+    }
+
+    .present-view.live {
+      opacity: 1;
+    }
+
+    .stage-shell {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    .stage {
+      position: relative;
+      width: min(92vw, 1280px);
+      aspect-ratio: 16 / 9;
+      max-height: calc(100vh - 64px);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      background: var(--paper);
+      color: var(--ink);
+      padding: clamp(34px, 4vw, 58px);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: clamp(18px, 2vw, 30px);
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition:
+        opacity 400ms var(--ease),
+        transform 400ms var(--ease);
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .slide.leaving {
+      opacity: 0;
+      transform: translateY(-20px);
+      transition-duration: 300ms;
+    }
+
+    .slide-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 14px;
+    }
+
+    .brand-marks {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .case-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .slide-body {
+      min-height: 0;
+      display: grid;
+      align-content: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .eyebrow.custom {
+      color: var(--highlight);
+    }
+
+    .display-title {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      line-height: 0.96;
+      font-size: clamp(42px, 5.2vw, 82px);
+    }
+
+    .display-title.medium {
+      font-size: clamp(38px, 4.4vw, 68px);
+      max-width: 980px;
+    }
+
+    .display-title.small {
+      font-size: clamp(32px, 3.6vw, 56px);
+      line-height: 1.02;
+    }
+
+    .display-title.massive {
+      font-size: clamp(56px, 7vw, 112px);
+      max-width: 980px;
+    }
+
+    em {
+      font-style: italic;
+      font-variation-settings: "SOFT" 80, "WONK" 1;
+    }
+
+    .slide-copy {
+      font-size: clamp(17px, 1.6vw, 24px);
+      line-height: 1.5;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .slide-copy.muted {
+      color: var(--muted);
+    }
+
+    .missing {
+      color: var(--highlight) !important;
+    }
+
+    .slide-footer {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+      padding-top: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .active .reveal-1 {
+      animation: revealUp 360ms var(--ease) forwards 200ms;
+    }
+
+    .active .reveal-2 {
+      animation: revealUp 420ms var(--ease) forwards 350ms;
+      transform: translateY(12px);
+    }
+
+    .active .reveal-3 {
+      animation: revealUp 420ms var(--ease) forwards 500ms;
+    }
+
+    .active .reveal-4 {
+      animation: revealFade 360ms var(--ease) forwards 700ms;
+    }
+
+    @keyframes revealUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes revealFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .cover {
+      padding: 0;
+      grid-template-rows: 1fr;
+      display: grid;
+      grid-template-columns: 58fr 42fr;
+      gap: 0;
+    }
+
+    .cover-left,
+    .cover-right {
+      padding: clamp(38px, 4.4vw, 64px);
+      display: grid;
+      min-width: 0;
+    }
+
+    .cover-left {
+      background: var(--paper);
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .cover-right {
+      background: var(--ink);
+      color: var(--paper);
+      grid-template-rows: 1fr auto;
+    }
+
+    .cover-brand {
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cover-kicker {
+      align-self: center;
+    }
+
+    .cover-kicker .mono {
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 20px;
+    }
+
+    .cover-title {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(54px, 6.4vw, 102px);
+      letter-spacing: -0.06em;
+      line-height: 0.9;
+      max-width: 720px;
+    }
+
+    .cover-meta {
+      align-self: end;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .prepared-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(251, 250, 247, 0.55);
+      margin: 0 0 18px;
+    }
+
+    .client-cover-name {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(42px, 4.8vw, 76px);
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+      color: var(--paper);
+      font-weight: 500;
+    }
+
+    .cover-bottom-right {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+      border-top: 1px solid rgba(251, 250, 247, 0.22);
+      padding-top: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(251, 250, 247, 0.62);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 5vw, 72px);
+      margin-top: clamp(30px, 4vw, 54px);
+      align-items: start;
+    }
+
+    .two-col.offset {
+      grid-template-columns: 0.92fr 1.08fr;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-left: 1px solid var(--rule);
+      padding-left: clamp(26px, 3vw, 44px);
+      gap: 28px 32px;
+    }
+
+    .stat-number,
+    .metric-number {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(42px, 4vw, 70px);
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .stat-label,
+    .metric-label {
+      margin-top: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .quote-block {
+      border-left: 3px solid var(--highlight);
+      padding-left: clamp(22px, 3vw, 38px);
+    }
+
+    .quote-text {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 3.1vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      font-style: italic;
+    }
+
+    .quote-attr {
+      margin-top: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .metric-stack {
+      display: grid;
+      gap: 28px;
+      align-content: start;
+    }
+
+    .metric-item {
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 24px;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(24px, 3vw, 44px);
+      margin-top: clamp(32px, 4vw, 54px);
+    }
+
+    .case-card {
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+
+    .card-label {
+      margin: 0 0 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .case-card p,
+    .risk-card p,
+    .work-card p,
+    .timeline-card p {
+      margin: 0;
+      line-height: 1.55;
+      color: var(--ink);
+      font-size: clamp(14px, 1.25vw, 18px);
+    }
+
+    .case-tags {
+      margin-top: 28px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      border: 1px solid var(--rule);
+      padding: 8px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: clamp(34px, 4vw, 56px);
+      background: var(--rule);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .phase-card {
+      background: var(--paper);
+      padding: clamp(20px, 2.4vw, 34px);
+      min-height: 240px;
+      display: grid;
+      align-content: start;
+      gap: 18px;
+    }
+
+    .phase-num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(46px, 4vw, 70px);
+      letter-spacing: -0.05em;
+      color: var(--accent);
+      line-height: 0.9;
+    }
+
+    .phase-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    .phase-desc {
+      color: var(--muted);
+      line-height: 1.52;
+      margin: 0;
+      font-size: clamp(13px, 1.1vw, 16px);
+    }
+
+    .noticed-list {
+      display: grid;
+      gap: 0;
+      margin-top: clamp(32px, 4vw, 54px);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .noticed-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: clamp(22px, 3vw, 44px);
+      align-items: center;
+      padding: clamp(22px, 2.4vw, 34px) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .noticed-item:last-child {
+      border-bottom: 0;
+    }
+
+    .noticed-num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(46px, 4.4vw, 74px);
+      line-height: 0.8;
+      letter-spacing: -0.05em;
+      font-style: italic;
+      color: var(--highlight);
+    }
+
+    .noticed-text {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(26px, 2.8vw, 46px);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      font-weight: 500;
+    }
+
+    .diagnosis-title {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(44px, 5.2vw, 84px);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      font-weight: 500;
+      max-width: 1120px;
+    }
+
+    .diagnosis-title .real {
+      color: var(--highlight);
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(28px, 4vw, 64px);
+      margin-top: clamp(36px, 4vw, 58px);
+      border-top: 1px solid var(--rule);
+      padding-top: clamp(24px, 3vw, 38px);
+    }
+
+    .solution-rows {
+      display: grid;
+      border-top: 1px solid var(--rule);
+      margin-top: clamp(32px, 4vw, 54px);
+    }
+
+    .solution-row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: clamp(24px, 4vw, 64px);
+      padding: clamp(22px, 2.6vw, 36px) 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+
+    .phase-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--highlight);
+      white-space: nowrap;
+    }
+
+    .solution-action {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 3vw, 48px);
+      line-height: 1.03;
+      letter-spacing: -0.035em;
+      font-weight: 500;
+    }
+
+    .work-grid,
+    .risk-grid,
+    .thanks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(24px, 3vw, 44px);
+      margin-top: clamp(32px, 4vw, 54px);
+    }
+
+    .work-card,
+    .risk-card,
+    .thanks-card {
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: clamp(20px, 2vw, 30px);
+    }
+
+    .work-value {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 3vw, 46px);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      font-weight: 500;
+    }
+
+    .risk-question {
+      margin: 0 0 14px;
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(25px, 2.5vw, 40px);
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+      color: var(--accent);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: clamp(54px, 6vw, 90px);
+      padding-top: 28px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 8px;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .timeline-card {
+      position: relative;
+      padding-right: 16px;
+    }
+
+    .timeline-card::before {
+      content: '';
+      position: absolute;
+      top: -26px;
+      left: 0;
+      width: 12px;
+      height: 12px;
+      background: var(--highlight);
+    }
+
+    .timeline-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .thanks-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid var(--rule);
+      padding-top: clamp(24px, 3vw, 38px);
+    }
+
+    .thanks-value {
+      margin: 0;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(22px, 2.2vw, 36px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    .controls {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(14, 16, 20, 0.88);
+      border: 1px solid rgba(251, 250, 247, 0.18);
+      padding: 9px;
+      opacity: 1;
+      transition: opacity 240ms ease, transform 240ms ease;
+    }
+
+    .controls.idle {
+      opacity: 0;
+      transform: translateX(-50%) translateY(8px);
+      pointer-events: none;
+    }
+
+    .control-button,
+    .slide-count {
+      height: 34px;
+      min-width: 38px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid rgba(251, 250, 247, 0.16);
+      background: transparent;
+      color: var(--paper);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 11px;
+    }
+
+    .control-button:hover {
+      border-color: rgba(251, 250, 247, 0.54);
+      background: rgba(251, 250, 247, 0.08);
+    }
+
+    .slide-count {
+      min-width: 82px;
+      color: rgba(251, 250, 247, 0.72);
+    }
+
+    .loading-dots {
+      display: inline-flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .loading-dots span {
+      width: 5px;
+      height: 5px;
+      background: var(--muted);
+      animation: pulseDot 900ms ease-in-out infinite;
+    }
+
+    .loading-dots span:nth-child(2) {
+      animation-delay: 120ms;
+    }
+
+    .loading-dots span:nth-child(3) {
+      animation-delay: 240ms;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 0.32; }
+      50% { opacity: 1; }
+    }
+
+    .print-deck {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .topbar,
+      .edit-bottom,
+      .intro-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .top-actions,
+      .launch-wrap {
+        justify-items: start;
+        justify-content: start;
+      }
+
+      .launch-helper {
+        text-align: left;
+      }
+
+      .field-grid,
+      .field-grid.cols-3,
+      .field-grid.cols-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .field.span-2,
+      .field.span-3 {
+        grid-column: auto;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .edit-bottom {
+        gap: 12px;
+      }
+
+      .progress-wrap {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .stage-shell {
+        padding: 12px;
+      }
+
+      .stage {
+        width: 96vw;
+        max-height: 70vh;
+      }
+
+      .slide {
+        padding: 24px;
+      }
+
+      .display-title,
+      .display-title.medium,
+      .display-title.small {
+        font-size: 30px;
+      }
+
+      .cover-title {
+        font-size: 38px;
+      }
+
+      .two-col,
+      .two-col.offset,
+      .case-grid,
+      .phase-grid,
+      .evidence-grid,
+      .work-grid,
+      .risk-grid,
+      .thanks-grid,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .phase-grid {
+        background: transparent;
+        border: 0;
+        gap: 10px;
+      }
+
+      .phase-card {
+        border: 1px solid var(--rule);
+        min-height: auto;
+      }
+
+      .solution-row,
+      .noticed-item {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        width: calc(100% - 24px);
+        overflow-x: auto;
+        justify-content: flex-start;
+        bottom: 12px;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+
+      html,
+      body {
+        background: #fff !important;
+        width: 100%;
+        height: auto;
+      }
+
+      .edit-view,
+      .present-view,
+      .controls {
+        display: none !important;
+      }
+
+      .print-deck {
+        display: block !important;
+        background: #fff;
+      }
+
+      .print-deck .slide {
+        position: relative !important;
+        inset: auto !important;
+        width: 297mm;
+        height: 210mm;
+        aspect-ratio: auto;
+        display: grid !important;
+        opacity: 1 !important;
+        transform: none !important;
+        page-break-after: always;
+        break-after: page;
+        overflow: hidden;
+      }
+
+      .print-deck .slide:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+
+      .print-deck .cover {
+        display: grid !important;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
+
+      * {
+        animation: none !important;
+        transition: none !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="editView" class="view edit-view">
+    <nav class="topbar">
+      <h1 class="brand-title">Master Deck Builder</h1>
+      <div class="top-actions">
+        <span id="saveIndicator" class="saved-indicator">Saved</span>
+        <button class="text-button" id="exportJsonBtn" type="button">Export JSON</button>
+        <button class="text-button" id="importJsonBtn" type="button">Import JSON</button>
+        <input type="file" id="jsonFileInput" accept="application/json,.json" />
+      </div>
+    </nav>
+
+    <div class="edit-shell">
+      <section class="intro-panel">
+        <div>
+          <p class="intro-kicker">Call 1 · The Diagnosis</p>
+          <h2 class="intro-headline">Build a custom deck that feels researched, calm, and impossible to ignore.</h2>
+        </div>
+        <p class="intro-copy">
+          Fill the reusable agency details once. Update the prospect-specific diagnosis before every call. Everything auto-saves in this browser.
+        </p>
+      </section>
+
+      <form id="deckForm" autocomplete="off"></form>
+
+      <section class="form-section">
+        <div class="section-heading">
+          <span class="section-number">Backup</span>
+          <h2 class="section-title">Reset or restore.</h2>
+          <span class="section-status">Manual</span>
+        </div>
+        <div class="backup-row">
+          <button class="danger-button" type="button" id="resetBtn">Reset all</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="edit-bottom">
+      <div class="progress-wrap">
+        <span class="progress-label">Section progress</span>
+        <div class="progress-dots" id="progressDots"></div>
+      </div>
+      <div class="launch-wrap">
+        <button class="primary-button" id="launchBtn" type="button">Launch Deck</button>
+        <div class="launch-helper" id="launchHelper"></div>
+      </div>
+    </div>
+  </main>
+
+  <main id="presentView" class="view present-view hidden" aria-live="polite">
+    <div class="stage-shell" id="stageShell">
+      <div class="stage" id="stage"></div>
+    </div>
+
+    <div class="controls" id="controls">
+      <button class="control-button" type="button" id="prevBtn" aria-label="Previous slide">‹</button>
+      <span class="slide-count" id="slideCount">01 / 12</span>
+      <button class="control-button" type="button" id="nextBtn" aria-label="Next slide">›</button>
+      <button class="control-button" type="button" id="fullscreenBtn">F</button>
+      <button class="control-button" type="button" id="pdfBtn">PDF</button>
+      <button class="control-button" type="button" id="exitBtn" aria-label="Exit to edit mode">↩</button>
+    </div>
+  </main>
+
+  <div id="printDeck" class="print-deck"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const STORAGE_KEY = 'master_deck_builder_v1';
+      const TOTAL_SLIDES = 12;
+
+      const fields = [
+        {
+          id: 'agency',
+          number: '01',
+          title: 'Agency Info',
+          fields: [
+            { key: 'agencyName', label: 'Agency name', type: 'text', placeholder: 'Example: Finch Growth Partners', required: true },
+            { key: 'presenterName', label: 'Your name', type: 'text', placeholder: 'Example: Aarav Mehta', required: true },
+            { key: 'presenterEmail', label: 'Your email', type: 'email', placeholder: 'Example: aarav@agency.com' },
+            { key: 'deckDate', label: 'Date', type: 'date', placeholder: '', required: true }
+          ]
+        },
+        {
+          id: 'client',
+          number: '02',
+          title: 'Client Info',
+          fields: [
+            { key: 'clientCompany', label: 'Client company name', type: 'text', placeholder: 'Example: Northstar Studio', required: true },
+            { key: 'clientIndustry', label: 'Client industry or niche', type: 'text', placeholder: 'Example: B2B SaaS, coaching, real estate', required: true }
+          ]
+        },
+        {
+          id: 'locked',
+          number: '03',
+          title: 'The Locked 9 Slides',
+          fields: [
+            { key: 'slide2About', label: 'Slide 2 · About us one-liner', type: 'textarea', placeholder: 'We help founder-led agencies turn scattered demand into a predictable appointment engine.' },
+            { key: 'stat1Number', label: 'Stat 1 number', type: 'text', placeholder: '47' },
+            { key: 'stat1Label', label: 'Stat 1 label', type: 'text', placeholder: 'Clients served' },
+            { key: 'stat2Number', label: 'Stat 2 number', type: 'text', placeholder: '5' },
+            { key: 'stat2Label', label: 'Stat 2 label', type: 'text', placeholder: 'Years in market' },
+            { key: 'stat3Number', label: 'Stat 3 number', type: 'text', placeholder: '₹8.2Cr' },
+            { key: 'stat3Label', label: 'Stat 3 label', type: 'text', placeholder: 'Pipeline influenced' },
+            { key: 'stat4Number', label: 'Stat 4 number', type: 'text', placeholder: '12' },
+            { key: 'stat4Label', label: 'Stat 4 label', type: 'text', placeholder: 'Niches tested' },
+
+            { type: 'divider', label: 'Slide 3 · Relevant Proof' },
+            { key: 'proofQuote', label: 'Quote', type: 'textarea', placeholder: 'They did not just run campaigns. They helped us understand why our sales process was leaking.' },
+            { key: 'proofAttribution', label: 'Quote attribution', type: 'text', placeholder: 'Rohan Shah, Founder, Apex Media' },
+            { key: 'metric1Value', label: 'Metric 1 value', type: 'text', placeholder: '31' },
+            { key: 'metric1Label', label: 'Metric 1 label', type: 'text', placeholder: 'Qualified calls in 60 days' },
+            { key: 'metric2Value', label: 'Metric 2 value', type: 'text', placeholder: '₹18L' },
+            { key: 'metric2Label', label: 'Metric 2 label', type: 'text', placeholder: 'Closed revenue tracked' },
+            { key: 'metric3Value', label: 'Metric 3 value', type: 'text', placeholder: '42%' },
+            { key: 'metric3Label', label: 'Metric 3 label', type: 'text', placeholder: 'Lower cost per booked call' },
+
+            { type: 'divider', label: 'Slide 4 · Case Study' },
+            { key: 'caseClientName', label: 'Client name', type: 'text', placeholder: 'Example: Apex Media' },
+            { key: 'caseProblem', label: 'Problem', type: 'textarea', placeholder: 'They had strong delivery, but their inbound leads were inconsistent and referrals were slowing down.' },
+            { key: 'caseWhatWeDid', label: 'What we did', type: 'textarea', placeholder: 'We rebuilt the offer angle, launched a narrow funnel, and added a follow-up system around qualified appointments.' },
+            { key: 'caseResult', label: 'Result', type: 'textarea', placeholder: '31 qualified calls and ₹18L in tracked closed revenue within 60 days.' },
+            { key: 'caseIndustryTag', label: 'Industry tag', type: 'text', placeholder: 'Creative agency' },
+            { key: 'caseTimelineTag', label: 'Timeline tag', type: 'text', placeholder: '60 days' },
+
+            { type: 'divider', label: 'Slide 5 · Process Proof' },
+            { key: 'phase1Name', label: 'Phase 1 name', type: 'text', placeholder: 'Diagnose' },
+            { key: 'phase1Desc', label: 'Phase 1 description', type: 'textarea', placeholder: 'We find the real constraint before touching ads, content, or automation.' },
+            { key: 'phase2Name', label: 'Phase 2 name', type: 'text', placeholder: 'Position' },
+            { key: 'phase2Desc', label: 'Phase 2 description', type: 'textarea', placeholder: 'We turn the offer into a clear reason to book a call now.' },
+            { key: 'phase3Name', label: 'Phase 3 name', type: 'text', placeholder: 'Launch' },
+            { key: 'phase3Desc', label: 'Phase 3 description', type: 'textarea', placeholder: 'We put the campaign in market with tight feedback loops.' },
+            { key: 'phase4Name', label: 'Phase 4 name', type: 'text', placeholder: 'Compound' },
+            { key: 'phase4Desc', label: 'Phase 4 description', type: 'textarea', placeholder: 'We use real sales data to improve targeting, copy, and follow-up.' },
+
+            { type: 'divider', label: 'Slide 9 · How We Work' },
+            { key: 'workComms', label: 'Comms channel', type: 'text', placeholder: 'Dedicated WhatsApp group + weekly recap' },
+            { key: 'workCadence', label: 'Strategy calls cadence', type: 'text', placeholder: 'One strategy call every week' },
+            { key: 'workReporting', label: 'Reporting', type: 'text', placeholder: 'Weekly dashboard with calls, pipeline, and bottlenecks' },
+            { key: 'workPoc', label: 'Point of contact', type: 'text', placeholder: 'Founder-led strategy, account manager execution' },
+
+            { type: 'divider', label: 'Slide 10 · Risk Handling' },
+            { key: 'risk1Question', label: 'Fear 1 question', type: 'textarea', placeholder: 'What if the leads are not serious?' },
+            { key: 'risk1Answer', label: 'Fear 1 answer', type: 'textarea', placeholder: 'We define qualification before launch and measure booked calls against that standard.' },
+            { key: 'risk2Question', label: 'Fear 2 question', type: 'textarea', placeholder: 'What if my team cannot follow up fast enough?' },
+            { key: 'risk2Answer', label: 'Fear 2 answer', type: 'textarea', placeholder: 'We keep the first version simple and build reminders into the follow-up flow.' },
+            { key: 'risk3Question', label: 'Fear 3 question', type: 'textarea', placeholder: 'What if this needs too much content?' },
+            { key: 'risk3Answer', label: 'Fear 3 answer', type: 'textarea', placeholder: 'We start with the smallest set of assets needed to test the diagnosis.' },
+            { key: 'risk4Question', label: 'Fear 4 question', type: 'textarea', placeholder: 'What if the market is too crowded?' },
+            { key: 'risk4Answer', label: 'Fear 4 answer', type: 'textarea', placeholder: 'Crowded markets are easier when the angle is specific and the proof is relevant.' },
+
+            { type: 'divider', label: 'Slide 11 · Timeline' },
+            { key: 'timeline1Period', label: 'Timeline 1 period', type: 'text', placeholder: 'Days 01-07' },
+            { key: 'timeline1Action', label: 'Timeline 1 action', type: 'textarea', placeholder: 'Diagnosis, offer angle, tracking, and campaign plan.' },
+            { key: 'timeline2Period', label: 'Timeline 2 period', type: 'text', placeholder: 'Days 08-21' },
+            { key: 'timeline2Action', label: 'Timeline 2 action', type: 'textarea', placeholder: 'Launch first campaign and follow-up flow.' },
+            { key: 'timeline3Period', label: 'Timeline 3 period', type: 'text', placeholder: 'Days 22-45' },
+            { key: 'timeline3Action', label: 'Timeline 3 action', type: 'textarea', placeholder: 'Read lead quality, sales notes, and conversion friction.' },
+            { key: 'timeline4Period', label: 'Timeline 4 period', type: 'text', placeholder: 'Days 46-90' },
+            { key: 'timeline4Action', label: 'Timeline 4 action', type: 'textarea', placeholder: 'Scale the winning angle and tighten the close process.' }
+          ]
+        },
+        {
+          id: 'custom',
+          number: '04',
+          title: 'The Custom 3 Slides',
+          fields: [
+            { key: 'noticed1', label: 'Slide 6 · Noticed point 1', type: 'textarea', placeholder: 'Your homepage speaks to everyone, so the best buyers cannot quickly tell why they should care.' },
+            { key: 'noticed2', label: 'Slide 6 · Noticed point 2', type: 'textarea', placeholder: 'Your proof is good, but it is buried below generic service copy.' },
+            { key: 'noticed3', label: 'Slide 6 · Noticed point 3', type: 'textarea', placeholder: 'Your follow-up depends on memory, not a visible sales system.' },
+
+            { type: 'divider', label: 'Slide 7 · The Real Problem' },
+            { key: 'surfaceProblem', label: 'Surface problem', type: 'text', placeholder: 'lack of leads' },
+            { key: 'realDiagnosis', label: 'Real diagnosis', type: 'text', placeholder: 'an unclear buying argument' },
+            { key: 'diagnosisEvidence', label: 'Evidence', type: 'textarea', placeholder: 'The offer, proof, and follow-up system do not create one clear reason for a qualified buyer to book now.' },
+            { key: 'diagnosisMatters', label: 'Why this matters', type: 'textarea', placeholder: 'When the buying argument is unclear, every lead becomes harder to convert and every sales call starts from zero.' },
+
+            { type: 'divider', label: "Slide 8 · How We'd Solve It" },
+            { key: 'solveWeek1', label: 'Week 1 action', type: 'textarea', placeholder: 'Rewrite the offer around one narrow buyer and one urgent problem.' },
+            { key: 'solveWeeks2to4', label: 'Weeks 2-4 action', type: 'textarea', placeholder: 'Launch a focused campaign, test two hooks, and track booked-call quality.' },
+            { key: 'solveMonth2', label: 'Month 2+ action', type: 'textarea', placeholder: 'Scale the winning message and install a follow-up rhythm your team can run weekly.' }
+          ]
+        },
+        {
+          id: 'final',
+          number: '05',
+          title: 'Final Slide',
+          fields: [
+            { key: 'nextCall', label: 'Next call date and time', type: 'text', placeholder: 'Example: Tuesday, 18 June, 4:00 PM IST' },
+            { key: 'contactEmail', label: 'Your email for contact', type: 'email', placeholder: 'Example: aarav@agency.com' }
+          ]
+        }
+      ];
+
+      const defaultData = createDefaultData();
+      let data = loadData();
+      let currentSlide = 0;
+      let saveTimer = null;
+      let controlTimer = null;
+      let isTransitioning = false;
+
+      const editView = document.getElementById('editView');
+      const presentView = document.getElementById('presentView');
+      const deckForm = document.getElementById('deckForm');
+      const saveIndicator = document.getElementById('saveIndicator');
+      const launchBtn = document.getElementById('launchBtn');
+      const launchHelper = document.getElementById('launchHelper');
+      const progressDots = document.getElementById('progressDots');
+      const stage = document.getElementById('stage');
+      const printDeck = document.getElementById('printDeck');
+      const controls = document.getElementById('controls');
+      const slideCount = document.getElementById('slideCount');
+      const jsonFileInput = document.getElementById('jsonFileInput');
+
+      renderForm();
+      updateProgress();
+      updateLaunchState();
+      generatePrintDeck();
+
+      document.getElementById('exportJsonBtn').addEventListener('click', exportJson);
+      document.getElementById('importJsonBtn').addEventListener('click', () => jsonFileInput.click());
+      jsonFileInput.addEventListener('change', importJson);
+      document.getElementById('resetBtn').addEventListener('click', resetAll);
+      launchBtn.addEventListener('click', launchDeck);
+      document.getElementById('prevBtn').addEventListener('click', previousSlide);
+      document.getElementById('nextBtn').addEventListener('click', nextSlide);
+      document.getElementById('fullscreenBtn').addEventListener('click', toggleFullscreen);
+      document.getElementById('pdfBtn').addEventListener('click', downloadPdf);
+      document.getElementById('exitBtn').addEventListener('click', exitPresentMode);
+
+      document.addEventListener('keydown', handleKeydown);
+      presentView.addEventListener('mousemove', showControls);
+      presentView.addEventListener('click', showControls);
+
+      function createDefaultData() {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+
+        const starter = { deckDate: `${yyyy}-${mm}-${dd}` };
+        fields.forEach(section => {
+          section.fields.forEach(field => {
+            if (field.key && starter[field.key] === undefined) {
+              starter[field.key] = '';
+            }
+          });
+        });
+        return starter;
+      }
+
+      function loadData() {
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (!saved) return { ...defaultData };
+          return { ...defaultData, ...JSON.parse(saved) };
+        } catch (error) {
+          return { ...defaultData };
+        }
+      }
+
+      function saveData() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        saveIndicator.textContent = 'Saved';
+        saveIndicator.classList.add('active');
+        window.clearTimeout(saveTimer);
+        saveTimer = window.setTimeout(() => {
+          saveIndicator.classList.remove('active');
+        }, 900);
+      }
+
+      function renderForm() {
+        deckForm.innerHTML = fields.map(section => {
+          const inputs = section.fields.map(field => {
+            if (field.type === 'divider') {
+              return `<h3 class="nested-title">${escapeHtml(field.label)}</h3>`;
+            }
+
+            const value = data[field.key] || '';
+            const tag = field.type === 'textarea'
+              ? `<textarea data-key="${field.key}" id="${field.key}" placeholder="${escapeHtml(field.placeholder || '')}">${escapeHtml(value)}</textarea>`
+              : `<input data-key="${field.key}" id="${field.key}" type="${field.type || 'text'}" value="${escapeHtml(value)}" placeholder="${escapeHtml(field.placeholder || '')}" />`;
+
+            const spanClass = field.type === 'textarea' ? ' span-2' : '';
+            return `
+              <div class="field${spanClass}">
+                <label for="${field.key}">${escapeHtml(field.label)}</label>
+                ${tag}
+              </div>
+            `;
+          }).join('');
+
+          return `
+            <section class="form-section" data-section="${section.id}">
+              <div class="section-heading">
+                <span class="section-number">${escapeHtml(section.number)}</span>
+                <h2 class="section-title">${escapeHtml(section.title)}</h2>
+                <span class="section-status">Incomplete</span>
+              </div>
+              <div class="field-grid">
+                ${inputs}
+              </div>
+            </section>
+          `;
+        }).join('');
+
+        deckForm.querySelectorAll('[data-key]').forEach(input => {
+          input.addEventListener('input', event => {
+            const key = event.target.dataset.key;
+            data[key] = event.target.value;
+            saveData();
+            updateProgress();
+            updateLaunchState();
+            generatePrintDeck();
+          });
+        });
+      }
+
+      function requiredFields() {
+        return fields.flatMap(section => section.fields.filter(field => field.required));
+      }
+
+      function missingRequiredFields() {
+        return requiredFields().filter(field => !String(data[field.key] || '').trim());
+      }
+
+      function updateLaunchState() {
+        const missing = missingRequiredFields();
+        launchBtn.disabled = missing.length > 0;
+        if (missing.length) {
+          launchHelper.textContent = `Fill these first: ${missing.map(field => field.label).join(', ')}.`;
+        } else {
+          launchHelper.textContent = '';
+        }
+      }
+
+      function updateProgress() {
+        const dots = [];
+        fields.forEach(section => {
+          const sectionFields = section.fields.filter(field => field.key);
+          const complete = sectionFields.every(field => String(data[field.key] || '').trim());
+          const sectionEl = deckForm.querySelector(`[data-section="${section.id}"]`);
+          if (sectionEl) {
+            sectionEl.classList.toggle('complete', complete);
+            const status = sectionEl.querySelector('.section-status');
+            status.textContent = complete ? 'Complete' : 'Incomplete';
+          }
+          dots.push(`<span class="progress-dot${complete ? ' complete' : ''}" title="${escapeHtml(section.title)}"></span>`);
+        });
+        progressDots.innerHTML = dots.join('');
+      }
+
+      function launchDeck() {
+        if (launchBtn.disabled) return;
+        currentSlide = 0;
+        editView.classList.add('hidden');
+        presentView.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          presentView.classList.add('live');
+          renderCurrentSlide(true);
+          showControls();
+        });
+      }
+
+      function exitPresentMode() {
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch(() => {});
+        }
+        presentView.classList.remove('live');
+        window.setTimeout(() => {
+          presentView.classList.add('hidden');
+          editView.classList.remove('hidden');
+        }, 260);
+      }
+
+      function nextSlide() {
+        goToSlide(currentSlide + 1);
+      }
+
+      function previousSlide() {
+        goToSlide(currentSlide - 1);
+      }
+
+      function goToSlide(index) {
+        const bounded = Math.max(0, Math.min(TOTAL_SLIDES - 1, index));
+        if (bounded === currentSlide && !isTransitioning) return;
+        currentSlide = bounded;
+        renderCurrentSlide(false);
+      }
+
+      function renderCurrentSlide(immediate) {
+        isTransitioning = true;
+        stage.querySelectorAll('.slide').forEach(slide => {
+          slide.classList.remove('active');
+          slide.classList.add('leaving');
+        });
+
+        const html = buildSlide(currentSlide + 1, true);
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html.trim();
+        const next = wrapper.firstElementChild;
+        stage.appendChild(next);
+
+        if (immediate) {
+          next.classList.add('active');
+          cleanupSlides();
+          isTransitioning = false;
+        } else {
+          requestAnimationFrame(() => {
+            next.classList.add('active');
+          });
+          window.setTimeout(() => {
+            cleanupSlides();
+            isTransitioning = false;
+          }, 520);
+        }
+
+        updateSlideCounter();
+        generatePrintDeck();
+      }
+
+      function cleanupSlides() {
+        stage.querySelectorAll('.slide').forEach(slide => {
+          if (!slide.classList.contains('active')) slide.remove();
+        });
+      }
+
+      function updateSlideCounter() {
+        slideCount.textContent = `${pad(currentSlide + 1)} / ${TOTAL_SLIDES}`;
+      }
+
+      function handleKeydown(event) {
+        if (presentView.classList.contains('hidden')) return;
+
+        const tag = event.target && event.target.tagName ? event.target.tagName.toLowerCase() : '';
+        if (tag === 'input' || tag === 'textarea') return;
+
+        if (event.key === 'ArrowRight' || event.key === ' ') {
+          event.preventDefault();
+          nextSlide();
+        } else if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          previousSlide();
+        } else if (event.key.toLowerCase() === 'f') {
+          event.preventDefault();
+          toggleFullscreen();
+        } else if (event.key === 'Escape') {
+          event.preventDefault();
+          if (document.fullscreenElement) {
+            document.exitFullscreen().catch(() => {});
+          } else {
+            exitPresentMode();
+          }
+        } else if (event.key === 'Home') {
+          event.preventDefault();
+          goToSlide(0);
+        } else if (event.key === 'End') {
+          event.preventDefault();
+          goToSlide(TOTAL_SLIDES - 1);
+        } else if (/^[1-9]$/.test(event.key)) {
+          event.preventDefault();
+          goToSlide(Number(event.key) - 1);
+        } else if (event.key === '0') {
+          event.preventDefault();
+          goToSlide(9);
+        }
+      }
+
+      function toggleFullscreen() {
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch(() => {});
+        } else {
+          presentView.requestFullscreen().catch(() => {});
+        }
+      }
+
+      function showControls() {
+        controls.classList.remove('idle');
+        window.clearTimeout(controlTimer);
+        controlTimer = window.setTimeout(() => {
+          controls.classList.add('idle');
+        }, 3000);
+      }
+
+      function downloadPdf() {
+        generatePrintDeck();
+        window.print();
+      }
+
+      function generatePrintDeck() {
+        printDeck.innerHTML = Array.from({ length: TOTAL_SLIDES }, (_, index) => buildSlide(index + 1, false)).join('');
+      }
+
+      function exportJson() {
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `master-deck-backup-${yyyy}-${mm}-${dd}.json`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+      }
+
+      function importJson(event) {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const imported = JSON.parse(String(reader.result || '{}'));
+            data = { ...defaultData, ...imported };
+            saveData();
+            renderForm();
+            updateProgress();
+            updateLaunchState();
+            generatePrintDeck();
+          } catch (error) {
+            alert('This JSON file could not be imported.');
+          } finally {
+            event.target.value = '';
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      function resetAll() {
+        const confirmed = window.confirm('Reset every saved field in this browser? This cannot be undone.');
+        if (!confirmed) return;
+        data = { ...defaultData };
+        localStorage.removeItem(STORAGE_KEY);
+        saveData();
+        renderForm();
+        updateProgress();
+        updateLaunchState();
+        generatePrintDeck();
+      }
+
+      function buildSlide(number, animated) {
+        const revealClass = animated ? 'reveal' : '';
+        const reveal = animated ? ['reveal reveal-1', 'reveal reveal-2', 'reveal reveal-3', 'reveal reveal-4'] : ['', '', '', ''];
+
+        switch (number) {
+          case 1: return slideCover(animated);
+          case 2: return slideAbout(reveal);
+          case 3: return slideProof(reveal);
+          case 4: return slideCaseStudy(reveal);
+          case 5: return slideProcess(reveal);
+          case 6: return slideNoticed(reveal);
+          case 7: return slideRealProblem(reveal);
+          case 8: return slideSolve(reveal);
+          case 9: return slideHowWeWork(reveal);
+          case 10: return slideRisk(reveal);
+          case 11: return slideTimeline(reveal);
+          case 12: return slideThanks(reveal);
+          default: return '';
+        }
+      }
+
+      function slideShell(number, phrase, identifier, body, className) {
+        return `
+          <section class="slide ${className || ''}" data-slide="${number}">
+            <header class="slide-head">
+              <div class="brand-marks">${t('agencyName', 'Your Agency')} × ${t('clientCompany', 'Client Company')}</div>
+              <div class="case-number">№ ${pad(number)} / 12</div>
+            </header>
+            <div class="slide-body">
+              ${body}
+            </div>
+            <footer class="slide-footer reveal reveal-4">
+              <span>${escapeHtml(phrase)}</span>
+              <span>${escapeHtml(identifier)}</span>
+            </footer>
+          </section>
+        `;
+      }
+
+      function slideCover() {
+        return `
+          <section class="slide cover" data-slide="1">
+            <div class="cover-left">
+              <div class="cover-brand reveal reveal-1">${t('agencyName', 'Your Agency')}</div>
+              <div class="cover-kicker">
+                <div class="mono reveal reveal-1">A Sales Diagnostic for</div>
+                <h2 class="cover-title reveal reveal-2">A custom plan, <em>not a pitch.</em></h2>
+              </div>
+              <div class="cover-meta reveal reveal-4">
+                <span>${dateDisplay()}</span>
+                <span>Prepared by ${t('presenterName', 'Presenter Name')}</span>
+              </div>
+            </div>
+            <div class="cover-right">
+              <div class="reveal reveal-3">
+                <p class="prepared-label">Prepared for</p>
+                <h3 class="client-cover-name">${t('clientCompany', 'Client Company')}</h3>
+              </div>
+              <div class="cover-bottom-right reveal reveal-4">
+                <span>The 2-Call Close</span>
+                <span>№ 01 / 12</span>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      function slideAbout(reveal) {
+        const stats = [1, 2, 3, 4].map(i => `
+          <div class="stat">
+            <div class="stat-number">${t(`stat${i}Number`, '00')}</div>
+            <div class="stat-label">${t(`stat${i}Label`, 'Metric label')}</div>
+          </div>
+        `).join('');
+
+        return slideShell(2, 'Context before prescription', 'ABOUT US', `
+          <div class="${reveal[0]}">
+            <p class="eyebrow">Who you're talking to</p>
+          </div>
+          <h2 class="display-title medium ${reveal[1]}">We do <em>one thing</em>, for a specific kind of business, and we do it really well.</h2>
+          <div class="two-col ${reveal[2]}">
+            <p class="slide-copy">${t('slide2About', 'Write a sharp one-liner about what your agency does and who you do it for.')}</p>
+            <div class="stats-grid">${stats}</div>
+          </div>
+        `, '');
+      }
+
+      function slideProof(reveal) {
+        const metrics = [1, 2, 3].map(i => `
+          <div class="metric-item">
+            <div class="metric-number"><em>${t(`metric${i}Value`, '00')}</em></div>
+            <div class="metric-label">${t(`metric${i}Label`, 'Metric label')}</div>
+          </div>
+        `).join('');
+
+        return slideShell(3, 'Relevant proof beats a large portfolio', 'PROOF', `
+          <div class="${reveal[0]}">
+            <p class="eyebrow">Proof, not portfolio</p>
+          </div>
+          <h2 class="display-title ${reveal[1]}">What we did for someone <em>like you.</em></h2>
+          <div class="two-col offset ${reveal[2]}">
+            <div class="quote-block">
+              <p class="quote-text">“${t('proofQuote', 'Add a client quote that proves your process created clarity, not just activity.')}”</p>
+              <div class="quote-attr">${t('proofAttribution', 'Name, title')}</div>
+            </div>
+            <div class="metric-stack">${metrics}</div>
+          </div>
+        `, '');
+      }
+
+      function slideCaseStudy(reveal) {
+        return slideShell(4, 'Problem, intervention, result', 'CASE STUDY', `
+          <h2 class="display-title small ${reveal[1]}">${t('caseClientName', 'Client name')} had ${t('caseProblem', 'a clear growth problem')}. Here's how we fixed it.</h2>
+          <div class="case-grid ${reveal[2]}">
+            <div class="case-card">
+              <p class="card-label">The problem</p>
+              <p>${t('caseProblem', 'Describe the problem in two or three sentences.')}</p>
+              <div class="case-tags">
+                <span class="tag">${t('caseIndustryTag', 'Industry')}</span>
+              </div>
+            </div>
+            <div class="case-card">
+              <p class="card-label">What we did</p>
+              <p>${t('caseWhatWeDid', 'Describe the intervention in two or three sentences.')}</p>
+            </div>
+            <div class="case-card">
+              <p class="card-label">The result</p>
+              <p>${t('caseResult', 'Add the result with numbers and timeframe.')}</p>
+              <div class="case-tags">
+                <span class="tag">${t('caseTimelineTag', 'Timeline')}</span>
+              </div>
+            </div>
+          </div>
+        `, '');
+      }
+
+      function slideProcess(reveal) {
+        const phases = [1, 2, 3, 4].map(i => `
+          <div class="phase-card">
+            <div class="phase-num">${pad(i)}.</div>
+            <div class="phase-name">${t(`phase${i}Name`, `Phase ${i}`)}</div>
+            <p class="phase-desc">${t(`phase${i}Desc`, 'Add one sentence that explains this phase.')}</p>
+          </div>
+        `).join('');
+
+        return slideShell(5, 'A method the buyer can understand', 'PROCESS', `
+          <div class="${reveal[0]}">
+            <p class="eyebrow">How we think</p>
+          </div>
+          <h2 class="display-title ${reveal[1]}">Our approach in <em>four moves.</em></h2>
+          <div class="phase-grid ${reveal[2]}">${phases}</div>
+        `, '');
+      }
+
+      function slideNoticed(reveal) {
+        const items = [1, 2, 3].map(i => `
+          <div class="noticed-item">
+            <div class="noticed-num">0${i}</div>
+            <p class="noticed-text">${t(`noticed${i}`, 'Add a sharp custom observation about this prospect.')}</p>
+          </div>
+        `).join('');
+
+        return slideShell(6, 'The diagnosis starts with observation', 'WHAT WE NOTICED', `
+          <div class="${reveal[0]}">
+            <p class="eyebrow custom">Custom · for this prospect</p>
+          </div>
+          <h2 class="display-title ${reveal[1]}">What we noticed about ${t('clientCompany', "the client's business")}.</h2>
+          <div class="noticed-list ${reveal[2]}">${items}</div>
+        `, '');
+      }
+
+      function slideRealProblem(reveal) {
+        return slideShell(7, 'Name the constraint clearly', 'REAL PROBLEM', `
+          <div class="${reveal[0]}">
+            <p class="eyebrow custom">Custom · for this prospect</p>
+          </div>
+          <h2 class="diagnosis-title ${reveal[1]}">Your real problem isn't <em>${t('surfaceProblem', 'the surface problem')}</em>. It's <em class="real">${t('realDiagnosis', 'the real diagnosis')}</em>.</h2>
+          <div class="evidence-grid ${reveal[2]}">
+            <div>
+              <p class="card-label">The evidence</p>
+              <p class="slide-copy muted">${t('diagnosisEvidence', 'Add two or three sentences that prove the diagnosis.')}</p>
+            </div>
+            <div>
+              <p class="card-label">Why this matters</p>
+              <p class="slide-copy muted">${t('diagnosisMatters', 'Add two or three sentences that explain the cost of not fixing it.')}</p>
+            </div>
+          </div>
+        `, '');
+      }
+
+      function slideSolve(reveal) {
+        const rows = [
+          ['Week 01', 'solveWeek1', 'Add the first week action.'],
+          ['Weeks 02-04', 'solveWeeks2to4', 'Add the first month action.'],
+          ['Month 02+', 'solveMonth2', 'Add the scaling action.']
+        ].map(row => `
+          <div class="solution-row">
+            <div class="phase-label">${row[0]}</div>
+            <p class="solution-action">${t(row[1], row[2])}</p>
+          </div>
+        `).join('');
+
+        return slideShell(8, 'Solution sequence over scattered tactics', 'SOLUTION', `
+          <div class="${reveal[0]}">
+            <p class="eyebrow custom">Custom · for this prospect</p>
+          </div>
+          <h2 class="display-title ${reveal[1]}">Here's how we'd solve it <em>for you.</em></h2>
+          <div class="solution-rows ${reveal[2]}">${rows}</div>
+        `, '');
+      }
+
+      function slideHowWeWork(reveal) {
+        const items = [
+          ['Comms channel', 'workComms', 'Add your communication channel.'],
+          ['Strategy calls', 'workCadence', 'Add call cadence.'],
+          ['Reporting', 'workReporting', 'Add reporting format.'],
+          ['Point of contact', 'workPoc', 'Add point of contact.']
+        ].map(item => `
+          <div class="work-card">
+            <p class="card-label">${item[0]}</p>
+            <p class="work-value">${t(item[1], item[2])}</p>
+          </div>
+        `).join('');
+
+        return slideShell(9, 'The operating rhythm matters', 'HOW WE WORK', `
+          <div class="${reveal[0]}">
+            <p class="eyebrow">If we work together</p>
+          </div>
+          <h2 class="display-title ${reveal[1]}">Here's what working <em>with us</em> looks like.</h2>
+          <div class="work-grid ${reveal[2]}">${items}</div>
+        `, '');
+      }
+
+      function slideRisk(reveal) {
+        const risks = [1, 2, 3, 4].map(i => `
+          <div class="risk-card">
+            <h3 class="risk-question">“${t(`risk${i}Question`, 'Add the prospect fear as a question.')}”</h3>
+            <p>${t(`risk${i}Answer`, 'Add your clear handling for this fear.')}</p>
+          </div>
+        `).join('');
+
+        return slideShell(10, 'Objections handled before they become objections', 'RISK', `
+          <div class="${reveal[0]}">
+            <p class="eyebrow">What you're probably wondering</p>
+          </div>
+          <h2 class="display-title small ${reveal[1]}">The fears <em>we know you have</em>, addressed upfront.</h2>
+          <div class="risk-grid ${reveal[2]}">${risks}</div>
+        `, '');
+      }
+
+      function slideTimeline(reveal) {
+        const items = [1, 2, 3, 4].map(i => `
+          <div class="timeline-card">
+            <div class="timeline-period">${t(`timeline${i}Period`, `Period ${i}`)}</div>
+            <p>${t(`timeline${i}Action`, 'Add the action for this stage.')}</p>
+          </div>
+        `).join('');
+
+        return slideShell(11, 'Make the first result feel near', 'TIMELINE', `
+          <div class="${reveal[0]}">
+            <p class="eyebrow">If we sign this month</p>
+          </div>
+          <h2 class="display-title ${reveal[1]}">From signature to <em>first result.</em></h2>
+          <div class="timeline ${reveal[2]}">${items}</div>
+        `, '');
+      }
+
+      function slideThanks(reveal) {
+        const contact = data.contactEmail || data.presenterEmail;
+        return slideShell(12, 'Close the loop, do not over-pitch', 'THANK YOU', `
+          <h2 class="display-title massive ${reveal[1]}">Let's pick this up <em>next week.</em></h2>
+          <div class="thanks-grid ${reveal[2]}">
+            <div class="thanks-card">
+              <p class="card-label">Next call</p>
+              <p class="thanks-value">${t('nextCall', 'Add next call date and time.')}</p>
+            </div>
+            <div class="thanks-card">
+              <p class="card-label">What they will get</p>
+              <p class="thanks-value">A decision, a clear plan, and the first version of the execution map.</p>
+            </div>
+            <div class="thanks-card">
+              <p class="card-label">Contact</p>
+              <p class="thanks-value">${contact ? escapeHtml(contact) : '<span class="missing">Add contact email.</span>'}</p>
+            </div>
+          </div>
+        `, '');
+      }
+
+      function t(key, placeholder) {
+        const value = String(data[key] || '').trim();
+        if (!value) return `<span class="missing">${escapeHtml(placeholder)}</span>`;
+        return escapeHtml(value);
+      }
+
+      function dateDisplay() {
+        const raw = String(data.deckDate || '').trim();
+        if (!raw) return '<span class="missing">Add date</span>';
+        const parsed = new Date(raw + 'T00:00:00');
+        if (Number.isNaN(parsed.getTime())) return escapeHtml(raw);
+        return parsed.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+      }
+
+      function pad(number) {
+        return String(number).padStart(2, '0');
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+    })();
+  </script>
+</body>
+</html>

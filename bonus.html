@@ -1,0 +1,2836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Capacity Problem | Private Field Guide</title>
+  <meta name="description" content="A premium interactive field guide for agency owners entering the territory of abundance." />
+  <meta property="og:title" content="The Capacity Problem" />
+  <meta property="og:description" content="A private field guide for agency owners entering the territory of abundance." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2314110f'/%3E%3Cpath d='M13 48 32 12l19 36H13Z' fill='%23d8bd76'/%3E%3Cpath d='M24 48 32 30l8 18H24Z' fill='%23f0eadf' opacity='.82'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: oklch(15.5% 0.018 54);
+      --ink-2: oklch(21% 0.022 54);
+      --ink-3: oklch(26% 0.024 54);
+      --paper: oklch(94.5% 0.03 79);
+      --paper-2: oklch(89.7% 0.037 78);
+      --gold: oklch(70.5% 0.105 81);
+      --gold-2: oklch(80% 0.095 86);
+      --gold-text: oklch(55% 0.105 81);
+      --muted: oklch(61% 0.03 75);
+      --muted-dark: oklch(44% 0.028 71);
+      --cold: oklch(33% 0.024 238);
+      --cold-2: oklch(56% 0.025 226);
+      --danger: oklch(57% 0.076 33);
+      --green: oklch(62% 0.065 102);
+      --line: rgba(201, 165, 92, 0.22);
+      --shadow: 0 28px 90px rgba(20, 17, 15, 0.18);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --max-copy: 680px;
+      --max-wide: 1180px;
+      --font-head: "Bodoni Moda", Georgia, serif;
+      --font-ui: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --z-raised: 2;
+      --z-sticky: 30;
+      --z-progress: 40;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--ink);
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-ui);
+      font-size: 19px;
+      line-height: 1.72;
+      color: var(--ink);
+      background: var(--paper);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: rgba(201, 165, 92, 0.35);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    p {
+      margin: 0 0 1.35rem;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-2));
+      z-index: var(--z-progress);
+      box-shadow: 0 1px 12px rgba(201, 165, 92, 0.34);
+    }
+
+    .sticky-label {
+      position: fixed;
+      top: 20px;
+      left: 18px;
+      z-index: var(--z-sticky);
+      padding: 8px 12px;
+      border: 1px solid rgba(201, 165, 92, 0.3);
+      border-radius: 999px;
+      background: rgba(20, 17, 15, 0.74);
+      color: var(--gold-2);
+      font: 700 11px/1 var(--font-ui);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      backdrop-filter: blur(14px);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 300ms ease, transform 300ms ease;
+      pointer-events: none;
+    }
+
+    .sticky-label.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .paper {
+      background:
+        radial-gradient(circle at 20% 12%, rgba(201, 165, 92, 0.11), transparent 22rem),
+        linear-gradient(180deg, var(--paper), var(--paper-2));
+      color: var(--ink);
+    }
+
+    .container {
+      width: min(calc(100% - 36px), var(--max-wide));
+      margin: 0 auto;
+    }
+
+    .copy {
+      width: min(calc(100% - 36px), var(--max-copy));
+      max-width: var(--max-copy);
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    .wide {
+      width: min(calc(100% - 36px), var(--max-wide));
+      margin: 0 auto;
+    }
+
+    .eyebrow,
+    .kicker,
+    .card-label,
+    .micro-label {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+    }
+
+    .dark .eyebrow,
+    .dark .kicker,
+    .dark .card-label,
+    .dark .micro-label {
+      color: var(--gold-2);
+    }
+
+    h1,
+    h2,
+    h3,
+    .headline {
+      font-family: var(--font-head);
+      font-weight: 650;
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      margin: 0;
+      text-wrap: balance;
+    }
+
+    h1 {
+      font-size: clamp(4.4rem, 16vw, 12.5rem);
+      max-width: 1000px;
+    }
+
+    h2 {
+      font-size: clamp(3.4rem, 10vw, 8rem);
+    }
+
+    h3 {
+      font-size: clamp(2.05rem, 5vw, 4.7rem);
+      letter-spacing: -0.035em;
+    }
+
+    .lead {
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 3.2vw, 2.15rem);
+      line-height: 1.3;
+      color: var(--muted-dark);
+      text-wrap: pretty;
+    }
+
+    .dark .lead {
+      color: rgba(244, 239, 231, 0.72);
+    }
+
+    .emphasis-line,
+    .pullquote {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 6vw, 5.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      color: var(--gold-text);
+      margin: 3rem 0;
+    }
+
+    .dark .emphasis-line,
+    .dark .pullquote {
+      color: var(--gold-2);
+    }
+
+    .pullquote.small {
+      font-size: clamp(1.75rem, 4.6vw, 3.8rem);
+    }
+
+    .subtle {
+      color: var(--muted);
+    }
+
+    .section-pad {
+      padding: clamp(5.5rem, 12vw, 11rem) 0;
+    }
+
+    .section-pad-tight {
+      padding: clamp(4rem, 9vw, 8rem) 0;
+    }
+
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      transition: transform 900ms ease, opacity 900ms ease;
+      will-change: transform;
+    }
+
+    .hero::before {
+      right: 50%;
+      background:
+        linear-gradient(rgba(20, 17, 15, 0.55), rgba(20, 17, 15, 0.72)),
+        repeating-linear-gradient(140deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 14px),
+        radial-gradient(circle at 35% 30%, rgba(108, 120, 128, 0.34), transparent 20rem),
+        linear-gradient(130deg, #151718, var(--cold));
+      clip-path: polygon(0 0, 56% 0, 47% 100%, 0 100%);
+    }
+
+    .hero::after {
+      left: 30%;
+      background:
+        linear-gradient(rgba(20, 17, 15, 0.35), rgba(20, 17, 15, 0.78)),
+        radial-gradient(circle at 72% 38%, rgba(201, 165, 92, 0.36), transparent 19rem),
+        radial-gradient(circle at 80% 74%, rgba(224, 201, 133, 0.12), transparent 18rem),
+        linear-gradient(135deg, #1c1510, #4a3520);
+      clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .hero.split-open::before {
+      transform: translateX(-8vw);
+      opacity: 0.66;
+    }
+
+    .hero.split-open::after {
+      transform: translateX(5vw);
+      opacity: 0.98;
+    }
+
+    .hero .ghost-left,
+    .hero .ghost-right {
+      position: absolute;
+      pointer-events: none;
+      color: rgba(244, 239, 231, 0.06);
+      font: 800 clamp(2.5rem, 7vw, 7.5rem)/0.9 var(--font-ui);
+      letter-spacing: -0.08em;
+      text-transform: uppercase;
+      z-index: 0;
+      opacity: 0.72;
+      max-width: 32vw;
+    }
+
+    .hero .ghost-left {
+      left: 4vw;
+      top: 12vh;
+      width: min(28rem, 32vw);
+    }
+
+    .hero .ghost-right {
+      right: 4vw;
+      bottom: 10vh;
+      width: min(24rem, 30vw);
+      font-family: var(--font-head);
+      text-transform: none;
+      opacity: 0.62;
+      text-align: right;
+    }
+
+    .hero-content {
+      width: min(calc(100% - 40px), 1150px);
+      padding: 7rem 0 6rem;
+      position: relative;
+      z-index: var(--z-raised);
+    }
+
+    .hero h1 {
+      margin-top: 1rem;
+    }
+
+    .hero h1 span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: wordIn 900ms cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .hero h1 span:nth-child(2) { animation-delay: 160ms; }
+    .hero h1 span:nth-child(3) { animation-delay: 320ms; }
+
+    .hero-subhead {
+      margin-top: 2rem;
+      width: min(680px, 100%);
+      font-family: var(--font-head);
+      font-style: italic;
+      font-size: clamp(1.35rem, 3vw, 2.05rem);
+      line-height: 1.32;
+      color: rgba(244, 239, 231, 0.75);
+      opacity: 0;
+      transform: translateY(18px);
+      animation: wordIn 900ms ease forwards 620ms;
+    }
+
+    .hero-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 32px;
+      width: min(calc(100% - 40px), 1150px);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: end;
+      color: rgba(244, 239, 231, 0.62);
+      font-size: 0.86rem;
+    }
+
+    .scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font: 800 11px/1 var(--font-ui);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-2);
+    }
+
+    .scroll-cue i {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-right: 2px solid var(--gold-2);
+      border-bottom: 2px solid var(--gold-2);
+      transform: rotate(45deg);
+      animation: cue 1400ms ease-in-out infinite;
+    }
+
+    @keyframes wordIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes cue {
+      0%, 100% { transform: translateY(-3px) rotate(45deg); opacity: 0.55; }
+      50% { transform: translateY(5px) rotate(45deg); opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 900ms cubic-bezier(.2,.8,.2,1), transform 900ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 800ms ease, transform 800ms ease;
+    }
+
+    .stagger.in-view > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger.in-view > *:nth-child(2) { transition-delay: 80ms; }
+    .stagger.in-view > *:nth-child(3) { transition-delay: 150ms; }
+    .stagger.in-view > *:nth-child(4) { transition-delay: 220ms; }
+    .stagger.in-view > *:nth-child(5) { transition-delay: 290ms; }
+
+    .chapter-opener {
+      min-height: max(100svh, 720px);
+      display: grid;
+      place-items: center;
+      padding: clamp(9rem, 16vw, 14rem) 0 clamp(7rem, 12vw, 11rem);
+      overflow: visible;
+      background:
+        radial-gradient(circle at 22% 30%, rgba(201, 165, 92, 0.16), transparent 22rem),
+        radial-gradient(circle at 80% 70%, rgba(244, 239, 231, 0.05), transparent 18rem),
+        linear-gradient(180deg, #17120e, var(--ink));
+      color: var(--paper);
+      border-top: 1px solid rgba(201, 165, 92, 0.18);
+      border-bottom: 1px solid rgba(201, 165, 92, 0.18);
+    }
+
+    .chapter-inner {
+      width: min(calc(100% - 40px), var(--max-wide));
+      margin: 0 auto;
+    }
+
+    .chapter-number {
+      font: 800 clamp(4rem, 20vw, 17rem)/0.85 var(--font-ui);
+      letter-spacing: -0.11em;
+      color: rgba(201, 165, 92, 0.15);
+      margin-bottom: -1.5rem;
+    }
+
+    .chapter-opener h2 {
+      max-width: 1050px;
+    }
+
+    .chapter-opener .lead {
+      max-width: 760px;
+      margin-top: 1.4rem;
+    }
+
+    .map-showcase {
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(201, 165, 92, 0.16), transparent 24rem),
+        linear-gradient(180deg, #17120e, #0f0d0c);
+      color: var(--paper);
+      padding: 7rem 0;
+    }
+
+    .map-grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .map-placeholder {
+      position: relative;
+      min-height: 420px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(99, 60, 32, 0.32), rgba(201, 165, 92, 0.13)),
+        repeating-linear-gradient(120deg, rgba(244, 239, 231, 0.04) 0 1px, transparent 1px 16px),
+        radial-gradient(circle at 20% 78%, rgba(113, 76, 41, 0.55), transparent 18rem),
+        radial-gradient(circle at 80% 22%, rgba(201, 165, 92, 0.23), transparent 18rem),
+        #211a14;
+      border: 1px solid rgba(201, 165, 92, 0.27);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+    }
+
+    .map-placeholder::before {
+      content: "";
+      display: none;
+    }
+
+    .map-placeholder::after {
+      content: "";
+      position: absolute;
+      inset: 26px;
+      border-radius: calc(var(--radius-xl) - 12px);
+      border: 1px solid rgba(201, 165, 92, 0.14);
+      pointer-events: none;
+    }
+
+    .map-placeholder svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .map-path {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      transition: stroke-dashoffset 2200ms cubic-bezier(.2,.7,.1,1);
+    }
+
+    .in-view .map-path {
+      stroke-dashoffset: 0;
+    }
+
+    .map-point {
+      position: absolute;
+      top: 50%;
+      z-index: 4;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .point-scarcity { left: 14%; }
+    .point-system { left: 50%; }
+    .point-abundance { left: 86%; }
+
+    .map-dot {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: var(--gold);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 8px rgba(201,165,92,0.12), 0 0 18px rgba(201,165,92,0.4);
+    }
+
+    .map-mountain {
+      position: absolute;
+      left: 50%;
+      top: calc(50% - 30px);
+      width: 48px;
+      height: 30px;
+      transform: translateX(-50%);
+    }
+
+    .map-mountain::before,
+    .map-mountain::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 24px solid rgba(224,201,133,0.74);
+    }
+
+    .map-mountain::before { left: 2px; }
+    .map-mountain::after { right: 2px; border-bottom-color: rgba(201,165,92,0.44); }
+
+    .map-label {
+      position: absolute;
+      top: calc(50% - 64px);
+      z-index: 4;
+      padding: 0.72rem 0.9rem;
+      border-radius: 15px;
+      background: rgba(20, 17, 15, 0.82);
+      border: 1px solid rgba(201, 165, 92, 0.3);
+      color: var(--paper);
+      font: 900 0.64rem/1.2 var(--font-ui);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: normal;
+      width: max-content;
+      max-width: 178px;
+      text-align: center;
+      box-shadow: 0 16px 44px rgba(0,0,0,0.22);
+      opacity: 0;
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .point-scarcity .map-label { left: 0; transform: translate(0, 12px); }
+    .point-system .map-label { left: 50%; transform: translate(-50%, 12px); }
+    .point-abundance .map-label { right: 0; transform: translate(0, 12px); }
+
+    .map-hazards-row {
+      position: absolute;
+      left: 50%;
+      right: 6%;
+      bottom: 18%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      z-index: 4;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .map-hazard-chip {
+      flex: 1 1 0;
+      min-width: 0;
+      text-align: center;
+      padding: 0.64rem 0.52rem;
+      border-radius: 999px;
+      background: rgba(20, 17, 15, 0.66);
+      border: 1px solid rgba(201, 165, 92, 0.24);
+      color: rgba(244,239,231,0.8);
+      font: 800 clamp(0.48rem, 0.8vw, 0.58rem)/1.25 var(--font-ui);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      white-space: normal;
+    }
+
+    .in-view .map-point,
+    .in-view .map-label,
+    .in-view .map-hazards-row { opacity: 1; }
+    .in-view .map-point { transform: translate(-50%, -50%); }
+    .in-view .point-scarcity .map-label { transform: translate(0, 0); transition-delay: 160ms; }
+    .in-view .point-system .map-label { transform: translate(-50%, 0); transition-delay: 320ms; }
+    .in-view .point-abundance .map-label { transform: translate(0, 0); transition-delay: 480ms; }
+    .in-view .point-system { transition-delay: 160ms; }
+    .in-view .point-abundance { transition-delay: 320ms; }
+    .in-view .map-hazards-row { transition-delay: 700ms; transform: translateY(0); }
+
+    .two-col {
+      display: grid;
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.78fr);
+      }
+      .map-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+      .sticky-label { left: 26px; }
+    }
+
+    .character-card {
+      position: relative;
+      border-radius: 30px;
+      padding: 1.1rem;
+      background:
+        linear-gradient(145deg, rgba(201, 165, 92, 0.48), rgba(244, 239, 231, 0.1)),
+        #19140f;
+      color: var(--paper);
+      box-shadow: 0 34px 90px rgba(20, 17, 15, 0.28);
+      border: 1px solid rgba(201, 165, 92, 0.36);
+      overflow: hidden;
+    }
+
+    .character-card::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 29px;
+      background:
+        radial-gradient(circle at 28% 20%, rgba(201, 165, 92, 0.26), transparent 16rem),
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent),
+        #17120e;
+      z-index: 0;
+    }
+
+    .character-inner {
+      position: relative;
+      z-index: 1;
+      padding: 1.35rem;
+    }
+
+    .avatar-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(201, 165, 92, 0.22);
+      margin-bottom: 1rem;
+    }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      border: 1px solid rgba(201, 165, 92, 0.35);
+      background:
+        radial-gradient(circle at 50% 28%, rgba(244, 239, 231, 0.72) 0 11%, transparent 12%),
+        radial-gradient(ellipse at 50% 72%, rgba(244, 239, 231, 0.34) 0 31%, transparent 32%),
+        linear-gradient(145deg, rgba(201, 165, 92, 0.38), rgba(47, 58, 66, 0.2));
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.24);
+    }
+
+    .avatar-row h4 {
+      margin: 0;
+      font-family: var(--font-head);
+      font-size: 2rem;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .level-pill {
+      display: inline-flex;
+      margin-top: 0.42rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(201, 165, 92, 0.14);
+      border: 1px solid rgba(201, 165, 92, 0.3);
+      color: var(--gold-2);
+      font: 800 10px/1 var(--font-ui);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .stat-list {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .stat-row {
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .stat-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 231, 0.68);
+    }
+
+    .stat-value {
+      color: var(--paper);
+      letter-spacing: 0;
+      text-transform: none;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 99px;
+      background: rgba(244, 239, 231, 0.12);
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      width: var(--w, 45%);
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--gold), var(--gold-2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1100ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .character-card.in-view .bar span {
+      transform: scaleX(1);
+    }
+
+    .unlock {
+      margin-top: 1rem;
+      padding: 0.9rem;
+      border-radius: 16px;
+      background: rgba(201, 165, 92, 0.12);
+      border: 1px solid rgba(201, 165, 92, 0.25);
+      font-size: 0.86rem;
+      line-height: 1.35;
+      color: var(--gold-2);
+      font-weight: 800;
+    }
+
+    .visual-card {
+      position: relative;
+      width: min(100%, 1000px);
+      margin: clamp(2rem, 6vw, 5rem) auto;
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(201, 165, 92, 0.12), transparent 18rem),
+        linear-gradient(180deg, #fff8ec, #e8ddcd);
+      border: 1px solid rgba(20, 17, 15, 0.08);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .visual-card.dark-card {
+      background:
+        radial-gradient(circle at 25% 15%, rgba(201, 165, 92, 0.14), transparent 18rem),
+        linear-gradient(180deg, #1d1712, #110f0d);
+      color: var(--paper);
+      border-color: rgba(201, 165, 92, 0.23);
+      box-shadow: 0 34px 90px rgba(0,0,0,0.25);
+    }
+
+    .visual-header {
+      padding: 1rem 1.15rem;
+      border-bottom: 1px solid rgba(20, 17, 15, 0.08);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      font: 800 11px/1 var(--font-ui);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-dark);
+    }
+
+    .dark-card .visual-header {
+      border-bottom-color: rgba(201, 165, 92, 0.17);
+      color: rgba(244, 239, 231, 0.68);
+    }
+
+    .visual-body {
+      padding: clamp(1.2rem, 4vw, 2.5rem);
+    }
+
+    .caption {
+      color: var(--muted-dark);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .dark-card .caption,
+    .dark .caption {
+      color: rgba(244, 239, 231, 0.66);
+    }
+
+    .graph-wrap {
+      height: clamp(320px, 38vw, 430px);
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    .graph-wrap svg {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: block;
+    }
+
+    .graph-line {
+      fill: none;
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      transition: stroke-dashoffset 1800ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .in-view .graph-line {
+      stroke-dashoffset: 0;
+    }
+
+    .gap-fill {
+      opacity: 0;
+      transition: opacity 900ms ease 900ms;
+    }
+
+    .in-view .gap-fill {
+      opacity: 0.42;
+    }
+
+    .axis-label {
+      font: 800 12px var(--font-ui);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .flywheel-card {
+      overflow: hidden;
+    }
+
+    .flywheel {
+      position: relative;
+      min-height: clamp(480px, 56vw, 650px);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: clamp(2rem, 4vw, 3.25rem) clamp(0.4rem, 2vw, 1.25rem);
+    }
+
+    .wheel-ring {
+      position: relative;
+      width: min(68vw, 520px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 165, 92, 0.18);
+      background:
+        radial-gradient(circle at center, rgba(244,239,231,0.04), transparent 32%),
+        radial-gradient(circle at center, transparent 57%, rgba(201,165,92,0.06) 58%, transparent 60%);
+    }
+
+    .wheel-ring::before,
+    .wheel-ring::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .wheel-ring::before {
+      inset: 10%;
+      border: 1px dashed rgba(201, 165, 92, 0.2);
+      animation: spin 30s linear infinite;
+    }
+
+    .wheel-ring::after {
+      inset: 25%;
+      border: 1px solid rgba(201, 165, 92, 0.12);
+    }
+
+    .doom .wheel-ring {
+      border-color: rgba(108, 120, 128, 0.34);
+      background:
+        radial-gradient(circle at center, rgba(108,120,128,0.08), transparent 32%),
+        radial-gradient(circle at center, transparent 57%, rgba(108,120,128,0.08) 58%, transparent 60%);
+    }
+
+    .doom .wheel-ring::before,
+    .doom .wheel-ring::after {
+      border-color: rgba(108, 120, 128, 0.24);
+      animation-direction: reverse;
+    }
+
+    .up .wheel-ring {
+      border-color: rgba(201, 165, 92, 0.38);
+      box-shadow: 0 0 85px rgba(201, 165, 92, 0.12);
+    }
+
+    .wheel-arrows {
+      position: absolute;
+      inset: 8%;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .wheel-arrows path {
+      fill: none;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-dasharray: 9 12;
+      opacity: 0.74;
+      animation: dashMove 9000ms linear infinite;
+    }
+
+    .doom .wheel-arrows path {
+      stroke: rgba(108, 120, 128, 0.72);
+      animation-direction: reverse;
+    }
+
+    .up .wheel-arrows path {
+      stroke: rgba(224, 201, 133, 0.9);
+    }
+
+    .wheel-node {
+      position: absolute;
+      z-index: 2;
+      width: clamp(106px, 14vw, 148px);
+      min-height: 58px;
+      display: grid;
+      place-items: center;
+      padding: 0.8rem 0.75rem;
+      border-radius: 18px;
+      background: rgba(20, 17, 15, 0.94);
+      border: 1px solid rgba(201, 165, 92, 0.28);
+      color: var(--paper);
+      text-align: center;
+      font: 900 clamp(0.58rem, 1.1vw, 0.75rem)/1.24 var(--font-ui);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.26);
+    }
+
+    .doom .wheel-node {
+      border-color: rgba(108, 120, 128, 0.46);
+      color: rgba(244, 239, 231, 0.78);
+      background: rgba(18, 20, 21, 0.95);
+    }
+
+    .up .wheel-node {
+      border-color: rgba(224, 201, 133, 0.45);
+      color: rgba(244, 239, 231, 0.92);
+      box-shadow: 0 0 38px rgba(201, 165, 92, 0.12), 0 20px 50px rgba(0,0,0,0.24);
+    }
+
+    .wheel-center {
+      position: absolute;
+      z-index: 3;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(126px, 20vw, 172px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      text-align: center;
+      font: 900 clamp(0.75rem, 1.5vw, 1rem)/1.18 var(--font-ui);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: radial-gradient(circle, rgba(20,17,15,0.96), rgba(20,17,15,0.78));
+      border: 1px solid rgba(244,239,231,0.12);
+      color: var(--gold-2);
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.35), 0 20px 60px rgba(0,0,0,0.24);
+    }
+
+    .doom .wheel-center {
+      color: rgba(244,239,231,0.72);
+      border-color: rgba(108,120,128,0.36);
+    }
+
+    .doom .node-1 { left: 50%; top: 6%; transform: translate(-50%, 0); }
+    .doom .node-2 { left: 82%; top: 32%; transform: translate(-50%, -50%); }
+    .doom .node-3 { left: 70%; top: 79%; transform: translate(-50%, -50%); }
+    .doom .node-4 { left: 30%; top: 79%; transform: translate(-50%, -50%); }
+    .doom .node-5 { left: 18%; top: 32%; transform: translate(-50%, -50%); }
+
+    .up .node-1 { left: 50%; top: 6%; transform: translate(-50%, 0); }
+    .up .node-2 { left: 74%; top: 17%; transform: translate(-50%, -50%); }
+    .up .node-3 { left: 84%; top: 50%; transform: translate(-50%, -50%); }
+    .up .node-4 { left: 66%; top: 81%; transform: translate(-50%, -50%); }
+    .up .node-5 { left: 34%; top: 81%; transform: translate(-50%, -50%); }
+    .up .node-6 { left: 16%; top: 50%; transform: translate(-50%, -50%); }
+    .up .node-7 { left: 26%; top: 17%; transform: translate(-50%, -50%); }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes dashMove { to { stroke-dashoffset: -180; } }
+
+    .balance {
+      min-height: clamp(300px, 34vw, 400px);
+      position: relative;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .balance::before {
+      content: "";
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      top: 50%;
+      height: 1px;
+      background: rgba(20,17,15,0.08);
+      transform: translateY(-50%);
+    }
+
+    .scale-beam {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(74%, 680px);
+      height: 9px;
+      background: linear-gradient(90deg, rgba(20,17,15,0.44), var(--gold), rgba(20,17,15,0.44));
+      border-radius: 999px;
+      transform: translate(-50%, -50%) rotate(-2deg);
+      transform-origin: center;
+      transition: transform 1300ms cubic-bezier(.2,.8,.2,1);
+      z-index: 1;
+    }
+
+    .in-view .scale-beam { transform: translate(-50%, -50%) rotate(8deg); }
+
+    .scale-post {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 10px;
+      height: 128px;
+      background: rgba(20,17,15,0.42);
+      border-radius: 999px;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    .scale-pan {
+      position: absolute;
+      top: calc(50% - 56px);
+      width: clamp(170px, 22vw, 220px);
+      min-height: 104px;
+      border-radius: 22px;
+      padding: 1rem 1.1rem;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 850;
+      line-height: 1.18;
+      box-shadow: 0 20px 40px rgba(20,17,15,0.14);
+      transition: transform 1300ms cubic-bezier(.2,.8,.2,1), opacity 900ms ease;
+      z-index: 2;
+    }
+
+    .scale-pan small {
+      display: block;
+      margin-top: 0.45rem;
+      font-size: 0.76em;
+      line-height: 1.25;
+    }
+
+    .scale-pan.left {
+      left: clamp(18px, 5%, 72px);
+      background: rgba(20,17,15,0.9);
+      color: var(--paper);
+    }
+
+    .scale-pan.right {
+      right: clamp(18px, 5%, 72px);
+      background: rgba(201, 165, 92, 0.24);
+      border: 1px solid rgba(201, 165, 92, 0.45);
+      color: var(--ink);
+      opacity: 0.74;
+    }
+
+    .in-view .scale-pan.left { transform: translateY(-24px); }
+    .in-view .scale-pan.right { transform: translateY(34px); opacity: 1; }
+
+    .gates {
+      min-height: 340px;
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .gate-track {
+      position: relative;
+      min-height: 190px;
+      border-radius: 24px;
+      background: rgba(20, 17, 15, 0.05);
+      overflow: hidden;
+      border: 1px solid rgba(20, 17, 15, 0.08);
+    }
+
+    .gate {
+      position: absolute;
+      top: 34px;
+      bottom: 34px;
+      width: clamp(86px, 11vw, 124px);
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 0.32rem;
+      background: rgba(20,17,15,0.88);
+      color: var(--gold-2);
+      font: 900 clamp(0.66rem, 0.9vw, 0.78rem)/1 var(--font-ui);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 250ms cubic-bezier(.2,.8,.2,1), background 250ms ease, border-color 250ms ease;
+      z-index: 2;
+      border: 1px solid rgba(201, 165, 92, 0.18);
+    }
+
+    .gate:hover,
+    .gate:focus-visible {
+      transform: translateY(-2px);
+      background: var(--ink-2);
+      border-color: rgba(224, 201, 133, 0.48);
+    }
+
+    .gate small {
+      display: block;
+      font-size: 0.62rem;
+      line-height: 1.25;
+      letter-spacing: 0;
+      text-transform: none;
+      color: rgba(244,239,231,0.72);
+      max-width: 105px;
+    }
+
+    .gate-1 { left: 23%; height: 122px; }
+    .gate-2 { left: 49%; height: 106px; top: 42px; bottom: auto; }
+    .gate-3 { left: 73%; height: 92px; top: 49px; bottom: auto; }
+
+    .prospect-dot {
+      position: absolute;
+      left: 24px;
+      top: calc(50% - 8px);
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: 0;
+      animation: dotMove 4800ms ease-in-out infinite;
+    }
+
+    .prospect-dot:nth-child(2) { animation-delay: 400ms; top: 36%; }
+    .prospect-dot:nth-child(3) { animation-delay: 800ms; top: 61%; }
+    .prospect-dot:nth-child(4) { animation-delay: 1200ms; top: 45%; }
+    .prospect-dot:nth-child(5) { animation-delay: 1600ms; top: 54%; background: var(--gold); }
+    .prospect-dot:nth-child(6) { animation-delay: 2000ms; top: 42%; background: var(--gold-2); }
+
+    @keyframes dotMove {
+      0% { transform: translateX(0); opacity: 0; }
+      8% { opacity: 1; }
+      55% { opacity: 1; }
+      78% { transform: translateX(calc(min(100vw, 960px) - 120px)); opacity: 1; }
+      100% { transform: translateX(calc(min(100vw, 960px) - 80px)); opacity: 0; }
+    }
+
+    .scorecard {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .score-grid {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .score-btn {
+      width: 100%;
+      border: 1px solid rgba(20,17,15,0.12);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.36);
+      color: var(--ink);
+      padding: 1rem;
+      text-align: left;
+      cursor: pointer;
+      font: 800 1rem/1.2 var(--font-ui);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .score-btn:hover { transform: translateY(-2px); }
+    .score-btn:focus-visible,
+    .gate:focus-visible,
+    input[type="range"]:focus-visible {
+      outline: 3px solid rgba(201, 165, 92, 0.68);
+      outline-offset: 4px;
+    }
+    .score-btn .mark { font-size: 1.35rem; color: var(--muted); }
+    .score-btn.is-yes { border-color: rgba(149, 143, 99, 0.45); background: rgba(149, 143, 99, 0.12); }
+    .score-btn.is-no { border-color: rgba(169, 111, 99, 0.45); background: rgba(169, 111, 99, 0.12); }
+    .score-btn.is-yes .mark { color: var(--green); }
+    .score-btn.is-no .mark { color: var(--danger); }
+
+    .rule-box {
+      border-radius: 18px;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 1.1rem;
+      font-weight: 800;
+      line-height: 1.35;
+      border: 1px solid rgba(201, 165, 92, 0.25);
+    }
+
+    @media (min-width: 720px) {
+      .score-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .restaurants {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .restaurant {
+      position: relative;
+      min-height: 245px;
+      border-radius: 26px;
+      padding: 1.2rem;
+      overflow: hidden;
+      border: 1px solid rgba(20,17,15,0.09);
+      display: grid;
+      align-content: end;
+    }
+
+    .restaurant.empty {
+      background: linear-gradient(145deg, #f8f1e7, #ddd2c2);
+      opacity: 0.7;
+    }
+
+    .restaurant.busy {
+      background:
+        radial-gradient(circle at 55% 38%, rgba(201,165,92,0.42), transparent 12rem),
+        linear-gradient(145deg, #19140f, #352717);
+      color: var(--paper);
+      box-shadow: 0 24px 80px rgba(201,165,92,0.12);
+    }
+
+    .restaurant::before {
+      content: "";
+      position: absolute;
+      inset: 25px;
+      border-radius: 22px;
+      border: 1px dashed rgba(201,165,92,0.24);
+    }
+
+    .restaurant-title {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .restaurant small {
+      position: relative;
+      z-index: 1;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    @media (min-width: 780px) {
+      .restaurants { grid-template-columns: 1fr 1fr; }
+    }
+
+    .seesaw {
+      position: relative;
+      min-height: clamp(310px, 34vw, 390px);
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .seesaw::before {
+      content: "";
+      position: absolute;
+      left: 13%;
+      right: 13%;
+      top: 50%;
+      height: 1px;
+      background: rgba(20,17,15,0.08);
+      transform: translateY(-50%);
+    }
+
+    .seesaw-beam {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(72%, 660px);
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--cold-2), var(--gold));
+      transform: translate(-50%, -50%) rotate(-8deg);
+      transform-origin: center;
+      transition: transform 1200ms cubic-bezier(.2,.8,.2,1);
+      box-shadow: 0 20px 30px rgba(20,17,15,0.12);
+      z-index: 1;
+    }
+
+    .in-view .seesaw-beam { transform: translate(-50%, -50%) rotate(9deg); }
+
+    .seesaw-base {
+      position: absolute;
+      left: 50%;
+      top: calc(50% + 8px);
+      width: 0;
+      height: 0;
+      border-left: 38px solid transparent;
+      border-right: 38px solid transparent;
+      border-bottom: 96px solid rgba(20,17,15,0.74);
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    .seesaw-person {
+      position: absolute;
+      width: clamp(150px, 20vw, 210px);
+      min-height: 82px;
+      border-radius: 18px;
+      padding: 0.85rem 1rem;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font: 850 clamp(0.68rem, 1vw, 0.78rem)/1.25 var(--font-ui);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 1200ms cubic-bezier(.2,.8,.2,1);
+      z-index: 2;
+      box-shadow: 0 18px 36px rgba(20,17,15,0.09);
+    }
+
+    .seesaw-person.prospect {
+      left: clamp(18px, 5%, 72px);
+      top: calc(50% - 92px);
+      background: rgba(47, 58, 66, 0.14);
+      color: var(--cold);
+      border: 1px solid rgba(47,58,66,0.2);
+    }
+
+    .seesaw-person.founder {
+      right: clamp(18px, 5%, 72px);
+      top: calc(50% - 50px);
+      background: rgba(201, 165, 92, 0.18);
+      color: var(--ink);
+      border: 1px solid rgba(201,165,92,0.35);
+    }
+
+    .in-view .seesaw-person.prospect { transform: translateY(52px); }
+    .in-view .seesaw-person.founder { transform: translateY(-52px); }
+
+    .stacking {
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .pedestal {
+      width: min(88%, 520px);
+      display: grid;
+      gap: 0.65rem;
+      transform: translateY(20px) rotate(-2deg);
+      transition: transform 1100ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .in-view .pedestal { transform: translateY(0) rotate(0); }
+
+    .block {
+      padding: 1.05rem;
+      border-radius: 16px;
+      background: rgba(201, 165, 92, 0.2);
+      border: 1px solid rgba(201, 165, 92, 0.42);
+      text-align: center;
+      font: 900 0.9rem/1 var(--font-ui);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transform: translateX(var(--offset, 0));
+      opacity: 0.35;
+      transition: transform 900ms ease, opacity 900ms ease;
+    }
+
+    .in-view .block { transform: translateX(0); opacity: 1; }
+    .block:nth-child(1) { --offset: -32px; transition-delay: 80ms; }
+    .block:nth-child(2) { --offset: 42px; transition-delay: 220ms; }
+    .block:nth-child(3) { --offset: -18px; transition-delay: 360ms; }
+
+    .doors {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .door {
+      min-height: 270px;
+      border-radius: 28px;
+      padding: 1.4rem;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      align-content: end;
+      border: 1px solid rgba(20,17,15,0.1);
+    }
+
+    .door.dark-door {
+      background: linear-gradient(145deg, #221a16, #0f0d0c);
+      color: var(--paper);
+    }
+
+    .door.gold-door {
+      background:
+        radial-gradient(circle at 50% 25%, rgba(201,165,92,0.4), transparent 13rem),
+        linear-gradient(145deg, #f4efe7, #d7c59f);
+      color: var(--ink);
+      box-shadow: 0 28px 80px rgba(201,165,92,0.14);
+    }
+
+    .door::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 34px;
+      transform: translateX(-50%);
+      width: 36%;
+      height: 56%;
+      border-radius: 16px 16px 6px 6px;
+      border: 2px solid rgba(201,165,92,0.32);
+    }
+
+    .door h4 {
+      margin: 0 0 0.45rem;
+      font-family: var(--font-head);
+      font-size: 2rem;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .door p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 780px) {
+      .doors { grid-template-columns: 1fr 1fr; }
+    }
+
+    .thermo-wrap {
+      display: grid;
+      gap: 1.6rem;
+      align-items: center;
+    }
+
+    .thermo {
+      position: relative;
+      width: 88px;
+      height: 340px;
+      margin: 0 auto;
+      border-radius: 999px;
+      background: linear-gradient(0deg, #71819a, var(--gold), #ad6d61);
+      box-shadow: inset 0 0 0 12px rgba(255,255,255,0.42), 0 20px 50px rgba(20,17,15,0.16);
+    }
+
+    .thermo-needle {
+      position: absolute;
+      left: 100px;
+      bottom: var(--needle, 47%);
+      transform: translateY(50%);
+      width: 110px;
+      height: 2px;
+      background: var(--ink);
+      transition: bottom 180ms ease;
+    }
+
+    .thermo-needle::before {
+      content: "";
+      position: absolute;
+      left: -9px;
+      top: -7px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .thermo-panel {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .thermo-panel input {
+      width: 100%;
+      accent-color: var(--gold);
+    }
+
+    .diagnosis {
+      border-radius: 20px;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 1rem;
+      border: 1px solid rgba(201,165,92,0.28);
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    @media (min-width: 760px) {
+      .thermo-wrap { grid-template-columns: 240px 1fr; }
+    }
+
+    .roster-visual {
+      min-height: 430px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(201,165,92,0.34);
+      background:
+        radial-gradient(circle at 31% 31%, rgba(201,165,92,0.24), transparent 12rem),
+        radial-gradient(circle at 70% 58%, rgba(47,58,66,0.34), transparent 16rem),
+        repeating-linear-gradient(135deg, rgba(244,239,231,0.045) 0 1px, transparent 1px 18px),
+        var(--ink-2);
+      color: rgba(244,239,231,0.84);
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(220px, 1fr);
+      align-items: center;
+      gap: clamp(1.4rem, 4vw, 3rem);
+      padding: 2rem;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 32px 90px rgba(20,17,15,0.18);
+    }
+
+    .dinner-table {
+      position: relative;
+      min-height: 320px;
+      display: grid;
+      place-items: center;
+    }
+
+    .table-oval {
+      width: min(100%, 420px);
+      aspect-ratio: 1.35;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(244,239,231,0.12), transparent 28%),
+        linear-gradient(145deg, rgba(201,165,92,0.42), rgba(76,58,42,0.42));
+      border: 1px solid rgba(224,201,133,0.28);
+      box-shadow: inset 0 0 55px rgba(0,0,0,0.28), 0 30px 70px rgba(0,0,0,0.2);
+    }
+
+    .seat {
+      position: absolute;
+      width: 74px;
+      aspect-ratio: 1;
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font: 900 0.58rem/1.1 var(--font-ui);
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      border: 1px solid rgba(244,239,231,0.15);
+    }
+
+    .seat.good {
+      background: rgba(224,201,133,0.9);
+      color: var(--ink);
+      box-shadow: 0 12px 34px rgba(201,165,92,0.18);
+    }
+
+    .seat.drain {
+      background: rgba(47,58,66,0.76);
+      color: rgba(244,239,231,0.78);
+      filter: saturate(0.7);
+    }
+
+    .seat-1 { left: 4%; top: 22%; }
+    .seat-2 { left: 38%; top: 0; }
+    .seat-3 { right: 5%; top: 24%; }
+    .seat-4 { right: 16%; bottom: 4%; }
+    .seat-5 { left: 16%; bottom: 5%; }
+
+    .capacity-meter {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .capacity-meter h4 {
+      margin: 0;
+      font-family: var(--font-head);
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      color: var(--paper);
+    }
+
+    .meter-rail {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(244,239,231,0.13);
+      overflow: hidden;
+    }
+
+    .meter-fill {
+      display: block;
+      width: 36%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--danger), var(--gold));
+    }
+
+    .meter-note {
+      margin: 0;
+      max-width: 34ch;
+      color: rgba(244,239,231,0.72);
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+
+    .fork {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .path-card {
+      border-radius: 24px;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.36);
+      border: 1px solid rgba(20,17,15,0.08);
+      min-height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .path-card::before {
+      content: "";
+      position: absolute;
+      inset: auto 18px 22px 18px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1200ms ease;
+    }
+
+    .in-view .path-card::before { transform: scaleX(1); }
+
+    .path-card h4 {
+      margin: 0 0 0.7rem;
+      font-family: var(--font-head);
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .path-card p { margin: 0; font-size: 0.98rem; line-height: 1.5; }
+
+    @media (min-width: 760px) {
+      .fork { grid-template-columns: 1fr 1fr; }
+    }
+
+    .narrow-card {
+      max-width: 480px;
+    }
+
+    .narrow-card-lg {
+      max-width: 500px;
+    }
+
+    .section-offset {
+      margin-top: 4rem;
+    }
+
+    .caption-left {
+      text-align: left;
+      margin: 0;
+    }
+
+    .final-copy {
+      margin-top: clamp(3rem, 8vw, 6rem);
+    }
+
+    .final-dot {
+      background: var(--gold-2) !important;
+      box-shadow: 0 0 0 8px rgba(224,201,133,0.12), 0 0 14px rgba(224,201,133,0.3) !important;
+    }
+
+    .script-card {
+      border-radius: 30px;
+      padding: clamp(1.4rem, 5vw, 3rem);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(201,165,92,0.18), transparent 14rem),
+        linear-gradient(180deg, #fff8ee, #eadcca);
+      border: 1px solid rgba(201,165,92,0.5);
+      box-shadow: 0 30px 80px rgba(20,17,15,0.14);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .script-card::before {
+      content: "FC";
+      position: absolute;
+      right: 20px;
+      top: 18px;
+      color: rgba(201,165,92,0.5);
+      font: 900 1rem/1 var(--font-ui);
+      letter-spacing: 0.2em;
+    }
+
+    .script-text {
+      font-family: var(--font-head);
+      font-size: clamp(1.32rem, 3.2vw, 2.05rem);
+      line-height: 1.42;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      max-width: 820px;
+    }
+
+    .annotations {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1.6rem;
+    }
+
+    .annotation {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(201,165,92,0.16);
+      color: var(--muted-dark);
+      font: 850 0.8rem/1 var(--font-ui);
+    }
+
+    .annotation::before {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    @media (min-width: 760px) {
+      .annotations { grid-template-columns: repeat(3, max-content); }
+    }
+
+    .ceiling-visual {
+      min-height: 420px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .doorway {
+      width: min(44vw, 220px);
+      height: 285px;
+      border: 2px solid rgba(201,165,92,0.42);
+      border-radius: 100px 100px 8px 8px;
+      display: grid;
+      place-items: center;
+      background: rgba(20,17,15,0.85);
+      color: var(--paper);
+      text-align: center;
+      padding: 1rem;
+      font-family: var(--font-head);
+      font-size: 1.7rem;
+      line-height: 1.05;
+      z-index: 2;
+      box-shadow: 0 26px 70px rgba(0,0,0,0.16);
+    }
+
+    .queue-dot {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.75;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .queue-dot:nth-child(1) { bottom: 22px; }
+    .queue-dot:nth-child(2) { bottom: 52px; opacity: 0.65; }
+    .queue-dot:nth-child(3) { bottom: 82px; opacity: 0.55; }
+    .queue-dot:nth-child(4) { bottom: 112px; opacity: 0.45; }
+    .queue-dot:nth-child(5) { bottom: 142px; opacity: 0.35; }
+    .queue-dot:nth-child(6) { bottom: 172px; opacity: 0.25; }
+
+    .hiring-paths {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .hiring-path {
+      border-radius: 24px;
+      padding: 1.4rem;
+      background: rgba(255,255,255,0.34);
+      border: 1px solid rgba(20,17,15,0.08);
+    }
+
+    .hiring-path.good {
+      background: rgba(201,165,92,0.16);
+      border-color: rgba(201,165,92,0.35);
+    }
+
+    .hiring-path h4 {
+      margin: 0 0 0.75rem;
+      font-family: var(--font-head);
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .path-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      font: 850 0.78rem/1 var(--font-ui);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .chip {
+      padding: 0.66rem 0.78rem;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .arrow { color: var(--gold); font-weight: 900; }
+
+    @media (min-width: 780px) {
+      .hiring-paths { grid-template-columns: 1fr 1fr; }
+    }
+
+    .sop-loop {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .sop-step {
+      border-radius: 22px;
+      padding: 1.25rem;
+      background: rgba(20,17,15,0.88);
+      color: var(--paper);
+      border: 1px solid rgba(201,165,92,0.24);
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .in-view .sop-step { opacity: 1; transform: translateY(0); }
+    .in-view .sop-step:nth-child(2) { transition-delay: 120ms; }
+    .in-view .sop-step:nth-child(3) { transition-delay: 240ms; }
+    .in-view .sop-step:nth-child(4) { transition-delay: 360ms; }
+
+    .sop-step h4 {
+      margin: 0 0 0.35rem;
+      font-family: var(--font-head);
+      font-size: 1.7rem;
+    }
+
+    .sop-step p { margin: 0; font-size: 0.9rem; line-height: 1.45; color: rgba(244,239,231,0.68); }
+
+    @media (min-width: 860px) {
+      .sop-loop { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .visited {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--gold-2);
+      box-shadow: 0 0 22px rgba(201,165,92,0.84);
+      opacity: 0;
+      transform: scale(0.2);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .in-view .visited { opacity: 1; transform: scale(1); }
+    .visited:nth-of-type(8) { transition-delay: 400ms; }
+    .visited:nth-of-type(9) { transition-delay: 520ms; }
+    .visited:nth-of-type(10) { transition-delay: 640ms; }
+    .visited:nth-of-type(11) { transition-delay: 760ms; }
+    .visited:nth-of-type(12) { transition-delay: 880ms; }
+    .visited:nth-of-type(13) { transition-delay: 1000ms; }
+
+    .closing-frame {
+      display: grid;
+      gap: 1rem;
+      place-items: center;
+      margin-top: 3rem;
+      padding: clamp(2rem, 6vw, 4rem);
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 50% 10%, rgba(201,165,92,0.22), transparent 16rem),
+        linear-gradient(180deg, #1d1712, #0f0d0c);
+      border: 1px solid rgba(201,165,92,0.25);
+      text-align: center;
+      color: var(--paper);
+    }
+
+    .mountain {
+      width: min(100%, 520px);
+      height: 230px;
+      position: relative;
+    }
+
+    .mountain::before,
+    .mountain::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-bottom: 220px solid rgba(244,239,231,0.12);
+    }
+
+    .mountain::before { left: 22px; }
+    .mountain::after { right: 22px; border-bottom-color: rgba(201,165,92,0.18); transform: scale(0.88); }
+
+    .mountain span {
+      position: absolute;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%);
+      z-index: 2;
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      background: rgba(20,17,15,0.82);
+      border: 1px solid rgba(201,165,92,0.34);
+      color: var(--gold-2);
+      font: 900 0.78rem/1 var(--font-ui);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      font: 900 0.76rem/1 var(--font-ui);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(244,239,231,0.5);
+      margin-top: 1rem;
+    }
+
+    .gold-number {
+      color: var(--gold-text);
+      font-weight: 900;
+    }
+
+    @media (max-width: 640px) {
+      body { font-size: 18px; line-height: 1.68; }
+      h1 { font-size: clamp(3.35rem, 17vw, 5rem); line-height: 1.02; letter-spacing: -0.055em; }
+      h2 { font-size: clamp(3rem, 13vw, 5.2rem); }
+      h3 { font-size: clamp(2rem, 8vw, 3.4rem); }
+      .hero { align-items: center; justify-items: center; }
+      .hero h1 { max-width: calc(100vw - 40px); }
+      .hero-subhead { max-width: calc(100vw - 40px); font-size: clamp(1.2rem, 5vw, 1.5rem); }
+      .hero-bottom {
+        position: relative;
+        bottom: auto;
+        margin: 4rem auto 0;
+        width: min(calc(100% - 40px), 350px);
+        display: grid;
+        justify-content: start;
+        gap: 1rem;
+      }
+      .hero-content { width: min(calc(100% - 40px), 350px); padding-top: 5rem; }
+      .hero .ghost-left, .hero .ghost-right { display: none; }
+      .chapter-opener { min-height: max(100svh, 620px); padding: 8rem 0 6rem; }
+      .chapter-number { margin-bottom: 0.25rem; }
+      .graph-wrap { height: 320px; }
+      .flywheel { min-height: 500px; padding: 2rem 0.2rem; }
+      .wheel-ring { width: min(78vw, 340px); }
+      .wheel-node { width: 98px; min-height: 54px; font-size: 0.62rem; padding: 0.54rem; border-radius: 14px; letter-spacing: 0.025em; }
+      .wheel-center { width: 102px; font-size: 0.68rem; }
+      .doom .node-1 { top: 5%; }
+      .doom .node-2 { left: 80%; top: 33%; }
+      .doom .node-3 { left: 69%; top: 78%; }
+      .doom .node-4 { left: 31%; top: 78%; }
+      .doom .node-5 { left: 20%; top: 33%; }
+      .up .node-1 { top: 5%; }
+      .up .node-2 { left: 72%; top: 18%; }
+      .up .node-3 { left: 82%; top: 50%; }
+      .up .node-4 { left: 66%; top: 80%; }
+      .up .node-5 { left: 34%; top: 80%; }
+      .up .node-6 { left: 18%; top: 50%; }
+      .up .node-7 { left: 28%; top: 18%; }
+      .scale-pan { width: 132px; font-size: 0.74rem; }
+      .scale-pan.left { left: 8px; }
+      .scale-pan.right { right: 8px; }
+      .scale-beam { width: 80%; }
+      .seesaw-person { width: 132px; font-size: 0.62rem; padding: 0.7rem; }
+      .seesaw-person.prospect { left: 8px; }
+      .seesaw-person.founder { right: 8px; }
+      .seesaw-beam { width: 82%; }
+      .gate { width: 80px; font-size: 0.66rem; letter-spacing: 0.08em; }
+      .gate small { font-size: 0.58rem; max-width: 76px; }
+      .gate-1 { left: 18%; }
+      .gate-2 { left: 50%; }
+      .gate-3 { left: 82%; }
+      .sticky-label { display: none; }
+      .map-placeholder, .roster-visual { min-height: 420px; }
+      .map-point { top: 46%; }
+      .point-scarcity { left: 16%; }
+      .point-system { left: 50%; }
+      .point-abundance { left: 84%; }
+      .map-label { max-width: 124px; font-size: 0.66rem; padding: 0.58rem 0.52rem; letter-spacing: 0.055em; }
+      .map-hazards-row { left: 8%; right: 8%; bottom: 12%; gap: 0.42rem; }
+      .map-hazard-chip { font-size: 0.62rem; padding: 0.58rem 0.38rem; letter-spacing: 0.035em; }
+      .block:nth-child(1) { --offset: -16px; }
+      .block:nth-child(2) { --offset: 16px; }
+      .block:nth-child(3) { --offset: -10px; }
+      .roster-visual { grid-template-columns: 1fr; padding: 1.3rem; }
+      .dinner-table { min-height: 285px; }
+      .seat { width: 62px; border-radius: 18px; font-size: 0.58rem; letter-spacing: 0.04em; }
+      .capacity-meter h4 { font-size: clamp(2rem, 10vw, 3rem); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal,
+      .stagger > *,
+      .sop-step,
+      .hero h1 span,
+      .hero-subhead,
+      .map-point,
+      .map-label,
+      .map-hazards-row,
+      .gap-fill,
+      .visited {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .graph-line,
+      .map-path { stroke-dashoffset: 0 !important; }
+      .bar span {
+        transform: scaleX(1) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+  <div class="sticky-label" id="stickyLabel">A PRIVATE FIELD GUIDE</div>
+
+  <main>
+    <section class="section hero dark" data-label="Cover">
+      <div class="ghost-left">Where's the next client?</div>
+      <div class="ghost-right">Phone down. Calendar full.</div>
+      <div class="hero-content">
+        <div class="kicker reveal">A Private Field Guide</div>
+        <h1 aria-label="The Capacity Problem"><span>The</span> <span>Capacity</span> <span>Problem</span></h1>
+        <p class="hero-subhead">What happens to your business the day the lead problem disappears, and why almost nobody is ready for it.</p>
+      </div>
+      <div class="hero-bottom">
+        <span>For agency owners who are about to have a very good problem.</span>
+        <span class="scroll-cue">Scroll <i aria-hidden="true"></i></span>
+      </div>
+    </section>
+
+    <section class="section paper section-pad" data-label="Note Before You Start">
+      <div class="copy stagger">
+        <div class="eyebrow">A note before you start</div>
+        <p>Right now, this guide solves a problem you don't have.</p>
+        <p>That's deliberate. I want you to read it anyway, because in ninety days it will be the most relevant thing you've read all year. The founders who see this coming are the ones who break through it instead of getting crushed under it.</p>
+        <p>Here's the strange truth nobody tells you about fixing your lead generation:</p>
+        <div class="emphasis-line">It doesn't end your problems. It swaps them.</div>
+        <p>You trade the problem of scarcity for the problem of abundance. And abundance, handled badly, will cap your business just as hard as scarcity ever did.</p>
+        <p>I've watched founders go from “I can't find clients” to “I'm drowning in clients” and somehow end up just as stuck, just as tired, and barely making more money.</p>
+        <p>This guide is the map of that second territory. Read it as a preview of where you're headed.</p>
+      </div>
+    </section>
+
+    <section class="section map-showcase dark" data-label="The Territory Map">
+      <div class="map-grid wide">
+        <div class="map-placeholder reveal">
+          <svg viewBox="0 0 1000 620" role="img" aria-label="Minimal path from scarcity through the system to abundance">
+            <defs>
+              <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <path class="map-path" d="M115 310 L885 310" fill="none" stroke="#c9a55c" stroke-width="8" stroke-linecap="round" stroke-dasharray="18 18" />
+          </svg>
+          <div class="map-point point-scarcity">
+            <span class="map-dot" aria-hidden="true"></span>
+            <span class="map-label">The Land of Scarcity</span>
+          </div>
+          <div class="map-point point-system">
+            <span class="map-dot" aria-hidden="true"></span>
+            <span class="map-mountain" aria-hidden="true"></span>
+            <span class="map-label">The System</span>
+          </div>
+          <div class="map-point point-abundance">
+            <span class="map-dot" aria-hidden="true"></span>
+            <span class="map-label">The Land of Abundance</span>
+          </div>
+          <div class="map-hazards-row" aria-label="Hazards in the land of abundance">
+            <span class="map-hazard-chip">Burnout Ridge</span>
+            <span class="map-hazard-chip">Wrong-Fit Clients</span>
+            <span class="map-hazard-chip">The Pricing Decision</span>
+          </div>
+        </div>
+        <div class="stagger">
+          <div class="eyebrow">The first wow</div>
+          <h3>Crossing the mountain does not end the journey.</h3>
+          <p class="lead">Fixing your leads begins a new one. You enter new territory, with new hazards most founders never see coming.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section paper section-pad" data-label="Meet Arjun">
+      <div class="two-col wide">
+        <div class="stagger">
+          <div class="eyebrow">Meet Arjun</div>
+          <p>Before we start, meet Arjun.</p>
+          <p>Arjun runs a <span class="gold-number count" data-count="4">0</span>-person marketing agency. Eighteen months ago he was where most agency owners live: refreshing his inbox, sending cold emails into the void, closing one client some months and zero others.</p>
+          <p>Revenue swung between ₹2 lakh and ₹6 lakh with no pattern he could name. He worked harder than anyone he knew and stayed exactly the same size.</p>
+          <p>Then Arjun fixed his client acquisition. Within three months, his calendar went from empty to overflowing.</p>
+          <p>This is the story of every problem he hit next, and how he solved each one. You'll recognise yourself in him. That's the point.</p>
+        </div>
+        <article class="character-card reveal" data-card="1">
+          <div class="character-inner">
+            <div class="avatar-row">
+              <div class="avatar" aria-hidden="true"></div>
+              <div>
+                <h4>Arjun</h4>
+                <span class="level-pill">Level 01: Scarcity Mode</span>
+              </div>
+            </div>
+            <div class="stat-list">
+              <div class="stat-row"><div class="stat-top"><span>Agency Size</span><span class="stat-value">4</span></div><div class="bar"><span style="--w:32%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Revenue</span><span class="stat-value">₹2 to ₹6L</span></div><div class="bar"><span style="--w:38%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Sleep</span><span class="stat-value">Poor</span></div><div class="bar"><span style="--w:22%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Lead Anxiety</span><span class="stat-value">Maximum</span></div><div class="bar"><span style="--w:96%"></span></div></div>
+              <div class="unlock">STATUS: Working hard, staying the same size.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark chapter-opener" data-label="CH. 01 - Capacity">
+      <div class="chapter-inner reveal">
+        <div class="chapter-number">01</div>
+        <h2>The Ceiling Nobody Warns You About</h2>
+        <p class="lead">The lead problem disappears. Then the founder discovers a quieter limit: their own calendar.</p>
+      </div>
+    </section>
+
+    <section class="section paper section-pad" data-label="CH. 01 - Capacity">
+      <div class="copy stagger">
+        <p>On a Tuesday night, Arjun opened his calendar and felt something he had wanted for years.</p>
+        <p>Panic.</p>
+        <p>Not because the calendar was empty. Because it was full. Discovery calls in the morning. Strategy calls after lunch. Follow-ups in the evening. Two proposals to send before bed. Three hot leads waiting on WhatsApp.</p>
+        <p>For years he thought more leads would fix the business. Now the leads were here, and the business had become heavier.</p>
+        <p>The first ceiling shows up in three places. Your call quality drops. Your follow-up gets slower. Your decision-making gets worse because every lead feels urgent.</p>
+        <div class="pullquote small">The solution is never generate fewer leads. It is change what you do with them.</div>
+        <p>Scarcity asks, “Where is the next client?” Abundance asks, “Which clients deserve our limited capacity?” That second question is the beginning of an actual business.</p>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>The Two Lines</span><span>Wasted abundance</span></div>
+        <div class="visual-body">
+          <div class="graph-wrap">
+            <svg viewBox="0 0 900 420" preserveAspectRatio="none" aria-label="Leads generated rising faster than closing capacity">
+              <defs>
+                <linearGradient id="gapGold" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#c9a55c" stop-opacity="0.72" />
+                  <stop offset="1" stop-color="#c9a55c" stop-opacity="0.05" />
+                </linearGradient>
+              </defs>
+              <line x1="68" y1="350" x2="840" y2="350" stroke="rgba(20,17,15,.18)" stroke-width="2" />
+              <line x1="68" y1="55" x2="68" y2="350" stroke="rgba(20,17,15,.18)" stroke-width="2" />
+              <line x1="68" y1="210" x2="840" y2="210" stroke="rgba(20,17,15,.2)" stroke-width="2" stroke-dasharray="8 10" />
+              <text x="812" y="198" text-anchor="end" fill="#635a4d" class="axis-label">≈ 4 to 5 calls/day, your human limit</text>
+              <path class="gap-fill" d="M80 325 C180 288 245 245 330 190 C445 118 560 90 820 52 L820 210 C620 207 420 205 310 214 C220 222 150 255 80 325 Z" fill="url(#gapGold)" />
+              <path class="graph-line" d="M80 325 C180 288 245 245 330 190 C445 118 560 90 820 52" stroke="#c9a55c" />
+              <path class="graph-line" d="M80 326 C145 300 210 255 302 219 C418 202 600 207 820 210" stroke="#2f3a42" />
+              <text x="806" y="94" text-anchor="end" fill="#c9a55c" class="axis-label">Leads generated</text>
+              <text x="790" y="248" text-anchor="end" fill="#2f3a42" class="axis-label">Your capacity to close</text>
+              <text x="420" y="150" fill="#14110f" class="axis-label">Wasted abundance</text>
+              <text x="72" y="389" fill="#635a4d" class="axis-label">Time</text>
+            </svg>
+          </div>
+          <p class="caption">The gap does not feel like opportunity. It feels like guilt, dropped balls, and money slipping through your fingers.</p>
+        </div>
+      </div>
+
+      <div class="visual-card dark-card flywheel-card reveal">
+        <div class="visual-header"><span>The Doom Loop</span><span>Wrong direction</span></div>
+        <div class="visual-body">
+          <div class="flywheel doom">
+            <div class="wheel-ring">
+              <svg class="wheel-arrows" viewBox="0 0 100 100" aria-hidden="true">
+                <defs><marker id="doomArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(108,120,128,0.72)"></path></marker></defs>
+                <path d="M50 8 A42 42 0 0 1 90 38" marker-end="url(#doomArrow)"></path>
+                <path d="M90 38 A42 42 0 0 1 74 88" marker-end="url(#doomArrow)"></path>
+                <path d="M74 88 A42 42 0 0 1 26 88" marker-end="url(#doomArrow)"></path>
+                <path d="M26 88 A42 42 0 0 1 10 38" marker-end="url(#doomArrow)"></path>
+                <path d="M10 38 A42 42 0 0 1 50 8" marker-end="url(#doomArrow)"></path>
+              </svg>
+              <div class="wheel-node node-1">More leads</div>
+              <div class="wheel-node node-2">More calls</div>
+              <div class="wheel-node node-3">Less energy</div>
+              <div class="wheel-node node-4">Lower close rate</div>
+              <div class="wheel-node node-5">Need more leads</div>
+              <div class="wheel-center">Exhaustion</div>
+            </div>
+          </div>
+          <p class="caption">A growth system without a capacity system becomes a prettier form of exhaustion.</p>
+        </div>
+      </div>
+
+      <div class="wide narrow-card">
+        <article class="character-card reveal" data-card="2">
+          <div class="character-inner">
+            <div class="avatar-row">
+              <div class="avatar"></div>
+              <div><h4>Arjun</h4><span class="level-pill">Level 02: Capacity Unlocked</span></div>
+            </div>
+            <div class="stat-list">
+              <div class="stat-row"><div class="stat-top"><span>Lead Anxiety</span><span class="stat-value">Gone</span></div><div class="bar"><span style="--w:8%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Calendar Pressure</span><span class="stat-value">High</span></div><div class="bar"><span style="--w:82%"></span></div></div>
+              <div class="unlock">NEW PROBLEM UNLOCKED: CAPACITY.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark chapter-opener" data-label="CH. 02 - Saying No">
+      <div class="chapter-inner reveal">
+        <div class="chapter-number">02</div>
+        <h2>How To Say No To ₹50,000 Without Feeling Sick</h2>
+        <p class="lead">The first owner-level skill is not selling more. It is refusing money that makes the business weaker.</p>
+      </div>
+    </section>
+
+    <section class="section paper section-pad" data-label="CH. 02 - Saying No">
+      <div class="copy stagger">
+        <p>Arjun still remembers the first time he said no to ₹50,000.</p>
+        <p>The prospect had money ready. The problem was obvious. The call should have felt like a win. Instead, the prospect interrupted him, argued about every step, asked for discounts twice, and wanted guarantees around things outside Arjun's control.</p>
+        <p>Old Arjun would have taken the deal and called it revenue. New Arjun saw the real cost. That client would not just take money. They would take energy, delivery quality, team morale, and the focus needed to serve better clients.</p>
+        <p>So he built a gate. Three filters. Fit. Ease. Ceiling.</p>
+        <p>Fit asks whether the client belongs in the model. Ease asks whether they will let the process work. Ceiling asks whether the account can grow into something meaningful.</p>
+        <div class="pullquote small">The way they behave before they pay you is the gentlest version you will ever see.</div>
+        <p>This is the move from freelancer with extra steps to owner. You stop asking, “Can I close this?” and start asking, “Should this enter the machine?”</p>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>The Balance Scale</span><span>Visible vs invisible cost</span></div>
+        <div class="visual-body">
+          <div class="balance">
+            <div class="scale-post"></div>
+            <div class="scale-beam"></div>
+            <div class="scale-pan left">₹50,000<br><small>real, certain, in front of you</small></div>
+            <div class="scale-pan right">The better client<br><small>you have not met yet</small></div>
+          </div>
+          <p class="caption">Every yes to the wrong one is a no to a right one you cannot see yet.</p>
+        </div>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>The 3-Filter Gate</span><span>Tap or hover each gate</span></div>
+        <div class="visual-body gates">
+          <div class="gate-track" aria-label="Prospects moving through three filters">
+            <span class="prospect-dot"></span><span class="prospect-dot"></span><span class="prospect-dot"></span><span class="prospect-dot"></span><span class="prospect-dot"></span><span class="prospect-dot"></span>
+            <button class="gate gate-1" type="button">Fit<small>They match the model you can serve best.</small></button>
+            <button class="gate gate-2" type="button">Ease<small>They respect the process before money moves.</small></button>
+            <button class="gate gate-3" type="button">Ceiling<small>The account can grow without breaking delivery.</small></button>
+          </div>
+          <p class="caption">A smaller number of right-fit clients will often create more profit than a larger number of chaotic ones.</p>
+        </div>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>The Scorecard</span><span>Screenshot tool</span></div>
+        <div class="visual-body scorecard">
+          <div class="score-grid" id="scoreGrid">
+            <button class="score-btn" data-score="unset" type="button"><span>Fit</span><span class="mark">?</span></button>
+            <button class="score-btn" data-score="unset" type="button"><span>Ease</span><span class="mark">?</span></button>
+            <button class="score-btn" data-score="unset" type="button"><span>Ceiling</span><span class="mark">?</span></button>
+          </div>
+          <div class="rule-box" id="ruleBox">Tap each filter. 2 or more ✗ = decline, even with money on the table.</div>
+        </div>
+      </div>
+
+      <div class="wide narrow-card">
+        <article class="character-card reveal" data-card="3">
+          <div class="character-inner">
+            <div class="avatar-row"><div class="avatar"></div><div><h4>Arjun</h4><span class="level-pill">Level 03: The Profitable No</span></div></div>
+            <div class="stat-list">
+              <div class="stat-row"><div class="stat-top"><span>Clients Declined</span><span class="stat-value"><span class="count" data-count="3">0</span></span></div><div class="bar"><span style="--w:45%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Clients Gained From Freed Capacity</span><span class="stat-value"><span class="count" data-count="5">0</span></span></div><div class="bar"><span style="--w:72%"></span></div></div>
+              <div class="unlock">SKILL UNLOCKED: The Profitable No.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark chapter-opener" data-label="CH. 03 - Waitlist">
+      <div class="chapter-inner reveal">
+        <div class="chapter-number">03</div>
+        <h2>The Waitlist Is A Status Symbol</h2>
+        <p class="lead">A real waitlist does not delay the sale. It increases the perceived value of the sale.</p>
+      </div>
+    </section>
+
+    <section class="section paper section-pad" data-label="CH. 03 - Waitlist">
+      <div class="copy stagger">
+        <p>One week, Arjun caught himself apologizing for being booked.</p>
+        <p>He was saying, “Sorry, the earliest we can start is next month,” as if demand was a weakness. Then he remembered how people judge restaurants, doctors, agencies, trainers, and consultants.</p>
+        <p>An empty room makes people cautious. A full room makes people curious.</p>
+        <p>Scarcity reads as quality when it is real and specific. A waitlist tells the prospect your time is not sitting on a shelf waiting for anyone to pick it up.</p>
+        <p>But a fake waitlist is weak. A real waitlist has three parts: a specific date, homework, and a deposit.</p>
+        <div class="pullquote small">The wait is not the bug. The wait is the leverage.</div>
+        <p>When prospects complete homework and pay to reserve a slot, the power dynamic changes before delivery even begins.</p>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>Two Restaurants</span><span>Decision in half a second</span></div>
+        <div class="visual-body">
+          <div class="restaurants">
+            <div class="restaurant empty"><small>Walk-ins welcome</small><div class="restaurant-title">Bright. Empty. Available.</div></div>
+            <div class="restaurant busy"><small>Booked 2 weeks out</small><div class="restaurant-title">Warm. Full. Desired.</div></div>
+          </div>
+          <p class="caption">Which do you assume is better? You decided in half a second. So do your prospects.</p>
+        </div>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>The Power Seesaw</span><span>The flip</span></div>
+        <div class="visual-body">
+          <div class="seesaw">
+            <div class="seesaw-base"></div>
+            <div class="seesaw-beam"></div>
+            <div class="seesaw-person prospect">Prospect: “Please prove yourself.”</div>
+            <div class="seesaw-person founder">Founder: “Let me see if I have room.”</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>The Waitlist That Works</span><span>Three blocks</span></div>
+        <div class="visual-body">
+          <div class="stacking">
+            <div class="pedestal">
+              <div class="block">Specific Date</div>
+              <div class="block">Homework</div>
+              <div class="block">Deposit</div>
+            </div>
+          </div>
+          <p class="caption">Remove any one block and the waitlist starts to wobble. Keep all three and it becomes a pedestal.</p>
+        </div>
+      </div>
+
+      <div class="wide narrow-card">
+        <article class="character-card reveal" data-card="4">
+          <div class="character-inner">
+            <div class="avatar-row"><div class="avatar"></div><div><h4>Arjun</h4><span class="level-pill">Level 04: Demand Controlled</span></div></div>
+            <div class="stat-list">
+              <div class="stat-row"><div class="stat-top"><span>Calendar</span><span class="stat-value">Booked out</span></div><div class="bar"><span style="--w:92%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Waitlist</span><span class="stat-value"><span class="count" data-count="6">0</span> deep</span></div><div class="bar"><span style="--w:70%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Stress</span><span class="stat-value">Lower</span></div><div class="bar"><span style="--w:32%"></span></div></div>
+              <div class="unlock">All deposits paid. Somehow calmer than when empty.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark chapter-opener" data-label="CH. 04 - Pricing">
+      <div class="chapter-inner reveal">
+        <div class="chapter-number">04</div>
+        <h2>Raise Your Prices Before You're Forced To</h2>
+        <p class="lead">The cleanest price raise happens when you do not need it.</p>
+      </div>
+    </section>
+
+    <section class="section paper section-pad" data-label="CH. 04 - Pricing">
+      <div class="copy stagger">
+        <p>Arjun waited too long to raise prices because the old price felt safe.</p>
+        <p>Then he saw the trap. The lower price was not protecting him. It was forcing him to sign more clients, take more calls, hire faster, and deliver with less margin.</p>
+        <p>Raising prices when desperate reads as need. Raising prices when demand is high reads as confidence.</p>
+        <p>Price is not just what the client pays. Price decides how many clients you need, how much attention each client receives, and how much room your team has to do good work.</p>
+        <div class="pullquote small">If your last five said yes without hesitation, your price is too low.</div>
+        <p>The mechanic is gentle. Raise for new clients first. Tell the market calmly. Keep proof visible. Let weak prospects drop. Use the reclaimed hours to improve delivery for the right ones.</p>
+        <p>Price buys back time. Time improves delivery. Better delivery creates better proof. Better proof creates more demand.</p>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>Two Doors</span><span>Same action, opposite energy</span></div>
+        <div class="visual-body">
+          <div class="doors">
+            <div class="door dark-door"><h4>Raise when desperate</h4><p>Reads as need. The prospect feels the pressure in your voice.</p></div>
+            <div class="door gold-door"><h4>Raise when you don't have to</h4><p>Reads as confidence. The prospect feels the market already wants you.</p></div>
+          </div>
+          <p class="caption">Same action. Opposite energy. Opposite result.</p>
+        </div>
+      </div>
+
+      <div class="visual-card dark-card flywheel-card reveal">
+        <div class="visual-header"><span>The Virtuous Pricing Loop</span><span>Right direction</span></div>
+        <div class="visual-body">
+          <div class="flywheel up">
+            <div class="wheel-ring">
+              <svg class="wheel-arrows" viewBox="0 0 100 100" aria-hidden="true">
+                <defs><marker id="upArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(224,201,133,0.9)"></path></marker></defs>
+                <path d="M50 8 A42 42 0 0 0 12 32" marker-end="url(#upArrow)"></path>
+                <path d="M12 32 A42 42 0 0 0 13 70" marker-end="url(#upArrow)"></path>
+                <path d="M13 70 A42 42 0 0 0 40 91" marker-end="url(#upArrow)"></path>
+                <path d="M40 91 A42 42 0 0 0 72 83" marker-end="url(#upArrow)"></path>
+                <path d="M72 83 A42 42 0 0 0 91 55" marker-end="url(#upArrow)"></path>
+                <path d="M91 55 A42 42 0 0 0 82 22" marker-end="url(#upArrow)"></path>
+                <path d="M82 22 A42 42 0 0 0 50 8" marker-end="url(#upArrow)"></path>
+              </svg>
+              <div class="wheel-node node-1">Demand rises</div>
+              <div class="wheel-node node-2">Raise prices</div>
+              <div class="wheel-node node-3">Weak prospects drop</div>
+              <div class="wheel-node node-4">Remaining clients more profitable</div>
+              <div class="wheel-node node-5">Capacity frees up</div>
+              <div class="wheel-node node-6">Delivery improves</div>
+              <div class="wheel-node node-7">Demand rises again</div>
+              <div class="wheel-center">Confidence</div>
+            </div>
+          </div>
+          <p class="caption">This flywheel has the same shape as the doom loop. The difference is direction.</p>
+        </div>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>The Pricing Thermometer</span><span>Drag the needle</span></div>
+        <div class="visual-body thermo-wrap">
+          <div class="thermo" id="thermo"><div class="thermo-needle" id="thermoNeedle"></div></div>
+          <div class="thermo-panel">
+            <input id="thermoRange" type="range" min="0" max="100" value="42" aria-label="Pricing thermometer" />
+            <div class="diagnosis" id="diagnosis">25 to 40% say yes = priced right. You are creating real selection pressure without starving demand.</div>
+            <p class="caption caption-left">Bottom: everyone says yes instantly = too low. Middle: enough say yes = priced right. Top: almost nobody says yes = too high.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wide narrow-card">
+        <article class="character-card reveal" data-card="5">
+          <div class="character-inner">
+            <div class="avatar-row"><div class="avatar"></div><div><h4>Arjun</h4><span class="level-pill">Level 05: Margin Returns</span></div></div>
+            <div class="stat-list">
+              <div class="stat-row"><div class="stat-top"><span>Price Per Client</span><span class="stat-value">+<span class="count" data-count="40">0</span>%</span></div><div class="bar"><span style="--w:74%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Clients Needed For Target</span><span class="stat-value">Down ⅓</span></div><div class="bar"><span style="--w:42%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Hours Reclaimed</span><span class="stat-value">~<span class="count" data-count="15">0</span>/week</span></div><div class="bar"><span style="--w:78%"></span></div></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark chapter-opener" data-label="CH. 05 - Roster">
+      <div class="chapter-inner reveal">
+        <div class="chapter-number">05</div>
+        <h2>The Clients You Signed When You Were Hungry</h2>
+        <p class="lead">Your old roster can become the silent tax on your next stage.</p>
+      </div>
+    </section>
+
+    <section class="section paper section-pad" data-label="CH. 05 - Roster">
+      <div class="copy stagger">
+        <p>Growth creates an uncomfortable truth: some clients were only a fit for the older version of the business.</p>
+        <p>They paid when you needed money. They trusted you early. That matters. But gratitude does not mean you keep serving them in a model that now weakens the whole company.</p>
+        <p>Scarcity-era clients often pay the least, ask for the most, and consume the capacity your growth-era clients need.</p>
+        <p>There are only two honourable doors. Elevate them to the current model, or exit them cleanly and respectfully.</p>
+        <div class="pullquote small">Nobody gets fired. Everybody moves forward.</div>
+        <p>The only wrong move is to keep tolerating the mismatch and quietly resent the client for a deal you agreed to.</p>
+      </div>
+
+      <div class="wide reveal section-offset">
+        <div class="roster-visual" role="img" aria-label="A dinner table where ideal clients preserve capacity while draining clients reduce the meter">
+          <div class="dinner-table" aria-hidden="true">
+            <div class="table-oval"></div>
+            <span class="seat good seat-1">Ideal</span>
+            <span class="seat good seat-2">Ideal</span>
+            <span class="seat drain seat-3">Drain</span>
+            <span class="seat drain seat-4">Drain</span>
+            <span class="seat good seat-5">Ideal</span>
+          </div>
+          <div class="capacity-meter">
+            <div class="micro-label">Capacity meter</div>
+            <h4>The table decides the ceiling.</h4>
+            <div class="meter-rail"><span class="meter-fill"></span></div>
+            <p class="meter-note">Scarcity-era clients do not always look dangerous. They quietly consume the attention your next stage needs.</p>
+          </div>
+        </div>
+        <p class="caption">Your scarcity-era clients are eating the capacity your growth era needs.</p>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>Two Doors</span><span>Elevate or exit</span></div>
+        <div class="visual-body">
+          <div class="fork">
+            <div class="path-card"><h4>Elevate</h4><p>Bring the client to current pricing, current scope, and current expectations. Give them a real chance to stay.</p></div>
+            <div class="path-card"><h4>Exit</h4><p>Close the loop respectfully. Set a timeline. Offer a referral. Protect your future capacity.</p></div>
+          </div>
+          <p class="caption">Two honourable doors. The only wrong move is to keep tolerating.</p>
+        </div>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>The Graceful Exit Script</span><span>Screenshot this</span></div>
+        <div class="visual-body">
+          <div class="script-card">
+            <div class="script-text">“I've genuinely valued working together, and I want to be straight with you. My business has shifted focus, and I don't think I'm the right fit to keep serving you at the level you deserve going forward. I'd like to wrap up our engagement by [date]. And because I want you in good hands, I'm happy to introduce you to a few people who'd be a perfect fit for where you are now.”</div>
+            <div class="annotations">
+              <span class="annotation">Takes the blame</span>
+              <span class="annotation">Gives a timeline</span>
+              <span class="annotation">Offers a referral</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wide narrow-card">
+        <article class="character-card reveal" data-card="6">
+          <div class="character-inner">
+            <div class="avatar-row"><div class="avatar"></div><div><h4>Arjun</h4><span class="level-pill">Level 06: Roster Cleaned</span></div></div>
+            <div class="stat-list">
+              <div class="stat-row"><div class="stat-top"><span>Capacity Meter</span><span class="stat-value">Full</span></div><div class="bar"><span style="--w:96%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Drainers</span><span class="stat-value">Elevated or exited</span></div><div class="bar"><span style="--w:10%"></span></div></div>
+              <div class="unlock">Dinner table now has ideal clients only. All on good terms.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark chapter-opener" data-label="CH. 06 - Closing">
+      <div class="chapter-inner reveal">
+        <div class="chapter-number">06</div>
+        <h2>The Day You Stop Being The Only One Who Can Close</h2>
+        <p class="lead">When you are the only closer, the business grows until it hits your voice, your calendar, and your energy.</p>
+      </div>
+    </section>
+
+    <section class="section paper section-pad" data-label="CH. 06 - Closing">
+      <div class="copy stagger">
+        <p>After Arjun fixed leads, filters, waitlist, pricing, and roster, he hit the final wall.</p>
+        <p>Everyone still needed him on the call.</p>
+        <p>The team could deliver. The ads could bring demand. The proof could create trust. But the last mile of the sale still depended on Arjun showing up with full energy and sharp judgment.</p>
+        <div class="pullquote small">You don't have a delivery problem. You have a closing bottleneck.</div>
+        <p>Most founders hire delivery first because it feels safer. But if the founder is still trapped on every sales call, delivery hires do not break the ceiling. They just support the same ceiling.</p>
+        <p>A trained closer at 70% of your skill, plus you at 100%, beats you alone at 100%. Two lanes beat one perfect lane.</p>
+        <p>The closer cloning path is simple: document, record, hire and train, review weekly. Not once. As a loop.</p>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>You Are The Ceiling</span><span>One doorway</span></div>
+        <div class="visual-body">
+          <div class="ceiling-visual">
+            <span class="queue-dot"></span><span class="queue-dot"></span><span class="queue-dot"></span><span class="queue-dot"></span><span class="queue-dot"></span><span class="queue-dot"></span>
+            <div class="doorway">Founder wearing the closer crown</div>
+          </div>
+          <p class="caption">When you are the only one who can close, you are the ceiling.</p>
+        </div>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>Two Hiring Paths</span><span>Choose the ceiling breaker</span></div>
+        <div class="visual-body hiring-paths">
+          <div class="hiring-path"><h4>Path A: Hire delivery first</h4><div class="path-steps"><span class="chip">More team</span><span class="arrow">→</span><span class="chip">Founder still on every call</span><span class="arrow">→</span><span class="chip">Feels productive, stays stuck</span></div></div>
+          <div class="hiring-path good"><h4>Path B: Train a closer first</h4><div class="path-steps"><span class="chip">Document sales</span><span class="arrow">→</span><span class="chip">Add closer</span><span class="arrow">→</span><span class="chip">Capacity doubles</span></div></div>
+        </div>
+      </div>
+
+      <div class="visual-card reveal">
+        <div class="visual-header"><span>The Closer Cloning System</span><span>Repeatable SOP</span></div>
+        <div class="visual-body">
+          <div class="sop-loop">
+            <div class="sop-step"><h4>Document</h4><p>Write the call structure, objections, proof points, and decision rules.</p></div>
+            <div class="sop-step"><h4>Record</h4><p>Create a call library so the closer learns judgment, not just words.</p></div>
+            <div class="sop-step"><h4>Hire & Train</h4><p>Start with roleplay, then shadowing, then controlled live calls.</p></div>
+            <div class="sop-step"><h4>Review Weekly</h4><p>Audit calls, tighten scripts, and raise the standard every week.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wide narrow-card-lg">
+        <article class="character-card reveal" data-card="7">
+          <div class="character-inner">
+            <div class="avatar-row"><div class="avatar"></div><div><h4>Arjun</h4><span class="level-pill">Level 07: Owner Mode</span></div></div>
+            <div class="stat-list">
+              <div class="stat-row"><div class="stat-top"><span>Agency Size</span><span class="stat-value"><span class="count" data-count="9">0</span></span></div><div class="bar"><span style="--w:86%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Revenue</span><span class="stat-value"><span class="count" data-count="5">0</span>x started</span></div><div class="bar"><span style="--w:92%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Closers Trained</span><span class="stat-value"><span class="count" data-count="2">0</span></span></div><div class="bar"><span style="--w:64%"></span></div></div>
+              <div class="stat-row"><div class="stat-top"><span>Calls He Personally Takes</span><span class="stat-value">Only the ones he wants</span></div><div class="bar"><span style="--w:28%"></span></div></div>
+              <div class="unlock">STATUS: Owner of a business, not a prisoner of one.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark map-showcase final-map" data-label="The Last Page">
+      <div class="wide">
+        <div class="map-grid">
+          <div class="map-placeholder reveal">
+            <svg viewBox="0 0 1000 620" role="img" aria-label="Completed path from scarcity through the system to abundance">
+              <defs>
+                <filter id="finalGlow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <path class="map-path" d="M115 310 L885 310" fill="none" stroke="#e0c985" stroke-width="10" stroke-linecap="round" />
+            </svg>
+            <div class="map-point point-scarcity">
+              <span class="map-dot final-dot" aria-hidden="true"></span>
+              <span class="map-label">The Land of Scarcity</span>
+            </div>
+            <div class="map-point point-system">
+              <span class="map-dot final-dot" aria-hidden="true"></span>
+              <span class="map-mountain" aria-hidden="true"></span>
+              <span class="map-label">The System</span>
+            </div>
+            <div class="map-point point-abundance">
+              <span class="map-dot final-dot" aria-hidden="true"></span>
+              <span class="map-label">The Land of Abundance</span>
+            </div>
+            <div class="map-hazards-row" aria-label="Hazards in the land of abundance">
+              <span class="map-hazard-chip">Burnout Ridge</span>
+              <span class="map-hazard-chip">Wrong-Fit Clients</span>
+              <span class="map-hazard-chip">The Pricing Decision</span>
+            </div>
+          </div>
+          <div class="stagger">
+            <div class="eyebrow">The last page</div>
+            <h3>You now have the whole map.</h3>
+            <p class="lead">Most founders walk this territory blind.</p>
+          </div>
+        </div>
+
+        <div class="copy stagger final-copy">
+          <p>Every single problem in this guide is a good problem. They are the problems of a business that works. None of them exist in a business that cannot get clients. They only show up after you have won the first battle.</p>
+          <p>When you do not have these problems yet, you are in the best possible position. You are standing at the foot of the mountain, holding a map of the territory on the other side.</p>
+          <p>Most founders cross that mountain blind, get ambushed by abundance, and stall out. They make more money but somehow stay just as stuck.</p>
+          <p>You will not. Because you have seen what's coming.</p>
+          <div class="pullquote small">The only question left is how you cross the mountain in the first place.</div>
+          <p>That's the conversation we're having. That's the system. Everything in this guide is what is waiting for you on the other side of it.</p>
+        </div>
+
+        <div class="closing-frame reveal">
+          <div class="mountain"><span>The System</span></div>
+          <h3>When you're ready to climb, you know where to find me.</h3>
+          <div class="brand-mark">Finest Clients</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+    const stickyLabel = document.getElementById('stickyLabel');
+    const hero = document.querySelector('.hero');
+    const revealItems = document.querySelectorAll('.reveal, .stagger, .visual-card, .character-card, .map-placeholder');
+    const sections = [...document.querySelectorAll('[data-label]')];
+
+    function updateProgress() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+      if (hero) hero.classList.toggle('split-open', scrollTop > 20);
+      updateStickyLabel();
+    }
+
+    function updateStickyLabel() {
+      const center = window.scrollY + window.innerHeight * 0.28;
+      let active = sections[0];
+      for (const section of sections) {
+        if (section.offsetTop <= center) active = section;
+      }
+      const label = active?.dataset?.label || '';
+      stickyLabel.textContent = label;
+      stickyLabel.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.55);
+    }
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+    revealItems.forEach(item => revealObserver.observe(item));
+
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting || entry.target.dataset.done) return;
+        entry.target.dataset.done = 'true';
+        const end = Number(entry.target.dataset.count || 0);
+        const duration = 1100;
+        const start = performance.now();
+        const el = entry.target;
+        function tick(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(end * eased).toLocaleString('en-IN');
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        countObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.6 });
+
+    document.querySelectorAll('.count').forEach(el => countObserver.observe(el));
+
+    const scoreButtons = [...document.querySelectorAll('.score-btn')];
+    const ruleBox = document.getElementById('ruleBox');
+
+    function updateScorecard() {
+      const noCount = scoreButtons.filter(btn => btn.dataset.score === 'no').length;
+      const yesCount = scoreButtons.filter(btn => btn.dataset.score === 'yes').length;
+      if (noCount >= 2) {
+        ruleBox.textContent = 'Decision: decline. 2 or more ✗ means the money is not worth the hidden cost.';
+      } else if (yesCount === 3) {
+        ruleBox.textContent = 'Decision: accept. The prospect passes Fit, Ease, and Ceiling.';
+      } else {
+        ruleBox.textContent = 'Keep qualifying. 2 or more ✗ = decline, even with money on the table.';
+      }
+    }
+
+    scoreButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const current = btn.dataset.score;
+        const next = current === 'unset' ? 'yes' : current === 'yes' ? 'no' : 'unset';
+        btn.dataset.score = next;
+        btn.classList.toggle('is-yes', next === 'yes');
+        btn.classList.toggle('is-no', next === 'no');
+        btn.querySelector('.mark').textContent = next === 'yes' ? '✓' : next === 'no' ? '✗' : '?';
+        updateScorecard();
+      });
+    });
+
+    const range = document.getElementById('thermoRange');
+    const needle = document.getElementById('thermoNeedle');
+    const diagnosis = document.getElementById('diagnosis');
+
+    function updateThermo() {
+      if (!range || !needle || !diagnosis) return;
+      const value = Number(range.value);
+      needle.style.setProperty('--needle', value + '%');
+      if (value < 28) {
+        diagnosis.textContent = 'Everyone says yes instantly = too low. You are probably buying clients with underpriced attention.';
+      } else if (value <= 62) {
+        diagnosis.textContent = '25 to 40% say yes = priced right. You are creating real selection pressure without starving demand.';
+      } else {
+        diagnosis.textContent = 'Almost nobody says yes = too high. Your proof, market, or offer may not support the number yet.';
+      }
+    }
+
+    if (range) {
+      range.addEventListener('input', updateThermo);
+      updateThermo();
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+  </script>
+</body>
+</html>

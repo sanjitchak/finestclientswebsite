@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Facebook Ads Playbook — Intern Field Guide · Finest Clients</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F0;
+    --paper-deep:#F2EDE2;
+    --ink:#1B2233;
+    --ink-soft:#4A5468;
+    --navy:#16305A;
+    --navy-deep:#0E2244;
+    --gold:#B8860B;
+    --gold-soft:#F3E8CE;
+    --line:#DCD4C3;
+    --good:#2E6B4F;
+    --good-bg:#E8F1EB;
+    --bad:#8C3A3A;
+    --bad-bg:#F5E9E7;
+    --card:#FFFFFF;
+    --radius:14px;
+    --maxw:880px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold-soft);}
+
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;font-weight:600;
+    letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* ---------- layout shell ---------- */
+  .shell{display:flex;max-width:1240px;margin:0 auto;}
+  .rail{
+    width:230px;flex-shrink:0;
+    position:sticky;top:0;height:100vh;
+    padding:48px 24px 48px 32px;
+    border-right:1px solid var(--line);
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .rail .brand{
+    font-family:'Fraunces',serif;font-weight:600;font-size:19px;
+    color:var(--navy);margin-bottom:26px;line-height:1.2;
+  }
+  .rail .brand span{display:block;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:10px;letter-spacing:.2em;color:var(--gold);margin-top:6px;text-transform:uppercase;}
+  .rail a{
+    display:flex;align-items:baseline;gap:10px;
+    text-decoration:none;color:var(--ink-soft);
+    font-size:13.5px;font-weight:500;
+    padding:7px 10px;border-radius:8px;
+    transition:background .15s,color .15s;
+  }
+  .rail a .num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);width:22px;flex-shrink:0;}
+  .rail a:hover{background:var(--paper-deep);color:var(--navy);}
+  .rail a.active{background:var(--navy);color:#fff;}
+  .rail a.active .num{color:var(--gold-soft);}
+
+  main{flex:1;min-width:0;padding:0 48px 120px;}
+  .inner{max-width:var(--maxw);margin:0 auto;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:88px 0 64px;border-bottom:1px solid var(--line);}
+  .hero h1{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(38px,5.2vw,58px);
+    line-height:1.06;color:var(--navy);
+    letter-spacing:-.015em;margin:18px 0 24px;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold);}
+  .hero p.lede{font-size:19px;color:var(--ink-soft);max-width:640px;}
+  .hero .meta{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:34px;
+  }
+  .hero .meta span{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    letter-spacing:.08em;color:var(--navy);
+    border:1px solid var(--line);background:var(--card);
+    padding:7px 13px;border-radius:100px;
+  }
+
+  /* ---------- phase headers ---------- */
+  section.phase{padding:76px 0 8px;scroll-margin-top:24px;}
+  .phase-head{display:flex;align-items:flex-end;gap:26px;border-bottom:2px solid var(--navy);padding-bottom:20px;margin-bottom:40px;}
+  .phase-head .big-num{
+    font-family:'Fraunces',serif;font-weight:400;font-style:italic;
+    font-size:clamp(56px,7vw,84px);line-height:.85;color:var(--gold);flex-shrink:0;
+  }
+  .phase-head h2{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(26px,3.4vw,38px);line-height:1.1;color:var(--navy);letter-spacing:-.01em;
+  }
+  .phase-head .sub{font-size:15px;color:var(--ink-soft);margin-top:8px;max-width:560px;font-family:'Inter',sans-serif;font-weight:400;}
+
+  h3{
+    font-family:'Fraunces',serif;font-weight:600;font-size:23px;
+    color:var(--navy);margin:52px 0 14px;letter-spacing:-.005em;
+  }
+  h3 .tag{
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+    letter-spacing:.14em;color:var(--gold);text-transform:uppercase;
+    display:block;margin-bottom:8px;
+  }
+  p{margin-bottom:16px;max-width:70ch;}
+  p strong{color:var(--navy);}
+  ul.plain{margin:0 0 18px 22px;}
+  ul.plain li{margin-bottom:9px;max-width:66ch;}
+  ol.steps{margin:0 0 18px 26px;}
+  ol.steps li{margin-bottom:10px;max-width:66ch;padding-left:6px;}
+  ol.steps li::marker{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--gold);}
+
+  /* ---------- cards & callouts ---------- */
+  .card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);padding:28px 30px;margin:22px 0;
+    box-shadow:0 1px 2px rgba(22,48,90,.04);
+  }
+  .keystone{
+    background:var(--navy);color:#EDE9DF;border-radius:var(--radius);
+    padding:38px 40px;margin:28px 0;position:relative;overflow:hidden;
+  }
+  .keystone::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(600px 200px at 90% -20%,rgba(184,134,11,.28),transparent 70%);
+    pointer-events:none;
+  }
+  .keystone .eyebrow{color:var(--gold-soft);}
+  .keystone h3{color:#fff;margin-top:10px;}
+  .keystone p{color:#D8D3C6;}
+  .keystone p strong,.keystone em{color:#fff;font-style:normal;}
+  .keystone .big-line{
+    font-family:'Fraunces',serif;font-size:clamp(22px,2.8vw,30px);
+    font-weight:500;line-height:1.3;color:#fff;margin:14px 0 18px;
+  }
+  .keystone .big-line em{color:var(--gold-soft);font-style:italic;}
+
+  .why{
+    border-left:3px solid var(--gold);background:var(--gold-soft);
+    border-radius:0 10px 10px 0;padding:18px 22px;margin:20px 0;
+    font-size:15.5px;color:#5B4A15;
+  }
+  .why strong{color:#3F3410;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:6px;}
+
+  .do-dont{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0;}
+  .do,.dont{border-radius:12px;padding:20px 22px;font-size:15.5px;}
+  .do{background:var(--good-bg);border:1px solid #CBDFD2;}
+  .dont{background:var(--bad-bg);border:1px solid #E4CBC6;}
+  .do .lbl,.dont .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:10px;}
+  .do .lbl{color:var(--good);}
+  .dont .lbl{color:var(--bad);}
+  .do ul,.dont ul{margin-left:18px;}
+  .do li,.dont li{margin-bottom:7px;}
+
+  /* glossary */
+  .gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:26px 0;}
+  .gloss .term{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px;font-size:14.5px;color:var(--ink-soft);
+  }
+  .gloss .term b{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;
+    color:var(--navy);display:block;margin-bottom:5px;letter-spacing:.04em;
+  }
+
+  /* numbered system list (e.g., 17 steps) */
+  .sys{counter-reset:sys;margin:20px 0;}
+  .sys .row{
+    counter-increment:sys;display:flex;gap:18px;align-items:baseline;
+    padding:13px 6px;border-bottom:1px dashed var(--line);font-size:15.5px;
+  }
+  .sys .row::before{
+    content:counter(sys,decimal-leading-zero);
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;
+    color:var(--gold);flex-shrink:0;width:28px;
+  }
+  .sys .row b{color:var(--navy);}
+  .sys .row span{color:var(--ink-soft);}
+
+  /* checklist */
+  .check{margin:18px 0;}
+  .check .row{display:flex;gap:14px;padding:11px 4px;border-bottom:1px dashed var(--line);font-size:15.5px;align-items:flex-start;}
+  .check .row::before{
+    content:"✓";font-family:'JetBrains Mono',monospace;font-weight:600;
+    color:var(--good);flex-shrink:0;
+  }
+
+  /* intern action box */
+  .action{
+    background:var(--paper-deep);border:1px solid var(--line);
+    border-radius:var(--radius);padding:24px 28px;margin:30px 0 8px;
+  }
+  .action .lbl{
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--navy);
+    display:flex;align-items:center;gap:8px;margin-bottom:12px;
+  }
+  .action .lbl::before{content:"→";color:var(--gold);}
+  .action ul{margin-left:20px;font-size:15px;}
+  .action li{margin-bottom:7px;}
+
+  /* quote */
+  blockquote{
+    font-family:'Fraunces',serif;font-style:italic;font-size:21px;line-height:1.45;
+    color:var(--navy);border-left:3px solid var(--gold);
+    padding:6px 0 6px 24px;margin:28px 0;max-width:62ch;
+  }
+  blockquote cite{display:block;font-family:'JetBrains Mono',monospace;font-style:normal;font-size:11.5px;letter-spacing:.1em;color:var(--ink-soft);margin-top:12px;text-transform:uppercase;}
+
+  code.k{
+    font-family:'JetBrains Mono',monospace;font-size:14px;
+    background:var(--paper-deep);border:1px solid var(--line);
+    border-radius:6px;padding:2px 7px;color:var(--navy);white-space:nowrap;
+  }
+  .promptbox{
+    font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:1.6;
+    background:var(--navy-deep);color:#D9E2F2;border-radius:12px;
+    padding:20px 24px;margin:18px 0;overflow-x:auto;
+  }
+  .promptbox .c{color:#8FA3C4;}
+
+  /* visuals */
+  .visual{
+    margin:28px 0 34px;
+  }
+  .visual img{
+    display:block;width:100%;height:auto;
+    border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--card);
+    box-shadow:0 12px 30px rgba(22,48,90,.08);
+  }
+  .visual figcaption{
+    margin-top:10px;
+    font-size:13.5px;color:var(--ink-soft);
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:.02em;
+  }
+  .visual-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 34px;
+  }
+  .visual-grid .visual{margin:0;}
+  .visual-grid .visual img{border-radius:12px;}
+  .visual-grid .visual figcaption{font-size:12.5px;}
+
+  table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line);}
+  th{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;color:var(--navy);background:var(--paper-deep);padding:13px 18px;border-bottom:1px solid var(--line);}
+  td{padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft);}
+  td b{color:var(--navy);}
+  tr:last-child td{border-bottom:none;}
+
+  .divider{border:none;border-top:1px solid var(--line);margin:64px 0 0;}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
+
+  /* footer */
+  footer{margin-top:90px;border-top:2px solid var(--navy);padding-top:34px;color:var(--ink-soft);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  footer .fbrand{font-family:'Fraunces',serif;color:var(--navy);font-weight:600;font-size:16px;}
+
+  @media (max-width:960px){
+    .rail{display:none;}
+    main{padding:0 22px 90px;}
+    .do-dont{grid-template-columns:1fr;}
+    .visual-grid{grid-template-columns:1fr;}
+    .phase-head{gap:16px;}
+    .keystone{padding:28px 24px;}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ============ PHASE RAIL ============ -->
+  <nav class="rail" aria-label="Playbook phases">
+    <div class="brand">Finest Clients<span>FB Ads Playbook</span></div>
+    <a href="#principle"><span class="num">00</span>The Core Principle</a>
+    <a href="#vocab"><span class="num">·</span>Vocabulary</a>
+    <a href="#research"><span class="num">01</span>Research</a>
+    <a href="#copy"><span class="num">02</span>Ad Copy</a>
+    <a href="#creative"><span class="num">03</span>Creative</a>
+    <a href="#landing"><span class="num">04</span>Landing Pages</a>
+    <a href="#scale"><span class="num">05</span>Launch &amp; Scale</a>
+    <a href="#refresh"><span class="num">06</span>Refresh Rhythm</a>
+    <a href="#week1"><span class="num">★</span>Your First Week</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="eyebrow">Internal Training · For New Team Members</div>
+    <h1>The Facebook Ads Playbook,<br>explained <em>from zero.</em></h1>
+    <p class="lede">This is how we take a client's offer and turn cold strangers on Facebook and Instagram into booked sales calls. Read it top to bottom — every phase feeds the next. You don't need any ads experience to follow this.</p>
+    <div class="meta">
+      <span>6 PHASES</span>
+      <span>RESEARCH → COPY → CREATIVE → LANDING → SCALE → REFRESH</span>
+      <span>BEGINNER FRIENDLY</span>
+    </div>
+  </header>
+
+  <!-- ============ 00 CORE PRINCIPLE ============ -->
+  <section class="phase reveal" id="principle">
+    <div class="phase-head">
+      <div class="big-num">00</div>
+      <div>
+        <h2>The core principle behind everything</h2>
+        <div class="sub">Before you touch a single ad, you need to understand who we are actually trying to reach.</div>
+      </div>
+    </div>
+
+    <p>Every business owner says the same thing: <strong>"I want more qualified leads."</strong> And almost everyone defines "qualified" the wrong way. They think a qualified lead is <em>someone who has money.</em></p>
+
+    <p>That's a weak filter. Thanks to credit, almost everyone has <em>access</em> to money. But having money does not mean someone is willing to spend it. Often the people with the most money are the stingiest with it — they ask for discounts, compare everything, delay, overthink, and want free advice first.</p>
+
+    <div class="keystone">
+      <div class="eyebrow">Memorize This</div>
+      <div class="big-line">The best customers are not the people who <em>have</em> money.<br>They're the people who already <em>spend</em> money on the problem we solve.</div>
+      <p>Someone who has paid for gyms, trainers and diet plans is a better fitness lead than a millionaire who never bought anything. Someone who has bought courses, coaching, or agency services before is a better lead for us. <strong>Buyers buy. The best predictor of a future buyer is a past buyer.</strong></p>
+    </div>
+
+    <figure class="visual">
+      <img src="assets/qualified-leads-spenders.svg" alt="Diagram comparing a weak has-money lead filter with a stronger spends-money lead filter">
+      <figcaption>Visual rule: qualify by spending behavior, not just income or access to money.</figcaption>
+    </figure>
+
+    <p>This one idea shapes everything downstream: the questions on our application forms, the angles in our ad copy, even which website visitors we tell Facebook to find more of. Whenever you're qualifying a lead, don't just ask <em>"can this person afford it?"</em> Ask:</p>
+
+    <div class="check">
+      <div class="row">"What have you already <b>tried</b> to solve this?"</div>
+      <div class="row">"What have you already <b>bought, used, or invested in</b>?"</div>
+      <div class="row">"Roughly <b>how much have you spent</b> so far?"</div>
+    </div>
+
+    <div class="why">
+      <strong>Why it works</strong>
+      Past spending tells you three things at once: they genuinely feel the problem, they believe in paid solutions, and they're already actively trying to get the result. When people answer "I've spent ₹1,000+" on a form, we can even redirect them to a special page with a tracking pixel — so Facebook's algorithm learns to find <em>more people like them</em>.
+    </div>
+
+    <figure class="visual">
+      <img src="assets/buyer-spending-questions.svg" alt="Mock application form asking what the prospect has tried, bought, and spent">
+      <figcaption>The three qualification questions should appear in forms, surveys, DMs, or sales calls.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ VOCAB ============ -->
+  <section class="phase reveal" id="vocab">
+    <h3><span class="tag">Before Phase 1</span>The vocabulary you'll hear every day</h3>
+    <p>Skim these now, come back whenever you're lost. Nobody expects you to memorize them on day one.</p>
+    <div class="gloss">
+      <div class="term"><b>Creative</b>The image or video part of an ad. "New creative" = new images/videos.</div>
+      <div class="term"><b>Hook</b>The first 1–2 lines (or seconds) of an ad. Its only job: stop the scroll.</div>
+      <div class="term"><b>CTA</b>Call to action — the line telling people what to do next ("Book your call").</div>
+      <div class="term"><b>CTR</b>Click-through rate — % of people who saw the ad and clicked the link.</div>
+      <div class="term"><b>CTR (All)</b>% who clicked <em>anything</em> on the ad — like, expand, profile, link.</div>
+      <div class="term"><b>CPL / CPA</b>Cost per lead / cost per acquisition. What we pay for one lead or one customer.</div>
+      <div class="term"><b>Ad set</b>A group of ads sharing the same audience and budget inside a campaign.</div>
+      <div class="term"><b>VSL</b>Video sales letter — a long-form sales video on a landing page.</div>
+      <div class="term"><b>Opt-in page</b>A page whose only job is capturing a name + email in exchange for something valuable.</div>
+      <div class="term"><b>HVCO</b>High-value content offer — the free thing (guide, checklist, training) we trade for contact details.</div>
+      <div class="term"><b>Creative fatigue</b>When an ad has been shown so much its performance dies. All ads fatigue eventually.</div>
+      <div class="term"><b>Awareness level</b>How much a reader already knows: problem-aware, solution-aware, or product-aware.</div>
+    </div>
+  </section>
+
+  <!-- ============ 01 RESEARCH ============ -->
+  <section class="phase reveal" id="research">
+    <div class="phase-head">
+      <div class="big-num">01</div>
+      <div>
+        <h2>Research — know the market before you spend a rupee</h2>
+        <div class="sub">Great ads are 80% research. We steal proven angles from competitors and pull real pain language from real people.</div>
+      </div>
+    </div>
+
+    <h3><span class="tag">Step 1.1</span>Spy on ads that are already winning</h3>
+    <p>Facebook publishes every active ad in the <strong>Meta Ads Library</strong>. Here's the logic: if an ad has been running for a long time and racking up impressions, the advertiser is almost certainly making money with it. We study those, not random ads.</p>
+    <ol class="steps">
+      <li>Search the Ads Library with broad keywords for the client's niche (use <code class="k">keyword_unordered</code> search and <strong>active ads only</strong>, sorted by total impressions).</li>
+      <li>Scroll manually. For each keyword, collect up to <strong>10 unique landing page URLs</strong> — the actual funnels behind the ads.</li>
+      <li>Only keep <strong>real coach/consultant funnels</strong>: VSL pages, webinars, challenges, applications, consultation bookings.</li>
+    </ol>
+
+    <figure class="visual">
+      <img src="assets/meta-ads-library-research.svg" alt="Mock Meta Ads Library screen showing active ad research and clean funnel URL collection">
+      <figcaption>Research output is clean funnel URLs, not random social links or duplicate ad variants.</figcaption>
+    </figure>
+    <div class="do-dont">
+      <div class="do">
+        <span class="lbl">Keep</span>
+        <ul>
+          <li>VSL, webinar &amp; challenge pages</li>
+          <li>Application / booking funnels</li>
+          <li>One clean root URL per funnel</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <span class="lbl">Throw out</span>
+        <ul>
+          <li>Facebook lead forms &amp; fb.me links</li>
+          <li>Instagram / WhatsApp / Linktree / social profiles</li>
+          <li>App-store links, e-commerce, clinics &amp; medspas</li>
+          <li>Duplicate variants of the same funnel</li>
+        </ul>
+      </div>
+    </div>
+    <p>If you only find 6 valid funnels, report 6 and say so. <strong>Never pad the list with junk</strong> — bad research poisons everything built on top of it.</p>
+
+    <h3><span class="tag">Step 1.2</span>Build the buyer persona (the deep dive)</h3>
+    <p>Next, we build a full psychological profile of the buyer. We use an AI deep-dive prompt that acts as a world-class direct response copywriter and maps out:</p>
+    <ul class="plain">
+      <li><strong>Deepest pain points</strong> — and what they've already tried that failed.</li>
+      <li><strong>The dream solution</strong> and their beliefs (true or false) about the market.</li>
+      <li><strong>The dominant emotion</strong> of the market and the exact language that connects.</li>
+      <li>The <strong>"Without / Even if" formula</strong>: <em>"You can get [big benefit] without [the thing they fear most], even if [their biggest limitation]."</em></li>
+    </ul>
+
+    <div class="card">
+      <div class="eyebrow" style="margin-bottom:12px;">The Forum Foraging Method</div>
+      <p style="margin-bottom:12px;">The gold is in <strong>verbatim quotes</strong>. We pull exact wording from Reddit, Quora, G2 reviews and Facebook groups, because people describe their pain better than any copywriter can invent it. We hunt for:</p>
+      <ul class="plain" style="margin-bottom:0;">
+        <li><strong>"Bleeding neck" problems</strong> — pain so urgent they need a solution now, not a nice-to-have.</li>
+        <li>What keeps them up at <strong>2am</strong>, and the pressure from bosses, family, or competitors.</li>
+        <li><strong>The cost of inaction</strong> — money lost, time wasted, deals going to faster competitors.</li>
+        <li><strong>Failed guru advice</strong> they've tried, and their skepticism about solutions like ours.</li>
+        <li>The <strong>identity trigger</strong> that makes them stop scrolling and think <em>"that's for me."</em></li>
+        <li>The <strong>transformation</strong>: before state → after state, with a concrete measurable outcome.</li>
+      </ul>
+    </div>
+
+    <figure class="visual">
+      <img src="assets/forum-foraging-board.svg" alt="Quote board of forum foraging notes grouped by pain, fears, dreams, and failed attempts">
+      <figcaption>Pull exact words first. Headlines, hooks, bullets, and objections come from this bank.</figcaption>
+    </figure>
+
+    <p>We also validate the market itself: who's running paid ads in this space, typical price points, and saturation on a 1–10 scale. <strong>The sweet spot is 5–6</strong> — proven demand, but still room to differentiate. Finally the avatar gets a name and bio ("Noah from New York, Head of Sales, $160K/year"), with their deepest fear and dream outcome each summarized in one sentence.</p>
+
+    <h3><span class="tag">Step 1.3</span>If the client has data: mine the form responses</h3>
+    <p>When a client has a CSV of survey or application answers, that's better than any guesswork. Upload it and run this prompt chain — and run the whole thing <strong>2–3 times</strong>, because each pass surfaces different insights:</p>
+    <div class="promptbox">
+      <span class="c">1.</span> Understand this CSV file please<br>
+      <span class="c">2.</span> I am starting [PROGRAM], can you summarize this sheet for me<br>
+      <span class="c">3.</span> Create an ideal client profile based on the responses here<br>
+      <span class="c">4.</span> What psychographic insights did you get from the data<br>
+      <span class="c">5.</span> What negative things have you noticed in the response sheet<br>
+      <span class="c">6.</span> Based on the data, give me a curriculum<br>
+      <span class="c">7.</span> Analyze the feedback and give me repeating words or phrases,<br>&nbsp;&nbsp;&nbsp;to be used in landing pages. Give the EXACT words.
+    </div>
+    <div class="why">
+      <strong>Why step 7 matters most</strong>
+      When your landing page uses the exact phrases your audience uses, readers feel like you're reading their mind. That's not magic — it's copy-paste from their own answers.
+    </div>
+
+    <h3><span class="tag">Step 1.4</span>If there's no data: build the persona from scratch</h3>
+    <p>No CSV? We use a structured persona prompt covering demographics, background, psychographics, professional and personal goals, media habits, purchasing behavior, technology usage, and pain points — woven into one coherent narrative person.</p>
+    <p>Then we run the <strong>Before/After exercise</strong>: acting as a market researcher who has talked to hundreds of people in the niche, answer these two questions <strong>10 times each</strong>, going deeper each time:</p>
+    <ol class="steps">
+      <li>Summarize their <strong>current state</strong> (the painful present).</li>
+      <li>Summarize their <strong>desired state</strong> (the dream outcome).</li>
+    </ol>
+    <p>The gap between those two lists <em>is</em> the ad campaign.</p>
+
+    <h3><span class="tag">Step 1.5</span>Interest targeting: proxies for buyers</h3>
+    <p>Remember Phase 00 — we want <em>spenders</em>. Since we can't target "people who spend money" directly, we target signals that correlate with it:</p>
+    <ul class="plain">
+      <li><strong>Life moments:</strong> birthdays (new beginnings), engaged credit-card users.</li>
+      <li><strong>Devices:</strong> premium phone owners.</li>
+      <li><strong>Locations:</strong> people near convention centers and five-star hotels (2&nbsp;km radius).</li>
+      <li><strong>Affluent hobbies:</strong> yoga, tennis, health clubs, spas, horse riding.</li>
+    </ul>
+
+    <div class="action">
+      <div class="lbl">What you'll actually do in Phase 1</div>
+      <ul>
+        <li>Collect 10 clean competitor funnel URLs per keyword from the Meta Ads Library.</li>
+        <li>Run the persona deep-dive with forum foraging; save verbatim quotes in a swipe doc.</li>
+        <li>If a CSV exists, run the 7-prompt chain 2–3× and extract exact repeated phrases.</li>
+        <li>Deliver: one avatar document + one "exact language" bank. Everything else builds on these.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 02 COPY ============ -->
+  <section class="phase reveal" id="copy">
+    <div class="phase-head">
+      <div class="big-num">02</div>
+      <div>
+        <h2>Ad copy — words that make strangers care</h2>
+        <div class="sub">Research gave us the ammunition. Now we write ads that pre-frame the reader before they ever reach the landing page.</div>
+      </div>
+    </div>
+
+    <h3><span class="tag">The metric that exposes bad copy</span>CTR vs CTR (All)</h3>
+    <div class="keystone">
+      <div class="eyebrow">Diagnostic Rule</div>
+      <div class="big-line">If <em>CTR (All)</em> and <em>CTR</em> are nearly the same, people are clicking without reading.</div>
+      <p>They arrive on the sales page with no context and no orientation — basically lost — and bounce. Good ad copy does half the selling <strong>before</strong> the click. A healthy ad has plenty of engagement (reads, expands, reactions) around its link clicks, which shows people consumed the message first.</p>
+    </div>
+
+    <figure class="visual">
+      <img src="assets/ctr-diagnostic.svg" alt="Dashboard explaining why CTR All and link CTR being close is a bad copy diagnostic">
+      <figcaption>Use this when reviewing reports: similar CTR metrics can mean the ad did not pre-frame the click.</figcaption>
+    </figure>
+
+    <h3><span class="tag">Framework</span>The "What Happens Next" ad</h3>
+    <p>This is our go-to long-copy framework. The psychology: people are more motivated to <strong>avoid loss</strong> than to gain something new — but you still need to move them from problem to solution. So you become a fortune teller and show them <em>two futures</em>:</p>
+    <ol class="steps">
+      <li><strong>Call out symptoms</strong> they're already feeling right now.</li>
+      <li><strong>Predict the dark future</strong> — "what happens next" if they don't fix it. Go deeper into the problem state.</li>
+      <li><strong>Flip the script</strong> — "what happens next" once they DO take action, using the client's mechanism.</li>
+      <li><strong>Stack the timeline of wins</strong> — within days… within weeks… within months…</li>
+      <li><strong>Prove it</strong> — "these are the exact results over [X] people achieved with [the method]."</li>
+    </ol>
+    <div class="why">
+      <strong>The engine of the framework</strong>
+      The contrast between the two futures is what creates desire. Neither future alone sells — the gap between them does.
+    </div>
+
+    <figure class="visual">
+      <img src="assets/what-happens-next-ad.svg" alt="Split future diagram for the What Happens Next ad framework">
+      <figcaption>A strong ad moves from present symptoms to consequences, then flips into mechanism and proof.</figcaption>
+    </figure>
+    <p>When writing it, don't lean on logic or feature lists. Tap into strong emotional desires: feeling <strong>safer, smarter, superior, or seen</strong>. And always write it USING the buyer persona from Phase 1 — never from imagination.</p>
+
+    <h3><span class="tag">Unlearning</span>Nine copywriting "rules" that are actually half-truths</h3>
+    <p>You'll hear these rules everywhere. Each has a kernel of truth and a bigger truth behind it:</p>
+    <table>
+      <tr><th style="width:38%;">The "rule"</th><th>The actual truth</th></tr>
+      <tr><td><b>"Keep sentences short."</b></td><td>Rhythm converts, not length. Mix short punches with longer flowing lines — monotony is the enemy.</td></tr>
+      <tr><td><b>"Never repeat yourself."</b></td><td>Repetition with variation is hypnotic. Each restatement of the promise answers a different doubt.</td></tr>
+      <tr><td><b>"Clear, never clever."</b></td><td>Clever <em>anchored in clarity</em> sticks. "Stop coaching like a side hustle. Start running it like a real business." Vagueness is the enemy, not wit.</td></tr>
+      <tr><td><b>"One CTA only."</b></td><td>Multiple CTAs work when they meet different readiness levels: "Join now" for the ready, "Grab the free guide" for the curious.</td></tr>
+      <tr><td><b>"Never say 'I'."</b></td><td>Strategic vulnerability sells. Your story isn't the hero — it's the mirror. "I felt this" makes them think "me too."</td></tr>
+      <tr><td><b>"No emotion in B2B."</b></td><td>Business buyers are still humans afraid of making the wrong call. Naming what they really feel is honest, not unprofessional.</td></tr>
+      <tr><td><b>"People don't read long copy."</b></td><td>People don't read <em>boring</em> copy. A 2,000-word piece that feels written just for them gets read to the end.</td></tr>
+      <tr><td><b>"Follow the formula (PAS, AIDA)."</b></td><td>Formulas are training wheels. Once you know <em>why</em> they work, you can lead with the dream instead of the pain and still convert.</td></tr>
+      <tr><td><b>"Qualified = has money."</b></td><td>You know this one already. Qualified = <em>spends</em> money. Weave the spending-behavior angle into the copy itself.</td></tr>
+    </table>
+
+    <h3><span class="tag">Headline machine</span>Formulas + the refinement chain</h3>
+    <p>Headlines are fill-in-the-blank structures fed with your persona DATA. A few of the workhorses:</p>
+    <ul class="plain">
+      <li>The Lazy [Avatar]'s Way to [Primary Goal]</li>
+      <li>How to [Achieve Desired Outcome] in [Specific Time Frame]</li>
+      <li>[Number] Mistakes Most People Make When [Common Action]</li>
+      <li>You Don't Have to Be [Something Challenging] to Be [Desired Result]</li>
+      <li>Why You're [Not Achieving Outcome] — and How to Fix It</li>
+      <li>Get Rid of [Problem] Once and For All</li>
+    </ul>
+    <p>Then we run a <strong>refinement chain</strong> — each prompt improves the last output:</p>
+    <div class="promptbox">
+      <span class="c">1.</span> Act as a direct response copywriter who uses visceral, real-life,<br>&nbsp;&nbsp;&nbsp;simple but dimensional language. Create 20 headlines using<br>&nbsp;&nbsp;&nbsp;FORMULA structures + DATA. Some as questions. No colons,<br>&nbsp;&nbsp;&nbsp;no exclamation points.<br>
+      <span class="c">2.</span> Rewrite each with dimensional, vivid examples in context.<br>
+      <span class="c">3.</span> Work the dimensional copy INTO the headline. Make each one<br>&nbsp;&nbsp;&nbsp;mysterious enough that I have to keep reading.<br>
+      <span class="c">4.</span> Remove colons, commas, dashes. One complete thought.<br>
+      <span class="c">5.</span> You're writing too lofty. Keep it simple.
+    </div>
+
+    <figure class="visual">
+      <img src="assets/headline-refinement.svg" alt="Five-step headline refinement chain from formula to simple human line">
+      <figcaption>The headline gets stronger when it becomes more specific, more human, and less formulaic.</figcaption>
+    </figure>
+    <p>One more guardrail: we ban the classic AI-sounding words — <em>empower, unleash, unlock, elevate, delve, tapestry, transform, journey, groundbreaking, discover</em> — and ask instead: <strong>"Make me see it."</strong></p>
+
+    <h3><span class="tag">Sales bullets</span>Fascination bullets that create intrigue</h3>
+    <p>Bullets tease, they never reveal. The pattern: imply a specific, valuable benefit while withholding the answer — <em>"The #1 thing you must never do…", "What [experts] know about [topic] that you don't…", "How to X without Y…"</em></p>
+    <p>Run the bullet prompt <strong>2–3 times</strong> against the client DATA, mixing the formula order (never top-to-bottom). Then refine: swap numbers for <code class="k">•</code>, make them more aggressive or softer as the brand needs, remove the company name to add mystery, and always end the stack with <strong>"• And much, much more!"</strong></p>
+
+    <h3><span class="tag">Final pass</span>Humanize + compliance</h3>
+    <div class="check">
+      <div class="row">Remove titles from headlines and <b>remove all em dashes</b>.</div>
+      <div class="row">Humanize the language and bring it down to a <b>fifth-grade reading level</b>.</div>
+      <div class="row">Open with and use emojis where the platform suits it (FB feed posts).</div>
+      <div class="row">Keep each primary text in its own block so it can be copied in the same format.</div>
+      <div class="row">Add the landing page link at the end.</div>
+      <div class="row">Health/medical niches: <b>no medical claims, no cures, no guarantees.</b> Replace risky words with compliant phrasing. Supportive, non-judgmental tone.</div>
+    </div>
+
+    <div class="action">
+      <div class="lbl">What you'll actually do in Phase 2</div>
+      <ul>
+        <li>Draft one "What Happens Next" long ad from the persona doc.</li>
+        <li>Generate 20 headlines through the 5-step refinement chain; shortlist 5.</li>
+        <li>Write 10 fascination bullets (2–3 passes), end with "And much, much more!"</li>
+        <li>Run the humanize + compliance checklist before anything ships.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 03 CREATIVE ============ -->
+  <section class="phase reveal" id="creative">
+    <div class="phase-head">
+      <div class="big-num">03</div>
+      <div>
+        <h2>Creative — the images and videos people actually see</h2>
+        <div class="sub">Copy carries the argument; creative earns the attention. We produce in volume, with strict quality rules.</div>
+      </div>
+    </div>
+
+    <h3><span class="tag">Image ads</span>Generating ad images with AI</h3>
+    <p>We generate square ad images from detailed <strong>JSON prompts</strong> (usually 6 at a time, each in its own text block so they're easy to copy). Two rules govern every image concept:</p>
+    <ol class="steps">
+      <li><strong>Bake in the qualification angle.</strong> Images should speak to people who already spend on the problem — "buyers buy" applies to visuals too.</li>
+      <li><strong>Feed the generator specifics.</strong> Use the fill-in-the-blank chain: <em>What kind of images would promote [product]? → List the adjectives of that scene → Describe the scene in detail</em> → paste all of it into the image generator.</li>
+    </ol>
+    <p>For fresh angles, we also ask open-ended questions: how to visually represent the product's benefits, how to use color psychology for this audience, what visual metaphor makes the ad memorable, and how to work user-generated content or social proof into the visual.</p>
+
+    <h3><span class="tag">Visual formats</span>Make it look native, not like an ad</h3>
+    <p>One useful note from the Sanjit process doc: the first job of an ad image is to blend into the kind of content people already stop for. Build a swipe file around formats like <strong>Breaking News</strong>, <strong>Raw Native</strong>, <strong>SMS Screenshot</strong>, and <strong>visual pattern interrupt</strong>. Then test one visual style with several headline variations before moving on.</p>
+
+    <div class="visual-grid">
+      <figure class="visual">
+        <img src="assets/sample-ad-raw-native.svg" alt="Raw native square Facebook ad sample about buyers who already spend">
+        <figcaption>Raw native: simple, feed-like, direct.</figcaption>
+      </figure>
+      <figure class="visual">
+        <img src="assets/sample-ad-sms.svg" alt="SMS screenshot style Facebook ad sample about asking spending behavior questions">
+        <figcaption>SMS screenshot: personal and familiar.</figcaption>
+      </figure>
+      <figure class="visual">
+        <img src="assets/sample-ad-breaking-news.svg" alt="Breaking news style Facebook ad sample about the money filter being misleading">
+        <figcaption>Breaking News: pattern interrupt.</figcaption>
+      </figure>
+    </div>
+
+    <h3><span class="tag">Video editing rules</span>The Ad Video Codex</h3>
+    <p>Every ad video gets edited with <strong>subtitle-based motion graphics</strong>: read the video's transcript, understand what's being said at each moment, and add a relevant visual graphic for that exact moment. Non-negotiables:</p>
+    <div class="do-dont">
+      <div class="do">
+        <span class="lbl">Always</span>
+        <ul>
+          <li>Graphics relevant to the spoken line — never random decoration</li>
+          <li>Keep graphics compact, clean, colorful, animated</li>
+          <li>Place graphics above the speaker's head area</li>
+          <li>Vary images, icons and colors across moments</li>
+          <li>Export vertical <b>and</b> a 1000×1000 square version</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <span class="lbl">Never</span>
+        <ul>
+          <li>Cover the face, mouth, eyes, or subtitles</li>
+          <li>Put text inside the motion graphics</li>
+          <li>Reuse the same image across videos or timelines</li>
+          <li>Leave internal labels in the export ("VSL 01", "1 min")</li>
+        </ul>
+      </div>
+    </div>
+
+    <figure class="visual">
+      <img src="assets/video-motion-graphics.svg" alt="Vertical video mockup showing motion graphics placed above the speaker without covering face or subtitles">
+      <figcaption>Motion graphics should explain the spoken moment while protecting face, mouth, eyes, and subtitles.</figcaption>
+    </figure>
+
+    <h3><span class="tag">Structure</span>The B2C video ad skeleton</h3>
+    <div class="sys">
+      <div class="row"><span><b>Aim</b> — address what the viewer wants first. "If you're looking to start a blog…"</span></div>
+      <div class="row"><span><b>Difficulty</b> — name the problem they're facing.</span></div>
+      <div class="row"><span><b>Understand</b> — build emotional connection: "I've been there."</span></div>
+      <div class="row"><span><b>Credibility</b> — worked with clients / helped hundreds of students.</span></div>
+      <div class="row"><span><b>Action plan</b> — the steps you'll teach. Fewer is better: a 3-step process beats a 10-step process.</span></div>
+      <div class="row"><span><b>Teach</b> — actually explain ONE step, quickly. Curiosity for the rest does the selling.</span></div>
+    </div>
+
+    <h3><span class="tag">Structure</span>The B2B VSL skeleton (timed)</h3>
+    <table>
+      <tr><th style="width:30%;">Beat</th><th>What happens</th></tr>
+      <tr><td><b>Pattern interrupt</b> <span class="mono" style="font-size:11px;color:var(--gold);">0–5s</span></td><td>Optional. A confusing prop, a shocking statement, walking toward the camera — anything unexpected. Must be paid off later in the copy.</td></tr>
+      <tr><td><b>Quick hook</b> <span class="mono" style="font-size:11px;color:var(--gold);">0–5s</span></td><td>Call out WHO they are, their circumstance, their problem, or their desire: "If your sales team is underperforming…"</td></tr>
+      <tr><td><b>Big claim + USP</b> <span class="mono" style="font-size:11px;color:var(--gold);">5–20s</span></td><td>State the ONE big benefit (2–3 max), then briefly explain why your way beats competitors, DIY, and indirect options.</td></tr>
+      <tr><td><b>Big guarantee</b></td><td>"You achieve [result] OR [we keep working free / we pay you / we buy your business]." Get creative — a guarantee that doesn't scare the owner a little isn't strong enough.</td></tr>
+      <tr><td><b>Proof</b> <span class="mono" style="font-size:11px;color:var(--gold);">20–45s</span></td><td>Track record or 5 rapid-fire case studies with quick before/afters in a timeframe.</td></tr>
+      <tr><td><b>Soft CTA</b></td><td>Low commitment: "See the demo."</td></tr>
+      <tr><td><b>Mechanism</b></td><td>The heart of the VSL — see below.</td></tr>
+      <tr><td><b>Hard CTA → more proof → final CTA</b></td><td>Direct ask, extra case studies, close. Optionally handle FAQs/objections rapid-fire at the end.</td></tr>
+    </table>
+    <div class="card">
+      <div class="eyebrow" style="margin-bottom:12px;">The Mechanism, in one sentence</div>
+      <p style="margin-bottom:12px;">A mechanism is <strong>the simultaneous explanation of why everything they tried before failed AND why this will be different.</strong> The script shape:</p>
+      <p class="mono" style="font-size:14px;color:var(--ink-soft);margin-bottom:0;">Most people trying to get [result] do [X] → here's the problem with that → which ultimately means [consequence] → so instead, we do [our method] → which allows us to [benefit] → which ultimately means [benefit of the benefit].</p>
+    </div>
+
+    <figure class="visual">
+      <img src="assets/b2b-vsl-timeline.svg" alt="Timed B2B video sales letter timeline from interrupt through CTA">
+      <figcaption>The mechanism is the center of the VSL, but the opening earns permission to explain it.</figcaption>
+    </figure>
+    <p>The more sophisticated and competitive the market, the more you should focus on <strong>ONE key mechanism</strong> instead of a list of reasons.</p>
+
+    <h3><span class="tag">Shortcut</span>Reverse-engineering YouTube video ads</h3>
+    <ol class="steps">
+      <li>Right-click a YouTube ad → <strong>Copy debug info</strong>.</li>
+      <li>Paste it into an AI chat and ask for the two YouTube links inside — the ad URL and the actual video URL.</li>
+      <li>Ask: <em>"Analyze this video ad's transcription for hook, story and CTA — and why is this ad working?"</em></li>
+      <li>Estimate spend: take the view count and date, look up current YouTube CPM rates for the region, and calculate roughly what they've spent.</li>
+      <li>Finish with: <em>"For you to adapt this ad for my business, what information do you need?"</em> — and let the AI interview you.</li>
+    </ol>
+
+    <div class="action">
+      <div class="lbl">What you'll actually do in Phase 3</div>
+      <ul>
+        <li>Generate 6 JSON image prompts per angle; keep every prompt in its own text block.</li>
+        <li>Edit videos to the Codex rules; QA against the Never list before export.</li>
+        <li>Draft one B2C skeleton and one B2B VSL skeleton per client using the tables above.</li>
+        <li>Reverse-engineer 2 competitor YouTube ads and log their hook/story/CTA in the swipe doc.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 04 LANDING ============ -->
+  <section class="phase reveal" id="landing">
+    <div class="phase-head">
+      <div class="big-num">04</div>
+      <div>
+        <h2>Landing pages — where clicks become leads</h2>
+        <div class="sub">The ad wins attention; the page wins the conversion. Two page types, one big mindset shift.</div>
+      </div>
+    </div>
+
+    <h3><span class="tag">The mindset shift</span>Awareness is a journey, not a badge</h3>
+    <p>Beginners think a reader arrives wearing a badge — "problem-aware", "solution-aware", "ready to buy" — and that you need a different page for each. Wrong frame. <strong>A sales page isn't written FOR an awareness level. It's written in an ORDER that creates awareness.</strong> One page, right sequence, works for everyone:</p>
+    <ol class="steps">
+      <li><strong>Start with the problem — even for people who already know it.</strong> The problem is neutral ground: the beginner feels seen, the researcher feels validated, the comparison-shopper feels reassured they're in the right place. Everyone keeps reading.</li>
+      <li><strong>Show WHY the problem exists.</strong> Most pages skip this. After recognizing the problem, the reader's next thought isn't "what should I buy?" — it's <em>"why does this keep happening to me?"</em> Answer that first.</li>
+      <li><strong>Show why the obvious solutions don't work.</strong> If you don't address "can't I just Google it / watch YouTube?", they'll leave and try that first. Knowing concepts and having a system are different things.</li>
+      <li><strong>Only now, present the product.</strong> All three reader types have arrived at the same realization: "I need a real solution, not more information."</li>
+    </ol>
+    <blockquote>Most sales pages don't fail because of bad copy. They fail because steps are skipped — the writer gets bored with the problem before the reader does.</blockquote>
+
+    <figure class="visual">
+      <img src="assets/sales-page-staircase.svg" alt="Sales page sequence staircase from problem to why it exists to DIY failure to product and CTA">
+      <figcaption>Cold readers need the right order: problem, cause, failed alternatives, then the offer.</figcaption>
+    </figure>
+
+    <h3><span class="tag">Page type A</span>The opt-in page — 5 essential elements</h3>
+    <p>One job: get contact details in exchange for a high-value content offer. Even though it's free, the prospect pays with their data — so you're still <em>selling</em> the opt-in.</p>
+    <div class="sys">
+      <div class="row"><span><b>Headline</b> — grabs them by the throat with a specific, vivid benefit. Formula: <em>Finally! How to Get [Result] Without [Thing They Fear Most] in [Time Frame].</em></span></div>
+      <div class="row"><span><b>Subheadline</b> — restates exactly what they get and what to do ("Enter your email below for instant access").</span></div>
+      <div class="row"><span><b>Fascination bullets</b> — the intrigue-cranking teasers from Phase 2. Imply the benefit, never give away the answer.</span></div>
+      <div class="row"><span><b>Visual mockup</b> — show, don't tell. A high-quality mockup of the guide/checklist/course so they can "see" the value.</span></div>
+      <div class="row"><span><b>The form</b> — name and email ONLY. Every extra field lowers conversion.</span></div>
+    </div>
+
+    <figure class="visual">
+      <img src="assets/opt-in-page-mockup.svg" alt="Opt-in page mockup showing headline, subheadline, bullets, visual mockup, and form">
+      <figcaption>An opt-in page should make the free thing feel concrete enough to trade contact details for it.</figcaption>
+    </figure>
+
+    <h3><span class="tag">Page type B</span>The sales page — the 17-step selling system</h3>
+    <p>For long-form sales pages, VSL pages and webinars (from <em>Sell Like Crazy</em>). The order matters — it's a persuasion staircase:</p>
+    <div class="sys">
+      <div class="row"><span><b>Call out your audience</b> — qualify instantly ("Attention: Agency Owners").</span></div>
+      <div class="row"><span><b>Demand attention</b> with a Big Promise headline.</span></div>
+      <div class="row"><span><b>Back up the promise</b> in the subheadline.</span></div>
+      <div class="row"><span><b>Create intrigue</b> with fascination bullets on pains, fears, hopes.</span></div>
+      <div class="row"><span><b>Floodlight the problem</b> — describe their struggle better than they can.</span></div>
+      <div class="row"><span><b>Provide the solution.</b></span></div>
+      <div class="row"><span><b>Show credentials</b> — case studies, awards, numbers.</span></div>
+      <div class="row"><span><b>Detail the benefits</b> — features tell, benefits sell.</span></div>
+      <div class="row"><span><b>Social proof</b> — third-party validation.</span></div>
+      <div class="row"><span><b>Make the Godfather Offer</b> — see below.</span></div>
+      <div class="row"><span><b>Add bonuses</b> — desirable sweeteners, not essentials.</span></div>
+      <div class="row"><span><b>Stack the value</b> — list everything with a total monetary value.</span></div>
+      <div class="row"><span><b>Reveal the price</b> — small against the stacked value.</span></div>
+      <div class="row"><span><b>Inject scarcity</b> — genuine reasons to act now.</span></div>
+      <div class="row"><span><b>Power guarantee</b> — reverse the risk completely.</span></div>
+      <div class="row"><span><b>Call to action</b> — a specific command, not a request.</span></div>
+      <div class="row"><span><b>Close with a P.S.</b> — warning + offer reminder + scarcity.</span></div>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow" style="margin-bottom:12px;">The Godfather Offer checklist</div>
+      <p style="margin-bottom:12px;">Copy is useless if the offer is weak. The offer must be so good <em>"only a lunatic would refuse."</em> Every Godfather Offer includes:</p>
+      <ul class="plain" style="margin-bottom:0;">
+        <li><strong>Rationale</strong> — why are you being this generous? (Unexplained generosity feels like a trap.)</li>
+        <li><strong>Value build</strong> — establish the "regular" price so the deal is visible.</li>
+        <li><strong>Payment options</strong> — plans lower the barrier to entry.</li>
+        <li><strong>Premiums</strong> — free gifts/bonuses included.</li>
+        <li><strong>Power guarantee</strong> — beyond "satisfaction guaranteed." Be specific: "results in 90 days or we work for free."</li>
+      </ul>
+    </div>
+
+    <figure class="visual">
+      <img src="assets/godfather-offer-stack.svg" alt="Offer stack diagram showing rationale, value build, bonuses, payment options, and power guarantee">
+      <figcaption>Before rewriting a page, check whether the offer itself has enough friction removed.</figcaption>
+    </figure>
+
+    <h3><span class="tag">High-ticket services</span>Sell the call, not the product</h3>
+    <p>For consulting and high-ticket services (that's us and most of our clients), don't sell from the page — sell a <strong>strategy call</strong>. After they accept, make them fill an <strong>application/survey</strong>. The psychology: jumping through hoops flips the power dynamic — <em>they're</em> chasing <em>you</em>. And the application questions? Phase 00: what have you tried, what have you bought, how much have you spent.</p>
+
+    <h3><span class="tag">Universal rules</span>Principles for every page</h3>
+    <div class="check">
+      <div class="row"><b>Temperature matching:</b> cold traffic (ads) → opt-in page first. Don't propose marriage on the first date. Hot traffic can go straight to a sales page.</div>
+      <div class="row"><b>The "fold" is a myth.</b> People DO read long-form copy — if it's entertaining. Long-form beats short-form for sales conversions.</div>
+      <div class="row"><b>80 cents of your dollar is spent on the headline.</b> If the headline fails, the page fails.</div>
+      <div class="row"><b>Know your unit economics.</b> You must know CPL and CPA to know if a page is profitably performing.</div>
+      <div class="row"><b>Writing style:</b> short sentences, simple words, no em dashes, strong direct statements, no vague claims, no fake numbers or invented testimonials.</div>
+    </div>
+    <blockquote>"If you can't pay money to acquire a new customer, you do not have a business."<cite>Sabri Suby — Sell Like Crazy</cite></blockquote>
+
+    <div class="action">
+      <div class="lbl">What you'll actually do in Phase 4</div>
+      <ul>
+        <li>Audit any page against the 5 opt-in elements or the 17-step staircase — flag skipped steps.</li>
+        <li>Check the reader sequence: problem → why it exists → why DIY fails → product.</li>
+        <li>Verify the offer passes the Godfather checklist before the page goes live.</li>
+        <li>Confirm application forms ask the three spending questions from Phase 00.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 05 SCALE ============ -->
+  <section class="phase reveal" id="scale">
+    <div class="phase-head">
+      <div class="big-num">05</div>
+      <div>
+        <h2>Launch &amp; scale — multiply what's working</h2>
+        <div class="sub">When an ad wins, we don't celebrate — we clone it, follow up relentlessly, and tighten the definition of a good lead.</div>
+      </div>
+    </div>
+
+    <h3><span class="tag">Scaling a winner</span>Change the hook, keep the body</h3>
+    <p>Once testing crowns a winning script, we scale it without breaking it. The golden rule: <strong>the body stays within ±10% of the winner's word count and structure — only the hook changes.</strong> The full scaling package:</p>
+    <div class="sys">
+      <div class="row"><span><b>Part A — 12 script variants.</b> Same body length and flow as the winner; a new hook angle each time: emotion, curiosity, myth-bust, mistake→fix, story, authority. Spread the required themes across the 12 (e.g., at least 4 hooks per core topic).</span></div>
+      <div class="row"><span><b>Part B — image ad text.</b> 3 formats (1080×1080 square, 1080×1920 story, 1200×1500 feed) × 3 angles (Authority, Relief/Emotion, How-To). Each gets a 5–7 word headline, ≤16-word subhead, 3 benefit bullets, price line, 2–3 word button, credibility micro-line — plus Meta primary text (125–150 chars), headline (≤30 chars), and alt text.</span></div>
+      <div class="row"><span><b>Part C — a 50-hook bank</b> (8–12 words each) for daily creative volume. Mix emotions, curiosity, myth-busting, before→after. No claims.</span></div>
+      <div class="row"><span><b>Part D — compliance pass.</b> Trim anything over winner length +10%, swap risky words (guarantee/cure/promise), confirm required mentions appear, return a QC checklist of edits made.</span></div>
+    </div>
+    <div class="why">
+      <strong>Why hooks, not bodies?</strong>
+      The body is the proven sales argument — touching it risks the win. The hook is just the doorway, and different people walk through different doors. Twelve doorways, one proven room.
+    </div>
+
+    <figure class="visual">
+      <img src="assets/headline-refinement.svg" alt="Headline refinement chain used when scaling hooks around a proven ad body">
+      <figcaption>Scaling usually starts at the doorway: keep the proven argument and test new hooks.</figcaption>
+    </figure>
+
+    <h3><span class="tag">Follow-up</span>Email sequences by "extrapolation"</h3>
+    <p>Most leads don't buy on day one, so email does the patient selling. Our rule is strict: <strong>every subject line and email angle must be pulled from something that already exists on the landing page.</strong> No random newsletters, no off-topic stories, no "just checking in."</p>
+    <ol class="steps">
+      <li><strong>Extract from the page:</strong> headline + subhead, big promise/mechanism, benefit bullets, proof, demo, steps, mistakes to avoid, FAQ objections, guarantees, bonuses.</li>
+      <li><strong>Turn each extracted item into ONE email theme.</strong> Each email feels like a continuation of the page.</li>
+      <li><strong>Write two sequences:</strong> a 10-email <em>non-buyer</em> follow-up (opted in, didn't buy → drive back to the front-end page, a different page-derived theme every email), and a 3–7 email <em>upsell</em> sequence (bought front-end, didn't buy the upsell → themes only from the upsell page).</li>
+    </ol>
+    <p>Format for every email: subject derived from page wording, optional preheader, <strong>120–250 word body</strong> in simple language and short paragraphs, exactly <strong>one clear CTA</strong> matching the goal.</p>
+
+    <h3><span class="tag">Lead quality</span>Measure it, don't vibe it</h3>
+    <p>"Lead quality" is too vague to improve. We pick <strong>3–5 specific, measurable parameters</strong> from the client's paid-student survey (occupation, income, education, past course purchases, and so on) and track those. Separately, we survey <em>paying</em> customers for buying-intent signals — premium gadget ownership, homeownership, vehicle type, club memberships, travel frequency, luxury hobbies — and use those patterns to sharpen targeting.</p>
+    <p>And when we find a winning audience? <strong>Stop fiddling with the audience. Start focusing on messaging.</strong></p>
+
+    <div class="action">
+      <div class="lbl">What you'll actually do in Phase 5</div>
+      <ul>
+        <li>Build the 12-variant + 9-image-text + 50-hook scaling package for each winner.</li>
+        <li>Run the Part D compliance pass and attach the QC checklist.</li>
+        <li>Draft the 10-email non-buyer sequence, every theme traceable to the page.</li>
+        <li>Report lead quality against the 3–5 agreed parameters — numbers, not adjectives.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 06 REFRESH ============ -->
+  <section class="phase reveal" id="refresh">
+    <div class="phase-head">
+      <div class="big-num">06</div>
+      <div>
+        <h2>The refresh rhythm — because every ad dies</h2>
+        <div class="sub">The most common way accounts blow up: a winner fatigues and there's nothing ready to replace it.</div>
+      </div>
+    </div>
+
+    <p>Here's the pattern that kills accounts: a campaign crushes for two weeks. Then week three hits — CPAs double, volume drops, and you're scrambling to make new creative under pressure. We've seen a large spender ride the same creatives for months, and when they finally fatigued it took <strong>six full weeks</strong> of poor performance to find viable replacements. The lesson:</p>
+
+    <div class="keystone">
+      <div class="eyebrow">The Non-Negotiable</div>
+      <div class="big-line">Don't wait for ads to die. <em>Refresh them before they do.</em></div>
+      <p>Whether the account runs complex manual bidding or simple broad targeting — both can work. The common thread in every account that scales is <strong>consistent creative refresh</strong>. That part is not optional.</p>
+    </div>
+
+    <figure class="visual">
+      <img src="assets/creative-refresh-calendar.svg" alt="Weekly creative refresh calendar showing Monday launch, Wednesday check, Friday plan, and monthly batch day">
+      <figcaption>The refresh rhythm turns creative into a pipeline instead of a panic task.</figcaption>
+    </figure>
+
+    <h3><span class="tag">Two-method system</span>Light refresh vs full refresh</h3>
+    <table>
+      <tr><th style="width:26%;"></th><th>Light refresh</th><th>Full refresh</th></tr>
+      <tr><td><b>When</b></td><td>Every 5–7 days</td><td>Monthly</td></tr>
+      <tr><td><b>For</b></td><td>Ads still working but showing early fatigue</td><td>When you need genuinely new creative</td></tr>
+      <tr><td><b>What changes</b></td><td>Same core message and angle. Swap the image/video slightly, change colors and layout, rotate testimonials, minor headline tweaks. (Winning red background? Ship blue, green, black versions.)</td><td>20–30 brand-new images from scratch, entirely new angles and hooks, new video creative, new formats, new testimonial creative.</td></tr>
+      <tr><td><b>Effort</b></td><td>Minutes per ad using templates</td><td>Batch it: one 2-hour block builds a month's stockpile</td></tr>
+    </table>
+
+    <h3><span class="tag">Experiment</span>The creative-variety test (Andromeda)</h3>
+    <p>The old way: separate everything — images in one ad set, videos in another, square here, vertical there. The new approach we're testing: <strong>throw variety into the SAME ad set</strong> — reels, square videos, square images, vertical images, 4–5 different pictures — and let Facebook figure it out. The algorithm optimizes for creative variety; giving it options in one place lets it test formats against people faster.</p>
+    <p><strong>Honest caveat:</strong> still under testing, not confirmed on every account. Where we've tried it, it's working — but treat it as an experiment, not a rule.</p>
+
+    <figure class="visual">
+      <img src="assets/andromeda-variety-adset.svg" alt="Andromeda test diagram showing reels, square images, story creatives, and videos in one ad set">
+      <figcaption>Use this as an experiment map: creative variety in one ad set, not a universal law.</figcaption>
+    </figure>
+
+    <h3><span class="tag">Routine</span>The weekly creative calendar</h3>
+    <table>
+      <tr><th style="width:24%;">Day</th><th>Job</th></tr>
+      <tr><td><b>Monday</b></td><td>Launch 5 new creatives from the stockpile into the testing campaign.</td></tr>
+      <tr><td><b>Wednesday</b></td><td>Quick 10-minute check. Are Monday's launches working? Kill obvious losers.</td></tr>
+      <tr><td><b>Friday</b></td><td>Review &amp; plan: which Monday creatives won? What's needed for next Monday? What needs a full refresh soon?</td></tr>
+      <tr><td><b>Monthly</b></td><td>Batch creation day: one 2-hour block, 20–30 new images or videos. Restock the pipeline.</td></tr>
+    </table>
+    <p>Two supporting habits: keep <strong>5–10 base templates</strong> ready so refreshes never start from zero, and maintain a <strong>swipe file</strong> — screenshot every ad (ours or competitors') that catches your attention.</p>
+
+    <h3><span class="tag">Housekeeping</span>Comment moderation</h3>
+    <p>Active ads attract trolls, and negative comments tank ad performance. Every client page gets our <strong>keyword moderation list</strong> loaded into Facebook's page settings so troll comments are auto-hidden before they poison the social proof.</p>
+
+    <figure class="visual">
+      <img src="assets/comment-moderation.svg" alt="Facebook comment moderation mockup showing a keyword list auto-hiding bad comments">
+      <figcaption>Moderation is performance hygiene: hide obvious bad-faith comments before they become social proof.</figcaption>
+    </figure>
+
+    <div class="action">
+      <div class="lbl">What you'll actually do in Phase 6</div>
+      <ul>
+        <li>Own the Mon / Wed / Fri rhythm on assigned accounts — it keeps us ahead of fatigue instead of reacting to it.</li>
+        <li>Prepare light-refresh variants (color/layout/testimonial swaps) every 5–7 days.</li>
+        <li>Join the monthly 2-hour batch day; leave with 20–30 fresh creatives stockpiled.</li>
+        <li>Confirm the keyword moderation list is installed on every new client page.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ FIRST WEEK ============ -->
+  <section class="phase reveal" id="week1">
+    <div class="phase-head">
+      <div class="big-num">★</div>
+      <div>
+        <h2>Your first week</h2>
+        <div class="sub">You won't touch a live budget yet. You'll build the muscles this playbook runs on.</div>
+      </div>
+    </div>
+    <figure class="visual">
+      <img src="assets/first-week-map.svg" alt="Five day first week training map from reading to research, persona, copy, and page critique">
+      <figcaption>Your first week is a practice loop: read, research, persona, copy, critique.</figcaption>
+    </figure>
+    <div class="sys">
+      <div class="row"><span><b>Day 1 — Read.</b> This whole guide, twice. Write down every question; bring them to your check-in.</span></div>
+      <div class="row"><span><b>Day 2 — Research.</b> Pick one client niche. Pull 10 clean competitor funnels from the Ads Library and start a swipe file.</span></div>
+      <div class="row"><span><b>Day 3 — Persona.</b> Run the deep-dive with forum foraging. Deliver an avatar with a name, a 2am fear, and a dream outcome — each in one sentence.</span></div>
+      <div class="row"><span><b>Day 4 — Copy.</b> Draft one "What Happens Next" ad and 20 headlines through the refinement chain. Run the compliance checklist.</span></div>
+      <div class="row"><span><b>Day 5 — Critique.</b> Audit one live landing page against the 17 steps and the opt-in 5. Present what's missing and why it matters.</span></div>
+    </div>
+    <blockquote>Your ads will die. That's not a question of if — it's a question of when. The difference between advertisers who scale and advertisers who struggle: the ones who scale refresh creative before the ads die.</blockquote>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS PLAYBOOK · INTERNAL TRAINING · v1.0</div>
+  </footer>
+
+  </div><!-- /inner -->
+  </main>
+</div><!-- /shell -->
+
+<script>
+  // reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // active rail link
+  const links=[...document.querySelectorAll('.rail a')];
+  const targets=links.map(a=>document.querySelector(a.getAttribute('href')));
+  const spy=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+e.target.id));
+      }
+    });
+  },{rootMargin:'-30% 0px -60% 0px'});
+  targets.forEach(t=>t&&spy.observe(t));
+</script>
+</body>
+</html>

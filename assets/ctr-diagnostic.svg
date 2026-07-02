@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">CTR and CTR All diagnostic</title>
+  <desc id="desc">A dashboard showing that similar CTR All and CTR means people are clicking without reading, leading to bounce.</desc>
+  <defs>
+    <style>
+      .bg{fill:#faf7f0}.card{fill:#fff;stroke:#dcd4c3;stroke-width:3}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.bad{fill:#8c3a3a}.good{fill:#2e6b4f}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="70" y="92" class="serif navy" font-size="50" font-weight="700">The copy diagnostic</text>
+  <text x="72" y="132" class="sans soft" font-size="24">If the two click metrics are too close, the ad is getting clicks without context.</text>
+  <rect x="80" y="205" width="310" height="210" rx="20" class="card"/>
+  <text x="120" y="268" class="mono gold" font-size="18" font-weight="700">CTR (ALL)</text>
+  <text x="120" y="342" class="serif navy" font-size="72" font-weight="700">1.8%</text>
+  <text x="120" y="382" class="sans soft" font-size="21">Any click on the ad</text>
+  <rect x="445" y="205" width="310" height="210" rx="20" class="card"/>
+  <text x="485" y="268" class="mono gold" font-size="18" font-weight="700">LINK CTR</text>
+  <text x="485" y="342" class="serif navy" font-size="72" font-weight="700">1.6%</text>
+  <text x="485" y="382" class="sans soft" font-size="21">Clicks to the page</text>
+  <rect x="810" y="205" width="310" height="210" rx="20" fill="#f5e9e7" stroke="#e4cbc6" stroke-width="3"/>
+  <text x="850" y="268" class="mono bad" font-size="18" font-weight="700">WARNING</text>
+  <text x="850" y="338" class="serif bad" font-size="54" font-weight="700">Too close</text>
+  <text x="850" y="382" class="sans soft" font-size="21">They clicked before reading.</text>
+  <path d="M232 472 C350 548 520 548 650 485" fill="none" stroke="#b8860b" stroke-width="7" stroke-linecap="round"/>
+  <polygon points="681,468 648,503 640,458" fill="#b8860b"/>
+  <rect x="268" y="545" width="660" height="80" rx="20" fill="#16305a"/>
+  <text x="598" y="579" text-anchor="middle" class="sans" fill="#fff" font-size="24" font-weight="700">Result: visitor lands cold, confused, and bounces.</text>
+  <text x="598" y="610" text-anchor="middle" class="mono" fill="#f3e8ce" font-size="17" font-weight="700">Fix: make the ad pre-frame the page.</text>
+</svg>

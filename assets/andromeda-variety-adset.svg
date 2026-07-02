@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Andromeda creative variety test</title>
+  <desc id="desc">Different creative formats mixed into one ad set for algorithmic testing.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f2ede2}.box{fill:#fff;stroke:#dcd4c3;stroke-width:3}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="72" y="92" class="serif navy" font-size="50" font-weight="700">Creative variety in one ad set</text>
+  <text x="74" y="132" class="sans soft" font-size="24">The test: give Meta formats to compare instead of over-segmenting.</text>
+  <rect x="435" y="220" width="330" height="260" rx="28" fill="#16305a"/>
+  <text x="600" y="310" text-anchor="middle" class="mono" fill="#f3e8ce" font-size="18" font-weight="700">SAME AD SET</text>
+  <text x="600" y="370" text-anchor="middle" class="serif" fill="#fff" font-size="48" font-weight="700">Andromeda</text>
+  <text x="600" y="420" text-anchor="middle" class="sans" fill="#fff" font-size="24">let Facebook sort formats</text>
+  <g transform="translate(88 235)"><rect width="190" height="190" rx="20" class="box"/><text x="95" y="85" text-anchor="middle" class="sans navy" font-size="28" font-weight="700">Square</text><text x="95" y="122" text-anchor="middle" class="sans soft" font-size="22">image</text></g>
+  <g transform="translate(255 485)"><rect width="120" height="200" rx="20" class="box"/><text x="60" y="92" text-anchor="middle" class="sans navy" font-size="24" font-weight="700">Story</text><text x="60" y="125" text-anchor="middle" class="sans soft" font-size="18">9:16</text></g>
+  <g transform="translate(845 235)"><rect width="190" height="190" rx="20" class="box"/><circle cx="95" cy="95" r="45" fill="#f3e8ce"/><polygon points="82,70 82,120 124,95" fill="#16305a"/><text x="95" y="170" text-anchor="middle" class="sans soft" font-size="20">video</text></g>
+  <g transform="translate(900 500)"><rect width="210" height="150" rx="20" class="box"/><text x="105" y="70" text-anchor="middle" class="sans navy" font-size="25" font-weight="700">Reel</text><text x="105" y="106" text-anchor="middle" class="sans soft" font-size="20">native cut</text></g>
+  <path d="M278 330 C355 330 375 340 425 350" fill="none" stroke="#b8860b" stroke-width="6" stroke-linecap="round"/><path d="M375 585 C405 545 430 505 462 470" fill="none" stroke="#b8860b" stroke-width="6" stroke-linecap="round"/><path d="M845 330 C790 335 785 348 765 360" fill="none" stroke="#b8860b" stroke-width="6" stroke-linecap="round"/><path d="M900 575 C845 540 810 500 760 465" fill="none" stroke="#b8860b" stroke-width="6" stroke-linecap="round"/>
+</svg>

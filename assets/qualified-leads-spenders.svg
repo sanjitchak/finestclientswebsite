@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Qualified leads are spenders</title>
+  <desc id="desc">A comparison between people who only have money and people who already spend money on the problem.</desc>
+  <defs>
+    <style>
+      .bg{fill:#faf7f0}.card{fill:#fff;stroke:#dcd4c3;stroke-width:3}.navy{fill:#16305a}.ink{fill:#1b2233}.soft{fill:#4a5468}.gold{fill:#b8860b}.good{fill:#2e6b4f}.bad{fill:#8c3a3a}.muted{fill:#f2ede2}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="70" y="88" class="serif navy" font-size="52" font-weight="700">Qualified does not mean rich.</text>
+  <text x="72" y="128" class="sans soft" font-size="24">It means they already spend money to solve this kind of problem.</text>
+  <rect x="70" y="190" width="480" height="430" rx="20" class="card"/>
+  <text x="116" y="255" class="mono bad" font-size="18" font-weight="700">WEAK FILTER</text>
+  <text x="116" y="302" class="serif ink" font-size="38" font-weight="700">Has money</text>
+  <circle cx="196" cy="410" r="58" fill="#f5e9e7" stroke="#e4cbc6" stroke-width="3"/>
+  <text x="177" y="426" class="sans bad" font-size="44" font-weight="700">$</text>
+  <text x="290" y="372" class="sans soft" font-size="24">Can afford it</text>
+  <text x="290" y="412" class="sans soft" font-size="24">Still compares</text>
+  <text x="290" y="452" class="sans soft" font-size="24">Delays the call</text>
+  <text x="116" y="548" class="sans bad" font-size="26" font-weight="700">Access to money is not intent.</text>
+  <rect x="650" y="190" width="480" height="430" rx="20" class="card"/>
+  <text x="696" y="255" class="mono good" font-size="18" font-weight="700">STRONG FILTER</text>
+  <text x="696" y="302" class="serif ink" font-size="38" font-weight="700">Spends money</text>
+  <circle cx="776" cy="410" r="58" fill="#e8f1eb" stroke="#cbdfd2" stroke-width="3"/>
+  <text x="751" y="425" class="sans good" font-size="42" font-weight="700">-></text>
+  <text x="870" y="372" class="sans soft" font-size="24">Paid for help</text>
+  <text x="870" y="412" class="sans soft" font-size="24">Feels the pain</text>
+  <text x="870" y="452" class="sans soft" font-size="24">Believes paid solutions</text>
+  <text x="696" y="548" class="sans good" font-size="26" font-weight="700">Past buying predicts future buying.</text>
+  <rect x="250" y="668" width="700" height="46" rx="23" fill="#16305a"/>
+  <text x="600" y="699" text-anchor="middle" class="mono" fill="#f3e8ce" font-size="19" font-weight="700">Ask: what have you already bought, tried, or invested in?</text>
+</svg>

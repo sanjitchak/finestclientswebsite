@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">B2B VSL timeline</title>
+  <desc id="desc">A timed video sales letter timeline from pattern interrupt to proof and CTA.</desc>
+  <defs>
+    <style>
+      .bg{fill:#faf7f0}.card{fill:#fff;stroke:#dcd4c3;stroke-width:3}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="74" y="92" class="serif navy" font-size="50" font-weight="700">B2B VSL timing map</text>
+  <text x="76" y="132" class="sans soft" font-size="24">Do not ramble. Each beat earns the next beat.</text>
+  <line x1="110" y1="380" x2="1090" y2="380" stroke="#b8860b" stroke-width="8" stroke-linecap="round"/>
+  <g transform="translate(90 235)">
+    <rect width="145" height="105" rx="16" class="card"/><text x="72" y="45" text-anchor="middle" class="mono gold" font-size="16" font-weight="700">0-5s</text><text x="72" y="80" text-anchor="middle" class="sans navy" font-size="19" font-weight="700">Interrupt</text>
+  </g>
+  <g transform="translate(250 430)">
+    <rect width="165" height="115" rx="16" class="card"/><text x="82" y="45" text-anchor="middle" class="mono gold" font-size="16" font-weight="700">0-5s</text><text x="82" y="80" text-anchor="middle" class="sans navy" font-size="19" font-weight="700">Quick hook</text>
+  </g>
+  <g transform="translate(430 235)">
+    <rect width="170" height="115" rx="16" class="card"/><text x="85" y="45" text-anchor="middle" class="mono gold" font-size="16" font-weight="700">5-20s</text><text x="85" y="80" text-anchor="middle" class="sans navy" font-size="19" font-weight="700">Big claim</text>
+  </g>
+  <g transform="translate(620 430)">
+    <rect width="170" height="115" rx="16" class="card"/><text x="85" y="45" text-anchor="middle" class="mono gold" font-size="16" font-weight="700">20-45s</text><text x="85" y="80" text-anchor="middle" class="sans navy" font-size="19" font-weight="700">Proof</text>
+  </g>
+  <g transform="translate(810 235)">
+    <rect width="170" height="115" rx="16" class="card"/><text x="85" y="45" text-anchor="middle" class="mono gold" font-size="16" font-weight="700">Core</text><text x="85" y="80" text-anchor="middle" class="sans navy" font-size="19" font-weight="700">Mechanism</text>
+  </g>
+  <g transform="translate(995 430)">
+    <rect width="125" height="115" rx="16" fill="#16305a"/><text x="62" y="45" text-anchor="middle" class="mono" fill="#f3e8ce" font-size="16" font-weight="700">Close</text><text x="62" y="80" text-anchor="middle" class="sans" fill="#fff" font-size="19" font-weight="700">CTA</text>
+  </g>
+  <rect x="232" y="630" width="736" height="58" rx="29" fill="#f2ede2" stroke="#dcd4c3" stroke-width="3"/>
+  <text x="600" y="668" text-anchor="middle" class="sans navy" font-size="23" font-weight="700">Mechanism = why old way failed + why this way works.</text>
+</svg>

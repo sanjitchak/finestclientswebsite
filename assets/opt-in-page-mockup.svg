@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">Opt-in page mockup</title>
+  <desc id="desc">A landing page wireframe showing headline, subheadline, bullets, mockup, and form.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f2ede2}.page{fill:#fff;stroke:#dcd4c3;stroke-width:3}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="820"/>
+  <rect x="110" y="70" width="980" height="680" rx="24" class="page"/>
+  <g transform="translate(175 145)">
+    <text class="mono gold" font-size="17" font-weight="700">OPT-IN PAGE</text>
+    <text y="62" class="serif navy" font-size="44" font-weight="700">Finally get consult calls</text>
+    <text y="112" class="serif navy" font-size="44" font-weight="700">without daily posting</text>
+    <text y="158" class="sans soft" font-size="23">Enter your email for the checklist.</text>
+    <text y="232" class="sans navy" font-size="24" font-weight="700">What you will learn:</text>
+    <text y="275" class="sans soft" font-size="22">- The question that filters spenders</text>
+    <text y="315" class="sans soft" font-size="22">- The form field that feeds the pixel</text>
+    <text y="355" class="sans soft" font-size="22">- The page order that warms cold traffic</text>
+  </g>
+  <g transform="translate(690 150)">
+    <rect width="275" height="345" rx="18" fill="#16305a"/>
+    <rect x="35" y="42" width="205" height="260" rx="10" fill="#faf7f0"/>
+    <text x="138" y="118" text-anchor="middle" class="serif navy" font-size="31" font-weight="700">Lead</text>
+    <text x="138" y="158" text-anchor="middle" class="serif navy" font-size="31" font-weight="700">Quality</text>
+    <text x="138" y="208" text-anchor="middle" class="mono gold" font-size="15" font-weight="700">CHECKLIST</text>
+  </g>
+  <g transform="translate(640 545)">
+    <rect width="365" height="105" rx="18" fill="#f2ede2" stroke="#dcd4c3" stroke-width="3"/>
+    <rect x="22" y="22" width="150" height="24" rx="12" fill="#fff"/>
+    <rect x="22" y="60" width="150" height="24" rx="12" fill="#fff"/>
+    <rect x="198" y="22" width="140" height="62" rx="31" fill="#b8860b"/>
+    <text x="268" y="61" text-anchor="middle" class="mono" fill="#fff" font-size="17" font-weight="700">GET IT</text>
+  </g>
+</svg>

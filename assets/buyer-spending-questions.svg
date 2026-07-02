@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">Buyer spending questions form</title>
+  <desc id="desc">A sample qualification form asking what the prospect has tried, bought, and spent.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f2ede2}.panel{fill:#fff;stroke:#dcd4c3;stroke-width:3}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.good{fill:#2e6b4f}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="820"/>
+  <rect x="285" y="70" width="630" height="680" rx="26" class="panel"/>
+  <text x="600" y="135" text-anchor="middle" class="mono gold" font-size="17" font-weight="700">APPLICATION FORM</text>
+  <text x="600" y="184" text-anchor="middle" class="serif navy" font-size="44" font-weight="700">Find the real buyers</text>
+  <text x="600" y="224" text-anchor="middle" class="sans soft" font-size="21">These questions train the sales team and the pixel.</text>
+  <g transform="translate(345 290)">
+    <text class="sans navy" font-size="23" font-weight="700">1. What have you already tried?</text>
+    <rect y="24" width="510" height="74" rx="12" fill="#faf7f0" stroke="#dcd4c3" stroke-width="2"/>
+    <text x="24" y="69" class="sans soft" font-size="20">Gym, ads, coach, course, agency...</text>
+  </g>
+  <g transform="translate(345 420)">
+    <text class="sans navy" font-size="23" font-weight="700">2. What have you bought or used?</text>
+    <rect y="24" width="510" height="74" rx="12" fill="#faf7f0" stroke="#dcd4c3" stroke-width="2"/>
+    <text x="24" y="69" class="sans soft" font-size="20">List tools, programs, services, books...</text>
+  </g>
+  <g transform="translate(345 550)">
+    <text class="sans navy" font-size="23" font-weight="700">3. Roughly how much have you spent?</text>
+    <rect y="24" width="510" height="74" rx="12" fill="#e8f1eb" stroke="#cbdfd2" stroke-width="2"/>
+    <text x="24" y="69" class="sans good" font-size="20" font-weight="700">$1,000+ or meaningful amount</text>
+  </g>
+  <path d="M914 627 C1010 625 1046 558 1057 492" fill="none" stroke="#b8860b" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="1062,460 1076,500 1038,488" fill="#b8860b"/>
+  <rect x="915" y="398" width="210" height="86" rx="18" fill="#16305a"/>
+  <text x="1020" y="432" text-anchor="middle" class="mono" fill="#f3e8ce" font-size="16" font-weight="700">PIXEL EVENT</text>
+  <text x="1020" y="462" text-anchor="middle" class="sans" fill="#fff" font-size="20">High spender</text>
+</svg>

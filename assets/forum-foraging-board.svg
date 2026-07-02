@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">Forum foraging quote board</title>
+  <desc id="desc">Sticky notes of real audience phrases grouped into pains, failed attempts, fears, and dream outcomes.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f2ede2}.board{fill:#16305a}.note{fill:#fff;stroke:#dcd4c3;stroke-width:3}.yellow{fill:#f3e8ce}.green{fill:#e8f1eb}.red{fill:#f5e9e7}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="780"/>
+  <rect x="92" y="82" width="1016" height="608" rx="26" class="board"/>
+  <text x="140" y="150" class="mono" fill="#f3e8ce" font-size="18" font-weight="700">FORUM FORAGING METHOD</text>
+  <text x="140" y="198" class="serif" fill="#fff" font-size="42" font-weight="700">Copy starts with exact language.</text>
+  <g transform="translate(140 260) rotate(-3)">
+    <rect width="235" height="170" rx="14" class="note"/>
+    <text x="22" y="42" class="mono gold" font-size="15" font-weight="700">PAIN</text>
+    <text x="22" y="82" class="sans navy" font-size="23" font-weight="700">"I feel stuck"</text>
+    <text x="22" y="122" class="sans soft" font-size="18">Use their words, not yours.</text>
+  </g>
+  <g transform="translate(402 278) rotate(2)">
+    <rect width="235" height="170" rx="14" class="yellow"/>
+    <text x="22" y="42" class="mono gold" font-size="15" font-weight="700">2AM FEAR</text>
+    <text x="22" y="82" class="sans navy" font-size="23" font-weight="700">"What if this keeps happening?"</text>
+  </g>
+  <g transform="translate(665 260) rotate(-2)">
+    <rect width="235" height="170" rx="14" class="green"/>
+    <text x="22" y="42" class="mono" fill="#2e6b4f" font-size="15" font-weight="700">DREAM</text>
+    <text x="22" y="82" class="sans navy" font-size="23" font-weight="700">"I want a simple system"</text>
+  </g>
+  <g transform="translate(265 482) rotate(3)">
+    <rect width="235" height="150" rx="14" class="red"/>
+    <text x="22" y="42" class="mono" fill="#8c3a3a" font-size="15" font-weight="700">FAILED TRY</text>
+    <text x="22" y="82" class="sans navy" font-size="23" font-weight="700">"I watched every tutorial"</text>
+  </g>
+  <g transform="translate(528 490) rotate(-2)">
+    <rect width="300" height="142" rx="14" class="note"/>
+    <text x="22" y="42" class="mono gold" font-size="15" font-weight="700">HEADLINE FUEL</text>
+    <text x="22" y="82" class="sans navy" font-size="25" font-weight="700">"That's for me."</text>
+    <text x="22" y="116" class="sans soft" font-size="18">The identity trigger.</text>
+  </g>
+  <path d="M900 488 C965 470 1006 420 1018 350" fill="none" stroke="#f3e8ce" stroke-width="5" stroke-linecap="round"/>
+  <text x="920" y="540" class="sans" fill="#fff" font-size="24" font-weight="700">Swipe doc = raw material</text>
+</svg>

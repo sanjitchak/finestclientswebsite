@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">Meta Ads Library research workflow</title>
+  <desc id="desc">A mock Ads Library search screen showing active ads and clean funnel URLs being collected.</desc>
+  <defs>
+    <style>
+      .bg{fill:#faf7f0}.browser{fill:#fff;stroke:#dcd4c3;stroke-width:3}.top{fill:#16305a}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.good{fill:#2e6b4f}.bad{fill:#8c3a3a}.muted{fill:#f2ede2}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="780"/>
+  <rect x="70" y="70" width="1060" height="620" rx="22" class="browser"/>
+  <rect x="70" y="70" width="1060" height="76" rx="22" class="top"/>
+  <circle cx="113" cy="108" r="10" fill="#f5e9e7"/><circle cx="147" cy="108" r="10" fill="#f3e8ce"/><circle cx="181" cy="108" r="10" fill="#e8f1eb"/>
+  <text x="236" y="116" class="mono" fill="#f3e8ce" font-size="20" font-weight="700">Meta Ads Library</text>
+  <rect x="105" y="180" width="450" height="70" rx="14" fill="#f2ede2"/>
+  <text x="130" y="224" class="sans soft" font-size="22">keyword_unordered: coach funnel</text>
+  <rect x="580" y="180" width="205" height="70" rx="14" fill="#e8f1eb"/>
+  <text x="682" y="224" text-anchor="middle" class="mono good" font-size="18" font-weight="700">ACTIVE ONLY</text>
+  <rect x="810" y="180" width="285" height="70" rx="14" fill="#f3e8ce"/>
+  <text x="952" y="224" text-anchor="middle" class="mono gold" font-size="18" font-weight="700">SORT: IMPRESSIONS</text>
+  <g transform="translate(105 300)">
+    <rect width="295" height="260" rx="18" fill="#fff" stroke="#dcd4c3" stroke-width="2"/>
+    <rect x="22" y="22" width="250" height="112" rx="14" fill="#16305a"/>
+    <circle cx="76" cy="80" r="32" fill="#f3e8ce"/><rect x="126" y="58" width="108" height="12" rx="6" fill="#faf7f0"/><rect x="126" y="86" width="72" height="12" rx="6" fill="#faf7f0"/>
+    <text x="22" y="172" class="sans navy" font-size="21" font-weight="700">Webinar funnel</text>
+    <text x="22" y="207" class="sans soft" font-size="17">Keep: clean URL</text>
+    <rect x="22" y="226" width="170" height="24" rx="12" fill="#e8f1eb"/><text x="107" y="244" text-anchor="middle" class="mono good" font-size="12" font-weight="700">LANDING PAGE</text>
+  </g>
+  <g transform="translate(450 300)">
+    <rect width="295" height="260" rx="18" fill="#fff" stroke="#dcd4c3" stroke-width="2"/>
+    <rect x="22" y="22" width="250" height="112" rx="14" fill="#f2ede2"/>
+    <rect x="54" y="48" width="186" height="16" rx="8" fill="#b8860b"/><rect x="54" y="82" width="132" height="16" rx="8" fill="#4a5468"/>
+    <text x="22" y="172" class="sans navy" font-size="21" font-weight="700">Application page</text>
+    <text x="22" y="207" class="sans soft" font-size="17">Keep: high-ticket intent</text>
+    <rect x="22" y="226" width="170" height="24" rx="12" fill="#e8f1eb"/><text x="107" y="244" text-anchor="middle" class="mono good" font-size="12" font-weight="700">BOOKING FUNNEL</text>
+  </g>
+  <g transform="translate(795 300)">
+    <rect width="295" height="260" rx="18" fill="#fff" stroke="#dcd4c3" stroke-width="2"/>
+    <rect x="22" y="22" width="250" height="112" rx="14" fill="#f5e9e7"/>
+    <text x="147" y="92" text-anchor="middle" class="sans bad" font-size="42" font-weight="700">fb.me</text>
+    <text x="22" y="172" class="sans navy" font-size="21" font-weight="700">Social profile</text>
+    <text x="22" y="207" class="sans soft" font-size="17">Reject: not a funnel</text>
+    <rect x="22" y="226" width="145" height="24" rx="12" fill="#f5e9e7"/><text x="95" y="244" text-anchor="middle" class="mono bad" font-size="12" font-weight="700">THROW OUT</text>
+  </g>
+  <text x="600" y="640" text-anchor="middle" class="serif navy" font-size="34" font-weight="700">Collect the funnels behind ads, not random links.</text>
+</svg>

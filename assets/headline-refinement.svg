@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Headline refinement chain</title>
+  <desc id="desc">Five headline refinement stages from formula to simple human line.</desc>
+  <defs>
+    <style>
+      .bg{fill:#faf7f0}.card{fill:#fff;stroke:#dcd4c3;stroke-width:3}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="80" y="92" class="serif navy" font-size="52" font-weight="700">Headline machine</text>
+  <text x="82" y="132" class="sans soft" font-size="24">Start with a formula. End with a line that sounds like a human.</text>
+  <g transform="translate(90 210)">
+    <rect width="1020" height="80" rx="16" class="card"/><text x="32" y="50" class="mono gold" font-size="18" font-weight="700">01 FORMULA</text><text x="245" y="51" class="sans navy" font-size="24" font-weight="700">How to get more leads without posting every day</text>
+  </g>
+  <g transform="translate(130 310)">
+    <rect width="980" height="80" rx="16" class="card"/><text x="32" y="50" class="mono gold" font-size="18" font-weight="700">02 ADD CONTEXT</text><text x="285" y="51" class="sans navy" font-size="24" font-weight="700">How busy coaches get consults without daily content</text>
+  </g>
+  <g transform="translate(170 410)">
+    <rect width="940" height="80" rx="16" class="card"/><text x="32" y="50" class="mono gold" font-size="18" font-weight="700">03 ADD INTRIGUE</text><text x="305" y="51" class="sans navy" font-size="24" font-weight="700">Why coaches with quiet pages still book calls</text>
+  </g>
+  <g transform="translate(210 510)">
+    <rect width="900" height="80" rx="16" class="card"/><text x="32" y="50" class="mono gold" font-size="18" font-weight="700">04 CLEAN</text><text x="215" y="51" class="sans navy" font-size="24" font-weight="700">Why quiet coaches still book calls</text>
+  </g>
+  <g transform="translate(250 610)">
+    <rect width="860" height="80" rx="16" fill="#16305a"/><text x="32" y="50" class="mono" fill="#f3e8ce" font-size="18" font-weight="700">05 SIMPLE</text><text x="225" y="51" class="sans" fill="#fff" font-size="26" font-weight="700">Your page is quiet. Your calendar does not have to be.</text>
+  </g>
+</svg>

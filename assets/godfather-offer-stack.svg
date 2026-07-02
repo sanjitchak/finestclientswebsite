@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Godfather offer stack</title>
+  <desc id="desc">A visual offer stack showing rationale, bonuses, value, payment options, and guarantee.</desc>
+  <defs>
+    <style>
+      .bg{fill:#16305a}.card{fill:#fff;stroke:#dcd4c3;stroke-width:3}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="600" y="92" text-anchor="middle" class="mono" fill="#f3e8ce" font-size="18" font-weight="700">THE OFFER MATTERS MORE THAN THE COPY</text>
+  <text x="600" y="150" text-anchor="middle" class="serif" fill="#fff" font-size="52" font-weight="700">The Godfather Offer Stack</text>
+  <g transform="translate(150 235)">
+    <rect width="900" height="80" rx="18" class="card"/><text x="38" y="50" class="mono gold" font-size="18" font-weight="700">01</text><text x="110" y="52" class="sans navy" font-size="27" font-weight="700">Rationale: why the deal exists</text>
+  </g>
+  <g transform="translate(190 330)">
+    <rect width="820" height="80" rx="18" class="card"/><text x="38" y="50" class="mono gold" font-size="18" font-weight="700">02</text><text x="110" y="52" class="sans navy" font-size="27" font-weight="700">Value build and regular price</text>
+  </g>
+  <g transform="translate(230 425)">
+    <rect width="740" height="80" rx="18" class="card"/><text x="38" y="50" class="mono gold" font-size="18" font-weight="700">03</text><text x="110" y="52" class="sans navy" font-size="27" font-weight="700">Bonuses and premiums</text>
+  </g>
+  <g transform="translate(270 520)">
+    <rect width="660" height="80" rx="18" class="card"/><text x="38" y="50" class="mono gold" font-size="18" font-weight="700">04</text><text x="110" y="52" class="sans navy" font-size="27" font-weight="700">Payment options</text>
+  </g>
+  <g transform="translate(310 615)">
+    <rect width="580" height="80" rx="18" fill="#f3e8ce"/><text x="38" y="50" class="mono gold" font-size="18" font-weight="700">05</text><text x="110" y="52" class="sans navy" font-size="27" font-weight="700">Power guarantee</text>
+  </g>
+</svg>

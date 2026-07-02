@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">First week training map</title>
+  <desc id="desc">A five day intern training map from reading to landing page critique.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f2ede2}.card{fill:#fff;stroke:#dcd4c3;stroke-width:3}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="600" y="92" text-anchor="middle" class="serif navy" font-size="54" font-weight="700">Your first week</text>
+  <text x="600" y="132" text-anchor="middle" class="sans soft" font-size="24">Build the muscles before touching live budget.</text>
+  <line x1="170" y1="395" x2="1030" y2="395" stroke="#b8860b" stroke-width="7" stroke-linecap="round"/>
+  <g transform="translate(90 240)"><circle cx="80" cy="155" r="72" fill="#16305a"/><text x="80" y="170" text-anchor="middle" class="serif" fill="#fff" font-size="46" font-weight="700">1</text><rect y="260" width="160" height="120" rx="16" class="card"/><text x="80" y="310" text-anchor="middle" class="sans navy" font-size="23" font-weight="700">Read</text><text x="80" y="345" text-anchor="middle" class="sans soft" font-size="18">twice</text></g>
+  <g transform="translate(315 240)"><circle cx="80" cy="155" r="72" fill="#16305a"/><text x="80" y="170" text-anchor="middle" class="serif" fill="#fff" font-size="46" font-weight="700">2</text><rect y="260" width="160" height="120" rx="16" class="card"/><text x="80" y="310" text-anchor="middle" class="sans navy" font-size="23" font-weight="700">Research</text><text x="80" y="345" text-anchor="middle" class="sans soft" font-size="18">10 funnels</text></g>
+  <g transform="translate(540 240)"><circle cx="80" cy="155" r="72" fill="#16305a"/><text x="80" y="170" text-anchor="middle" class="serif" fill="#fff" font-size="46" font-weight="700">3</text><rect y="260" width="160" height="120" rx="16" class="card"/><text x="80" y="310" text-anchor="middle" class="sans navy" font-size="23" font-weight="700">Persona</text><text x="80" y="345" text-anchor="middle" class="sans soft" font-size="18">2am fear</text></g>
+  <g transform="translate(765 240)"><circle cx="80" cy="155" r="72" fill="#16305a"/><text x="80" y="170" text-anchor="middle" class="serif" fill="#fff" font-size="46" font-weight="700">4</text><rect y="260" width="160" height="120" rx="16" class="card"/><text x="80" y="310" text-anchor="middle" class="sans navy" font-size="23" font-weight="700">Copy</text><text x="80" y="345" text-anchor="middle" class="sans soft" font-size="18">ad + heads</text></g>
+  <g transform="translate(990 240)"><circle cx="80" cy="155" r="72" fill="#16305a"/><text x="80" y="170" text-anchor="middle" class="serif" fill="#fff" font-size="46" font-weight="700">5</text><rect y="260" width="160" height="120" rx="16" class="card"/><text x="80" y="310" text-anchor="middle" class="sans navy" font-size="23" font-weight="700">Critique</text><text x="80" y="345" text-anchor="middle" class="sans soft" font-size="18">page audit</text></g>
+</svg>

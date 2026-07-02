@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">What Happens Next ad framework</title>
+  <desc id="desc">A split future diagram showing the bad path if the problem stays unsolved and the good path after action.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f2ede2}.panel{fill:#fff;stroke:#dcd4c3;stroke-width:3}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.bad{fill:#8c3a3a}.good{fill:#2e6b4f}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="780"/>
+  <text x="600" y="92" text-anchor="middle" class="serif navy" font-size="52" font-weight="700">Show two futures.</text>
+  <text x="600" y="132" text-anchor="middle" class="sans soft" font-size="24">The contrast is what creates desire.</text>
+  <rect x="90" y="205" width="465" height="430" rx="24" class="panel"/>
+  <rect x="645" y="205" width="465" height="430" rx="24" class="panel"/>
+  <text x="135" y="270" class="mono bad" font-size="18" font-weight="700">IF THEY DO NOTHING</text>
+  <text x="135" y="322" class="serif bad" font-size="38" font-weight="700">What happens next?</text>
+  <g class="sans soft" font-size="24">
+    <text x="155" y="395">1. The symptom gets louder</text>
+    <text x="155" y="450">2. The quick fixes stop working</text>
+    <text x="155" y="505">3. The cost of delay rises</text>
+    <text x="155" y="560">4. They feel even more stuck</text>
+  </g>
+  <text x="690" y="270" class="mono good" font-size="18" font-weight="700">IF THEY TAKE ACTION</text>
+  <text x="690" y="322" class="serif good" font-size="38" font-weight="700">What happens next?</text>
+  <g class="sans soft" font-size="24">
+    <text x="710" y="395">1. The mechanism makes sense</text>
+    <text x="710" y="450">2. The first win appears</text>
+    <text x="710" y="505">3. Confidence comes back</text>
+    <text x="710" y="560">4. The dream state feels real</text>
+  </g>
+  <rect x="360" y="675" width="480" height="54" rx="27" fill="#16305a"/>
+  <text x="600" y="710" text-anchor="middle" class="mono" fill="#f3e8ce" font-size="20" font-weight="700">Problem -> consequence -> mechanism -> proof</text>
+</svg>

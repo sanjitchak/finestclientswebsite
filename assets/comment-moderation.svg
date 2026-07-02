@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Comment moderation keyword filter</title>
+  <desc id="desc">A Facebook comment thread with negative comments auto-hidden by a keyword moderation list.</desc>
+  <defs>
+    <style>
+      .bg{fill:#faf7f0}.card{fill:#fff;stroke:#dcd4c3;stroke-width:3}.navy{fill:#16305a}.soft{fill:#4a5468}.gold{fill:#b8860b}.bad{fill:#8c3a3a}.good{fill:#2e6b4f}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text x="80" y="92" class="serif navy" font-size="50" font-weight="700">Moderation protects social proof</text>
+  <text x="82" y="132" class="sans soft" font-size="24">Bad comments drag performance before buyers even click.</text>
+  <rect x="95" y="200" width="520" height="430" rx="24" class="card"/>
+  <text x="135" y="260" class="mono gold" font-size="18" font-weight="700">LIVE AD COMMENTS</text>
+  <g transform="translate(135 305)">
+    <circle cx="30" cy="30" r="30" fill="#e8f1eb"/><rect x="78" y="8" width="340" height="46" rx="23" fill="#f2ede2"/><text x="100" y="38" class="sans navy" font-size="20" font-weight="700">This looks useful.</text>
+  </g>
+  <g transform="translate(135 395)">
+    <circle cx="30" cy="30" r="30" fill="#f5e9e7"/><rect x="78" y="8" width="340" height="46" rx="23" fill="#f5e9e7"/><text x="100" y="38" class="sans bad" font-size="20" font-weight="700">scam scam scam</text>
+  </g>
+  <g transform="translate(135 485)">
+    <circle cx="30" cy="30" r="30" fill="#e8f1eb"/><rect x="78" y="8" width="390" height="46" rx="23" fill="#f2ede2"/><text x="100" y="38" class="sans navy" font-size="20" font-weight="700">Booked a call.</text>
+  </g>
+  <rect x="690" y="200" width="410" height="430" rx="24" fill="#16305a"/>
+  <text x="735" y="260" class="mono" fill="#f3e8ce" font-size="18" font-weight="700">KEYWORD LIST</text>
+  <g fill="#fff" class="sans" font-size="25" font-weight="700">
+    <text x="735" y="325">Auto-hide:</text>
+    <text x="760" y="380">scam</text>
+    <text x="760" y="430">fraud</text>
+    <text x="760" y="480">fake</text>
+    <text x="760" y="530">spam</text>
+  </g>
+  <rect x="845" y="555" width="190" height="48" rx="24" fill="#e8f1eb"/>
+  <text x="940" y="586" text-anchor="middle" class="mono good" font-size="17" font-weight="700">HIDDEN</text>
+</svg>

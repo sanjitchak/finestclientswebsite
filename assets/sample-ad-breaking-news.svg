@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Breaking news style sample ad</title>
+  <desc id="desc">A square ad mockup in a news style format for a pattern interrupt.</desc>
+  <defs>
+    <style>
+      .bg{fill:#faf7f0}.panel{fill:#fff;stroke:#1b2233;stroke-width:5}.navy{fill:#16305a}.ink{fill:#1b2233}.soft{fill:#4a5468}.gold{fill:#b8860b}.red{fill:#8c3a3a}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.serif{font-family:Georgia,serif}.sans{font-family:Inter,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1080" height="1080"/>
+  <rect x="74" y="86" width="932" height="908" class="panel"/>
+  <rect x="74" y="86" width="932" height="112" fill="#8c3a3a"/>
+  <text x="540" y="158" text-anchor="middle" class="sans" fill="#fff" font-size="58" font-weight="800">BREAKING</text>
+  <text x="130" y="270" class="mono gold" font-size="23" font-weight="700">HIGH-TICKET OFFERS</text>
+  <text x="130" y="355" class="serif ink" font-size="62" font-weight="700">The money filter</text>
+  <text x="130" y="425" class="serif ink" font-size="62" font-weight="700">is misleading.</text>
+  <rect x="130" y="492" width="820" height="4" fill="#1b2233"/>
+  <text x="130" y="570" class="sans navy" font-size="40" font-weight="700">The better signal:</text>
+  <text x="130" y="636" class="sans soft" font-size="36">Who already paid to solve this?</text>
+  <text x="130" y="704" class="sans soft" font-size="36">What did they buy?</text>
+  <text x="130" y="772" class="sans soft" font-size="36">How much did they spend?</text>
+  <rect x="130" y="845" width="350" height="70" rx="35" fill="#16305a"/>
+  <text x="305" y="890" text-anchor="middle" class="mono" fill="#f3e8ce" font-size="24" font-weight="700">See the framework</text>
+</svg>

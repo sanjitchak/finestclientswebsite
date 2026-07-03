@@ -60,7 +60,7 @@ a{color:inherit}
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.02;margin-bottom:14px}
 .section-copy{max-width:720px;color:var(--white-dim);font-size:17px;line-height:1.7;font-weight:300;margin-bottom:42px}
 
-.agency-grid,.youtube-grid,.case-grid{display:grid;min-width:0;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.agency-grid,.case-grid{display:grid;min-width:0;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
 .agency-card,.youtube-card,.case-card{min-width:0;max-width:100%;background:var(--black-card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.28);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
 .agency-card:hover,.youtube-card:hover,.case-card:hover{transform:translateY(-4px);border-color:rgba(212,168,83,.28);box-shadow:0 26px 70px rgba(0,0,0,.38),0 0 0 1px rgba(212,168,83,.08)}
 .agency-card::before,.youtube-card::before,.case-card::before{content:'';display:block;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));opacity:.88}
@@ -76,17 +76,13 @@ a{color:inherit}
 .profile-name{font-size:18px;font-weight:900;line-height:1.1}
 .profile-company{margin-top:3px;color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.9px;text-transform:uppercase}
 .youtube-player{min-width:0;max-width:100%;border:1px solid rgba(245,240,232,.11);border-radius:var(--radius-sm);overflow:hidden;background:#050505;box-shadow:0 10px 30px rgba(0,0,0,.28)}
-.channel-shot{display:block;margin-top:18px;border:1px solid rgba(245,240,232,.11);border-radius:var(--radius-sm);overflow:hidden;background:var(--black-elevated);transition:border-color .3s ease,box-shadow .3s ease,opacity .3s ease}
-.channel-shot:hover{border-color:rgba(212,168,83,.48);box-shadow:0 12px 34px rgba(212,168,83,.12)}
-.channel-shot img{width:100%;height:auto;display:block;opacity:.92;transition:opacity .3s ease,transform .45s ease}
-.channel-shot:hover img{opacity:1;transform:scale(1.015)}
 .case-grid{margin-bottom:72px}
-.proof-divider{margin:8px 0 34px;padding-top:38px;border-top:1px solid rgba(245,240,232,.08)}
-.case-shot{position:relative;height:200px;background:var(--black-elevated);overflow:hidden}
+.case-shot{position:relative;height:260px;background:var(--black-elevated);overflow:hidden}
 .case-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .45s ease}
 .case-card:hover .case-shot img{transform:scale(1.025)}
 .yt-link{position:absolute;right:12px;bottom:12px;padding:7px 13px;border:1px solid rgba(245,240,232,.12);border-radius:100px;background:rgba(10,10,10,.82);color:var(--white-dim);font-size:11px;font-weight:800;letter-spacing:.4px;text-decoration:none;backdrop-filter:blur(10px)}
 .yt-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(212,168,83,.12)}
+.case-image-label{position:absolute;left:14px;right:14px;bottom:14px;padding:10px 12px;border:1px solid rgba(245,240,232,.12);border-radius:10px;background:rgba(10,10,10,.74);backdrop-filter:blur(10px);font-size:13px;font-weight:900;color:var(--white)}
 .case-body{padding:24px}
 .case-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px}
 .case-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;line-height:1.15}
@@ -115,7 +111,7 @@ a{color:inherit}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
 @media(max-width:900px){
-  .agency-grid,.youtube-grid,.case-grid{grid-template-columns:1fr}
+  .agency-grid,.case-grid{grid-template-columns:1fr}
   .hero-stats{gap:28px}
 }
 
@@ -159,10 +155,10 @@ window.addEventListener('error', function(e) {
   <div class="hero-inner">
     <div class="hero-badge"><span class="dot"></span> Finest Clients</div>
     <h1>Hall of<br><span>Fame</span></h1>
-    <p class="hero-sub">Real client wins across agency growth and YouTube-powered acquisition, now separated into two focused collections.</p>
+    <p class="hero-sub">Real client wins separated into video testimonials and image-only case studies.</p>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="num">10</div><div class="label">Agency Wins</div></div>
-      <div class="hero-stat"><div class="num">15</div><div class="label">YouTube Cases</div></div>
+      <div class="hero-stat"><div class="num">12</div><div class="label">Testimonials</div></div>
+      <div class="hero-stat"><div class="num">15</div><div class="label">Case Studies</div></div>
     </div>
   </div>
 </section>
@@ -170,18 +166,18 @@ window.addEventListener('error', function(e) {
 <div class="tabs-wrap">
   <div class="wrap">
     <div class="tabs" role="tablist" aria-label="Hall of Fame sections">
-      <button class="tab-btn active" id="agency-tab" type="button" role="tab" aria-selected="true" aria-controls="agency-panel" data-tab="agency">Agency Hall of Fame</button>
-      <button class="tab-btn" id="youtube-tab" type="button" role="tab" aria-selected="false" aria-controls="youtube-panel" data-tab="youtube">YouTube Hall of Fame</button>
+      <button class="tab-btn active" id="testimonials-tab" type="button" role="tab" aria-selected="true" aria-controls="testimonials-panel" data-tab="testimonials">Testimonials</button>
+      <button class="tab-btn" id="cases-tab" type="button" role="tab" aria-selected="false" aria-controls="cases-panel" data-tab="cases">Case Studies</button>
     </div>
   </div>
 </div>
 
 <main>
-  <section class="hall-section active" id="agency-panel" role="tabpanel" aria-labelledby="agency-tab" data-panel="agency">
+  <section class="hall-section active" id="testimonials-panel" role="tabpanel" aria-labelledby="testimonials-tab" data-panel="testimonials">
     <div class="wrap">
-      <div class="section-kicker">Agency Hall of Fame</div>
-      <h2 class="section-title">Agency client wins</h2>
-      <p class="section-copy">The full testimonial collection from the original agency Hall of Fame, restyled to match the Finest Clients black and gold experience.</p>
+      <div class="section-kicker">Testimonials</div>
+      <h2 class="section-title">Video testimonials</h2>
+      <p class="section-copy">All testimonial videos in one place, without case study images.</p>
 
       <div class="agency-grid">
         <article class="agency-card">
@@ -274,116 +270,59 @@ window.addEventListener('error', function(e) {
 
         <article class="agency-card">
           <div class="agency-head">
-            <h3 class="agency-title">Alex Berman, Cold Email Expert</h3>
+            <h3 class="agency-title">Avi Arya, Internet Moguls</h3>
           </div>
           <div class="player">
-            <script src="https://fast.wistia.com/embed/0r6kh0jppa.js" async type="module"></script>
-            <style>wistia-player[media-id="0r6kh0jppa"]:not(:defined){background:center/contain no-repeat url("https://fast.wistia.com/embed/medias/0r6kh0jppa/swatch");display:block;filter:blur(5px);aspect-ratio:9/16;}</style>
-            <wistia-player media-id="0r6kh0jppa" aspect="0.5625"></wistia-player>
+            <script src="https://fast.wistia.com/embed/pwm2j4vyyw.js" async type="module"></script>
+            <style>wistia-player[media-id="pwm2j4vyyw"]:not(:defined){background:center/contain no-repeat url("https://fast.wistia.com/embed/medias/pwm2j4vyyw/swatch");display:block;filter:blur(5px);aspect-ratio:16/9;}</style>
+            <wistia-player media-id="pwm2j4vyyw" aspect="1.7777777777777777"></wistia-player>
           </div>
         </article>
 
         <article class="agency-card">
           <div class="agency-head">
-            <h3 class="agency-title">Michael, LinkedIn Expert</h3>
+            <h3 class="agency-title">Paul Gabrail, Everything Money</h3>
           </div>
           <div class="player">
-            <script src="https://fast.wistia.com/embed/qznl67tajq.js" async type="module"></script>
-            <style>wistia-player[media-id="qznl67tajq"]:not(:defined){background:center/contain no-repeat url("https://fast.wistia.com/embed/medias/qznl67tajq/swatch");display:block;filter:blur(5px);aspect-ratio:0.5741626794258373/1;}</style>
-            <wistia-player media-id="qznl67tajq" aspect="0.5741626794258373"></wistia-player>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="hall-section" id="youtube-panel" role="tabpanel" aria-labelledby="youtube-tab" data-panel="youtube">
-    <div class="wrap">
-      <div class="section-kicker">YouTube Hall of Fame</div>
-      <h2 class="section-title">YouTube case studies</h2>
-      <p class="section-copy">The original Hall of Fame case studies are restored here under the YouTube tab.</p>
-
-      <div class="case-grid" id="youtubeCases"></div>
-
-      <div class="proof-divider">
-        <div class="section-kicker">Interview Proof</div>
-        <h2 class="section-title">Client interviews and channel proof</h2>
-        <p class="section-copy">The screenshot-style proof section from the application thank-you page, with each interview paired with the matching YouTube channel result.</p>
-      </div>
-
-      <div class="youtube-grid">
-        <article class="youtube-card">
-          <div class="profile">
-            <div class="avatar"><img src="https://finestclients.com/asset/aviarya.jpg" alt="Avi Arya"></div>
-            <div>
-              <div class="profile-name">Avi Arya</div>
-              <div class="profile-company">Internet Moguls</div>
-            </div>
-          </div>
-          <div class="youtube-player">
-            <script src="https://fast.wistia.com/embed/pwm2j4vyyw.js" async type="module"></script>
-            <style>wistia-player[media-id="pwm2j4vyyw"]:not(:defined){background:center/contain no-repeat url("https://fast.wistia.com/embed/medias/pwm2j4vyyw/swatch");display:block;filter:blur(5px);aspect-ratio:16/9;}</style>
-            <wistia-player media-id="pwm2j4vyyw" aspect="1.7777777777777777"></wistia-player>
-          </div>
-          <a class="channel-shot" href="https://finestclients.com/asset/aviaryachannel.png" target="_blank" rel="noopener noreferrer">
-            <img src="https://finestclients.com/asset/aviaryachannel.png" alt="Avi Arya channel screenshot">
-          </a>
-        </article>
-
-        <article class="youtube-card">
-          <div class="profile">
-            <div class="avatar"><img src="https://finestclients.com/asset/paul.jpg" alt="Paul Gabrail"></div>
-            <div>
-              <div class="profile-name">Paul Gabrail</div>
-              <div class="profile-company">Everything Money</div>
-            </div>
-          </div>
-          <div class="youtube-player">
             <script src="https://fast.wistia.com/embed/smewxk5cyy.js" async type="module"></script>
             <style>wistia-player[media-id="smewxk5cyy"]:not(:defined){background:center/contain no-repeat url("https://fast.wistia.com/embed/medias/smewxk5cyy/swatch");display:block;filter:blur(5px);aspect-ratio:16/9;}</style>
             <wistia-player media-id="smewxk5cyy" aspect="1.7777777777777777"></wistia-player>
           </div>
-          <a class="channel-shot" href="https://finestclients.com/asset/paulchannel.png" target="_blank" rel="noopener noreferrer">
-            <img src="https://finestclients.com/asset/paulchannel.png" alt="Everything Money channel screenshot">
-          </a>
         </article>
 
-        <article class="youtube-card">
-          <div class="profile">
-            <div class="avatar"><img src="https://finestclients.com/asset/david.jpg" alt="David Ellis"></div>
-            <div>
-              <div class="profile-name">David Ellis</div>
-              <div class="profile-company">David Ellis Growth</div>
-            </div>
+        <article class="agency-card">
+          <div class="agency-head">
+            <h3 class="agency-title">David Ellis, David Ellis Growth</h3>
           </div>
-          <div class="youtube-player">
+          <div class="player">
             <script src="https://fast.wistia.com/embed/mbhbe4nmv3.js" async type="module"></script>
             <style>wistia-player[media-id="mbhbe4nmv3"]:not(:defined){background:center/contain no-repeat url("https://fast.wistia.com/embed/medias/mbhbe4nmv3/swatch");display:block;filter:blur(5px);aspect-ratio:16/9;}</style>
             <wistia-player media-id="mbhbe4nmv3" aspect="1.7777777777777777"></wistia-player>
           </div>
-          <a class="channel-shot" href="https://finestclients.com/asset/davidchannel.png" target="_blank" rel="noopener noreferrer">
-            <img src="https://finestclients.com/asset/davidchannel.png" alt="David Ellis channel screenshot">
-          </a>
         </article>
 
-        <article class="youtube-card">
-          <div class="profile">
-            <div class="avatar"><img src="https://finestclients.com/asset/arun.jpg" alt="Arun Sharma"></div>
-            <div>
-              <div class="profile-name">Arun Sharma</div>
-              <div class="profile-company">Mindworkzz</div>
-            </div>
+        <article class="agency-card">
+          <div class="agency-head">
+            <h3 class="agency-title">Arun Sharma, Mindworkzz</h3>
           </div>
-          <div class="youtube-player">
+          <div class="player">
             <script src="https://fast.wistia.com/embed/psv6g87cc1.js" async type="module"></script>
             <style>wistia-player[media-id="psv6g87cc1"]:not(:defined){background:center/contain no-repeat url("https://fast.wistia.com/embed/medias/psv6g87cc1/swatch");display:block;filter:blur(5px);aspect-ratio:16/9;}</style>
             <wistia-player media-id="psv6g87cc1" aspect="1.7777777777777777"></wistia-player>
           </div>
-          <a class="channel-shot" href="https://finestclients.com/asset/images/arun.png" target="_blank" rel="noopener noreferrer">
-            <img src="https://finestclients.com/asset/images/arun.png" alt="Arun Sharma channel screenshot">
-          </a>
         </article>
+
       </div>
+    </div>
+  </section>
+
+  <section class="hall-section" id="cases-panel" role="tabpanel" aria-labelledby="cases-tab" data-panel="cases">
+    <div class="wrap">
+      <div class="section-kicker">Case Studies</div>
+      <h2 class="section-title">Image-only case studies</h2>
+      <p class="section-copy">Case study screenshots only. No testimonial videos in this tab.</p>
+
+      <div class="case-grid" id="youtubeCases"></div>
     </div>
   </section>
 </main>
@@ -609,25 +548,7 @@ if (youtubeCasesEl) {
       <div class="case-shot">
         <img src="${escapeHTML(item.image)}" alt="${escapeHTML(item.imageAlt)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:var(--white-muted);font-size:13px;text-align:center;padding:24px">Add: ${escapeHTML(item.image)}</div>
-        <a href="${escapeHTML(item.url)}" target="_blank" rel="noopener noreferrer" class="yt-link">Visit Channel</a>
-      </div>
-      <div class="case-body">
-        <div class="case-top">
-          <div>
-            <div class="case-name">${escapeHTML(item.name)}</div>
-            <div class="case-niche">${escapeHTML(item.niche)}</div>
-          </div>
-          <div class="case-offer">${escapeHTML(item.offer)}</div>
-        </div>
-        <div class="case-ba">
-          <div class="ba-card before"><div class="ba-label">Before</div><div class="ba-text">${escapeHTML(item.before)}</div></div>
-          <div class="ba-card after"><div class="ba-label">After</div><div class="ba-text">${escapeHTML(item.after)}</div></div>
-        </div>
-        <div class="case-metrics">
-          ${item.metrics.map((metric) => `<span class="metric-pill">${escapeHTML(metric)}</span>`).join('')}
-        </div>
-        <div class="case-insight">${escapeHTML(item.insight)}</div>
-        <div class="case-timeline">${escapeHTML(item.timeline)}</div>
+        <div class="case-image-label">${escapeHTML(item.name)}</div>
       </div>
     </article>
   `).join('');
@@ -658,8 +579,10 @@ tabButtons.forEach((button) => {
 });
 
 const initialTab = window.location.hash.replace('#', '');
-if (initialTab === 'agency' || initialTab === 'youtube') {
-  activateTab(initialTab, false);
+const tabAliases = { agency: 'testimonials', youtube: 'cases' };
+const resolvedInitialTab = tabAliases[initialTab] || initialTab;
+if (resolvedInitialTab === 'testimonials' || resolvedInitialTab === 'cases') {
+  activateTab(resolvedInitialTab, false);
 }
 </script>
 </body>

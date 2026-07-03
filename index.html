@@ -269,17 +269,25 @@
       padding: 1.5rem 4vw 3.5rem;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      will-change: transform;
     }
     .hero-card {
-      flex: 0 0 74vw;
+      flex: 0 0 min(88vw, 560px);
       scroll-snap-align: center;
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid var(--line);
       background: var(--black-2);
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      will-change: transform, opacity;
     }
-    .hero-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: top; }
+    .hero-card img {
+      width: 100%;
+      aspect-ratio: 1310 / 431;
+      object-fit: contain;
+      object-position: center;
+      background: #050505;
+    }
     .hero-card .hc-tag {
       display: flex; align-items: center; gap: 0.5rem;
       padding: 0.7rem 1rem;
@@ -289,18 +297,27 @@
     .hero-card .hc-tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex: none; }
 
     @media (min-width: 1025px) {
-      .hero { padding-bottom: max(2vw, calc(48vw - 22vh)); }
-      .hero-cards { position: static; padding: 0; overflow: visible; display: block; }
-      .hero-card {
+      .hero { padding-bottom: clamp(7rem, 15vw, 15rem); }
+      .hero-cards {
         position: absolute;
-        width: 21vw;
-        top: 76vh;
-        opacity: 0; /* revealed by intro animation */
+        left: 50%;
+        bottom: clamp(2.5rem, 4vw, 5rem);
+        transform: translateX(-50%);
+        width: min(1680px, 94vw);
+        padding: 0;
+        overflow: visible;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: clamp(0.9rem, 1.35vw, 1.5rem);
       }
-      .hero-card:nth-child(1) { left: 4vw;  margin-left: 26.5vw; }
-      .hero-card:nth-child(2) { left: 28vw; margin-left: 8.5vw; }
-      .hero-card:nth-child(3) { left: 52vw; margin-left: -9.5vw; }
-      .hero-card:nth-child(4) { left: 76vw; margin-left: -27.5vw; }
+      .hero-card {
+        position: relative;
+        width: 100%;
+        min-width: 0;
+        top: auto;
+        left: auto;
+        margin: 0;
+      }
     }
 
     /* ============ METRICS ============ */
@@ -547,7 +564,13 @@
     .cred-card .small { font-size: 0.82rem; color: var(--grey); letter-spacing: 0.08em; text-transform: uppercase; }
     .cred-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.2rem; }
     .cred-shot { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-    .cred-shot img { width: 100%; object-fit: cover; }
+    .cred-shot img {
+      width: 100%;
+      aspect-ratio: 1310 / 431;
+      object-fit: contain;
+      object-position: center;
+      background: #050505;
+    }
     .cred-shot figcaption { padding: 0.9rem 1.2rem; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey); border-top: 1px solid var(--line); }
 
     /* ============ TESTIMONIALS ============ */
@@ -1337,8 +1360,8 @@
 
       if (isDesktop) {
         tl.fromTo(heroCards,
-          { y: "100vh", opacity: 1 },
-          { y: 0, opacity: 1, duration: 0.95, ease: "power3.out", stagger: 0.16 },
+          { y: "3.5rem", opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.75, ease: "power3.out", stagger: 0.12 },
           ">-0.55");
       } else {
         tl.fromTo(heroCards,
@@ -1350,32 +1373,82 @@
     if (window.preloaderDone) heroIntro();
     else window.addEventListener("preloader:done", heroIntro);
 
-    /* ---------- HERO CARDS: fan -> grid on scroll (desktop) ---------- */
+    /* ---------- HERO CARDS: direction-aware desktop movement ---------- */
     mm.add("(min-width: 1025px)", function () {
-      var rot = [-8, -3.5, 3.5, 8];
-      var xTargets = ["-26.5vw", "-8.5vw", "9.5vw", "27.5vw"];
+      var row = document.getElementById("heroCards");
+      var rowTween = null;
+      var rowState = "";
+
+      function cardLiftY() {
+        var currentY = parseFloat(gsap.getProperty(row, "y")) || 0;
+        var rowRect = row.getBoundingClientRect();
+        var naturalTop = rowRect.top - currentY;
+        var anchor = document.querySelector(".hero-bottom");
+        var anchorRect = anchor.getBoundingClientRect();
+        var gap = Math.max(24, window.innerHeight * 0.035);
+        var targetTop = anchorRect.bottom + gap;
+        var rawLift = targetTop - naturalTop;
+        var maxLift = -Math.min(window.innerHeight * 0.52, Math.max(0, naturalTop - 80));
+        return Math.max(maxLift, Math.min(0, rawLift));
+      }
+
+      function placeCards(state, immediate) {
+        if (rowState === state && !immediate) return;
+        rowState = state;
+        if (rowTween) rowTween.kill();
+
+        var y = state === "up" ? cardLiftY() : 0;
+        if (immediate) {
+          gsap.set(row, { y: y });
+        } else {
+          rowTween = gsap.to(row, {
+            y: y,
+            duration: 0.7,
+            ease: "power3.out",
+            overwrite: "auto"
+          });
+        }
+      }
 
       heroCards.forEach(function (card, i) {
-        gsap.set(card, { rotate: rot[i] });
+        gsap.set(card, { x: 0, rotate: 0 });
       });
 
-      var scatter = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "bottom 92%",
-          scrub: 1
+      placeCards("up", true);
+
+      var cardTrigger = ScrollTrigger.create({
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        onUpdate: function (self) {
+          placeCards(self.direction < 0 ? "up" : "down", false);
+        },
+        onEnter: function () {
+          placeCards((window.scrollY || window.pageYOffset) < 12 ? "up" : "down", false);
+        },
+        onEnterBack: function () {
+          placeCards("up", false);
+        },
+        onLeave: function () {
+          placeCards("down", false);
+        },
+        onRefresh: function () {
+          placeCards(rowState || "up", true);
         }
       });
-      heroCards.forEach(function (card, i) {
-        scatter.to(card, {
-          x: xTargets[i],
-          y: "26vw",
-          rotate: 0,
-          duration: 1,
-          ease: "power2.out"
-        }, i * 0.12);
-      });
+
+      function refreshCards() {
+        placeCards(rowState || "up", true);
+      }
+
+      window.addEventListener("resize", refreshCards);
+
+      return function () {
+        window.removeEventListener("resize", refreshCards);
+        if (rowTween) rowTween.kill();
+        cardTrigger.kill();
+        gsap.set(row, { clearProps: "y" });
+      };
     });
 
     /* ---------- HERO CARDS: autoplay slider on mobile/tablet ---------- */

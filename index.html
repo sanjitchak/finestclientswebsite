@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Finest Clients, 20 High-Ticket Clients in 180 Days</title>
-  <meta name="description" content="We install appointment and high-ticket sales systems for creative & marketing agencies. 20 high-ticket clients in 180 days, without ads, referrals, or negotiating your pricing, or 100% of your money back.">
+  <meta name="description" content="We install appointment and high-ticket sales systems for B2B high-ticket agency owners. 20 high-ticket clients in 180 days, without ads, referrals, or negotiating your pricing, or 100% of your money back.">
   <link rel="icon" href="finestclientslogo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -110,7 +110,105 @@
       z-index: 9999;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      gap: 1.6rem;
+      gap: 1rem;
+      overflow: hidden;
+    }
+    .preloader::before {
+      content: "";
+      position: absolute;
+      width: min(520px, 78vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,175,55,0.16), rgba(212,175,55,0.05) 34%, transparent 68%);
+      filter: blur(10px);
+      transform: translateY(-2rem);
+      pointer-events: none;
+    }
+    .loader-hello {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .stickman-loader {
+      position: relative;
+      width: clamp(180px, 23vw, 246px);
+      aspect-ratio: 447 / 559;
+      filter: drop-shadow(0 18px 38px rgba(212,175,55,0.14));
+    }
+    .stickman-loader img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: invert(1) brightness(1.7);
+      user-select: none;
+      pointer-events: none;
+    }
+    .stickman-base {
+      opacity: 0.9;
+      animation: stickmanFloat 2.8s ease-in-out infinite;
+    }
+    .stickman-hand-cover {
+      position: absolute;
+      left: 40.5%;
+      top: 16.7%;
+      width: 13%;
+      height: 7.8%;
+      border-radius: 999px;
+      background: var(--black);
+      filter: blur(2px);
+      transform: rotate(-10deg);
+      z-index: 2;
+    }
+    .stickman-arm-wave {
+      z-index: 3;
+      opacity: 0.98;
+      clip-path: inset(12% 42% 69% 37%);
+      transform-origin: 47% 24%;
+      filter: invert(1) brightness(1.9) drop-shadow(0 0 12px rgba(212,175,55,0.28));
+      animation: stickmanWave 0.86s ease-in-out infinite alternate;
+    }
+    .stickman-wave-lines,
+    .stickman-wave-lines::before,
+    .stickman-wave-lines::after {
+      position: absolute;
+      border: 1.5px solid var(--gold);
+      border-left: 0;
+      border-bottom: 0;
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .stickman-wave-lines {
+      left: 53%;
+      top: 16%;
+      width: 18%;
+      height: 12%;
+      animation: waveLines 1.15s ease-out infinite;
+    }
+    .stickman-wave-lines::before,
+    .stickman-wave-lines::after { content: ""; inset: 18% -22% -10% 24%; }
+    .stickman-wave-lines::after {
+      inset: 34% -42% -22% 44%;
+      animation-delay: 0.2s;
+    }
+    @keyframes stickmanFloat {
+      0%, 100% { transform: translateY(0) rotate(-0.4deg); }
+      50% { transform: translateY(-8px) rotate(0.6deg); }
+    }
+    @keyframes stickmanWave {
+      0% { transform: rotate(-17deg) translate(-2px, 1px); }
+      100% { transform: rotate(14deg) translate(3px, -3px); }
+    }
+    @keyframes waveLines {
+      0% { transform: scale(0.72) rotate(-14deg); opacity: 0; }
+      18% { opacity: 0.88; }
+      100% { transform: scale(1.15) rotate(-14deg); opacity: 0; }
     }
     .preloader .ring-wrap { position: relative; width: 160px; height: 160px; }
     .preloader svg { transform: rotate(-90deg); }
@@ -122,25 +220,61 @@
       font-family: var(--oswald); font-size: 2rem; font-weight: 600;
     }
     .preloader .pre-brand {
+      position: relative;
+      z-index: 1;
       font-family: var(--oswald); font-weight: 600; letter-spacing: 0.45em;
       font-size: 0.8rem; text-transform: uppercase; color: var(--grey);
     }
 
     /* ============ HEADER ============ */
+    .top-strip {
+      position: relative;
+      z-index: 930;
+      height: 36px;
+      background: #171717;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: #d7d7d7;
+    }
+    .top-strip-inner {
+      width: min(1240px, 92vw);
+      height: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1rem;
+    }
+    .top-quote {
+      grid-column: 2;
+      font-weight: 700;
+      font-size: 0.82rem;
+      line-height: 1.2;
+      text-align: center;
+      color: #cfcfcf;
+    }
+    .top-socials {
+      grid-column: 3;
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .top-socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      color: var(--white);
+      opacity: 0.92;
+      transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+    }
+    .top-socials a:hover { color: var(--gold); opacity: 1; transform: translateY(-1px); }
     .site-header {
-      position: fixed; top: 0; left: 0; right: 0;
+      position: absolute; top: 36px; left: 0; right: 0;
       z-index: 900;
       padding: 1.1rem 0;
-      transition: transform 0.4s ease, background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
       background: transparent;
-    }
-    .site-header.hide { transform: translateY(-110%); }
-    .site-header.solid {
-      background: rgba(10, 10, 10, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      padding: 0.75rem 0;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.45);
     }
     .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
     .brand { display: inline-flex; align-items: center; gap: 0.8rem; }
@@ -201,7 +335,7 @@
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center;
-      padding: 7.5rem 4vw 3rem;
+      padding: 8.8rem 4vw 3rem;
       z-index: 2;
     }
     .hero-stroke {
@@ -223,6 +357,9 @@
       position: relative; z-index: 2;
     }
     .hero h1 .h-line { display: block; overflow: hidden; padding: 0.04em 0; }
+    .hero h1 .h-line-gap { display: flex; justify-content: center; align-items: stretch; }
+    .hero h1 .h-line-gap .split-line { display: inline-block; overflow: hidden; padding: 0.04em 0; }
+    .space-holder { display: inline-block; width: 0; align-self: stretch; flex: none; }
     .word { display: inline-block; white-space: nowrap; }
     .hero h1 .h-line .char { display: inline-block; will-change: transform; }
     .hero h1 .accent .char { color: var(--gold); }
@@ -232,6 +369,22 @@
       display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
       position: relative; z-index: 3;
     }
+    .hb-left, .hb-right { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+    .hb-center { display: none; }
+    .scroll-more {
+      display: none;
+      align-items: center; gap: 0.9rem;
+      color: var(--grey);
+      font-size: 0.95rem; font-weight: 500;
+    }
+    .scroll-more .sm-circle {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-size: 1.15rem;
+      transition: background 0.25s ease;
+    }
+    .scroll-more:hover .sm-circle { background: var(--gold); color: var(--black); }
     .hero-sub {
       max-width: 620px;
       color: var(--grey);
@@ -288,6 +441,40 @@
       object-position: center;
       background: #050505;
     }
+    .hero-stat-card {
+      min-height: clamp(160px, 12.5vw, 200px);
+      padding: clamp(1rem, 1.55vw, 1.45rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.55rem;
+      background: var(--paper);
+      color: var(--black);
+      border-color: rgba(212, 175, 55, 0.34);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+    .hero-stat-card .hero-stat-num {
+      font-family: var(--oswald);
+      font-weight: 700;
+      font-size: clamp(2.45rem, 4vw, 3.9rem);
+      line-height: 1.35;
+      color: var(--gold);
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+    .hero-stat-card .hero-stat-label {
+      font-weight: 800;
+      font-size: clamp(0.68rem, 0.85vw, 0.82rem);
+      line-height: 1.32;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+    .hero-stat-card .hero-stat-desc {
+      color: var(--grey-dark);
+      font-size: clamp(0.84rem, 0.95vw, 0.94rem);
+      line-height: 1.45;
+    }
     .hero-card .hc-tag {
       display: flex; align-items: center; gap: 0.5rem;
       padding: 0.7rem 1rem;
@@ -297,27 +484,65 @@
     .hero-card .hc-tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex: none; }
 
     @media (min-width: 1025px) {
-      .hero { padding-bottom: clamp(7rem, 15vw, 15rem); }
+      /* extra bottom space = the grid area the cards scatter into on scroll */
+      .hero { min-height: 100vh; padding-bottom: clamp(280px, 24vw, 400px); }
+      .hero-inner {
+        justify-content: flex-start;
+        min-height: 100vh;
+        padding-top: clamp(8.5rem, 14vh, 10.5rem);
+        padding-bottom: clamp(2.5rem, 5vh, 4rem);
+      }
+      .hero h1 {
+        width: min(1540px, 96vw);
+        font-size: clamp(5.2rem, 11.5vw, 12rem);
+        line-height: 0.88;
+      }
+      .scroll-hint { display: none; }
+      .scroll-more { display: inline-flex; }
+      .hero-bottom {
+        margin-top: clamp(2.5rem, 4.5vw, 5rem);
+        display: grid;
+        grid-template-columns: 1fr minmax(24vw, auto) 1fr;
+        align-items: start;
+        width: min(1240px, 92vw);
+        gap: 2rem;
+        text-align: left;
+      }
+      .hb-left { align-items: flex-start; justify-self: start; padding-top: 1.4rem; }
+      .hb-center { display: block; }
+      .hb-right { align-items: flex-start; justify-self: end; max-width: 360px; }
+      .hb-right .hero-sub { font-size: 1rem; }
+      .hb-right .hero-cta-row { justify-content: flex-start; }
+      /* card cluster hangs inside the headline gap; left/top are set precisely by JS */
       .hero-cards {
         position: absolute;
         left: 50%;
-        bottom: clamp(2.5rem, 4vw, 5rem);
+        top: 34%;
         transform: translateX(-50%);
-        width: min(1680px, 94vw);
+        width: min(400px, 24.5vw);
+        height: clamp(250px, 24vw, 360px);
         padding: 0;
         overflow: visible;
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: clamp(0.9rem, 1.35vw, 1.5rem);
+        display: block;
+        z-index: 5;
       }
       .hero-card {
-        position: relative;
-        width: 100%;
+        position: absolute;
+        width: clamp(205px, 15.5vw, 280px);
         min-width: 0;
         top: auto;
         left: auto;
         margin: 0;
+        opacity: 0; /* revealed by the fly-in animation */
       }
+      .hero-stat-card {
+        min-height: clamp(160px, 12.5vw, 200px);
+        background: linear-gradient(145deg, #f8f7f3, #dedbd1);
+      }
+      .hero-card:nth-child(1) { left: -4%; top: 12%; z-index: 3; }
+      .hero-card:nth-child(2) { left: 26%; top: 0; z-index: 4; }
+      .hero-card:nth-child(3) { left: 6%; top: 44%; z-index: 5; }
+      .hero-card:nth-child(4) { left: 34%; top: 54%; z-index: 2; }
     }
 
     /* ============ METRICS ============ */
@@ -711,6 +936,9 @@
 
     /* ============ RESPONSIVE ============ */
     @media (max-width: 1024px) {
+      .top-strip-inner { grid-template-columns: 1fr auto; }
+      .top-quote { grid-column: 1; text-align: left; font-size: 0.72rem; }
+      .top-socials { grid-column: 2; gap: 0.75rem; }
       .main-nav { display: none; }
       .menu-toggle { display: flex; }
       .metrics-grid { grid-template-columns: repeat(2, 1fr); }
@@ -724,7 +952,8 @@
       .metrics-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
       .metric-card { padding: 1.5rem 1.2rem; }
       .footer-top { grid-template-columns: 1fr; }
-      .hero-inner { padding-top: 6.5rem; }
+      .hero-inner { padding-top: 7.5rem; }
+      .top-quote { max-width: 220px; }
       .scroll-hint { display: none; }
     }
   </style>
@@ -733,16 +962,41 @@
 
   <!-- ================= PRELOADER ================= -->
   <div class="preloader" id="preloader">
-    <div class="ring-wrap">
-      <svg width="160" height="160" viewBox="0 0 160 160">
-        <circle class="track" cx="80" cy="80" r="70"></circle>
-        <circle class="progress" id="preProgress" cx="80" cy="80" r="70"></circle>
-      </svg>
-      <div class="counter" id="preCounter">0%</div>
+    <div class="loader-hello">
+      <div class="stickman-loader" aria-hidden="true">
+        <img class="stickman-base" src="stickman-loader.png" alt="">
+        <span class="stickman-hand-cover"></span>
+        <img class="stickman-arm-wave" src="stickman-loader.png" alt="">
+        <span class="stickman-wave-lines"></span>
+      </div>
+      <div class="ring-wrap">
+        <svg width="160" height="160" viewBox="0 0 160 160">
+          <circle class="track" cx="80" cy="80" r="70"></circle>
+          <circle class="progress" id="preProgress" cx="80" cy="80" r="70"></circle>
+        </svg>
+        <div class="counter" id="preCounter">0%</div>
+      </div>
     </div>
     <div class="pre-brand">Finest Clients</div>
   </div>
   <noscript><style>.preloader{display:none}body{overflow-y:auto}</style></noscript>
+
+  <div class="top-strip" aria-label="Finest Clients note and social links">
+    <div class="top-strip-inner">
+      <div class="top-quote">High-ticket clients pay for judgment, not deliverables.</div>
+      <div class="top-socials">
+        <a href="https://www.instagram.com/finestedit_/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.8" cy="6.2" r="1.4" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@Finesteditacademy" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.3-1C16.6 4 12 4 12 4s-4.6 0-7.8.2c-.4.1-1.4.1-2.3 1-.7.7-.9 2.3-.9 2.3S.8 9.4.8 11.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.8.2 7.6.2 7.6.2s4.6 0 7.8-.2c.4-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8zM9.8 15.3V8.7l6.1 3.3-6.1 3.3z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/mousamch/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S.02 4.88.02 3.5 1.14 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.2h4V23h-4V8.2zM8 8.2h3.84v2.02h.05c.54-1.02 1.86-2.1 3.82-2.1 4.08 0 4.84 2.69 4.84 6.18V23h-4v-7.72c0-1.84-.03-4.2-2.56-4.2-2.56 0-2.95 2-2.95 4.07V23H8V8.2z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- ================= HEADER ================= -->
   <header class="site-header" id="siteHeader">
@@ -778,28 +1032,64 @@
     <section class="hero" id="hero">
       <div class="hero-inner">
         <div class="hero-stroke">FINEST CLIENTS</div>
-        <span class="eyebrow hero-eyebrow">For Creative &amp; Marketing Agencies</span>
+        <span class="eyebrow hero-eyebrow">For B2B High Ticket Agency Owners</span>
         <h1>
           <span class="h-line split-line">20 High-Ticket Clients</span>
-          <span class="h-line split-line accent">In 180 Days</span>
+          <span class="h-line h-line-gap accent"><span class="split-line">In 180</span><span class="space-holder" id="spaceHolder"></span><span class="split-line">Days</span></span>
         </h1>
         <div class="hero-bottom">
-          <p class="hero-sub">Without running ads, begging for referrals, or negotiating your pricing. If we don't deliver, <strong>you get 100% of your money back.</strong></p>
-          <div class="hero-cta-row">
-            <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website">Apply Now <span class="arr">→</span></a>
-            <a class="btn btn-ghost" href="https://lp.finestclients.com/optin-page?utm_source=website">Watch the Breakdown</a>
+          <div class="hb-left">
+            <button class="scroll-more" id="scrollMore" aria-label="Scroll for more">
+              <span class="sm-circle">↓</span>
+              <span>Scroll for more</span>
+            </button>
           </div>
-          <span class="hero-note">2-minute form &nbsp;·&nbsp; No hard sell</span>
+          <div class="hb-center" aria-hidden="true"></div>
+          <div class="hb-right">
+            <p class="hero-sub">Without running ads, begging for referrals, or negotiating your pricing. If we don't deliver, <strong>you get 100% of your money back.</strong></p>
+            <div class="hero-cta-row">
+              <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website">Apply Now <span class="arr">→</span></a>
+            </div>
+            <span class="hero-note">2-minute form &nbsp;·&nbsp; No hard sell</span>
+          </div>
         </div>
         <div class="scroll-hint"><span>Scroll</span><span class="wheel"></span></div>
       </div>
 
       <div class="hero-cards" id="heroCards">
-        <div class="hero-card"><img src="screenshots/ryan-jackson.png" alt="Ryan Jackson Hall of Fame case study"><span class="hc-tag">Hall of Fame</span></div>
-        <div class="hero-card"><img src="screenshots/david-ellis.png" alt="David Ellis Hall of Fame case study"><span class="hc-tag">Client Win</span></div>
-        <div class="hero-card"><img src="screenshots/arun-sharma.png" alt="Arun Sharma Hall of Fame case study"><span class="hc-tag">Case Study</span></div>
-        <div class="hero-card"><img src="screenshots/finest-edit.png" alt="Finest Edit Hall of Fame case study"><span class="hc-tag">Proof</span></div>
+        <div class="hero-card hero-stat-card">
+          <div class="hero-stat-num">500+</div>
+          <div class="hero-stat-label">Agency Owners Worked With</div>
+          <p class="hero-stat-desc">B2B high-ticket agency owners across service-led markets.</p>
+        </div>
+        <div class="hero-card hero-stat-card">
+          <div class="hero-stat-num">200+</div>
+          <div class="hero-stat-label">Appointments / Month</div>
+          <p class="hero-stat-desc">Booked for our own agency, on autopilot.</p>
+        </div>
+        <div class="hero-card hero-stat-card">
+          <div class="hero-stat-num">&lt;1%</div>
+          <div class="hero-stat-label">Refund Rate</div>
+          <p class="hero-stat-desc">Our guarantee almost never gets used.</p>
+        </div>
+        <div class="hero-card hero-stat-card">
+          <div class="hero-stat-num">180</div>
+          <div class="hero-stat-label">Days To 20 Clients</div>
+          <p class="hero-stat-desc">Or you get every rupee back.</p>
+        </div>
       </div>
+    </section>
+
+    <!-- ================= VSL ================= -->
+    <section class="vsl" id="vsl" aria-label="Watch the Finest Clients VSL">
+      <a class="video-shell" id="videoShell" href="https://lp.finestclients.com/optin-page?utm_source=website" aria-label="Open the Finest Clients VSL">
+          <video id="vslVideo" src="vslgif.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <div class="video-overlay">
+            <div class="play-btn">
+              <svg width="30" height="34" viewBox="0 0 30 34" fill="currentColor"><path d="M0 0 L30 17 L0 34 Z"/></svg>
+            </div>
+          </div>
+      </a>
     </section>
 
     <!-- ================= METRICS ================= -->
@@ -812,8 +1102,8 @@
         <div class="metrics-grid">
           <div class="metric-card reveal">
             <div class="num"><span data-count="500" data-suffix="+">0+</span></div>
-            <div class="lbl">Agencies Worked With</div>
-            <div class="dsc">Creative &amp; marketing agencies across the industry.</div>
+            <div class="lbl">Agency Owners Worked With</div>
+            <div class="dsc">B2B high-ticket agency owners across service-led markets.</div>
           </div>
           <div class="metric-card reveal">
             <div class="num"><span data-count="200" data-suffix="+">0+</span></div>
@@ -832,18 +1122,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ================= VSL ================= -->
-    <section class="vsl" id="vsl" aria-label="Watch the Finest Clients VSL">
-      <a class="video-shell" id="videoShell" href="https://lp.finestclients.com/optin-page?utm_source=website" aria-label="Open the Finest Clients VSL">
-          <video id="vslVideo" src="vslgif.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          <div class="video-overlay">
-            <div class="play-btn">
-              <svg width="30" height="34" viewBox="0 0 30 34" fill="currentColor"><path d="M0 0 L30 17 L0 34 Z"/></svg>
-            </div>
-          </div>
-      </a>
     </section>
 
     <!-- ================= SYSTEMS ================= -->
@@ -875,7 +1153,7 @@
             <div class="sys-num">02</div>
             <div>
               <h3>Appointment Engine</h3>
-              <p class="sys-desc">Predictable appointments with strategic buyers, the ones who say "we need a creative partner", not "we need a logo designer or video editor".</p>
+              <p class="sys-desc">Predictable appointments with strategic buyers, the ones who say "we need a growth partner", not "we need another vendor".</p>
               <ul>
                 <li>Qualified, high-quality appointments on autopilot</li>
                 <li>Abundance, you choose the right clients</li>
@@ -956,14 +1234,14 @@
             <div class="car-slide">
               <div class="serve-card">
                 <span class="sc-idx">01</span>
-                <h3>Creative Agencies</h3>
+                <h3>B2B Service Agencies</h3>
                 <p>Escape the referral trap and the delivery loop. Charge for strategy, not hours.</p>
               </div>
             </div>
             <div class="car-slide">
               <div class="serve-card">
                 <span class="sc-idx">02</span>
-                <h3>Marketing Agencies</h3>
+                <h3>High-Ticket Agencies</h3>
                 <p>A predictable pipeline instead of content roulette and lucky months.</p>
               </div>
             </div>
@@ -971,7 +1249,7 @@
               <div class="serve-card">
                 <span class="sc-idx">03</span>
                 <h3>Video Production Studios</h3>
-                <p>Sell outcomes and creative direction, not edits by the hour.</p>
+                <p>Sell outcomes and strategic direction, not edits by the hour.</p>
               </div>
             </div>
             <div class="car-slide">
@@ -1008,7 +1286,7 @@
       <div class="container">
         <span class="eyebrow reveal">From The Co-Founder</span>
         <blockquote class="founder-quote reveal" style="margin-top:1.6rem;">
-          "I started as a freelance video editor charging <em>₹500 for a reel</em>. Even with an agency I was stuck at ₹20 to 30K projects, until I built the high-ticket system that changed everything. Today, my team installs that <em>exact system</em> into creative and marketing agencies."
+          "I started as a freelance video editor charging <em>₹500 for a reel</em>. Even with an agency I was stuck at ₹20 to 30K projects, until I built the high-ticket system that changed everything. Today, my team installs that <em>exact system</em> for B2B high-ticket agency owners."
         </blockquote>
         <div class="founder-sig reveal">
           <span class="sig-chip"><img src="finestclientslogo.png" alt="Finest Clients"></span>
@@ -1057,17 +1335,17 @@
                 <p class="t-quote">"Whatever job I give him, he gets it done very fast. If you ever want to hire Mousam for your business, I 100% recommend him. Nobody asked me to record this, I'm doing it myself so people know how effective this team is."</p>
                 <div class="t-who">
                   <span class="t-ava">D</span>
-                  <div><div class="t-name">Deepak</div><div class="t-role">Agency Owner</div></div>
+                  <div><div class="t-name">Deepak</div><div class="t-role">B2B Agency Owner</div></div>
                 </div>
               </div>
             </div>
             <div class="car-slide">
               <div class="t-card">
                 <div class="stars">★★★★★</div>
-                <p class="t-quote">"If you're struggling with your marketing agency, outbound marketing, or appointments, I will 1000% recommend this team. They're very efficient."</p>
+                <p class="t-quote">"If you're struggling with your B2B agency, outbound, or appointments, I will 1000% recommend this team. They're very efficient."</p>
                 <div class="t-who">
                   <span class="t-ava">A</span>
-                  <div><div class="t-name">Agency Owner</div><div class="t-role">Marketing Agency</div></div>
+                  <div><div class="t-name">B2B Agency Owner</div><div class="t-role">High-Ticket Agency</div></div>
                 </div>
               </div>
             </div>
@@ -1081,7 +1359,7 @@
             <div class="car-slide">
               <div class="t-card result">
                 <div class="r-num">&lt;1%</div>
-                <p class="t-quote">Refund rate across 500+ creative and marketing agencies. Our guarantee exists, it just almost never gets used.</p>
+                <p class="t-quote">Refund rate across 500+ B2B high-ticket agency owners. Our guarantee exists, it just almost never gets used.</p>
                 <div class="t-who"><div><div class="t-name">The Track Record</div><div class="t-role" style="color:var(--grey);">Highest success ratio in the industry</div></div></div>
               </div>
             </div>
@@ -1124,7 +1402,7 @@
           </div>
           <div class="faq-item">
             <button class="faq-q">I don't have a big portfolio <span class="fx">+</span></button>
-            <div class="faq-a"><p>You don't need to be a celebrity entrepreneur, this is built for normal agencies. Strategic buyers purchase confidence, clarity, and a clear outcome. Our appointment system puts you in front of buyers who want a creative partner, and the sales framework closes them without a giant logo wall.</p></div>
+            <div class="faq-a"><p>You don't need to be a celebrity entrepreneur, this is built for normal B2B high-ticket agency owners. Strategic buyers purchase confidence, clarity, and a clear outcome. Our appointment system puts you in front of buyers who want a growth partner, and the sales framework closes them without a giant logo wall.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-q">I'm not a salesperson, I hate pushy tactics <span class="fx">+</span></button>
@@ -1136,7 +1414,7 @@
           </div>
           <div class="faq-item">
             <button class="faq-q">Who exactly is this for? <span class="fx">+</span></button>
-            <div class="faq-a"><p>Creative agencies and marketing agencies already doing a minimum of ₹2 lakhs per month who want predictable growth, around 20 additional high-ticket clients in the next 180 days. If that's you, apply. If it's not a fit, we'll tell you directly.</p></div>
+            <div class="faq-a"><p>B2B high-ticket agency owners already doing a minimum of ₹2 lakhs per month who want predictable growth, around 20 additional high-ticket clients in the next 180 days. If that's you, apply. If it's not a fit, we'll tell you directly.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-q">What happens after I apply? <span class="fx">+</span></button>
@@ -1160,6 +1438,9 @@
           <a href="https://www.youtube.com/@Finesteditacademy" target="_blank" rel="noopener" aria-label="YouTube">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.3-1C16.6 4 12 4 12 4s-4.6 0-7.8.2c-.4.1-1.4.1-2.3 1-.7.7-.9 2.3-.9 2.3S.8 9.4.8 11.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.8.2 7.6.2 7.6.2s4.6 0 7.8-.2c.4-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8zM9.8 15.3V8.7l6.1 3.3-6.1 3.3z"/></svg>
           </a>
+          <a href="https://www.linkedin.com/in/mousamch/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S.02 4.88.02 3.5 1.14 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.2h4V23h-4V8.2zM8 8.2h3.84v2.02h.05c.54-1.02 1.86-2.1 3.82-2.1 4.08 0 4.84 2.69 4.84 6.18V23h-4v-7.72c0-1.84-.03-4.2-2.56-4.2-2.56 0-2.95 2-2.95 4.07V23H8V8.2z"/></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -1175,7 +1456,7 @@
             <span class="logo-chip"><img src="finestclientslogo.png" alt="Finest Clients logo"></span>
             <span class="brand-name">Finest <span>Clients</span></span>
           </a>
-          <p>Appointment &amp; high-ticket sales systems for creative and marketing agencies. 20 clients in 180 days, guaranteed.</p>
+          <p>Appointment &amp; high-ticket sales systems for B2B high-ticket agency owners. 20 clients in 180 days, guaranteed.</p>
         </div>
         <div>
           <h4>Explore</h4>
@@ -1191,6 +1472,7 @@
           <ul>
             <li><a href="https://www.instagram.com/finestedit_/" target="_blank" rel="noopener">Instagram</a></li>
             <li><a href="https://www.youtube.com/@Finesteditacademy" target="_blank" rel="noopener">YouTube</a></li>
+            <li><a href="https://www.linkedin.com/in/mousamch/" target="_blank" rel="noopener">LinkedIn</a></li>
           </ul>
         </div>
         <div>
@@ -1255,7 +1537,7 @@
         clearInterval(interval);
         finishPreloader();
       }
-    }, 11);
+    }, 18);
     setTimeout(finishPreloader, 5000); // safety net
 
     /* ---------- LENIS SMOOTH SCROLL ---------- */
@@ -1269,7 +1551,7 @@
     }
 
     function scrollToTarget(target) {
-      if (lenis) { lenis.scrollTo(target, { offset: -70 }); }
+      if (lenis) { lenis.scrollTo(target, { offset: -16 }); }
       else if (typeof target === "string") {
         var el = document.querySelector(target);
         if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -1288,26 +1570,20 @@
       });
     });
 
-    /* ---------- HEADER: hide on scroll down, show on scroll up ---------- */
-    var header = document.getElementById("siteHeader");
-    var lastY = 0;
-    function onScrollHeader() {
+    /* ---------- SCROLL WIDGETS (header itself is non-sticky) ---------- */
+    function onScrollWidgets() {
       var y = window.scrollY || window.pageYOffset;
-      header.classList.toggle("solid", y > 60);
-      if (y > 500) {
-        header.classList.toggle("hide", y > lastY);
-      } else {
-        header.classList.remove("hide");
-      }
-      lastY = y;
-
-      var show = y > 900;
-      backTop.classList.toggle("show", show);
+      backTop.classList.toggle("show", y > 900);
     }
-    window.addEventListener("scroll", onScrollHeader, { passive: true });
+    window.addEventListener("scroll", onScrollWidgets, { passive: true });
 
     var backTop = document.getElementById("backTop");
     backTop.addEventListener("click", function () { scrollToTarget(0); });
+
+    var scrollMore = document.getElementById("scrollMore");
+    if (scrollMore) {
+      scrollMore.addEventListener("click", function () { scrollToTarget("#vsl"); });
+    }
 
     /* ---------- MOBILE MENU ---------- */
     var menuToggle = document.getElementById("menuToggle");
@@ -1343,6 +1619,7 @@
     var heroLines = document.querySelectorAll(".hero h1 .split-line");
     var line1Chars = splitChars(heroLines[0]);
     var line2Chars = splitChars(heroLines[1]);
+    if (heroLines[2]) line2Chars = line2Chars.concat(splitChars(heroLines[2]));
     gsap.set([line1Chars, line2Chars], { yPercent: 110, opacity: 0 });
 
     var heroCards = gsap.utils.toArray("#heroCards .hero-card");
@@ -1359,10 +1636,16 @@
         .fromTo(".scroll-hint", { opacity: 0 }, { opacity: 1, duration: 0.6 }, ">-0.2");
 
       if (isDesktop) {
-        tl.fromTo(heroCards,
-          { y: "3.5rem", opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.75, ease: "power3.out", stagger: 0.12 },
-          ">-0.55");
+        tl.to("#spaceHolder", {
+            width: "22.5vw",
+            duration: 0.7,
+            ease: "power2.out",
+            onComplete: function () { window.dispatchEvent(new Event("herogap:ready")); }
+          }, ">-0.1")
+          .fromTo(heroCards,
+            { y: "100vh", opacity: 1 },
+            { y: 0, opacity: 1, duration: 0.95, ease: "power3.out", stagger: 0.16 },
+            ">-0.2");
       } else {
         tl.fromTo(heroCards,
           { y: 50, opacity: 0 },
@@ -1373,81 +1656,78 @@
     if (window.preloaderDone) heroIntro();
     else window.addEventListener("preloader:done", heroIntro);
 
-    /* ---------- HERO CARDS: direction-aware desktop movement ---------- */
+    /* ---------- HERO CARDS: hang in the headline gap, scatter to a grid on scroll ---------- */
+    var heroEl = document.querySelector(".hero");
+    var spaceHolder = document.getElementById("spaceHolder");
+    var cardsBox = document.getElementById("heroCards");
+
+    // Anchor the card cluster to the center of the headline gap.
+    // The gap expands symmetrically (the line is centered flex), so its
+    // center is stable before and after the expansion animation.
+    function positionCluster() {
+      if (!window.matchMedia("(min-width: 1025px)").matches) return;
+      var heroRect = heroEl.getBoundingClientRect();
+      var spRect = spaceHolder.getBoundingClientRect();
+      var cx = spRect.left + spRect.width / 2 - heroRect.left;
+      var cy = spRect.top - heroRect.top;
+      cardsBox.style.left = Math.round(cx) + "px";
+      cardsBox.style.top = Math.round(cy - spRect.height * 0.12) + "px";
+    }
+
     mm.add("(min-width: 1025px)", function () {
-      var row = document.getElementById("heroCards");
-      var rowTween = null;
-      var rowState = "";
+      var rot = [-7, 4, -4, 6];
+      var scatterTl = null;
 
-      function cardLiftY() {
-        var currentY = parseFloat(gsap.getProperty(row, "y")) || 0;
-        var rowRect = row.getBoundingClientRect();
-        var naturalTop = rowRect.top - currentY;
-        var anchor = document.querySelector(".hero-bottom");
-        var anchorRect = anchor.getBoundingClientRect();
-        var gap = Math.max(24, window.innerHeight * 0.035);
-        var targetTop = anchorRect.bottom + gap;
-        var rawLift = targetTop - naturalTop;
-        var maxLift = -Math.min(window.innerHeight * 0.52, Math.max(0, naturalTop - 80));
-        return Math.max(maxLift, Math.min(0, rawLift));
-      }
+      heroCards.forEach(function (card, i) { gsap.set(card, { rotate: rot[i] }); });
 
-      function placeCards(state, immediate) {
-        if (rowState === state && !immediate) return;
-        rowState = state;
-        if (rowTween) rowTween.kill();
-
-        var y = state === "up" ? cardLiftY() : 0;
-        if (immediate) {
-          gsap.set(row, { y: y });
-        } else {
-          rowTween = gsap.to(row, {
-            y: y,
-            duration: 0.7,
-            ease: "power3.out",
-            overwrite: "auto"
-          });
+      function buildScatter() {
+        positionCluster();
+        if (scatterTl) {
+          if (scatterTl.scrollTrigger) scatterTl.scrollTrigger.kill();
+          scatterTl.kill();
         }
+        var gridLefts = [0.045, 0.29, 0.535, 0.78];
+        scatterTl = gsap.timeline({
+          scrollTrigger: { trigger: heroEl, start: "top top", end: "bottom 92%", scrub: 1 }
+        });
+        heroCards.forEach(function (card, i) {
+          // layout position (transform-free) measured via the offset chain
+          var baseLeft = cardsBox.offsetLeft - cardsBox.offsetWidth / 2 + card.offsetLeft;
+          var baseTop = cardsBox.offsetTop + card.offsetTop;
+          var targetLeft = gridLefts[i] * window.innerWidth;
+          var targetTop = heroEl.offsetHeight - card.offsetHeight - 56;
+          scatterTl.fromTo(card,
+            { x: 0, y: 0, rotate: rot[i] },
+            {
+              x: targetLeft - baseLeft,
+              y: targetTop - baseTop,
+              rotate: 0,
+              duration: 1,
+              ease: "power2.out",
+              immediateRender: false
+            },
+            i * 0.12);
+        });
       }
 
-      heroCards.forEach(function (card, i) {
-        gsap.set(card, { x: 0, rotate: 0 });
-      });
-
-      placeCards("up", true);
-
-      var cardTrigger = ScrollTrigger.create({
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        onUpdate: function (self) {
-          placeCards(self.direction < 0 ? "up" : "down", false);
-        },
-        onEnter: function () {
-          placeCards((window.scrollY || window.pageYOffset) < 12 ? "up" : "down", false);
-        },
-        onEnterBack: function () {
-          placeCards("up", false);
-        },
-        onLeave: function () {
-          placeCards("down", false);
-        },
-        onRefresh: function () {
-          placeCards(rowState || "up", true);
-        }
-      });
-
-      function refreshCards() {
-        placeCards(rowState || "up", true);
+      buildScatter();
+      window.addEventListener("herogap:ready", positionCluster);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () { buildScatter(); ScrollTrigger.refresh(); });
       }
-
-      window.addEventListener("resize", refreshCards);
+      var onResize = function () { buildScatter(); };
+      window.addEventListener("resize", onResize);
 
       return function () {
-        window.removeEventListener("resize", refreshCards);
-        if (rowTween) rowTween.kill();
-        cardTrigger.kill();
-        gsap.set(row, { clearProps: "y" });
+        window.removeEventListener("resize", onResize);
+        window.removeEventListener("herogap:ready", positionCluster);
+        if (scatterTl) {
+          if (scatterTl.scrollTrigger) scatterTl.scrollTrigger.kill();
+          scatterTl.kill();
+        }
+        gsap.set(heroCards, { clearProps: "x,y,rotate,opacity" });
+        cardsBox.style.left = "";
+        cardsBox.style.top = "";
       };
     });
 
@@ -1552,6 +1832,19 @@
             scrub: 1
           }
         });
+
+      // Browsers pause off-screen muted videos; resume the loop when visible.
+      var vslVideoEl = document.getElementById("vslVideo");
+      if (vslVideoEl && "IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && vslVideoEl.paused) {
+              var p = vslVideoEl.play();
+              if (p && p.catch) p.catch(function () {});
+            }
+          });
+        }, { threshold: 0.2 }).observe(vslVideoEl);
+      }
     }
 
     /* ---------- TESTIMONIAL HEADING: char reveal on scrub ---------- */

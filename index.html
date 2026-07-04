@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Finest Clients, 20 High-Ticket Clients in 180 Days</title>
-  <meta name="description" content="We install appointment and high-ticket sales systems for B2B high-ticket agency owners. 20 high-ticket clients in 180 days, without ads, referrals, or negotiating your pricing, or 100% of your money back.">
+  <meta name="description" content="The end-to-end client acquisition firm for Indian agencies. We build everything between your offer and your bank account, and guarantee the result: 20 high-ticket clients in 180 days, or 100% of your money back.">
   <link rel="icon" href="finestclientslogo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -357,9 +357,11 @@
       position: relative; z-index: 2;
     }
     .hero h1 .h-line { display: block; overflow: hidden; padding: 0.04em 0; }
-    .hero h1 .h-line-gap { display: flex; justify-content: center; align-items: stretch; }
-    .hero h1 .h-line-gap .split-line { display: inline-block; overflow: hidden; padding: 0.04em 0; }
-    .space-holder { display: inline-block; width: 0; align-self: stretch; flex: none; }
+    .hero h1 .cycle-row { display: flex; justify-content: center; align-items: baseline; gap: 0.26em; overflow: visible; }
+    .hero h1 .cycle-row .split-line { display: inline-block; overflow: hidden; padding: 0.04em 0; }
+    .cw-mask { display: inline-block; overflow: hidden; padding: 0.04em 0; text-align: left; }
+    #cycleWord { display: inline-block; will-change: transform; }
+    #cycleWord.locked { color: var(--gold); }
     .word { display: inline-block; white-space: nowrap; }
     .hero h1 .h-line .char { display: inline-block; will-change: transform; }
     .hero h1 .accent .char { color: var(--gold); }
@@ -544,6 +546,44 @@
       .hero-card:nth-child(3) { left: 6%; top: 44%; z-index: 5; }
       .hero-card:nth-child(4) { left: 34%; top: 54%; z-index: 2; }
     }
+
+    /* ============ POSITIONING STATEMENT ============ */
+    .positioning { background: var(--black); text-align: center; }
+    .positioning .pos-line {
+      font-family: var(--oswald); font-weight: 700; text-transform: uppercase;
+      font-size: clamp(1.5rem, 3.2vw, 2.8rem); line-height: 1.3; color: var(--grey);
+    }
+    .positioning .pos-main {
+      color: var(--gold);
+      font-size: clamp(2.7rem, 6.4vw, 5.6rem);
+      margin-top: 0.8rem; line-height: 1.05;
+    }
+    .positioning .pos-tail { margin-top: 1.6rem; color: var(--grey); font-size: 1.02rem; }
+
+    /* ============ MANIFESTO ============ */
+    .manifesto { background: var(--black); }
+    .manifesto-body { max-width: 760px; margin-top: 2.6rem; display: grid; gap: 1.5rem; }
+    .manifesto-body p { color: #cfcfcf; font-size: clamp(1rem, 1.4vw, 1.12rem); }
+    .manifesto-body p strong { color: var(--white); }
+    .manifesto-body p.manifesto-punch {
+      font-family: var(--oswald); font-weight: 600; text-transform: uppercase;
+      color: var(--gold); font-size: clamp(1.25rem, 2vw, 1.6rem); letter-spacing: 0.05em;
+    }
+
+    /* ============ COPY DECK ADDITIONS ============ */
+    .sys-item .sys-sub {
+      color: var(--gold); font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .ai-closer { text-align: center; max-width: 680px; margin: 2.8rem auto 0; font-size: 1.1rem; color: var(--grey-dark); }
+    .ai-closer strong { color: var(--black); }
+    .serve-sub { color: var(--grey); margin-top: 1.2rem; max-width: 440px; }
+    .t-eyebrow-row { text-align: center; margin-bottom: 1.2rem; }
+    .testimonials .cred-label { color: var(--grey-dark); }
+    .testimonials .cred-card { border-color: var(--line-dark); }
+    .testimonials .cred-card .small { color: var(--grey-dark); }
+    .testimonials .cred-shot { border-color: var(--line-dark); }
+    .testimonials .cred-shot figcaption { color: var(--grey-dark); border-top-color: var(--line-dark); }
 
     /* ============ METRICS ============ */
     .metrics { background: var(--paper); color: var(--black); }
@@ -1006,11 +1046,11 @@
         <span class="brand-name">Finest <span>Clients</span></span>
       </a>
       <nav class="main-nav">
-        <a class="nav-link" href="#systems" data-scroll>How It Works</a>
-        <a class="nav-link" href="#serve" data-scroll>Who It's For</a>
-        <a class="nav-link" href="halloffameofficial.html">Results</a>
+        <a class="nav-link" href="#systems" data-scroll>The System</a>
+        <a class="nav-link" href="#manifesto" data-scroll>Manifesto</a>
+        <a class="nav-link" href="halloffameofficial.html">Hall of Fame</a>
         <a class="nav-link" href="#faq" data-scroll>FAQ</a>
-        <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website">Apply Now <span class="arr">→</span></a>
+        <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website">Work With Us <span class="arr">→</span></a>
       </nav>
       <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -1019,11 +1059,11 @@
   </header>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#systems" data-scroll>How It Works</a>
-    <a href="#serve" data-scroll>Who It's For</a>
-    <a href="halloffameofficial.html">Results</a>
+    <a href="#systems" data-scroll>The System</a>
+    <a href="#manifesto" data-scroll>Manifesto</a>
+    <a href="halloffameofficial.html">Hall of Fame</a>
     <a href="#faq" data-scroll>FAQ</a>
-    <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website">Apply Now <span class="arr">→</span></a>
+    <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website">Work With Us <span class="arr">→</span></a>
   </div>
 
   <main id="top">
@@ -1032,10 +1072,12 @@
     <section class="hero" id="hero">
       <div class="hero-inner">
         <div class="hero-stroke">FINEST CLIENTS</div>
-        <span class="eyebrow hero-eyebrow">For B2B High Ticket Agency Owners</span>
+        <span class="eyebrow hero-eyebrow">For Indian Agency Owners</span>
         <h1>
-          <span class="h-line split-line">20 High-Ticket Clients</span>
-          <span class="h-line h-line-gap accent"><span class="split-line">In 180</span><span class="space-holder" id="spaceHolder"></span><span class="split-line">Days</span></span>
+          <span class="h-line cycle-row">
+            <span class="split-line">Finest</span>
+            <span class="cw-mask" id="cycleMask"><span id="cycleWord" class="locked">Clients.</span></span>
+          </span>
         </h1>
         <div class="hero-bottom">
           <div class="hb-left">
@@ -1046,9 +1088,10 @@
           </div>
           <div class="hb-center" aria-hidden="true"></div>
           <div class="hb-right">
-            <p class="hero-sub">Without running ads, begging for referrals, or negotiating your pricing. If we don't deliver, <strong>you get 100% of your money back.</strong></p>
+            <p class="hero-sub">The end-to-end client acquisition firm for Indian agencies. We build everything between your offer and your bank account, and guarantee the result: <strong>20 high-ticket clients in 180 days, or 100% of your money back.</strong></p>
             <div class="hero-cta-row">
-              <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website">Apply Now <span class="arr">→</span></a>
+              <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website">Work With Us <span class="arr">→</span></a>
+              <a class="btn btn-ghost" href="#manifesto" data-scroll>Read the Manifesto</a>
             </div>
             <span class="hero-note">2-minute form &nbsp;·&nbsp; No hard sell</span>
           </div>
@@ -1059,23 +1102,23 @@
       <div class="hero-cards" id="heroCards">
         <div class="hero-card hero-stat-card">
           <div class="hero-stat-num">500+</div>
-          <div class="hero-stat-label">Agency Owners Worked With</div>
-          <p class="hero-stat-desc">B2B high-ticket agency owners across service-led markets.</p>
+          <div class="hero-stat-label">Agencies Worked With</div>
+          <p class="hero-stat-desc">Real installs, not course students.</p>
         </div>
         <div class="hero-card hero-stat-card">
           <div class="hero-stat-num">200+</div>
-          <div class="hero-stat-label">Appointments / Month</div>
+          <div class="hero-stat-label">Appointments Per Month</div>
           <p class="hero-stat-desc">Booked for our own agency, on autopilot.</p>
         </div>
         <div class="hero-card hero-stat-card">
           <div class="hero-stat-num">&lt;1%</div>
           <div class="hero-stat-label">Refund Rate</div>
-          <p class="hero-stat-desc">Our guarantee almost never gets used.</p>
+          <p class="hero-stat-desc">On a 100% money-back guarantee.</p>
         </div>
         <div class="hero-card hero-stat-card">
           <div class="hero-stat-num">180</div>
           <div class="hero-stat-label">Days To 20 Clients</div>
-          <p class="hero-stat-desc">Or you get every rupee back.</p>
+          <p class="hero-stat-desc">Or every rupee back.</p>
         </div>
       </div>
     </section>
@@ -1092,34 +1135,62 @@
       </a>
     </section>
 
-    <!-- ================= METRICS ================= -->
+    <!-- ================= POSITIONING STATEMENT ================= -->
+    <section class="positioning com-padding" id="positioning">
+      <div class="container">
+        <p class="pos-line reveal">We don't sell ads.</p>
+        <p class="pos-line reveal">We don't sell funnels.</p>
+        <p class="pos-line reveal">We don't sell content.</p>
+        <p class="pos-line pos-main reveal">We sell clients.</p>
+        <p class="pos-tail reveal">Everything else is just how we get you there.</p>
+      </div>
+    </section>
+
+    <!-- ================= METRICS / PROOF BAR ================= -->
     <section class="metrics com-padding">
       <div class="container">
         <div class="metrics-head">
-          <h2 class="reveal">Predictable Growth.<br>Not Luck.</h2>
-          <p class="text-dim-dark reveal" style="max-width:380px;">Most agencies survive on luck, referrals and content spikes. We replace the fee-cycle with systems.</p>
+          <h2 class="reveal">Luck Is Not<br>a Pipeline.</h2>
+          <p class="text-dim-dark reveal" style="max-width:380px;">Most agencies run on referrals, content spikes, and hope. We replace hope with infrastructure.</p>
         </div>
         <div class="metrics-grid">
           <div class="metric-card reveal">
-            <div class="num"><span data-count="500" data-suffix="+">0+</span></div>
-            <div class="lbl">Agency Owners Worked With</div>
-            <div class="dsc">B2B high-ticket agency owners across service-led markets.</div>
+            <div class="num"><span data-count="500" data-suffix="+">500+</span></div>
+            <div class="lbl">Agencies Worked With</div>
+            <div class="dsc">Real installs, not course students.</div>
           </div>
           <div class="metric-card reveal">
-            <div class="num"><span data-count="200" data-suffix="+">0+</span></div>
-            <div class="lbl">Appointments / Month</div>
+            <div class="num"><span data-count="200" data-suffix="+">200+</span></div>
+            <div class="lbl">Appointments Per Month</div>
             <div class="dsc">Booked for our own agency, on autopilot.</div>
           </div>
           <div class="metric-card reveal">
             <div class="num"><span data-count="1" data-prefix="&lt;" data-suffix="%">&lt;1%</span></div>
             <div class="lbl">Refund Rate</div>
-            <div class="dsc">Our guarantee almost never gets used.</div>
+            <div class="dsc">On a 100% money-back guarantee.</div>
           </div>
           <div class="metric-card reveal">
-            <div class="num"><span data-count="180">0</span></div>
+            <div class="num"><span data-count="180">180</span></div>
             <div class="lbl">Days To 20 Clients</div>
-            <div class="dsc">Or you get every rupee back.</div>
+            <div class="dsc">Or every rupee back.</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MANIFESTO ================= -->
+    <section class="manifesto com-padding" id="manifesto">
+      <div class="container">
+        <span class="eyebrow reveal">Why Finest Exists</span>
+        <h2 class="reveal" style="margin-top:1.1rem;">We Believe Great Agencies<br>Deserve Great Clients.</h2>
+        <div class="manifesto-body">
+          <p class="reveal">Somewhere along the way, Indian agencies accepted a lie: that chasing is part of the job. That referrals are a strategy. That discounts close deals. That $500 clients are the ceiling.</p>
+          <p class="reveal manifesto-punch">We don't accept it.</p>
+          <p class="reveal">We believe the agency that owns strategy, taste, and judgment should never compete on price. We believe AI killing cheap execution is the best thing to ever happen to premium agencies. And we believe client acquisition is an engineering problem, not a luck problem.</p>
+          <p class="reveal">So we engineered it. End to end. The offer, the brand, the content, the ads, the appointments, the sales. One firm, one system, one outcome.</p>
+          <p class="reveal">The Agency Funnels System books 200+ appointments a month for our own agency. We install it into yours, and we back it with the only guarantee in this industry that means anything: <strong>20 high-ticket clients in 180 days, or every rupee back.</strong></p>
+          <p class="reveal">That's not marketing. That's a standard.</p>
+          <p class="reveal manifesto-punch">Finest isn't our name. It's the filter.</p>
         </div>
       </div>
     </section>
@@ -1129,8 +1200,8 @@
       <div class="container">
         <div class="systems-head">
           <span class="eyebrow reveal">How We Do It</span>
-          <h2 class="reveal" style="margin-top:1.1rem;">We install 3 systems<br>into your agency</h2>
-          <p class="reveal">No hours of courses. No boring lectures. We install the systems that attract clients who need strategic partners, not order-takers.</p>
+          <h2 class="reveal" style="margin-top:1.1rem;">The Agency Funnels<br>System&trade;</h2>
+          <p class="reveal">One end-to-end installation. Every stage of client acquisition, engineered and owned. No handoffs, no gaps, no "that's not our department."</p>
         </div>
 
         <div class="systems-wrap" id="systemsWrap">
@@ -1139,12 +1210,13 @@
           <div class="sys-item">
             <div class="sys-num">01</div>
             <div>
-              <h3>Premium Repositioning</h3>
-              <p class="sys-desc">Move away from execution-only work. You'll talk about outcomes and strategy, not deliverables, timelines or pricing, so premium international clients see a partner, not a vendor.</p>
+              <h3>The Partner Position&trade;</h3>
+              <div class="sys-sub">Offer + Brand</div>
+              <p class="sys-desc">We rebuild your offer and reposition your agency so international buyers see a strategic partner, not a vendor with a rate card.</p>
               <ul>
+                <li>Offers engineered for $2,000-3,000/month retainers</li>
+                <li>Positioning that repels cheap buyers before they waste your time</li>
                 <li>Charge for judgment, not hours</li>
-                <li>Positioning that filters out low-ticket buyers</li>
-                <li>Built to attract premium international clients</li>
               </ul>
             </div>
           </div>
@@ -1152,12 +1224,13 @@
           <div class="sys-item">
             <div class="sys-num">02</div>
             <div>
-              <h3>Appointment Engine</h3>
-              <p class="sys-desc">Predictable appointments with strategic buyers, the ones who say "we need a growth partner", not "we need another vendor".</p>
+              <h3>The Appointment Engine&trade;</h3>
+              <div class="sys-sub">Content + Ads + Outreach</div>
+              <p class="sys-desc">Every acquisition channel, built and run as one machine, filling your calendar with qualified buyers.</p>
               <ul>
-                <li>Qualified, high-quality appointments on autopilot</li>
-                <li>Abundance, you choose the right clients</li>
-                <li>The same engine books 200+ appointments a month for us</li>
+                <li>Content, ads, and outreach working as one system, not three experiments</li>
+                <li>Buyers who say "we need a partner," not "what's your best price?"</li>
+                <li>The same engine books 200+ appointments a month for our own agency</li>
               </ul>
             </div>
           </div>
@@ -1165,19 +1238,20 @@
           <div class="sys-item">
             <div class="sys-num">03</div>
             <div>
-              <h3>High-Ticket Sales Framework</h3>
-              <p class="sys-desc">Close ₹1 to 2 lakh/month retainers without pushy tactics or fake urgency. Premium clients buy confidence and clarity, not desperation.</p>
+              <h3>The Quiet Close&trade;</h3>
+              <div class="sys-sub">Sales</div>
+              <p class="sys-desc">Premium clients buy confidence and clarity. Desperation kills deals. We install a closing framework built for founders who hate "selling."</p>
               <ul>
-                <li>No begging, no chasing, no discount spirals</li>
-                <li>Works even if you're not an "extrovert sales guy"</li>
-                <li>Closing big clients is 10× easier than closing small ones</li>
+                <li>No chasing, no fake urgency, no discount spirals</li>
+                <li>Works even if you're not the extrovert sales type</li>
+                <li>One $3,000 client is easier to close than ten $300 ones</li>
               </ul>
             </div>
           </div>
         </div>
 
         <div class="systems-outcome reveal">
-          Combine all three and you attract clients who pay <strong>₹1 to 2 lakhs per month</strong> because they value your judgment, not because you're the cheapest or the fastest. That's up to <strong>₹10 to 20 lakhs per month</strong> in added revenue over the next 180 days.
+          Offer to close, one system, one owner, one guarantee. <strong>That's what end-to-end means.</strong>
         </div>
       </div>
     </section>
@@ -1187,31 +1261,30 @@
       <div class="container">
         <div class="ai-head">
           <span class="eyebrow reveal">The Problem Nobody Talks About</span>
-          <h2 class="reveal">AI is eating<br>execution-only agencies</h2>
-          <p class="reveal">The ₹20,000 logo designer is being replaced today, not next year. Agencies competing on execution speed and low pricing are on a two-year timer.</p>
+          <h2 class="reveal">AI Isn't Coming for Agencies.<br>It's Coming for Cheap Agencies.</h2>
+          <p class="reveal">The $200 logo designer is being replaced today. Every agency competing on speed and price is on a two-year timer.</p>
         </div>
         <div class="ai-grid">
           <div class="ai-card doom reveal">
             <h3>What AI already does</h3>
             <ul>
-              <li><span class="mk">✕</span> Creates brand concepts in seconds</li>
+              <li><span class="mk">✕</span> Generates brand concepts in seconds</li>
               <li><span class="mk">✕</span> Writes your client's copy on demand</li>
               <li><span class="mk">✕</span> Edits video faster every month</li>
-              <li><span class="mk">✕</span> Undercuts every "fast and cheap" agency</li>
+              <li><span class="mk">✕</span> Undercuts every "fast and cheap" agency on earth</li>
             </ul>
-            <p class="ai-foot">If you compete on execution speed and price, you're competing with software.</p>
           </div>
           <div class="ai-card safe reveal">
-            <h3>What AI can't do</h3>
+            <h3>What AI will never do</h3>
             <ul>
               <li><span class="mk">✓</span> Understand why a luxury brand needs to feel inaccessible</li>
               <li><span class="mk">✓</span> Read the room in a client meeting</li>
               <li><span class="mk">✓</span> Push back on a brief when the client is wrong</li>
-              <li><span class="mk">✓</span> Strategy, taste, judgment &amp; relationships</li>
+              <li><span class="mk">✓</span> Own strategy, taste, judgment, and relationships</li>
             </ul>
-            <p class="ai-foot">We reposition you on the side AI can't commoditize.</p>
           </div>
         </div>
+        <p class="ai-closer reveal">We move you to the side of the line AI can't cross. After that, AI stops being your competitor and becomes <strong>the reason clients need you.</strong></p>
       </div>
     </section>
 
@@ -1221,7 +1294,8 @@
         <div class="serve-head">
           <div>
             <span class="eyebrow reveal">Who We Serve</span>
-            <h2 class="reveal" style="margin-top:1.1rem;">Built for <span>normal</span> agencies.<br>Not celebrities.</h2>
+            <h2 class="reveal" style="margin-top:1.1rem;">Built for <span>real</span> agencies.<br>Not celebrities.</h2>
+            <p class="reveal serve-sub">You don't need a personal brand, a podcast, or 100K followers. You need a system.</p>
           </div>
           <div class="car-arrows reveal">
             <button class="car-arrow" id="servePrev" aria-label="Previous">←</button>
@@ -1234,90 +1308,60 @@
             <div class="car-slide">
               <div class="serve-card">
                 <span class="sc-idx">01</span>
-                <h3>B2B Service Agencies</h3>
-                <p>Escape the referral trap and the delivery loop. Charge for strategy, not hours.</p>
+                <h3>Creative Agencies</h3>
+                <p>Escape the referral trap. Charge for strategy, not hours.</p>
               </div>
             </div>
             <div class="car-slide">
               <div class="serve-card">
                 <span class="sc-idx">02</span>
-                <h3>High-Ticket Agencies</h3>
-                <p>A predictable pipeline instead of content roulette and lucky months.</p>
+                <h3>Marketing Agencies</h3>
+                <p>A predictable pipeline instead of content roulette.</p>
               </div>
             </div>
             <div class="car-slide">
               <div class="serve-card">
                 <span class="sc-idx">03</span>
                 <h3>Video Production Studios</h3>
-                <p>Sell outcomes and strategic direction, not edits by the hour.</p>
+                <p>Sell outcomes and direction, not edits by the hour.</p>
               </div>
             </div>
             <div class="car-slide">
               <div class="serve-card">
                 <span class="sc-idx">04</span>
                 <h3>Design Studios</h3>
-                <p>Stop competing with ₹20K logo generators. Become the strategic partner.</p>
+                <p>Stop competing with $50 logo generators. Become the partner.</p>
               </div>
             </div>
             <div class="car-slide">
               <div class="serve-card">
                 <span class="sc-idx">05</span>
                 <h3>Freelancers Scaling Up</h3>
-                <p>Turn your skills into an agency with real client acquisition systems.</p>
+                <p>Turn your skill into an agency with real acquisition systems.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <p class="serve-note reveal">Already doing <strong>₹2 lakhs+ per month</strong> and want the next 20 high-ticket clients? You're exactly who this is for.</p>
+        <p class="serve-note reveal">Already doing <strong>₹2 lakhs+ per month</strong> and ready for international, high-ticket clients? You're exactly who this is built for.</p>
       </div>
     </section>
 
     <!-- ================= MARQUEE ================= -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span>20 Clients in 180 Days ✦ No Ads ✦ No Referral Trap ✦ 100% Money-Back Guarantee ✦ High-Ticket Only ✦&nbsp;</span>
-        <span>20 Clients in 180 Days ✦ No Ads ✦ No Referral Trap ✦ 100% Money-Back Guarantee ✦ High-Ticket Only ✦&nbsp;</span>
+        <span>20 Clients in 180 Days ✦ End-to-End ✦ No Referral Trap ✦ 100% Money-Back Guarantee ✦ High-Ticket Only ✦&nbsp;</span>
+        <span>20 Clients in 180 Days ✦ End-to-End ✦ No Referral Trap ✦ 100% Money-Back Guarantee ✦ High-Ticket Only ✦&nbsp;</span>
       </div>
     </div>
 
-    <!-- ================= FOUNDER ================= -->
-    <section class="founder com-padding">
-      <div class="container">
-        <span class="eyebrow reveal">From The Co-Founder</span>
-        <blockquote class="founder-quote reveal" style="margin-top:1.6rem;">
-          "I started as a freelance video editor charging <em>₹500 for a reel</em>. Even with an agency I was stuck at ₹20 to 30K projects, until I built the high-ticket system that changed everything. Today, my team installs that <em>exact system</em> for B2B high-ticket agency owners."
-        </blockquote>
-        <div class="founder-sig reveal">
-          <span class="sig-chip"><img src="finestclientslogo.png" alt="Finest Clients"></span>
-          <div>
-            <div class="sig-name">Mousam</div>
-            <div class="sig-role">Co-Founder, Finest Clients</div>
-          </div>
-        </div>
-
-        <div class="cred reveal">
-          <div class="cred-label">We've worked with the biggest in the industry</div>
-          <div class="cred-grid">
-            <div class="cred-card"><span class="big">DNEG</span><span class="small">World's biggest VFX studio</span></div>
-            <div class="cred-card"><span class="big">Netflix</span><span class="small">Global brands &amp; more</span></div>
-            <div class="cred-card"><span class="big gold">45K+</span><span class="small">YouTube subscribers</span></div>
-            <div class="cred-card"><span class="big gold">90K+</span><span class="small">Instagram followers</span></div>
-          </div>
-          <div class="cred-shots">
-            <figure class="cred-shot"><img src="screenshots/easy-business.png" alt="Easy Business Hall of Fame case study"><figcaption>Hall of Fame, Easy Business</figcaption></figure>
-            <figure class="cred-shot"><img src="screenshots/seven-figure-agency.png" alt="Seven Figure Agency Hall of Fame case study"><figcaption>Hall of Fame, Seven Figure Agency</figcaption></figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= TESTIMONIALS ================= -->
+    <!-- ================= HALL OF FAME ================= -->
     <section class="testimonials com-padding" id="results">
       <div class="container">
+        <div class="t-eyebrow-row"><span class="eyebrow reveal">Real Agencies. Real Numbers.</span></div>
         <div class="t-heading">
-          <span class="t-line split-line">Real Agencies.</span>
-          <span class="t-line split-line accent">Real Results.</span>
+          <span class="t-line split-line">The Hall</span>
+          <span class="t-line split-line accent">of Fame.</span>
         </div>
 
         <div style="display:flex; justify-content:flex-end; margin-bottom:1.4rem;">
@@ -1366,8 +1410,22 @@
           </div>
         </div>
 
+        <div class="cred reveal" style="margin-top:3rem;">
+          <div class="cred-label">Worked with the biggest in the industry</div>
+          <div class="cred-grid">
+            <div class="cred-card"><span class="big">DNEG</span><span class="small">The world's biggest VFX studio</span></div>
+            <div class="cred-card"><span class="big">Netflix</span><span class="small">Global brands</span></div>
+            <div class="cred-card"><span class="big gold">49K+</span><span class="small">YouTube subscribers</span></div>
+            <div class="cred-card"><span class="big gold">90K+</span><span class="small">Instagram followers</span></div>
+          </div>
+          <div class="cred-shots">
+            <figure class="cred-shot"><img src="screenshots/easy-business.png" alt="Easy Business Hall of Fame case study"><figcaption>Hall of Fame, Easy Business</figcaption></figure>
+            <figure class="cred-shot"><img src="screenshots/seven-figure-agency.png" alt="Seven Figure Agency Hall of Fame case study"><figcaption>Hall of Fame, Seven Figure Agency</figcaption></figure>
+          </div>
+        </div>
+
         <div class="t-foot reveal">
-          <a class="btn" href="https://lp.finestclients.com/optin-page?utm_source=website">Dive deep into the results, Hall of Fame <span class="arr">→</span></a>
+          <a class="btn" href="halloffameofficial.html">Dive into the results <span class="arr">→</span></a>
         </div>
       </div>
     </section>
@@ -1377,9 +1435,10 @@
       <div class="container">
         <div class="g-card reveal">
           <span class="g-badge">Our Guarantee</span>
-          <h2>20 Clients. 180 Days.<br><span>Or 100% Back.</span></h2>
-          <p>If our systems don't deliver a minimum of <strong>20 high-ticket clients</strong>, each paying you at least <strong>₹1 lakh per month</strong>, within 180 days, we refund <strong>all of your money</strong>. What's the worst that can happen? You get our entire system for free.</p>
-          <div class="g-refund">Current refund rate: less than 1%</div>
+          <h2>20 Clients. 180 Days.<br><span>Or Every Rupee Back.</span></h2>
+          <p>If the Agency Funnels System doesn't deliver a minimum of <strong>20 high-ticket clients</strong>, each paying you at least <strong>₹1 lakh per month</strong>, within 180 days, we refund <strong>100% of your money.</strong></p>
+          <p>Worst case, you get the entire system for free. Best case, you add up to ₹20 lakhs per month in retainer revenue, much of it in dollars.</p>
+          <div class="g-refund">Refund rate under 1%. Not fine print. It just almost never gets triggered.</div>
         </div>
       </div>
     </section>
@@ -1393,32 +1452,32 @@
         </div>
         <div class="faq-list">
           <div class="faq-item">
-            <button class="faq-q">My niche is different, clients won't pay ₹1L+/month <span class="fx">+</span></button>
-            <div class="faq-a"><p>That's what almost every one of the 500+ agencies we've worked with believed. Premium clients don't pay for deliverables, they pay for judgment and outcomes. Once you're repositioned away from execution-only work, the same niche that "wouldn't pay" starts paying ₹1 to 2 lakhs per month. The system targets strategic buyers, including premium international clients.</p></div>
+            <button class="faq-q">My niche won't pay ₹1L+/month <span class="fx">+</span></button>
+            <div class="faq-a"><p>Almost every one of the 500+ agencies said that before joining. Premium clients, especially US/UK buyers, don't pay for deliverables. They pay for judgment and outcomes. Once repositioned, the same niche that "wouldn't pay" starts paying $2,000-3,000 a month. The niche was never the problem. The positioning was.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-q">Isn't AI going to take over my space? <span class="fx">+</span></button>
-            <div class="faq-a"><p>AI is taking over execution, logos in seconds, copy on demand, faster edits. It cannot replace strategy, taste, judgment, or client relationships. Our first system repositions you onto exactly that side of the business, so AI becomes the reason clients need you, not the thing replacing you.</p></div>
+            <div class="faq-a"><p>AI is taking over execution. It cannot replace strategy, taste, or trust. The Partner Position moves you onto exactly that side. AI becomes the reason clients need you.</p></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q">I don't have a big portfolio <span class="fx">+</span></button>
-            <div class="faq-a"><p>You don't need to be a celebrity entrepreneur, this is built for normal B2B high-ticket agency owners. Strategic buyers purchase confidence, clarity, and a clear outcome. Our appointment system puts you in front of buyers who want a growth partner, and the sales framework closes them without a giant logo wall.</p></div>
+            <button class="faq-q">I don't have a big portfolio or personal brand <span class="fx">+</span></button>
+            <div class="faq-a"><p>Good. This is built for normal agencies, not celebrities. Strategic buyers purchase confidence, clarity, and a clear outcome. The Appointment Engine puts you in front of them. The Quiet Close signs them.</p></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q">I'm not a salesperson, I hate pushy tactics <span class="fx">+</span></button>
-            <div class="faq-a"><p>Good, the framework doesn't use them. Rich clients have their own way of conversations, follow-ups, and closings, and desperation kills those deals. You don't have to be an extrovert; in fact, closing big clients is about 10× easier than closing low-ticket ones once you follow the framework.</p></div>
+            <button class="faq-q">I hate selling <span class="fx">+</span></button>
+            <div class="faq-a"><p>Neither do most of our best clients. The Quiet Close has no pushy tactics because premium buyers are allergic to them. You'll close like a consultant diagnosing a problem, not a salesperson pitching a product.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Why end-to-end? I just need ads / just need outreach <span class="fx">+</span></button>
+            <div class="faq-a"><p>Because a great ad feeding a weak offer produces expensive silence, and great outreach for a badly positioned agency books calls that never close. Client acquisition fails at its weakest link. We own every link, which is the only reason we can guarantee the outcome. Nobody guarantees a piece. We guarantee the result.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-q">What if it doesn't work for me? <span class="fx">+</span></button>
-            <div class="faq-a"><p>Then you get 100% of your money back. If the system doesn't deliver a minimum of 20 high-ticket clients, each paying at least ₹1 lakh per month, within 180 days, we refund everything. Our current refund rate is under 1%.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q">Who exactly is this for? <span class="fx">+</span></button>
-            <div class="faq-a"><p>B2B high-ticket agency owners already doing a minimum of ₹2 lakhs per month who want predictable growth, around 20 additional high-ticket clients in the next 180 days. If that's you, apply. If it's not a fit, we'll tell you directly.</p></div>
+            <div class="faq-a"><p>Then you get 100% of your money back. 20 clients, each at ₹1 lakh+ per month, within 180 days, or a full refund. Current refund rate: under 1%.</p></div>
           </div>
           <div class="faq-item">
             <button class="faq-q">What happens after I apply? <span class="fx">+</span></button>
-            <div class="faq-a"><p>It's a 2-minute form. If we're the right fit, we'll walk you through a personalized game-plan call and you decide. If we're not the right fit, we'll tell you honestly, there's no hard sell.</p></div>
+            <div class="faq-a"><p>A 2-minute form. If we're the right fit, you get a personalized game-plan call for your agency. If we're not, we'll say so directly. No hard sell.</p></div>
           </div>
         </div>
       </div>
@@ -1427,10 +1486,10 @@
     <!-- ================= FINAL CTA ================= -->
     <section class="final-cta com-padding">
       <div class="container">
-        <h2 class="reveal">Ready to escape<br>the referral trap?</h2>
-        <p class="reveal">Get a personalized game plan for your agency's next 20 high-ticket clients. Whatever your goals are, we'll hand-hold you through it.</p>
-        <a class="btn btn-black reveal" href="https://lp.finestclients.com/optin-page?utm_source=website">Apply Now, It's a 2-Minute Form <span class="arr">→</span></a>
-        <div class="cta-note reveal">If we're not the right fit, we'll tell you. No hard sell.</div>
+        <h2 class="reveal">Your Next 20 Clients<br>Are a System Away.</h2>
+        <p class="reveal">The offer, the brand, the content, the ads, the sales. We build all of it. You sign the clients.</p>
+        <a class="btn btn-black reveal" href="https://lp.finestclients.com/optin-page?utm_source=website">Work With Us <span class="arr">→</span></a>
+        <div class="cta-note reveal">If we're not the right fit, we'll tell you. No hard sell. Ever.</div>
         <div class="final-socials reveal">
           <a href="https://www.instagram.com/finestedit_/" target="_blank" rel="noopener" aria-label="Instagram">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.8" cy="6.2" r="1.4" fill="currentColor" stroke="none"/></svg>
@@ -1456,15 +1515,15 @@
             <span class="logo-chip"><img src="finestclientslogo.png" alt="Finest Clients logo"></span>
             <span class="brand-name">Finest <span>Clients</span></span>
           </a>
-          <p>Appointment &amp; high-ticket sales systems for B2B high-ticket agency owners. 20 clients in 180 days, guaranteed.</p>
+          <p>The end-to-end client acquisition firm for Indian agencies. 20 high-ticket clients in 180 days, guaranteed.</p>
         </div>
         <div>
           <h4>Explore</h4>
           <ul>
-            <li><a href="#systems" data-scroll>How It Works</a></li>
-            <li><a href="#serve" data-scroll>Who It's For</a></li>
+            <li><a href="#systems" data-scroll>The System</a></li>
+            <li><a href="#manifesto" data-scroll>Manifesto</a></li>
             <li><a href="halloffameofficial.html">Hall of Fame</a></li>
-            <li><a href="pitch.html">Pitch</a></li>
+            <li><a href="#faq" data-scroll>FAQ</a></li>
           </ul>
         </div>
         <div>
@@ -1484,13 +1543,13 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 Finest Clients. All rights reserved.</span>
-        <span>Made for agencies that refuse to stay cheap.</span>
+        <span>© 2026 Finest Clients.</span>
+        <span>Built for agencies that refuse to stay cheap.</span>
       </div>
     </div>
   </footer>
 
-  <a class="float-apply" href="https://lp.finestclients.com/optin-page?utm_source=website">Apply <span class="arr">→</span></a>
+  <a class="float-apply" href="https://lp.finestclients.com/optin-page?utm_source=website">Work With Us <span class="arr">→</span></a>
   <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
 
   <!-- ================= SCRIPTS ================= -->
@@ -1618,9 +1677,53 @@
     /* ---------- HERO INTRO (waits for preloader) ---------- */
     var heroLines = document.querySelectorAll(".hero h1 .split-line");
     var line1Chars = splitChars(heroLines[0]);
-    var line2Chars = splitChars(heroLines[1]);
-    if (heroLines[2]) line2Chars = line2Chars.concat(splitChars(heroLines[2]));
-    gsap.set([line1Chars, line2Chars], { yPercent: 110, opacity: 0 });
+    gsap.set(line1Chars, { yPercent: 110, opacity: 0 });
+
+    /* ---------- HERO PIPELINE LOOP: Offer -> Brand -> Content -> Ads -> Sales -> Clients ---------- */
+    var cycleWordEl = document.getElementById("cycleWord");
+    var cycleMaskEl = document.getElementById("cycleMask");
+    var cycleWords = ["Offer.", "Brand.", "Content.", "Ads.", "Sales."];
+    var cycleIndex = 0;
+    gsap.set(cycleWordEl, { yPercent: 110 });
+
+    // Fix the mask to the widest word so "Finest" never shifts.
+    function sizeCycleMask() {
+      var prev = cycleWordEl.textContent;
+      cycleMaskEl.style.width = "auto";
+      var max = 0;
+      cycleWords.concat(["Clients."]).forEach(function (w) {
+        cycleWordEl.textContent = w;
+        max = Math.max(max, cycleWordEl.offsetWidth);
+      });
+      cycleWordEl.textContent = prev;
+      cycleMaskEl.style.width = Math.ceil(max + 2) + "px";
+    }
+
+    function showCycleWord(text, locked, holdMs) {
+      cycleWordEl.textContent = text;
+      cycleWordEl.classList.toggle("locked", locked);
+      gsap.fromTo(cycleWordEl, { yPercent: 110 }, { yPercent: 0, duration: 0.45, ease: "power3.out" });
+      setTimeout(function () {
+        gsap.to(cycleWordEl, { yPercent: -110, duration: 0.35, ease: "power3.in", onComplete: nextCycleWord });
+      }, holdMs);
+    }
+
+    function nextCycleWord() {
+      if (cycleIndex < cycleWords.length) {
+        showCycleWord(cycleWords[cycleIndex], false, 750);
+        cycleIndex++;
+      } else {
+        cycleIndex = 0;
+        showCycleWord("Clients.", true, 3600); // lock in gold, hold, restart the loop
+      }
+    }
+
+    function startCycle() {
+      sizeCycleMask();
+      nextCycleWord();
+    }
+    window.addEventListener("resize", sizeCycleMask);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeCycleMask);
 
     var heroCards = gsap.utils.toArray("#heroCards .hero-card");
     var mm = gsap.matchMedia();
@@ -1628,21 +1731,15 @@
 
     function heroIntro() {
       var tl = gsap.timeline();
-      tl.to(line1Chars, { yPercent: 0, opacity: 1, duration: 0.55, ease: "power3.out", stagger: 0.045 })
-        .to(line2Chars, { yPercent: 0, opacity: 1, duration: 0.55, ease: "power3.out", stagger: 0.05 }, ">-0.25")
-        .fromTo(".hero-stroke", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out" }, ">-0.3")
+      tl.to(line1Chars, { yPercent: 0, opacity: 1, duration: 0.55, ease: "power3.out", stagger: 0.06 })
+        .add(startCycle, ">-0.05")
+        .fromTo(".hero-stroke", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out" }, ">0.2")
         .fromTo(".hero-eyebrow", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, "<")
         .fromTo(".hero-bottom > *", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out", stagger: 0.09 }, ">-0.2")
         .fromTo(".scroll-hint", { opacity: 0 }, { opacity: 1, duration: 0.6 }, ">-0.2");
 
       if (isDesktop) {
-        tl.to("#spaceHolder", {
-            width: "22.5vw",
-            duration: 0.7,
-            ease: "power2.out",
-            onComplete: function () { window.dispatchEvent(new Event("herogap:ready")); }
-          }, ">-0.1")
-          .fromTo(heroCards,
+        tl.fromTo(heroCards,
             { y: "100vh", opacity: 1 },
             { y: 0, opacity: 1, duration: 0.95, ease: "power3.out", stagger: 0.16 },
             ">-0.2");
@@ -1658,20 +1755,16 @@
 
     /* ---------- HERO CARDS: hang in the headline gap, scatter to a grid on scroll ---------- */
     var heroEl = document.querySelector(".hero");
-    var spaceHolder = document.getElementById("spaceHolder");
+    var heroH1 = document.querySelector(".hero h1");
     var cardsBox = document.getElementById("heroCards");
 
-    // Anchor the card cluster to the center of the headline gap.
-    // The gap expands symmetrically (the line is centered flex), so its
-    // center is stable before and after the expansion animation.
+    // Anchor the card cluster centered below the headline.
     function positionCluster() {
       if (!window.matchMedia("(min-width: 1025px)").matches) return;
       var heroRect = heroEl.getBoundingClientRect();
-      var spRect = spaceHolder.getBoundingClientRect();
-      var cx = spRect.left + spRect.width / 2 - heroRect.left;
-      var cy = spRect.top - heroRect.top;
-      cardsBox.style.left = Math.round(cx) + "px";
-      cardsBox.style.top = Math.round(cy - spRect.height * 0.12) + "px";
+      var h1Rect = heroH1.getBoundingClientRect();
+      cardsBox.style.left = Math.round(h1Rect.left + h1Rect.width / 2 - heroRect.left) + "px";
+      cardsBox.style.top = Math.round(h1Rect.bottom - heroRect.top + 28) + "px";
     }
 
     mm.add("(min-width: 1025px)", function () {
@@ -1711,7 +1804,6 @@
       }
 
       buildScatter();
-      window.addEventListener("herogap:ready", positionCluster);
       if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(function () { buildScatter(); ScrollTrigger.refresh(); });
       }
@@ -1720,7 +1812,6 @@
 
       return function () {
         window.removeEventListener("resize", onResize);
-        window.removeEventListener("herogap:ready", positionCluster);
         if (scatterTl) {
           if (scatterTl.scrollTrigger) scatterTl.scrollTrigger.kill();
           scatterTl.kill();

@@ -287,7 +287,7 @@
     .top-socials a:hover { color: var(--gold); opacity: 1; transform: translateY(-1px); }
     .site-header {
       position: absolute; top: 36px; left: 0; right: 0;
-      z-index: 900;
+      z-index: 1000;
       padding: 1.1rem 0;
       background: transparent;
     }
@@ -324,6 +324,9 @@
 
     .menu-toggle { display: none; flex-direction: column; gap: 6px; padding: 6px; z-index: 1001; }
     .menu-toggle span { width: 28px; height: 2px; background: var(--white); transition: transform 0.3s ease, opacity 0.3s ease; }
+    .menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
     .mobile-menu {
       position: fixed; inset: 0; z-index: 950;
@@ -335,6 +338,7 @@
     .mobile-menu.open { opacity: 1; pointer-events: auto; }
     .mobile-menu a { font-family: var(--oswald); font-size: 2rem; text-transform: uppercase; font-weight: 600; }
     .mobile-menu a:hover { color: var(--gold); }
+    body.menu-open { overflow: hidden; }
 
     /* ============ HERO ============ */
     .hero {
@@ -767,8 +771,9 @@
       font-size: 1.2rem;
     }
     .car-arrow:hover { background: var(--gold); border-color: var(--gold); color: var(--black); }
-    .carousel { overflow: hidden; }
-    .car-track { display: flex; transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
+    .carousel { overflow: hidden; touch-action: pan-y; }
+    .carousel.is-dragging { cursor: grabbing; }
+    .car-track { display: flex; transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
     .car-slide { padding: 0 0.65rem; }
     .serve-card {
       border: 1px solid var(--line);
@@ -1010,6 +1015,21 @@
       .hero-inner { padding-top: 7.5rem; }
       .top-quote { max-width: 220px; }
       .scroll-hint { display: none; }
+      main { padding-bottom: 5.6rem; }
+      .float-apply {
+        left: 1rem;
+        right: 1rem;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 0.75rem);
+        justify-content: center;
+        padding: 0.85rem 1rem;
+        font-size: 0.78rem;
+      }
+      .back-top {
+        right: 1rem;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 4.55rem);
+        width: 42px;
+        height: 42px;
+      }
     }
   </style>
 </head>
@@ -1066,7 +1086,7 @@
         <a class="nav-link" href="#faq" data-scroll>FAQ</a>
         <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website" target="_blank" rel="noopener">Work With Us <span class="arr">→</span></a>
       </nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -1631,13 +1651,35 @@
       } else { window.scrollTo({ top: 0, behavior: "smooth" }); }
     }
 
+    var menuToggle = document.getElementById("menuToggle");
+    var mobileMenu = document.getElementById("mobileMenu");
+    function closeMobileMenu() {
+      mobileMenu.classList.remove("open");
+      menuToggle.classList.remove("open");
+      menuToggle.setAttribute("aria-label", "Open menu");
+      menuToggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+      if (lenis && typeof lenis.start === "function") lenis.start();
+    }
+    function toggleMobileMenu() {
+      var shouldOpen = !mobileMenu.classList.contains("open");
+      mobileMenu.classList.toggle("open", shouldOpen);
+      menuToggle.classList.toggle("open", shouldOpen);
+      menuToggle.setAttribute("aria-label", shouldOpen ? "Close menu" : "Open menu");
+      menuToggle.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+      document.body.classList.toggle("menu-open", shouldOpen);
+      if (lenis) {
+        if (shouldOpen && typeof lenis.stop === "function") lenis.stop();
+        if (!shouldOpen && typeof lenis.start === "function") lenis.start();
+      }
+    }
+
     document.querySelectorAll("[data-scroll]").forEach(function (link) {
       link.addEventListener("click", function (e) {
         var href = link.getAttribute("href");
         if (href && href.charAt(0) === "#") {
           e.preventDefault();
-          mobileMenu.classList.remove("open");
-          document.getElementById("menuToggle").classList.remove("open");
+          closeMobileMenu();
           scrollToTarget(href === "#top" ? 0 : href);
         }
       });
@@ -1659,10 +1701,14 @@
     }
 
     /* ---------- MOBILE MENU ---------- */
-    var menuToggle = document.getElementById("menuToggle");
-    var mobileMenu = document.getElementById("mobileMenu");
-    menuToggle.addEventListener("click", function () {
-      mobileMenu.classList.toggle("open");
+    menuToggle.addEventListener("click", toggleMobileMenu);
+    mobileMenu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        closeMobileMenu();
+      });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeMobileMenu();
     });
 
     /* ---------- SPLIT TEXT UTILITY ---------- */
@@ -1989,6 +2035,7 @@
       var track = root.querySelector(".car-track");
       var slides = Array.prototype.slice.call(track.children);
       var index = 0, show = 1, timer = null;
+      var startX = 0, startY = 0, dragX = 0, dragging = false, touching = false;
 
       function perView() {
         var w = window.innerWidth, n = 1;
@@ -1996,8 +2043,14 @@
           .forEach(function (bp) { if (w >= bp) n = breakpoints[bp]; });
         return Math.min(n, slides.length);
       }
+      function setTransition(enabled) {
+        track.style.transition = enabled ? "" : "none";
+      }
       function apply() {
         track.style.transform = "translateX(-" + (index * (100 / show)) + "%)";
+      }
+      function applyDrag(px) {
+        track.style.transform = "translateX(calc(-" + (index * (100 / show)) + "% + " + px + "px))";
       }
       function goTo(i) {
         var max = slides.length - show;
@@ -2014,12 +2067,66 @@
         if (timer) clearInterval(timer);
         timer = setInterval(function () { goTo(index + 1); }, autoplayMs);
       }
+      function stopAutoplay() {
+        if (timer) clearInterval(timer);
+        timer = null;
+      }
+      function readPoint(e) {
+        var point = e.touches ? e.touches[0] : e;
+        return { x: point.clientX, y: point.clientY };
+      }
+      function startDrag(e) {
+        if (e.touches && e.touches.length > 1) return;
+        var p = readPoint(e);
+        startX = p.x;
+        startY = p.y;
+        dragX = 0;
+        dragging = false;
+        touching = true;
+        stopAutoplay();
+      }
+      function moveDrag(e) {
+        if (!touching) return;
+        var p = readPoint(e);
+        var dx = p.x - startX;
+        var dy = p.y - startY;
+        if (!dragging && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy) * 1.15) {
+          dragging = true;
+          root.classList.add("is-dragging");
+          setTransition(false);
+        }
+        if (!dragging) return;
+        dragX = dx;
+        if (e.cancelable) e.preventDefault();
+        applyDrag(dragX);
+      }
+      function endDrag() {
+        if (!touching) return;
+        touching = false;
+        root.classList.remove("is-dragging");
+        setTransition(true);
+        if (dragging) {
+          var threshold = Math.max(46, root.getBoundingClientRect().width * 0.16);
+          if (Math.abs(dragX) > threshold) goTo(index + (dragX < 0 ? 1 : -1));
+          else apply();
+        }
+        dragging = false;
+        dragX = 0;
+        restartAutoplay();
+      }
 
       layout();
       restartAutoplay();
       window.addEventListener("resize", layout);
       document.getElementById(prevId).addEventListener("click", function () { goTo(index - 1); restartAutoplay(); });
       document.getElementById(nextId).addEventListener("click", function () { goTo(index + 1); restartAutoplay(); });
+      root.addEventListener("touchstart", startDrag, { passive: true });
+      root.addEventListener("touchmove", moveDrag, { passive: false });
+      root.addEventListener("touchend", endDrag, { passive: true });
+      root.addEventListener("touchcancel", endDrag, { passive: true });
+      root.addEventListener("mousedown", startDrag);
+      window.addEventListener("mousemove", moveDrag);
+      window.addEventListener("mouseup", endDrag);
     }
 
     makeCarousel("serveCarousel", "servePrev", "serveNext", { 0: 1, 641: 2, 1025: 3 }, 4000);

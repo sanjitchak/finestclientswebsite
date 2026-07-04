@@ -152,25 +152,40 @@
       opacity: 0.9;
       animation: stickmanFloat 2.8s ease-in-out infinite;
     }
-    .stickman-hand-cover {
+    .stickman-wave-hand {
       position: absolute;
-      left: 40.5%;
-      top: 16.7%;
-      width: 13%;
-      height: 7.8%;
-      border-radius: 999px;
-      background: var(--black);
-      filter: blur(2px);
-      transform: rotate(-10deg);
-      z-index: 2;
-    }
-    .stickman-arm-wave {
+      left: 48.8%;
+      top: 18.5%;
+      width: clamp(24px, 4vw, 42px);
+      height: clamp(20px, 3.4vw, 34px);
       z-index: 3;
-      opacity: 0.98;
-      clip-path: inset(12% 42% 69% 37%);
-      transform-origin: 47% 24%;
-      filter: invert(1) brightness(1.9) drop-shadow(0 0 12px rgba(212,175,55,0.28));
-      animation: stickmanWave 0.86s ease-in-out infinite alternate;
+      transform-origin: 10% 72%;
+      animation: stickmanWave 0.72s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 11px rgba(212,175,55,0.45));
+    }
+    .stickman-wave-hand::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 58%;
+      height: 66%;
+      border: 2px solid var(--gold);
+      border-radius: 54% 46% 48% 52%;
+      transform: rotate(-20deg);
+      background: rgba(212,175,55,0.08);
+    }
+    .stickman-wave-hand::after {
+      content: "";
+      position: absolute;
+      left: 4%;
+      bottom: 24%;
+      width: 70%;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--gold);
+      transform: rotate(-24deg);
+      transform-origin: left center;
     }
     .stickman-wave-lines,
     .stickman-wave-lines::before,
@@ -185,11 +200,11 @@
       pointer-events: none;
     }
     .stickman-wave-lines {
-      left: 53%;
-      top: 16%;
-      width: 18%;
+      left: 56.5%;
+      top: 16.5%;
+      width: 16%;
       height: 12%;
-      animation: waveLines 1.15s ease-out infinite;
+      animation: waveLines 1s ease-out infinite;
     }
     .stickman-wave-lines::before,
     .stickman-wave-lines::after { content: ""; inset: 18% -22% -10% 24%; }
@@ -202,8 +217,8 @@
       50% { transform: translateY(-8px) rotate(0.6deg); }
     }
     @keyframes stickmanWave {
-      0% { transform: rotate(-17deg) translate(-2px, 1px); }
-      100% { transform: rotate(14deg) translate(3px, -3px); }
+      0% { transform: rotate(-22deg) translate(-2px, 1px); }
+      100% { transform: rotate(18deg) translate(4px, -4px); }
     }
     @keyframes waveLines {
       0% { transform: scale(0.72) rotate(-14deg); opacity: 0; }
@@ -1005,8 +1020,7 @@
     <div class="loader-hello">
       <div class="stickman-loader" aria-hidden="true">
         <img class="stickman-base" src="stickman-loader.png" alt="">
-        <span class="stickman-hand-cover"></span>
-        <img class="stickman-arm-wave" src="stickman-loader.png" alt="">
+        <span class="stickman-wave-hand"></span>
         <span class="stickman-wave-lines"></span>
       </div>
       <div class="ring-wrap">
@@ -1050,7 +1064,7 @@
         <a class="nav-link" href="#manifesto" data-scroll>Manifesto</a>
         <a class="nav-link" href="halloffameofficial.html">Hall of Fame</a>
         <a class="nav-link" href="#faq" data-scroll>FAQ</a>
-        <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website">Work With Us <span class="arr">→</span></a>
+        <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website" target="_blank" rel="noopener">Work With Us <span class="arr">→</span></a>
       </nav>
       <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -1063,7 +1077,7 @@
     <a href="#manifesto" data-scroll>Manifesto</a>
     <a href="halloffameofficial.html">Hall of Fame</a>
     <a href="#faq" data-scroll>FAQ</a>
-    <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website">Work With Us <span class="arr">→</span></a>
+    <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website" target="_blank" rel="noopener">Work With Us <span class="arr">→</span></a>
   </div>
 
   <main id="top">
@@ -1090,7 +1104,7 @@
           <div class="hb-right">
             <p class="hero-sub">The end-to-end client acquisition firm for Indian agencies. We build everything between your offer and your bank account, and guarantee the result: <strong>20 high-ticket clients in 180 days, or 100% of your money back.</strong></p>
             <div class="hero-cta-row">
-              <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website">Work With Us <span class="arr">→</span></a>
+              <a class="btn btn-gold" href="https://lp.finestclients.com/optin-page?utm_source=website" target="_blank" rel="noopener">Work With Us <span class="arr">→</span></a>
               <a class="btn btn-ghost" href="#manifesto" data-scroll>Read the Manifesto</a>
             </div>
             <span class="hero-note">2-minute form &nbsp;·&nbsp; No hard sell</span>
@@ -1125,7 +1139,7 @@
 
     <!-- ================= VSL ================= -->
     <section class="vsl" id="vsl" aria-label="Watch the Finest Clients VSL">
-      <a class="video-shell" id="videoShell" href="https://lp.finestclients.com/optin-page?utm_source=website" aria-label="Open the Finest Clients VSL">
+      <a class="video-shell" id="videoShell" href="https://lp.finestclients.com/optin-page?utm_source=website" target="_blank" rel="noopener" aria-label="Open the Finest Clients VSL">
           <video id="vslVideo" src="vslgif.mp4" autoplay muted loop playsinline preload="metadata"></video>
           <div class="video-overlay">
             <div class="play-btn">
@@ -1488,7 +1502,7 @@
       <div class="container">
         <h2 class="reveal">Your Next 20 Clients<br>Are a System Away.</h2>
         <p class="reveal">The offer, the brand, the content, the ads, the sales. We build all of it. You sign the clients.</p>
-        <a class="btn btn-black reveal" href="https://lp.finestclients.com/optin-page?utm_source=website">Work With Us <span class="arr">→</span></a>
+        <a class="btn btn-black reveal" href="https://lp.finestclients.com/optin-page?utm_source=website" target="_blank" rel="noopener">Work With Us <span class="arr">→</span></a>
         <div class="cta-note reveal">If we're not the right fit, we'll tell you. No hard sell. Ever.</div>
         <div class="final-socials reveal">
           <a href="https://www.instagram.com/finestedit_/" target="_blank" rel="noopener" aria-label="Instagram">
@@ -1549,7 +1563,7 @@
     </div>
   </footer>
 
-  <a class="float-apply" href="https://lp.finestclients.com/optin-page?utm_source=website">Work With Us <span class="arr">→</span></a>
+  <a class="float-apply" href="https://lp.finestclients.com/optin-page?utm_source=website" target="_blank" rel="noopener">Work With Us <span class="arr">→</span></a>
   <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
 
   <!-- ================= SCRIPTS ================= -->

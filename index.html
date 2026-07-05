@@ -966,6 +966,18 @@
     .founder-sig .sig-name { font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
     .founder-sig .sig-role { font-size: 0.82rem; color: var(--grey); letter-spacing: 0.1em; text-transform: uppercase; }
 
+    .audience-proof {
+      min-height: 0;
+      padding: clamp(3.25rem, 7vw, 5.75rem) 0 clamp(1rem, 2vw, 1.75rem);
+      background:
+        radial-gradient(ellipse 42% 34% at 50% 0%, rgba(212,175,55,0.14), transparent 68%),
+        var(--black);
+      color: var(--white);
+    }
+    .audience-sticky {
+      position: relative;
+      top: auto;
+    }
     .cred { margin-top: 4.5rem; }
     .cred .cred-label {
       font-size: 0.78rem; font-weight: 700; letter-spacing: 0.32em;
@@ -983,6 +995,77 @@
     .cred-card .big { font-family: var(--oswald); font-weight: 700; font-size: 2rem; text-transform: uppercase; }
     .cred-card .big.gold { color: var(--gold); }
     .cred-card .small { font-size: 0.82rem; color: var(--grey); letter-spacing: 0.08em; text-transform: uppercase; }
+    .channel-proof {
+      margin-top: 1.2rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(212, 175, 55, 0.32);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(212,175,55,0.18), transparent 38%),
+        #0a0a0a;
+      color: var(--white);
+      padding: clamp(1.2rem, 3vw, 2rem);
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: clamp(1rem, 2.6vw, 2rem);
+      align-items: center;
+      box-shadow: 0 22px 70px rgba(10, 10, 10, 0.18);
+    }
+    .channel-proof-copy h3 {
+      font-size: clamp(1.45rem, 3vw, 2.55rem);
+      max-width: 420px;
+    }
+    .channel-proof-copy .eyebrow {
+      margin-bottom: 1rem;
+    }
+    .channel-proof-copy p {
+      margin-top: 1rem;
+      color: #bfbfbf;
+      max-width: 390px;
+      font-size: 0.98rem;
+    }
+    .channel-proof-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+    }
+    .channel-shot {
+      position: relative;
+      display: block;
+      color: inherit;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: #000;
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+    }
+    .channel-shot:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212,175,55,0.62);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.24);
+    }
+    .channel-shot img {
+      width: 100%;
+      aspect-ratio: 718 / 255;
+      object-fit: contain;
+      object-position: center;
+      background: #000;
+    }
+    .channel-shot figcaption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.78rem 1rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      color: #d8d8d8;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .channel-shot figcaption span:last-child { color: var(--gold); }
     .cred-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.2rem; }
     .cred-shot { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
     .cred-shot img {
@@ -1137,6 +1220,9 @@
         max-width: 30vw;
         opacity: 0.1;
       }
+      .channel-proof {
+        grid-template-columns: 1fr;
+      }
       .top-strip-inner { grid-template-columns: 1fr auto; }
       .top-quote { grid-column: 1; text-align: left; font-size: 0.72rem; }
       .top-socials { grid-column: 2; gap: 0.75rem; }
@@ -1192,6 +1278,17 @@
         display: block;
         max-width: 100%;
         text-align: center;
+      }
+      .channel-proof {
+        padding: 1rem;
+      }
+      .channel-proof-copy h3 {
+        font-size: clamp(1.7rem, 10vw, 2.5rem);
+      }
+      .channel-shot figcaption {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.25rem;
       }
       .top-quote { max-width: 250px; }
       .scroll-hint { display: none; }
@@ -1392,6 +1489,36 @@
             <div class="num"><span data-count="180">180</span></div>
             <div class="lbl">Days To 20 Clients</div>
             <div class="dsc">Or every rupee back.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CHANNEL PROOF ================= -->
+    <section class="audience-proof with-mascot" id="audience-proof">
+      <div class="container">
+        <div class="audience-sticky">
+          <div class="channel-proof reveal">
+            <div class="channel-proof-copy">
+              <span class="eyebrow">Audience Proof</span>
+              <h3>Built The Audience Before Building The Pipeline.</h3>
+              <p>Mousam has already built attention in public. The same taste, consistency, and distribution judgment now gets installed into your client acquisition system.</p>
+            </div>
+
+            <div class="channel-proof-grid">
+              <a class="channel-shot" href="https://www.instagram.com/finestedit_/" target="_blank" rel="noopener" aria-label="Open Finest Edit Instagram">
+                <figure>
+                  <img src="instagram.png" alt="Finest Edit Instagram profile showing 90.7K followers">
+                  <figcaption><span>Instagram audience</span><span>90.7K followers</span></figcaption>
+                </figure>
+              </a>
+              <a class="channel-shot" href="https://www.youtube.com/@Finesteditacademy" target="_blank" rel="noopener" aria-label="Open Finest Edit Academy YouTube">
+                <figure>
+                  <img src="youtube.png" alt="Finest Edit Academy YouTube channel showing 46.7K subscribers">
+                  <figcaption><span>YouTube channel</span><span>46.7K subscribers</span></figcaption>
+                </figure>
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -103,6 +103,142 @@
     .btn-ghost { border: 1px solid var(--line); color: var(--white); }
     .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
 
+    /* Mascot accents */
+    .with-mascot {
+      position: relative;
+      overflow: hidden;
+    }
+    .with-mascot > .container {
+      position: relative;
+      z-index: 2;
+    }
+    .mascot {
+      position: absolute;
+      width: var(--mascot-w, clamp(110px, 13vw, 210px));
+      max-width: 42vw;
+      opacity: var(--mascot-opacity, 0.18);
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+      transform: rotate(var(--mascot-rot, 0deg));
+      transform-origin: center;
+      animation: mascotFloat var(--mascot-speed, 7s) ease-in-out infinite;
+    }
+    .mascot-light {
+      filter: invert(1) brightness(1.56) drop-shadow(0 18px 42px rgba(212,175,55,0.18));
+    }
+    .mascot-dark {
+      filter: drop-shadow(0 18px 34px rgba(10,10,10,0.12));
+    }
+    .mascot-gold {
+      filter: sepia(1) saturate(1.8) hue-rotate(354deg) brightness(0.82) drop-shadow(0 16px 32px rgba(10,10,10,0.18));
+    }
+    .mascot-hero-sign {
+      left: clamp(0.6rem, 4vw, 4.5rem);
+      bottom: clamp(10rem, 17vw, 16rem);
+      --mascot-w: clamp(120px, 14vw, 220px);
+      --mascot-rot: -8deg;
+      --mascot-opacity: 0.23;
+    }
+    .mascot-hero-target {
+      right: clamp(0.8rem, 6vw, 6rem);
+      top: clamp(8.2rem, 19vh, 13rem);
+      --mascot-w: clamp(96px, 10vw, 168px);
+      --mascot-rot: 8deg;
+      --mascot-opacity: 0.22;
+      --mascot-speed: 8.5s;
+    }
+    .mascot-vsl-laptop {
+      right: clamp(1rem, 5vw, 5rem);
+      bottom: clamp(1.2rem, 4vw, 4rem);
+      --mascot-w: clamp(115px, 14vw, 230px);
+      --mascot-rot: 5deg;
+      --mascot-opacity: 0.24;
+    }
+    .mascot-position-handshake {
+      left: clamp(0.6rem, 5vw, 5rem);
+      top: clamp(1rem, 5vw, 4rem);
+      --mascot-w: clamp(130px, 15vw, 230px);
+      --mascot-rot: -6deg;
+      --mascot-opacity: 0.17;
+    }
+    .mascot-metrics-coins {
+      right: clamp(0.5rem, 5vw, 4rem);
+      top: clamp(1rem, 5vw, 3.5rem);
+      --mascot-w: clamp(105px, 12vw, 190px);
+      --mascot-rot: 9deg;
+      --mascot-opacity: 0.13;
+    }
+    .mascot-manifesto-question {
+      right: clamp(0.8rem, 7vw, 7rem);
+      bottom: clamp(1rem, 4vw, 4rem);
+      --mascot-w: clamp(95px, 11vw, 170px);
+      --mascot-rot: 7deg;
+      --mascot-opacity: 0.2;
+      --mascot-speed: 8s;
+    }
+    .mascot-systems-funnel {
+      right: clamp(0.5rem, 5vw, 4.5rem);
+      top: clamp(2rem, 5vw, 5rem);
+      --mascot-w: clamp(140px, 18vw, 280px);
+      --mascot-rot: 4deg;
+      --mascot-opacity: 0.16;
+    }
+    .mascot-systems-agency {
+      left: clamp(0.4rem, 4vw, 3rem);
+      bottom: clamp(1rem, 4vw, 3rem);
+      --mascot-w: clamp(135px, 17vw, 270px);
+      --mascot-rot: -4deg;
+      --mascot-opacity: 0.15;
+      --mascot-speed: 9s;
+    }
+    .mascot-ai-weight {
+      left: clamp(0.4rem, 5vw, 4rem);
+      bottom: clamp(1rem, 5vw, 4.5rem);
+      --mascot-w: clamp(105px, 12vw, 190px);
+      --mascot-rot: -5deg;
+      --mascot-opacity: 0.12;
+    }
+    .mascot-serve-choice {
+      right: clamp(0.5rem, 5vw, 5rem);
+      top: clamp(1.5rem, 5vw, 4rem);
+      --mascot-w: clamp(118px, 15vw, 230px);
+      --mascot-rot: 6deg;
+      --mascot-opacity: 0.18;
+    }
+    .mascot-results-handshake {
+      left: clamp(0.4rem, 4vw, 3.5rem);
+      top: clamp(1.4rem, 4vw, 3rem);
+      --mascot-w: clamp(120px, 15vw, 230px);
+      --mascot-rot: -5deg;
+      --mascot-opacity: 0.11;
+    }
+    .mascot-guarantee-throne {
+      right: clamp(0.4rem, 5vw, 4.5rem);
+      bottom: clamp(1rem, 5vw, 4rem);
+      --mascot-w: clamp(115px, 14vw, 230px);
+      --mascot-rot: 7deg;
+      --mascot-opacity: 0.19;
+    }
+    .mascot-faq-question {
+      left: clamp(0.4rem, 5vw, 4rem);
+      bottom: clamp(1rem, 4vw, 3rem);
+      --mascot-w: clamp(95px, 11vw, 170px);
+      --mascot-rot: -7deg;
+      --mascot-opacity: 0.12;
+    }
+    .mascot-final-flag {
+      right: clamp(0.5rem, 6vw, 6rem);
+      top: clamp(1rem, 4vw, 3rem);
+      --mascot-w: clamp(130px, 16vw, 250px);
+      --mascot-rot: 5deg;
+      --mascot-opacity: 0.2;
+    }
+    @keyframes mascotFloat {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -12px; }
+    }
+
     /* ============ PRELOADER ============ */
     .preloader {
       position: fixed; inset: 0;
@@ -996,6 +1132,11 @@
 
     /* ============ RESPONSIVE ============ */
     @media (max-width: 1024px) {
+      .hide-tablet { display: none !important; }
+      .mascot {
+        max-width: 30vw;
+        opacity: 0.1;
+      }
       .top-strip-inner { grid-template-columns: 1fr auto; }
       .top-quote { grid-column: 1; text-align: left; font-size: 0.72rem; }
       .top-socials { grid-column: 2; gap: 0.75rem; }
@@ -1006,6 +1147,17 @@
       .footer-top { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 640px) {
+      .hide-mobile { display: none !important; }
+      .mascot {
+        max-width: 38vw;
+        opacity: 0.075;
+      }
+      .btn {
+        max-width: 100%;
+        justify-content: center;
+        text-align: center;
+        white-space: normal;
+      }
       .ai-grid { grid-template-columns: 1fr; }
       .cred-shots { grid-template-columns: 1fr; }
       .sys-item { grid-template-columns: 1fr; gap: 1rem; }
@@ -1013,7 +1165,35 @@
       .metric-card { padding: 1.5rem 1.2rem; }
       .footer-top { grid-template-columns: 1fr; }
       .hero-inner { padding-top: 7.5rem; }
-      .top-quote { max-width: 220px; }
+      .hero-eyebrow {
+        max-width: calc(100vw - 2rem);
+        justify-content: center;
+        text-align: center;
+        letter-spacing: 0.18em;
+        font-size: 0.68rem;
+        line-height: 1.45;
+      }
+      .hero h1 {
+        max-width: calc(100vw - 2rem);
+        font-size: clamp(2.55rem, 14vw, 3.55rem);
+      }
+      .hero-bottom,
+      .hb-right,
+      .hero-cta-row {
+        width: 100%;
+        max-width: 100%;
+      }
+      .hero-sub {
+        width: min(100%, 340px);
+        margin: 0 auto;
+        text-wrap: balance;
+      }
+      .hero-note {
+        display: block;
+        max-width: 100%;
+        text-align: center;
+      }
+      .top-quote { max-width: 250px; }
       .scroll-hint { display: none; }
       main { padding-bottom: 5.6rem; }
       .float-apply {
@@ -1103,7 +1283,9 @@
   <main id="top">
 
     <!-- ================= HERO ================= -->
-    <section class="hero" id="hero">
+    <section class="hero with-mascot" id="hero">
+      <img class="mascot mascot-light mascot-hero-sign hide-mobile" src="stickman/mascot-transparent/mascot-2.png" alt="" aria-hidden="true">
+      <img class="mascot mascot-light mascot-hero-target hide-mobile" src="stickman/mascot-transparent/mascot-16.png" alt="" aria-hidden="true">
       <div class="hero-inner">
         <div class="hero-stroke">FINEST CLIENTS</div>
         <span class="eyebrow hero-eyebrow">For Indian Agency Owners</span>
@@ -1158,7 +1340,7 @@
     </section>
 
     <!-- ================= VSL ================= -->
-    <section class="vsl" id="vsl" aria-label="Watch the Finest Clients VSL">
+    <section class="vsl with-mascot" id="vsl" aria-label="Watch the Finest Clients VSL">
       <a class="video-shell" id="videoShell" href="https://lp.finestclients.com/optin-page?utm_source=website" target="_blank" rel="noopener" aria-label="Open the Finest Clients VSL">
           <video id="vslVideo" src="vslgif.mp4" autoplay muted loop playsinline preload="metadata"></video>
           <div class="video-overlay">
@@ -1167,10 +1349,12 @@
             </div>
           </div>
       </a>
+      <img class="mascot mascot-light mascot-vsl-laptop hide-mobile" src="stickman/mascot-transparent/mascot-64.png" alt="" aria-hidden="true">
     </section>
 
     <!-- ================= POSITIONING STATEMENT ================= -->
-    <section class="positioning com-padding" id="positioning">
+    <section class="positioning com-padding with-mascot" id="positioning">
+      <img class="mascot mascot-light mascot-position-handshake hide-mobile" src="stickman/mascot-transparent/mascot-22.png" alt="" aria-hidden="true">
       <div class="container">
         <p class="pos-line reveal">We don't sell ads.</p>
         <p class="pos-line reveal">We don't sell funnels.</p>
@@ -1181,7 +1365,8 @@
     </section>
 
     <!-- ================= METRICS / PROOF BAR ================= -->
-    <section class="metrics com-padding">
+    <section class="metrics com-padding with-mascot">
+      <img class="mascot mascot-dark mascot-metrics-coins hide-mobile" src="stickman/mascot-transparent/mascot-49.png" alt="" aria-hidden="true">
       <div class="container">
         <div class="metrics-head">
           <h2 class="reveal">Luck Is Not<br>a Pipeline.</h2>
@@ -1213,7 +1398,8 @@
     </section>
 
     <!-- ================= MANIFESTO ================= -->
-    <section class="manifesto com-padding" id="manifesto">
+    <section class="manifesto com-padding with-mascot" id="manifesto">
+      <img class="mascot mascot-light mascot-manifesto-question hide-mobile" src="stickman/mascot-transparent/mascot-6.png" alt="" aria-hidden="true">
       <div class="container">
         <span class="eyebrow reveal">Why Finest Exists</span>
         <h2 class="reveal" style="margin-top:1.1rem;">We Believe Great Agencies<br>Deserve Great Clients.</h2>
@@ -1230,7 +1416,9 @@
     </section>
 
     <!-- ================= SYSTEMS ================= -->
-    <section class="systems com-padding" id="systems">
+    <section class="systems com-padding with-mascot" id="systems">
+      <img class="mascot mascot-light mascot-systems-funnel hide-mobile" src="stickman/mascot-transparent/mascot-36.png" alt="" aria-hidden="true">
+      <img class="mascot mascot-light mascot-systems-agency hide-tablet" src="stickman/mascot-transparent/mascot-41.png" alt="" aria-hidden="true">
       <div class="container">
         <div class="systems-head">
           <span class="eyebrow reveal">How We Do It</span>
@@ -1291,7 +1479,8 @@
     </section>
 
     <!-- ================= AI SECTION ================= -->
-    <section class="ai-section com-padding">
+    <section class="ai-section com-padding with-mascot">
+      <img class="mascot mascot-dark mascot-ai-weight hide-mobile" src="stickman/mascot-transparent/mascot-53.png" alt="" aria-hidden="true">
       <div class="container">
         <div class="ai-head">
           <span class="eyebrow reveal">The Problem Nobody Talks About</span>
@@ -1323,7 +1512,8 @@
     </section>
 
     <!-- ================= SERVE ================= -->
-    <section class="serve com-padding" id="serve">
+    <section class="serve com-padding with-mascot" id="serve">
+      <img class="mascot mascot-light mascot-serve-choice hide-mobile" src="stickman/mascot-transparent/mascot-70.png" alt="" aria-hidden="true">
       <div class="container">
         <div class="serve-head">
           <div>
@@ -1390,7 +1580,8 @@
     </div>
 
     <!-- ================= HALL OF FAME ================= -->
-    <section class="testimonials com-padding" id="results">
+    <section class="testimonials com-padding with-mascot" id="results">
+      <img class="mascot mascot-dark mascot-results-handshake hide-mobile" src="stickman/mascot-transparent/mascot-22.png" alt="" aria-hidden="true">
       <div class="container">
         <div class="t-eyebrow-row"><span class="eyebrow reveal">Real Agencies. Real Numbers.</span></div>
         <div class="t-heading">
@@ -1465,7 +1656,8 @@
     </section>
 
     <!-- ================= GUARANTEE ================= -->
-    <section class="guarantee com-padding">
+    <section class="guarantee com-padding with-mascot">
+      <img class="mascot mascot-light mascot-guarantee-throne hide-mobile" src="stickman/mascot-transparent/mascot-72.png" alt="" aria-hidden="true">
       <div class="container">
         <div class="g-card reveal">
           <span class="g-badge">Our Guarantee</span>
@@ -1478,7 +1670,8 @@
     </section>
 
     <!-- ================= FAQ ================= -->
-    <section class="faq com-padding" id="faq">
+    <section class="faq com-padding with-mascot" id="faq">
+      <img class="mascot mascot-dark mascot-faq-question hide-mobile" src="stickman/mascot-transparent/mascot-6.png" alt="" aria-hidden="true">
       <div class="container">
         <div class="faq-head">
           <span class="eyebrow reveal">Still Thinking?</span>
@@ -1518,7 +1711,8 @@
     </section>
 
     <!-- ================= FINAL CTA ================= -->
-    <section class="final-cta com-padding">
+    <section class="final-cta com-padding with-mascot">
+      <img class="mascot mascot-gold mascot-final-flag hide-mobile" src="stickman/mascot-transparent/mascot-7.png" alt="" aria-hidden="true">
       <div class="container">
         <h2 class="reveal">Your Next 20 Clients<br>Are a System Away.</h2>
         <p class="reveal">The offer, the brand, the content, the ads, the sales. We build all of it. You sign the clients.</p>

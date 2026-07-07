@@ -296,12 +296,32 @@
     backdrop-filter:saturate(140%) blur(8px);
     border-bottom:1px solid var(--line);
   }
-  .tabbar{
+  .tabbar-shell{
     max-width:1240px;margin:0 auto;
+    display:grid;grid-template-columns:38px minmax(0,1fr) 38px;
+    align-items:center;gap:6px;padding:0 12px;
+  }
+  .tabbar{
     display:flex;align-items:center;gap:6px;
-    padding:9px 24px;overflow-x:auto;scrollbar-width:none;
+    min-width:0;
+    padding:9px 4px;overflow-x:auto;scrollbar-width:none;
+    scroll-behavior:smooth;
   }
   .tabbar::-webkit-scrollbar{display:none;}
+  .tab-scroll{
+    width:34px;height:34px;border-radius:999px;
+    border:1px solid var(--line);background:var(--card);
+    color:var(--navy);display:grid;place-items:center;
+    cursor:pointer;box-shadow:0 1px 2px rgba(22,48,90,.06);
+    transition:background .15s,color .15s,opacity .15s,transform .15s;
+  }
+  .tab-scroll:hover:not(:disabled){background:var(--navy);color:#fff;transform:translateY(-1px);}
+  .tab-scroll:disabled{opacity:.36;cursor:not-allowed;}
+  .tab-scroll span{
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:23px;font-weight:700;line-height:1;
+    transform:translateY(-1px);
+  }
   .tb-brand{
     font-family:'Fraunces',serif;font-weight:600;font-size:15px;
     color:var(--navy);line-height:1.05;margin-right:12px;white-space:nowrap;
@@ -338,7 +358,9 @@
     .phase-head{gap:16px;}
     .keystone{padding:28px 24px;}
     .tb-brand{display:none;}
-    .tabbar{padding:8px 16px;}
+    .tabbar-shell{grid-template-columns:34px minmax(0,1fr) 34px;padding:0 8px;gap:4px;}
+    .tabbar{padding:8px 4px;}
+    .tab-scroll{width:30px;height:30px;}
   }
 </style>
 </head>
@@ -346,21 +368,25 @@
 
 <!-- ============ TOP TABS ============ -->
 <div class="tabbar-wrap">
-  <div class="tabbar" role="tablist" aria-label="Sections">
-    <div class="tb-brand">Finest Clients<span>FB Ads</span></div>
-    <button class="tab active" role="tab" data-panel="tab-guide"><span class="tnum">◆</span>Field Guide</button>
-    <button class="tab" role="tab" data-panel="tab-course"><span class="tnum">01</span>Mastery · Intro</button>
-    <button class="tab" role="tab" data-panel="tab-m02"><span class="tnum">02</span>Business Manager</button>
-    <button class="tab" role="tab" data-panel="tab-m03"><span class="tnum">03</span>Pixel &amp; Events</button>
-    <button class="tab" role="tab" data-panel="tab-m04"><span class="tnum">04</span>Campaigns</button>
-    <button class="tab" role="tab" data-panel="tab-m05"><span class="tnum">05</span>Campaign Build</button>
-    <button class="tab" role="tab" data-panel="tab-m06"><span class="tnum">06</span>Copy &amp; Visuals</button>
-    <button class="tab" role="tab" data-panel="tab-m07"><span class="tnum">07</span>Metrics</button>
-    <button class="tab" role="tab" data-panel="tab-m08"><span class="tnum">08</span>Measurement</button>
-    <button class="tab" role="tab" data-panel="tab-m09"><span class="tnum">09</span>Optimization</button>
-    <button class="tab" role="tab" data-panel="tab-m10"><span class="tnum">10</span>Rules</button>
-    <button class="tab" role="tab" data-panel="tab-m11"><span class="tnum">11</span>Scaling</button>
-    <button class="tab" role="tab" data-panel="tab-m12"><span class="tnum">12</span>Funnels</button>
+  <div class="tabbar-shell">
+    <button class="tab-scroll tab-scroll-left" type="button" aria-label="Scroll tabs left" title="Scroll tabs left"><span aria-hidden="true">&lsaquo;</span></button>
+    <div class="tabbar" role="tablist" aria-label="Sections">
+      <div class="tb-brand">Finest Clients<span>FB Ads</span></div>
+      <button class="tab active" role="tab" data-panel="tab-guide"><span class="tnum">◆</span>Field Guide</button>
+      <button class="tab" role="tab" data-panel="tab-course"><span class="tnum">01</span>Mastery · Intro</button>
+      <button class="tab" role="tab" data-panel="tab-m02"><span class="tnum">02</span>Business Manager</button>
+      <button class="tab" role="tab" data-panel="tab-m03"><span class="tnum">03</span>Pixel &amp; Events</button>
+      <button class="tab" role="tab" data-panel="tab-m04"><span class="tnum">04</span>Campaigns</button>
+      <button class="tab" role="tab" data-panel="tab-m05"><span class="tnum">05</span>Campaign Build</button>
+      <button class="tab" role="tab" data-panel="tab-m06"><span class="tnum">06</span>Copy &amp; Visuals</button>
+      <button class="tab" role="tab" data-panel="tab-m07"><span class="tnum">07</span>Metrics</button>
+      <button class="tab" role="tab" data-panel="tab-m08"><span class="tnum">08</span>Measurement</button>
+      <button class="tab" role="tab" data-panel="tab-m09"><span class="tnum">09</span>Optimization</button>
+      <button class="tab" role="tab" data-panel="tab-m10"><span class="tnum">10</span>Rules</button>
+      <button class="tab" role="tab" data-panel="tab-m11"><span class="tnum">11</span>Scaling</button>
+      <button class="tab" role="tab" data-panel="tab-m12"><span class="tnum">12</span>Funnels</button>
+    </div>
+    <button class="tab-scroll tab-scroll-right" type="button" aria-label="Scroll tabs right" title="Scroll tabs right"><span aria-hidden="true">&rsaquo;</span></button>
   </div>
 </div>
 
@@ -3023,6 +3049,27 @@
   // ----- tab switching -----
   const tabs=[...document.querySelectorAll('.tab')];
   const panels=[...document.querySelectorAll('.tabpanel')];
+  const tabbar=document.querySelector('.tabbar');
+  const tabScrollLeft=document.querySelector('.tab-scroll-left');
+  const tabScrollRight=document.querySelector('.tab-scroll-right');
+  function updateTabScrollButtons(){
+    if(!tabbar||!tabScrollLeft||!tabScrollRight) return;
+    const max=tabbar.scrollWidth-tabbar.clientWidth;
+    const hasOverflow=max>2;
+    tabScrollLeft.disabled=!hasOverflow||tabbar.scrollLeft<=2;
+    tabScrollRight.disabled=!hasOverflow||tabbar.scrollLeft>=max-2;
+  }
+  function scrollTabs(direction){
+    if(!tabbar) return;
+    tabbar.scrollBy({left:direction*tabbar.clientWidth*.75,behavior:'smooth'});
+  }
+  if(tabbar&&tabScrollLeft&&tabScrollRight){
+    tabScrollLeft.addEventListener('click',()=>scrollTabs(-1));
+    tabScrollRight.addEventListener('click',()=>scrollTabs(1));
+    tabbar.addEventListener('scroll',updateTabScrollButtons,{passive:true});
+    window.addEventListener('resize',updateTabScrollButtons);
+    updateTabScrollButtons();
+  }
   function showPanel(id){
     panels.forEach(p=>{
       const on=p.id===id;
@@ -3030,7 +3077,12 @@
       p.hidden=!on;
       if(on){ p.querySelectorAll('.reveal').forEach(el=>el.classList.add('in')); }
     });
-    tabs.forEach(t=>t.classList.toggle('active',t.dataset.panel===id));
+    tabs.forEach(t=>{
+      const on=t.dataset.panel===id;
+      t.classList.toggle('active',on);
+      if(on&&tabbar){ t.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'}); }
+    });
+    updateTabScrollButtons();
     window.scrollTo({top:0,behavior:'auto'});
   }
   tabs.forEach(t=>t.addEventListener('click',()=>showPanel(t.dataset.panel)));

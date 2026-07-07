@@ -33,6 +33,9 @@ body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
 
 a{color:inherit}
 .wrap{width:min(1200px,calc(100% - 48px));max-width:100%;min-width:0;margin:0 auto}
+.home-btn{position:fixed;top:20px;left:24px;z-index:220;display:inline-flex;align-items:center;gap:9px;padding:10px 16px;border:1px solid rgba(212,168,83,.32);border-radius:100px;background:rgba(10,10,10,.78);color:var(--white);font-size:12px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;text-decoration:none;backdrop-filter:blur(14px);box-shadow:0 12px 34px rgba(0,0,0,.24);transition:transform .25s ease,border-color .25s ease,background .25s ease,color .25s ease}
+.home-btn:hover{transform:translateY(-2px);border-color:var(--gold);background:rgba(212,168,83,.14);color:var(--gold)}
+.home-btn span{font-size:16px;line-height:1}
 
 .hero{position:relative;min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:96px 24px 72px;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-42%;left:50%;transform:translateX(-50%);width:min(900px,120vw);height:900px;background:radial-gradient(circle,rgba(212,168,83,.12) 0%,transparent 65%);pointer-events:none}
@@ -60,7 +63,7 @@ a{color:inherit}
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.02;margin-bottom:14px}
 .section-copy{max-width:720px;color:var(--white-dim);font-size:17px;line-height:1.7;font-weight:300;margin-bottom:42px}
 
-.agency-grid,.youtube-grid,.case-grid{display:grid;min-width:0;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.agency-grid,.case-grid{display:grid;min-width:0;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
 .agency-card,.youtube-card,.case-card{min-width:0;max-width:100%;background:var(--black-card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.28);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
 .agency-card:hover,.youtube-card:hover,.case-card:hover{transform:translateY(-4px);border-color:rgba(212,168,83,.28);box-shadow:0 26px 70px rgba(0,0,0,.38),0 0 0 1px rgba(212,168,83,.08)}
 .agency-card::before,.youtube-card::before,.case-card::before{content:'';display:block;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));opacity:.88}
@@ -76,17 +79,13 @@ a{color:inherit}
 .profile-name{font-size:18px;font-weight:900;line-height:1.1}
 .profile-company{margin-top:3px;color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.9px;text-transform:uppercase}
 .youtube-player{min-width:0;max-width:100%;border:1px solid rgba(245,240,232,.11);border-radius:var(--radius-sm);overflow:hidden;background:#050505;box-shadow:0 10px 30px rgba(0,0,0,.28)}
-.channel-shot{display:block;margin-top:18px;border:1px solid rgba(245,240,232,.11);border-radius:var(--radius-sm);overflow:hidden;background:var(--black-elevated);transition:border-color .3s ease,box-shadow .3s ease,opacity .3s ease}
-.channel-shot:hover{border-color:rgba(212,168,83,.48);box-shadow:0 12px 34px rgba(212,168,83,.12)}
-.channel-shot img{width:100%;height:auto;display:block;opacity:.92;transition:opacity .3s ease,transform .45s ease}
-.channel-shot:hover img{opacity:1;transform:scale(1.015)}
 .case-grid{margin-bottom:72px}
-.proof-divider{margin:8px 0 34px;padding-top:38px;border-top:1px solid rgba(245,240,232,.08)}
-.case-shot{position:relative;height:200px;background:var(--black-elevated);overflow:hidden}
+.case-shot{position:relative;height:260px;background:var(--black-elevated);overflow:hidden}
 .case-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .45s ease}
 .case-card:hover .case-shot img{transform:scale(1.025)}
 .yt-link{position:absolute;right:12px;bottom:12px;padding:7px 13px;border:1px solid rgba(245,240,232,.12);border-radius:100px;background:rgba(10,10,10,.82);color:var(--white-dim);font-size:11px;font-weight:800;letter-spacing:.4px;text-decoration:none;backdrop-filter:blur(10px)}
 .yt-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(212,168,83,.12)}
+.case-image-label{position:absolute;left:14px;right:14px;bottom:14px;padding:10px 12px;border:1px solid rgba(245,240,232,.12);border-radius:10px;background:rgba(10,10,10,.74);backdrop-filter:blur(10px);font-size:13px;font-weight:900;color:var(--white)}
 .case-body{padding:24px}
 .case-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px}
 .case-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;line-height:1.15}
@@ -115,12 +114,13 @@ a{color:inherit}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
 @media(max-width:900px){
-  .agency-grid,.youtube-grid,.case-grid{grid-template-columns:1fr}
+  .agency-grid,.case-grid{grid-template-columns:1fr}
   .hero-stats{gap:28px}
 }
 
 @media(max-width:640px){
   .wrap{width:min(100% - 64px,1200px)}
+  .home-btn{top:14px;left:16px;padding:9px 13px;font-size:11px}
   .hero{min-height:auto;padding:86px 20px 58px}
   .hero h1{letter-spacing:-1px}
   .hero-sub,.section-copy{max-width:24ch;margin-left:auto;margin-right:auto}
@@ -155,14 +155,16 @@ window.addEventListener('error', function(e) {
 </head>
 <body>
 
+<a class="home-btn" href="index.html"><span aria-hidden="true">&larr;</span> Home</a>
+
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-badge"><span class="dot"></span> Finest Clients</div>
     <h1>Hall of<br><span>Fame</span></h1>
     <p class="hero-sub">Real client wins separated into video testimonials and image-only case studies.</p>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="num">11</div><div class="label">Testimonials</div></div>
-      <div class="hero-stat"><div class="num">13</div><div class="label">Case Studies</div></div>
+      <div class="hero-stat"><div class="num">12</div><div class="label">Testimonials</div></div>
+      <div class="hero-stat"><div class="num">15</div><div class="label">Case Studies</div></div>
     </div>
   </div>
 </section>
@@ -180,6 +182,8 @@ window.addEventListener('error', function(e) {
   <section class="hall-section active" id="testimonials-panel" role="tabpanel" aria-labelledby="testimonials-tab" data-panel="testimonials">
     <div class="wrap">
       <div class="section-kicker">Testimonials</div>
+      <h2 class="section-title">Video testimonials</h2>
+      <p class="section-copy">All testimonial videos in one place, without case study images.</p>
 
       <div class="agency-grid">
         <article class="agency-card">
@@ -310,9 +314,10 @@ window.addEventListener('error', function(e) {
   <section class="hall-section" id="cases-panel" role="tabpanel" aria-labelledby="cases-tab" data-panel="cases">
     <div class="wrap">
       <div class="section-kicker">Case Studies</div>
+      <h2 class="section-title">Image-only case studies</h2>
+      <p class="section-copy">Case study screenshots only. No testimonial videos in this tab.</p>
 
       <div class="case-grid" id="youtubeCases"></div>
-
     </div>
   </section>
 </main>
@@ -442,6 +447,19 @@ const youtubeCases = [
     timeline: 'First client at Day 45, consistent flow by Month 4'
   },
   {
+    name: 'Finest Edit Academy',
+    niche: 'Creative Agencies Coach',
+    offer: '$6K plan',
+    image: 'screenshots/finest-edit-faceless.png',
+    imageAlt: 'Finest Edit Academy Channel',
+    url: 'https://www.youtube.com/@Finesteditacademy',
+    before: 'No YouTube presence, all clients from Ads',
+    after: '30 videos generating 120 calls/month, 10-12 clients/month',
+    metrics: ['30 videos', '1M views', '120 calls/mo'],
+    insight: 'You do not need 100 videos. You need 20-30 videos targeting exactly what your ideal clients are searching for.',
+    timeline: 'Consistent call flow established by video 6'
+  },
+  {
     name: 'Easy Business',
     niche: 'Industrial Import/Export Consultant',
     offer: '$12K audit',
@@ -466,6 +484,19 @@ const youtubeCases = [
     metrics: ['Ad spend -67%', 'Close rate 18% to 32%', 'Warmer leads'],
     insight: 'YouTube leads are pre-sold. They have watched 15 minutes of you teaching. The sales call is easier.',
     timeline: 'YouTube leads Month 2, ad reduction Month 4'
+  },
+  {
+    name: 'Arun Sharma',
+    niche: 'CAT Career Coaching',
+    offer: '$3K program',
+    image: 'screenshots/arun-sharma.png',
+    imageAlt: 'Arun Sharma YouTube Channel',
+    url: 'https://www.youtube.com/channel/UC39ykzRlxyYexaOxqIyVPRQ',
+    before: '$4,000/month on Google ads, diminishing returns',
+    after: 'YouTube as primary channel, ads now only for retargeting',
+    metrics: ['0 to 15 organic calls/mo', 'ROI improved 4x'],
+    insight: 'For high-ticket B2B, organic content builds trust that ads cannot buy. YouTube became the trust-builder, ads became the amplifier.',
+    timeline: 'Full transition over 6 months'
   },
   {
     name: 'Debbie Shadid',
@@ -512,25 +543,7 @@ if (youtubeCasesEl) {
       <div class="case-shot">
         <img src="${escapeHTML(item.image)}" alt="${escapeHTML(item.imageAlt)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:var(--white-muted);font-size:13px;text-align:center;padding:24px">Add: ${escapeHTML(item.image)}</div>
-        <a href="${escapeHTML(item.url)}" target="_blank" rel="noopener noreferrer" class="yt-link">Visit Channel</a>
-      </div>
-      <div class="case-body">
-        <div class="case-top">
-          <div>
-            <div class="case-name">${escapeHTML(item.name)}</div>
-            <div class="case-niche">${escapeHTML(item.niche)}</div>
-          </div>
-          <div class="case-offer">${escapeHTML(item.offer)}</div>
-        </div>
-        <div class="case-ba">
-          <div class="ba-card before"><div class="ba-label">Before</div><div class="ba-text">${escapeHTML(item.before)}</div></div>
-          <div class="ba-card after"><div class="ba-label">After</div><div class="ba-text">${escapeHTML(item.after)}</div></div>
-        </div>
-        <div class="case-metrics">
-          ${item.metrics.map((metric) => `<span class="metric-pill">${escapeHTML(metric)}</span>`).join('')}
-        </div>
-        <div class="case-insight">${escapeHTML(item.insight)}</div>
-        <div class="case-timeline">${escapeHTML(item.timeline)}</div>
+        <div class="case-image-label">${escapeHTML(item.name)}</div>
       </div>
     </article>
   `).join('');

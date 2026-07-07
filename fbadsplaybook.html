@@ -6,7 +6,7 @@
 <title>The Facebook Ads Playbook — Intern Field Guide · Finest Clients</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#FAF7F0;
@@ -250,6 +250,17 @@
     font-family:'JetBrains Mono',monospace;
     letter-spacing:.02em;
   }
+  .diagram-visual{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 12px 30px rgba(22,48,90,.08);
+    padding:14px;
+    overflow:hidden;
+  }
+  .diagram-visual svg{display:block;width:100%;height:auto;}
+  .diagram-visual text{font-family:'Inter',system-ui,sans-serif;letter-spacing:0;}
+  .diagram-visual .mono-label{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
   .visual-grid{
     display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 34px;
   }
@@ -277,6 +288,48 @@
   footer{margin-top:90px;border-top:2px solid var(--navy);padding-top:34px;color:var(--ink-soft);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
   footer .fbrand{font-family:'Fraunces',serif;color:var(--navy);font-weight:600;font-size:16px;}
 
+  /* ---------- top tabs ---------- */
+  .tabbar-wrap{
+    position:sticky;top:0;z-index:60;
+    background:rgba(250,247,240,.9);
+    -webkit-backdrop-filter:saturate(140%) blur(8px);
+    backdrop-filter:saturate(140%) blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .tabbar{
+    max-width:1240px;margin:0 auto;
+    display:flex;align-items:center;gap:6px;
+    padding:9px 24px;overflow-x:auto;scrollbar-width:none;
+  }
+  .tabbar::-webkit-scrollbar{display:none;}
+  .tb-brand{
+    font-family:'Fraunces',serif;font-weight:600;font-size:15px;
+    color:var(--navy);line-height:1.05;margin-right:12px;white-space:nowrap;
+  }
+  .tb-brand span{
+    display:block;font-family:'JetBrains Mono',monospace;font-weight:500;
+    font-size:9px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-top:2px;
+  }
+  .tab{
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;
+    letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);
+    background:none;border:1px solid transparent;
+    padding:9px 15px;border-radius:100px;cursor:pointer;white-space:nowrap;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:background .15s,color .15s,border-color .15s;
+  }
+  .tab:hover{color:var(--navy);background:var(--paper-deep);}
+  .tab.active{color:#fff;background:var(--navy);border-color:var(--navy);}
+  .tab .tnum{color:var(--gold);font-size:11px;}
+  .tab.active .tnum{color:var(--gold-soft);}
+
+  .tabpanel{display:none;}
+  .tabpanel.active{display:block;}
+
+  /* offset the sticky rail + anchor jumps for the tab bar */
+  .tabpanel .rail{top:58px;height:calc(100vh - 58px);padding-top:34px;}
+  .tabpanel section.phase{scroll-margin-top:80px;}
+
   @media (max-width:960px){
     .rail{display:none;}
     main{padding:0 22px 90px;}
@@ -284,10 +337,34 @@
     .visual-grid{grid-template-columns:1fr;}
     .phase-head{gap:16px;}
     .keystone{padding:28px 24px;}
+    .tb-brand{display:none;}
+    .tabbar{padding:8px 16px;}
   }
 </style>
 </head>
 <body>
+
+<!-- ============ TOP TABS ============ -->
+<div class="tabbar-wrap">
+  <div class="tabbar" role="tablist" aria-label="Sections">
+    <div class="tb-brand">Finest Clients<span>FB Ads</span></div>
+    <button class="tab active" role="tab" data-panel="tab-guide"><span class="tnum">◆</span>Field Guide</button>
+    <button class="tab" role="tab" data-panel="tab-course"><span class="tnum">01</span>Mastery · Intro</button>
+    <button class="tab" role="tab" data-panel="tab-m02"><span class="tnum">02</span>Business Manager</button>
+    <button class="tab" role="tab" data-panel="tab-m03"><span class="tnum">03</span>Pixel &amp; Events</button>
+    <button class="tab" role="tab" data-panel="tab-m04"><span class="tnum">04</span>Campaigns</button>
+    <button class="tab" role="tab" data-panel="tab-m05"><span class="tnum">05</span>Campaign Build</button>
+    <button class="tab" role="tab" data-panel="tab-m06"><span class="tnum">06</span>Copy &amp; Visuals</button>
+    <button class="tab" role="tab" data-panel="tab-m07"><span class="tnum">07</span>Metrics</button>
+    <button class="tab" role="tab" data-panel="tab-m08"><span class="tnum">08</span>Measurement</button>
+    <button class="tab" role="tab" data-panel="tab-m09"><span class="tnum">09</span>Optimization</button>
+    <button class="tab" role="tab" data-panel="tab-m10"><span class="tnum">10</span>Rules</button>
+    <button class="tab" role="tab" data-panel="tab-m11"><span class="tnum">11</span>Scaling</button>
+    <button class="tab" role="tab" data-panel="tab-m12"><span class="tnum">12</span>Funnels</button>
+  </div>
+</div>
+
+<div class="tabpanel active" id="tab-guide">
 <div class="shell">
 
   <!-- ============ PHASE RAIL ============ -->
@@ -982,25 +1059,2001 @@
   </div><!-- /inner -->
   </main>
 </div><!-- /shell -->
+</div><!-- /tab-guide -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 01 ============ -->
+<div class="tabpanel" id="tab-course" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 01 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 01</span></div>
+    <a href="#m1-picture"><span class="num">1</span>The Big Picture</a>
+    <a href="#m1-demand"><span class="num">2</span>Demand: Gen vs Fulfil</a>
+    <a href="#m1-budget"><span class="num">3</span>Budget &amp; Metrics</a>
+    <a href="#m1-auction"><span class="num">4</span>The Auction</a>
+    <a href="#m1-vs"><span class="num">5</span>Facebook vs Google</a>
+    <a href="#m1-strategy"><span class="num">6</span>The Pro Move</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 01</div>
+    <h1>Introduction to <em>Facebook ads.</em></h1>
+    <p class="lede">The mental model before any tactics: what Facebook ads really are, why we pick them over Google, and the hidden auction that decides who gets seen. You don't need any ads experience to follow this.</p>
+    <div class="meta">
+      <span>MODULE 01</span>
+      <span>WHY FB · DEMAND GEN · THE AUCTION</span>
+      <span>BEGINNER FRIENDLY</span>
+    </div>
+  </header>
+
+  <!-- 1 -->
+  <section class="phase reveal" id="m1-picture">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>The big picture: almost everyone is already here</h2>
+        <div class="sub">The audience is huge, it spans four platforms, and it is visual. That combination is the whole reason we start on Facebook.</div>
+      </div>
+    </div>
+    <p>The audience is massive and it isn't going anywhere. As of early 2023, when this course was recorded, Facebook had roughly <strong>2.9 billion monthly active users</strong> worldwide, including about <strong>490 million in India</strong>, close to a third of the country in one place. Treat the exact figures as a dated snapshot rather than gospel, but the point holds: this is where the market lives.</p>
+    <p>And Facebook is no longer just Facebook. Meta owns four connected platforms, and <strong>one ad account reaches all of them</strong>:</p>
+    <ul class="plain">
+      <li><strong>Facebook</strong>: still the widest reach, especially for older Indian audiences.</li>
+      <li><strong>Instagram</strong>: the second most used, strong for visual and younger buyers.</li>
+      <li><strong>Messenger &amp; WhatsApp</strong>: where you can drive people straight into a conversation.</li>
+    </ul>
+    <p>There is one edge Google search can't match: Facebook is a <strong>visual medium</strong>. You tell a story with images, video, carousels, and collections. A search result is plain text. Here you grab attention with something people actually want to look at, and attention is the whole game.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="phase reveal" id="m1-demand">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>Demand generation vs demand fulfilment</h2>
+        <div class="sub">The single most important idea in this module. Get it and everything downstream clicks into place.</div>
+      </div>
+    </div>
+    <p>Here is the distinction that separates people who understand paid ads from people who just push buttons.</p>
+    <div class="keystone">
+      <div class="eyebrow">Memorize This</div>
+      <div class="big-line">Google <em>fulfils</em> demand that already exists.<br>Facebook <em>generates</em> demand that doesn't.</div>
+      <p>On Google, people are searching. They already want the thing, so you just show up to meet them. Intent is high, but the market is capped at how many people are looking. On Facebook, nobody asked for your ad. You interrupt the scroll, so it has to be relevant or it gets ignored. In return, you reach people who didn't even know your solution existed. <strong>You're not fighting over existing demand. You're creating new demand.</strong></p>
+    </div>
+    <p>A real example from the trainer: he bought a bamboo fibre towel from an Instagram ad. He'd never have searched Google for that, because he didn't know better towels existed. That's demand generation. Facebook planted the idea. Google could only have helped if he already wanted it.</p>
+    <table>
+      <tr><th style="width:26%;"></th><th>Google (search)</th><th>Facebook / Instagram</th></tr>
+      <tr><td><b>Type</b></td><td>Inbound, demand fulfilment</td><td>Outbound, demand generation</td></tr>
+      <tr><td><b>Buyer intent</b></td><td>High, they're searching</td><td>Low, they're scrolling</td></tr>
+      <tr><td><b>Data on people</b></td><td>Shallow, intent is enough</td><td>Deep: demographics, interests, behaviour, location, age</td></tr>
+      <tr><td><b>Ceiling</b></td><td>Limited by search volume</td><td>Limited only by budget and audience size</td></tr>
+      <tr><td><b>Format</b></td><td>Mostly text</td><td>Image, video, carousel, collection</td></tr>
+      <tr><td><b>Cost per click</b></td><td>Usually higher</td><td>Usually lower (endless scroll = more ad space)</td></tr>
+    </table>
+  </section>
+
+  <!-- 3 -->
+  <section class="phase reveal" id="m1-budget">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>You control the spend, and you can see everything</h2>
+        <div class="sub">Two reasons Facebook is safe to learn on: hard budget caps, and metrics far deeper than Google gives you.</div>
+      </div>
+    </div>
+    <p><strong>Cost control first.</strong> You set a daily budget (spend ₹1,000 a day) or a lifetime budget (₹50,000 across the whole campaign), and Facebook never overspends it. You decide the ceiling, not the platform.</p>
+    <p><strong>Then measurability.</strong> The dashboard shows far more than Google ever exposes:</p>
+    <div class="check">
+      <div class="row">Reach and impressions (how many people, how many times shown)</div>
+      <div class="row">Frequency (how often one person sees the same ad)</div>
+      <div class="row">CTR (who actually clicked)</div>
+      <div class="row">Landing page views (who arrived on the page)</div>
+      <div class="row">Add-to-cart and checkout (who moved toward buying)</div>
+      <div class="row">Purchases (who actually paid)</div>
+    </div>
+    <div class="why">
+      <strong>Why this matters on day one</strong>
+      Because you can see every step, you can find the exact place people drop off and fix that one thing. Vague "the ads aren't working" becomes "80% reach the page but only 5% book". That is a fixable problem, not a mystery.
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="phase reveal" id="m1-auction">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>How the auction actually decides who gets seen</h2>
+        <div class="sub">Every ad slot is an auction, but the highest bid does not automatically win. Relevance does most of the work.</div>
+      </div>
+    </div>
+    <p>This surprises almost everyone. You can bid less than a competitor and still win the slot. Here is the real formula:</p>
+    <div class="card">
+      <div class="eyebrow" style="margin-bottom:12px;">The winning formula</div>
+      <p style="margin-bottom:0;"><strong>Winner = your bid × your action rate.</strong> Action rate is basically how relevant and engaging your ad is. Facebook scores it with three rankings you'll see in the dashboard: <strong>quality ranking</strong>, <strong>engagement ranking</strong> (likes, comments, shares), and <strong>conversion rate ranking</strong> (leads and sales).</p>
+    </div>
+    <div class="why">
+      <strong>Why relevance beats a bigger bid</strong>
+      Say you bid ₹1 and I bid ₹2 for the same audience. You'd expect me to win. But if your ad is more relevant and pulls 100 clicks while mine pulls 10, Facebook earns far more from you per impression, so it shows your cheaper ad more often. Relevant ads are cheaper <em>and</em> get shown more. This is exactly why we obsess over research and creative, not bid size.
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="phase reveal" id="m1-vs">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Facebook vs Google, honestly</h2>
+        <div class="sub">Real strengths, and the real costs you sign up for. Know both before you spend.</div>
+      </div>
+    </div>
+    <div class="do-dont">
+      <div class="do">
+        <span class="lbl">Strengths</span>
+        <ul>
+          <li>Huge reach with precise targeting (job title, age, location, interests)</li>
+          <li>Visual storytelling that lifts engagement and conversion</li>
+          <li>Social proof: likes, comments, and shares make ads more persuasive</li>
+          <li>Usually lower cost per click than Google in the same niche</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <span class="lbl">Watch-outs</span>
+        <ul>
+          <li>Ad fatigue is fast. People go blind to the same ad, and some get annoyed</li>
+          <li>Search intent is low or zero. You're interrupting, not being invited</li>
+          <li>Results are less consistent, and privacy changes keep shrinking the data</li>
+          <li>Each ad points to one action, and it needs a team feeding it fresh creative</li>
+        </ul>
+      </div>
+    </div>
+    <p>Google is closer to "set it and forget it": a search ad for a stable keyword can run for years untouched. Facebook is a living system that needs constant creative. Neither is better in the abstract. They do different jobs, and we use Facebook because we want to <em>create</em> demand, not just collect it.</p>
+  </section>
+
+  <!-- 6 -->
+  <section class="phase reveal" id="m1-strategy">
+    <div class="phase-head">
+      <div class="big-num">6</div>
+      <div>
+        <h2>The pro move: don't sell, warm the market</h2>
+        <div class="sub">The mindset that turns cold strangers into buyers who did not exist yet.</div>
+      </div>
+    </div>
+    <p>The biggest beginner mistake is trying to sell the product directly in the ad. On a demand-generation platform, that's shoving a cold stranger toward something they never asked for. The trainer's approach, and ours, is different:</p>
+    <ol class="steps">
+      <li>Advertise <strong>free, valuable content</strong>, not the paid offer.</li>
+      <li>Pull people into a <strong>funnel</strong> and capture their contact details.</li>
+      <li><strong>Nurture</strong> with email until trust is built.</li>
+      <li>Then make the <strong>offer</strong> they can't resist.</li>
+    </ol>
+    <p>This does something powerful. When your ads convince people they need a solution, you warm up the <em>entire market</em>, not just your own audience. Some of them take a year of emails before they buy. You're creating buyers who didn't exist yet.</p>
+    <div class="keystone">
+      <div class="eyebrow">The Mindset That Scales</div>
+      <div class="big-line">Master the fundamentals, <em>not the tricks.</em></div>
+      <p>Tactics are short-lived. Fundamentals let you invent your own tactics and stay ahead of the curve. When you understand the process, a campaign isn't emotional. You either know it will win, or you know exactly why it lost.</p>
+    </div>
+    <div class="why">
+      <strong>Why lead costs keep rising, and why that's normal</strong>
+      Facebook costs climb over time because more advertisers compete for the same feed. A cosmetics brand isn't your competitor, but its ads still fill the space where yours could show. You can't optimize your way out of the market price forever. The real fix isn't endless ad tweaking. It's a strong offer, good nurture, and a sales process that earns enough per lead that you can happily pay the going rate and keep reinvesting.
+    </div>
+    <div class="action">
+      <div class="lbl">What this means for you</div>
+      <ul>
+        <li>Never judge an ad by bid size. Judge it by relevance: quality, engagement, and conversion rankings.</li>
+        <li>Think demand generation. We advertise content and warm people up; we don't hard-sell cold traffic.</li>
+        <li>Learn the fundamentals before chasing any tactic you see online.</li>
+        <li>Expect lead costs to drift up over time. The answer is a better funnel, not just a lower bid.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 01 · INTERNAL TRAINING</div>
+  </footer>
+
+  </div><!-- /inner -->
+  </main>
+</div><!-- /shell -->
+</div><!-- /tab-course -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 02 ============ -->
+<div class="tabpanel" id="tab-m02" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 02 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 02</span></div>
+    <a href="#m2-why"><span class="num">1</span>Why BM Exists</a>
+    <a href="#m2-map"><span class="num">2</span>The Hierarchy</a>
+    <a href="#m2-access"><span class="num">3</span>Access Control</a>
+    <a href="#m2-assets"><span class="num">4</span>Assets &amp; Data</a>
+    <a href="#m2-safety"><span class="num">5</span>Safety Setup</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 02</div>
+    <h1>Set up the <em>business machine.</em></h1>
+    <p class="lede">Before campaigns, there is infrastructure: Business Manager, ad accounts, pages, pixels, domains, payment methods, people, partners, and backups. This module is the map of who owns what.</p>
+    <div class="meta">
+      <span>MODULE 02</span>
+      <span>BUSINESS MANAGER · ACCESS · SECURITY</span>
+      <span>OPS FOUNDATION</span>
+    </div>
+  </header>
+
+  <section class="phase reveal" id="m2-why">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>Why Business Manager matters</h2>
+        <div class="sub">A personal ad account is fragile. A verified business setup gives the account a real legal identity.</div>
+      </div>
+    </div>
+    <p>The first principle: <strong>Meta trusts a real person first, then a real business.</strong> Do not create a fake profile just to create Business Manager. Use a complete, legitimate Facebook profile because everything still starts from that identity.</p>
+    <p>A Business Manager account gives you structure and recovery paths. You can verify the business with documents, add more people safely, request or share client access, centralize payments, and get better support if an ad account gets disabled.</p>
+    <div class="why">
+      <strong>Agency mindset</strong>
+      Never ask a client for their personal Facebook login. Both sides should use Business Manager, then share only the assets required for the work.
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m2-map">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>The hierarchy: business first, assets below</h2>
+        <div class="sub">Most confusion disappears when you stop thinking of it as one account and start seeing it as a container of assets.</div>
+      </div>
+    </div>
+    <figure class="visual diagram-visual">
+      <svg viewBox="0 0 860 390" role="img" aria-label="Business Manager hierarchy with people, partners and assets">
+        <title>Business Manager hierarchy with people, partners and assets</title>
+        <rect width="860" height="390" fill="#FAF7F0"/>
+        <rect x="280" y="28" width="300" height="70" rx="14" fill="#16305A"/>
+        <text x="430" y="58" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Business Manager</text>
+        <text x="430" y="82" text-anchor="middle" font-size="12" fill="#F3E8CE">verified company container</text>
+        <path d="M430 98V138M185 138H675" stroke="#B8860B" stroke-width="3" fill="none"/>
+        <g fill="#FFFFFF" stroke="#DCD4C3" stroke-width="2">
+          <rect x="52" y="146" width="170" height="70" rx="12"/>
+          <rect x="250" y="146" width="170" height="70" rx="12"/>
+          <rect x="448" y="146" width="170" height="70" rx="12"/>
+          <rect x="646" y="146" width="170" height="70" rx="12"/>
+        </g>
+        <g font-size="17" font-weight="700" fill="#16305A">
+          <text x="137" y="176" text-anchor="middle">Ad Accounts</text>
+          <text x="335" y="176" text-anchor="middle">Pages</text>
+          <text x="533" y="176" text-anchor="middle">Pixels</text>
+          <text x="731" y="176" text-anchor="middle">Domains</text>
+        </g>
+        <g font-size="12" fill="#4A5468">
+          <text x="137" y="197" text-anchor="middle">spend + campaigns</text>
+          <text x="335" y="197" text-anchor="middle">organic + ad identity</text>
+          <text x="533" y="197" text-anchor="middle">site behavior data</text>
+          <text x="731" y="197" text-anchor="middle">verified traffic homes</text>
+        </g>
+        <g fill="#F3E8CE" stroke="#D5BD83" stroke-width="2">
+          <rect x="122" y="274" width="190" height="64" rx="12"/>
+          <rect x="335" y="274" width="190" height="64" rx="12"/>
+          <rect x="548" y="274" width="190" height="64" rx="12"/>
+        </g>
+        <text x="217" y="302" text-anchor="middle" font-size="16" font-weight="700" fill="#16305A">People</text>
+        <text x="430" y="302" text-anchor="middle" font-size="16" font-weight="700" fill="#16305A">Partners</text>
+        <text x="643" y="302" text-anchor="middle" font-size="16" font-weight="700" fill="#16305A">Payments</text>
+        <text x="217" y="322" text-anchor="middle" font-size="12" fill="#4A5468">admins + employees</text>
+        <text x="430" y="322" text-anchor="middle" font-size="12" fill="#4A5468">agencies + clients</text>
+        <text x="643" y="322" text-anchor="middle" font-size="12" fill="#4A5468">shared billing methods</text>
+        <path d="M217 216v58M430 216v58M643 216v58" stroke="#D5BD83" stroke-width="2" stroke-dasharray="6 7"/>
+      </svg>
+      <figcaption>Think of Business Manager as the vault. Ad accounts, pages, pixels, domains, people, and payments sit inside it.</figcaption>
+    </figure>
+    <p>The simple hierarchy is: <strong>Business Manager → ad accounts → pages and data sources.</strong> A page is the public identity that runs the ad. An ad account is where spend and campaigns live. A pixel is the data source that tracks what happens on the website.</p>
+  </section>
+
+  <section class="phase reveal" id="m2-access">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>Give access without giving away control</h2>
+        <div class="sub">Business Manager exists so the right person can touch the right asset and nothing else.</div>
+      </div>
+    </div>
+    <div class="do-dont">
+      <div class="do">
+        <span class="lbl">Do</span>
+        <ul>
+          <li>Add team members under <strong>People</strong> and assign only the assets they need.</li>
+          <li>Use <strong>Partners</strong> when an agency or client shares a business ID.</li>
+          <li>Give accountant-style access when someone only needs spend or invoice visibility.</li>
+          <li>Request ad account access instead of asking clients to transfer ownership.</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <span class="lbl">Avoid</span>
+        <ul>
+          <li>Sharing personal Facebook passwords.</li>
+          <li>Giving full Business Manager admin access to every employee.</li>
+          <li>Assuming pixel, domain, audience, and ad account access come together.</li>
+          <li>Making major access changes without checking who owns the asset.</li>
+        </ul>
+      </div>
+    </div>
+    <p>For client work, the flow is usually: client owns the business and ad account, agency requests partner access, then the agency assigns its internal team members from its own Business Manager.</p>
+  </section>
+
+  <section class="phase reveal" id="m2-assets">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>Pages, pixels, domains, audiences, and WhatsApp</h2>
+        <div class="sub">Running ads is not just an ad account. The campaign needs all supporting assets connected.</div>
+      </div>
+    </div>
+    <div class="gloss">
+      <div class="term"><b>Page</b>The identity shown on the ad. It can also publish organic posts.</div>
+      <div class="term"><b>Instagram</b>Linked so ads can run under the correct IG identity.</div>
+      <div class="term"><b>WhatsApp</b>Can connect to a business number, usually handled through tools like Interakt or similar providers.</div>
+      <div class="term"><b>Pixel</b>Website behavior data. It must be shared separately from the ad account.</div>
+      <div class="term"><b>Domain</b>Verified with a meta tag so Meta knows you own the traffic destination.</div>
+      <div class="term"><b>Audience</b>Customer lists, saved audiences, or website visitors. These can be shared without exposing raw customer data.</div>
+    </div>
+    <div class="keystone">
+      <div class="eyebrow">Important Distinction</div>
+      <div class="big-line">Sharing an ad account does <em>not</em> automatically share the pixel, domain, or audience.</div>
+      <p>If a partner needs to optimize campaigns properly, check every required asset: ad account, page, pixel, domain, custom audiences, Instagram account, and payment access where relevant.</p>
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m2-safety">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Safety setup before spend</h2>
+        <div class="sub">Good operators reduce avoidable risk before the first campaign goes live.</div>
+      </div>
+    </div>
+    <div class="check">
+      <div class="row">Verify the business with proper documents where available.</div>
+      <div class="row">Add a backup admin so one locked profile does not lock the company out.</div>
+      <div class="row">Turn on two-factor authentication for profiles and Business Manager.</div>
+      <div class="row">Add payment methods centrally when multiple owned ad accounts need billing access.</div>
+      <div class="row">Verify domains before sending paid traffic.</div>
+      <div class="row">Know where support lives, but do not depend on support to rescue policy mistakes.</div>
+    </div>
+    <div class="action">
+      <div class="lbl">Module 02 operating checklist</div>
+      <ul>
+        <li>Create or confirm the Business Manager from a real, complete Facebook profile.</li>
+        <li>Map every asset: ad account, page, pixel, domain, Instagram, WhatsApp, audiences, payments.</li>
+        <li>Assign people and partners using least-privilege access.</li>
+        <li>Verify business, domain, two-factor authentication, and backup admin before launch.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 02 · BUSINESS MANAGER</div>
+  </footer>
+
+  </div>
+  </main>
+</div>
+</div><!-- /tab-m02 -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 03 ============ -->
+<div class="tabpanel" id="tab-m03" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 03 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 03</span></div>
+    <a href="#m3-pixel"><span class="num">1</span>Pixel Basics</a>
+    <a href="#m3-install"><span class="num">2</span>Install &amp; Test</a>
+    <a href="#m3-events"><span class="num">3</span>Events</a>
+    <a href="#m3-custom"><span class="num">4</span>Custom Conversions</a>
+    <a href="#m3-audiences"><span class="num">5</span>Audience Data</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 03</div>
+    <h1>Pixel, events, and <em>conversion memory.</em></h1>
+    <p class="lede">The pixel tells Meta what happens after the click. Without it, campaigns optimize for cheap clicks. With it, campaigns can learn who becomes a lead, who buys, and who should see the next ad.</p>
+    <div class="meta">
+      <span>MODULE 03</span>
+      <span>PIXEL · STANDARD EVENTS · CUSTOM CONVERSIONS</span>
+      <span>TRACKING FOUNDATION</span>
+    </div>
+  </header>
+
+  <section class="phase reveal" id="m3-pixel">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>The pixel is a tiny code with a big job</h2>
+        <div class="sub">It records page views and conversion behavior so Meta can optimize for people who take real actions.</div>
+      </div>
+    </div>
+    <p>The Meta pixel is a small JavaScript snippet tied to a unique pixel ID. By default it tracks <strong>PageView</strong>, meaning Meta can see that a visitor reached a page where the pixel loaded.</p>
+    <p>The old "pixel" name comes from the fallback tracking image: a hidden 1×1 image that could fire even when JavaScript was limited. Modern pixel setup is more powerful, but the idea is the same: <strong>send behavior data back to the ad account.</strong></p>
+    <div class="why">
+      <strong>Why conversion data matters</strong>
+      If you optimize for clicks, Meta finds clickers. If you optimize for leads or purchases, Meta studies the people who converted and tries to find more like them.
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m3-install">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>Install it site-wide, then prove it fires</h2>
+        <div class="sub">Do not trust that a pixel exists until you have tested it from the browser and inside Events Manager.</div>
+      </div>
+    </div>
+    <figure class="visual diagram-visual">
+      <svg viewBox="0 0 860 320" role="img" aria-label="Pixel data flow from ad click to optimization">
+        <title>Pixel data flow from ad click to optimization</title>
+        <rect width="860" height="320" fill="#FAF7F0"/>
+        <g stroke="#B8860B" stroke-width="3" fill="none" stroke-linecap="round">
+          <path d="M170 158H330"/>
+          <path d="M530 158H690"/>
+          <path d="M760 190C720 255 570 276 430 260C290 244 220 216 185 185"/>
+        </g>
+        <g fill="#FFFFFF" stroke="#DCD4C3" stroke-width="2">
+          <rect x="40" y="94" width="150" height="128" rx="14"/>
+          <rect x="350" y="94" width="160" height="128" rx="14"/>
+          <rect x="670" y="94" width="150" height="128" rx="14"/>
+        </g>
+        <rect x="62" y="120" width="106" height="58" rx="8" fill="#16305A"/>
+        <text x="115" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Ad Click</text>
+        <text x="115" y="168" text-anchor="middle" font-size="12" fill="#F3E8CE">Facebook / Instagram</text>
+        <circle cx="430" cy="135" r="30" fill="#F3E8CE" stroke="#B8860B" stroke-width="2"/>
+        <text x="430" y="142" text-anchor="middle" font-size="20" font-weight="700" fill="#16305A">fbq</text>
+        <text x="430" y="190" text-anchor="middle" font-size="15" font-weight="700" fill="#16305A">Website Pixel</text>
+        <text x="430" y="210" text-anchor="middle" font-size="12" fill="#4A5468">PageView + events</text>
+        <rect x="696" y="118" width="98" height="62" rx="8" fill="#16305A"/>
+        <text x="745" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Events</text>
+        <text x="745" y="168" text-anchor="middle" font-size="12" fill="#F3E8CE">Manager</text>
+        <text x="430" y="284" text-anchor="middle" font-size="14" fill="#4A5468">Data loops back into delivery, custom audiences, and lookalikes.</text>
+      </svg>
+      <figcaption>Pixel data is the feedback loop. It turns the landing page into part of the ad system.</figcaption>
+    </figure>
+    <ol class="steps">
+      <li>Create the pixel from Events Manager under the correct ad account.</li>
+      <li>Install it manually or through a site-wide header/footer tool. On WordPress, the transcript uses Header Footer Code Manager.</li>
+      <li>Enable advanced matching when appropriate so Meta can match more visitors to profiles.</li>
+      <li>Open the page source and search for <code class="k">fbq</code>, then use Meta Pixel Helper and Events Manager's test events.</li>
+    </ol>
+  </section>
+
+  <section class="phase reveal" id="m3-events">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>Standard events tell Meta what action happened</h2>
+        <div class="sub">Page views are only the start. Lead and Purchase events are what make optimization useful.</div>
+      </div>
+    </div>
+    <div class="gloss">
+      <div class="term"><b>Lead</b>Usually fires on the thank-you page after someone submits a form.</div>
+      <div class="term"><b>CompleteRegistration</b>Useful when a signup is more like account or webinar registration.</div>
+      <div class="term"><b>InitiateCheckout</b>Shows that a buyer started the checkout flow.</div>
+      <div class="term"><b>Purchase</b>Best for sales campaigns, especially when value and currency are passed back.</div>
+    </div>
+    <p>Standard events can be installed as code or configured with the Event Setup Tool by tracking a URL or button. For lead generation, the simplest reliable pattern is: form submit → redirect to thank-you page → fire the <strong>Lead</strong> event there.</p>
+    <div class="keystone">
+      <div class="eyebrow">Optimization Rule</div>
+      <div class="big-line">Do not run lead campaigns if the <em>Lead</em> event is not firing.</div>
+      <p>Otherwise Meta cannot learn who became a lead. It can only optimize for cheaper clicks or page views, which is a different population of people.</p>
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m3-custom">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>Standard events vs custom conversions</h2>
+        <div class="sub">Both can measure outcomes, but they behave differently.</div>
+      </div>
+    </div>
+    <table>
+      <tr><th></th><th>Standard event</th><th>Custom conversion</th></tr>
+      <tr><td><b>How it works</b></td><td>Event code or event setup fires a named action like Lead or Purchase.</td><td>Meta matches a URL rule, often a specific thank-you page.</td></tr>
+      <tr><td><b>Best for</b></td><td>Reusable events, purchases, dynamic product/cart values, custom audiences.</td><td>Separating one funnel from another when both use the same event.</td></tr>
+      <tr><td><b>Value tracking</b></td><td>Can pass dynamic value and currency for purchase/ROAS reporting.</td><td>Usually fixed value, not dynamic.</td></tr>
+      <tr><td><b>Audiences</b></td><td>Can be used to build custom audiences and lookalikes.</td><td>More limited; useful as a campaign optimization target.</td></tr>
+    </table>
+    <p>Example: a lead magnet and a webinar may both fire <strong>Lead</strong>. If you want to optimize only for webinar registrations, create a custom conversion for the webinar thank-you page.</p>
+  </section>
+
+  <section class="phase reveal" id="m3-audiences">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Pixels become audiences</h2>
+        <div class="sub">Once events fire, you can retarget converters or ask Meta to find more people like them.</div>
+      </div>
+    </div>
+    <p>After enough people visit pages or trigger events, you can build custom audiences: all website visitors, people who fired Lead in the last 30 or 90 days, people who viewed checkout, buyers, or people who visited a specific page.</p>
+    <p>Those custom audiences become seeds for <strong>lookalike audiences</strong>. The cleaner the seed, the better the lookalike. A list of engaged leads or buyers is better than a raw list of everyone who ever joined an email list.</p>
+    <div class="action">
+      <div class="lbl">Module 03 setup checklist</div>
+      <ul>
+        <li>Create the pixel under the correct ad account and install it site-wide.</li>
+        <li>Test PageView, then configure Lead and Purchase where relevant.</li>
+        <li>Use custom conversions for specific thank-you pages or funnel-specific outcomes.</li>
+        <li>Create custom audiences from important events, then use them for retargeting and lookalikes.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 03 · PIXEL &amp; EVENTS</div>
+  </footer>
+
+  </div>
+  </main>
+</div>
+</div><!-- /tab-m03 -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 04 ============ -->
+<div class="tabpanel" id="tab-m04" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 04 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 04</span></div>
+    <a href="#m4-objectives"><span class="num">1</span>Objectives</a>
+    <a href="#m4-leads"><span class="num">2</span>Leads vs Clicks</a>
+    <a href="#m4-structure"><span class="num">3</span>Structure</a>
+    <a href="#m4-budget"><span class="num">4</span>Budget Math</a>
+    <a href="#m4-rhythm"><span class="num">5</span>Monitoring</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 04</div>
+    <h1>Campaign types, structure, and <em>budget logic.</em></h1>
+    <p class="lede">The campaign objective tells Meta what kind of person to find. Pick the wrong objective and the system can deliver exactly what you asked for, while your business gets nothing useful.</p>
+    <div class="meta">
+      <span>MODULE 04</span>
+      <span>OBJECTIVES · STRUCTURE · BUDGETING</span>
+      <span>CAMPAIGN PLANNING</span>
+    </div>
+  </header>
+
+  <section class="phase reveal" id="m4-objectives">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>Every objective trains Meta for a different behavior</h2>
+        <div class="sub">Clicks, views, leads, purchases, messages, and engagement are different audiences inside the same platform.</div>
+      </div>
+    </div>
+    <table>
+      <tr><th>Objective</th><th>Use it when</th><th>Beginner warning</th></tr>
+      <tr><td><b>Awareness / reach</b></td><td>You want memory, visibility, or brand recall.</td><td>Useful for brand building, not direct lead ROI.</td></tr>
+      <tr><td><b>Video views</b></td><td>You want people to watch 15 seconds or more, or finish short videos.</td><td>Great for warming audiences, not necessarily leads.</td></tr>
+      <tr><td><b>Traffic</b></td><td>You want clicks or landing page views.</td><td>Clickers are not always converters.</td></tr>
+      <tr><td><b>Engagement</b></td><td>You want likes, comments, shares, or social proof on a post.</td><td>Comments can help or hurt if moderation is weak.</td></tr>
+      <tr><td><b>Leads</b></td><td>You want form fills or website lead events.</td><td>Website leads usually beat instant forms for quality.</td></tr>
+      <tr><td><b>Sales</b></td><td>You can pass purchase behavior and value back to Meta.</td><td>Needs tracking quality and enough purchase data.</td></tr>
+    </table>
+  </section>
+
+  <section class="phase reveal" id="m4-leads">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>Do not ask a traffic campaign for leads</h2>
+        <div class="sub">If you choose traffic, Meta finds people likely to click. If you choose leads, it finds people likely to convert.</div>
+      </div>
+    </div>
+    <div class="keystone">
+      <div class="eyebrow">Beginner Trap</div>
+      <div class="big-line">A cheap click is not a lead.<br>A cheap lead is not a buyer.</div>
+      <p>The objective sets the learning target. A traffic campaign can get 200 clicks and zero leads because it did its job: it found clickers. For lead generation, use the Leads objective with a website conversion event whenever quality matters.</p>
+    </div>
+    <p>Instant forms reduce friction because Facebook pre-fills name and email. That can lower CPL, but quality often drops because people submit casually or forget they opted in. A landing page form adds friction, but the lead usually understands the offer better.</p>
+  </section>
+
+  <section class="phase reveal" id="m4-structure">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>The starting structure: one campaign, multiple tests</h2>
+        <div class="sub">Give Meta enough variation to learn, but keep the structure simple enough to read.</div>
+      </div>
+    </div>
+    <figure class="visual diagram-visual">
+      <svg viewBox="0 0 860 360" role="img" aria-label="Recommended Facebook campaign structure">
+        <title>Recommended Facebook campaign structure</title>
+        <rect width="860" height="360" fill="#FAF7F0"/>
+        <rect x="282" y="28" width="296" height="58" rx="14" fill="#16305A"/>
+        <text x="430" y="64" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">1 Campaign: Leads</text>
+        <path d="M430 86V116M118 116H742" stroke="#B8860B" stroke-width="3" fill="none"/>
+        <g fill="#FFFFFF" stroke="#DCD4C3" stroke-width="2">
+          <rect x="40" y="124" width="170" height="78" rx="12"/>
+          <rect x="250" y="124" width="170" height="78" rx="12"/>
+          <rect x="460" y="124" width="170" height="78" rx="12"/>
+          <rect x="650" y="124" width="170" height="78" rx="12"/>
+        </g>
+        <g font-size="15" font-weight="700" fill="#16305A">
+          <text x="125" y="156" text-anchor="middle">Ad Set 1</text>
+          <text x="335" y="156" text-anchor="middle">Ad Set 2</text>
+          <text x="545" y="156" text-anchor="middle">Ad Set 3</text>
+          <text x="735" y="156" text-anchor="middle">Ad Set 4</text>
+        </g>
+        <g font-size="12" fill="#4A5468">
+          <text x="125" y="180" text-anchor="middle">digital marketing</text>
+          <text x="335" y="180" text-anchor="middle">online marketing</text>
+          <text x="545" y="180" text-anchor="middle">lead generation</text>
+          <text x="735" y="180" text-anchor="middle">email marketing</text>
+        </g>
+        <g fill="#F3E8CE" stroke="#D5BD83" stroke-width="1.6">
+          <rect x="70" y="254" width="42" height="42" rx="8"/><rect x="118" y="254" width="42" height="42" rx="8"/><rect x="166" y="254" width="42" height="42" rx="8"/>
+          <rect x="280" y="254" width="42" height="42" rx="8"/><rect x="328" y="254" width="42" height="42" rx="8"/><rect x="376" y="254" width="42" height="42" rx="8"/>
+          <rect x="490" y="254" width="42" height="42" rx="8"/><rect x="538" y="254" width="42" height="42" rx="8"/><rect x="586" y="254" width="42" height="42" rx="8"/>
+          <rect x="680" y="254" width="42" height="42" rx="8"/><rect x="728" y="254" width="42" height="42" rx="8"/><rect x="776" y="254" width="42" height="42" rx="8"/>
+        </g>
+        <g font-size="13" font-weight="700" fill="#16305A">
+          <text x="139" y="238" text-anchor="middle">4 ads each</text>
+          <text x="349" y="238" text-anchor="middle">4 ads each</text>
+          <text x="559" y="238" text-anchor="middle">4 ads each</text>
+          <text x="749" y="238" text-anchor="middle">4 ads each</text>
+        </g>
+        <text x="430" y="330" text-anchor="middle" font-size="13" fill="#4A5468">Use 1 video + 3 image ads per ad set when starting. Let Meta identify winners after enough data.</text>
+      </svg>
+      <figcaption>One broad interest per ad set keeps results readable. Four ads per ad set gives Meta creative options.</figcaption>
+    </figure>
+    <p>The recommended beginner structure is <strong>one campaign</strong>, <strong>three to four ad sets</strong>, and <strong>four ads per ad set</strong>. Each ad set gets one broad interest so you can see which audience is actually producing results.</p>
+  </section>
+
+  <section class="phase reveal" id="m4-budget">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>Budgeting starts from funnel math, not guessing</h2>
+        <div class="sub">You cannot answer "how much should I spend?" without conversion assumptions.</div>
+      </div>
+    </div>
+    <p>The budgeting sheet uses the funnel backwards. Decide how many leads or sales you need, then estimate the inputs:</p>
+    <div class="sys">
+      <div class="row"><span><b>Landing page conversion rate</b> — out of 100 visitors, how many fill the form or buy?</span></div>
+      <div class="row"><span><b>Link click to landing page ratio</b> — out of 100 clicks, how many actually load the page?</span></div>
+      <div class="row"><span><b>CTR</b> — out of 100 impressions, how many click the ad?</span></div>
+      <div class="row"><span><b>CPM</b> — cost to buy 1,000 impressions in that audience.</span></div>
+      <div class="row"><span><b>Target volume</b> — how many leads or sales you need in the campaign period.</span></div>
+    </div>
+    <div class="why">
+      <strong>Use real numbers quickly</strong>
+      The first sheet uses assumptions. After 10,000 impressions or a few days of data, replace assumptions with your actual CPM, CTR, landing page views, and conversion rate.
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m4-rhythm">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Monitor because Facebook is not set-and-forget</h2>
+        <div class="sub">Costs move as Meta reaches colder people and frequency rises.</div>
+      </div>
+    </div>
+    <p>Facebook usually shows ads first to the people most likely to convert. As you spend more, it must reach colder people, CTR can drop, frequency can rise, and CPL can climb. That is why every campaign needs daily or at least weekly monitoring.</p>
+    <div class="action">
+      <div class="lbl">Module 04 launch checklist</div>
+      <ul>
+        <li>Use Leads or Sales when the business needs leads or sales.</li>
+        <li>Start with one campaign, three to four ad sets, and four ads per ad set.</li>
+        <li>Put each broad interest in its own ad set so results are readable.</li>
+        <li>Calculate budget from CPM, CTR, link-click-to-LP ratio, and landing page conversion.</li>
+        <li>Refresh assumptions with real data after three to seven days or around 10,000 impressions.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 04 · CAMPAIGN OVERVIEW</div>
+  </footer>
+
+  </div>
+  </main>
+</div>
+</div><!-- /tab-m04 -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 05 ============ -->
+<div class="tabpanel" id="tab-m05" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 05 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 05</span></div>
+    <a href="#m5-campaign"><span class="num">1</span>Campaign Setup</a>
+    <a href="#m5-targeting"><span class="num">2</span>Targeting</a>
+    <a href="#m5-research"><span class="num">3</span>Interest Research</a>
+    <a href="#m5-ad"><span class="num">4</span>Ad Level</a>
+    <a href="#m5-audience"><span class="num">5</span>Custom Audiences</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 05</div>
+    <h1>Build the first <em>lead campaign.</em></h1>
+    <p class="lede">This module walks through a practical campaign build: choose the right objective, target the right people, research interests, set placements, write the ad, and create audiences that improve over time.</p>
+    <div class="meta">
+      <span>MODULE 05</span>
+      <span>LEADS · TARGETING · AUDIENCES</span>
+      <span>HANDS-ON BUILD</span>
+    </div>
+  </header>
+
+  <section class="phase reveal" id="m5-campaign">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>Create a Leads campaign for website conversions</h2>
+        <div class="sub">Start by telling Meta the actual outcome: leads on your landing page, not instant-form curiosity.</div>
+      </div>
+    </div>
+    <ol class="steps">
+      <li>Create a new campaign and choose <strong>Leads</strong>.</li>
+      <li>At the ad set level, choose <strong>Website</strong> rather than instant forms when lead quality matters.</li>
+      <li>Use <strong>maximize number of conversions</strong> at the beginning.</li>
+      <li>Select the correct pixel and <strong>Lead</strong> conversion event.</li>
+      <li>Avoid setting a low cost-per-result goal too early; it can stop delivery before Meta has room to learn.</li>
+      <li>Schedule the campaign for the next day at midnight so the daily budget is spread across a full day.</li>
+    </ol>
+    <div class="why">
+      <strong>Timing detail</strong>
+      Launching a daily-budget campaign at 7 PM can force Meta to spend the day's budget in a few hours, often creating high CPL. Start clean at the beginning of the day.
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m5-targeting">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>Target location, age, and broad interests with intent</h2>
+        <div class="sub">The goal is not to find tiny perfect pockets. The goal is broad enough scale with enough relevance.</div>
+      </div>
+    </div>
+    <figure class="visual diagram-visual">
+      <svg viewBox="0 0 860 330" role="img" aria-label="Lead campaign setup path">
+        <title>Lead campaign setup path</title>
+        <rect width="860" height="330" fill="#FAF7F0"/>
+        <g fill="#FFFFFF" stroke="#DCD4C3" stroke-width="2">
+          <rect x="35" y="95" width="130" height="82" rx="12"/>
+          <rect x="195" y="95" width="130" height="82" rx="12"/>
+          <rect x="355" y="95" width="130" height="82" rx="12"/>
+          <rect x="515" y="95" width="130" height="82" rx="12"/>
+          <rect x="675" y="95" width="150" height="82" rx="12"/>
+        </g>
+        <g stroke="#B8860B" stroke-width="3" stroke-linecap="round">
+          <path d="M165 136H195M325 136H355M485 136H515M645 136H675"/>
+        </g>
+        <g font-size="14" font-weight="700" fill="#16305A">
+          <text x="100" y="124" text-anchor="middle">Objective</text>
+          <text x="260" y="124" text-anchor="middle">Event</text>
+          <text x="420" y="124" text-anchor="middle">Audience</text>
+          <text x="580" y="124" text-anchor="middle">Placement</text>
+          <text x="750" y="124" text-anchor="middle">Ad</text>
+        </g>
+        <g font-size="12" fill="#4A5468">
+          <text x="100" y="150" text-anchor="middle">Leads</text>
+          <text x="260" y="150" text-anchor="middle">Website Lead</text>
+          <text x="420" y="150" text-anchor="middle">location + age</text>
+          <text x="580" y="150" text-anchor="middle">exclude low quality</text>
+          <text x="750" y="150" text-anchor="middle">image/video + URL</text>
+        </g>
+        <rect x="105" y="234" width="650" height="52" rx="12" fill="#16305A"/>
+        <text x="430" y="266" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Use UTMs and hidden fields so every lead carries source, ad set, and ad name.</text>
+      </svg>
+      <figcaption>A campaign build is a chain. If the event or audience is wrong, the ad cannot rescue it.</figcaption>
+    </figure>
+    <p>Use <strong>people living in this location</strong> when you need residents, not travelers. For a large country like India, filter by city size or handpick top metros depending on buying power and offer type.</p>
+    <p>Keep interests broad enough to avoid extreme CPM. For a digital agency course, examples include digital marketing, online marketing, lead generation, email marketing, internet marketing, and search engine marketing.</p>
+  </section>
+
+  <section class="phase reveal" id="m5-research">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>Research interests before you build ad sets</h2>
+        <div class="sub">Do not stack interests forever inside one ad set, then wonder which one worked.</div>
+      </div>
+    </div>
+    <p>Use stacked seed interests only for research and suggestions. Once you find ideas, record them in a sheet and test them as separate ad sets whenever possible.</p>
+    <div class="sys">
+      <div class="row"><span><b>Dashboard suggestions</b> — stack a few relevant seeds, then use suggested interests.</span></div>
+      <div class="row"><span><b>External interest tools</b> — useful for generating ideas, but verify audience size inside Meta.</span></div>
+      <div class="row"><span><b>Graph API Explorer</b> — advanced way to discover interests by query, then validate them in Ads Manager.</span></div>
+      <div class="row"><span><b>Profile signals</b> — if you know a target buyer, inspect their visible interests, likes, books, tools, influencers, and brands.</span></div>
+    </div>
+    <div class="why">
+      <strong>Testing logic</strong>
+      If digital marketing, affiliate marketing, and email marketing are all inside one ad set, you cannot tell which one produced low-quality or high-quality leads.
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m5-ad">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>At the ad level, keep control of the message</h2>
+        <div class="sub">Meta has many optimization toggles. Use them intentionally, not blindly.</div>
+      </div>
+    </div>
+    <div class="check">
+      <div class="row">Select the correct Facebook page and Instagram account.</div>
+      <div class="row">Upload the image or video and review how it appears across placements.</div>
+      <div class="row">Turn off multi-advertiser expansion at the start if you want cleaner testing.</div>
+      <div class="row">Write primary text, headline, optional description, and choose the CTA button.</div>
+      <div class="row">Use a clean display URL so the ad looks trustworthy.</div>
+      <div class="row">Confirm the website event is tied to the correct pixel.</div>
+    </div>
+    <p>The transcript's default CTA choice is often <strong>Learn More</strong>. It has lower resistance than Sign Up or Buy Now when the landing page needs to explain before asking for action.</p>
+  </section>
+
+  <section class="phase reveal" id="m5-audience">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Custom and lookalike audiences compound over time</h2>
+        <div class="sub">Your best future targeting often comes from the data you are collecting today.</div>
+      </div>
+    </div>
+    <p>A custom audience can come from a customer list, an engaged email segment, website visitors, lead events, page engagement, or people who watched videos. Meta hashes uploaded data, so partners can use the audience without seeing the raw list.</p>
+    <p>For uploads, quality beats volume. A list of 1,000 engaged subscribers or buyers can be more useful than 10,000 cold leads who never open emails. Add value fields when you can so Meta learns which customers matter most.</p>
+    <table>
+      <tr><th>Audience type</th><th>What to use</th><th>Why it matters</th></tr>
+      <tr><td><b>Customer list</b></td><td>Email, phone with country code, name, location, value where available.</td><td>Retarget known people or create lookalikes.</td></tr>
+      <tr><td><b>Website activity</b></td><td>All visitors, Lead event, thank-you page, specific product page.</td><td>Retarget based on intent and behavior.</td></tr>
+      <tr><td><b>Lookalike</b></td><td>Use a strong custom audience as the seed.</td><td>Find new people who resemble converters or buyers.</td></tr>
+    </table>
+    <div class="action">
+      <div class="lbl">Module 05 build checklist</div>
+      <ul>
+        <li>Use Website Leads with maximize conversions for the first serious campaign.</li>
+        <li>Schedule from midnight, not late in the day.</li>
+        <li>Research interests, then test them in separate ad sets.</li>
+        <li>Set up ad-level copy, creative, CTA, URL, display URL, and pixel event carefully.</li>
+        <li>Create custom audiences from engaged lists and Lead events, then use them for lookalikes.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 05 · CAMPAIGN BUILD</div>
+  </footer>
+
+  </div>
+  </main>
+</div>
+</div><!-- /tab-m05 -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 06 ============ -->
+<div class="tabpanel" id="tab-m06" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 06 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 06</span></div>
+    <a href="#m6-awareness"><span class="num">1</span>Awareness</a>
+    <a href="#m6-hook"><span class="num">2</span>Hook</a>
+    <a href="#m6-aida"><span class="num">3</span>AIDA Copy</a>
+    <a href="#m6-creative"><span class="num">4</span>Visual Rules</a>
+    <a href="#m6-testing"><span class="num">5</span>Testing</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 06</div>
+    <h1>Create ad copy and visuals that <em>stop the scroll.</em></h1>
+    <p class="lede">Good ads speak to the right awareness level, open with a sharp hook, use simple copy, and pair the message with creative that looks clear, native, and worth clicking.</p>
+    <div class="meta">
+      <span>MODULE 06</span>
+      <span>AWARENESS · AIDA · CREATIVE TESTING</span>
+      <span>COPY + DESIGN</span>
+    </div>
+  </header>
+
+  <section class="phase reveal" id="m6-awareness">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>Write for the audience's awareness level</h2>
+        <div class="sub">Different ad sets contain different people. They should not all hear the same message.</div>
+      </div>
+    </div>
+    <figure class="visual diagram-visual">
+      <svg viewBox="0 0 860 360" role="img" aria-label="Five awareness levels mapped to ad message types">
+        <title>Five awareness levels mapped to ad message types</title>
+        <rect width="860" height="360" fill="#FAF7F0"/>
+        <path d="M95 270L235 225L375 180L515 135L655 90L770 58" stroke="#B8860B" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <g fill="#FFFFFF" stroke="#DCD4C3" stroke-width="2">
+          <rect x="55" y="246" width="150" height="72" rx="12"/>
+          <rect x="215" y="205" width="150" height="72" rx="12"/>
+          <rect x="375" y="162" width="150" height="72" rx="12"/>
+          <rect x="535" y="119" width="150" height="72" rx="12"/>
+          <rect x="650" y="40" width="160" height="72" rx="12"/>
+        </g>
+        <g font-size="15" font-weight="700" fill="#16305A">
+          <text x="130" y="275" text-anchor="middle">Unaware</text>
+          <text x="290" y="234" text-anchor="middle">Problem aware</text>
+          <text x="450" y="191" text-anchor="middle">Solution aware</text>
+          <text x="610" y="148" text-anchor="middle">Product aware</text>
+          <text x="730" y="69" text-anchor="middle">Most aware</text>
+        </g>
+        <g font-size="12" fill="#4A5468">
+          <text x="130" y="298" text-anchor="middle">name the hidden issue</text>
+          <text x="290" y="257" text-anchor="middle">show outsider insight</text>
+          <text x="450" y="214" text-anchor="middle">introduce mechanism</text>
+          <text x="610" y="171" text-anchor="middle">compare options</text>
+          <text x="730" y="92" text-anchor="middle">deal + urgency</text>
+        </g>
+      </svg>
+      <figcaption>The colder the audience, the more your ad must teach the problem before pitching the solution.</figcaption>
+    </figure>
+    <p>The transcript uses five awareness levels: unaware, problem aware, solution aware, product aware, and most aware. A beginner audience may need the problem named for them. A comparison-shopper may respond to discounts, urgency, or a direct reason to choose you.</p>
+    <p>That is why the same product can need several angles. Email marketers, agency owners, freshers, and web developers may all be relevant, but each group needs a hook that sounds like it was written for them.</p>
+  </section>
+
+  <section class="phase reveal" id="m6-hook">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>The first line sells the rest of the ad</h2>
+        <div class="sub">In the feed, the first line is often all people see before "see more". Spend your best thinking there.</div>
+      </div>
+    </div>
+    <p>Use Ads Library research before writing. Search broad keywords in your niche and look for ads that have been running for weeks. Long-running ads are not proof, but they are strong clues that the advertiser is getting value.</p>
+    <div class="keystone">
+      <div class="eyebrow">Hook Rule</div>
+      <div class="big-line">The ad does not sell the product.<br>It sells the <em>click.</em></div>
+      <p>The landing page does the deeper selling. The ad should create enough relevance, curiosity, and trust that the right person wants to learn more.</p>
+    </div>
+    <div class="check">
+      <div class="row">Use a specific problem: "Is your cost per lead rising every month?"</div>
+      <div class="row">Call out the audience directly: "Freshers and aspiring web developers..."</div>
+      <div class="row">Use numbers and specificity: "Helped 173 people..." feels more real than "helped many".</div>
+      <div class="row">Use open loops ethically: give enough information to create curiosity, then pay it off on the page.</div>
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m6-aida">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>Use AIDA until you earn the right to improvise</h2>
+        <div class="sub">Attention, Interest, Desire, Action is simple because it matches the reader's path.</div>
+      </div>
+    </div>
+    <table>
+      <tr><th>Stage</th><th>What it does</th><th>How to write it</th></tr>
+      <tr><td><b>Attention</b></td><td>Stops the scroll.</td><td>One killer hook in roughly the first 125 characters.</td></tr>
+      <tr><td><b>Interest</b></td><td>Joins the conversation already in their head.</td><td>Name the pain, symptom, failed attempt, or situation.</td></tr>
+      <tr><td><b>Desire</b></td><td>Shows the better future.</td><td>Explain how the solution makes life better, not just its features.</td></tr>
+      <tr><td><b>Action</b></td><td>Directs the next step.</td><td>Tell them to click the button, watch the training, book, or learn more.</td></tr>
+    </table>
+    <div class="why">
+      <strong>Reading test</strong>
+      Read the ad out loud. If a 10-year-old would not understand it, simplify. Jargon makes marketers feel smart and prospects feel tired.
+    </div>
+    <p>Recommended range from the transcript: the hook can sit around 125 characters, total copy often works well between 125 and 1,024 characters, and very long copy can lose placements if it exceeds platform limits.</p>
+  </section>
+
+  <section class="phase reveal" id="m6-creative">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>Design creative for placements and clarity</h2>
+        <div class="sub">A good creative does not look cluttered, does not waste the image, and does not blend into Facebook's own UI.</div>
+      </div>
+    </div>
+    <div class="gloss">
+      <div class="term"><b>1200×628</b>Feed and right-column style placements.</div>
+      <div class="term"><b>1080×1920</b>Vertical stories and reels.</div>
+      <div class="term"><b>1024×1024</b>Square format that can work widely, though dedicated verticals perform better in vertical inventory.</div>
+    </div>
+    <div class="do-dont">
+      <div class="do">
+        <span class="lbl">Creative rules</span>
+        <ul>
+          <li>Use the ad hook as the image headline.</li>
+          <li>Keep text readable on mobile.</li>
+          <li>Add a button-like visual CTA where appropriate.</li>
+          <li>Use two to three colors and clean sans-serif fonts.</li>
+          <li>Use proof elements like screenshots, ratings, or served-counts.</li>
+        </ul>
+      </div>
+      <div class="dont">
+        <span class="lbl">Avoid</span>
+        <ul>
+          <li>Clutter, tiny text, and too many fonts.</li>
+          <li>White and Facebook-blue dominant designs that blend into the UI.</li>
+          <li>Repeating the exact same message in headline, description, and image.</li>
+          <li>Videos longer than needed; under two minutes keeps more placements open.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m6-testing">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Variation must be meaningful</h2>
+        <div class="sub">Tiny design tweaks usually produce tiny learning. Test different angles, formats, and behaviors.</div>
+      </div>
+    </div>
+    <p>Quantity and quality both matter. Test image ads and video ads aggressively, but do not put three videos and one image in the same ad set at the beginning because the video can dominate spend before the image has a fair shot.</p>
+    <p>Use different creative types to reach different people inside the same broad interest: professional studio videos, authentic selfie videos, UGC-style testimonials, asymmetric designs, angle-based images, and native-looking text posts.</p>
+    <div class="action">
+      <div class="lbl">Module 06 production checklist</div>
+      <ul>
+        <li>Match each ad set to a specific awareness level and message angle.</li>
+        <li>Research Ads Library before writing the hook.</li>
+        <li>Write AIDA copy in plain language and add a clear CTA inside the copy.</li>
+        <li>Create all three major aspect ratios when possible.</li>
+        <li>Test meaningfully different creatives, then scale the pattern that wins.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 06 · COPY &amp; VISUALS</div>
+  </footer>
+
+  </div>
+  </main>
+</div>
+</div><!-- /tab-m06 -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 07 ============ -->
+<div class="tabpanel" id="tab-m07" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 07 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 07</span></div>
+    <a href="#m7-wait"><span class="num">1</span>Let Data Build</a>
+    <a href="#m7-cpm"><span class="num">2</span>CPM</a>
+    <a href="#m7-ctr"><span class="num">3</span>CTR &amp; CPC</a>
+    <a href="#m7-leakage"><span class="num">4</span>LP Leakage</a>
+    <a href="#m7-conversion"><span class="num">5</span>Conversion Rate</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 07</div>
+    <h1>Understand the numbers that create <em>CPL.</em></h1>
+    <p class="lede">Cost per lead is not one thing. It is the result of CPM, CTR, CPC, landing page load quality, and landing page conversion. Fix the upstream number, and the downstream cost changes.</p>
+    <div class="meta">
+      <span>MODULE 07</span>
+      <span>CPM · CTR · CPC · FREQUENCY · CVR</span>
+      <span>PERFORMANCE MATH</span>
+    </div>
+  </header>
+
+  <section class="phase reveal" id="m7-wait">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>Let a campaign earn enough data before judging it</h2>
+        <div class="sub">Early numbers are noisy. The transcript suggests three to seven days or around 10,000 impressions.</div>
+      </div>
+    </div>
+    <p>Do not panic because an ad set spent ₹20 and looks terrible. It has not had a fair test. Campaigns need enough impressions and enough budget spread across ad sets before their metrics mean anything.</p>
+    <p>Also remember: bad historical data can influence future learning. If you keep running poorly optimized campaigns, the account and pixel can develop weak benchmarks. Every campaign should be launched with clean tracking and a real optimization target.</p>
+  </section>
+
+  <section class="phase reveal" id="m7-cpm">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>CPM is the root cost</h2>
+        <div class="sub">Meta charges for attention. Most other metrics are derived from how efficiently that attention becomes action.</div>
+      </div>
+    </div>
+    <figure class="visual diagram-visual">
+      <svg viewBox="0 0 860 330" role="img" aria-label="Metrics funnel from impressions to leads">
+        <title>Metrics funnel from impressions to leads</title>
+        <rect width="860" height="330" fill="#FAF7F0"/>
+        <g fill="#16305A">
+          <path d="M80 50H780L705 115H155Z"/>
+          <path d="M155 128H705L640 190H220Z" opacity=".9"/>
+          <path d="M220 203H640L585 260H275Z" opacity=".8"/>
+        </g>
+        <rect x="330" y="272" width="200" height="42" rx="12" fill="#B8860B"/>
+        <text x="430" y="88" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Impressions bought by CPM</text>
+        <text x="430" y="164" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Clicks created by CTR</text>
+        <text x="430" y="238" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">Landing views + conversion</text>
+        <text x="430" y="300" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">Leads / Sales</text>
+      </svg>
+      <figcaption>CPL is downstream. Work backward: CPM → CTR → CPC → landing page views → conversion rate.</figcaption>
+    </figure>
+    <div class="sys">
+      <div class="row"><span><b>Audience size</b> — broader audiences usually reduce CPM; too narrow makes scale expensive.</span></div>
+      <div class="row"><span><b>Niche competition</b> — more advertisers bidding for the same attention means higher CPM.</span></div>
+      <div class="row"><span><b>Campaign structure</b> — one campaign, one ad set, one ad gives Meta little room to optimize.</span></div>
+      <div class="row"><span><b>Objective</b> — awareness is cheaper than leads; sales can be more expensive because the target behavior is rarer.</span></div>
+      <div class="row"><span><b>Tracking quality</b> — bad pixel or event setup starves Meta of feedback.</span></div>
+      <div class="row"><span><b>Seasonality</b> — Diwali, Black Friday, and sale periods lift competition across industries.</span></div>
+      <div class="row"><span><b>Quality rankings</b> — below-average quality, engagement, or conversion rankings lift cost.</span></div>
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m7-ctr">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>CTR and CPC are copy/creative report cards</h2>
+        <div class="sub">If CPM is what attention costs, CTR is how well your ad uses it.</div>
+      </div>
+    </div>
+    <p>The transcript uses roughly <strong>0.5% to 1%</strong> CTR as a reasonable starting range, with around 1% as a healthy target in many cases. Higher is not always better if the ad attracts curious, low-quality clicks.</p>
+    <div class="why">
+      <strong>CPC formula</strong>
+      If CPM is low and CTR is high, cost per link click falls naturally. You do not optimize CPC directly as much as you optimize CPM and CTR.
+    </div>
+    <p>CTR improves through hooks, clear CTAs, native-looking creative, good design, action language, relevant awareness level, clean display URL, and a CTA button that matches intent: Learn More, Watch More, Book Now, Sign Up, and so on.</p>
+  </section>
+
+  <section class="phase reveal" id="m7-leakage">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>Link click to landing page view exposes leakage</h2>
+        <div class="sub">People can click the ad and still never load the page. That gap burns budget quietly.</div>
+      </div>
+    </div>
+    <p>Calculate it manually: <strong>landing page views ÷ link clicks</strong>. If 100 people click and only 80 load the page, your ratio is 80%.</p>
+    <div class="check">
+      <div class="row">Improve speed and hosting reliability.</div>
+      <div class="row">Check Core Web Vitals: LCP under 2.5s, FID under 100ms, CLS under 0.1.</div>
+      <div class="row">Fix SSL, 404s, broken redirects, and downtime monitoring.</div>
+      <div class="row">Make sure the ad is attracting the right audience so people do not bounce before the page loads.</div>
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m7-conversion">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Landing page conversion is your responsibility</h2>
+        <div class="sub">If people reach the page and do not convert, the answer is usually on the page, not inside Ads Manager.</div>
+      </div>
+    </div>
+    <p>Landing page conversion is improved by strong copy, aligned expectations, fast loading, social proof, screenshots of testimonials, multimedia, clear offer, clean UI, mobile-first design, and no distracting navigation.</p>
+    <p>Use A/B tests for landing pages. Even a headline change can move the final CPL because every downstream conversion rate compounds the economics.</p>
+    <div class="action">
+      <div class="lbl">Module 07 metrics checklist</div>
+      <ul>
+        <li>Wait for enough impressions before judging.</li>
+        <li>Read CPM first, then CTR, CPC, frequency, LP ratio, and conversion rate.</li>
+        <li>Customize columns to show link clicks, landing page views, cost per LP view, frequency, and results.</li>
+        <li>Use your real numbers in the budgeting sheet to forecast the next week.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 07 · AD METRICS</div>
+  </footer>
+
+  </div>
+  </main>
+</div>
+</div><!-- /tab-m07 -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 08 ============ -->
+<div class="tabpanel" id="tab-m08" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 08 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 08</span></div>
+    <a href="#m8-why"><span class="num">1</span>Why UTMs</a>
+    <a href="#m8-fields"><span class="num">2</span>Hidden Fields</a>
+    <a href="#m8-sheet"><span class="num">3</span>Google Sheet</a>
+    <a href="#m8-sales"><span class="num">4</span>Map Sales</a>
+    <a href="#m8-use"><span class="num">5</span>Use In Ads</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 08</div>
+    <h1>Measure ad performance beyond <em>Facebook's dashboard.</em></h1>
+    <p class="lede">When sales happen on calls, webinars, WhatsApp, or offline teams, Meta may not know which ad created revenue. UTMs and hidden fields give you manual last-touch attribution.</p>
+    <div class="meta">
+      <span>MODULE 08</span>
+      <span>UTM · HIDDEN FIELDS · GOOGLE SHEETS</span>
+      <span>ATTRIBUTION SYSTEM</span>
+    </div>
+  </header>
+
+  <section class="phase reveal" id="m8-why">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>Use UTMs when revenue happens outside Meta</h2>
+        <div class="sub">Meta can show lead cost, but you need to know which ad set created customers.</div>
+      </div>
+    </div>
+    <p>UTM parameters are small codes added to the URL. The transcript focuses on three fields:</p>
+    <div class="gloss">
+      <div class="term"><b>utm_source</b>Where the visitor came from: Facebook ads, Google ads, organic, affiliate, newsletter.</div>
+      <div class="term"><b>utm_campaign</b>In this workflow, use the ad set name, such as digital marketing or online marketing.</div>
+      <div class="term"><b>utm_content</b>The specific ad: image ad 1, video ad 1, slideshow ad 1.</div>
+    </div>
+    <div class="keystone">
+      <div class="eyebrow">Core Idea</div>
+      <div class="big-line">Low CPL is not proof.<br>Revenue by ad set is proof.</div>
+      <p>An ad set can generate cheap leads that never buy. UTMs let you trace the final sale back to source, ad set, and ad creative.</p>
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m8-fields">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>Hidden fields capture the URL values</h2>
+        <div class="sub">The lead never types these values. The form pulls them from the URL and saves them silently.</div>
+      </div>
+    </div>
+    <figure class="visual diagram-visual">
+      <svg viewBox="0 0 860 350" role="img" aria-label="UTM tracking flow into Google Sheets and revenue mapping">
+        <title>UTM tracking flow into Google Sheets and revenue mapping</title>
+        <rect width="860" height="350" fill="#FAF7F0"/>
+        <g fill="#FFFFFF" stroke="#DCD4C3" stroke-width="2">
+          <rect x="38" y="82" width="150" height="86" rx="12"/>
+          <rect x="238" y="82" width="150" height="86" rx="12"/>
+          <rect x="438" y="82" width="150" height="86" rx="12"/>
+          <rect x="638" y="82" width="170" height="86" rx="12"/>
+        </g>
+        <g stroke="#B8860B" stroke-width="3" stroke-linecap="round">
+          <path d="M188 125H238M388 125H438M588 125H638"/>
+        </g>
+        <g font-size="15" font-weight="700" fill="#16305A">
+          <text x="113" y="112" text-anchor="middle">Ad URL</text>
+          <text x="313" y="112" text-anchor="middle">Form</text>
+          <text x="513" y="112" text-anchor="middle">Automation</text>
+          <text x="723" y="112" text-anchor="middle">Google Sheet</text>
+        </g>
+        <g font-size="12" fill="#4A5468">
+          <text x="113" y="137" text-anchor="middle">utm_source</text>
+          <text x="113" y="153" text-anchor="middle">campaign + content</text>
+          <text x="313" y="137" text-anchor="middle">hidden fields</text>
+          <text x="313" y="153" text-anchor="middle">save URL values</text>
+          <text x="513" y="137" text-anchor="middle">Pabbly / Zapier</text>
+          <text x="513" y="153" text-anchor="middle">send new row</text>
+          <text x="723" y="137" text-anchor="middle">lead + source data</text>
+          <text x="723" y="153" text-anchor="middle">ready for VLOOKUP</text>
+        </g>
+        <rect x="230" y="230" width="400" height="56" rx="14" fill="#16305A"/>
+        <text x="430" y="264" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">Sales export maps back by email ID</text>
+      </svg>
+      <figcaption>The UTM system turns every lead row into source data you can later match with revenue.</figcaption>
+    </figure>
+    <p>In Elementor Pro, add hidden fields for source, campaign, and content. Under advanced settings, use a dynamic request parameter with GET and set the parameter names to <code class="k">utm_source</code>, <code class="k">utm_campaign</code>, and <code class="k">utm_content</code>.</p>
+  </section>
+
+  <section class="phase reveal" id="m8-sheet">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>Send every form submission to a sheet</h2>
+        <div class="sub">The WordPress backend is not a performance dashboard. Push the data somewhere you can calculate.</div>
+      </div>
+    </div>
+    <ol class="steps">
+      <li>Create a workflow in Pabbly Connect, Zapier, or a similar automation tool.</li>
+      <li>Use Elementor form submission or webhook as the trigger.</li>
+      <li>Map name, email, phone, source, campaign, and content into Google Sheets.</li>
+      <li>Add a date/time column; the transcript uses a Pabbly local human-now shortcode.</li>
+      <li>Freeze the header row so the sheet stays clean.</li>
+    </ol>
+  </section>
+
+  <section class="phase reveal" id="m8-sales">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>Map sales back with email ID</h2>
+        <div class="sub">Once sales are exported, match them against the lead sheet to find which ads produced revenue.</div>
+      </div>
+    </div>
+    <p>Export sales data from the payment processor or CRM, then use email ID as the common key. A simple VLOOKUP can pull revenue or product purchased into the lead sheet.</p>
+    <div class="why">
+      <strong>What this reveals</strong>
+      An ad set with ₹20 CPL and zero revenue may be worse than an ad set with ₹70 CPL that produces paying customers. Manual attribution prevents optimization by vanity lead cost.
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m8-use">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Use the generated URL inside the ad</h2>
+        <div class="sub">Manual URLs are slower, but they keep the data accurate when ad names change.</div>
+      </div>
+    </div>
+    <p>Facebook has a built-in URL parameter builder, but the transcript warns that edited ad names may not always update previously published parameters the way you expect. For clean manual tracking, generate the full UTM URL and paste it into the ad's website URL field.</p>
+    <div class="promptbox">
+      landing-page-url?<br>
+      utm_source=facebook_ads&amp;<br>
+      utm_campaign=digital_marketing&amp;<br>
+      utm_content=image_ad_1
+    </div>
+    <div class="action">
+      <div class="lbl">Module 08 tracking checklist</div>
+      <ul>
+        <li>Define source, campaign/ad set, and content/ad naming conventions.</li>
+        <li>Add hidden fields that dynamically pull UTM values from the URL.</li>
+        <li>Send form submissions into a Google Sheet automatically.</li>
+        <li>Export sales data and map revenue back by email.</li>
+        <li>Optimize ad sets by revenue and customer quality, not lead cost alone.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 08 · MEASUREMENT</div>
+  </footer>
+
+  </div>
+  </main>
+</div>
+</div><!-- /tab-m08 -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 09 ============ -->
+<div class="tabpanel" id="tab-m09" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 09 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 09</span></div>
+    <a href="#m9-cac"><span class="num">1</span>CAC Cap</a>
+    <a href="#m9-projection"><span class="num">2</span>Projection</a>
+    <a href="#m9-testing"><span class="num">3</span>Creative Tests</a>
+    <a href="#m9-audience"><span class="num">4</span>Audience Tests</a>
+    <a href="#m9-bidding"><span class="num">5</span>Bidding</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 09</div>
+    <h1>Optimize before you <em>scale.</em></h1>
+    <p class="lede">Scaling a broken campaign just breaks it louder. This module starts from business math, then moves into creative testing, audience expansion, breakdown analysis, retargeting, and bid strategies.</p>
+    <div class="meta">
+      <span>MODULE 09</span>
+      <span>CAC · TESTING · BREAKDOWNS · BIDDING</span>
+      <span>OPTIMIZATION SYSTEM</span>
+    </div>
+  </header>
+
+  <section class="phase reveal" id="m9-cac">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>Know your maximum CAC before touching optimizations</h2>
+        <div class="sub">If you do not know what you can afford to pay for a customer, you do not know what "good" means.</div>
+      </div>
+    </div>
+    <p>Start from the business model. For a course launch, calculate expected students, price, GST/tax, ad spend, ad GST, operations cost, and net revenue. If 50 students from ₹1,00,000 ad spend keeps the launch profitable, CAC is ₹2,000.</p>
+    <p>For webinars, work backwards: required customers → webinar attendees → registrations → leads per day → daily budget. For ecommerce, include product cost, shipping, platform cost, selling price, and the CAC ceiling that still leaves profit.</p>
+    <div class="keystone">
+      <div class="eyebrow">Optimization Target</div>
+      <div class="big-line">CPL is useful only after CAC is clear.</div>
+      <p>A lead cost can look expensive but still be profitable if sales conversion is strong. Or it can look cheap and destroy the business if no one buys.</p>
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m9-projection">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>Build projections so decisions are not emotional</h2>
+        <div class="sub">The sheet tells you when to increase budget, fix show-up rate, improve conversion, or stop.</div>
+      </div>
+    </div>
+    <figure class="visual diagram-visual">
+      <svg viewBox="0 0 860 330" role="img" aria-label="Optimization loop from business goal to campaign changes">
+        <title>Optimization loop from business goal to campaign changes</title>
+        <rect width="860" height="330" fill="#FAF7F0"/>
+        <circle cx="430" cy="165" r="112" fill="#FFFFFF" stroke="#DCD4C3" stroke-width="2"/>
+        <g fill="#16305A">
+          <circle cx="430" cy="52" r="44"/><circle cx="543" cy="165" r="44"/><circle cx="430" cy="278" r="44"/><circle cx="317" cy="165" r="44"/>
+        </g>
+        <g font-size="13" font-weight="700" fill="#FFFFFF">
+          <text x="430" y="49" text-anchor="middle">CAC</text><text x="430" y="66" text-anchor="middle">Cap</text>
+          <text x="543" y="162" text-anchor="middle">Funnel</text><text x="543" y="179" text-anchor="middle">Metrics</text>
+          <text x="430" y="275" text-anchor="middle">Tests</text><text x="430" y="292" text-anchor="middle">Run</text>
+          <text x="317" y="162" text-anchor="middle">Breakdown</text><text x="317" y="179" text-anchor="middle">Analysis</text>
+        </g>
+        <path d="M463 76C500 91 526 119 538 154M519 198C497 238 469 260 438 272M394 259C354 238 331 209 320 177M336 129C359 91 387 68 419 58" stroke="#B8860B" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <text x="430" y="158" text-anchor="middle" font-size="18" font-weight="700" fill="#16305A">Optimize</text>
+        <text x="430" y="182" text-anchor="middle" font-size="13" fill="#4A5468">then scale only what survives</text>
+      </svg>
+      <figcaption>Optimization is a loop: target economics, read metrics, test changes, analyze by segment, then repeat.</figcaption>
+    </figure>
+    <p>For launch funnels, break the promotion into webinar windows instead of waiting a month for one event. Revenue from early webinars can fund the next week's ads. If projections slip, you know what lever to pull: WhatsApp reminders, landing page copy, show-up rate, close rate, or budget.</p>
+  </section>
+
+  <section class="phase reveal" id="m9-testing">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>Test creative first, then copy, then dynamic creative</h2>
+        <div class="sub">Creative differences are usually bigger than copy differences, so test the visual pattern first.</div>
+      </div>
+    </div>
+    <ol class="steps">
+      <li>Test different creative types: text image, video, reel, slideshow, UGC, proof image.</li>
+      <li>Once a creative type wins, test two or three copy variations against that winning creative.</li>
+      <li>When winning combinations are known, use Dynamic Creative to let Meta combine selected images, texts, headlines, and descriptions.</li>
+      <li>Do not use Dynamic Creative before UTM and revenue testing teach you which combinations actually create customers.</li>
+    </ol>
+    <div class="why">
+      <strong>Dynamic creative caveat</strong>
+      It can tell you the overall dynamic ad works, but it will not always give a clean revenue answer for every possible combination.
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m9-audience">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>Optimize audiences through size, indirect interests, and breakdowns</h2>
+        <div class="sub">After basics work, expand intelligently instead of randomly adding interests.</div>
+      </div>
+    </div>
+    <div class="sys">
+      <div class="row"><span><b>Audience size</b> — try to shape interest audiences into roughly 3-5 million where possible.</span></div>
+      <div class="row"><span><b>Indirect interests</b> — real estate buyers may also be investors, stock-market followers, or wealth-building readers.</span></div>
+      <div class="row"><span><b>Naked targeting</b> — use age/location without interests inside the same campaign after other ad sets have trained the campaign.</span></div>
+      <div class="row"><span><b>Lookalikes</b> — create from leads, buyers, thank-you page visitors, engaged email lists, or website events.</span></div>
+      <div class="row"><span><b>Retargeting</b> — target landing page visitors who did not reach the thank-you page.</span></div>
+      <div class="row"><span><b>Breakdowns</b> — inspect age, gender, region, platform, placement, device, and destination.</span></div>
+    </div>
+    <p>When making major changes, duplicate the ad set, edit the duplicate, and keep the old one available. If the new version fails, you can return to the previous working version.</p>
+  </section>
+
+  <section class="phase reveal" id="m9-bidding">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Bid strategies are advanced controls, not first moves</h2>
+        <div class="sub">Use them after metrics, tracking, creative, and audience testing have been cleaned up.</div>
+      </div>
+    </div>
+    <table>
+      <tr><th>Strategy</th><th>Meaning</th><th>Risk</th></tr>
+      <tr><td><b>Highest volume / lowest cost</b></td><td>Spend the budget to get as many conversions as possible.</td><td>Costs can float higher if the system finds volume.</td></tr>
+      <tr><td><b>Cost per result goal / cost cap</b></td><td>Average around a target CPL or CPA over time.</td><td>Volume may drop if the target is too strict.</td></tr>
+      <tr><td><b>Bid cap</b></td><td>Do not bid above a strict ceiling.</td><td>Ads may barely deliver if the market requires higher bids.</td></tr>
+      <tr><td><b>ROAS goal</b></td><td>Optimize for minimum return when purchase value is passed back.</td><td>Requires enough reliable purchase-value data.</td></tr>
+    </table>
+    <div class="action">
+      <div class="lbl">Module 09 optimization checklist</div>
+      <ul>
+        <li>Calculate maximum CAC and translate it into CPL where relevant.</li>
+        <li>Fix the five metrics from Module 07 before doing advanced optimizations.</li>
+        <li>Test creative first, copy second, dynamic creative third.</li>
+        <li>Use breakdowns to split winning demographics, placements, and devices.</li>
+        <li>Use cost caps, bid caps, and ROAS goals only after the account has data.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 09 · OPTIMIZATION</div>
+  </footer>
+
+  </div>
+  </main>
+</div>
+</div><!-- /tab-m09 -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 10 ============ -->
+<div class="tabpanel" id="tab-m10" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 10 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 10</span></div>
+    <a href="#m10-why"><span class="num">1</span>Why Rules</a>
+    <a href="#m10-overlap"><span class="num">2</span>Overlap</a>
+    <a href="#m10-custom"><span class="num">3</span>Custom Rules</a>
+    <a href="#m10-levels"><span class="num">4</span>Levels</a>
+    <a href="#m10-scale"><span class="num">5</span>Scaling Guardrail</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 10</div>
+    <h1>Automated rules for <em>controlled scaling.</em></h1>
+    <p class="lede">When budgets get large, you cannot watch Ads Manager every minute. Automated rules let Meta notify you, pause losers, increase winners, and reduce overlap before small problems become expensive.</p>
+    <div class="meta">
+      <span>MODULE 10</span>
+      <span>AUTOMATED RULES · OVERLAP · BUDGET GUARDS</span>
+      <span>SCALING PART 1</span>
+    </div>
+  </header>
+
+  <section class="phase reveal" id="m10-why">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>Rules are trigger-action instructions</h2>
+        <div class="sub">If a condition becomes true, Meta takes the action or alerts you.</div>
+      </div>
+    </div>
+    <figure class="visual diagram-visual">
+      <svg viewBox="0 0 860 330" role="img" aria-label="Automated rule trigger and action system">
+        <title>Automated rule trigger and action system</title>
+        <rect width="860" height="330" fill="#FAF7F0"/>
+        <g fill="#FFFFFF" stroke="#DCD4C3" stroke-width="2">
+          <rect x="65" y="105" width="210" height="96" rx="14"/>
+          <rect x="325" y="105" width="210" height="96" rx="14"/>
+          <rect x="585" y="105" width="210" height="96" rx="14"/>
+        </g>
+        <g stroke="#B8860B" stroke-width="4" stroke-linecap="round">
+          <path d="M275 153H325"/>
+          <path d="M535 153H585"/>
+        </g>
+        <text x="170" y="137" text-anchor="middle" font-size="18" font-weight="700" fill="#16305A">Condition</text>
+        <text x="430" y="137" text-anchor="middle" font-size="18" font-weight="700" fill="#16305A">Schedule</text>
+        <text x="690" y="137" text-anchor="middle" font-size="18" font-weight="700" fill="#16305A">Action</text>
+        <text x="170" y="166" text-anchor="middle" font-size="13" fill="#4A5468">CPL &gt; ₹50</text>
+        <text x="170" y="184" text-anchor="middle" font-size="13" fill="#4A5468">or frequency &gt; 3</text>
+        <text x="430" y="166" text-anchor="middle" font-size="13" fill="#4A5468">daily, weekly,</text>
+        <text x="430" y="184" text-anchor="middle" font-size="13" fill="#4A5468">or every 30 minutes</text>
+        <text x="690" y="166" text-anchor="middle" font-size="13" fill="#4A5468">pause, notify,</text>
+        <text x="690" y="184" text-anchor="middle" font-size="13" fill="#4A5468">raise or lower budget</text>
+        <rect x="236" y="250" width="388" height="48" rx="14" fill="#16305A"/>
+        <text x="430" y="280" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Automation protects budget while you sleep.</text>
+      </svg>
+      <figcaption>Rules are simple: condition, time window, action, notification.</figcaption>
+    </figure>
+    <p>A rule can pause an ad set when CPL goes above your cap, increase budget by 20% when results stay strong, decrease budget when efficiency drops, or simply send a notification so a human can decide.</p>
+    <div class="why">
+      <strong>Use notifications when unsure</strong>
+      You do not have to let Meta make every decision. A notification-only rule can surface issues without changing the account automatically.
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m10-overlap">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>Reduce auction overlap and audience fragmentation</h2>
+        <div class="sub">At scale, your own ad sets can start competing with each other.</div>
+      </div>
+    </div>
+    <div class="gloss">
+      <div class="term"><b>Auction overlap</b>Your campaigns or ad sets enter the same auction and bid against each other.</div>
+      <div class="term"><b>Audience fragmentation</b>Several ad sets contain overlapping audiences that Meta is forced to treat separately.</div>
+      <div class="term"><b>Budget reallocation</b>Meta can turn off overlapping ad sets and move budget to the remaining stronger set.</div>
+      <div class="term"><b>Combined audience</b>Meta can combine fragmented interests into one larger ad set when scaling.</div>
+    </div>
+    <p>The transcript does not recommend combining audiences too early. Test ad sets separately first so you know cost and quality. Once several audiences work and overlap becomes a problem, rules can help consolidate them.</p>
+  </section>
+
+  <section class="phase reveal" id="m10-custom">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>Custom rules are where the real control lives</h2>
+        <div class="sub">Prebuilt rules are helpful, but custom rules let you define the exact metric and action.</div>
+      </div>
+    </div>
+    <table>
+      <tr><th>Rule idea</th><th>Example condition</th><th>Possible action</th></tr>
+      <tr><td><b>Cut losers</b></td><td>Cost per result &gt; ₹50 and results &gt; 20.</td><td>Turn off ad set or send notification.</td></tr>
+      <tr><td><b>Scale winners</b></td><td>Cost per result &lt; ₹30 and results &gt; 100 in last 7 days.</td><td>Increase daily budget by 20% with a max cap.</td></tr>
+      <tr><td><b>Protect frequency</b></td><td>Frequency &gt; 2 or 3 depending on campaign type.</td><td>Pause ad or notify creative team.</td></tr>
+      <tr><td><b>Control spend</b></td><td>Budget reaches a defined maximum.</td><td>Stop increasing at that cap.</td></tr>
+    </table>
+    <p>Always combine quality and quantity conditions. For example, do not increase budget just because CPL is low if the ad set only generated two leads. Give Meta enough evidence before the rule acts.</p>
+  </section>
+
+  <section class="phase reveal" id="m10-levels">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>Rules behave differently at each level</h2>
+        <div class="sub">Campaign, ad set, and ad level controls are not interchangeable.</div>
+      </div>
+    </div>
+    <div class="sys">
+      <div class="row"><span><b>Campaign level</b> — turn campaign on/off or notify based on broad spend, CPA, impressions, or other conditions.</span></div>
+      <div class="row"><span><b>Ad set level</b> — most useful for scaling because you can increase/decrease daily budget by percent or fixed amount.</span></div>
+      <div class="row"><span><b>Ad level</b> — mainly turn individual ads on or off based on performance.</span></div>
+      <div class="row"><span><b>Manual bid automation</b> — after bid caps are in use, rules can raise or lower the bid by a fixed value.</span></div>
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m10-scale">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Rules are not a replacement for the funnel</h2>
+        <div class="sub">They protect scaling, but they cannot fix weak sales, weak nurture, or weak conversion.</div>
+      </div>
+    </div>
+    <p>At low budgets, you may not need advanced automation. At large budgets, a few hours of inefficient spend can be expensive. That is when rules become a serious performance-marketer tool.</p>
+    <div class="action">
+      <div class="lbl">Module 10 automation checklist</div>
+      <ul>
+        <li>Create notification-only rules first if you want human review.</li>
+        <li>Use automated rules to pause high-CPL ad sets, protect frequency, and scale proven winners.</li>
+        <li>Set maximum daily budget caps when allowing automated increases.</li>
+        <li>Run rules on useful time windows, such as last 7 days, instead of reacting to tiny samples.</li>
+        <li>Use rules for scaling, not for replacing judgment.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 10 · AUTOMATED RULES</div>
+  </footer>
+
+  </div>
+  </main>
+</div>
+</div><!-- /tab-m10 -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 11 ============ -->
+<div class="tabpanel" id="tab-m11" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 11 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 11</span></div>
+    <a href="#m11-definition"><span class="num">1</span>What Scaling Means</a>
+    <a href="#m11-vertical"><span class="num">2</span>Vertical</a>
+    <a href="#m11-horizontal"><span class="num">3</span>Horizontal</a>
+    <a href="#m11-combined"><span class="num">4</span>Combined + CBO</a>
+    <a href="#m11-stop"><span class="num">5</span>When To Stop</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 11</div>
+    <h1>Scale without pretending costs stay <em>flat.</em></h1>
+    <p class="lede">Scaling means spending more while keeping CPA acceptable. It does not mean doubling budget and expecting double leads at the same price.</p>
+    <div class="meta">
+      <span>MODULE 11</span>
+      <span>VERTICAL · HORIZONTAL · COMBINED SCALING</span>
+      <span>SCALING PART 2</span>
+    </div>
+  </header>
+
+  <section class="phase reveal" id="m11-definition">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>Scaling means more spend at tolerable CPA</h2>
+        <div class="sub">The first audience pocket is usually the warmest. More spend reaches colder people.</div>
+      </div>
+    </div>
+    <p>When a campaign starts, Meta often finds the people most likely to convert first. When you add budget, it must reach beyond that first responsive pocket. CTR can fall, conversion rate can fall, frequency can rise, and CPL can climb.</p>
+    <div class="keystone">
+      <div class="eyebrow">Scaling Reality</div>
+      <div class="big-line">More budget does not guarantee more leads.<br>Sometimes it buys the <em>same</em> leads at higher cost.</div>
+      <p>That is why scaling is gradual, measured against your upper cap, and supported by fresh creative and new audiences.</p>
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m11-vertical">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>Vertical scaling: go deeper into the same winner</h2>
+        <div class="sub">If frequency is still under 2 and quality is strong, start by adding budget to the existing winner.</div>
+      </div>
+    </div>
+    <figure class="visual diagram-visual">
+      <svg viewBox="0 0 860 350" role="img" aria-label="Scaling curve showing CPL rising with budget and stabilizing">
+        <title>Scaling curve showing CPL rising with budget and stabilizing</title>
+        <rect width="860" height="350" fill="#FAF7F0"/>
+        <line x1="90" y1="285" x2="790" y2="285" stroke="#DCD4C3" stroke-width="2"/>
+        <line x1="90" y1="285" x2="90" y2="55" stroke="#DCD4C3" stroke-width="2"/>
+        <text x="430" y="325" text-anchor="middle" font-size="13" fill="#4A5468">daily budget increases</text>
+        <text x="42" y="173" text-anchor="middle" font-size="13" fill="#4A5468" transform="rotate(-90 42 173)">cost per lead</text>
+        <path d="M105 248C175 238 220 225 275 202C340 174 395 130 455 118C525 104 585 130 642 176C692 216 735 244 775 252" fill="none" stroke="#B8860B" stroke-width="5" stroke-linecap="round"/>
+        <line x1="90" y1="145" x2="790" y2="145" stroke="#8C3A3A" stroke-width="2" stroke-dasharray="7 8"/>
+        <text x="715" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#8C3A3A">upper CPL cap</text>
+        <rect x="132" y="72" width="170" height="58" rx="12" fill="#FFFFFF" stroke="#DCD4C3" stroke-width="2"/>
+        <text x="217" y="97" text-anchor="middle" font-size="14" font-weight="700" fill="#16305A">Scale vertically</text>
+        <text x="217" y="115" text-anchor="middle" font-size="12" fill="#4A5468">frequency &lt; 2</text>
+        <rect x="528" y="72" width="190" height="58" rx="12" fill="#FFFFFF" stroke="#DCD4C3" stroke-width="2"/>
+        <text x="623" y="97" text-anchor="middle" font-size="14" font-weight="700" fill="#16305A">Stop and optimize</text>
+        <text x="623" y="115" text-anchor="middle" font-size="12" fill="#4A5468">cap is breached</text>
+      </svg>
+      <figcaption>Scale until the campaign stabilizes above your acceptable CPL, then stop pushing that path.</figcaption>
+    </figure>
+    <table>
+      <tr><th>Daily budget level</th><th>Suggested increase</th><th>Stabilization wait</th></tr>
+      <tr><td><b>Under ₹2,500/day</b></td><td>Up to 50%</td><td>Wait 5-7 days before the next increase.</td></tr>
+      <tr><td><b>₹2,500-₹5,000/day</b></td><td>Up to 30%</td><td>Wait 5-7 days.</td></tr>
+      <tr><td><b>Above ₹5,000/day</b></td><td>10-20%</td><td>Move slowly to avoid disrupting learning.</td></tr>
+    </table>
+    <p>Vertical scaling can also include expanding age range, adding locations, using multi-advertiser expansion, or reaching beyond a custom audience. While doing this, refresh ads because higher spend fatigues creatives faster.</p>
+  </section>
+
+  <section class="phase reveal" id="m11-horizontal">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>Horizontal scaling: find new people</h2>
+        <div class="sub">When frequency rises beyond 3, you need more audience, not just more money.</div>
+      </div>
+    </div>
+    <div class="sys">
+      <div class="row"><span><b>New interests</b> — use persona research: influencers, books, magazines, websites, tools, brands, and behaviors.</span></div>
+      <div class="row"><span><b>New hooks</b> — a marketing-book audience needs a different hook from a digital-marketing-interest audience.</span></div>
+      <div class="row"><span><b>Open targeting</b> — add an ad set with no interests inside the same trained campaign.</span></div>
+      <div class="row"><span><b>Lookalikes</b> — build from email lists, thank-you page visitors, leads, buyers, video viewers, or engagement audiences.</span></div>
+      <div class="row"><span><b>Retargeting</b> — keep page visitors who did not convert in a separate hot-audience campaign.</span></div>
+    </div>
+    <div class="why">
+      <strong>Open targeting placement</strong>
+      Put open targeting inside the same campaign that already has working ad sets. The transcript's hypothesis is that the campaign history helps teach the broad ad set who to find.
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m11-combined">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>Combined scaling: merge winners, then use CBO</h2>
+        <div class="sub">After vertical and horizontal testing, combine proven pockets into larger, cleaner audiences.</div>
+      </div>
+    </div>
+    <p>If online marketing 20-30 and online marketing 30-40 both work, create a new combined ad set for online marketing 20-40. If digital marketing and online marketing both work, test combining them into a larger audience.</p>
+    <p>Once several combined ad sets stabilize, move from ad set budget optimization to campaign budget optimization, also called Advantage campaign budget in newer Meta language. This lets Meta decide which winning ad set should receive more budget each day.</p>
+  </section>
+
+  <section class="phase reveal" id="m11-stop">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Know when the campaign has reached its ceiling</h2>
+        <div class="sub">Stopping is a skill. Past a point, a campaign can spend more without producing meaningfully more leads.</div>
+      </div>
+    </div>
+    <p>The module's example shows CPL rising as budget scales. When CPL crosses the upper cap and lead volume stops increasing meaningfully, pause vertical scaling, stabilize, test new creatives and angles, then try horizontal or combined scaling. If that ceiling remains, build new campaigns, offers, or lead magnets instead of forcing the old one.</p>
+    <div class="action">
+      <div class="lbl">Module 11 scaling checklist</div>
+      <ul>
+        <li>Use automated rules before heavy scaling.</li>
+        <li>Scale vertically first when frequency is under 2.</li>
+        <li>Use 50%, 30%, or 10-20% budget increases based on daily budget size.</li>
+        <li>Do not test and scale at the same time.</li>
+        <li>Use horizontal scaling when frequency rises and audience is exhausted.</li>
+        <li>Combine winners and move to CBO only after enough proof.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 11 · SCALING PART 2</div>
+  </footer>
+
+  </div>
+  </main>
+</div>
+</div><!-- /tab-m11 -->
+
+<!-- ============ TAB · FB ADS MASTERY MODULE 12 ============ -->
+<div class="tabpanel" id="tab-m12" hidden>
+<div class="shell">
+
+  <nav class="rail" aria-label="Module 12 lessons">
+    <div class="brand">FB Ads Mastery<span>Course · Module 12</span></div>
+    <a href="#m12-why"><span class="num">1</span>Why Funnels</a>
+    <a href="#m12-attribution"><span class="num">2</span>Attribution</a>
+    <a href="#m12-tof"><span class="num">3</span>Top Funnel</a>
+    <a href="#m12-mid"><span class="num">4</span>Middle + Bottom</a>
+    <a href="#m12-audiences"><span class="num">5</span>Hot Audiences</a>
+  </nav>
+
+  <main>
+  <div class="inner">
+
+  <header class="hero">
+    <div class="eyebrow">FB Ads Mastery · Module 12</div>
+    <h1>Build a Facebook funnel that <em>warms up the market.</em></h1>
+    <p class="lede">When cold lead campaigns hit a ceiling, use Facebook itself as a nurture platform: value first, proof second, offer third.</p>
+    <div class="meta">
+      <span>MODULE 12</span>
+      <span>TOF · MOF · BOF · HOT AUDIENCES</span>
+      <span>FULL-FUNNEL STRATEGY</span>
+    </div>
+  </header>
+
+  <section class="phase reveal" id="m12-why">
+    <div class="phase-head">
+      <div class="big-num">1</div>
+      <div>
+        <h2>Do not be salesy in every impression</h2>
+        <div class="sub">A cold audience that has only seen pitches becomes resistant. Value content lowers that resistance.</div>
+      </div>
+    </div>
+    <p>This is not needed for every small account. It becomes useful for personal brands, larger advertisers, and brands that need reach beyond the warm slice already responding to lead ads.</p>
+    <p>The idea is simple: spend a small amount showing useful, non-sales content; then show proof; then retarget engaged people with lead generation or sales ads. The final CPL may look similar, but the audience has had multiple trust-building touches before the ask.</p>
+    <div class="why">
+      <strong>Influence plus lead</strong>
+      If you spend ₹20 warming someone and ₹30 converting them, the total may still be ₹50, but you also created brand recall and trust.
+    </div>
+  </section>
+
+  <section class="phase reveal" id="m12-attribution">
+    <div class="phase-head">
+      <div class="big-num">2</div>
+      <div>
+        <h2>Understand attribution before judging funnels</h2>
+        <div class="sub">Facebook gives credit based on rules and windows, not perfect truth.</div>
+      </div>
+    </div>
+    <p>Attribution is how Meta decides which ad gets credit for a conversion. The transcript explains last-touch attribution, one-day click, seven-day click, one-day view, and seven-day click plus one-day view windows.</p>
+    <p>For time-sensitive campaigns, shorter windows can help you read faster. For normal campaigns, broader click/view windows can capture more delayed behavior, though modeled data and platform changes can affect accuracy. Treat attribution as a directional tool, not a perfect accounting system.</p>
+  </section>
+
+  <section class="phase reveal" id="m12-tof">
+    <div class="phase-head">
+      <div class="big-num">3</div>
+      <div>
+        <h2>Top of funnel: attract with value, not a CTA</h2>
+        <div class="sub">Use low-cost objectives to reach cold audiences with content they can consume inside the feed.</div>
+      </div>
+    </div>
+    <figure class="visual diagram-visual">
+      <svg viewBox="0 0 860 390" role="img" aria-label="Facebook ad funnel from top of funnel to bottom of funnel">
+        <title>Facebook ad funnel from top of funnel to bottom of funnel</title>
+        <rect width="860" height="390" fill="#FAF7F0"/>
+        <g fill="#FFFFFF" stroke="#DCD4C3" stroke-width="2">
+          <rect x="60" y="56" width="740" height="70" rx="14"/>
+          <rect x="130" y="156" width="600" height="70" rx="14"/>
+          <rect x="215" y="256" width="430" height="70" rx="14"/>
+        </g>
+        <path d="M430 126V156M430 226V256" stroke="#B8860B" stroke-width="4" stroke-linecap="round"/>
+        <text x="430" y="88" text-anchor="middle" font-size="20" font-weight="700" fill="#16305A">Top of Funnel</text>
+        <text x="430" y="110" text-anchor="middle" font-size="13" fill="#4A5468">brand awareness · engagement · video views · blog traffic</text>
+        <text x="430" y="188" text-anchor="middle" font-size="20" font-weight="700" fill="#16305A">Middle of Funnel</text>
+        <text x="430" y="210" text-anchor="middle" font-size="13" fill="#4A5468">testimonials · media mentions · podcast clips · proof posts</text>
+        <text x="430" y="288" text-anchor="middle" font-size="20" font-weight="700" fill="#16305A">Bottom of Funnel</text>
+        <text x="430" y="310" text-anchor="middle" font-size="13" fill="#4A5468">lead generation · sales · strategy call · purchase</text>
+        <rect x="325" y="342" width="210" height="30" rx="15" fill="#16305A"/>
+        <text x="430" y="362" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Hot audiences feed the next layer</text>
+      </svg>
+      <figcaption>The Facebook funnel mirrors normal marketing: attract, nurture, convert.</figcaption>
+    </figure>
+    <div class="gloss">
+      <div class="term"><b>Brand awareness</b>Build recall cheaply with non-sales posts.</div>
+      <div class="term"><b>Engagement</b>Promote posts, carousels, memes, quotes, tips, or simple value images.</div>
+      <div class="term"><b>Video views</b>Warm people through useful short videos or tool tutorials.</div>
+      <div class="term"><b>Landing page views</b>Send cold people to broad, useful blog posts.</div>
+    </div>
+    <p>Use interests that already worked in lead generation. Do not start brand-awareness funnels before you know which audiences can eventually produce good leads.</p>
+  </section>
+
+  <section class="phase reveal" id="m12-mid">
+    <div class="phase-head">
+      <div class="big-num">4</div>
+      <div>
+        <h2>Middle and bottom of funnel: proof, then offer</h2>
+        <div class="sub">Top funnel attracts. Middle funnel builds trust. Bottom funnel asks for the conversion.</div>
+      </div>
+    </div>
+    <table>
+      <tr><th>Stage</th><th>Content</th><th>Goal</th></tr>
+      <tr><td><b>Top</b></td><td>How-to posts, tips, memes, broad blog posts, simple value images, short videos.</td><td>Attract cold people and create first engagement.</td></tr>
+      <tr><td><b>Middle</b></td><td>Customer testimonials, media mentions, podcast clips, meetups, corporate trainings, authority photos.</td><td>Build trust and credibility with engaged people.</td></tr>
+      <tr><td><b>Bottom</b></td><td>Lead magnet, VSL, webinar, sales page, booking campaign, purchase campaign.</td><td>Convert the warmest recent audience.</td></tr>
+    </table>
+    <p>Middle-of-funnel proof can be simple: a photo from a conference, a media mention, a customer result, a podcast clip, or a corporate training snippet. It should feel like value or credibility, not a constant sales pitch.</p>
+  </section>
+
+  <section class="phase reveal" id="m12-audiences">
+    <div class="phase-head">
+      <div class="big-num">5</div>
+      <div>
+        <h2>Build Hot 28 and Hot 7 style audiences</h2>
+        <div class="sub">Group recent engagers so the next layer targets people who already showed attention.</div>
+      </div>
+    </div>
+    <div class="sys">
+      <div class="row"><span><b>Hot 28</b> — people who interacted with top-of-funnel content in the last 28 days.</span></div>
+      <div class="row"><span><b>Hot 7</b> — people with very recent bottom-funnel intent in the last 7 days.</span></div>
+      <div class="row"><span><b>Website actions</b> — visited specific pages, spent more time on site, visited blog posts.</span></div>
+      <div class="row"><span><b>Video actions</b> — completed or watched at least 15 seconds of selected top-funnel videos.</span></div>
+      <div class="row"><span><b>Instagram actions</b> — engaged, followed, visited profile, sent DM, or engaged with an ad.</span></div>
+      <div class="row"><span><b>Facebook actions</b> — page likes, post engagement, ad engagement, event engagement.</span></div>
+    </div>
+    <p>Create the component audiences first, then combine them in saved audiences for middle and bottom campaigns. The more you spend at the top, the more the Hot 28 pool refreshes automatically.</p>
+    <div class="action">
+      <div class="lbl">Module 12 funnel checklist</div>
+      <ul>
+        <li>Prove winning interests with lead generation before using them for top-funnel branding.</li>
+        <li>Use low-cost objectives to warm large cold pools with useful content.</li>
+        <li>Combine top-funnel engagers into a Hot 28-style audience.</li>
+        <li>Show trust content to Hot 28, then use Hot 7-style audiences for lead or sales campaigns.</li>
+        <li>Track total influence and eventual conversion, not only immediate lead cost.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fbrand">Finest Clients</div>
+    <div class="mono" style="font-size:11.5px;letter-spacing:.1em;">FB ADS MASTERY · MODULE 12 · FACEBOOK AD FUNNELS</div>
+  </footer>
+
+  </div>
+  </main>
+</div>
+</div><!-- /tab-m12 -->
 
 <script>
-  // reveal on scroll
-  const io = new IntersectionObserver((entries)=>{
+  // ----- tab switching -----
+  const tabs=[...document.querySelectorAll('.tab')];
+  const panels=[...document.querySelectorAll('.tabpanel')];
+  function showPanel(id){
+    panels.forEach(p=>{
+      const on=p.id===id;
+      p.classList.toggle('active',on);
+      p.hidden=!on;
+      if(on){ p.querySelectorAll('.reveal').forEach(el=>el.classList.add('in')); }
+    });
+    tabs.forEach(t=>t.classList.toggle('active',t.dataset.panel===id));
+    window.scrollTo({top:0,behavior:'auto'});
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>showPanel(t.dataset.panel)));
+
+  // ----- reveal on scroll -----
+  const io=new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   },{threshold:.06});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // active rail link
-  const links=[...document.querySelectorAll('.rail a')];
-  const targets=links.map(a=>document.querySelector(a.getAttribute('href')));
-  const spy=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+e.target.id));
-      }
-    });
-  },{rootMargin:'-30% 0px -60% 0px'});
-  targets.forEach(t=>t&&spy.observe(t));
+  // ----- active rail link, scoped to each panel -----
+  document.querySelectorAll('.tabpanel').forEach(panel=>{
+    const links=[...panel.querySelectorAll('.rail a')];
+    if(!links.length) return;
+    const spy=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+e.target.id));
+        }
+      });
+    },{rootMargin:'-30% 0px -60% 0px'});
+    links.map(a=>panel.querySelector(a.getAttribute('href'))).forEach(t=>t&&spy.observe(t));
+  });
 </script>
 </body>
 </html>

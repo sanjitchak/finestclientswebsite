@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Finest Clients - DWY Agreement - Anand</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <link rel="icon" href="finestclientslogo.png" type="image/png">
+  <style>
+    :root {
+      --bg-body:#f3f4f6;
+      --bg-card:#ffffff;
+      --border:#d1d5db;
+      --soft:#f9fafb;
+      --text:#111827;
+      --muted:#4b5563;
+      --dark:#111827;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;padding:24px;font-family:Arial,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg-body);color:var(--text)}
+    .page-wrapper{max-width:900px;margin:0 auto 40px}
+    .contract-container{background:var(--bg-card);border-radius:12px;box-shadow:0 16px 40px rgba(15,23,42,.14);padding:34px 42px;border:1px solid rgba(148,163,184,.45)}
+    .contract-header{border-bottom:1px solid #e5e7eb;padding-bottom:14px;margin-bottom:18px}
+    .contract-title{font-size:1.55rem;font-weight:800;margin:0 0 8px;letter-spacing:.04em;text-transform:uppercase;color:var(--dark)}
+    .contract-subtitle{font-size:.88rem;color:var(--muted);line-height:1.5;margin:0;max-width:760px}
+    .meta-row{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:10px;font-size:.82rem;color:var(--muted)}
+    .meta-label{font-weight:700;color:var(--dark)}
+    .section{margin-top:16px}
+    .section-title{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--dark);margin:0 0 7px;padding-bottom:5px;border-bottom:1px solid #e5e7eb}
+    p{font-size:.88rem;line-height:1.45;margin:5px 0}
+    ul{margin:5px 0 6px 1.1rem;padding:0;font-size:.88rem;line-height:1.45}
+    li{margin:2px 0}
+    .grid-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:8px}
+    .box{border:1px solid var(--border);background:var(--soft);border-radius:9px;padding:10px 12px;min-width:0;overflow-wrap:break-word}
+    .box-label{font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.11em;margin-bottom:4px;color:var(--dark)}
+    .small{font-size:.82rem;color:var(--muted)}
+    .page-break{break-before:page;page-break-before:always}
+    .signature-section{margin-top:16px;padding-top:14px;border-top:1px solid #e5e7eb}
+    .signature-section-title{font-size:.96rem;font-weight:800;margin:0 0 8px;color:var(--dark)}
+    .signature-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px 18px;margin-top:10px}
+    .field-group{display:flex;flex-direction:column;gap:4px}
+    .field-label{font-size:.8rem;font-weight:700;color:var(--dark)}
+    .field-input{border-radius:7px;border:1px solid var(--border);padding:7px 9px;font-size:.86rem;outline:none}
+    .signature-input{width:100%;border:none;border-bottom:1px solid var(--border);padding:9px 4px 4px;font-size:1.45rem;font-family:"Dancing Script","Segoe Script",cursive;background:transparent;outline:none;text-align:left}
+    .signature-input::placeholder{font-size:.84rem;font-family:Arial,system-ui;color:#6b7280}
+    .signature-hint{font-size:.75rem;color:#6b7280;margin-top:2px}
+    .actions-bar{margin-top:22px;display:flex;justify-content:flex-end}
+    .primary-button{border-radius:999px;border:none;padding:10px 24px;font-size:.9rem;font-weight:700;cursor:pointer;background:#111827;color:#f9fafb;box-shadow:0 10px 20px rgba(15,23,42,.25)}
+    .primary-button:hover{background:#020617}
+    @media(max-width:700px){body{padding:14px}.contract-container{padding:22px 16px}.grid-two,.signature-grid{grid-template-columns:1fr}.contract-title{font-size:1.32rem}}
+    @media print{
+      @page{size:A4;margin:8mm 10mm}
+      html,body{background:#fff;padding:0;margin:0;width:auto;overflow:visible}
+      .page-wrapper{max-width:none;margin:0;width:100%}
+      .contract-container{box-shadow:none;border:none;border-radius:0;padding:0;width:100%}
+      .no-print{display:none!important}
+      .contract-title{font-size:15.5pt;margin-bottom:4px}
+      .contract-subtitle{font-size:8.8pt;line-height:1.35}
+      .contract-header{padding-bottom:8px;margin-bottom:10px}
+      .meta-row{font-size:7.9pt;margin-top:6px;gap:6px 16px}
+      .section{margin-top:7px;break-inside:avoid;page-break-inside:avoid}
+      .section-title{font-size:7.5pt;margin-bottom:3px;padding-bottom:2px}
+      p,ul{font-size:7.95pt;line-height:1.22;margin-top:2px;margin-bottom:2.5px}
+      li{margin:.6px 0}
+      .box{padding:5px 7px;border-radius:6px}
+      .box-label{font-size:6.8pt;margin-bottom:2px}
+      .grid-two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px;margin-top:5px}
+      .small{font-size:7.6pt}
+      .refund-section{break-inside:auto;page-break-inside:auto}
+      .signature-section{margin-top:8px;padding-top:6px;break-inside:avoid;page-break-inside:avoid}
+      .signature-section-title{font-size:9pt;margin-bottom:4px}
+      .signature-grid{gap:7px 12px;margin-top:6px}
+      .field-label{font-size:7.3pt}
+      .field-input{padding:4px 6px;font-size:7.8pt;border-radius:5px;height:24px}
+      .signature-input{font-size:15pt;padding:5px 3px 2px;height:30px}
+      .signature-hint{font-size:6.8pt}
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="contract-container" id="contract">
+      <header class="contract-header">
+        <h1 class="contract-title">Finest Clients - DWY Agreement</h1>
+        <p class="contract-subtitle">This Agreement is made between the signatory below (“you” or “your”) and Finest Clients (“we,” “us,” or “our”). It becomes effective on the date of signature. By signing, you agree to join the Program under the terms below.</p>
+        <div class="meta-row">
+          <div><span class="meta-label">Client:</span> Anand</div>
+          <div><span class="meta-label">Program:</span> Agency Funnels DWY</div>
+          <div><span class="meta-label">Core Promise:</span> 20 high ticket clients in 180 days, subject to eligibility and implementation terms</div>
+          <div><span class="meta-label">Jurisdiction:</span> Delhi, India</div>
+        </div>
+      </header>
+
+      <section class="section">
+        <h2 class="section-title">Program Objective</h2>
+        <p>The Program is built for creative agencies and marketing agencies that want to escape referrals, low ticket clients, price negotiation, and random content dependence. The goal is to help you install predictable appointment and high ticket sales systems so you can attract clients who value strategy, judgment, outcomes, and long term partnership.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Program Deliverables</h2>
+        <ul>
+          <li>Access to the Agency Funnels DWY systems, trainings, templates, and implementation assets.</li>
+          <li>Repositioning support so your agency moves away from execution only work and presents itself around outcomes, strategy, and premium value.</li>
+          <li>Appointment system setup and guidance to target strategic buyers who want a creative or marketing partner, not the cheapest vendor.</li>
+          <li>VSL funnel guidance, landing page review, offer refinement, tracking support, and follow up structure.</li>
+          <li>High ticket sales framework to help you close premium clients with clarity, confidence, and a non pushy sales process.</li>
+          <li>Accountability, review, troubleshooting, and strategy support through calls, learning platform access, and account manager guidance during the Program.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Implementation Roadmap</h2>
+        <div class="grid-two">
+          <div class="box"><div class="box-label">Weeks 1 to 2</div><p>Audit your current offer, funnel, positioning, sales process, assets, and technical setup. Build the first version of your appointment system and VSL funnel plan.</p></div>
+          <div class="box"><div class="box-label">Weeks 3 to 4</div><p>Launch or improve the acquisition system, set up tracking, review lead quality, improve messaging, and prepare follow ups and sales scripts.</p></div>
+          <div class="box"><div class="box-label">Weeks 5 to 8</div><p>Optimize appointments, show up rate, sales calls, objections, follow ups, and offer clarity using real campaign and call data.</p></div>
+          <div class="box"><div class="box-label">Day 60 to 180</div><p>Scale what is working, improve weak points, review performance, and keep implementation focused on client acquisition and high ticket sales.</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Client Responsibilities</h2>
+        <ul>
+          <li>You must attend calls, complete assigned work, provide required assets, and implement the systems in a timely manner.</li>
+          <li>You must take booked calls, follow up with leads, track metrics, share sales call recordings when asked, and use the recommended sales process.</li>
+          <li>You must maintain access to required tools, ad accounts, landing pages, calendars, CRMs, domains, emails, and payment systems.</li>
+          <li>You understand that the Program is done with you. We guide, review, build systems, and support implementation. Your effort and execution directly affect results.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Required Operating Costs</h2>
+        <div class="grid-two">
+          <div class="box"><div class="box-label">Facebook Ad Spend</div><p>Facebook ad spend is ₹15,000 per month plus GST, payable by you for running the acquisition campaigns.</p></div>
+          <div class="box"><div class="box-label">Calendly</div><p>Calendly is approximately ₹950 per month.</p></div>
+          <div class="box"><div class="box-label">Domain</div><p>Domain cost is extra only if you do not already have a suitable domain.</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Program Fee and Payment Schedule</h2>
+        <ul>
+          <li>The total Program fee is ₹1,00,000.</li>
+          <li>₹30,000 is payable immediately upon signing this Agreement.</li>
+          <li>The second installment of ₹20,000 may be paid during the second or third month, but must be paid no later than the end of the third month or immediately upon closing your first client through the Program, whichever occurs first.</li>
+          <li>The final ₹50,000 is payable immediately upon closing your third client through the Program.</li>
+          <li>The final ₹50,000 is a result-based payment due only after three clients have been closed. Because it is payable after this result is achieved, it is not covered by or included in the refund policy.</li>
+          <li>If any payment is not made by its due date, you will no longer be eligible for any refund under this Agreement, and no refund claim will be accepted.</li>
+        </ul>
+      </section>
+
+      <section class="section page-break refund-section">
+        <h2 class="section-title">Guarantee, Refund Policy and Eligibility</h2>
+        <p>You may be eligible for a refund only if all conditions below are met. The guarantee applies to the Program promise of helping you work toward 20 paying high ticket clients in 180 days through the ads, VSL funnel, offer, follow up, and sales systems taught and implemented in the Program.</p>
+        <ul>
+          <li>You have signed less than 20 paying clients using Finest Clients systems.</li>
+          <li>180 days have elapsed since you registered for the Program.</li>
+          <li>You attended at least 30 Finest Clients support calls in the last 180 days.</li>
+          <li>All payments due to Finest Clients have been made on time, without delay.</li>
+          <li>You spent at least ₹15,000 per month plus GST on Facebook ads for at least 3 months, unless our team advised otherwise in writing.</li>
+          <li>You conducted all sales calls generated from the Program using the Finest Clients sales process.</li>
+          <li>The offer you used was created using the Program training and audited by Finest Clients.</li>
+          <li>You watched the designated foundational modules in full.</li>
+          <li>By day 120, if fewer than 10 clients were signed, you emailed or messaged Finest Clients asking for help.</li>
+          <li>You kept accurate daily tracking for ad spend, leads, booked calls, show ups, sales calls, follow ups, and payments.</li>
+          <li>All inbound conversations from ads, VSL funnel, WhatsApp, forms, calendar, or follow up were handled using the Finest Clients process.</li>
+          <li>You did not pause implementation, ignore follow ups, delay assets, change the offer without review, or stop campaigns without written discussion with our team.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Refund Claim Process</h2>
+        <ul>
+          <li>Refund claims can be made only once, after 180 days.</li>
+          <li>You must submit all required proof through the designated process or form.</li>
+          <li>We will review your implementation, payment history, tracking, sales activity, calls, funnel data, and campaign data before deciding eligibility.</li>
+          <li>If eligible, a call will be scheduled to process the refund as per our internal process.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Access, Conduct and Intellectual Property</h2>
+        <p>All trainings, systems, templates, recordings, funnels, scripts, frameworks, and materials are owned by Finest Clients or its licensors. You may not copy, resell, record, distribute, teach, or share them without written permission. We may remove access if you violate this Agreement, abuse the team, misuse materials, fail to pay, or act against the interests of Finest Clients.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Confidentiality, Data and Promotion</h2>
+        <p>You agree to keep private Program materials, internal processes, client data, and business information shared during the Program. We may use anonymized or aggregate data to improve the Program. You permit us to use your name, voice, likeness, testimonials, screenshots, and results for proof and promotional purposes unless restricted by law.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">No Absolute Income Guarantee</h2>
+        <p>We provide systems, strategy, support, and implementation guidance. Results depend on your market, offer, pricing, sales skill, follow up, ad spend, implementation speed, and business quality. We do not guarantee revenue, profit, or identical results for every client except as expressly covered by the written refund eligibility terms above.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Legal Terms</h2>
+        <p>This Agreement is governed by the laws of India, with exclusive jurisdiction in the courts of Delhi. Finest Clients is not liable for indirect damages, lost profits, platform issues, ad account restrictions, tool outages, or business losses. Our total liability is capped at the Program fee paid by you in the 12 months before the claim.</p>
+      </section>
+
+      <section class="signature-section">
+        <h2 class="signature-section-title">Acceptance</h2>
+        <p>By signing below, you confirm that you have read, understood, and agreed to this Agreement and authorize the required operating costs described above.</p>
+        <div class="signature-grid">
+          <div class="field-group"><label class="field-label" for="signatory-name">Signatory Full Name</label><input id="signatory-name" class="field-input" type="text" value="Anand" placeholder="Enter full legal name" /></div>
+          <div class="field-group"><label class="field-label" for="company-name">Legal Company Name</label><input id="company-name" class="field-input" type="text" placeholder="Enter company legal name" /></div>
+          <div class="field-group"><label class="field-label" for="sign-date">Date</label><input id="sign-date" class="field-input" type="date" /></div>
+          <div class="field-group"><label class="field-label" for="signature-text">Signature</label><input id="signature-text" class="signature-input" type="text" placeholder="Type your name here" /><div class="signature-hint">Type your name and it will appear in a handwritten style.</div></div>
+        </div>
+      </section>
+
+      <div class="actions-bar no-print"><button class="primary-button" type="button" onclick="window.print()">Download PDF</button></div>
+    </div>
+  </div>
+</body>
+</html>

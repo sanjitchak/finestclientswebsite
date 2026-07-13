@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 1 Lesson 1 | The Anatomy of a VSL Funnel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,750&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0E0E10;
+      --bg2: #15151A;
+      --panel: rgba(242, 240, 235, 0.055);
+      --panel2: rgba(242, 240, 235, 0.09);
+      --line: rgba(242, 240, 235, 0.18);
+      --line2: rgba(242, 240, 235, 0.28);
+      --text: #F2F0EB;
+      --muted: rgba(242, 240, 235, 0.64);
+      --faint: rgba(242, 240, 235, 0.34);
+      --gold: #D8A24D;
+      --gold2: #E0A756;
+      --danger: #8E5C4B;
+      --green: #9CA879;
+      --shadow: 0 30px 90px rgba(0,0,0,0.55);
+      --ease: cubic-bezier(.22,.9,.25,1);
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #050506;
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+    }
+
+    .deck {
+      position: relative;
+      width: min(100vw, calc(100vh * 16 / 9));
+      height: min(100vh, calc(100vw * 9 / 16));
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(216,162,77,0.13), transparent 28%),
+        radial-gradient(circle at 86% 78%, rgba(216,162,77,0.07), transparent 30%),
+        linear-gradient(145deg, #15151A 0%, #0E0E10 62%, #0A0A0C 100%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 20px 80px rgba(0,0,0,0.65);
+      isolation: isolate;
+    }
+
+    .deck:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(242,240,235,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(242,240,235,0.028) 1px, transparent 1px);
+      background-size: 84px 84px;
+      mask-image: radial-gradient(circle at center, black 0 56%, transparent 86%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 82px 108px;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate3d(0, 18px, 0) scale(0.995);
+      transition: opacity .42s ease, transform .42s ease;
+      z-index: 1;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate3d(0,0,0) scale(1);
+    }
+
+    .slide-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .kicker {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 18px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .counter {
+      position: absolute;
+      right: 34px;
+      bottom: 28px;
+      z-index: 20;
+      font-size: 13px;
+      letter-spacing: .14em;
+      color: rgba(242,240,235,0.36);
+      font-weight: 600;
+      user-select: none;
+    }
+    .counter.hidden { display: none; }
+
+    h1, h2, .serif {
+      font-family: Fraunces, Lora, Georgia, serif;
+      margin: 0;
+      line-height: .94;
+      letter-spacing: -0.045em;
+      font-weight: 650;
+    }
+
+    h1 { font-size: 160px; }
+    h2 { font-size: 112px; }
+    .huge { font-size: 190px; }
+    .medium { font-size: 74px; }
+    .label {
+      font-size: 22px;
+      line-height: 1.18;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .small-label {
+      font-size: 16px;
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: .02em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .gold { color: var(--gold); }
+    .muted { color: var(--muted); }
+    .faint { color: var(--faint); }
+
+    .reveal { opacity: 0; transform: translateY(24px); }
+    .active .reveal { animation: rise .85s var(--ease) forwards; }
+    .active .fade { animation: fade .8s ease forwards; }
+    .active .scale { animation: scaleIn .9s var(--ease) forwards; }
+    .active .draw { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 1.25s var(--ease) forwards; }
+    .active .pulse { animation: pulse 2.8s ease-in-out infinite; }
+    .d1 { animation-delay: .12s !important; }
+    .d2 { animation-delay: .28s !important; }
+    .d3 { animation-delay: .44s !important; }
+    .d4 { animation-delay: .62s !important; }
+    .d5 { animation-delay: .84s !important; }
+    .d6 { animation-delay: 1.08s !important; }
+    .d7 { animation-delay: 1.32s !important; }
+    .d8 { animation-delay: 1.58s !important; }
+
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade { to { opacity: 1; } }
+    @keyframes scaleIn { 0% { opacity: 0; transform: scale(.92); } 100% { opacity: 1; transform: scale(1); } }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @keyframes pulse { 0%,100% { filter: drop-shadow(0 0 0 rgba(216,162,77,0)); } 50% { filter: drop-shadow(0 0 22px rgba(216,162,77,0.34)); } }
+    @keyframes glow { 0%,100% { box-shadow: 0 0 0 rgba(216,162,77,0); } 50% { box-shadow: 0 0 42px rgba(216,162,77,0.2); } }
+    @keyframes flowLine { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+    @keyframes rotateSlow { to { transform: rotate(360deg); } }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes lockDrop { 0% { opacity: 0; transform: translateY(-40px) scale(.92); } 70% { opacity: 1; transform: translateY(6px) scale(1.02); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+
+    .card {
+      background: linear-gradient(180deg, rgba(242,240,235,0.09), rgba(242,240,235,0.045));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .pill {
+      border: 1px solid rgba(216,162,77,0.44);
+      background: rgba(216,162,77,0.09);
+      color: var(--gold);
+      border-radius: 999px;
+      padding: 13px 24px;
+      font-weight: 800;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      font-size: 16px;
+    }
+
+    .node {
+      width: 164px;
+      height: 92px;
+      border: 1px solid var(--line2);
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      background: rgba(242,240,235,0.052);
+      box-shadow: 0 18px 52px rgba(0,0,0,0.22);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      position: relative;
+      text-align: center;
+    }
+
+    .node.gold-border { border-color: rgba(216,162,77,0.74); box-shadow: 0 0 0 1px rgba(216,162,77,0.16), 0 18px 52px rgba(0,0,0,0.32); }
+    .node.dim { opacity: .42; }
+
+    .arrow-line {
+      width: 72px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--line2), rgba(216,162,77,0.7));
+      position: relative;
+    }
+    .arrow-line:after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      width: 9px;
+      height: 9px;
+      border-top: 2px solid rgba(216,162,77,0.7);
+      border-right: 2px solid rgba(216,162,77,0.7);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .funnel-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      width: 100%;
+    }
+
+    .mini-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .icon-line { fill: none; stroke: var(--text); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+    .icon-gold { fill: none; stroke: var(--gold); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Slide 1 */
+    .s1-grid { display: grid; place-items: center; gap: 34px; text-align: center; }
+    .neq { font-size: 108px; color: var(--gold); font-family: Fraunces, serif; line-height: 1; }
+    .machine-mark { width: 420px; height: 180px; opacity: 0; }
+    .active .machine-mark { animation: scaleIn .9s var(--ease) .9s forwards; }
+
+    /* Slide 2 */
+    .bridge { display: flex; align-items: center; gap: 64px; }
+    .big-word { font-family: Fraunces, serif; font-size: 92px; letter-spacing: -0.05em; }
+    .bridge .line { width: 270px; height: 3px; background: rgba(216,162,77,0.55); position: relative; transform-origin: left; opacity: 0; }
+    .active .bridge .line { animation: lineGrow .8s var(--ease) .4s forwards; }
+    .bridge .line:after { content:""; position:absolute; right:-2px; top:50%; width:14px; height:14px; border-top:3px solid var(--gold); border-right:3px solid var(--gold); transform:translateY(-50%) rotate(45deg); }
+    @keyframes lineGrow { from { transform: scaleX(0); opacity: 1; } to { transform: scaleX(1); opacity: 1; } }
+
+    /* Slide 3 */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 78px; align-items: center; width: 100%; max-width: 1320px; }
+    .visual-box { height: 520px; display: grid; place-items: center; position: relative; }
+    .monitor { width: 420px; height: 260px; border: 2px solid rgba(242,240,235,0.26); border-radius: 28px; position: relative; background: rgba(242,240,235,0.045); }
+    .monitor:after { content:""; position:absolute; bottom:-64px; left:50%; transform:translateX(-50%); width:150px; height:38px; border-top:2px solid rgba(242,240,235,0.26); border-left:2px solid rgba(242,240,235,0.26); border-right:2px solid rgba(242,240,235,0.26); border-radius: 18px 18px 0 0; }
+    .play { width: 96px; height: 96px; border-radius: 50%; border: 1px solid rgba(216,162,77,0.5); display: grid; place-items: center; color: var(--gold); font-size: 54px; margin: 80px auto 0; }
+    .calendar { width: 360px; height: 340px; border: 2px solid rgba(242,240,235,0.26); border-radius: 30px; background: rgba(242,240,235,0.045); position: relative; padding: 80px 34px 28px; }
+    .calendar:before { content:""; position:absolute; top:0; left:0; right:0; height:68px; border-bottom:1px solid rgba(242,240,235,0.18); background: rgba(216,162,77,0.08); border-radius: 28px 28px 0 0; }
+    .slots { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; opacity: .22; }
+    .slot { height:46px; border-radius:12px; border:1px solid rgba(242,240,235,0.3); }
+    .zero { position:absolute; inset:0; display:grid; place-items:center; font-family:Fraunces,serif; font-size:150px; color:var(--gold); opacity:0; }
+    .active .zero { animation: scaleIn .8s var(--ease) .8s forwards; }
+
+    /* Slide 4 */
+    .map-wrap { width: 1420px; height: 500px; position:relative; display:grid; place-items:center; }
+    .map-wrap .funnel-row { filter: blur(8px); opacity: .25; transform: scale(.98); }
+    .active .map-wrap .funnel-row { animation: mapFocus 1.2s var(--ease) .65s forwards; }
+    @keyframes mapFocus { to { filter: blur(0); opacity: 1; transform: scale(1); } }
+
+    /* Slide 5 */
+    .path-large { width: 1180px; height: 460px; position: relative; }
+    .person-dot { width: 92px; height: 92px; border-radius:50%; border:1px solid rgba(216,162,77,.56); display:grid; place-items:center; position:absolute; left:40px; top:184px; background: rgba(216,162,77,.08); }
+    .call-dot { width: 120px; height: 120px; border-radius:50%; border:1px solid rgba(242,240,235,.28); display:grid; place-items:center; position:absolute; right:40px; top:170px; background: rgba(242,240,235,.05); }
+    .curved-path { position:absolute; left:148px; top:120px; width:884px; height:250px; }
+
+    /* Slide 6 */
+    .you-path { width: 1240px; height: 540px; position:relative; }
+    .you-badge { position:absolute; right:44px; top:190px; width:172px; height:172px; border-radius:50%; border:1px solid rgba(216,162,77,.7); background:rgba(216,162,77,.08); display:grid; place-items:center; font-family:Fraunces,serif; font-size:60px; color:var(--gold); }
+    .trail-node { position:absolute; width:132px; height:76px; border:1px solid rgba(242,240,235,.24); border-radius:20px; display:grid; place-items:center; background:rgba(242,240,235,.045); font-weight:800; }
+    .t1{ left:40px; top:235px;} .t2{ left:230px; top:150px;} .t3{ left:430px; top:235px;} .t4{ left:630px; top:150px;} .t5{ left:830px; top:235px;}
+    .back-line { position:absolute; left:150px; top:120px; width:850px; height:300px; }
+
+    /* Slide 7 */
+    .feed { width: 520px; height: 640px; border-radius:36px; border:1px solid rgba(242,240,235,.18); background:rgba(242,240,235,.04); padding:30px; display:grid; gap:18px; }
+    .feed-card { border-radius:24px; border:1px solid rgba(242,240,235,.12); background:rgba(242,240,235,.055); height:118px; }
+    .ad-card { height:210px; border-color:rgba(216,162,77,.6); background:linear-gradient(180deg, rgba(216,162,77,.16), rgba(216,162,77,.06)); display:grid; place-items:center; }
+    .stop-dot { position:absolute; right: 470px; top: 345px; width: 104px; height: 104px; border-radius:50%; border:1px solid rgba(216,162,77,.6); display:grid; place-items:center; color:var(--gold); font-family:Fraunces,serif; font-size:54px; background:#121216; }
+
+    /* Slide 8 */
+    .door { width: 350px; height: 500px; border: 2px solid rgba(216,162,77,.65); border-radius: 38px 38px 8px 8px; position: relative; background: linear-gradient(180deg, rgba(216,162,77,.12), rgba(242,240,235,.035)); box-shadow: 0 0 70px rgba(216,162,77,.1); }
+    .door:after { content:""; position:absolute; right:42px; top:248px; width:18px; height:18px; border-radius:50%; background:var(--gold); }
+    .click-cursor { position:absolute; right:-110px; bottom:70px; width:120px; height:120px; }
+
+    /* Slide 9 */
+    .page { width: 620px; height: 520px; border-radius: 34px; border:1px solid rgba(242,240,235,.22); background:rgba(242,240,235,.055); padding:42px; box-shadow:var(--shadow); }
+    .page-line { height: 22px; border-radius:99px; background:rgba(242,240,235,.18); margin-bottom:18px; }
+    .page-line.gold-line { width:72%; background:rgba(216,162,77,.36); }
+    .form-line { height: 58px; border:1px solid rgba(242,240,235,.19); border-radius:18px; margin-top:22px; background:rgba(14,14,16,.32); }
+    .button { height:64px; border-radius:18px; background:rgba(216,162,77,.75); color:#15110A; display:grid; place-items:center; font-weight:900; margin-top:26px; letter-spacing:.02em; }
+
+    /* Slide 10 */
+    .capture-wrap { width: 1100px; height: 520px; position:relative; }
+    .mini-form { position:absolute; left:70px; top:94px; width:360px; height:320px; border-radius:30px; border:1px solid rgba(242,240,235,.22); background:rgba(242,240,235,.052); padding:34px; }
+    .data-vault { position:absolute; right:80px; top:126px; width:360px; height:260px; border-radius:34px; border:1px solid rgba(216,162,77,.5); background:rgba(216,162,77,.08); display:grid; place-items:center; }
+    .data-chip { position:absolute; left:480px; width:150px; height:56px; border-radius:999px; border:1px solid rgba(216,162,77,.52); background:#15151A; display:grid; place-items:center; font-weight:800; color:var(--gold); opacity:0; }
+    .chip1 { top:170px; } .chip2 { top:250px; }
+    .active .data-chip { animation: chipMove 1.15s var(--ease) forwards; }
+    .active .chip1 { animation-delay: .78s; }
+    .active .chip2 { animation-delay: .95s; }
+    @keyframes chipMove { 0% { opacity:0; transform:translateX(-70px) scale(.92); } 35% { opacity:1; } 100% { opacity:1; transform:translateX(270px) scale(1); } }
+
+    /* Slide 11 */
+    .heart-machine { width: 1020px; height: 560px; position:relative; }
+    .heart { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:260px; height:260px; border-radius:50%; border:1px solid rgba(216,162,77,.72); background:radial-gradient(circle, rgba(216,162,77,.22), rgba(216,162,77,.07) 58%, transparent); display:grid; place-items:center; font-family:Fraunces,serif; font-size:74px; color:var(--gold); }
+    .orbit { position:absolute; left:50%; top:50%; width:540px; height:540px; margin-left:-270px; margin-top:-270px; border:1px solid rgba(242,240,235,.11); border-radius:50%; opacity:0; }
+    .active .orbit { animation: scaleIn 1s var(--ease) .4s forwards, rotateSlow 24s linear .4s infinite; }
+    .orbit .dot { position:absolute; width:18px; height:18px; border-radius:50%; background:var(--gold); left:260px; top:-9px; }
+
+    /* Slide 12 */
+    .vsl-page { width: 820px; height: 560px; border-radius:34px; border:1px solid rgba(242,240,235,.22); background:rgba(242,240,235,.052); padding:44px; display:grid; grid-template-rows:58px 1fr 68px; gap:28px; }
+    .headline-bar { width:64%; height:38px; border-radius:99px; background:rgba(242,240,235,.2); justify-self:center; }
+    .video-block { border-radius:26px; border:1px solid rgba(216,162,77,.44); background:rgba(14,14,16,.52); display:grid; place-items:center; }
+    .cta-block { width:260px; border-radius:18px; background:rgba(216,162,77,.77); justify-self:center; display:grid; place-items:center; color:#111; font-weight:900; }
+    .removed { position:absolute; right:210px; top:230px; width:170px; height:50px; border-radius:999px; border:1px solid rgba(242,240,235,.13); color:rgba(242,240,235,.25); display:grid; place-items:center; font-weight:800; }
+
+    /* Slide 13 */
+    .fork { width: 1000px; height: 560px; position:relative; }
+    .fork-center { position:absolute; left:50%; top:52px; transform:translateX(-50%); width:220px; height:140px; border-radius:28px; border:1px solid rgba(216,162,77,.55); background:rgba(216,162,77,.08); display:grid; place-items:center; font-family:Fraunces,serif; font-size:54px; color:var(--gold); }
+    .fork-path { position:absolute; left:0; right:0; top:140px; height:310px; }
+    .path-card { position:absolute; bottom:0; width:290px; height:144px; border-radius:28px; border:1px solid rgba(242,240,235,.22); background:rgba(242,240,235,.052); display:grid; place-items:center; }
+    .path-card.left { left:110px; } .path-card.right { right:110px; }
+
+    /* Slide 14 */
+    .booking { width: 760px; height: 540px; border-radius:36px; border:1px solid rgba(242,240,235,.22); background:rgba(242,240,235,.052); padding:36px; display:grid; grid-template-columns: 1fr 250px; gap:34px; }
+    .month { display:grid; grid-template-columns:repeat(7, 1fr); gap:12px; align-content:start; }
+    .day { height:52px; border-radius:14px; border:1px solid rgba(242,240,235,.14); background:rgba(242,240,235,.035); }
+    .day.hot { border-color:rgba(216,162,77,.7); background:rgba(216,162,77,.13); }
+    .times { display:grid; gap:16px; align-content:start; padding-top:44px; }
+    .time { height:48px; border-radius:14px; border:1px solid rgba(242,240,235,.18); display:grid; place-items:center; color:var(--muted); }
+    .time.hot { color:#15110A; background:var(--gold); border-color:var(--gold); font-weight:900; }
+
+    /* Slide 15 */
+    .gate-wrap { width: 1160px; height: 560px; position:relative; }
+    .gate { position:absolute; left:50%; top:80px; transform:translateX(-50%); width:300px; height:400px; border:2px solid rgba(216,162,77,.66); border-radius:160px 160px 20px 20px; background:rgba(216,162,77,.07); display:grid; place-items:center; }
+    .question-stack { position:absolute; left:114px; top:130px; display:grid; gap:18px; }
+    .q-card { width:250px; height:72px; border-radius:20px; border:1px solid rgba(242,240,235,.18); background:rgba(242,240,235,.05); display:grid; place-items:center; color:var(--muted); font-weight:800; }
+    .tire { position:absolute; right:120px; top:215px; width:250px; height:120px; border-radius:28px; border:1px solid rgba(142,92,75,.54); background:rgba(142,92,75,.08); display:grid; place-items:center; color:rgba(242,240,235,.55); font-weight:900; }
+
+    /* Slide 16 */
+    .rate-lock { width: 980px; height: 540px; position:relative; display:grid; place-items:center; }
+    .lock-ring { width:430px; height:430px; border-radius:50%; border:1px solid rgba(216,162,77,.56); display:grid; place-items:center; background:rgba(216,162,77,.055); }
+    .lock-number { font-family:Fraunces,serif; font-size:104px; color:var(--gold); }
+    .lock-bar { position:absolute; bottom:122px; left:50%; transform:translateX(-50%); width:580px; height:34px; border-radius:999px; background:rgba(242,240,235,.1); overflow:hidden; }
+    .lock-bar span { display:block; height:100%; width:0; background:linear-gradient(90deg, rgba(216,162,77,.45), var(--gold)); border-radius:999px; }
+    .active .lock-bar span { animation: fillBar 1.2s var(--ease) .55s forwards; }
+    @keyframes fillBar { to { width:72%; } }
+
+    /* Slide 17 */
+    .afterthought { width:1200px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    .thank-card { height:430px; border-radius:34px; border:1px solid rgba(242,240,235,.18); background:rgba(242,240,235,.045); padding:42px; position:relative; overflow:hidden; }
+    .thank-card.good { border-color:rgba(216,162,77,.54); background:rgba(216,162,77,.055); }
+    .dead-icon { position:absolute; inset:0; display:grid; place-items:center; font-family:Fraunces,serif; font-size:120px; color:rgba(242,240,235,.16); }
+    .proof-tile { height:74px; border-radius:18px; background:rgba(242,240,235,.1); margin-top:22px; }
+    .proof-tile.goldish { background:rgba(216,162,77,.22); }
+
+    /* Slide 18 */
+    .gap { width:1160px; height:520px; position:relative; }
+    .gap-line { position:absolute; left:160px; right:160px; top:260px; height:3px; background:linear-gradient(90deg, rgba(216,162,77,.65), rgba(242,240,235,.16), rgba(216,162,77,.65)); }
+    .gap-dot { position:absolute; top:202px; width:120px; height:120px; border-radius:50%; display:grid; place-items:center; border:1px solid rgba(242,240,235,.22); background:rgba(242,240,235,.05); font-weight:900; }
+    .gap-dot.booked { left:90px; border-color:rgba(216,162,77,.62); color:var(--gold); }
+    .gap-dot.call { right:90px; }
+    .danger-zone { position:absolute; left:425px; top:170px; width:310px; height:180px; border:1px solid rgba(142,92,75,.5); border-radius:30px; background:rgba(142,92,75,.075); display:grid; place-items:center; color:rgba(242,240,235,.68); font-weight:900; }
+
+    /* Slide 19 */
+    .warm-grid { width:1160px; display:grid; grid-template-columns:repeat(3, 1fr); gap:34px; }
+    .warm-card { height:380px; border-radius:34px; border:1px solid rgba(242,240,235,.18); background:rgba(242,240,235,.052); padding:42px; display:grid; grid-template-rows:110px 1fr 54px; align-items:center; justify-items:center; text-align:center; }
+    .warm-icon { width:100px; height:100px; border-radius:50%; border:1px solid rgba(216,162,77,.55); display:grid; place-items:center; }
+    .warm-job { color:var(--muted); font-weight:800; font-size:20px; }
+
+    /* Slide 20 new handoff */
+    .handoff { width:1180px; height:540px; position:relative; }
+    .handoff .node { position:absolute; top:210px; }
+    .h1n{ left:110px;} .h2n{ left:405px;} .h3n{ right:110px; width:220px; }
+    .handoff-line { position:absolute; left:275px; top:254px; width:680px; height:2px; background:linear-gradient(90deg, rgba(216,162,77,.7), rgba(216,162,77,.25)); }
+
+    /* Slide 21 non-clickers */
+    .watchers { width:1120px; height:540px; position:relative; }
+    .big-vsl { position:absolute; left:90px; top:105px; width:360px; height:310px; border-radius:34px; border:1px solid rgba(216,162,77,.54); background:rgba(216,162,77,.06); display:grid; place-items:center; font-family:Fraunces,serif; font-size:82px; color:var(--gold); }
+    .ghosts { position:absolute; right:110px; top:116px; display:grid; grid-template-columns:repeat(3, 90px); gap:30px; }
+    .ghost { width:90px; height:90px; border-radius:50%; border:1px solid rgba(242,240,235,.18); background:rgba(242,240,235,.04); opacity:.54; }
+    .leave-arrow { position:absolute; left:500px; top:252px; width:230px; height:2px; background:rgba(242,240,235,.18); }
+    .leave-arrow:after { content:""; position:absolute; right:0; top:50%; width:12px; height:12px; border-top:2px solid rgba(242,240,235,.34); border-right:2px solid rgba(242,240,235,.34); transform:translateY(-50%) rotate(45deg); }
+
+    /* Slide 22 recovery loop */
+    .loop-wrap { width:980px; height:580px; position:relative; display:grid; place-items:center; }
+    .loop-svg { position:absolute; width:720px; height:470px; overflow:visible; }
+    .loop-node { position:absolute; width:180px; height:90px; border-radius:22px; border:1px solid rgba(242,240,235,.22); background:rgba(242,240,235,.052); display:grid; place-items:center; font-weight:900; }
+    .ln1 { left:60px; top:245px; } .ln2 { right:60px; top:245px; } .ln3 { left:400px; top:68px; } .ln4 { left:400px; bottom:36px; border-color:rgba(216,162,77,.55); color:var(--gold); }
+
+    /* Slide 23 no leaks */
+    .bucket-wrap { width:900px; height:560px; position:relative; display:grid; place-items:center; }
+    .bucket { width:390px; height:400px; border:3px solid rgba(242,240,235,.24); border-top:none; border-radius:0 0 70px 70px; position:relative; }
+    .bucket:before, .bucket:after { content:""; position:absolute; width:120px; height:3px; background:rgba(242,240,235,.24); top:0; }
+    .bucket:before { left:-30px; transform:rotate(-14deg); transform-origin:right; }
+    .bucket:after { right:-30px; transform:rotate(14deg); transform-origin:left; }
+    .leak { position:absolute; right:190px; bottom:118px; width:80px; height:120px; border-radius:60px; background:linear-gradient(180deg, rgba(216,162,77,.22), transparent); opacity:0; }
+    .active .leak { animation: fade .7s ease .45s forwards; }
+    .loop-seal { position:absolute; right:150px; bottom:135px; width:128px; height:66px; border-radius:999px; background:rgba(216,162,77,.18); border:1px solid rgba(216,162,77,.6); display:grid; place-items:center; color:var(--gold); font-weight:900; opacity:0; }
+    .active .loop-seal { animation: scaleIn .8s var(--ease) 1.05s forwards; }
+
+    /* Slide 24 full machine */
+    .full-machine { width:1410px; height:560px; display:grid; place-items:center; position:relative; }
+    .full-machine .funnel-row { position:absolute; top:220px; }
+    .support-loop { position:absolute; left:424px; right:150px; bottom:96px; height:140px; border:2px solid rgba(216,162,77,.28); border-top:none; border-radius:0 0 56px 56px; opacity:0; }
+    .active .support-loop { animation: rise .8s var(--ease) 1.25s forwards; }
+
+    /* Slide 25 jobs */
+    .jobs { width:1320px; height:590px; position:relative; }
+    .jobs .funnel-row { position:absolute; left:0; right:0; top:246px; }
+    .job-tag { position:absolute; min-width:150px; padding:13px 18px; border-radius:999px; border:1px solid rgba(216,162,77,.48); background:rgba(216,162,77,.08); color:var(--gold); text-align:center; font-weight:900; font-size:16px; opacity:0; }
+    .active .job-tag { animation: scaleIn .7s var(--ease) forwards; }
+    .jt1{ left:33px; top:128px; animation-delay:.65s!important;} .jt2{ left:221px; bottom:110px; animation-delay:.78s!important;} .jt3{ left:424px; top:126px; animation-delay:.91s!important;} .jt4{ left:617px; bottom:108px; animation-delay:1.04s!important;} .jt5{ left:818px; top:126px; animation-delay:1.17s!important;} .jt6{ right:100px; bottom:110px; animation-delay:1.3s!important;}
+
+    /* Slide 26 metric mapping */
+    .map-metrics { width:1320px; height:590px; position:relative; }
+    .map-metrics .funnel-row { position:absolute; left:0; right:0; top:246px; }
+    .metric-stack { position:absolute; top:322px; display:flex; flex-direction:column; align-items:center; width:190px; opacity:0; z-index:3; }
+    .metric-stack .drop { width:2px; height:34px; background:linear-gradient(rgba(216,162,77,.7), rgba(216,162,77,.15)); margin-bottom:10px; }
+    .metric-label { padding:12px 16px; border-radius:12px; border:1px solid rgba(216,162,77,.42); background:rgba(216,162,77,.07); color:var(--gold); font-weight:800; font-size:16px; line-height:1.2; text-align:center; }
+    .metric-driver { border-color:rgba(216,162,77,.85); background:rgba(216,162,77,.16); box-shadow:0 0 0 1px rgba(216,162,77,.2), 0 14px 40px rgba(0,0,0,.4); font-size:17px; }
+    .active .metric-stack { animation: lockDrop .7s var(--ease) forwards; }
+    /* align each stack under its node, same x-anchors as the job tags */
+    .ms1 { left:-25px;  animation-delay:.7s!important; }
+    .ms2 { left:211px;  animation-delay:.92s!important; }
+    .ms3 { left:447px;  animation-delay:1.14s!important; }
+    .ms4 { left:683px;  animation-delay:1.36s!important; }
+    .ms5 { left:919px;  animation-delay:1.58s!important; }
+    .mc1 { left:118px; top:112px; animation-delay:.68s!important; }
+    .mc2 { left:613px; top:105px; animation-delay:1.02s!important; }
+    .mc3 { right:204px; bottom:104px; animation-delay:1.36s!important; }
+    .mc4 { left:482px; bottom:82px; animation-delay:1.7s!important; }
+    .connector { position:absolute; stroke:rgba(216,162,77,.52); stroke-width:2; stroke-dasharray:8 8; fill:none; opacity:0; }
+    .active .connector { animation: fade .6s ease forwards; }
+    .c1{ animation-delay:.98s!important;} .c2{ animation-delay:1.32s!important;} .c3{ animation-delay:1.66s!important;} .c4{ animation-delay:2.0s!important;}
+
+    /* Slide 27 student task */
+    .paper-wrap { width:1040px; height:600px; position:relative; display:grid; place-items:center; }
+    .paper { width:720px; height:440px; border-radius:24px; background:rgba(242,240,235,.9); box-shadow:0 35px 90px rgba(0,0,0,.38); color:#15151A; position:relative; transform:rotate(-1.5deg); }
+    .paper-line { position:absolute; height:2px; background:rgba(21,21,26,.16); left:54px; right:54px; }
+    .pl1{ top:100px;} .pl2{ top:168px;} .pl3{ top:236px;} .pl4{ top:304px;}
+    .pencil { position:absolute; right:170px; bottom:85px; width:260px; height:24px; background:linear-gradient(90deg, var(--gold), #7E5B2B); border-radius:12px; transform:rotate(-28deg); box-shadow:0 18px 40px rgba(0,0,0,.3); }
+    .pencil:after { content:""; position:absolute; right:-32px; top:0; border-left:34px solid #C7BDA9; border-top:12px solid transparent; border-bottom:12px solid transparent; }
+
+    /* Slide 28 optimization */
+    .test-grid { width:1180px; display:grid; grid-template-columns:1fr 1fr; gap:56px; }
+    .test-card { height:360px; border-radius:34px; border:1px solid rgba(216,162,77,.48); background:rgba(216,162,77,.065); padding:50px; display:grid; place-items:center; text-align:center; position:relative; overflow:hidden; }
+    .test-card:before { content:""; position:absolute; inset:-90px; border:1px solid rgba(216,162,77,.11); border-radius:50%; }
+    .test-card .serif { font-size:56px; color:var(--gold); line-height:1.02; }
+
+    /* Slide 29 bridge */
+    .next-piece { width:1060px; height:580px; position:relative; display:grid; place-items:center; }
+    .engine-stack { width:640px; height:360px; position:relative; }
+    .engine-box { position:absolute; width:260px; height:120px; border-radius:28px; border:1px solid rgba(242,240,235,.22); background:rgba(242,240,235,.052); display:grid; place-items:center; font-weight:900; }
+    .eb1 { left:0; top:120px; opacity:.38; } .eb2 { left:190px; top:0; border-color:rgba(216,162,77,.64); color:var(--gold); background:rgba(216,162,77,.08); } .eb3 { right:0; top:120px; opacity:.38; }
+    .forward-arrow { position:absolute; bottom:56px; left:50%; transform:translateX(-50%); width:420px; height:2px; background:rgba(216,162,77,.65); }
+    .forward-arrow:after { content:""; position:absolute; right:0; top:50%; width:15px; height:15px; border-top:2px solid var(--gold); border-right:2px solid var(--gold); transform:translateY(-50%) rotate(45deg); }
+
+    svg text { font-family: Inter, system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <main class="deck" id="deck">
+    <section class="slide active" data-index="1">
+      <div class="slide-inner s1-grid">
+        <div class="kicker reveal d1">Module 1 · VSL Engine</div>
+        <div class="reveal d1 serif huge gold">VSL</div>
+        <div class="reveal d2 neq">≠</div>
+        <div class="reveal d3 label" style="font-size:42px;letter-spacing:.12em;text-transform:uppercase;">Just a video</div>
+        <svg class="machine-mark" viewBox="0 0 420 180" aria-hidden="true">
+          <rect x="30" y="48" width="90" height="70" rx="16" fill="none" stroke="rgba(242,240,235,.34)" stroke-width="3"/>
+          <rect x="165" y="26" width="90" height="70" rx="16" fill="none" stroke="rgba(216,162,77,.75)" stroke-width="3"/>
+          <rect x="300" y="48" width="90" height="70" rx="16" fill="none" stroke="rgba(242,240,235,.34)" stroke-width="3"/>
+          <path class="draw" d="M120 82 C145 82 143 60 165 60" fill="none" stroke="rgba(216,162,77,.65)" stroke-width="3" stroke-linecap="round"/>
+          <path class="draw d1" d="M255 60 C278 60 275 82 300 82" fill="none" stroke="rgba(216,162,77,.65)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="210" cy="130" r="22" fill="rgba(216,162,77,.12)" stroke="rgba(216,162,77,.7)" stroke-width="3"/>
+        </svg>
+        <div class="mini-title reveal d5">One part of a machine</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="2">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">The shift</div>
+        <div class="bridge">
+          <div class="big-word reveal d1 muted">Thinking</div>
+          <div class="line"></div>
+          <div class="big-word reveal d3 gold">Building</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="3">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Common mistake</div>
+        <div class="two-col">
+          <div class="visual-box reveal d1">
+            <div class="monitor"><div class="play">▶</div></div>
+            <div class="label" style="position:absolute;bottom:0;">Great video</div>
+          </div>
+          <div class="visual-box reveal d3">
+            <div class="calendar">
+              <div class="slots">
+                <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+                <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+                <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+              </div>
+              <div class="zero">0</div>
+            </div>
+            <div class="label gold" style="position:absolute;bottom:0;">Empty calendar</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="4">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Today</div>
+        <h2 class="reveal d1" style="position:absolute;top:90px;text-align:center;width:100%;">Draw the map</h2>
+        <div class="map-wrap">
+          <div class="funnel-row">
+            <div class="node">Ad</div><div class="arrow-line"></div>
+            <div class="node">Opt-in</div><div class="arrow-line"></div>
+            <div class="node gold-border">VSL</div><div class="arrow-line"></div>
+            <div class="node">Booking</div><div class="arrow-line"></div>
+            <div class="node">Call</div>
+          </div>
+        </div>
+        <div class="mini-title reveal d5">The whole machine</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="5">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Real prospect journey</div>
+        <div class="path-large">
+          <div class="person-dot reveal d1">
+            <svg width="46" height="46" viewBox="0 0 46 46"><circle class="icon-gold" cx="23" cy="15" r="8"/><path class="icon-gold" d="M9 40c3-11 25-11 28 0"/></svg>
+          </div>
+          <svg class="curved-path" viewBox="0 0 884 250">
+            <path class="draw d2" d="M10 145 C190 10 340 242 500 110 C628 4 715 66 870 120" fill="none" stroke="rgba(216,162,77,.72)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <div class="call-dot reveal d4">
+            <svg width="54" height="54" viewBox="0 0 54 54"><path class="icon-line" d="M18 13h18a7 7 0 0 1 7 7v12a7 7 0 0 1-7 7H25l-10 7v-7h-1a7 7 0 0 1-7-7V20a7 7 0 0 1 7-7z"/><path class="icon-gold" d="M18 25h18M18 32h11"/></svg>
+          </div>
+        </div>
+        <div class="mini-title reveal d5">Stranger to booked call</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="6">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Recognition moment</div>
+        <h2 class="reveal d1" style="position:absolute;top:92px;text-align:center;width:100%;font-size:88px;">You walked this path</h2>
+        <div class="you-path">
+          <svg class="back-line" viewBox="0 0 850 300">
+            <path class="draw d2" d="M835 150 C700 20 592 285 445 160 C312 48 203 62 15 150" fill="none" stroke="rgba(216,162,77,.68)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <div class="trail-node t1 reveal d7">Ad</div>
+          <div class="trail-node t2 reveal d6">Opt-in</div>
+          <div class="trail-node t3 reveal d5 gold-border">VSL</div>
+          <div class="trail-node t4 reveal d4">Booking</div>
+          <div class="trail-node t5 reveal d3">Call</div>
+          <div class="you-badge reveal d2">You</div>
+        </div>
+        <div class="mini-title reveal d8">The funnel brought you here</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="7">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Stage 1</div>
+        <div class="feed reveal d1">
+          <div class="feed-card"></div>
+          <div class="feed-card ad-card"><div class="label gold">Problem named</div></div>
+          <div class="feed-card"></div>
+          <div class="feed-card"></div>
+        </div>
+        <div class="stop-dot reveal d4">!</div>
+        <div class="mini-title reveal d5">The ad interrupts</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="8">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">One job only</div>
+        <div class="door reveal d1 pulse"></div>
+        <svg class="click-cursor reveal d3" viewBox="0 0 120 120" style="position:absolute;left:calc(50% + 210px);top:575px;">
+          <path d="M27 15l56 55-32 2-12 30-12-87z" fill="rgba(242,240,235,.9)"/>
+          <path d="M27 15l56 55-32 2-12 30-12-87z" fill="none" stroke="rgba(14,14,16,.8)" stroke-width="3"/>
+        </svg>
+        <h2 class="reveal d3 gold" style="position:absolute;bottom:102px;font-size:74px;">Earn the click</h2>
+      </div>
+    </section>
+
+    <section class="slide" data-index="9">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Stage 2</div>
+        <div class="page reveal d1">
+          <div class="page-line gold-line"></div>
+          <div class="page-line" style="width:58%;"></div>
+          <div class="form-line"></div>
+          <div class="form-line"></div>
+          <div class="form-line"></div>
+          <div class="button">Watch now</div>
+        </div>
+        <div class="mini-title reveal d4">Opt-in page</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="10">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Why opt-in first</div>
+        <div class="capture-wrap">
+          <div class="mini-form reveal d1">
+            <div class="page-line gold-line" style="height:18px;width:70%;"></div>
+            <div class="form-line" style="height:48px;margin-top:28px;"></div>
+            <div class="form-line" style="height:48px;"></div>
+            <div class="form-line" style="height:48px;"></div>
+          </div>
+          <div class="data-chip chip1">Email</div>
+          <div class="data-chip chip2">Phone</div>
+          <div class="data-vault reveal d3">
+            <svg width="112" height="112" viewBox="0 0 112 112"><rect class="icon-gold" x="26" y="46" width="60" height="44" rx="10"/><path class="icon-gold" d="M40 46V34a16 16 0 0 1 32 0v12"/><circle class="icon-gold" cx="56" cy="68" r="4"/></svg>
+          </div>
+        </div>
+        <div class="mini-title reveal d5">Captured before watching</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="11">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Stage 3</div>
+        <div class="heart-machine">
+          <div class="orbit"><div class="dot"></div></div>
+          <div class="heart reveal d1 pulse">VSL</div>
+          <div class="node reveal d3" style="position:absolute;left:60px;top:236px;">Problem</div>
+          <div class="node reveal d4" style="position:absolute;right:60px;top:236px;">Proof</div>
+          <div class="node reveal d5" style="position:absolute;left:428px;bottom:24px;">Book call</div>
+        </div>
+        <div class="mini-title reveal d6">Heart of the machine</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="12">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Stripped down on purpose</div>
+        <div class="vsl-page reveal d1">
+          <div class="headline-bar reveal d2"></div>
+          <div class="video-block reveal d3"><div class="play" style="margin:0;">▶</div></div>
+          <div class="cta-block reveal d4">Book a call</div>
+        </div>
+        <div class="removed reveal d5">No noise</div>
+        <div class="mini-title reveal d6">Headline · Video · Button</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="13">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">After they watch</div>
+        <div class="fork">
+          <div class="fork-center reveal d1">VSL</div>
+          <svg class="fork-path" viewBox="0 0 1000 310">
+            <path class="draw d2" d="M500 0 C420 92 310 115 255 170" fill="none" stroke="rgba(216,162,77,.65)" stroke-width="4" stroke-linecap="round"/>
+            <path class="draw d3" d="M500 0 C580 92 690 115 745 170" fill="none" stroke="rgba(242,240,235,.28)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <div class="path-card left reveal d3"><div class="label gold">Clicks</div></div>
+          <div class="path-card right reveal d4"><div class="label muted">Leaves</div></div>
+        </div>
+        <div class="mini-title reveal d5">Two paths</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="14">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Stage 4</div>
+        <div class="booking reveal d1">
+          <div class="month">
+            <div class="day"></div><div class="day"></div><div class="day"></div><div class="day hot"></div><div class="day"></div><div class="day"></div><div class="day"></div>
+            <div class="day"></div><div class="day"></div><div class="day hot"></div><div class="day"></div><div class="day"></div><div class="day hot"></div><div class="day"></div>
+            <div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day hot"></div><div class="day"></div><div class="day"></div>
+            <div class="day"></div><div class="day hot"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div>
+          </div>
+          <div class="times">
+            <div class="time">10:30</div>
+            <div class="time hot">14:00</div>
+            <div class="time">16:30</div>
+            <div class="time">18:00</div>
+          </div>
+        </div>
+        <div class="mini-title reveal d4">They pick a time</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="15">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Booking page lever</div>
+        <div class="gate-wrap">
+          <div class="question-stack">
+            <div class="q-card reveal d1">Revenue?</div>
+            <div class="q-card reveal d2">Offer?</div>
+            <div class="q-card reveal d3">Niche?</div>
+          </div>
+          <div class="gate reveal d2"><div class="label gold">Qualification</div></div>
+          <div class="tire reveal d4">Tire-kickers</div>
+          <svg style="position:absolute;left:410px;top:240px;width:320px;height:120px;" viewBox="0 0 320 120">
+            <path class="draw d3" d="M0 60 H108" stroke="rgba(216,162,77,.65)" stroke-width="4" stroke-linecap="round"/>
+            <path class="draw d4" d="M205 60 H318" stroke="rgba(142,92,75,.55)" stroke-width="4" stroke-linecap="round" stroke-dasharray="9 12"/>
+          </svg>
+        </div>
+        <div class="mini-title reveal d5">Filter before the call</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="16">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Module 0 number</div>
+        <div class="rate-lock">
+          <div class="lock-ring reveal d1"><div class="lock-number">QR</div></div>
+          <div class="lock-bar reveal d2"><span></span></div>
+        </div>
+        <h2 class="reveal d3 gold" style="position:absolute;bottom:98px;font-size:66px;">Protect qualified rate</h2>
+      </div>
+    </section>
+
+    <section class="slide" data-index="17">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Stage 5</div>
+        <div class="afterthought">
+          <div class="thank-card reveal d1">
+            <div class="small-label">Most funnels</div>
+            <div class="dead-icon">…</div>
+            <div class="label" style="position:absolute;bottom:42px;left:42px;color:rgba(242,240,235,.42);">Dead end</div>
+          </div>
+          <div class="thank-card good reveal d3">
+            <div class="small-label gold">Your funnel</div>
+            <div class="proof-tile goldish"></div>
+            <div class="proof-tile"></div>
+            <div class="proof-tile"></div>
+            <div class="label gold" style="position:absolute;bottom:42px;left:42px;">Warm start</div>
+          </div>
+        </div>
+        <div class="mini-title reveal d5">Thank-you page works</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="18">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">The dangerous gap</div>
+        <div class="gap">
+          <div class="gap-line reveal d1"></div>
+          <div class="gap-dot booked reveal d1">Booked</div>
+          <div class="danger-zone reveal d3">Show rate risk</div>
+          <div class="gap-dot call reveal d4">Call</div>
+        </div>
+        <div class="mini-title reveal d5">Excitement cools down</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="19">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Keep them warm</div>
+        <div class="warm-grid">
+          <div class="warm-card reveal d1">
+            <div class="warm-icon">
+              <svg width="58" height="58" viewBox="0 0 58 58"><rect class="icon-gold" x="9" y="15" width="40" height="28" rx="7"/><path class="icon-gold" d="M11 18l18 15 18-15"/></svg>
+            </div>
+            <div class="label">Email</div>
+            <div class="warm-job">Confirm and prove</div>
+          </div>
+          <div class="warm-card reveal d3">
+            <div class="warm-icon">
+              <svg width="58" height="58" viewBox="0 0 58 58"><rect class="icon-gold" x="18" y="7" width="22" height="44" rx="7"/><path class="icon-gold" d="M25 44h8"/><path class="icon-line" d="M22 17h14"/></svg>
+            </div>
+            <div class="label">WhatsApp</div>
+            <div class="warm-job">Remind and reheat</div>
+          </div>
+          <div class="warm-card reveal d5">
+            <div class="warm-icon">
+              <svg width="58" height="58" viewBox="0 0 58 58"><circle class="icon-gold" cx="22" cy="20" r="9"/><path class="icon-gold" d="M7 49c3-14 27-14 30 0"/><path class="icon-line" d="M39 17h12M39 27h9"/></svg>
+            </div>
+            <div class="label">Setter</div>
+            <div class="warm-job">Human handoff</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="20">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Course seam</div>
+        <div class="handoff">
+          <div class="handoff-line reveal d2"></div>
+          <div class="node h1n reveal d1 gold-border">Qualified</div>
+          <div class="node h2n reveal d3 gold-border">Shows up</div>
+          <div class="node h3n reveal d5">2-Call Close</div>
+        </div>
+        <div class="mini-title reveal d6">Acquisition delivers to sales</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="21">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">The ones who leave</div>
+        <div class="watchers">
+          <div class="big-vsl reveal d1">VSL</div>
+          <div class="leave-arrow reveal d3"></div>
+          <div class="ghosts">
+            <div class="ghost reveal d4"></div><div class="ghost reveal d5"></div><div class="ghost reveal d6"></div>
+            <div class="ghost reveal d5"></div><div class="ghost reveal d6"></div><div class="ghost reveal d7"></div>
+          </div>
+        </div>
+        <div class="mini-title reveal d8">Most will not book today</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="22">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Real machine behavior</div>
+        <div class="loop-wrap">
+          <svg class="loop-svg" viewBox="0 0 720 470">
+            <path class="draw d2" d="M150 255 C170 70 548 70 570 255" fill="none" stroke="rgba(216,162,77,.62)" stroke-width="4" stroke-linecap="round"/>
+            <path class="draw d4" d="M570 255 C548 432 170 432 150 255" fill="none" stroke="rgba(216,162,77,.32)" stroke-width="4" stroke-linecap="round" stroke-dasharray="12 14"/>
+          </svg>
+          <div class="loop-node ln1 reveal d1">Leaves</div>
+          <div class="loop-node ln2 reveal d3">Follow-up</div>
+          <div class="loop-node ln3 reveal d5">Retargeting</div>
+          <div class="loop-node ln4 reveal d6">Returns</div>
+        </div>
+        <div class="mini-title reveal d7">Another chance tomorrow</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="23">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Machine vs bucket</div>
+        <div class="bucket-wrap">
+          <div class="bucket reveal d1"></div>
+          <div class="leak"></div>
+          <div class="loop-seal">No leaks</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="24">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Step back</div>
+        <h2 class="reveal d1" style="position:absolute;top:86px;text-align:center;width:100%;font-size:82px;">One complete funnel</h2>
+        <div class="full-machine">
+          <div class="funnel-row">
+            <div class="node reveal d1">Ad</div><div class="arrow-line reveal d2"></div>
+            <div class="node reveal d2">Opt-in</div><div class="arrow-line reveal d3"></div>
+            <div class="node gold-border reveal d3">VSL</div><div class="arrow-line reveal d4"></div>
+            <div class="node reveal d4">Booking</div><div class="arrow-line reveal d5"></div>
+            <div class="node reveal d5">Thank you</div><div class="arrow-line reveal d6"></div>
+            <div class="node reveal d6">Call</div>
+          </div>
+          <div class="support-loop"></div>
+          <div class="pill reveal d7" style="position:absolute;bottom:70px;left:50%;transform:translateX(-50%);">Follow-up loop</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="25">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Nothing random</div>
+        <div class="jobs">
+          <div class="funnel-row">
+            <div class="node reveal d1">Ad</div><div class="arrow-line reveal d1"></div>
+            <div class="node reveal d1">Opt-in</div><div class="arrow-line reveal d1"></div>
+            <div class="node gold-border reveal d1">VSL</div><div class="arrow-line reveal d1"></div>
+            <div class="node reveal d1">Booking</div><div class="arrow-line reveal d1"></div>
+            <div class="node reveal d1">Thank you</div><div class="arrow-line reveal d1"></div>
+            <div class="node reveal d1">Call</div>
+          </div>
+          <div class="job-tag jt1">Interrupt</div>
+          <div class="job-tag jt2">Capture</div>
+          <div class="job-tag jt3">Convince</div>
+          <div class="job-tag jt4">Qualify</div>
+          <div class="job-tag jt5">Nurture</div>
+          <div class="job-tag jt6">Convert</div>
+        </div>
+        <div class="mini-title reveal d7">Every part has a job</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="26">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Module 0 math becomes visible</div>
+        <div class="map-metrics">
+          <div class="funnel-row">
+            <div class="node reveal d1">Ad</div><div class="arrow-line reveal d1"></div>
+            <div class="node reveal d1">Opt-in</div><div class="arrow-line reveal d1"></div>
+            <div class="node gold-border reveal d1">VSL</div><div class="arrow-line reveal d1"></div>
+            <div class="node reveal d1">Booking</div><div class="arrow-line reveal d1"></div>
+            <div class="node reveal d1">Follow-up</div><div class="arrow-line reveal d1"></div>
+            <div class="node reveal d1">Call</div>
+          </div>
+          <div class="metric-stack ms1"><span class="drop"></span><span class="metric-label">Cost per appointment</span></div>
+          <div class="metric-stack ms2"><span class="drop"></span><span class="metric-label">Cost per appointment</span></div>
+          <div class="metric-stack ms3"><span class="drop"></span><span class="metric-label metric-driver">Drives everything</span></div>
+          <div class="metric-stack ms4"><span class="drop"></span><span class="metric-label">Qualified rate</span></div>
+          <div class="metric-stack ms5"><span class="drop"></span><span class="metric-label">Show rate</span></div>
+        </div>
+        <div class="mini-title reveal d7" style="animation-delay:1.9s;">The 5 stages made visible</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="27">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Before next lesson</div>
+        <div class="paper-wrap">
+          <div class="paper reveal d1">
+            <div class="paper-line pl1"></div><div class="paper-line pl2"></div><div class="paper-line pl3"></div><div class="paper-line pl4"></div>
+            <svg style="position:absolute;left:78px;top:108px;width:570px;height:220px;" viewBox="0 0 570 220">
+              <circle class="draw d3" cx="38" cy="110" r="24" stroke="#15151A" stroke-width="4" fill="none"/>
+              <path class="draw d4" d="M70 110 H145" stroke="#15151A" stroke-width="4" stroke-linecap="round"/>
+              <rect class="draw d4" x="150" y="84" width="72" height="52" rx="12" stroke="#15151A" stroke-width="4" fill="none"/>
+              <path class="draw d5" d="M230 110 H305" stroke="#15151A" stroke-width="4" stroke-linecap="round"/>
+              <rect class="draw d5" x="310" y="84" width="72" height="52" rx="12" stroke="#D8A24D" stroke-width="4" fill="none"/>
+              <path class="draw d6" d="M390 110 H465" stroke="#15151A" stroke-width="4" stroke-linecap="round"/>
+              <circle class="draw d6" cx="510" cy="110" r="24" stroke="#15151A" stroke-width="4" fill="none"/>
+            </svg>
+          </div>
+          <div class="pencil reveal d4"></div>
+        </div>
+        <h2 class="reveal d5 gold" style="position:absolute;bottom:82px;font-size:72px;">Draw it by hand</h2>
+      </div>
+    </section>
+
+    <section class="slide" data-index="28">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Then stress test</div>
+        <div class="test-grid">
+          <div class="test-card reveal d1">
+            <div>
+              <div class="small-label">Lift show-up?</div>
+              <div class="serif">30-min reminder call?</div>
+            </div>
+          </div>
+          <div class="test-card reveal d3">
+            <div>
+              <div class="small-label">Lift closing?</div>
+              <div class="serif">Personal video after call one?</div>
+            </div>
+          </div>
+        </div>
+        <div class="mini-title reveal d5">Try it first</div>
+      </div>
+    </section>
+
+    <section class="slide" data-index="29">
+      <div class="slide-inner">
+        <div class="kicker reveal d1">Next lesson</div>
+        <h2 class="reveal d1" style="position:absolute;top:82px;text-align:center;width:100%;font-size:84px;">The sharp message</h2>
+        <div class="next-piece">
+          <div class="engine-stack">
+            <div class="engine-box eb1 reveal d1">Funnel</div>
+            <div class="engine-box eb2 reveal d3">VSL</div>
+            <div class="engine-box eb3 reveal d5">Call</div>
+          </div>
+          <div class="forward-arrow reveal d6"></div>
+        </div>
+        <div class="mini-title reveal d7">Translate the offer</div>
+      </div>
+    </section>
+
+    <div class="counter" id="counter">01 / 29</div>
+  </main>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const counter = document.getElementById('counter');
+    let current = 0;
+    const total = slides.length;
+
+    function pad(num) { return String(num).padStart(2, '0'); }
+
+    function showSlide(index) {
+      current = Math.max(0, Math.min(total - 1, index));
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === current);
+      });
+      counter.textContent = `${pad(current + 1)} / ${pad(total)}`;
+      const active = slides[current];
+      active.style.animation = 'none';
+      void active.offsetHeight;
+      active.style.animation = '';
+    }
+
+    function nextSlide() { showSlide(current + 1); }
+    function prevSlide() { showSlide(current - 1); }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' || event.key === ' ' || event.key === 'PageDown') {
+        event.preventDefault();
+        nextSlide();
+      }
+      if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+        event.preventDefault();
+        prevSlide();
+      }
+      if (event.key.toLowerCase() === 'c' || event.key.toLowerCase() === 'h') {
+        counter.classList.toggle('hidden');
+      }
+      if (event.key === 'Home') showSlide(0);
+      if (event.key === 'End') showSlide(total - 1);
+    });
+
+    document.getElementById('deck').addEventListener('click', (event) => {
+      const selection = window.getSelection().toString();
+      if (!selection) nextSlide();
+    });
+
+    showSlide(0);
+  </script>
+</body>
+</html>

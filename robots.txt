@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Disallow: /contract/
+Disallow: /courses/
+Disallow: /proposals/
+Disallow: /stickman/
+Disallow: /youtubeagency/
+Disallow: /oldhalloffame/
+Disallow: /volare/
+Disallow: /screenshots/
+Disallow: /liveforeverhealth/
+Disallow: /sopv2.html
+Disallow: /sop.html
+Disallow: /salesdeck.html
+Disallow: /pitchmaker.html
+Disallow: /pitch.html
+Disallow: /onboarding.html
+Disallow: /bonus.html
+
+# Private HTML pages also carry noindex directives as a second layer.
+Sitemap: https://finestclients.com/sitemap.xml

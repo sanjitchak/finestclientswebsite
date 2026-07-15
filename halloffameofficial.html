@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finest Clients - Hall of Fame</title>
+<title>Agency Client Results &amp; Case Studies | Finest Clients</title>
 <meta name="description" content="See how agencies have used Finest Clients systems to generate qualified appointments, close high-ticket clients and build predictable client acquisition.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="canonical" href="https://finestclients.com/halloffameofficial.html">
@@ -12,12 +12,12 @@
 <meta property="og:title" content="Finest Clients Hall of Fame">
 <meta property="og:description" content="Real agency results, qualified appointments and high-ticket client wins from Finest Clients.">
 <meta property="og:url" content="https://finestclients.com/halloffameofficial.html">
-<meta property="og:image" content="https://finestclients.com/screenshots/easy-business.png">
-<meta property="og:image:alt" content="Finest Clients Hall of Fame case study results">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://finestclients.com/finestclientslogo.png">
+<meta property="og:image:alt" content="Finest Clients logo">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Finest Clients Hall of Fame">
 <meta name="twitter:description" content="Real agency results, qualified appointments and high-ticket client wins from Finest Clients.">
-<meta name="twitter:image" content="https://finestclients.com/screenshots/easy-business.png">
+<meta name="twitter:image" content="https://finestclients.com/finestclientslogo.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -137,6 +137,9 @@ a{color:inherit}
 .footer-brand{font-family:'Playfair Display',serif;font-size:28px;font-weight:800;margin-bottom:8px}
 .footer-brand span{color:var(--gold)}
 .footer-sub{color:var(--white-muted);font-size:14px}
+.footer-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin-top:22px;font-size:13px;font-weight:700}
+.footer-nav a{color:var(--white-dim);text-decoration:none}
+.footer-nav a:hover{color:var(--gold)}
 
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -347,6 +350,13 @@ window.addEventListener('error', function(e) {
 <div class="footer">
   <div class="footer-brand">Finest <span>Clients</span></div>
   <div class="footer-sub">Client acquisition proof for agencies, coaches, and consultants</div>
+  <nav class="footer-nav" aria-label="Footer navigation">
+    <a href="/">Home</a>
+    <a href="client-acquisition-for-agencies.html">Client Acquisition</a>
+    <a href="solutions/digital-marketing-agencies.html">Marketing Agencies</a>
+    <a href="solutions/creative-agencies.html">Creative Agencies</a>
+    <a href="solutions/video-production-agencies.html">Video Production</a>
+  </nav>
 </div>
 
 <script>
@@ -537,7 +547,7 @@ if (youtubeCasesEl) {
   youtubeCasesEl.innerHTML = youtubeCases.map((item) => `
     <article class="case-card">
       <div class="case-shot">
-        <img src="${escapeHTML(item.image)}" alt="${escapeHTML(item.imageAlt)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <img src="${escapeHTML(item.image)}" alt="${escapeHTML(item.imageAlt)}" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:var(--white-muted);font-size:13px;text-align:center;padding:24px">Add: ${escapeHTML(item.image)}</div>
         <a href="${escapeHTML(item.url)}" target="_blank" rel="noopener noreferrer" class="yt-link">Visit Channel</a>
       </div>

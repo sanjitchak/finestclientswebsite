@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EU Finance Academy Funnel | Finest Clients</title>
-  <meta name="description" content="A done-for-you Meta Ads and webinar or VSL enrolment system for EU AI-for-finance, finance transformation, reporting and CFO programmes.">
+  <title>Finance Academy Enrolment Funnel | Finest Clients</title>
+  <meta name="description" content="A done-for-you Meta Ads, webinar or VSL, application and follow-up system for premium finance, CFO and accounting academies.">
   <meta name="theme-color" content="#000000">
-  <meta property="og:title" content="EU Finance Academy Funnel | Finest Clients">
-  <meta property="og:description" content="Fill one European finance programme in one country and language through Meta Ads, education, qualification and follow-up.">
+  <meta property="og:title" content="Finance Academy Enrolment Funnel | Finest Clients">
+  <meta property="og:description" content="Turn Meta interest into educated, qualified applicants for a proven premium finance programme.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://finestclients.com/finance-eu.html">
+  <meta property="og:url" content="https://finestclients.com/finance-academy.html">
   <meta property="og:image" content="https://finestclients.com/finestclientslogo.png">
-  <link rel="canonical" href="https://finestclients.com/finance-eu.html">
+  <link rel="canonical" href="https://finestclients.com/finance-academy.html">
   <link rel="icon" href="https://finestclients.com/finestclientslogo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -528,6 +528,106 @@
       line-height: 1.75;
     }
 
+    .fqd-results-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .fqd-result-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      padding: 28px;
+    }
+
+    .fqd-result-card::before {
+      position: absolute;
+      top: -120px;
+      right: -110px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(144, 184, 51, 0.11);
+      filter: blur(65px);
+      content: "";
+    }
+
+    .fqd-result-card > * {
+      position: relative;
+    }
+
+    .fqd-result-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 18px;
+      padding: 7px 10px;
+      color: #d8e8b4;
+      border: 1px solid rgba(144, 184, 51, 0.24);
+      border-radius: 999px;
+      background: rgba(144, 184, 51, 0.07);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .fqd-result-card h3 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.15;
+    }
+
+    .fqd-result-detail {
+      display: grid;
+      gap: 13px;
+      margin: 23px 0 0;
+    }
+
+    .fqd-result-detail dt {
+      padding-top: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    .fqd-result-detail dt {
+      margin: 0 0 5px;
+      color: var(--muted-2);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .fqd-result-detail dd {
+      margin: 0;
+      color: #d1d5db;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .fqd-result-number {
+      color: var(--brand-400);
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .fqd-results-disclosure {
+      max-width: 800px;
+      margin: 24px auto 0;
+      padding: 17px 19px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.025);
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .fqd-results-disclosure strong {
+      color: #fff;
+    }
+
     .fqd-process {
       counter-reset: process;
     }
@@ -945,7 +1045,8 @@
       }
 
       .fqd-grid-2,
-      .fqd-fit-grid {
+      .fqd-fit-grid,
+      .fqd-results-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -1087,9 +1188,9 @@
         <div class="fqd-nav-links">
           <a href="#problem">The enrolment gap</a>
           <a href="#system">The system</a>
+          <a href="#results">Relevant results</a>
           <a href="#process">How it works</a>
-          <a href="#faq">Questions</a>
-          <a class="fqd-button" href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20EU%20finance%20academy." target="_blank" rel="noopener">WhatsApp us</a>
+          <a class="fqd-button" href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20finance%20academy." target="_blank" rel="noopener">WhatsApp us</a>
         </div>
         <button class="fqd-menu-toggle" id="fqd-menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="fqd-mobile-menu">
           <i data-lucide="menu" aria-hidden="true"></i>
@@ -1101,9 +1202,10 @@
       <div class="fqd-mobile-menu-inner">
         <a class="fqd-mobile-link" href="#problem">The enrolment gap</a>
         <a class="fqd-mobile-link" href="#system">The system</a>
+        <a class="fqd-mobile-link" href="#results">Relevant results</a>
         <a class="fqd-mobile-link" href="#process">How it works</a>
         <a class="fqd-mobile-link" href="#faq">Questions</a>
-        <a class="fqd-mobile-link" href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20EU%20finance%20academy." target="_blank" rel="noopener">WhatsApp us</a>
+        <a class="fqd-mobile-link" href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20finance%20academy." target="_blank" rel="noopener">WhatsApp us</a>
       </div>
     </div>
 
@@ -1111,11 +1213,11 @@
       <section class="fqd-hero">
         <div class="fqd-container">
           <div class="fqd-hero-inner">
-            <div class="fqd-badge"><span class="fqd-ping"></span> For specialist finance academies in the European Union</div>
-            <h1>Fill One European Finance Programme With <span class="fqd-gradient-text">Qualified Applicants.</span></h1>
-            <p class="fqd-hero-copy">We build the Meta Ads, webinar or VSL, application, booking and follow-up system for specialist programmes in AI for finance, finance transformation, reporting and CFO leadership.</p>
+            <div class="fqd-badge"><span class="fqd-ping"></span> For premium finance, CFO and accounting academies</div>
+            <h1>Fill Your Next Finance Cohort With <span class="fqd-gradient-text">Qualified Applicants.</span></h1>
+            <p class="fqd-hero-copy">We build the Meta Ads, webinar or VSL, application, booking and follow-up system for proven programmes in CFO leadership, accounting advisory, FP&amp;A, tax, reporting, financial modelling and AI for finance.</p>
             <div class="fqd-cta-row">
-              <a class="fqd-button" href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20EU%20finance%20academy." target="_blank" rel="noopener">
+              <a class="fqd-button" href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20finance%20academy." target="_blank" rel="noopener">
                 Request a free audit on WhatsApp <i data-lucide="message-circle-more" aria-hidden="true"></i>
               </a>
               <a class="fqd-button fqd-button-secondary" href="#system">
@@ -1125,6 +1227,7 @@
             <div class="fqd-microcopy">
               <span><i data-lucide="check" width="15" height="15" aria-hidden="true"></i> Meta Ads only</span>
               <span><i data-lucide="check" width="15" height="15" aria-hidden="true"></i> Webinar or VSL funnel</span>
+              <span><i data-lucide="check" width="15" height="15" aria-hidden="true"></i> One programme at a time</span>
             </div>
           </div>
         </div>
@@ -1147,13 +1250,13 @@
         <div class="fqd-container-narrow">
           <div class="fqd-problem-panel fqd-glass">
             <p class="fqd-kicker">The enrolment gap</p>
-            <h2>Europe is not one market. A broad campaign can weaken the message and the applicant quality.</h2>
+            <h2>A strong finance programme can still lose good applicants between the ad and the admissions call.</h2>
             <div class="fqd-problem-copy">
-              <p>A finance professional in Belgium, the Netherlands or Spain may face a different role, language and reporting need. The funnel should focus on one country and one useful outcome.</p>
+              <p>A finance professional will not enrol only because a page lists more modules. The funnel must make the outcome relevant to their role, build trust and guide the next step clearly.</p>
               <ul class="fqd-problem-list">
-                <li><i data-lucide="x-circle" width="18" height="18" aria-hidden="true"></i><span>One message for the whole EU can feel too broad to a specialist finance buyer.</span></li>
-                <li><i data-lucide="x-circle" width="18" height="18" aria-hidden="true"></i><span>Visitors may not understand how the programme fits their role, local market or language.</span></li>
-                <li><i data-lucide="x-circle" width="18" height="18" aria-hidden="true"></i><span>Applications and sales data become hard to read when several countries are mixed together.</span></li>
+                <li><i data-lucide="x-circle" width="18" height="18" aria-hidden="true"></i><span>Broad finance messaging can attract clicks from the wrong roles, markets or price points.</span></li>
+                <li><i data-lucide="x-circle" width="18" height="18" aria-hidden="true"></i><span>Senior professionals need credible proof, faculty trust and a clear career or commercial use case.</span></li>
+                <li><i data-lucide="x-circle" width="18" height="18" aria-hidden="true"></i><span>Qualified registrants can be lost when reminders, admissions calls and payment follow-up rely on memory.</span></li>
               </ul>
               <div class="fqd-quote">We do not promise more students. We build a clear path that educates, qualifies and follows up with each applicant.</div>
             </div>
@@ -1164,16 +1267,16 @@
       <section class="fqd-section fqd-section-muted" id="system">
         <div class="fqd-container">
           <div class="fqd-section-head">
-            <p class="fqd-kicker">The Single-Country EU Finance Academy Funnel</p>
+            <p class="fqd-kicker">The Finance Academy Enrolment Funnel</p>
             <h2>One clear system from Meta click to enrolment.</h2>
-            <p class="fqd-subhead">We build the pages, application, booking, reminders and tracking around one programme and one country. Your team keeps control of admissions and delivery.</p>
+            <p class="fqd-subhead">We build the pages, application, booking, reminders and tracking around one programme, one audience and one market at a time. Your team keeps control of admissions and delivery.</p>
           </div>
 
           <div class="fqd-grid fqd-grid-2">
             <article class="fqd-card fqd-glass">
               <div class="fqd-icon-box"><i data-lucide="megaphone" width="27" height="27" aria-hidden="true"></i></div>
               <h4>Focused Meta campaigns</h4>
-              <p>Reach finance professionals in one selected EU country and language with clear, approved messages.</p>
+              <p>Reach accountants and finance professionals seeking higher-value leadership, advisory, technical or AI skills with clear, approved messages.</p>
             </article>
             <article class="fqd-card fqd-glass">
               <div class="fqd-icon-box"><i data-lucide="presentation" width="27" height="27" aria-hidden="true"></i></div>
@@ -1183,7 +1286,7 @@
             <article class="fqd-card fqd-glass">
               <div class="fqd-icon-box"><i data-lucide="list-checks" width="27" height="27" aria-hidden="true"></i></div>
               <h4>Application and booking</h4>
-              <p>Qualify by country, language, role, experience, programme goal, timeline and readiness to invest before the admissions call.</p>
+              <p>Qualify by role, experience, location, goal, timeline, budget and readiness to join before the admissions call.</p>
             </article>
             <article class="fqd-card fqd-glass">
               <div class="fqd-icon-box"><i data-lucide="refresh-cw" width="27" height="27" aria-hidden="true"></i></div>
@@ -1191,6 +1294,50 @@
               <p>Send reminders, replay messages and call follow-up. Track qualified applicants, calls and paid enrolments.</p>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section class="fqd-section" id="results">
+        <div class="fqd-container">
+          <div class="fqd-section-head">
+            <p class="fqd-kicker">Relevant Funnel Results</p>
+            <h2>The same funnel mechanisms premium finance academies need.</h2>
+            <p class="fqd-subhead">These examples show how better education, tracking, automation and follow-up improved adjacent coaching and education funnels.</p>
+          </div>
+
+          <div class="fqd-results-grid">
+            <article class="fqd-result-card fqd-glass">
+              <div class="fqd-result-type"><i data-lucide="presentation" width="14" height="14" aria-hidden="true"></i> Paid workshop coaching business</div>
+              <h3>How backend nurturing nearly doubled the return from a paid workshop funnel</h3>
+              <dl class="fqd-result-detail">
+                <dt>Problem</dt>
+                <dd>Ads were generating sales, but older leads were not being nurtured or invited back into upcoming workshops.</dd>
+                <dt>What changed</dt>
+                <dd>Automation, daily emails, and email and WhatsApp workshop invitations were added to reactivate the existing audience.</dd>
+                <dt>Documented result</dt>
+                <dd><span class="fqd-result-number">ROAS increased from roughly 1.8x–2x to 3.5x–4x.</span></dd>
+                <dt>Evidence status</dt>
+                <dd>Documented anonymised case study from an adjacent coaching market.</dd>
+              </dl>
+            </article>
+
+            <article class="fqd-result-card fqd-glass">
+              <div class="fqd-result-type"><i data-lucide="radio" width="14" height="14" aria-hidden="true"></i> Free webinar coaching business</div>
+              <h3>Replacing low-quality lead forms with a tracked webinar funnel</h3>
+              <dl class="fqd-result-detail">
+                <dt>Problem</dt>
+                <dd>The client relied on lead forms, received weak leads and had no automation to educate or follow up with registrants.</dd>
+                <dt>What changed</dt>
+                <dd>A focused landing page, tracking and follow-up system replaced the disconnected lead-form journey.</dd>
+                <dt>Documented result</dt>
+                <dd><span class="fqd-result-number">Monthly ROAS reached 2.5x–3.5x.</span></dd>
+                <dt>Evidence status</dt>
+                <dd>Documented anonymised case study from an adjacent coaching market.</dd>
+              </dl>
+            </article>
+          </div>
+
+          <p class="fqd-results-disclosure"><strong>Important context:</strong> These examples come from coaching and education businesses using webinars, workshops, automation and paid acquisition. They are not finance academy case studies. Results vary by offer, market, sales process and advertising budget.</p>
         </div>
       </section>
 
@@ -1240,7 +1387,7 @@
               <div class="fqd-flow-list">
                 <div class="fqd-flow-item"><i data-lucide="megaphone" width="18" height="18" aria-hidden="true"></i> Meta ad</div>
                 <div class="fqd-flow-arrow"><i data-lucide="arrow-down" width="18" height="18" aria-hidden="true"></i></div>
-                <div class="fqd-flow-item"><i data-lucide="layout-template" width="18" height="18" aria-hidden="true"></i> Country and programme page</div>
+                <div class="fqd-flow-item"><i data-lucide="layout-template" width="18" height="18" aria-hidden="true"></i> Focused programme page</div>
                 <div class="fqd-flow-arrow"><i data-lucide="arrow-down" width="18" height="18" aria-hidden="true"></i></div>
                 <div class="fqd-flow-item"><i data-lucide="presentation" width="18" height="18" aria-hidden="true"></i> Webinar or VSL</div>
                 <div class="fqd-flow-arrow"><i data-lucide="arrow-down" width="18" height="18" aria-hidden="true"></i></div>
@@ -1263,21 +1410,21 @@
             <div class="fqd-fit-box fqd-glass">
               <h4><i class="yes" data-lucide="check-circle-2" width="22" height="22" aria-hidden="true"></i> This may fit if:</h4>
               <ul>
-                <li><i class="yes" data-lucide="check" width="18" height="18" aria-hidden="true"></i><span>You sell a specialist live finance programme in one clear EU market.</span></li>
-                <li><i class="yes" data-lucide="check" width="18" height="18" aria-hidden="true"></i><span>Your usual tuition is at least EUR 2,000 or you sell corporate training.</span></li>
-                <li><i class="yes" data-lucide="check" width="18" height="18" aria-hidden="true"></i><span>You have approved learner proof and programme claims.</span></li>
-                <li><i class="yes" data-lucide="check" width="18" height="18" aria-hidden="true"></i><span>Your team can sell and support the selected language.</span></li>
-                <li><i class="yes" data-lucide="check" width="18" height="18" aria-hidden="true"></i><span>You can fund Meta separately and track enrolments and collected revenue.</span></li>
+                <li><i class="yes" data-lucide="check" width="18" height="18" aria-hidden="true"></i><span>You sell a live premium finance or accounting programme.</span></li>
+                <li><i class="yes" data-lucide="check" width="18" height="18" aria-hidden="true"></i><span>Your programme value and tuition can support paid acquisition and admissions calls.</span></li>
+                <li><i class="yes" data-lucide="check" width="18" height="18" aria-hidden="true"></i><span>You have real learner proof and permission to use it.</span></li>
+                <li><i class="yes" data-lucide="check" width="18" height="18" aria-hidden="true"></i><span>Your admissions team can respond quickly and handle more qualified calls.</span></li>
+                <li><i class="yes" data-lucide="check" width="18" height="18" aria-hidden="true"></i><span>You can fund Meta separately and report applications, enrolments and refunds.</span></li>
               </ul>
             </div>
             <div class="fqd-fit-box fqd-glass">
               <h4><i class="no" data-lucide="x-circle" width="22" height="22" aria-hidden="true"></i> This is not a fit if:</h4>
               <ul>
-                <li><i class="no" data-lucide="x" width="18" height="18" aria-hidden="true"></i><span>You want one generic campaign for every EU country.</span></li>
                 <li><i class="no" data-lucide="x" width="18" height="18" aria-hidden="true"></i><span>You expect guaranteed leads, students, revenue or ROAS.</span></li>
-                <li><i class="no" data-lucide="x" width="18" height="18" aria-hidden="true"></i><span>Your programme has no proof or clear commercial value.</span></li>
-                <li><i class="no" data-lucide="x" width="18" height="18" aria-hidden="true"></i><span>No one owns applicant follow-up.</span></li>
-                <li><i class="no" data-lucide="x" width="18" height="18" aria-hidden="true"></i><span>You cannot obtain approval for local privacy, consent and claims.</span></li>
+                <li><i class="no" data-lucide="x" width="18" height="18" aria-hidden="true"></i><span>You sell only a low-ticket recorded course with no admissions process.</span></li>
+                <li><i class="no" data-lucide="x" width="18" height="18" aria-hidden="true"></i><span>Your programme depends on unsupported job, salary or certification claims.</span></li>
+                <li><i class="no" data-lucide="x" width="18" height="18" aria-hidden="true"></i><span>No one owns applicant calls and follow-up.</span></li>
+                <li><i class="no" data-lucide="x" width="18" height="18" aria-hidden="true"></i><span>You cannot share applications, calls, payments and refunds.</span></li>
               </ul>
             </div>
           </div>
@@ -1287,10 +1434,10 @@
       <section class="fqd-section">
         <div class="fqd-container-narrow">
           <div class="fqd-founding fqd-glass">
-            <p class="fqd-kicker">Founding EU academy programme</p>
-            <h3>A clear pilot for one EU country, one language and one finance programme.</h3>
-            <p>This is a new specialist Finest Clients service for AI-for-finance, finance transformation, CSRD, reporting and CFO-leadership programmes. We have funnel experience, but we will not use coaching results as proof for this market. We do not promise leads, students, revenue or ROAS.</p>
-            <a class="fqd-button" href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20EU%20finance%20academy.%20I%20also%20want%20to%20discuss%20the%20founding%20programme." target="_blank" rel="noopener">
+            <p class="fqd-kicker">Founding finance academy programme</p>
+            <h3>A clear pilot for one proven premium finance programme.</h3>
+            <p>This is a new specialist Finest Clients service for CFO leadership, accounting advisory, FP&amp;A, tax, reporting, financial modelling and AI-for-finance programmes. The results above come from adjacent coaching and education businesses, not finance academy clients. We do not promise leads, students, revenue or ROAS.</p>
+            <a class="fqd-button" href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20finance%20academy.%20I%20also%20want%20to%20discuss%20the%20founding%20programme." target="_blank" rel="noopener">
               Discuss the founding programme <i data-lucide="message-circle" aria-hidden="true"></i>
             </a>
           </div>
@@ -1318,7 +1465,7 @@
             </details>
             <details class="fqd-glass">
               <summary>Can we target several countries at once?</summary>
-              <p>No. We begin with one country and one language. Your legal adviser must approve the privacy, consent, tracking and claims used in that market before launch.</p>
+              <p>We begin with one audience, one market or language and one programme. We expand only after the first funnel gives useful application and enrolment data.</p>
             </details>
             <details class="fqd-glass">
               <summary>Do you guarantee leads, students or revenue?</summary>
@@ -1334,7 +1481,7 @@
             <p class="fqd-kicker">Start with an audit</p>
             <h2>See where qualified applicants may be leaving your enrolment journey.</h2>
             <p>We will review your public offer, page, webinar or VSL, application and follow-up. Then we will show you what we would test before you decide.</p>
-            <a class="fqd-button" href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20EU%20finance%20academy." target="_blank" rel="noopener">
+            <a class="fqd-button" href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20finance%20academy." target="_blank" rel="noopener">
               Request your audit on WhatsApp <i data-lucide="message-circle-more" aria-hidden="true"></i>
             </a>
             <p class="fqd-final-note">No pressure. No promise of results. We will tell you if this service is not a good fit.</p>
@@ -1362,10 +1509,10 @@
           <div>
             <h4>Follow</h4>
             <div class="fqd-footer-links">
-              <a href="https://www.instagram.com/finestedit_/" target="_blank" rel="noopener"><i data-lucide="instagram" width="15" height="15" aria-hidden="true"></i> Instagram</a>
-              <a href="https://www.youtube.com/@Finesteditacademy" target="_blank" rel="noopener"><i data-lucide="youtube" width="15" height="15" aria-hidden="true"></i> YouTube</a>
-              <a href="https://www.linkedin.com/in/mousamch/" target="_blank" rel="noopener"><i data-lucide="linkedin" width="15" height="15" aria-hidden="true"></i> LinkedIn</a>
-              <a href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20EU%20finance%20academy." target="_blank" rel="noopener"><i data-lucide="message-circle-more" width="15" height="15" aria-hidden="true"></i> WhatsApp: +91 94335 69217</a>
+              <a href="https://www.instagram.com/finestedit_/" target="_blank" rel="noopener">Instagram</a>
+              <a href="https://www.youtube.com/@Finesteditacademy" target="_blank" rel="noopener">YouTube</a>
+              <a href="https://www.linkedin.com/in/mousamch/" target="_blank" rel="noopener">LinkedIn</a>
+              <a href="https://wa.me/919433569217?text=Hi%2C%20I%20want%20a%20funnel%20audit%20for%20my%20finance%20academy." target="_blank" rel="noopener"><i data-lucide="message-circle-more" width="15" height="15" aria-hidden="true"></i> WhatsApp: +91 94335 69217</a>
             </div>
           </div>
         </div>

@@ -198,11 +198,23 @@
       margin-top: 2.4rem;
     }
     .fc-proof-card {
+      --fc-card-pad: clamp(1.5rem, 3vw, 2.25rem);
       min-width: 0;
-      padding: clamp(1.5rem, 3vw, 2.25rem);
+      padding: var(--fc-card-pad);
       border: 1px solid rgba(212, 175, 55, .25);
       border-radius: 18px;
       background: linear-gradient(145deg, rgba(212, 175, 55, .1), rgba(255,255,255,.018));
+      overflow: hidden;
+    }
+    .fc-channel-image {
+      display: block;
+      width: calc(100% + (var(--fc-card-pad) * 2));
+      max-width: none;
+      aspect-ratio: 718 / 255;
+      margin: calc(var(--fc-card-pad) * -1) calc(var(--fc-card-pad) * -1) 1.4rem;
+      border-bottom: 1px solid rgba(212, 175, 55, .2);
+      object-fit: cover;
+      object-position: top center;
     }
     .fc-proof-card .fc-proof-label {
       color: #d8c987;
@@ -347,8 +359,8 @@
             <p class="lead">Finest Clients brings an established audience, media visibility and experience serving agencies and business owners to the partnership.</p>
           </div>
           <div class="fc-proof-grid">
-            <article class="fc-proof-card"><span class="fc-proof-label">Instagram</span><strong>90,000+</strong><p>Followers across the Finest Clients founding ecosystem</p></article>
-            <article class="fc-proof-card"><span class="fc-proof-label">YouTube</span><strong>46,000+</strong><p>Subscribers across the Finest Clients founding ecosystem</p></article>
+            <article class="fc-proof-card"><img class="fc-channel-image" src="instagram.png" alt="Finest Edit Instagram profile showing more than 90,000 followers" loading="lazy"><span class="fc-proof-label">Instagram</span><strong>90,000+</strong><p>Followers across the Finest Clients founding ecosystem</p></article>
+            <article class="fc-proof-card"><img class="fc-channel-image" src="youtube.png" alt="Finest Edit Academy YouTube channel showing more than 46,000 subscribers" loading="lazy"><span class="fc-proof-label">YouTube</span><strong>46,000+</strong><p>Subscribers across the Finest Clients founding ecosystem</p></article>
             <article class="fc-proof-card"><span class="fc-proof-label">Client experience</span><strong>Hundreds</strong><p>Of agencies and business owners served</p></article>
           </div>
           <div class="fc-media-panel">

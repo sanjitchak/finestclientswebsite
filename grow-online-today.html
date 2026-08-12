@@ -190,6 +190,55 @@
     .lane-card.partner-lane .label { color: var(--partner-green); }
     .lane-card p { color: var(--muted); margin-bottom: 0; }
     .lane-plus { align-self: center; color: #77746d; font-family: Oswald, sans-serif; font-size: 2rem; }
+    .fc-credibility { margin-top: clamp(4rem, 8vw, 6.5rem); }
+    .fc-proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2.4rem;
+    }
+    .fc-proof-card {
+      min-width: 0;
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      border: 1px solid rgba(212, 175, 55, .25);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(212, 175, 55, .1), rgba(255,255,255,.018));
+    }
+    .fc-proof-card .fc-proof-label {
+      color: #d8c987;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .fc-proof-card strong {
+      display: block;
+      margin-top: .75rem;
+      color: var(--gold-light);
+      font-family: Oswald, sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1;
+    }
+    .fc-proof-card p { margin: .85rem 0 0; color: var(--muted); line-height: 1.55; }
+    .fc-media-panel {
+      margin-top: 1rem;
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.025);
+    }
+    .fc-media-panel h3 { margin: 0; font-size: clamp(1.45rem, 3vw, 2rem); }
+    .fc-media-panel p { margin: .55rem 0 1.35rem; color: var(--muted); }
+    .fc-media-logos { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .75rem; }
+    .fc-media-logo {
+      display: grid;
+      place-items: center;
+      min-height: 86px;
+      padding: 1rem;
+      border-radius: 13px;
+      background: #f5f3ed;
+    }
+    .fc-media-logo img { display: block; max-width: 100%; max-height: 42px; object-fit: contain; }
     .funnel-map { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; margin-top: 2.25rem; }
     .funnel-step { position: relative; min-height: 170px; padding: 1.35rem; border: 1px solid var(--line); border-radius: 16px; background: #111; }
     .funnel-step:not(:last-child)::after { content: "→"; position: absolute; top: 50%; right: -.75rem; z-index: 2; color: var(--partner-green); transform: translate(50%, -50%); font-weight: 900; }
@@ -212,6 +261,8 @@
     @media (max-width: 820px) {
       .lane-grid { grid-template-columns: 1fr; }
       .lane-plus { justify-self: center; transform: rotate(90deg); }
+      .fc-proof-grid { grid-template-columns: 1fr; }
+      .fc-media-logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .funnel-map { grid-template-columns: 1fr 1fr; }
       .funnel-step:nth-child(2)::after { display: none; }
     }
@@ -223,6 +274,7 @@
       .partner-hero .hero-copy { font-size: 1rem; line-height: 1.6; }
       .experience-pill { border-radius: 14px; line-height: 1.45; }
       .proof-metrics { grid-template-columns: 1fr; }
+      .fc-media-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .funnel-map { grid-template-columns: 1fr; }
       .funnel-step:not(:last-child)::after { top: auto; right: 50%; bottom: -.75rem; transform: translate(50%, 50%) rotate(90deg); }
       .funnel-step:nth-child(2)::after { display: block; }
@@ -287,6 +339,29 @@
           <article class="lane-card"><span class="label">Finest Clients</span><h3>Helping agencies win clients</h3><p>We help Indian marketing, creative and video production agencies explain their value, attract better leads and close more clients.</p></article>
           <div class="lane-plus" aria-hidden="true">+</div>
           <article class="lane-card partner-lane"><span class="label">Grow Online Today</span><h3>Helping coaches improve sales funnels</h3><p>Grow Online Today helps established coaches turn more Meta ad leads into qualified booked calls or direct sales through webinars and VSLs.</p></article>
+        </div>
+        <div class="fc-credibility">
+          <div class="section-head">
+            <span class="eyebrow">Finest Clients reach and recognition</span>
+            <h2>Audience, channels and media coverage.</h2>
+            <p class="lead">Finest Clients brings an established audience, media visibility and experience serving agencies and business owners to the partnership.</p>
+          </div>
+          <div class="fc-proof-grid">
+            <article class="fc-proof-card"><span class="fc-proof-label">Instagram</span><strong>90,000+</strong><p>Followers across the Finest Clients founding ecosystem</p></article>
+            <article class="fc-proof-card"><span class="fc-proof-label">YouTube</span><strong>46,000+</strong><p>Subscribers across the Finest Clients founding ecosystem</p></article>
+            <article class="fc-proof-card"><span class="fc-proof-label">Client experience</span><strong>Hundreds</strong><p>Of agencies and business owners served</p></article>
+          </div>
+          <div class="fc-media-panel">
+            <h3>PR and media coverage</h3>
+            <p>Finest Clients has received coverage across these media names.</p>
+            <div class="fc-media-logos" aria-label="Media names associated with Finest Clients coverage">
+              <div class="fc-media-logo"><img src="asset/fox-removebg-preview.png" alt="FOX" loading="lazy"></div>
+              <div class="fc-media-logo"><img src="asset/nbc-removebg-preview.png" alt="NBC" loading="lazy"></div>
+              <div class="fc-media-logo"><img src="asset/abc-removebg-preview.png" alt="ABC" loading="lazy"></div>
+              <div class="fc-media-logo"><img src="asset/cbs-removebg-preview.png" alt="CBS" loading="lazy"></div>
+              <div class="fc-media-logo"><img src="asset/digitaljournal.webp" alt="Digital Journal" loading="lazy"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

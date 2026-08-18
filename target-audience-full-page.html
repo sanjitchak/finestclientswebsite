@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A free training for agency owners, freelancers and service providers who want a predictable system for winning high-ticket clients.">
+    <title>Get 20 High-Ticket Clients in the Next 180 Days | Finest Clients</title>
+
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <script src="https://fast.wistia.com/embed/fwgh23wveh.js" async type="module"></script>
+    <script src="https://fast.wistia.com/embed/3ltm1m4ji0.js" async type="module"></script>
+    <script src="https://fast.wistia.com/embed/ox1nwp7yz3.js" async type="module"></script>
+    <script src="https://fast.wistia.com/embed/al9ytxmsbg.js" async type="module"></script>
+    <script src="https://fast.wistia.com/embed/bus9lnv7sn.js" async type="module"></script>
+
+    <style>
+        :root {
+            --ink: #101010;
+            --muted: #5f6368;
+            --line: #e5e1d8;
+            --surface: #ffffff;
+            --soft: #f7f5ef;
+            --accent: #ffc400;
+            --accent-hover: #ffd338;
+            --success: #1b6b43;
+            --shadow: 0 24px 65px rgba(16, 16, 16, 0.10);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            margin: 0;
+            background: var(--soft);
+            color: var(--ink);
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .page-shell {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            width: min(1160px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 34px 0 88px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 34px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            background: var(--ink);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px rgba(255, 196, 0, 0.18);
+        }
+
+        .hero {
+            max-width: 1030px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            max-width: 930px;
+            margin: 16px auto 0;
+            font-size: clamp(32px, 4.2vw, 52px);
+            font-weight: 800;
+            line-height: 1.02;
+            letter-spacing: -0.045em;
+        }
+
+        .desktop-headline-copy {
+            display: inline;
+        }
+
+        .mobile-headline-copy {
+            display: none;
+        }
+
+        .highlight {
+            position: relative;
+            display: inline;
+            z-index: 0;
+        }
+
+        .highlight::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0.06em;
+            height: 0.24em;
+            border-radius: 4px;
+            background: var(--accent);
+            z-index: -1;
+        }
+
+        .hero-copy {
+            max-width: 720px;
+            margin: 8px auto 0;
+            color: #303030;
+            font-size: clamp(16px, 1.45vw, 18px);
+            line-height: 1.42;
+        }
+
+        .hero-guarantee {
+            margin-top: 12px;
+            font-size: clamp(17px, 1.8vw, 21px);
+            font-weight: 750;
+        }
+
+        .hero-cta {
+            margin-top: 18px;
+        }
+
+        .hero-proof {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .proof-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 13px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.84);
+            color: #292929;
+            font-size: 14px;
+            font-weight: 650;
+        }
+
+        .proof-chip::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: 900;
+        }
+
+        .video-stage {
+            max-width: 1030px;
+            margin: 28px auto 0;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .video-stage-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--line);
+            background: #fff;
+        }
+
+        .step-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 15px;
+            font-weight: 750;
+        }
+
+        .step-number {
+            display: grid;
+            place-items: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--ink);
+            color: #fff;
+            font-size: 13px;
+        }
+
+        .runtime {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            background: #111;
+            overflow: hidden;
+        }
+
+        wistia-player[media-id="fwgh23wveh"]:not(:defined) {
+            display: block;
+            padding-top: 56.25%;
+            background: center / contain no-repeat url("https://fast.wistia.com/embed/medias/fwgh23wveh/swatch");
+            filter: blur(5px);
+        }
+
+        wistia-player[media-id="3ltm1m4ji0"]:not(:defined),
+        wistia-player[media-id="ox1nwp7yz3"]:not(:defined),
+        wistia-player[media-id="al9ytxmsbg"]:not(:defined),
+        wistia-player[media-id="bus9lnv7sn"]:not(:defined) {
+            display: block;
+            aspect-ratio: 2 / 1;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            filter: blur(5px);
+        }
+
+        wistia-player[media-id="3ltm1m4ji0"]:not(:defined) {
+            background-image: url("https://fast.wistia.com/embed/medias/3ltm1m4ji0/swatch");
+        }
+
+        wistia-player[media-id="ox1nwp7yz3"]:not(:defined) {
+            background-image: url("https://fast.wistia.com/embed/medias/ox1nwp7yz3/swatch");
+        }
+
+        wistia-player[media-id="al9ytxmsbg"]:not(:defined) {
+            background-image: url("https://fast.wistia.com/embed/medias/al9ytxmsbg/swatch");
+        }
+
+        wistia-player[media-id="bus9lnv7sn"]:not(:defined) {
+            background-image: url("https://fast.wistia.com/embed/medias/bus9lnv7sn/swatch");
+        }
+
+        wistia-player {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .video-note {
+            padding: 14px 20px;
+            color: var(--muted);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .booking-panel {
+            max-width: 880px;
+            margin: 36px auto 0;
+            padding: 34px;
+            border-radius: 18px;
+            background: var(--ink);
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(16, 16, 16, 0.16);
+        }
+
+        .booking-panel .step-label {
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .booking-panel .step-number {
+            background: var(--accent);
+            color: var(--ink);
+        }
+
+        .booking-panel h2 {
+            max-width: 650px;
+            margin: 16px auto 0;
+            font-size: clamp(25px, 3.4vw, 38px);
+            line-height: 1.14;
+            letter-spacing: -0.025em;
+        }
+
+        .booking-panel p {
+            max-width: 640px;
+            margin: 13px auto 0;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 15px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 58px;
+            margin-top: 22px;
+            padding: 15px 28px;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            background: var(--accent);
+            color: var(--ink);
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+        }
+
+        .cta-button::after {
+            content: "→";
+            margin-left: 10px;
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .cta-button-copy {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cta-button-subtext {
+            margin-top: 4px;
+            font-size: 12px;
+            font-weight: 650;
+            line-height: 1.25;
+            opacity: 0.72;
+            overflow-wrap: anywhere;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            background: var(--accent-hover);
+            box-shadow: 0 12px 28px rgba(255, 196, 0, 0.24);
+        }
+
+        .cta-button:focus-visible {
+            outline: 3px solid #fff;
+            outline-offset: 4px;
+        }
+
+        .cta-meta {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .cta-meta span::before {
+            content: "✓";
+            margin-right: 6px;
+            color: var(--accent);
+            font-weight: 900;
+        }
+
+        .proof-section {
+            max-width: 1100px;
+            margin: 82px auto 0;
+            text-align: center;
+        }
+
+        .section-kicker {
+            color: var(--success);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .proof-section h2 {
+            max-width: 720px;
+            margin: 10px auto 0;
+            font-size: clamp(30px, 4vw, 45px);
+            line-height: 1.12;
+            letter-spacing: -0.035em;
+        }
+
+        .section-intro {
+            max-width: 700px;
+            margin: 15px auto 34px;
+            color: var(--muted);
+            font-size: 17px;
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+
+        .proof-card {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: var(--surface);
+            box-shadow: 0 10px 32px rgba(16, 16, 16, 0.07);
+        }
+
+        .proof-card-copy {
+            min-height: 116px;
+            padding: 18px 20px;
+        }
+
+        .proof-card h3 {
+            font-size: 18px;
+            line-height: 1.34;
+            letter-spacing: -0.01em;
+        }
+
+        .proof-card p {
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 650;
+        }
+
+        .proof-player {
+            margin-top: auto;
+            background: #111;
+        }
+
+        .final-cta {
+            max-width: 1100px;
+            margin: 32px auto 0;
+            padding: 38px 28px;
+            border: 1px solid #e1d6a5;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #fffdf4 0%, #fff6c9 100%);
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            max-width: 680px;
+            margin: 0 auto;
+            font-size: clamp(26px, 3.2vw, 38px);
+            line-height: 1.15;
+            letter-spacing: -0.025em;
+        }
+
+        .final-cta p {
+            max-width: 620px;
+            margin: 12px auto 0;
+            color: #524a2d;
+            font-size: 15px;
+        }
+
+        .final-cta .cta-button {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: #fff;
+        }
+
+        .final-cta .cta-button:hover {
+            background: #292929;
+            box-shadow: 0 12px 28px rgba(16, 16, 16, 0.18);
+        }
+
+        .mobile-sticky-cta {
+            display: none;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                width: min(100% - 28px, 1160px);
+                padding: 10px 0 calc(94px + env(safe-area-inset-bottom));
+            }
+
+            .eyebrow {
+                min-height: 27px;
+                padding: 5px 10px;
+                font-size: 10px;
+                letter-spacing: 0.045em;
+            }
+
+            .hero h1 {
+                margin-top: 8px;
+                font-size: clamp(24px, 7vw, 30px);
+                line-height: 1;
+                letter-spacing: -0.04em;
+            }
+
+            .desktop-headline-copy {
+                display: none;
+            }
+
+            .mobile-headline-copy {
+                display: inline;
+            }
+
+            .hero-copy {
+                margin-top: 6px;
+                font-size: 14px;
+                line-height: 1.35;
+            }
+
+            .hero-guarantee {
+                margin-top: 7px;
+                font-size: 16px;
+            }
+
+            .hero-cta {
+                min-height: 50px;
+                margin-top: 12px;
+            }
+
+            .hero-proof {
+                display: none;
+            }
+
+            .video-stage {
+                margin-top: 16px;
+                border-radius: 13px;
+            }
+
+            .video-stage-header {
+                padding: 9px 11px;
+            }
+
+            .step-label {
+                gap: 7px;
+                font-size: 14px;
+            }
+
+            .step-number {
+                width: 26px;
+                height: 26px;
+                font-size: 12px;
+            }
+
+            .video-note {
+                display: none;
+            }
+
+            .booking-panel {
+                margin-top: 24px;
+                padding: 26px 18px;
+                border-radius: 14px;
+            }
+
+            .booking-panel h2 {
+                font-size: 27px;
+            }
+
+            .cta-button {
+                width: 100%;
+                min-height: 56px;
+                padding: 14px 16px;
+                font-size: 16px;
+            }
+
+            .cta-meta {
+                display: grid;
+                gap: 5px;
+            }
+
+            .proof-section {
+                margin-top: 62px;
+            }
+
+            .section-intro {
+                margin-bottom: 24px;
+                font-size: 15px;
+            }
+
+            .proof-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .proof-card-copy {
+                min-height: auto;
+                padding: 16px;
+            }
+
+            .final-cta {
+                margin-top: 24px;
+                padding: 28px 18px;
+            }
+
+            .mobile-sticky-cta {
+                position: fixed;
+                z-index: 50;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                display: block;
+                padding: 9px 12px calc(9px + env(safe-area-inset-bottom));
+                border-top: 1px solid rgba(0, 0, 0, 0.12);
+                background: rgba(255, 255, 255, 0.94);
+                box-shadow: 0 -10px 30px rgba(16, 16, 16, 0.10);
+                backdrop-filter: blur(12px);
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(110%);
+                transition: opacity 180ms ease, transform 180ms ease;
+            }
+
+            .mobile-sticky-cta.is-visible {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            .mobile-sticky-cta .cta-button {
+                min-height: 49px;
+                margin: 0;
+                padding: 11px 14px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 760px) and (max-height: 700px) {
+            .container {
+                padding-top: 7px;
+            }
+
+            .hero h1 {
+                margin-top: 6px;
+                font-size: clamp(22px, 6.5vw, 27px);
+            }
+
+            .hero-copy {
+                font-size: 13.5px;
+                line-height: 1.3;
+            }
+
+            .hero-cta {
+                min-height: 48px;
+                margin-top: 10px;
+            }
+
+            .video-stage {
+                margin-top: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .cta-button {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page-shell">
+        <div class="container">
+            <header class="hero">
+                <div class="eyebrow">For Agency Owners, Freelancers and Service Providers</div>
+
+                <h1>
+                    <span class="desktop-headline-copy">
+                        How Agency Owners, Freelancers and Service Providers Can Get
+                        <span class="highlight">20 High-Ticket Clients</span>
+                        in the Next 180 Days
+                    </span>
+                    <span class="mobile-headline-copy">
+                        How Agency Owners, Freelancers and Service Providers Can Get
+                        <span class="highlight">20 High-Ticket Clients</span>
+                        in the Next 180 Days
+                    </span>
+                </h1>
+
+                <p class="hero-guarantee">Or Your Money Back.</p>
+
+                <p class="hero-copy">
+                    Discover the client acquisition system designed for agency owners, freelancers and service providers who want to grow without cold DMs, spammy emails, daily content, bidding sites, or depending on referrals.
+                </p>
+
+                <a href="https://lp.finestclients.com/schedule" class="cta-button hero-cta js-schedule-cta" data-cta-position="hero">
+                    <span class="cta-button-copy">
+                        <span>Book My Free Strategy Call</span>
+                        <span class="cta-button-subtext">Yes, I am ready to get 20+ clients in 180 days</span>
+                    </span>
+                </a>
+
+                <div class="hero-proof" aria-label="Who this training is for">
+                    <span class="proof-chip">Agencies, freelancers or service providers</span>
+                    <span class="proof-chip">Built for high-ticket offers</span>
+                    <span class="proof-chip">No daily content required</span>
+                </div>
+
+                <section class="video-stage" aria-labelledby="training-heading">
+                    <div class="video-stage-header">
+                        <h2 class="step-label" id="training-heading">
+                            <span class="step-number">1</span>
+                            Watch the free training
+                        </h2>
+                    </div>
+
+                    <div class="video-wrapper">
+                        <wistia-player media-id="fwgh23wveh" aspect="1.7777777777777777"></wistia-player>
+                    </div>
+
+                    <p class="video-note">Turn your sound on and watch to the end to see whether this system fits your business.</p>
+                </section>
+            </header>
+
+            <section class="booking-panel" aria-labelledby="booking-heading">
+                <div class="step-label">
+                    <span class="step-number">2</span>
+                    If the system fits your business
+                </div>
+
+                <h2 id="booking-heading">Book Your Free Strategy Call</h2>
+                <p>We’ll identify the biggest bottleneck in your current client acquisition process and map the next steps for building a more predictable pipeline.</p>
+
+                <a href="https://lp.finestclients.com/schedule" class="cta-button js-schedule-cta" data-cta-position="after-vsl">
+                    <span class="cta-button-copy">
+                        <span>Book My Free Strategy Call</span>
+                        <span class="cta-button-subtext">Yes, I am ready to get 20+ clients in 180 days</span>
+                    </span>
+                </a>
+
+                <div class="cta-meta" aria-label="Call details">
+                    <span>Choose a convenient time</span>
+                    <span>Short 2–3 minute questionnaire</span>
+                    <span>No obligation</span>
+                </div>
+            </section>
+
+            <section class="proof-section" aria-labelledby="proof-heading">
+                <div class="section-kicker">Real client experiences</div>
+                <h2 id="proof-heading">See What Happened for Other Agency Owners, Freelancers and Service Providers</h2>
+                <p class="section-intro">Watch these short stories before you book. They show the kinds of marketing, positioning, and sales problems our team has helped solve.</p>
+
+                <div class="proof-grid">
+                    <article class="proof-card">
+                        <div class="proof-card-copy">
+                            <h3>Digital Deepak Made His Ad Campaign Profitable</h3>
+                            <p>Founder, PixelTrack</p>
+                        </div>
+                        <div class="proof-player">
+                            <wistia-player media-id="3ltm1m4ji0" aspect="2.0"></wistia-player>
+                        </div>
+                    </article>
+
+                    <article class="proof-card">
+                        <div class="proof-card-copy">
+                            <h3>Jayant on Working With the Finest Clients Team</h3>
+                        </div>
+                        <div class="proof-player">
+                            <wistia-player media-id="ox1nwp7yz3" aspect="2.0"></wistia-player>
+                        </div>
+                    </article>
+
+                    <article class="proof-card">
+                        <div class="proof-card-copy">
+                            <h3>Saptarshi 10× His Revenue After Fixing His Client Acquisition</h3>
+                            <p>Founder, DesignX</p>
+                        </div>
+                        <div class="proof-player">
+                            <wistia-player media-id="al9ytxmsbg" aspect="2.0"></wistia-player>
+                        </div>
+                    </article>
+
+                    <article class="proof-card">
+                        <div class="proof-card-copy">
+                            <h3>Indrila Built a More Consistent Premium-Pricing System</h3>
+                            <p>Founder, Animation Door</p>
+                        </div>
+                        <div class="proof-player">
+                            <wistia-player media-id="bus9lnv7sn" aspect="2.0"></wistia-player>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="final-cta" aria-labelledby="final-cta-heading">
+                <h2 id="final-cta-heading">Ready to Build a More Predictable Client Pipeline?</h2>
+                <p>Pick a convenient time and tell us a little about your business. We’ll use the call to diagnose the gaps and see whether we’re a fit.</p>
+                <a href="https://lp.finestclients.com/schedule" class="cta-button js-schedule-cta" data-cta-position="after-proof">
+                    <span class="cta-button-copy">
+                        <span>Book My Free Strategy Call</span>
+                        <span class="cta-button-subtext">Yes, I am ready to get 20+ clients in 180 days</span>
+                    </span>
+                </a>
+            </section>
+        </div>
+
+        <div class="mobile-sticky-cta" aria-label="Book a strategy call">
+            <a href="https://lp.finestclients.com/schedule" class="cta-button js-schedule-cta" data-cta-position="mobile-sticky">
+                <span class="cta-button-copy">
+                    <span>Book My Free Strategy Call</span>
+                    <span class="cta-button-subtext">Yes, I am ready to get 20+ clients in 180 days</span>
+                </span>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            const attributionKeys = [
+                "utm_source",
+                "utm_medium",
+                "utm_campaign",
+                "utm_content",
+                "utm_term",
+                "fbclid",
+                "gclid"
+            ];
+
+            const currentParams = new URLSearchParams(window.location.search);
+
+            document.querySelectorAll(".js-schedule-cta").forEach(function (link) {
+                const destination = new URL(link.href, window.location.href);
+
+                attributionKeys.forEach(function (key) {
+                    if (currentParams.has(key)) {
+                        destination.searchParams.set(key, currentParams.get(key));
+                    }
+                });
+
+                link.href = destination.toString();
+
+                link.addEventListener("click", function () {
+                    const position = link.getAttribute("data-cta-position") || "unknown";
+
+                    if (typeof window.fbq === "function") {
+                        window.fbq("trackCustom", "ScheduleClick", {
+                            cta_position: position,
+                            page_path: window.location.pathname
+                        });
+                    }
+
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({
+                        event: "schedule_click",
+                        cta_position: position,
+                        page_path: window.location.pathname
+                    });
+                });
+            });
+
+            const stickyCta = document.querySelector(".mobile-sticky-cta");
+            const videoStage = document.querySelector(".video-stage");
+
+            function updateStickyCta() {
+                if (!stickyCta || !videoStage) {
+                    return;
+                }
+
+                const triggerPoint = videoStage.offsetTop + (videoStage.offsetHeight * 0.65);
+                stickyCta.classList.toggle("is-visible", window.scrollY > triggerPoint);
+            }
+
+            window.addEventListener("scroll", updateStickyCta, { passive: true });
+            window.addEventListener("resize", updateStickyCta);
+            updateStickyCta();
+        })();
+    </script>
+</body>
+</html>

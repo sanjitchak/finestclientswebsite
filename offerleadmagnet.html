@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>High-Ticket Offers Made Simple | Mousam — Finest Edit</title>
+
+<style>
+  :root {
+    --ink: #152236;
+    --paper: #F7F7F1;
+    --white: #FFFFFF;
+    --lime: #DDF68B;
+    --purple: #7056C8;
+    --lavender: #EEEAF8;
+    --muted: #586371;
+    --line: #DCE0D9;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    background: #DDE1E3;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  p { margin: 0 0 12px; }
+  h1, h2, h3 { margin: 0; }
+  a { color: inherit; }
+
+  .toolbar {
+    width: 210mm;
+    margin: 20px auto;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 13px;
+  }
+
+  .toolbar button {
+    border: 0;
+    border-radius: 8px;
+    padding: 13px 19px;
+    background: var(--ink);
+    color: white;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    margin: 22px auto;
+    padding: 16mm 18mm 13mm;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 12px 40px rgba(21,34,54,.12);
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .page > * { flex-shrink: 0; }
+
+  .page:last-of-type {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 27px;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+  }
+
+  .brand-mark {
+    display: inline-flex;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--ink);
+    color: var(--lime);
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+
+  .section-name {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.7px;
+    text-align: right;
+  }
+
+  .page-heading { margin-bottom: 22px; }
+
+  .eyebrow {
+    margin-bottom: 10px;
+    color: var(--purple);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: 42px;
+    line-height: 1.06;
+    letter-spacing: -1.7px;
+    margin-bottom: 13px;
+  }
+
+  h3 {
+    font-size: 18px;
+    line-height: 1.25;
+    margin-bottom: 7px;
+    letter-spacing: -.25px;
+  }
+
+  .lead {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 600px;
+  }
+
+  .label {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+  }
+
+  .card p:last-child { margin-bottom: 0; }
+
+  .card.lime {
+    background: var(--lime);
+    border-color: transparent;
+  }
+
+  .card.lavender {
+    background: var(--lavender);
+    border-color: transparent;
+  }
+
+  .quote {
+    font-size: 19px;
+    line-height: 1.4;
+    letter-spacing: -.3px;
+    font-weight: 700;
+  }
+
+  .note {
+    margin-top: 18px;
+    padding: 15px 18px;
+    border-left: 4px solid var(--purple);
+    border-radius: 0 10px 10px 0;
+    background: var(--lavender);
+  }
+
+  .note p:last-child { margin-bottom: 0; }
+
+  .takeaway {
+    margin-top: 20px;
+    padding: 19px 21px;
+    border-radius: 14px;
+    background: var(--ink);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -.2px;
+  }
+
+  .takeaway .label { color: var(--lime); }
+
+  .fine {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .space { height: 18px; }
+
+  .footer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: .3px;
+  }
+
+  .footer strong { color: var(--ink); }
+  .page-number { white-space: nowrap; }
+
+  /* Cover and closing page */
+
+  .dark {
+    background: var(--ink);
+    color: white;
+  }
+
+  .dark .brand-mark {
+    background: var(--lime);
+    color: var(--ink);
+  }
+
+  .dark .section-name,
+  .dark .lead,
+  .dark .fine {
+    color: #BCC7D3;
+  }
+
+  .dark .eyebrow { color: var(--lime); }
+
+  .dark .footer {
+    border-color: #3A4657;
+    color: #BCC7D3;
+  }
+
+  .dark .footer strong { color: white; }
+
+  .cover-intro {
+    margin-top: 43px;
+    margin-bottom: 22px;
+  }
+
+  .cover-title {
+    font-size: 72px;
+    line-height: .98;
+    letter-spacing: -3.5px;
+    font-weight: 800;
+  }
+
+  .cover-title span { color: var(--lime); }
+
+  .cover-subtitle {
+    margin-top: 27px;
+    max-width: 510px;
+    color: #E0E6EC;
+    font-size: 22px;
+    line-height: 1.4;
+    letter-spacing: -.3px;
+  }
+
+  .cover-blocks {
+    margin: 38px 0 29px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 9px;
+    align-items: end;
+  }
+
+  .cover-block {
+    padding: 14px 12px;
+    border: 1px solid #465161;
+    border-radius: 10px;
+    min-height: 83px;
+    background: #1D2C41;
+  }
+
+  .cover-block:nth-child(2) { min-height: 96px; }
+  .cover-block:nth-child(3) { min-height: 109px; }
+  .cover-block:nth-child(4) { min-height: 122px; }
+
+  .cover-block:nth-child(5) {
+    min-height: 135px;
+    background: var(--lime);
+    border-color: var(--lime);
+    color: var(--ink);
+  }
+
+  .cover-block b {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 23px;
+    line-height: 1;
+  }
+
+  .cover-block span {
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .cover-promise {
+    max-width: 500px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #D5DEE7;
+  }
+
+  .byline {
+    margin-top: 28px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .byline span {
+    color: #BCC7D3;
+    font-weight: 400;
+  }
+
+  /* Five building blocks */
+
+  .blocks {
+    display: grid;
+    gap: 15px;
+  }
+
+  .block {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 14px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .number {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--purple);
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .block p {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .block .example {
+    margin: 0;
+    color: var(--purple);
+    font-weight: 700;
+  }
+
+  /* Worked offer */
+
+  .offer-promise {
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: var(--lime);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.45;
+    margin-bottom: 17px;
+  }
+
+  .offer-detail p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  .offer-detail h3 { font-size: 16px; }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 11px;
+    margin: 16px 0;
+  }
+
+  .step {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 13px;
+  }
+
+  .step b {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .step p {
+    font-size: 12px;
+    line-height: 1.45;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .price-band {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    margin: 16px 0 12px;
+    padding: 16px 19px;
+    background: var(--ink);
+    color: white;
+    border-radius: 12px;
+  }
+
+  .price-band .label {
+    color: var(--lime);
+    margin-bottom: 3px;
+  }
+
+  .price-band strong {
+    font-size: 29px;
+    line-height: 1.1;
+    letter-spacing: -.7px;
+  }
+
+  .price-band p {
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 290px;
+  }
+
+  /* Pricing page */
+
+  .question { margin-bottom: 21px; }
+  .question p:last-child { margin-bottom: 0; }
+
+  .math {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 14px 0 9px;
+  }
+
+  .math-cell {
+    padding: 17px 12px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+  }
+
+  .math-cell:last-child {
+    background: var(--lime);
+    border-color: var(--lime);
+  }
+
+  .math-cell b {
+    display: block;
+    font-size: 26px;
+    letter-spacing: -.8px;
+    margin-bottom: 5px;
+  }
+
+  .math-cell span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  /* Trust page */
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .trust-grid .card { padding: 19px; }
+  .trust-grid h3 { margin-top: 13px; }
+
+  .trust-grid p {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .trust-example {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-weight: 700;
+  }
+
+  /* Worksheet */
+
+  .worksheet {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+  }
+
+  .field.full { grid-column: 1 / -1; }
+
+  .field-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .write-line {
+    height: 25px;
+    border-bottom: 1px solid #AEB8B5;
+  }
+
+  .plan-fields {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+  }
+
+  .plan-fields span {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .formula {
+    margin-top: 20px;
+    padding: 17px 19px;
+    background: var(--ink);
+    color: white;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .formula .label { color: var(--lime); }
+  .formula p:last-child { margin-bottom: 0; }
+
+  /* Checklist */
+
+  .checklist { margin-bottom: 20px; }
+
+  .check {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .check-box {
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    border: 1.7px solid var(--purple);
+    border-radius: 3px;
+  }
+
+  .check b {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .check p {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .ask {
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid var(--line);
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  /* Closing page */
+
+  .closing-title {
+    margin-top: 39px;
+    font-size: 54px;
+    line-height: 1.03;
+    letter-spacing: -2.3px;
+  }
+
+  .closing-title span { color: var(--lime); }
+
+  .closing-copy {
+    margin-top: 24px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #D5DEE7;
+  }
+
+  .closing-quote {
+    margin: 23px 0;
+    padding: 20px 0;
+    border-top: 1px solid #435062;
+    border-bottom: 1px solid #435062;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: -.4px;
+  }
+
+  .cta-panel {
+    margin-top: 22px;
+    padding: 23px;
+    border: 1px solid #435062;
+    border-radius: 16px;
+    background: #1D2C41;
+  }
+
+  .cta-panel h3 {
+    font-size: 27px;
+    margin-bottom: 11px;
+  }
+
+  .cta-panel p {
+    color: #D5DEE7;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .cta {
+    display: block;
+    margin-top: 19px;
+    padding: 17px 20px;
+    background: var(--lime);
+    color: var(--ink);
+    border-radius: 9px;
+    font-size: 17px;
+    font-weight: 800;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .cta-url {
+    display: block;
+    margin-top: 11px;
+    color: #BCC7D3;
+    font-size: 11px;
+    text-align: center;
+    text-decoration: underline;
+    overflow-wrap: anywhere;
+  }
+
+  .closing-mantra {
+    margin-top: 25px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--lime);
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  @media print {
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: white;
+    }
+
+    .toolbar { display: none !important; }
+
+    .page {
+      margin: 0;
+      box-shadow: none;
+    }
+
+    a { text-decoration-skip-ink: auto; }
+  }
+
+  @media screen and (max-width: 820px) {
+    .toolbar { margin-left: 12px; }
+    .page { margin: 16px 12px; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="toolbar">
+  <span><strong>FINEST EDIT</strong> &nbsp; / &nbsp; High-Ticket Offers Made Simple</span>
+  <button type="button" onclick="window.print()">Print / Save PDF</button>
+</div>
+
+<!-- PAGE 01 — COVER -->
+
+<section class="page dark" aria-label="Cover">
+  <div class="topline">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">FE</span>
+      FINEST EDIT
+    </div>
+    <div class="section-name">The simple offer guide</div>
+  </div>
+
+  <div class="cover-intro">
+    <div class="eyebrow">For agency owners &amp; freelancers</div>
+  </div>
+
+  <h1 class="cover-title">
+    High-ticket<br>
+    <span>offers.</span><br>
+    Made simple.
+  </h1>
+
+  <p class="cover-subtitle">
+    Turn what you do into a clear offer
+    customers can understand.
+  </p>
+
+  <div class="cover-blocks" aria-label="The five building blocks of an offer">
+    <div class="cover-block"><b>01</b><span>Customer</span></div>
+    <div class="cover-block"><b>02</b><span>Problem</span></div>
+    <div class="cover-block"><b>03</b><span>Change</span></div>
+    <div class="cover-block"><b>04</b><span>Plan</span></div>
+    <div class="cover-block"><b>05</b><span>Deal</span></div>
+  </div>
+
+  <p class="cover-promise">
+    No confusing words. No wild promises.<br>
+    No “just charge more” advice.<br><br>
+    <strong>One customer. One important problem. One clear offer.</strong>
+  </p>
+
+  <div class="byline">
+    By Mousam <span>| Finest Edit</span>
+  </div>
+
+  <footer class="footer">
+    <span>Learn the idea. See an example. Build your first draft.</span>
+    <span class="page-number">01 / 09</span>
+  </footer>
+</section>
+
+<!-- PAGE 02 — THE BIG IDEA -->
+
+<section class="page" aria-label="What is a high-ticket offer?">
+  <div class="topline">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">FE</span>
+      FINEST EDIT
+    </div>
+    <div class="section-name">01 / The big idea</div>
+  </div>
+
+  <header class="page-heading">
+    <div class="eyebrow">Start here</div>
+    <h2>Sell the fixed bike.<br>Not the tools.</h2>
+    <p class="lead">
+      Imagine your bike is broken. Two people offer to help.
+    </p>
+  </header>
+
+  <div class="two">
+    <div class="card">
+      <span class="label">Person one</span>
+      <p class="quote">“Pay me to use my tools for two hours.”</p>
+    </div>
+
+    <div class="card lime">
+      <span class="label">Person two</span>
+      <p class="quote">
+        “I’ll fix the chain, check the brakes, and test the bike
+        so it’s ready to ride.”
+      </p>
+    </div>
+  </div>
+
+  <div class="space"></div>
+
+  <p>
+    The second explanation makes the deal easier to understand.
+    You know what the person will do and what you will get.
+  </p>
+
+  <p><strong>Explain your agency offer the same way.</strong></p>
+
+  <div class="two">
+    <div class="card">
+      <span class="label">A service = the work</span>
+      <h3>“I design websites.”</h3>
+      <p>This names a skill, but leaves the details open.</p>
+    </div>
+
+    <div class="card lavender">
+      <span class="label">An offer = the whole deal</span>
+      <h3>“A five-page website.”</h3>
+      <p>
+        For cleaning businesses, with a working quote-request
+        form, a defined timeline, and a clear price.
+      </p>
+    </div>
+  </div>
+
+  <div class="note">
+    <h3>So, what does “high-ticket” mean?</h3>
+    <p>
+      In this guide, it means a premium-priced package that
+      represents a meaningful investment for your buyer.
+    </p>
+    <p>
+      There is no magic price that makes an offer good.
+      A big price does not automatically mean big value.
+    </p>
+  </div>
+
+  <div class="takeaway">
+    <span class="label">Remember this</span>
+    Do not start with “How much can I charge?”<br>
+    Start with “What useful change can I deliver?”
+  </div>
+
+  <footer class="footer">
+    <span><strong>Mousam | Finest Edit</strong> · High-Ticket Offers Made Simple</span>
+    <span class="page-number">02 / 09</span>
+  </footer>
+</section>
+
+<!-- PAGE 03 — FIVE BUILDING BLOCKS -->
+
+<section class="page" aria-label="The five building blocks">
+  <div class="topline">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">FE</span>
+      FINEST EDIT
+    </div>
+    <div class="section-name">02 / Build the offer</div>
+  </div>
+
+  <header class="page-heading">
+    <div class="eyebrow">Keep it simple</div>
+    <h2>Five blocks.<br>One clear offer.</h2>
+    <p class="lead">
+      Each block answers a question your customer needs answered.
+    </p>
+  </header>
+
+  <div class="blocks">
+    <div class="block">
+      <div class="number">1</div>
+      <div>
+        <h3>Who do you help?</h3>
+        <p>Choose a specific kind of customer—not “everyone.”</p>
+        <p class="example">
+          “Local cleaning businesses with outdated websites.”
+        </p>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="number">2</div>
+      <div>
+        <h3>What problem do they have?</h3>
+        <p>Use words the customer would actually say.</p>
+        <p class="example">
+          “People have to call us just to ask for a cleaning quote.”
+        </p>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="number">3</div>
+      <div>
+        <h3>What will be better?</h3>
+        <p>
+          Describe the finish line. Separate what you deliver
+          from results you cannot fully control.
+        </p>
+        <p class="example">
+          “Visitors can request a quote from their phone.”
+        </p>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="number">4</div>
+      <div>
+        <h3>What is the plan?</h3>
+        <p>Explain the work in a few simple steps.</p>
+        <p class="example">
+          “Plan the website → Build the pages → Test and launch.”
+        </p>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="number">5</div>
+      <div>
+        <h3>What is the deal?</h3>
+        <p>
+          Explain the price, timing, what is included, what is
+          excluded, and what the customer must provide.
+        </p>
+        <p class="example">
+          “Five pages. Two revision rounds. One agreed price.”
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span class="label">The clarity test</span>
+    Your buyer should not have to guess<br>
+    what they are paying for.
+  </div>
+
+  <footer class="footer">
+    <span><strong>Mousam | Finest Edit</strong> · High-Ticket Offers Made Simple</span>
+    <span class="page-number">03 / 09</span>
+  </footer>
+</section>
+
+<!-- PAGE 04 — WORKED EXAMPLE -->
+
+<section class="page" aria-label="A complete example offer">
+  <div class="topline">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">FE</span>
+      FINEST EDIT
+    </div>
+    <div class="section-name">03 / See it in action</div>
+  </div>
+
+  <header class="page-heading">
+    <div class="eyebrow">A complete example</div>
+    <h2>The Cleaning<br>Website Makeover</h2>
+    <p class="fine">
+      Fictional teaching example. The price and timeline are
+      illustrative—not market benchmarks.
+    </p>
+  </header>
+
+  <div class="offer-promise">
+    “We rebuild your website so visitors can understand your
+    services and request a quote from their phone.”
+  </div>
+
+  <div class="two">
+    <div class="offer-detail">
+      <h3>Who it is for</h3>
+      <p>
+        Established local cleaning businesses whose websites
+        make requesting a quote difficult.
+      </p>
+    </div>
+    <div class="offer-detail">
+      <h3>Delivery timeline</h3>
+      <p>
+        Launch within 21 days after required materials and
+        account access arrive, provided approvals stay on schedule.
+      </p>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <b>01 · Plan</b>
+      <p>Agree on the pages, message, and information needed.</p>
+    </div>
+    <div class="step">
+      <b>02 · Build</b>
+      <p>Create the pages and connect the quote-request form.</p>
+    </div>
+    <div class="step">
+      <b>03 · Launch</b>
+      <p>Test the website and show the owner how to use it.</p>
+    </div>
+  </div>
+
+  <div class="two">
+    <div class="card offer-detail">
+      <h3>What is included</h3>
+      <p>
+        Five pages, clear service descriptions, one quote-request
+        form, mobile testing, two revision rounds, and a
+        30-minute handover.
+      </p>
+    </div>
+    <div class="card offer-detail">
+      <h3>What the customer provides</h3>
+      <p>
+        Business details, photos they may legally use, account
+        access, and feedback within two business days.
+      </p>
+    </div>
+  </div>
+
+  <div class="price-band">
+    <div>
+      <span class="label">Example investment</span>
+      <strong>US$3,000</strong>
+    </div>
+    <p>
+      US$1,500 to begin.<br>
+      US$1,500 when the agreed website is ready to launch.
+    </p>
+  </div>
+
+  <p class="fine">
+    <strong>Not included:</strong> Advertising, ongoing traffic
+    generation, extra pages, and third-party software fees.
+  </p>
+
+  <p class="fine">
+    <strong>After-launch support:</strong> Errors in the delivered
+    pages and form reported within 14 days of launch are fixed
+    at no extra charge. New features are separate work.
+  </p>
+
+  <div class="note">
+    <p>
+      <strong>The boundary:</strong> This promises a functioning
+      website and quote form—not a guaranteed number of leads
+      or sales.
+    </p>
+  </div>
+
+  <footer class="footer">
+    <span><strong>Mousam | Finest Edit</strong> · High-Ticket Offers Made Simple</span>
+    <span class="page-number">04 / 09</span>
+  </footer>
+</section>
+
+<!-- PAGE 05 — PRICING -->
+
+<section class="page" aria-label="Choosing a sensible price">
+  <div class="topline">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">FE</span>
+      FINEST EDIT
+    </div>
+    <div class="section-name">04 / Choose the price</div>
+  </div>
+
+  <header class="page-heading">
+    <div class="eyebrow">Make the numbers make sense</div>
+    <h2>A big number<br>is not a strategy.</h2>
+    <p class="lead">
+      Choose a price you can explain—and work you can deliver sustainably.
+    </p>
+  </header>
+
+  <div class="question">
+    <h3>1. What will it cost you to deliver?</h3>
+    <p>
+      Count your time, people helping you, tools, revisions,
+      and support. Your own working time is not free.
+    </p>
+
+    <div class="math" aria-label="Illustrative pricing calculation">
+      <div class="math-cell">
+        <b>$3,000</b>
+        <span>Customer pays</span>
+      </div>
+      <div class="math-cell">
+        <b>− $1,200</b>
+        <span>Estimated delivery costs</span>
+      </div>
+      <div class="math-cell">
+        <b>= $1,800</b>
+        <span>Remaining before other costs</span>
+      </div>
+    </div>
+
+    <p class="fine">
+      Imaginary example in US dollars. The remaining $1,800 is
+      not automatically take-home profit. Overhead, taxes, and
+      other costs may still need to be covered.
+    </p>
+  </div>
+
+  <div class="question">
+    <h3>2. How important is the problem?</h3>
+    <p>
+      Ask what happens when it stays unfixed. Does it waste
+      time, make work harder, or frustrate their customers?
+    </p>
+    <p>
+      Use the buyer’s real situation—not numbers you invented
+      to make your price look small.
+    </p>
+    <div class="card lavender">
+      <p><strong>Ask:</strong> “What would make fixing this worthwhile?”</p>
+    </div>
+  </div>
+
+  <div class="question">
+    <h3>3. Does the package make sense to the buyer?</h3>
+    <p>
+      Learn which alternatives they are considering and what
+      they expect from a provider. Covering your costs does not
+      automatically mean the buyer will accept the price.
+    </p>
+  </div>
+
+  <div class="note">
+    <h3>Need a lower-priced option?</h3>
+    <p>
+      Consider a smaller package instead of the same work at a
+      much lower price. For example: three website pages and
+      one revision round instead of five pages and two rounds.
+    </p>
+  </div>
+
+  <div class="takeaway">
+    A sensible price needs to work for both sides.
+  </div>
+
+  <footer class="footer">
+    <span><strong>Mousam | Finest Edit</strong> · High-Ticket Offers Made Simple</span>
+    <span class="page-number">05 / 09</span>
+  </footer>
+</section>
+
+<!-- PAGE 06 — TRUST -->
+
+<section class="page" aria-label="Building trust">
+  <div class="topline">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">FE</span>
+      FINEST EDIT
+    </div>
+    <div class="section-name">05 / Build trust</div>
+  </div>
+
+  <header class="page-heading">
+    <div class="eyebrow">Less doubt. More clarity.</div>
+    <h2>Help the buyer feel<br>safe saying yes.</h2>
+    <p class="lead">
+      A bigger promise is not the same as better proof.
+    </p>
+  </header>
+
+  <div class="trust-grid">
+    <div class="card">
+      <div class="number">1</div>
+      <h3>Show something real.</h3>
+      <p>
+        Show relevant work and explain what you actually
+        delivered. Do not turn one success into a guarantee
+        for everyone.
+      </p>
+      <p>
+        Starting from zero? Create a sample or offer a small,
+        clearly scoped paid pilot.
+      </p>
+      <p class="trust-example">
+        “Demonstration project—not a client result.”
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="number">2</div>
+      <h3>Define the support.</h3>
+      <p>
+        Explain what is covered, what conditions apply, and
+        what happens when something goes wrong.
+      </p>
+      <p>
+        Avoid vague promises such as “unlimited changes until
+        you are happy.”
+      </p>
+      <p class="trust-example">
+        “Your package includes two revision rounds.”
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="number">3</div>
+      <h3>Add a useful extra.</h3>
+      <p>
+        A bonus should help the customer use the main service.
+        It does not need to be a giant pile of unrelated material.
+      </p>
+      <p class="trust-example">
+        Website bonus: a ready-to-use email template for
+        replying to quote requests.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="number">4</div>
+      <h3>Use honest deadlines.</h3>
+      <p>
+        Mention limited availability only when it is true.
+        Do not invent “last spots,” countdowns, or deadlines
+        to pressure a buyer.
+      </p>
+      <p class="trust-example">
+        No real deadline? Leave the countdown out.
+      </p>
+    </div>
+  </div>
+
+  <div class="note">
+    <p>
+      <strong>Keep this boundary:</strong> Do not invent
+      testimonials, clients, or results. Promise work you can
+      responsibly deliver—not sales outcomes you cannot control.
+    </p>
+  </div>
+
+  <div class="takeaway">
+    Show real work. Explain the limits. Keep your promises.
+  </div>
+
+  <footer class="footer">
+    <span><strong>Mousam | Finest Edit</strong> · High-Ticket Offers Made Simple</span>
+    <span class="page-number">06 / 09</span>
+  </footer>
+</section>
+
+<!-- PAGE 07 — WORKSHEET -->
+
+<section class="page" aria-label="Build your own offer worksheet">
+  <div class="topline">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">FE</span>
+      FINEST EDIT
+    </div>
+    <div class="section-name">06 / Your worksheet</div>
+  </div>
+
+  <header class="page-heading">
+    <div class="eyebrow">Your turn</div>
+    <h2>Build your first draft.</h2>
+    <p class="lead">
+      Use everyday words. It does not need to sound clever.
+      It needs to make sense.
+    </p>
+  </header>
+
+  <div class="worksheet">
+    <div class="field full">
+      <span class="field-label">The specific customer I help is:</span>
+      <div class="write-line"></div>
+    </div>
+
+    <div class="field full">
+      <span class="field-label">The problem they want solved is:</span>
+      <div class="write-line"></div>
+    </div>
+
+    <div class="field full">
+      <span class="field-label">The useful change they want is:</span>
+      <div class="write-line"></div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">The work I will deliver:</span>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">What is not included:</span>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <div class="field full">
+      <span class="field-label">My simple plan:</span>
+      <div class="plan-fields">
+        <div><span>First</span><div class="write-line"></div></div>
+        <div><span>Then</span><div class="write-line"></div></div>
+        <div><span>Finally</span><div class="write-line"></div></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Timeline—and when it starts:</span>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">What the customer must provide:</span>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Price and payment schedule:</span>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Additional costs, if any:</span>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Real proof or a clearly labeled sample:</span>
+      <div class="write-line"></div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">The next step for an interested buyer:</span>
+      <div class="write-line"></div>
+    </div>
+  </div>
+
+  <div class="formula">
+    <span class="label">Now put it together</span>
+    <p>
+      I help <strong>[customer]</strong> solve
+      <strong>[problem]</strong> by delivering
+      <strong>[clear package]</strong>.
+    </p>
+    <p>
+      The project takes <strong>[timeline and conditions]</strong>,
+      costs <strong>[price]</strong>, and includes
+      <strong>[main items]</strong>. The next step is
+      <strong>[one clear action]</strong>.
+    </p>
+  </div>
+
+  <footer class="footer">
+    <span><strong>Mousam | Finest Edit</strong> · High-Ticket Offers Made Simple</span>
+    <span class="page-number">07 / 09</span>
+  </footer>
+</section>
+
+<!-- PAGE 08 — CHECK AND TEST -->
+
+<section class="page" aria-label="Offer clarity checklist">
+  <div class="topline">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">FE</span>
+      FINEST EDIT
+    </div>
+    <div class="section-name">07 / Check and test</div>
+  </div>
+
+  <header class="page-heading">
+    <div class="eyebrow">Before you sell it</div>
+    <h2>Can someone understand<br>the deal without guessing?</h2>
+    <p class="lead">
+      Check each box only when your draft makes the answer clear.
+    </p>
+  </header>
+
+  <div class="checklist">
+    <div class="check">
+      <div class="check-box" aria-hidden="true"></div>
+      <div>
+        <b>The right person can recognize themselves.</b>
+        <p>I have named a specific customer—not “everyone.”</p>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-box" aria-hidden="true"></div>
+      <div>
+        <b>The problem sounds like something they would say.</b>
+        <p>I have removed confusing business words.</p>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-box" aria-hidden="true"></div>
+      <div>
+        <b>The buyer knows what they will receive.</b>
+        <p>The deliverables and finish line are clear.</p>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-box" aria-hidden="true"></div>
+      <div>
+        <b>The plan is easy to follow.</b>
+        <p>I can explain it in a few simple steps.</p>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-box" aria-hidden="true"></div>
+      <div>
+        <b>The price and responsibilities are visible.</b>
+        <p>Payment terms, extra costs, and customer tasks are explained.</p>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-box" aria-hidden="true"></div>
+      <div>
+        <b>The promises match my abilities and evidence.</b>
+        <p>I am not presenting hoped-for results as guarantees.</p>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-box" aria-hidden="true"></div>
+      <div>
+        <b>The next step is obvious.</b>
+        <p>There is one clear action to take.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Now show it to potential customers.</h3>
+  <p>
+    Start with three people who fit your audience. Treat this
+    as a learning exercise—not proof that the whole market will buy.
+  </p>
+
+  <div class="ask">“What do you think you would get from this offer?”</div>
+  <div class="ask">“Which part feels useful, unclear, or unnecessary?”</div>
+  <div class="ask">“What would you need to know before considering it?”</div>
+
+  <p class="fine">
+    Listen before explaining. Write down their exact words.
+    Use what you learn to improve the offer.
+  </p>
+
+  <div class="takeaway">
+    Your first offer is a draft to test—not a promise of instant sales.
+  </div>
+
+  <footer class="footer">
+    <span><strong>Mousam | Finest Edit</strong> · High-Ticket Offers Made Simple</span>
+    <span class="page-number">08 / 09</span>
+  </footer>
+</section>
+
+<!-- PAGE 09 — CTA -->
+
+<section class="page dark" aria-label="Connect with Mousam">
+  <div class="topline">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">FE</span>
+      FINEST EDIT
+    </div>
+    <div class="section-name">Your next step</div>
+  </div>
+
+  <div class="eyebrow" style="margin-top: 20px;">Keep the useful part. Remove the confusion.</div>
+
+  <h2 class="closing-title">
+    You do not need<br>
+    a more complicated<br>
+    offer.<br>
+    <span>You need a clearer one.</span>
+  </h2>
+
+  <p class="closing-copy">
+    When someone asks, “What do you do?” you do not need
+    to give them a long list of services.
+  </p>
+
+  <div class="closing-quote">
+    “I help this kind of customer solve this problem.
+    Here is what they get, how it works, and what it costs.”
+  </div>
+
+  <p style="color:#D5DEE7;">
+    Start with your worksheet. Write your first draft.
+    Read it out loud. Remove anything confusing.
+  </p>
+
+  <div class="cta-panel">
+    <h3>Let’s connect.</h3>
+    <p>
+      Tell me what your agency does, who you help, and which
+      part of your offer you are struggling to explain.
+    </p>
+
+    <a
+      class="cta"
+      href="https://lp.finestclients.com/vsl-directcontact"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      CONNECT WITH MOUSAM &nbsp; →
+    </a>
+
+    <a
+      class="cta-url"
+      href="https://lp.finestclients.com/vsl-directcontact"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      https://lp.finestclients.com/vsl-directcontact
+    </a>
+  </div>
+
+  <p class="closing-mantra">
+    Make a useful promise. Make it clear. Keep it.
+  </p>
+
+  <footer class="footer">
+    <span><strong>Mousam | Finest Edit</strong></span>
+    <span class="page-number">09 / 09</span>
+  </footer>
+</section>
+
+</body>
+</html>

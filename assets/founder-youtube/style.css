@@ -71,3 +71,19 @@ html:not([data-motion]) .mobile-nav[hidden]{display:none!important}
 .film-clear .cinema-top a{background:#09090b85;border:1px solid #ffffff70;border-radius:6px;padding:9px 14px;backdrop-filter:blur(8px)}
 @media(max-width:650px){.cinema-tools{gap:9px}.cinema-sound{min-height:40px;font-size:10px;padding:8px 10px;gap:7px}.cinema-sound .icon{width:15px;height:15px}.cinema-opening .cinema-top>span{max-width:115px;font-size:6px}.cinema-opening .cinema-top{gap:8px}.cinema-opening .cinema-top a{font-size:9px;min-height:40px;gap:5px}.cinema-opening .cinema-top a .icon{width:13px;height:13px}.cinema-opening .cinema-play{position:absolute}.cinema-opening .cinema-overlay:before{background:linear-gradient(0deg,#000d,transparent 95%)}.film-clear .cinema-top{transform:translateY(-64px)}.film-clear .cinema-top a{padding:8px 10px}}
 @media(max-width:360px){.cinema-opening .cinema-top>span{max-width:75px}.cinema-tools{gap:7px}.cinema-sound{font-size:9px;padding:8px}.cinema-opening .cinema-top a{font-size:8px}}
+
+/* Stable film geometry is reserved by the tiny head preflight, before any media loads. */
+html[data-film-layout=scroll] .cinema-opening .cinema-track{height:600svh;min-height:0}
+html[data-film-layout=scroll] .cinema-opening .cinema-stage{position:sticky;top:0;height:100svh;min-height:480px;display:block}
+html[data-film-layout=static] .cinema-opening .cinema-track{height:auto;min-height:0}
+html[data-film-layout=static] .cinema-opening .cinema-stage{position:relative}
+.cinema-opening .cinema-poster{object-position:center center}
+.cinema-sharp-canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .22s ease;pointer-events:none}
+.cinema-canvas{transition:opacity .32s ease}
+.film-clear .film-fallback .cinema-play{opacity:1;visibility:visible;pointer-events:auto}
+@media(max-width:900px){html[data-film-layout=scroll] .cinema-opening .cinema-track{height:420svh}}
+@media(prefers-reduced-motion:reduce){.cinema-sharp-canvas,.cinema-canvas{transition:none!important}html[data-film-layout=scroll] .cinema-opening .cinema-track{height:auto!important}html[data-film-layout=scroll] .cinema-opening .cinema-stage{position:relative!important}}
+/* Readable, deliberate header hierarchy; preserve the established studio identity. */
+@media(min-width:901px){.desktop-nav{font-size:13px;gap:26px}.desktop-nav a{min-height:44px;display:flex;align-items:center}.header-cta{font-size:12px;min-height:44px}.site-header .header-inner{gap:22px}}
+/* A stable opaque menu keeps text readable over any film or proof frame. */
+@media(max-width:900px){.mobile-nav{background:#09090b;border-bottom:1px solid #303036}}

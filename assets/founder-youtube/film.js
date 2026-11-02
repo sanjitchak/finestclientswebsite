@@ -12,6 +12,9 @@
   const picture = section.querySelector('.cinema-picture');
   const canvas = section.querySelector('canvas');
   const context = canvas.getContext('2d', { alpha: false });
+  const sharpCanvas = section.querySelector('.cinema-sharp-canvas');
+  const sharpContext = sharpCanvas.getContext('2d', { alpha: false });
+  const poster = section.querySelector('.cinema-poster');
   const instruction = section.querySelector('.cinema-instruction');
   const chapterGroup = section.querySelector('.cinema-chapters');
   const chapters = [...chapterGroup.querySelectorAll('button')];
@@ -25,7 +28,8 @@
   const previewBlobs = new Map(), previewImages = new Map(), previewPending = new Map();
   const blockCache = new Map(), fullImages = new Map();
   let near = false, ready = false, active = false, navLoading = false, navFailed = false;
-  let desired = 0, progress = 0, paintFrame = 0, settleTimer = 0, fullController = null;
+  let desired = 0, visualFrame = 0, targetFrame = 0, lastPaintTime = 0;
+  let progress = 0, paintFrame = 0, settleTimer = 0, fullController = null;
   let fullBlock = -1, lastDraw = '', dialogFocus = null, previousOverflow = '';
   let navController = null, lastChapter = -1, lastTarget = -1;
   const clamp = n => Math.max(0, Math.min(1, n));
@@ -72,7 +76,7 @@
     soundButton.dataset.signal = '0'; soundButton.style.setProperty('--sound-level', '0');
     showSoundState(soundBlocked && soundRequested ? 'blocked' : soundEnabled ? 'idle' : 'off');
   }
-  function disableSound() { soundRequested = false; soundBlocked = false; soundEnabled = false; audioGeneration++; pauseSound(); }
+  function disableSound() { soundRequested = false; soundBlocked = false; soundEnabled = false; audioGeneration++; pauseSound(); soundStatus.textContent = 'Original sound is off. Enable sound to hear it.'; }
   function canSound() {
     const rect = track.getBoundingClientRect();
     return soundEnabled && !soundNavigationPaused && active && !document.hidden && !dialog.open && audioContext?.state === 'running' && rect.top < innerHeight && rect.bottom > innerHeight * .55;
@@ -200,7 +204,7 @@
     const fade = active ? 1 - clamp(distance / 125) : 1;
     section.style.setProperty('--cinema-copy', fade.toFixed(3));
     root.classList.toggle('film-clear', clear);
-    intro.inert = clear; playLink.inert = clear; bottom.inert = clear;
+    intro.inert = clear; playLink.inert = clear && !navFailed; bottom.inert = clear;
     siteHeader.inert = clear;
     if (clear) {
       document.getElementById('mobile-nav').hidden = true;
@@ -208,7 +212,7 @@
       menu.setAttribute('aria-expanded', 'false'); menu.classList.remove('is-open');
     }
     [intro, playLink, bottom, siteHeader].forEach(element => {
-      if (clear) element.setAttribute('aria-hidden', 'true'); else element.removeAttribute('aria-hidden');
+      if (clear && !(element===playLink && navFailed)) element.setAttribute('aria-hidden', 'true'); else element.removeAttribute('aria-hidden');
     });
     if (clear && document.activeElement?.closest('.cinema-intro, .cinema-play, .cinema-bottom, .site-header')) soundButton.focus({ preventScroll: true });
     if (!canSound() && audioVoice) pauseSound();
@@ -299,7 +303,7 @@
       if (previewBlobs.size !== FILM.preview.atlasCount) throw Error('Preview incomplete');
     } catch (_) {
       navFailed = true;
-      if (!ready) instruction.textContent = 'Scroll preview unavailable. Play the original film instead.';
+      if (!ready) { instruction.textContent = 'Scroll preview unavailable. Play the original film instead.'; section.classList.add('film-fallback'); schedule(); }
     } finally { clearTimeout(timer); navLoading = false; navController = null; }
   }
   function nearestPreview(frame) {
@@ -308,23 +312,38 @@
     while (low < high) { const mid = Math.floor((low + high) / 2); if (indices[mid] < frame) low = mid + 1; else high = mid; }
     return low > 0 && Math.abs(indices[low - 1] - frame) < Math.abs(indices[low] - frame) ? low - 1 : low;
   }
+  function drawImage(target, image, sx, sy, sw, sh) {
+    const ratio = Math.max(canvas.width / sw, canvas.height / sh);
+    // Exactly the same centered cover crop as the HTML poster, including mobile.
+    target.drawImage(image, sx, sy, sw, sh, (canvas.width-sw*ratio)/2, (canvas.height-sh*ratio)/2, sw*ratio, sh*ratio);
+  }
   function draw(image, sx, sy, sw, sh, key, sourceFrame, quality) {
     if (!image || key === lastDraw || !active || dialog.open) return;
-    // Keep the sharp poster at the opening until the first HD frame is ready.
-    if (sourceFrame === 0 && quality !== 'HD') return;
-    const ratio = Math.max(canvas.width / sw, canvas.height / sh);
-    context.drawImage(image, sx, sy, sw, sh, (canvas.width - sw * ratio) / 2, (canvas.height - sh * ratio) / 2, sw * ratio, sh * ratio);
+    const sameFrame = track.dataset.frame === String(sourceFrame);
+    if (quality === 'HD' && sourceFrame !== 0 && sameFrame && track.dataset.quality === 'scroll preview') {
+      // Upgrade only the identical frame. Crossfade detail, never camera position.
+      drawImage(sharpContext,image,sx,sy,sw,sh);
+      sharpCanvas.style.opacity='1';
+    } else {
+      drawImage(context,image,sx,sy,sw,sh);
+      sharpCanvas.style.transition='none'; sharpCanvas.style.opacity='0';
+      requestAnimationFrame(()=>{sharpCanvas.style.transition='';});
+    }
     lastDraw = key; track.classList.add('has-frame');
-    track.dataset.frame = String(sourceFrame); track.dataset.quality = quality;
+    track.dataset.frame=String(sourceFrame); track.dataset.quality=quality;
   }
   function drawBest() {
     if (!active || document.hidden || dialog.open) return;
-    if (fullImages.has(desired)) {
-      const image = fullImages.get(desired); draw(image, 0, 0, image.width, image.height, `hd-${desired}`, desired, 'HD'); return;
+    const sample=nearestPreview(desired), sourceFrame=FILM.preview.indices[sample];
+    // The first canvas image is the already-decoded original poster: no startup quality dip.
+    if (sourceFrame === 0 && poster.complete && poster.naturalWidth) {
+      draw(poster,0,0,poster.naturalWidth,poster.naturalHeight,'opening-poster',0,'original poster'); return;
     }
-    const sample = nearestPreview(desired), atlas = Math.floor(sample / 16), tile = sample % 16;
-    const image = previewImages.get(atlas);
-    if (image) draw(image, tile % 4 * FILM.preview.width, Math.floor(tile / 4) * FILM.preview.height, FILM.preview.width, FILM.preview.height, `preview-${sample}`, FILM.preview.indices[sample], 'scroll preview');
+    if (fullImages.has(sourceFrame)) {
+      const image=fullImages.get(sourceFrame); draw(image,0,0,image.width,image.height,`hd-${sourceFrame}`,sourceFrame,'HD'); return;
+    }
+    const atlas=Math.floor(sample/16),tile=sample%16,image=previewImages.get(atlas);
+    if (image) draw(image,tile%4*FILM.preview.width,Math.floor(tile/4)*FILM.preview.height,FILM.preview.width,FILM.preview.height,`preview-${sample}`,sourceFrame,'scroll preview');
     else previewImage(atlas);
   }
   async function sharpen(frame) {
@@ -346,7 +365,8 @@
         keep(blockCache, block, frames, 2);
       }
       if (!active || controller.signal.aborted) return;
-      const target = Math.floor(desired / 8) === block ? desired : frame;
+      const current = FILM.preview.indices[nearestPreview(desired)];
+      const target = Math.floor(current / 8) === block ? current : frame;
       if (!frames.has(target)) return;
       const image = await decode(frames.get(target));
       keep(fullImages, target, image, 3); schedule();
@@ -358,29 +378,39 @@
     if (index !== lastChapter) { lastChapter = index; chapters.forEach((button, n) => button.setAttribute('aria-pressed', String(n === index))); }
     track.style.setProperty('--film-progress', progress.toFixed(4));
   }
-  function paint() {
-    paintFrame = 0;
+  function paint(now) {
+    paintFrame=0;
     updateClearView();
-    if (!active || document.hidden || dialog.open) return;
-    const rect = track.getBoundingClientRect(), header = headerHeight();
-    if (rect.bottom < header || rect.top > innerHeight) { clearTimeout(settleTimer); return; }
-    progress = clamp((header - rect.top) / Math.max(1, rect.height - (innerHeight - header)));
-    desired = Math.round(progress * (FILM.frameCount - 1));
-    updateLabels(); drawBest(); soundMovement(desired);
-    if (lastTarget !== desired) {
-      lastTarget = desired; clearTimeout(settleTimer);
-      settleTimer = setTimeout(() => sharpen(desired), 180);
+    if (!active || document.hidden || dialog.open) {lastPaintTime=0;return;}
+    const rect=track.getBoundingClientRect(),header=headerHeight();
+    if (rect.bottom<header || rect.top>innerHeight) {clearTimeout(settleTimer);lastPaintTime=0;return;}
+    progress=clamp((header-rect.top)/Math.max(1,rect.height-(innerHeight-header)));
+    targetFrame=Math.round(progress*(FILM.frameCount-1));
+    const dt=Math.min(40,Math.max(1,now-(lastPaintTime||now-16)));lastPaintTime=now;
+    if (targetFrame===0) visualFrame=0;
+    else if (ready) {
+      const next=visualFrame+(targetFrame-visualFrame)*(1-Math.exp(-dt/75));
+      const sample=nearestPreview(Math.round(next)),atlas=Math.floor(sample/16);
+      // Do not race past undecoded media and then suddenly reveal a distant frame.
+      if (previewImages.has(atlas) || fullImages.has(FILM.preview.indices[sample])) visualFrame=Math.abs(targetFrame-next)<.5?targetFrame:next;
+      else previewImage(atlas);
     }
+    desired=Math.round(visualFrame);
+    updateLabels();drawBest();soundMovement(desired);
+    const sampleFrame=FILM.preview.indices[nearestPreview(desired)];
+    if (lastTarget!==sampleFrame) {lastTarget=sampleFrame;clearTimeout(settleTimer);settleTimer=setTimeout(()=>sharpen(sampleFrame),180);}
+    if (ready && Math.abs(targetFrame-visualFrame)>.5 && previewImages.has(Math.floor(nearestPreview(Math.round(visualFrame+(targetFrame-visualFrame)*(1-Math.exp(-16/75))))/16))) schedule();
   }
   function schedule() { if (!paintFrame && !document.hidden) paintFrame = requestAnimationFrame(paint); }
   function resizeCanvas() {
     const box = picture.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 1.5);
     const width = Math.min(1920, Math.round(box.width * dpr)), height = Math.round(box.height * width / Math.max(1, box.width));
-    if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; lastDraw = ''; }
+    if (canvas.width !== width || canvas.height !== height) { canvas.width=sharpCanvas.width=width; canvas.height=sharpCanvas.height=height; sharpCanvas.style.opacity='0'; lastDraw=''; }
     schedule();
   }
   function syncMode() {
-    const next = allowed() && ready;
+    const next = allowed();
+    root.dataset.filmLayout=next?'scroll':'static';
     if (next !== active) {
       const work = document.getElementById('work'), beforeWork = work.getBoundingClientRect().top;
       const before = track.getBoundingClientRect(), wasActive = active;
@@ -394,7 +424,7 @@
     if (active && !soundPrimed) requestSound();
     if (!active) pauseSound();
     updateClearView();
-    instruction.textContent = active ? 'Scroll to enter the story ↓' : 'Press play to watch the original film.';
+    instruction.textContent = navFailed && !ready ? 'Scroll preview unavailable. Play the original film instead.' : active ? 'Scroll to enter the story ↓' : 'Press play to watch the original film.';
     if (near && allowed() && !ready && !navFailed) loadPreview();
   }
   chapters.forEach((button, index) => {
@@ -435,5 +465,6 @@
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => { near = entries[0].isIntersecting; if (near) syncMode(); }, { rootMargin: '250px 0px' }).observe(stage);
   } else { near = true; syncMode(); }
+  poster.addEventListener('load', schedule);
   syncMode();
 })();

@@ -46,32 +46,5 @@
   document.addEventListener('visibilitychange', () => { root.classList.toggle('motion-idle',document.hidden); if (document.hidden) {cancelAnimationFrame(frame);frame=0;} else schedule(); });
   if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(document.body);
   document.fonts?.ready.then(schedule);
-  // A native deep link can resolve before the lazy film track expands. Preserve
-  // that requested below-film destination, without changing the film or hijacking scroll.
-  const track = document.querySelector('.cinema-track');
-  const content = document.querySelector('.funnel-content');
-  let pendingAnchor = null;
-  const requestedAnchor = hash => {
-    if (!hash || hash[0] !== '#') return null;
-    const target = document.getElementById(hash.slice(1));
-    return target && content.contains(target) ? target : null;
-  };
-  if (!track.classList.contains('is-scrubbing')) pendingAnchor = requestedAnchor(location.hash);
-  document.addEventListener('click', event => {
-    const link = event.target.closest('a[href^="#"]');
-    if (link && !track.classList.contains('is-scrubbing')) pendingAnchor = requestedAnchor(link.getAttribute('href'));
-  });
-  const cancelAnchorRecovery = () => { pendingAnchor = null; };
-  addEventListener('wheel', cancelAnchorRecovery, {passive:true});
-  addEventListener('touchstart', cancelAnchorRecovery, {passive:true});
-  addEventListener('keydown', event => {
-    if (['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(event.key)) cancelAnchorRecovery();
-  });
-  new MutationObserver(() => {
-    if (pendingAnchor && track.classList.contains('is-scrubbing')) {
-      const target = pendingAnchor; pendingAnchor = null;
-      requestAnimationFrame(() => target.scrollIntoView({block:'start',behavior:'instant'}));
-    }
-  }).observe(track,{attributes:true,attributeFilter:['class']});
   document.getElementById('year').textContent=new Date().getFullYear();
 })();

@@ -22,3 +22,46 @@ html[data-motion=off] .f-stack-wrap{position:relative;top:auto}
 @media(min-width:768px) and (max-height:720px){.f-stack-wrap,.f-stack-wrap:nth-child(2){position:relative;top:auto}}
 
 .f-faq-list summary:focus-visible{outline-offset:-3px;border-radius:11px}.f-faq-list summary:hover{background:#ffffff05}
+
+/* Quiet, tactile motion: no perpetual loops, scroll interception or hidden defaults. */
+.f-stack-card{transform:scale(var(--stack-scale,1));transition:box-shadow .35s,border-color .35s}
+.f-channel-image img,.f-stack-image>svg{transition:transform .7s cubic-bezier(.22,1,.36,1);transform-origin:center}
+.f-play-circle,.f-video-play{transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,background .35s}
+.f-cta{position:relative;isolation:isolate;overflow:hidden;transition:background .25s,transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s}
+.f-cta:before{content:'';position:absolute;z-index:-1;inset:0;background:linear-gradient(110deg,transparent 25%,#ffffff20 48%,transparent 70%);transform:translateX(-110%);transition:transform .65s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.f-cta .icon{transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.f-cta:focus-visible{background:#2563eb;box-shadow:0 0 30px #3b82f680}
+.f-cta:focus-visible:before{transform:translateX(110%)}
+.f-cta:focus-visible .icon{transform:translateX(4px)}
+.f-cta:active{transform:translateY(1px) scale(.985)}
+.f-stack-card:focus-visible .f-play-circle,.f-testimonial-video:focus-visible .f-video-play{transform:scale(1.08);box-shadow:0 0 0 7px #ff000020}
+.f-phase-dot{transition:background .35s,box-shadow .35s,transform .35s}
+.f-phase-card{transition:border-color .4s,box-shadow .4s,background .4s}
+.f-phase.is-current .f-phase-dot{background:#ff3030;box-shadow:0 0 18px #ff303070;transform:scale(1.12)}
+.f-phase.is-current .f-phase-card{border-color:#ff30304d;box-shadow:0 12px 36px #0003;background:linear-gradient(120deg,#ff000008,transparent 65%),#000}
+.f-phase.is-current .f-phase-number{color:#ff7070;transition:color .35s}
+.f-service-icon .icon{transition:transform .45s cubic-bezier(.22,1,.36,1),color .35s}
+.f-faq-list details{transition:border-color .3s,background .3s}
+.f-faq-list summary .icon{transition:transform .3s cubic-bezier(.22,1,.36,1),color .3s}
+.f-footer-grid>div>a:not(.f-footer-brand){transition:color .25s,transform .25s}
+@media(hover:hover) and (pointer:fine){
+ .f-cta:hover:before{transform:translateX(110%)}
+ .f-cta:hover .icon{transform:translateX(4px)}
+ .f-stack-card:hover .f-channel-image img,.f-stack-card:hover .f-stack-image>svg{transform:scale(1.018)}
+ .f-stack-card:hover .f-play-circle,.f-testimonial-video:hover .f-video-play{transform:scale(1.08);box-shadow:0 0 0 7px #ff000020}
+ .f-service-card:hover .f-service-icon .icon{transform:translateY(-4px) scale(1.06);color:#fff}
+ .f-footer-grid>div>a:not(.f-footer-brand):hover{transform:translateX(3px)}
+}
+html[data-motion=off] .funnel-content .f-stack-card,html[data-motion=off] .funnel-content .f-channel-image img,html[data-motion=off] .funnel-content .f-stack-image>svg,html[data-motion=off] .funnel-content .f-cta,html[data-motion=off] .funnel-content .f-cta .icon,html[data-motion=off] .funnel-content .f-play-circle,html[data-motion=off] .funnel-content .f-video-play,html[data-motion=off] .funnel-content .f-service-icon .icon,html[data-motion=off] .funnel-content .f-result,html[data-motion=off] .funnel-content .f-service-card,html[data-motion=off] .funnel-content .f-phase-dot{transform:none!important}
+html[data-motion=off] .funnel-content .f-cta:before{display:none}
+@media(prefers-reduced-motion:reduce){.funnel-content .f-stack-card,.funnel-content .f-channel-image img,.funnel-content .f-stack-image>svg,.funnel-content .f-cta,.funnel-content .f-cta .icon,.funnel-content .f-play-circle,.funnel-content .f-video-play,.funnel-content .f-service-icon .icon,.funnel-content .f-result,.funnel-content .f-service-card,.funnel-content .f-phase-dot{transform:none!important}.funnel-content .f-cta:before{display:none}}
+.f-timeline-track i{height:100%;transform:scaleY(var(--phase-progress,1));transform-origin:top;transition:transform .14s linear}
+.f-phase-dot{background:#492326;box-shadow:none}
+.f-phase.is-current .f-phase-dot{background:#ff3030;box-shadow:0 0 18px #ff303070}
+html[data-motion=off] .f-footer-grid>div>a:not(.f-footer-brand){transform:none!important}
+@media(prefers-reduced-motion:reduce){.f-footer-grid>div>a:not(.f-footer-brand){transform:none!important}}
+/* Preserve the testimonial button's positional centering while scaling feedback. */
+.f-testimonial-video:focus-visible .f-video-play{transform:translate(-50%,-50%) scale(1.08)}
+@media(hover:hover) and (pointer:fine){.f-testimonial-video:hover .f-video-play{transform:translate(-50%,-50%) scale(1.08)}}
+html[data-motion=off] .funnel-content .f-video-play{transform:translate(-50%,-50%)!important}
+@media(prefers-reduced-motion:reduce){.funnel-content .f-video-play{transform:translate(-50%,-50%)!important}}

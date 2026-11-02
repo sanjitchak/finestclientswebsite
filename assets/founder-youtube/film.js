@@ -35,6 +35,185 @@
   let offset = 0;
   const blocks = FILM.blockLengths.map(length => { const item = [offset, length]; offset += length; return item; });
 
+
+  // Original supplied clip audio. Best-effort autoplay; never bypass browser policy.
+  const soundButton = section.querySelector('.cinema-sound');
+  const soundStatus = section.querySelector('.cinema-sound-status');
+  const siteHeader = document.querySelector('.site-header');
+  const intro = section.querySelector('.cinema-intro');
+  const bottom = section.querySelector('.cinema-bottom');
+  const audioURL = 'https://d2ol7oe51mr4n9.cloudfront.net/user_3IHQT3zhsPrMrC3eclpIQLUCZ8K/3eff4b62-e21a-4b2c-9f5e-32ed861f7451.tar';
+  let soundNavigationPaused = false;
+  let soundRequested = true, soundBlocked = false, soundPrimed = false, scrollSoundTried = false;
+  let soundEnabled = false, audioContext = null, audioGain = null, audioAnalyser = null;
+  let audioBuffers = null, audioLoading = null, audioVoice = null, soundIdle = 0, meterTimer = 0;
+  let audioGeneration = 0, lastSoundFrame = -1;
+  const soundChapter = frame => frame < 433 ? 0 : frame < 866 ? 1 : frame < 1299 ? 2 : 3;
+  function showSoundState(state) {
+    soundButton.dataset.audioState = state;
+    soundButton.setAttribute('aria-pressed', String(soundEnabled));
+    soundButton.setAttribute('aria-label', soundEnabled ? 'Turn off original film sound' : 'Enable original film sound');
+    soundButton.querySelector('span').textContent = state === 'loading' ? 'Loading sound…' : state === 'error' ? 'Retry sound' : state === 'blocked' ? 'Enable sound' : soundEnabled ? 'Sound on' : 'Sound off';
+  }
+  function stopVoice(voice, duration = .12) {
+    if (!voice || !audioContext) return;
+    try {
+      const now = audioContext.currentTime;
+      voice.gain.gain.cancelScheduledValues(now);
+      voice.gain.gain.setValueAtTime(voice.gain.gain.value, now);
+      voice.gain.gain.linearRampToValueAtTime(0, now + duration);
+      voice.source.stop(now + duration + .02);
+    } catch (_) { /* Already ended. */ }
+  }
+  function pauseSound() {
+    clearTimeout(soundIdle); soundIdle = 0;
+    stopVoice(audioVoice); audioVoice = null;
+    clearInterval(meterTimer); meterTimer = 0;
+    soundButton.dataset.signal = '0'; soundButton.style.setProperty('--sound-level', '0');
+    showSoundState(soundBlocked && soundRequested ? 'blocked' : soundEnabled ? 'idle' : 'off');
+  }
+  function disableSound() { soundRequested = false; soundBlocked = false; soundEnabled = false; audioGeneration++; pauseSound(); }
+  function canSound() {
+    const rect = track.getBoundingClientRect();
+    return soundEnabled && !soundNavigationPaused && active && !document.hidden && !dialog.open && audioContext?.state === 'running' && rect.top < innerHeight && rect.bottom > innerHeight * .55;
+  }
+  async function loadSound() {
+    if (audioBuffers) return audioBuffers;
+    if (audioLoading) return audioLoading;
+    audioLoading = (async () => {
+      const controller = new AbortController(), timeout = setTimeout(() => controller.abort(), 30000);
+      try {
+        const response = await fetch(audioURL, { signal: controller.signal, cache: 'force-cache' });
+        if (!response.ok) throw Error('Original audio unavailable');
+        const bytes = new Uint8Array(await response.arrayBuffer()), decoder = new TextDecoder(), clips = new Map();
+        if (bytes.length > 3000000) throw Error('Unexpected audio archive');
+        let cursor = 0;
+        while (cursor + 512 <= bytes.length) {
+          const name = decoder.decode(bytes.subarray(cursor, cursor + 100)).split('\0')[0];
+          if (!name) break;
+          const size = parseInt(decoder.decode(bytes.subarray(cursor + 124, cursor + 136)).replace(/\0/g, '').trim(), 8);
+          const match = /^original-audio-([1-4])\.m4a$/.exec(name);
+          cursor += 512;
+          if (!match || !Number.isFinite(size) || size < 1 || cursor + size > bytes.length) throw Error('Invalid original audio archive');
+          clips.set(Number(match[1]) - 1, bytes.slice(cursor, cursor + size).buffer);
+          cursor += Math.ceil(size / 512) * 512;
+        }
+        if (clips.size !== 4) throw Error('Missing original audio');
+        audioBuffers = await Promise.all([0,1,2,3].map(index => audioContext.decodeAudioData(clips.get(index))));
+        soundButton.dataset.audioReady = 'true';
+        return audioBuffers;
+      } finally { clearTimeout(timeout); }
+    })().finally(() => { audioLoading = null; });
+    return audioLoading;
+  }
+  function startSound(frame) {
+    if (!canSound() || !audioBuffers) return;
+    const chapter = soundChapter(frame), buffer = audioBuffers[chapter];
+    const offset = Math.max(0, (frame - FILM.chapterFrames[chapter]) / 24);
+    if (offset >= buffer.duration - .15) { pauseSound(); return; }
+    stopVoice(audioVoice, .18);
+    const source = audioContext.createBufferSource(), gain = audioContext.createGain(), now = audioContext.currentTime;
+    source.buffer = buffer; source.playbackRate.value = 1;
+    gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(.8, now + .12);
+    source.connect(gain); gain.connect(audioGain);
+    const voice = { source, gain, chapter }; audioVoice = voice;
+    source.onended = () => { source.disconnect(); gain.disconnect(); if (audioVoice === voice) { audioVoice = null; clearInterval(meterTimer); meterTimer = 0; soundButton.dataset.signal = '0'; soundButton.style.setProperty('--sound-level', '0'); showSoundState(soundBlocked && soundRequested ? 'blocked' : soundEnabled ? 'idle' : 'off'); } };
+    source.start(now, offset); showSoundState('playing');
+    soundButton.dataset.audioChapter = String(chapter + 1);
+    if (!meterTimer) meterTimer = setInterval(() => {
+      if (!audioVoice) return;
+      const samples = new Float32Array(audioAnalyser.fftSize); audioAnalyser.getFloatTimeDomainData(samples);
+      const rms = Math.sqrt(samples.reduce((sum, value) => sum + value * value, 0) / samples.length);
+      soundButton.dataset.signal = rms.toFixed(5);
+      soundButton.style.setProperty('--sound-level', String(Math.min(1, rms * 25)));
+    }, 100);
+  }
+  function soundMovement(frame) {
+    if (!canSound()) { if (audioVoice) pauseSound(); return; }
+    if (frame === lastSoundFrame) return;
+    lastSoundFrame = frame;
+    // Do not seek on each wheel/touch tick: retain coherent natural-rate phrases.
+    // Only a new chapter or a new scroll gesture starts at the current image.
+    if (!audioVoice || audioVoice.chapter !== soundChapter(frame)) startSound(frame);
+    clearTimeout(soundIdle); soundIdle = setTimeout(pauseSound, 1000);
+  }
+  function beginReadySound() {
+    if (!soundRequested || !audioBuffers || audioContext?.state !== 'running' || document.hidden || !active || dialog.open) return;
+    soundBlocked = false; soundEnabled = true;
+    soundStatus.textContent = 'Original sound is on. Escape or Sound on mutes it.';
+    if (!audioVoice) { startSound(desired); clearTimeout(soundIdle); soundIdle = setTimeout(pauseSound, 1600); }
+  }
+  function requestSound() {
+    if (!soundRequested || !active || document.hidden || dialog.open) return;
+    soundPrimed = true;
+    const generation = audioGeneration;
+    try {
+      if (!audioContext) {
+        const Context = window.AudioContext || window.webkitAudioContext;
+        if (!Context) throw Error('Audio unavailable');
+        audioContext = new Context({ latencyHint: 'interactive', sampleRate: 32000 });
+        audioGain = audioContext.createGain(); audioGain.gain.value = 1;
+        audioAnalyser = audioContext.createAnalyser(); audioAnalyser.fftSize = 512;
+        audioGain.connect(audioAnalyser); audioAnalyser.connect(audioContext.destination);
+        audioContext.addEventListener('statechange', () => {
+          soundButton.dataset.audioContext = audioContext.state;
+          if (audioContext.state === 'running') beginReadySound(); else pauseSound();
+        });
+      }
+      // A suspended context may not resolve resume() until an eligible gesture.
+      // Never wait forever or conceal the browser-policy fallback.
+      audioContext.resume().then(() => { if (generation === audioGeneration) beginReadySound(); }).catch(() => {});
+      soundBlocked = audioContext.state !== 'running';
+      soundButton.dataset.audioContext = audioContext.state;
+      showSoundState(soundBlocked ? 'blocked' : 'loading');
+      if (soundBlocked) soundStatus.textContent = 'Your browser paused automatic audio. Enable sound to hear the original soundtrack.';
+      loadSound().then(() => {
+        if (generation !== audioGeneration || !soundRequested) return;
+        if (audioContext.state === 'running') beginReadySound(); else { soundBlocked = true; showSoundState('blocked'); }
+      }).catch(() => {
+        if (generation !== audioGeneration) return;
+        disableSound(); showSoundState('error'); soundStatus.textContent = 'Sound could not load. Try again, or use the full film player.';
+      });
+    } catch (_) { disableSound(); showSoundState('error'); }
+  }
+  soundButton.addEventListener('click', () => {
+    soundNavigationPaused = false;
+    if (soundEnabled || soundRequested && soundButton.dataset.audioState === 'loading') { disableSound(); return; }
+    soundRequested = true; audioGeneration++; requestSound();
+  });
+  function naturalAudioGesture(event) {
+    if (!event.isTrusted || !soundRequested || soundEnabled || !active) return;
+    if (event.target instanceof Element && event.target.closest('a,button,video,dialog,input,textarea,select')) return;
+    if (event.type === 'keydown' && !['ArrowDown','ArrowUp','PageDown','PageUp',' ','Home','End'].includes(event.key)) return;
+    requestSound();
+  }
+  section.querySelector('.cinema-tools > a').addEventListener('click', () => { soundNavigationPaused = true; pauseSound(); });
+  const resumeScrollSound = event => { if (event.isTrusted) soundNavigationPaused = false; };
+  addEventListener('wheel', resumeScrollSound, { passive: true });
+  addEventListener('touchmove', resumeScrollSound, { passive: true });
+  addEventListener('keydown', event => { if (['ArrowDown','ArrowUp','PageDown','PageUp',' ','Home','End'].includes(event.key)) resumeScrollSound(event); });
+  addEventListener('pointerdown', naturalAudioGesture, { passive: true });
+  addEventListener('keydown', naturalAudioGesture);
+  function updateClearView() {
+    const rect = track.getBoundingClientRect(), distance = Math.max(0, -rect.top);
+    const clear = active && distance > 125 && rect.bottom > siteHeader.offsetHeight;
+    const fade = active ? 1 - clamp(distance / 125) : 1;
+    section.style.setProperty('--cinema-copy', fade.toFixed(3));
+    root.classList.toggle('film-clear', clear);
+    intro.inert = clear; playLink.inert = clear; bottom.inert = clear;
+    siteHeader.inert = clear;
+    if (clear) {
+      document.getElementById('mobile-nav').hidden = true;
+      const menu = siteHeader.querySelector('.menu-toggle');
+      menu.setAttribute('aria-expanded', 'false'); menu.classList.remove('is-open');
+    }
+    [intro, playLink, bottom, siteHeader].forEach(element => {
+      if (clear) element.setAttribute('aria-hidden', 'true'); else element.removeAttribute('aria-hidden');
+    });
+    if (clear && document.activeElement?.closest('.cinema-intro, .cinema-play, .cinema-bottom, .site-header')) soundButton.focus({ preventScroll: true });
+    if (!canSound() && audioVoice) pauseSound();
+  }
+
   function keep(cache, key, value, max) {
     if (cache.has(key)) cache.delete(key);
     cache.set(key, value);
@@ -181,12 +360,13 @@
   }
   function paint() {
     paintFrame = 0;
+    updateClearView();
     if (!active || document.hidden || dialog.open) return;
     const rect = track.getBoundingClientRect(), header = headerHeight();
     if (rect.bottom < header || rect.top > innerHeight) { clearTimeout(settleTimer); return; }
     progress = clamp((header - rect.top) / Math.max(1, rect.height - (innerHeight - header)));
     desired = Math.round(progress * (FILM.frameCount - 1));
-    updateLabels(); drawBest();
+    updateLabels(); drawBest(); soundMovement(desired);
     if (lastTarget !== desired) {
       lastTarget = desired; clearTimeout(settleTimer);
       settleTimer = setTimeout(() => sharpen(desired), 180);
@@ -210,6 +390,10 @@
       else if (wasActive && before.top < headerHeight() && before.bottom > headerHeight()) scrollTo({ top: scrollY + track.getBoundingClientRect().top - headerHeight(), behavior: 'instant' });
       resizeCanvas();
     }
+    soundButton.hidden = !active;
+    if (active && !soundPrimed) requestSound();
+    if (!active) pauseSound();
+    updateClearView();
     instruction.textContent = active ? 'Scroll to enter the story ↓' : 'Press play to watch the original film.';
     if (near && allowed() && !ready && !navFailed) loadPreview();
   }
@@ -232,7 +416,7 @@
   playLink.addEventListener('click', event => {
     if (typeof dialog.showModal !== 'function') return;
     event.preventDefault(); dialogFocus = document.activeElement; previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden'; movie.muted = true; movie.src = FILM.film; dialog.showModal();
+    pauseSound(); document.body.style.overflow = 'hidden'; movie.muted = !soundRequested; movie.src = FILM.film; dialog.showModal();
     fullController?.abort(); clearTimeout(settleTimer); closeButton.focus(); movie.play()?.catch(() => { /* Native play controls remain available. */ });
   });
   closeButton.addEventListener('click', closeFilm);
@@ -241,10 +425,12 @@
     dialogFocus?.focus({ preventScroll: true }); lastDraw = ''; schedule();
   });
   dialog.addEventListener('click', event => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) closeFilm(); } });
-  document.addEventListener('visibilitychange', () => { if (document.hidden) { movie.pause(); clearTimeout(settleTimer); fullController?.abort(); } else schedule(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { pauseSound(); movie.pause(); clearTimeout(settleTimer); fullController?.abort(); } else schedule(); });
+  addEventListener('pagehide', pauseSound);
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') disableSound(); });
   new MutationObserver(syncMode).observe(root, { attributes: true, attributeFilter: ['data-motion'] });
   desktop.addEventListener('change', syncMode); scrollViewport.addEventListener('change', syncMode); reduced.addEventListener('change', syncMode);
-  addEventListener('scroll', schedule, { passive: true }); addEventListener('resize', resizeCanvas, { passive: true }); addEventListener('pageshow', schedule);
+  addEventListener('scroll', () => { schedule(); if (!scrollSoundTried && active && soundRequested && !soundEnabled) { scrollSoundTried = true; requestSound(); } }, { passive: true }); addEventListener('resize', resizeCanvas, { passive: true }); addEventListener('pageshow', schedule);
   if ('ResizeObserver' in window) new ResizeObserver(resizeCanvas).observe(picture);
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => { near = entries[0].isIntersecting; if (near) syncMode(); }, { rootMargin: '250px 0px' }).observe(stage);

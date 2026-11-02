@@ -17,7 +17,7 @@
   toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
   nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !nav.hidden) setMenu(false, true); });
-  matchMedia('(max-width:650px)').addEventListener('change', e => { if (!e.matches) setMenu(false); });
+  matchMedia('(max-width:900px)').addEventListener('change', e => { if (!e.matches) setMenu(false); });
   const content = document.querySelector('.funnel-content');
   const runningReveals = new Set();
   const disclosures = new Map();
@@ -91,11 +91,11 @@
       entries.filter(entry => entry.isIntersecting).forEach(({target}) => {
         observer.unobserve(target);
         if (!enabled || document.hidden || target.contains(document.activeElement)) return;
-        const delay = Math.min(delays.get(target)||0, innerWidth<768?90:180);
+        const delay = Math.min(delays.get(target)||0, innerWidth<768?0:120);
         const animation=target.animate([
-          {opacity:.18,transform:'translate3d(0,18px,0)'},
+          {opacity:.5,transform:'translate3d(0,12px,0)'},
           {opacity:1,transform:'translate3d(0,0,0)'}
-        ],{duration:650,delay,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+        ],{duration:520,delay,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
         runningReveals.add(animation);
         const clear=()=>runningReveals.delete(animation);
         animation.addEventListener('finish',clear,{once:true});

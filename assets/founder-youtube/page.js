@@ -34,6 +34,7 @@
   function setMotion(next, persist = false) {
     const work=document.getElementById('work'),before=work.getBoundingClientRect().top;
     const preserveReading=scrollY>0 && before<innerHeight,change=++motionChange;
+    const focusBefore=document.activeElement;
     enabled = next && !reduced.matches;
     root.dataset.motion = enabled ? 'on' : 'off';
     motionButton.setAttribute('aria-pressed', String(!enabled));
@@ -48,6 +49,9 @@
       if(change!==motionChange)return;
       const delta=work.getBoundingClientRect().top-before;
       if(Math.abs(delta)>.5)scrollBy({top:delta,behavior:'instant'});
+      requestAnimationFrame(()=>{
+        if(change===motionChange && focusBefore===motionButton && document.activeElement?.classList.contains('cinema-sound')) motionButton.focus({preventScroll:true});
+      });
     });
     schedule();
   }

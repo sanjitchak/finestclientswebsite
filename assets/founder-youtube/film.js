@@ -16,6 +16,7 @@
   const chapterGroup = section.querySelector('.cinema-chapters');
   const chapters = [...chapterGroup.querySelectorAll('button')];
   const desktop = matchMedia('(min-width:901px) and (min-height:640px)');
+  const scrollViewport = matchMedia('(min-height:480px)');
   const reduced = matchMedia('(prefers-reduced-motion:reduce)');
   const dialog = document.querySelector('.cinema-dialog');
   const movie = dialog.querySelector('video');
@@ -28,8 +29,9 @@
   let fullBlock = -1, lastDraw = '', dialogFocus = null, previousOverflow = '';
   let navController = null, lastChapter = -1, lastTarget = -1;
   const clamp = n => Math.max(0, Math.min(1, n));
-  const headerHeight = () => document.querySelector('.header-inner').offsetHeight;
-  const allowed = () => Boolean(context) && desktop.matches && !reduced.matches && root.dataset.motion === 'on' && !navigator.connection?.saveData;
+  // The opening stage begins at the viewport edge, behind the overlay navigation.
+  const headerHeight = () => 0;
+  const allowed = () => Boolean(context) && scrollViewport.matches && !reduced.matches && root.dataset.motion === 'on' && !navigator.connection?.saveData;
   let offset = 0;
   const blocks = FILM.blockLengths.map(length => { const item = [offset, length]; offset += length; return item; });
 
@@ -129,6 +131,8 @@
   }
   function draw(image, sx, sy, sw, sh, key, sourceFrame, quality) {
     if (!image || key === lastDraw || !active || dialog.open) return;
+    // Keep the sharp poster at the opening until the first HD frame is ready.
+    if (sourceFrame === 0 && quality !== 'HD') return;
     const ratio = Math.max(canvas.width / sw, canvas.height / sh);
     context.drawImage(image, sx, sy, sw, sh, (canvas.width - sw * ratio) / 2, (canvas.height - sh * ratio) / 2, sw * ratio, sh * ratio);
     lastDraw = key; track.classList.add('has-frame');
@@ -206,7 +210,7 @@
       else if (wasActive && before.top < headerHeight() && before.bottom > headerHeight()) scrollTo({ top: scrollY + track.getBoundingClientRect().top - headerHeight(), behavior: 'instant' });
       resizeCanvas();
     }
-    instruction.textContent = active ? 'Scroll to explore the original film. No sound plays while scrolling.' : 'Press play to watch the original film.';
+    instruction.textContent = active ? 'Scroll to enter the story ↓' : 'Press play to watch the original film.';
     if (near && allowed() && !ready && !navFailed) loadPreview();
   }
   chapters.forEach((button, index) => {
@@ -239,7 +243,7 @@
   dialog.addEventListener('click', event => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) closeFilm(); } });
   document.addEventListener('visibilitychange', () => { if (document.hidden) { movie.pause(); clearTimeout(settleTimer); fullController?.abort(); } else schedule(); });
   new MutationObserver(syncMode).observe(root, { attributes: true, attributeFilter: ['data-motion'] });
-  desktop.addEventListener('change', syncMode); reduced.addEventListener('change', syncMode);
+  desktop.addEventListener('change', syncMode); scrollViewport.addEventListener('change', syncMode); reduced.addEventListener('change', syncMode);
   addEventListener('scroll', schedule, { passive: true }); addEventListener('resize', resizeCanvas, { passive: true }); addEventListener('pageshow', schedule);
   if ('ResizeObserver' in window) new ResizeObserver(resizeCanvas).observe(picture);
   if ('IntersectionObserver' in window) {

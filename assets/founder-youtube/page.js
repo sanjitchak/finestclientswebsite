@@ -58,9 +58,6 @@
   let frame = 0;
   const timeline = document.querySelector('.f-timeline');
   const phases = [...timeline.querySelectorAll('.f-phase')];
-  const stackCards = [...content.querySelectorAll('.f-stack-card')];
-  const stackWrappers = [...content.querySelectorAll('.f-stack-wrap')];
-  const stackDesktop = matchMedia('(min-width:768px) and (min-height:721px)');
   const clamp = v => Math.max(0, Math.min(1,v));
   function paint() {
     frame = 0;
@@ -69,12 +66,7 @@
     const rect = timeline.getBoundingClientRect();
     timeline.style.setProperty('--phase-progress', enabled ? clamp((innerHeight*.7-rect.top)/rect.height).toFixed(4) : '1');
     phases.forEach(phase => phase.classList.toggle('is-current', !enabled || phase.getBoundingClientRect().top < innerHeight*.68));
-    // The original portfolio's stacked-card depth, confined to the work showcase.
-    stackCards.forEach((card,index) => {
-      const next=stackWrappers[index+1];
-      const depth=enabled && stackDesktop.matches && next ? clamp((innerHeight*.8-next.getBoundingClientRect().top)/Math.max(1,innerHeight*.8-122)) : 0;
-      card.style.setProperty('--stack-scale',(1-depth*.035).toFixed(4));
-    });
+
   }
   function schedule() { if (!frame) frame = requestAnimationFrame(paint); }
   motionButton.hidden = false; setMotion(enabled);
@@ -89,7 +81,7 @@
   if ('IntersectionObserver' in window && Element.prototype.animate) {
     const groups = [
       ['.f-offer > .f-container > *', 55],
-      ['.f-heading', 0], ['.f-results > *', 75], ['.f-feedback > *', 75],
+      ['.f-heading', 0], ['.f-work-grid > *', 65], ['.f-results > *', 75], ['.f-feedback > *', 75],
       ['.f-fit-grid > *', 75], ['.f-phase-card', 0], ['.f-service-grid > *', 65],
       ['.f-founder-layout > *', 80], ['.f-faq-list > details', 40],
       ['.f-close > .f-container > *', 55], ['.f-footer-grid > *', 55]

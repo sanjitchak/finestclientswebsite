@@ -1,5 +1,12 @@
 # Changelog
 
+## Footer address label and city
+
+- Added an Address heading and formatted the address beneath it in title case, including New Delhi before the PIN code.
+- The footer uses static text and needs no configuration, tracking, or data collection changes.
+- Verification covers the heading and address on desktop and mobile, plus Git whitespace checks. This static repository has no npm scripts.
+- To roll back, revert the commit on `main` and let GitHub Pages republish.
+
 ## 2026-11-20
 
 - Promoted the homepage footer address to a bold heading that wraps within the existing footer grid.

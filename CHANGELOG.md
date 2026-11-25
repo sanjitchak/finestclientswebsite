@@ -1,5 +1,12 @@
 # Changelog
 
+## Homepage legal name
+
+- Added the supplied legal name, SANJIT CHAKRABARTI, directly below the address on the homepage.
+- The name is public static text. The change requires no configuration, data collection, or DNS updates.
+- Verification covers desktop and mobile footer placement and Git whitespace checks. This static repository has no npm scripts.
+- To roll back, revert the commit on `main` and let GitHub Pages republish.
+
 ## Footer address label and city
 
 - Added an Address heading and formatted the address beneath it in title case, including New Delhi before the PIN code.
